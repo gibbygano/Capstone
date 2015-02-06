@@ -45,7 +45,7 @@
     <Compile Include="EventDataAccess.cs" />
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-
+    <Compile Include="SupplierAccessor.cs" />
     <Compile Include="UserLoginAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +53,7 @@
       <Project>{b27ea16a-c7d9-4664-a33e-50f4c7c1e166}</Project>
       <Name>com.WanderingTurtle.Common</Name>
     </ProjectReference>
-
     <Compile Include="Validator.cs" />
-
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
