@@ -59,7 +59,7 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-<<<<<<< HEAD
+
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
@@ -68,10 +68,9 @@
     <Build Include="dbo\Stored Procedures\spUserLoginGetList.sql" />
     <Build Include="dbo\Stored Procedures\spUserLoginAdd.sql" />
     <Build Include="dbo\Stored Procedures\spUserLoginUpdate.sql" />
-=======
+
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
->>>>>>> origin/master
   </ItemGroup>
 </Project>
