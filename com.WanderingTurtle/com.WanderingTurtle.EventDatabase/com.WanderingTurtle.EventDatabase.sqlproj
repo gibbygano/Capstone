@@ -59,7 +59,6 @@
     <Folder Include="Properties" />
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
-
     <Folder Include="dbo\Stored Procedures\" />
   </ItemGroup>
   <ItemGroup>
@@ -68,7 +67,20 @@
     <Build Include="dbo\Stored Procedures\spUserLoginGetList.sql" />
     <Build Include="dbo\Stored Procedures\spUserLoginAdd.sql" />
     <Build Include="dbo\Stored Procedures\spUserLoginUpdate.sql" />
-
+    <Build Include="dbo\Tables\Booking.sql" />
+    <Build Include="dbo\Tables\EventItem.sql" />
+    <Build Include="dbo\Tables\Supplier.sql" />
+    <Build Include="dbo\Stored Procedures\spAddBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteEventItem.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteSupplier.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertEventItem.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertSupplier.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllBookings.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateEventItem.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateSupplier.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
