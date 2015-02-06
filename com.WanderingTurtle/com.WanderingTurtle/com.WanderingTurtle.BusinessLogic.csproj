@@ -39,8 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="UserLoginAccessor.cs" />
+=======
+    <Compile Include="Validator.cs" />
+>>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
