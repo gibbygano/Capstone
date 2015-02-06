@@ -81,6 +81,14 @@
     <Build Include="dbo\Stored Procedures\spUpdateBooking.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateEventItem.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateSupplier.sql" />
+    <Build Include="dbo\Tables\CityState.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateCreate.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateRead.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateReadAll.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateReadCity.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateReadState.sql" />
+    <Build Include="dbo\Stored Procedures\spCityStateReadCityState.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
