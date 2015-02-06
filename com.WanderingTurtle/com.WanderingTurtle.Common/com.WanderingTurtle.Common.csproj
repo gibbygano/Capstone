@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Booking.cs" />
+    <Compile Include="BookingLineItem.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HotelGuest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
