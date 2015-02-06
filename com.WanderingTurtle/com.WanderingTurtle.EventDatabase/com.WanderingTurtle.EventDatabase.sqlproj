@@ -57,5 +57,15 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\UserLogin.sql" />
+    <Build Include="dbo\Stored Procedures\spUserLoginGet.sql" />
+    <Build Include="dbo\Stored Procedures\spUserLoginGetList.sql" />
+    <Build Include="dbo\Stored Procedures\spUserLoginAdd.sql" />
+    <Build Include="dbo\Stored Procedures\spUserLoginUpdate.sql" />
   </ItemGroup>
 </Project>
