@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookingAccessor.cs" />
+    <Compile Include="BookingLineItemAccessor.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="EventDataAccess.cs" />
     <Compile Include="EmployeeAccessor.cs" />
