@@ -1,21 +1,21 @@
 ﻿using System;
 
-public class Event : Product
+public class Event
 {
-    int EventItemID         { get; set; }
-    string EventItemName    { get; set; }
-    DateTime EventStartDate { get; set; }
-    DateTime EventEndDate   { get; set; }
-    int MaxNumGuests        { get; set; }
-    int MinNumGuests        { get; set; }
-    int CurrentNumGuests    { get; set; }
-    bool Transportation     { get; set; }
-    int EventTypeID         { get; set; }
-    bool OnSite             { get; set; }
-    int ProductID           { get; set; }
-    decimal PricePerPerson  { get; set; }
-    String Description      { get; set; }
-    bool Active             { get; set; }
+    public int EventItemID         { get; set; }
+    public string EventItemName    { get; set; }
+    public DateTime EventStartDate { get; set; }
+    public DateTime EventEndDate   { get; set; }
+    public int MaxNumGuests        { get; set; }
+    public int MinNumGuests        { get; set; }
+    public int CurrentNumGuests    { get; set; }
+    public bool Transportation     { get; set; }
+    public int EventTypeID         { get; set; }
+    public bool OnSite             { get; set; }
+    public int ProductID           { get; set; }
+    public decimal PricePerPerson  { get; set; }
+    public String Description      { get; set; }
+    public bool Active             { get; set; }
 
 	public Event(int eventItemID, string eventItemName, DateTime eventStartDate, DateTime eventEndDate, int maxNumGuests, int minNumGuests,
         int currentNumGuests, bool transportation, int eventTypeID, bool onSite, int productID, decimal pricePerPerson, String description, bool active)
