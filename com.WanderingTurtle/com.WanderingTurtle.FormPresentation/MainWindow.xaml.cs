@@ -23,5 +23,21 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
         }
+
+        private void EventAdder_Click(object sender, RoutedEventArgs e)
+        {
+            var newWind = new ViewList();
+            newWind.Show();
+        }
+
+        private void btnSupplier_click(object sender, RoutedEventArgs e)
+        {
+            var newWind = new AddSupplier();
+            newWind.Show();
+        }
+
+
+
+
     }
 }
