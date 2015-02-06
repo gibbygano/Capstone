@@ -39,15 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="DatabaseConnection.cs" />
-=======
-<<<<<<< HEAD
     <Compile Include="EventDataAccess.cs" />
-=======
     <Compile Include="EmployeeAccessor.cs" />
->>>>>>> origin/master
->>>>>>> origin/master
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
