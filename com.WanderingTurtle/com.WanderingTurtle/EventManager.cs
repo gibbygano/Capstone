@@ -7,7 +7,7 @@ using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle
 {
-    class EventManager
+    public class EventManager
     {
         public EventManager()
         {
@@ -20,7 +20,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EventAccessor.getEvent(eventItemID); 
+                return EventAccessor.GetEvent(eventItemID); 
             }
             catch (Exception ex)
             {
@@ -35,7 +35,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EventAccessor.getEventList();
+                return EventAccessor.GetEventList();
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EventAccessor.addEvent(newEvent);
+                return EventAccessor.AddEvent(newEvent);
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EventAccessor.updateEvent(oldEvent, newEvent);
+                return EventAccessor.UpdateEvent(oldEvent, newEvent);
             }
             catch (Exception ex)
             {
@@ -80,7 +80,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EventAccessor.delteEvent(eventToDelete);
+                return EventAccessor.DeleteEvent(eventToDelete);
             }
             catch (Exception ex)
             {
