@@ -8,8 +8,9 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class DatabaseConnection
     {
-        const string ConnectionString = @"Data Source=localhost;Initial Catalog=EventDatabase;Integrated Security=True";
-        public static SqlConnection GetConnection() 
+        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=EventDatabase;Integrated Security=True";
+
+        public static SqlConnection GetDatabaseConnection()
         {
             return new SqlConnection(ConnectionString);
         }

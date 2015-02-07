@@ -94,4 +94,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="com.WanderingTurtle.EventDatabase.refactorlog" />
+  </ItemGroup>
 </Project>

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -15,12 +15,13 @@ namespace com.WanderingTurtle.DataAccess
         * Specific Exception thrown is if the BookingID isn't on file.
         * Created By: Tony Noel - 2/3/15
         * */
+
         public static Booking getBooking(int BookingID)
         {
             Booking BookingToGet = new Booking();
 
             //establish connection
-            SqlConnection conn = GenericDatabase.GetConnection();
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectBooking";
             //create a Sql Command
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -50,7 +51,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -61,17 +61,17 @@ namespace com.WanderingTurtle.DataAccess
             return BookingToGet;
         }
 
-
         /* getBookingList- a method used to collect a list of bookings from the database
          * Output is a list of booking objects to hold the booking records.
          * Specific Exception thrown is if the booking data cannot be found.
          * Created By: Tony Noel - 2/3/15
          * */
+
         public static List<Booking> getBookingList()
         {
             var BookingList = new List<Booking>();
             //Set up database call
-            var conn = GenericDatabase.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "SELECT * FROM Booking";
             var cmd = new SqlCommand(query, conn);
             try
@@ -101,7 +101,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -116,9 +115,10 @@ namespace com.WanderingTurtle.DataAccess
          * Output is the number of rows affected by the insert
          * Created By: Tony Noel - 2/3/15
          * */
+
         public static int addBooking(Booking toAdd)
         {
-            var conn = GenericDatabase.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spAddBooking";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
@@ -130,7 +130,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@GuestID", toAdd.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toAdd.EmployeeID);
             cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
-            
+
             try
             {
                 conn.Open();
@@ -138,7 +138,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -146,19 +145,18 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
 
-            return rowsAffected; 
+            return rowsAffected;
         }
-
-
 
         /* UpdateBooking- a method used to update a booking in the database
          * inputs are the original Booking object along with a booking object to update
          * Output is the rows affected by the update
          * Created By: Tony Noel - 2/3/15
          * */
+
         public static int updateBooking(Booking oldOne, Booking toUpdate)
         {
-            var conn = GenericDatabase.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spUpdateBooking";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
@@ -169,7 +167,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@GuestID", toUpdate.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toUpdate.EmployeeID);
             cmd.Parameters.AddWithValue("@DateBooked", toUpdate.DateBooked);
-            
+
             cmd.Parameters.AddWithValue("@original_BookingID", oldOne.BookingID);
             cmd.Parameters.AddWithValue("@original_GuestID", oldOne.GuestID);
             cmd.Parameters.AddWithValue("@original_EmployeeID", oldOne.EmployeeID);
@@ -182,7 +180,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -192,15 +189,15 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-
         /* DeleteBooking- a method used to delete a booking in the database
          * inputs are the Booking object to delete
          * Output is the rows affected by the update
          * Created By: Tony Noel - 2/3/15
          * */
+
         public static int deleteBooking(Booking toDelete)
         {
-            var conn = GenericDatabase.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spDeleteBooking";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
@@ -212,7 +209,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_GuestID", toDelete.GuestID);
             cmd.Parameters.AddWithValue("@original_EmployeeID", toDelete.EmployeeID);
             cmd.Parameters.AddWithValue("@original_DateBooked", toDelete.DateBooked);
-            
+
             try
             {
                 conn.Open();
@@ -220,7 +217,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -228,7 +224,7 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
 
-            return rowsAffected; 
+            return rowsAffected;
         }
     }
 }

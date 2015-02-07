@@ -7,7 +7,7 @@ namespace com.WanderingTurtle.Common
 {
     public class HotelGuest
     {
-        public int CustomerID { get; set; }
+        public int HotelGuestID { get; set; }
 
         public string FirstName { get; set; }
 
@@ -25,9 +25,9 @@ namespace com.WanderingTurtle.Common
 
         public int HotelGuestPIN { get; set; }
 
-        public HotelGuest(int CustomerID, string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
         {
-            this.CustomerID = CustomerID;
+            this.HotelGuestID = HotelGuestID;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Address1 = Address1;

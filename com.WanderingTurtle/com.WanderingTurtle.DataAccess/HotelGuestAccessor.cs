@@ -7,26 +7,16 @@ using System.Text;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    public class DatabaseConnection
-    {
-        private const string ConnectionString = "Data Source=voice.magi1053.com;Initial Catalog=mugshotsDatabase;Persist Security Info=True;User ID=Magi1053;Password=Manastarystar123";
-
-        public static SqlConnection GetDatabaseConnection()
-        {
-            return new SqlConnection(ConnectionString);
-        }
-    }
-
     public class HotelGuestAccessor
     {
-        public static HotelGuest SelectHotelGuest(string hotelGuestID)
+        public static HotelGuest SelectHotelGuest(int hotelGuestID)
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            string query = @"SELECT [CustomerID],[FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[EmailAddress],[HotelGuestPIN]
+            string query = @"SELECT [HotelGuestID],[FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[EmailAddress],[HotelGuestPIN]
                             FROM [dbo].[HotelGuest]
-                            WHERE [CustomerID] = @customerID";
+                            WHERE [HotelGuestID] = @hotelGuestID";
             SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@pin", hotelGuestID);
+            cmd.Parameters.AddWithValue("@hotelGuestID", hotelGuestID);
 
             try
             {
@@ -41,7 +31,7 @@ namespace com.WanderingTurtle.DataAccess
                     reader.Read();
 
                     return new HotelGuest(
-                        reader.GetInt32(0), // CustomerID
+                        reader.GetInt32(0), // HotelGuestID
                         reader.GetString(1), //FirstName
                         reader.GetString(2), //LastName
                         reader.GetString(3), //Zip
@@ -54,7 +44,7 @@ namespace com.WanderingTurtle.DataAccess
                 }
                 else
                 {
-                    throw new ApplicationException("Customer ID number did not match any records.");
+                    throw new ApplicationException("Hotel Guest ID number did not match any records.");
                 }
             }
             catch (Exception)

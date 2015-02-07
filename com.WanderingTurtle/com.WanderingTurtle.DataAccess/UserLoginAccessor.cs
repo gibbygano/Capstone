@@ -1,11 +1,11 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
-using com.WanderingTurtle.Common;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -32,8 +32,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             UserLogin loginUser = new UserLogin();
 
-            //var conn = DatabaseConnections.getConnection(); //find out the class where the database string will be held and place it in here
-            SqlConnection conn = new SqlConnection(@"Data Source=localhost;Initial Catalog=nameOfDatabase;Integrated Security=True"); //temporary
+            var conn = DatabaseConnection.GetDatabaseConnection(); //find out the class where the database string will be held and place it in here
             var query = @"spUserLoginGet";
             var cmd = new SqlCommand(query, conn);
             cmd.Parameters.AddWithValue("@original_userID", id);
@@ -87,8 +86,7 @@ namespace com.WanderingTurtle.DataAccess
             List<UserLogin> loginList = new List<UserLogin>();
             UserLogin loginUser;
 
-            //var conn = DatabaseConnections.getConnection(); //find out the class where the database string will be held and place it in here
-            SqlConnection conn = new SqlConnection(@"Data Source=localhost;Initial Catalog=nameOfDatabase;Integrated Security=True"); //temporary
+            var conn = DatabaseConnection.GetDatabaseConnection(); //find out the class where the database string will be held and place it in here
             var query = @"spUserLoginGetList";
             var cmd = new SqlCommand(query, conn);
 

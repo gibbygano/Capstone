@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             var bliToReturn = new BookingLineItem();
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             string sql = @"spBookingLineItemSelectSingle";
             SqlCommand command = new SqlCommand(sql, conn);
@@ -60,7 +60,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             var bliList = new List<BookingLineItem>();
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             string sql = @"spBookingLineItemSelectAll";
             SqlCommand command = new SqlCommand(sql, conn);
@@ -103,7 +103,7 @@ namespace com.WanderingTurtle.DataAccess
 
         public static int deleteBookingLineItem(BookingLineItem itemToDelete)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             string sql = @"spBookingLineItemSelectSingle";
             SqlCommand command = new SqlCommand(sql, conn);
@@ -130,7 +130,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int addBookingLineItem(BookingLineItem itemToAdd)
         {
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             string sql = @"spBookingLineItemInsert";
             SqlCommand command = new SqlCommand(sql, conn);
@@ -158,7 +158,7 @@ namespace com.WanderingTurtle.DataAccess
 
         public static int updateBookingLineItem(BookingLineItem newItem, BookingLineItem oldItem)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             string sql = @"spBookingLineItemInsert";
             SqlCommand command = new SqlCommand(sql, conn);
