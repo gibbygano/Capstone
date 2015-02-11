@@ -11,26 +11,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
-
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ListUsers.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ListUsers : UserControl
     {
-
-        public MainWindow()
+        public ListUsers()
         {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnUpdateUser_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            var newWind = new AddUser();
+            newWind.Show();
+        }
+        private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

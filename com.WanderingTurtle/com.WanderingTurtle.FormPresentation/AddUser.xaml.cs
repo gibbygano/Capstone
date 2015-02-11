@@ -9,27 +9,31 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 
-
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddUser.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddUser : Window
     {
+        private UserLoginManager myUserManager = new UserLoginManager();
+        private UserLogin userToAdd = new UserLogin();
 
-        public MainWindow()
+        public AddUser()
         {
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
+            // collect the values from the form - ID needs to pre-populate
+            userToAdd.UserID = int.Parse(txtUserID.Text);
+            //userToAdd.FirstName = 
+           // userToAdd.LastName = 
 
 
         }
