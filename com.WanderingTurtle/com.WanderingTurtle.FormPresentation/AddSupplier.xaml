@@ -30,13 +30,12 @@
                     <TextBox x:Name="txtPhoneNumber" HorizontalAlignment="Left" Height="30" Margin="551,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135" MaxLength="15"/>
                     <Label Content="Email Address" HorizontalAlignment="Left" Margin="431,66,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
                     <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="30" Margin="551,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135" MaxLength="100"/>
-                    <Label Content="Supplier Type" HorizontalAlignment="Left" Margin="431,117,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
-                    <Label Content="User ID" HorizontalAlignment="Left" Margin="431,172,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
-                    <TextBox x:Name="txtUserID" HorizontalAlignment="Left" Height="31" Margin="551,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135"/>
-                    <Label Content="Description" HorizontalAlignment="Left" Margin="431,227,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
-                    <TextBox x:Name="txtCompanyDescription" HorizontalAlignment="Left" Height="89" Margin="551,229,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="256"/>
-                    <ComboBox x:Name="cboSupplierType" HorizontalAlignment="Left" Margin="551,120,0,0" VerticalAlignment="Top" Width="135" Height="29"/>
-                    <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="10,382,0,0" VerticalAlignment="Top" Width="126" Height="47" Click="btnSubmit_Click"/>
+                    <Label Content="User ID" HorizontalAlignment="Left" Margin="431,118,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
+                    <TextBox x:Name="txtUserID" HorizontalAlignment="Left" Height="31" Margin="551,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135"/>
+                    <Label Content="Description" HorizontalAlignment="Left" Margin="431,173,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
+                    <TextBox x:Name="txtCompanyDescription" HorizontalAlignment="Left" Height="89" Margin="551,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="256"/>
+                    <Button x:Name="btnSubmit" Content="Add Supplier" HorizontalAlignment="Left" Margin="10,382,0,0" VerticalAlignment="Top" Width="126" Height="47" Click="btnSubmit_Click"/>
+                    <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="154,382,0,0" VerticalAlignment="Top" Width="129" Height="47" Click="btnEdit_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Update/Delete">
@@ -45,7 +44,6 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width ="140" Header="Company Name" DisplayMemberBinding="{Binding CompanyName}"/>
-                                <GridViewColumn Width ="100" Header="Supplier Type" DisplayMemberBinding="{Binding SupplierTypeID}"/>
                                 <GridViewColumn Width ="100" Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
                                 <GridViewColumn Width ="100" Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
                                 <GridViewColumn Width ="150" Header="Address" DisplayMemberBinding="{Binding Address1}"/>
