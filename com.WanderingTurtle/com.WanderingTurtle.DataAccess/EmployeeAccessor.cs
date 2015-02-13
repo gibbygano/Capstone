@@ -10,14 +10,21 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class EmployeeAccessor
     {
-        // getEmployeeList() takes in no parameters and returns a full
-        // list of all of the employeesin the database(employeeList)
-        // objects are added to list object collection
-        // if no employee database listings are found an
-        // applicaiton exception is thrown
-        // Ryan Blake February 5th
+        
+        // Ryan Blake
+        // February 12, 2015
 
-        public static List<Employee> getEmployeeList()
+        // Paramaters: N/A
+
+        // Desc.: Method creates a connection to the database and calls 
+        // the stored procedure spEmployeeList that querys the database
+        // for all of the active employees
+
+        // Failure: Exception is thrown stating that no employees could be found in DB
+
+        // Success: List object employeeList is returned with a list of all the employees
+        // in the database
+        public static List<Employee> GetEmployeeList()
         {
             var employeeList = new List<Employee>();
 
@@ -65,14 +72,21 @@ namespace com.WanderingTurtle.DataAccess
             return employeeList;
         }
 
-        // getEmployee takes in two parameters of firstName and lastName and
-        // then queries the database with a string that returns
-        // the results to an employee object if they match the parameters
-        // employee first name and last name must be correct in databae or
-        // an Application exception will be returned
-        // if successful, an Employee type object named myEmployee will be returned holding all of the employee information
-        // Ryan Blake, February 5th
+       
+        // Ryan Blake
+        // February 12, 2015
 
+        // Parameters: firstName || Type: string, lastName || Type: string
+
+        // Desc.: Method takes in an employee first name and last name, submits
+        // those variables to the stored procedure spSelect Employee
+        // which will return the specific employee that matches the firstName and lastName
+
+        // Failure: Exception is thrown that asks the user to try their search again
+        // becuase the employee wasn't found
+
+        // Success: An employee object is returned from the database and from the method
+        // as myEmployee
         public static Employee GetEmployee(string firstName, string lastName)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -117,13 +131,18 @@ namespace com.WanderingTurtle.DataAccess
             return myEmployee;
         }
 
-        // AddEmployee() takes in a parameter of newEmployee type Employee
+        // Ryan Blake
+        // February 15, 2015
+
+        // Parameters: newEmployee || Type: Employee
+
+        // Desc.: Method takes in a parameter of newEmployee
         // Database is queried using stored procedure and looks for matching
         // information from the object passed to the method
-        // if successful a count of rows affected is returned
-        // if unsuccssful an application exception will be thrown
-        // Ryan Blake, February 5th
 
+        // Success: a count of rows affected is returned
+
+        // Failure: an application exception will be thrown
         public static int AddEmployee(Employee newEmployee)
         {
             int rowsAffected = 0;
@@ -159,14 +178,23 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        // UpdateEmployee takes in two parameters of Employee object type (originalEmployee, updatedEmployee)
-        // the parameters are inserted into the stored procedure and update the information from orignalEmployee with updatedEmployee
-        // upon success a rowcount of rows affected will be returned
-        // if unsuccessful (originalEmployee does not match an employee listing in the database)
-        // Application exception wil be thrown
-        // this method will also serve as the delete as the user will simply change the employee Active to false, removing them
+        // Ryan Blake
+        // February 12, 2015
+
+        // Parameters: originalEmployee || Type: Employee, updatedEmployee || Type: Employee
+
+        // Desc.: Method takes in originalEmployee and updatedEmployee
+        // the parameters are inserted into the stored procedure and update the 
+        // information from orignalEmployee with updatedEmployee
+
+        // Success: a rowcount of rows affected will be returned
+
+        // Failure:  (originalEmployee does not match an employee listing in the database)
+        // application exception wil be thrown
+
+        // Note: this method will also serve as the delete as the user will simply 
+        // change the employee Active to false, removing them
         // from any listings but still keeping their records in the database
-        // Ryan Blake, February 5th
 
         public static int UpdateEmployee(Employee originalEmployee, Employee updatedEmployee)
         {
