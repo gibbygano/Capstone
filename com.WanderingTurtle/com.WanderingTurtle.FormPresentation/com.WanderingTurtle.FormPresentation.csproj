@@ -59,6 +59,12 @@
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddItemListing.xaml.cs">
+      <DependentUpon>AddItemListing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListingList.xaml.cs">
+      <DependentUpon>ListingList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewList.xaml.cs">
       <DependentUpon>ViewList.xaml</DependentUpon>
     </Compile>
@@ -67,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditExistingEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListingList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -88,7 +98,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddSupplier.xaml"></Page>
+    <Page Include="AddSupplier.xaml">
+    </Page>
+    <Page Include="AddItemListing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
