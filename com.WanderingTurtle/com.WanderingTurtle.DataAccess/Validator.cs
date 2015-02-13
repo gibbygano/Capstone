@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace com.WanderingTurtle
 {
-    class Validator
+    public class Validator
     {
         //Validates that the given string only contains letters (no numbers)
         //Created by Matt Lapka 2/1/15

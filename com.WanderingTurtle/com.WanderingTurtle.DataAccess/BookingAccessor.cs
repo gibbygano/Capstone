@@ -61,6 +61,111 @@ namespace com.WanderingTurtle.DataAccess
             return BookingToGet;
         }
 
+        /*Creates a list of options, has an ItemListID, Quantity, and some event info
+         * to help populate drop downs/ lists for Add and update Bookings
+         *Returns a list of BookingOptions objects 
+         * 
+         * Tony Noel- 2/13/15
+         */
+        public static List<ListItem> getListItems()
+        {
+            var BookingOpsList = new List<ListItem>();
+            //Set up database call
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSelectBookingFull";
+            var cmd = new SqlCommand(query, conn);
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    while (reader.Read())
+                    {
+                        var currentBook = new ListItem();
+
+                        currentBook.ItemListID = reader.GetInt32(0);
+                        currentBook.BookingQuantity = reader.GetInt32(1);
+                        currentBook.EventID = reader.GetInt32(2);
+                        currentBook.EventName = reader.GetString(3);
+                        currentBook.EventDescription = reader.GetString(4);
+
+                        BookingOpsList.Add(currentBook);
+                    }
+                }
+                else
+                {
+                    var ax = new ApplicationException("Booking data not found!");
+                    throw ax;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return BookingOpsList;
+        }
+
+
+        /*searchBooking() takes a booking objects and uses the spSearchBooking to locate a booking where the 
+         * bookingID is unknown. Useful when a new booking has just been added to the database as a way to retrieve the bookingID
+         * under the hood.
+         * Returns a booking object complete with the bookingID.
+         * Tony Noel- 2/12/15
+         */
+        public static Booking searchBooking(Booking toSearch)
+        {
+            Booking BookingToGet = new Booking();
+
+            //establish connection
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSearchBooking";
+            //create a Sql Command
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@guestID", toSearch.GuestID); //This is the parameter passing portion of the code.
+            cmd.Parameters.AddWithValue("@empID", toSearch.EmployeeID);
+            cmd.Parameters.AddWithValue("@date", toSearch.DateBooked);
+
+
+            try
+            {
+                //open connection
+                conn.Open();
+                //execute the command and capture the results to a SqlDataReader
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+
+                    BookingToGet.BookingID = reader.GetInt32(0);
+                    BookingToGet.GuestID = reader.GetInt32(1);
+                    if (!reader.IsDBNull(2)) BookingToGet.EmployeeID = reader.GetInt32(2);
+                    BookingToGet.DateBooked = reader.GetDateTime(3);
+                }
+                else
+                {
+                    var up = new ApplicationException("The BookingID provided does not match any records on file.");
+                    throw up;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return BookingToGet;
+        }
+
         /* getBookingList- a method used to collect a list of bookings from the database
          * Output is a list of booking objects to hold the booking records.
          * Specific Exception thrown is if the booking data cannot be found.
@@ -72,7 +177,7 @@ namespace com.WanderingTurtle.DataAccess
             var BookingList = new List<Booking>();
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT * FROM Booking";
+            string query = "spSelectAllBookings";
             var cmd = new SqlCommand(query, conn);
             try
             {
@@ -126,7 +231,6 @@ namespace com.WanderingTurtle.DataAccess
             //Set command type to stored procedure and add parameters
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@BookingID", toAdd.BookingID);
             cmd.Parameters.AddWithValue("@GuestID", toAdd.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toAdd.EmployeeID);
             cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
