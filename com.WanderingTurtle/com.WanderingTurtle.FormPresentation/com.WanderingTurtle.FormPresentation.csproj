@@ -68,6 +68,12 @@
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Lists.xaml.cs">
+      <DependentUpon>Lists.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListsPopUp.xaml.cs">
+      <DependentUpon>ListsPopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
@@ -116,6 +122,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditExistingEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Lists.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListsPopUp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,31 +1,28 @@
 ﻿//Justin Pennington
 
+using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using com.WanderingTurtle.Common;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    class EventDataAccess
+    internal class EventAccessor
     {
-         
-        
-
         //creates a new event item in the database, using an event object that is passed in
         public static int addEvent(Event newEvent)
         {
-            var conn = DatabaseConnection.GetDBConnection();
-            string query = "INSERT INTO EventItem (EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests," +
-            "CurrentNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active) " +
-                                 "VALUES(@EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests, CurrentNumberOfGuests, EventTypeID" +
-                                 ", PricePerPerson, EventOnsite, Transportation, EventDescription, Active)";
-            var cmd = new SqlCommand(query, conn);
+            //Connect To Database
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spInsertEventItem";
+            var cmd = new SqlCommand(cmdText, conn);
+            var rowsAffected = 0;
 
+            //Set up Parameters For the Stored Procedure
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventStartTime", newEvent.EventStartDate);
             cmd.Parameters.AddWithValue("@EventEndTime", newEvent.EventEndDate);
@@ -40,7 +37,11 @@ namespace com.WanderingTurtle.DataAccess
             try
             {
                 conn.Open();
-                return cmd.ExecuteNonQuery();
+                rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Concurrency Violation");
+                }
             }
             catch (Exception)
             {
@@ -50,14 +51,15 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
+            return rowsAffected;
         }
 
         //needs the event object that is having its name being changed and the new name
-        //Returns the number of rows affected (should be 1) 
+        //Returns the number of rows affected (should be 1)
         public static int updateEvent(Event oldEvent, Event newEvent)
         {
-            var conn = DatabaseConnection.GetDBConnection();
-            var cmdText = "spUpdateEventName";
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spUpdateEventItem";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
@@ -96,7 +98,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -108,9 +109,9 @@ namespace com.WanderingTurtle.DataAccess
 
         //requires: Event object, Boolean value for active/inactive
         //returns number of rows affected
-        public static int deleteEvent(Event newEvent)
+        public static int DeleteEventItem(Event newEvent)
         {
-            var conn = DatabaseConnection.GetDBConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spDeleteEvent";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
@@ -147,12 +148,13 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+        //retrieves all Events and returns a List of Event objects
         public static List<Event> getEventList()
         {
-            var CharacterList = new List<Event>();
+            var EventList = new List<Event>();
 
             // set up the database call
-            var conn = DatabaseConnection.GetDBConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "SELECT EventItemID, EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests," +
             "CurrentNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active " +
             "FROM EventItem";
@@ -180,7 +182,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentEvent.Transportation = reader.GetBoolean(10);
                         currentEvent.Description = reader.GetString(11);
                         currentEvent.Active = reader.GetBoolean(12);
-                        CharacterList.Add(currentEvent);
+                        EventList.Add(currentEvent);
                     }
                 }
                 else
@@ -197,13 +199,15 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return CharacterList;
+            return EventList;
         }
+
+        //retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
         public static Event getEvent(String eventID)
         {
             var theEvent = new Event();
             // set up the database call
-            var conn = DatabaseConnection.GetDBConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "SELECT EventItemID, EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests," +
             "CurrentNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active " +
             "FROM EventItem WHERE EventItemID = " + eventID;
@@ -215,21 +219,18 @@ namespace com.WanderingTurtle.DataAccess
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows == true)
                 {
-
-                        theEvent.EventItemID = reader.GetInt32(0);
-                        theEvent.EventItemName = reader.GetString(1);
-                        theEvent.EventEndDate = (DateTime)reader.GetValue(3);
-                        theEvent.MaxNumGuests = reader.GetInt32(4);
-                        theEvent.CurrentNumGuests = reader.GetInt32(5);
-                        theEvent.MinNumGuests = reader.GetInt32(6);
-                        theEvent.EventTypeID = reader.GetInt32(7);
-                        theEvent.PricePerPerson = reader.GetDecimal(8);
-                        theEvent.OnSite = reader.GetBoolean(9);
-                        theEvent.Transportation = reader.GetBoolean(10);
-                        theEvent.Description = reader.GetString(11);
-                        theEvent.Active = reader.GetBoolean(12);
-                        
-                    
+                    theEvent.EventItemID = reader.GetInt32(0);
+                    theEvent.EventItemName = reader.GetString(1);
+                    theEvent.EventEndDate = (DateTime)reader.GetValue(3);
+                    theEvent.MaxNumGuests = reader.GetInt32(4);
+                    theEvent.CurrentNumGuests = reader.GetInt32(5);
+                    theEvent.MinNumGuests = reader.GetInt32(6);
+                    theEvent.EventTypeID = reader.GetInt32(7);
+                    theEvent.PricePerPerson = reader.GetDecimal(8);
+                    theEvent.OnSite = reader.GetBoolean(9);
+                    theEvent.Transportation = reader.GetBoolean(10);
+                    theEvent.Description = reader.GetString(11);
+                    theEvent.Active = reader.GetBoolean(12);
                 }
                 else
                 {
@@ -249,4 +250,3 @@ namespace com.WanderingTurtle.DataAccess
         }
     }
 }
-

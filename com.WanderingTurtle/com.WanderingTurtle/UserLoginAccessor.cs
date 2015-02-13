@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle
 {
-    public class UserLoginManager
+    class UserLoginAccessor
     {
         /// <summary>  Create a user login
         /// 
@@ -27,7 +25,7 @@ namespace com.WanderingTurtle
         /// <param name="userName"></param>
         /// <returns></returns>
 
-        public UserLogin RetrieveUserLogin(int userID)
+        public UserLogin RetrieveUserLogin(string userName)
         {
 
         }
@@ -67,7 +65,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EmployeeAccessor.GetEmployeeList();
+                return EmployeeAccessor.getEmployeeList();
             }
             catch (System.Data.SqlClient.SqlException)
             {

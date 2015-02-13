@@ -31,7 +31,7 @@ namespace com.WanderingTurtle
 
         //Retrieve a list of active Event objects from the Data Access layer with
         //Created by Matt Lapka 1/31/15
-        public List<Event> RetrieveEvent(string eventItemID)
+        public List<Event> RetrieveEventList()
         {
             try
             {
@@ -89,5 +89,82 @@ namespace com.WanderingTurtle
 
         }
         
+
+        /// <summary>
+        /// Retrieve a single EventType object from the Data Access layer with an eventTypeID
+        /// Created by Matt Lapka 2/8/15
+        /// </summary>
+        public EventType RetrieveEventType(string eventTypeID)
+        {
+            try
+            {
+                return EventTypeAccessor.GetEventType(eventTypeID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        ///Retrieve a list of active EventType objects from the Data Access layer
+        ///Created by Matt Lapka 2/8/15
+        public List<EventType> RetrieveEventTypeList()
+        {
+            try
+            {
+                return EventTypeAccessor.GetEventTypeList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        ///Add a single EventType object
+        ///Created by Matt Lapka 2/8/15
+        public int AddNewEventType(EventType newEventType)
+        {
+            try
+            {
+                return EventTypeAccessor.AddEventType(newEventType);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        //Edit an EventType object
+        //Created by Matt Lapka 2/8/15
+        public int EditEventType(EventType oldEventType, EventType newEventType)
+        {
+            try
+            {
+                return EventTypeAccessor.UpdateEventType(oldEventType, newEventType);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        //"Delete" a single EventType object (make inactive)
+        //Created by Matt Lapka 2/8/15
+        public int ArchiveAnEventType(EventType eventTypeToDelete)
+        {
+            try
+            {
+                return EventTypeAccessor.DeleteEventType(eventTypeToDelete);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }
