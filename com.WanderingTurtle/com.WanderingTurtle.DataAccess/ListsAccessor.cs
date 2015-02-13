@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.DataAccess
     {
         public static List<Lists> getListsList(string inListName)
         {
-            var myLists = new List<Event>();
+            var myLists = new List<Lists>();
 
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -33,7 +33,7 @@ namespace com.WanderingTurtle.DataAccess
                         var currentList = new Lists();
 
                         currentList.SupplierID = reader.GetInt32(0);
-                        currentList.ItemListsID = reader.GetInt32(1);
+                        currentList.ItemListID = reader.GetInt32(1);
                         currentList.DateListed = (DateTime)reader.GetValue(3);
                         
                         myLists.Add(currentList);
