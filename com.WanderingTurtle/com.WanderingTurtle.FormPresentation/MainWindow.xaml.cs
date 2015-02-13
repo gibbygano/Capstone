@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
+
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -19,25 +22,16 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void EventAdder_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var newWind = new ViewList();
-            newWind.Show();
+
+
         }
-
-        private void btnSupplier_click(object sender, RoutedEventArgs e)
-        {
-            var newWind = new AddSupplier();
-            newWind.Show();
-        }
-
-
-
-
     }
 }

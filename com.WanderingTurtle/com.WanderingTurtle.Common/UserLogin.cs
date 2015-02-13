@@ -10,6 +10,8 @@ namespace com.WanderingTurtle.Common
         public int UserID { get; set; }
         public string UserPassword { get; set; }
         public char UserLevel { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         //Summary: makes a UserLogin object that is empty
         //

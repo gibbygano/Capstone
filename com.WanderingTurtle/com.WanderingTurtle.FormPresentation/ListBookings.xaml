@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="com.WanderingTurtle.FormPresentation.ListBookings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+            d:DesignHeight="400" d:DesignWidth="700">
+    <Grid Background="#FFE5E5E5">
+        <ListView x:Name="lvBookingList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="561" Margin="9,5,0,0" SelectionChanged="lvEmployeesList_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width ="75" Header="Booking ID" />
+                    <GridViewColumn Width ="50" Header="Guest ID" />
+                    <GridViewColumn Width ="100" Header="Employee ID" />
+                    <GridViewColumn Header="Item ID" Width="50"/>
+                    <GridViewColumn Header="Quantity" Width="50"/>
+                    <GridViewColumn Header="Date" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddBooking_Click" />
+        <Button x:Name="btnUpdateBooking" Content="Update Booking" HorizontalAlignment="Left" Margin="116,370,0,0" VerticalAlignment="Top" Click="btnUpdateBooking_Click" />
+        <Button x:Name="btnDeleteBooking" Content="Delete Booking" HorizontalAlignment="Left" Margin="227,371,0,0" VerticalAlignment="Top" />
+    </Grid>
+</UserControl>

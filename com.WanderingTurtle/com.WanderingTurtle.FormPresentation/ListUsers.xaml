@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="com.WanderingTurtle.FormPresentation.ListUsers"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="700">
+    <Grid Background="#FFE5E5E5" Margin="0,0,0.4,-2.8">
+        <ListView x:Name="lvUsersList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="560" Margin="11,4,0,0">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width ="100" Header="User ID" />
+                    <GridViewColumn Width ="150" Header="First Name" />
+                    <GridViewColumn Width ="150" Header="Last Name" />
+                    <GridViewColumn Width ="150" Header="Role" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="btnAddUser" Content="Add User" HorizontalAlignment="Left" Margin="13,368,0,0" VerticalAlignment="Top" Width="74" Click="btnAddUser_Click"/>
+        <Button x:Name="btnUpdateUser" Content="Update User" HorizontalAlignment="Left" Margin="100,368,0,0" VerticalAlignment="Top" Width="74" Click="btnUpdateUser_Click" />
+        <Button x:Name="btnDeleteUser" Content="Delete User" HorizontalAlignment="Left" Margin="185,369,0,0" VerticalAlignment="Top" Width="74" Click="btnDeleteUser_Click" />
+    </Grid>
+</UserControl>
