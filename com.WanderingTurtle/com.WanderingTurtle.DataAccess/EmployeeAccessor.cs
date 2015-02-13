@@ -1,19 +1,19 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
 
 namespace com.WanderingTurtle.DataAccess
 {
     public class EmployeeAccessor
     {
-        // getEmployeeList() takes in no parameters and returns a full 
+        // getEmployeeList() takes in no parameters and returns a full
         // list of all of the employeesin the database(employeeList)
         // objects are added to list object collection
-        // if no employee database listings are found an 
+        // if no employee database listings are found an
         // applicaiton exception is thrown
         // Ryan Blake February 5th
 
@@ -21,8 +21,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             var employeeList = new List<Employee>();
 
-
-            SqlConnection conn = Database.GetDBConnection();
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
             var cmdText = "spEmployeeList";
             var cmd = new SqlCommand(cmdText, conn);
@@ -45,7 +44,6 @@ namespace com.WanderingTurtle.DataAccess
                         inEmployee.UserID = (int)reader.GetValue(3);
                         inEmployee.Active = (bool)reader.GetValue(4);
 
-
                         employeeList.Add(inEmployee);
                     }
                 }
@@ -54,7 +52,6 @@ namespace com.WanderingTurtle.DataAccess
                     var ax = new ApplicationException("No employees found in database.");
                     throw ax;
                 }
-
             }
             catch (Exception)
             {
@@ -68,18 +65,17 @@ namespace com.WanderingTurtle.DataAccess
             return employeeList;
         }
 
-        // getEmployee takes in two parameters of firstName and lastName and 
-        // then queries the database with a string that returns 
+        // getEmployee takes in two parameters of firstName and lastName and
+        // then queries the database with a string that returns
         // the results to an employee object if they match the parameters
         // employee first name and last name must be correct in databae or
         // an Application exception will be returned
         // if successful, an Employee type object named myEmployee will be returned holding all of the employee information
         // Ryan Blake, February 5th
 
-        public static Employee getEmployee(string firstName, string lastName)
+        public static Employee GetEmployee(string firstName, string lastName)
         {
-
-            var conn = Database.GetDBConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             var cmdText = "spSelectEmployee";
             var cmd = new SqlCommand(cmdText, conn);
@@ -92,7 +88,6 @@ namespace com.WanderingTurtle.DataAccess
 
             try
             {
-
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
@@ -133,7 +128,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             int rowsAffected = 0;
 
-            var conn = Database.GetDBConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             var cmdText = "spAddEmployee";
             var cmd = new SqlCommand(cmdText, conn);
@@ -155,7 +150,6 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     throw new ApplicationException("There was a problem adding the employee to the database. Please try again.");
                 }
-
             }
             catch (Exception)
             {
@@ -169,7 +163,7 @@ namespace com.WanderingTurtle.DataAccess
         // the parameters are inserted into the stored procedure and update the information from orignalEmployee with updatedEmployee
         // upon success a rowcount of rows affected will be returned
         // if unsuccessful (originalEmployee does not match an employee listing in the database)
-        // Application exception wil be thrown 
+        // Application exception wil be thrown
         // this method will also serve as the delete as the user will simply change the employee Active to false, removing them
         // from any listings but still keeping their records in the database
         // Ryan Blake, February 5th
@@ -178,7 +172,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             int rowsAffected = 0;
 
-            var conn = Database.GetDBConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             var cmdText = "spUpdateEmployee";
             var cmd = new SqlCommand(cmdText, conn);
@@ -206,7 +200,6 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     throw new ApplicationException("Could not update employee information, please try again.");
                 }
-
             }
             catch (Exception)
             {

@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[HotelGuest](
-	[CustomerID] [int] IDENTITY(0,1) NOT NULL,
+	[HotelGuestID] [int] IDENTITY(0,1) NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NOT NULL,
 	[Zip] [varchar](10) NOT NULL,

@@ -8,9 +8,10 @@ namespace com.WanderingTurtle.Common
     public class Employee : UserLogin
     {
         public int EmployeeID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int UserID { get; set; }
+
         public bool Active { get; set; }
+
+        public Employee() : base() {}   
+
     }
 }

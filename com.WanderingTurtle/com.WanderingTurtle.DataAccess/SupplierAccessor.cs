@@ -1,10 +1,10 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
-using com.WanderingTurtle.Common;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -14,15 +14,14 @@ namespace com.WanderingTurtle.DataAccess
         {
             /*
              * Retrieves Supplier information from database based on SupplierID and returns a Supplier Object.
-             * 
-             * Created by Tyler Collins 02/03/15 
+             *
+             * Created by Tyler Collins 02/03/15
              */
-
 
             Supplier supplierToRetrieve = new Supplier();
             string query = "Select SupplierID, CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierType, ApplicationID, UserID "
                 + "From Supplier Where SupplierID = '" + supplierID + "' and Active=1";
-            SqlConnection conn = DatabaseConnection.GetConnection();
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -71,13 +70,13 @@ namespace com.WanderingTurtle.DataAccess
         //{
         //    /*
         //     * Retrieves Supplier information from database based on SupplierID or CompanyName and returns a Supplier Object.
-        //     * 
-        //     * Created by Tyler Collins 02/03/15 
+        //     *
+        //     * Created by Tyler Collins 02/03/15
         //     */
 
         //    Supplier supplierToRetrieve = new Supplier();
         //    string query;
-        //    SqlConnection conn = DatabaseConnection.GetConnection();
+        //    SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
         //    if (isSupplierID)
         //    {
@@ -140,12 +139,12 @@ namespace com.WanderingTurtle.DataAccess
              * Adds Supplier Object to a List of Supplier Objects.
              * Repeats for every supplier in the table.
              * Returns List of Supplier Objects
-             * 
-             * Created by Tyler Collins 02/03/15 
+             *
+             * Created by Tyler Collins 02/03/15
              */
             List<Supplier> supplierList = new List<Supplier>();
 
-            var conn = new DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "SELECT SupplierID, CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierTypeID, ApplicationID, UserID "
                 + "FROM Suppliers WHERE Active=1";
             var cmd = new SqlCommand(query, conn);
@@ -199,10 +198,10 @@ namespace com.WanderingTurtle.DataAccess
         {
             /*
              * Takes a Supplier Object to INSERT a Supplier into the database.
-             * 
-             * Created by Tyler Collins 02/04/15 
+             *
+             * Created by Tyler Collins 02/04/15
              */
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
 
             string storedProcedure = "spInsertSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
@@ -243,13 +242,13 @@ namespace com.WanderingTurtle.DataAccess
              * Retrieves Supplier data based on passed Supplier Object.
              * Creates duplicate Supplier Object with original data.
              * Updates database with passed Supplier Object data WHERE database data = original Supplier Object data.
-             * 
-             * Created by Tyler Collins 02/04/15 
+             *
+             * Created by Tyler Collins 02/04/15
              */
             Supplier oldSupplierInfo = new Supplier();
             oldSupplierInfo = GetSupplier((newSupplierInfo.SupplierID).ToString());
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spUpdateSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
 
@@ -266,7 +265,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@SupplierTypeID", newSupplierInfo.SupplierTypeID);
             cmd.Parameters.AddWithValue("@ApplicationID", newSupplierInfo.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", newSupplierInfo.UserID);
-
 
             //Old Supplier Info
             cmd.Parameters.AddWithValue("@SupplierID", oldSupplierInfo.SupplierID);
@@ -306,10 +304,10 @@ namespace com.WanderingTurtle.DataAccess
             /*
              * Takes a Supplier Object to match to a record in the database.
              * Updates a Supplier record in database to set Active field to false.
-             * 
-             * Created by Tyler Collins 02/05/15 
+             *
+             * Created by Tyler Collins 02/05/15
              */
-            var conn = new DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spDeleteSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
 

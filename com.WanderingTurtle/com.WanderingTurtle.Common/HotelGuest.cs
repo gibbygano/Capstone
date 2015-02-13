@@ -1,14 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace com.WanderingTurtle.Common
+﻿namespace com.WanderingTurtle.Common
 {
-    public class HotelGuest
+    public class HotelGuest : NewHotelGuest
     {
-        public int CustomerID { get; set; }
+        /// <summary>
+        /// Create a HotelGuest object. To create a HotelGuestObject without an id, use NewHotelGuest
+        /// </summary>
+        public int HotelGuestID { get; set; }
 
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
+            : base(FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, HotelGuestPIN)
+        {
+            this.HotelGuestID = HotelGuestID;
+        }
+    }
+
+    public class NewHotelGuest
+    {
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -25,9 +32,8 @@ namespace com.WanderingTurtle.Common
 
         public int HotelGuestPIN { get; set; }
 
-        public HotelGuest(int CustomerID, string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
+        public NewHotelGuest(string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
         {
-            this.CustomerID = CustomerID;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Address1 = Address1;
