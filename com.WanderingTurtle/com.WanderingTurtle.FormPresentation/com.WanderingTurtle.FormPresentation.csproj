@@ -119,6 +119,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListsPopUp.xaml">
+    </Page>
     <Page Include="ListBookings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
