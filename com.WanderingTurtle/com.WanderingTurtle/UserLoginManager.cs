@@ -67,7 +67,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EmployeeAccessor.getEmployeeList();
+                return EmployeeAccessor.GetEmployeeList();
             }
             catch (System.Data.SqlClient.SqlException)
             {
