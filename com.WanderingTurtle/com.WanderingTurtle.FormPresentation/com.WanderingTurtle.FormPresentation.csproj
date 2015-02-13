@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="ListsPopUp.xaml.cs">
       <DependentUpon>ListsPopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
