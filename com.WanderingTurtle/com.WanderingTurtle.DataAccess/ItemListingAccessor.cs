@@ -23,7 +23,7 @@ namespace com.WanderingTurtle.DataAccess
 
             ItemListing itemListingToRetrieve = new ItemListing();
 
-            SqlConnection conn = DatabaseConnection.GetConnection();
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spSelectItemListing";
             SqlCommand cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -77,7 +77,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             List<ItemListing> itemListingList = new List<ItemListing>();
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spSelectItemListingList";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -131,7 +131,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>Returns the number of rows affected.</returns>
         public static int AddItemListing(ItemListing itemListingToAdd)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spInsertItemListing";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -170,7 +170,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>Returns the number of rows affected.</returns>
         public static int UpdateItemListing(ItemListing newItemListing, ItemListing oldItemListing)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spUpdateItemListing";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -220,7 +220,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>Returns the number of rows affected.</returns>
         public static int DeleteItemListing(ItemListing itemListingToDelete)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spDeleteItemListing";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;

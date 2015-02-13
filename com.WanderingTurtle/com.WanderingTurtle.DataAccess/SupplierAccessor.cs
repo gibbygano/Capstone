@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             Supplier supplierToRetrieve = new Supplier();
 
-            SqlConnection conn = DatabaseConnection.GetConnection();
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spSelectSupplier";
             SqlCommand cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -145,7 +145,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             List<Supplier> supplierList = new List<Supplier>();
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spSelectSupplierList";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -202,7 +202,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>Returns the number of rows affected.</returns>
         public static int AddSupplier(Supplier supplierToAdd)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spInsertSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -247,7 +247,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int UpdateSupplier(Supplier newSupplierInfo, Supplier oldSupplierInfo)
         {
 
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spUpdateSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -306,7 +306,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>Returns the number of rows affected</returns>
         public static int DeleteSupplier(Supplier supplierToDelete)
         {
-            var conn = DatabaseConnection.GetConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spDeleteSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
