@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
     class EventTypeAccessor
     {
+        //input parameter of EventType, will add the event type to the database, will return a 0 if it fails and a 1 if it was successful (false/true)
         public static int addEventType(EventType newEventType)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertEventType";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
-
+            //set up parameters for EventType
             cmd.Parameters.AddWithValue("@EventTypeID", newEventType.EventTypeID);
             cmd.Parameters.AddWithValue("@EventName", newEventType.EventName);
             
@@ -85,7 +87,7 @@ namespace com.WanderingTurtle.DataAccess
             var rowsAffected = 0;
 
             cmd.CommandType = CommandType.StoredProcedure;
-
+            //Set up parameters for EventType
             cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventItemName);
             cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventItemID);
             
@@ -109,6 +111,7 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+        //retrieves all EventTypes, Makes a List of EventTypes, Returns the List of EventTypes
         public static List<EventType> getEventTypeList()
         {
             var EventTypeList = new List<Event>();
@@ -151,6 +154,7 @@ namespace com.WanderingTurtle.DataAccess
             return EventTypeList;
         }
 
+        //gets an eventTypeID, retrieves data from databases, Returns an Event object
         public static Event getEventType(String eventTypeID)
         {
             var theEventType = new EventType();

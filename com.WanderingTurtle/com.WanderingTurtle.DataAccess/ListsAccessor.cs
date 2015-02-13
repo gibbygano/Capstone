@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.com.WanderingTurtle.Common;
+using com.WanderingTurtle.Common;
 using System.Data.SqlClient;
 using System.Data;
 
@@ -65,6 +65,8 @@ namespace com.WanderingTurtle.DataAccess
             "FROM Lists WHERE ItemListID = " + inItemListID + "AND SupplierID = " + inSupplierID;
             var cmd = new SqlCommand(query, conn);
 
+
+            //Put retrieved data into objects
             try
             {
                 conn.Open();
@@ -93,11 +95,13 @@ namespace com.WanderingTurtle.DataAccess
         }
         public static int AddLists(Lists newLists)
         {
+            //Connect to Database
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertListsItem";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
+            //Set up Parameters for the Stored Procedures
             cmd.Parameters.AddWithValue("@SupplierID", newLists.SupplierID);
             cmd.Parameters.AddWithValue("@ItemListID", newLists.ItemListID);
             cmd.Parameters.AddWithValue("@DateListed", newLists.DateListed);
@@ -123,6 +127,7 @@ namespace com.WanderingTurtle.DataAccess
         }
         public static int UpdateLists(Lists oldList, Lists newList)
         {
+            //connect to Database
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spUpdateLists";
             var cmd = new SqlCommand(cmdText, conn);
@@ -161,11 +166,13 @@ namespace com.WanderingTurtle.DataAccess
 
         public static int DeleteLists(Lists inLists)
         {
+            //make connection to Database
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spDeleteLists";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
+            //set up parameters for the stored Procedure
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@original_SupplierID", inLists.SupplierID);
             cmd.Parameters.AddWithValue("@original_ItemListID", inLists.ItemListID);

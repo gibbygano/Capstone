@@ -16,11 +16,13 @@ namespace com.WanderingTurtle.DataAccess
         //creates a new event item in the database, using an event object that is passed in
         public static int addEvent(Event newEvent)
         {
+            //Connect To Database
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertEventItem";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
+            //Set up Parameters For the Stored Procedure
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventStartTime", newEvent.EventStartDate);
             cmd.Parameters.AddWithValue("@EventEndTime", newEvent.EventEndDate);
@@ -146,6 +148,7 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+        //retrieves all Events and returns a List of Event objects
         public static List<Event> getEventList()
         {
             var EventList = new List<Event>();
@@ -199,6 +202,7 @@ namespace com.WanderingTurtle.DataAccess
             return EventList;
         }
 
+        //retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
         public static Event getEvent(String eventID)
         {
             var theEvent = new Event();
