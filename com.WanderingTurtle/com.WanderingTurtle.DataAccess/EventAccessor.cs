@@ -11,17 +11,15 @@ using System.Threading.Tasks;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    internal class EventDataAccess
+    internal class EventAccessor
     {
         //creates a new event item in the database, using an event object that is passed in
         public static int addEvent(Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "INSERT INTO EventItem (EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests," +
-            "CurrentNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active) " +
-                                 "VALUES(@EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests, CurrentNumberOfGuests, EventTypeID" +
-                                 ", PricePerPerson, EventOnsite, Transportation, EventDescription, Active)";
-            var cmd = new SqlCommand(query, conn);
+            var cmdText = "spInsertEventItem";
+            var cmd = new SqlCommand(cmdText, conn);
+            var rowsAffected = 0;
 
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventStartTime", newEvent.EventStartDate);
@@ -37,7 +35,11 @@ namespace com.WanderingTurtle.DataAccess
             try
             {
                 conn.Open();
-                return cmd.ExecuteNonQuery();
+                rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Concurrency Violation");
+                }
             }
             catch (Exception)
             {
@@ -47,6 +49,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
+            return rowsAffected;
         }
 
         //needs the event object that is having its name being changed and the new name
@@ -54,7 +57,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int updateEvent(Event oldEvent, Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spUpdateEventName";
+            var cmdText = "spUpdateEventItem";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
@@ -104,7 +107,7 @@ namespace com.WanderingTurtle.DataAccess
 
         //requires: Event object, Boolean value for active/inactive
         //returns number of rows affected
-        public static int deleteEvent(Event newEvent)
+        public static int DeleteEventItem(Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spDeleteEvent";
@@ -145,7 +148,7 @@ namespace com.WanderingTurtle.DataAccess
 
         public static List<Event> getEventList()
         {
-            var CharacterList = new List<Event>();
+            var EventList = new List<Event>();
 
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -176,7 +179,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentEvent.Transportation = reader.GetBoolean(10);
                         currentEvent.Description = reader.GetString(11);
                         currentEvent.Active = reader.GetBoolean(12);
-                        CharacterList.Add(currentEvent);
+                        EventList.Add(currentEvent);
                     }
                 }
                 else
@@ -193,7 +196,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return CharacterList;
+            return EventList;
         }
 
         public static Event getEvent(String eventID)
