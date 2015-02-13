@@ -60,7 +60,6 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
-    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\UserLogin.sql" />
@@ -92,11 +91,17 @@
     <Build Include="dbo\Stored Procedures\spCityStateReadCityState.sql" />
     <Build Include="dbo\Tables\SupplierApplication.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <Build Include="dbo\Tables\Employee.sql" />
+    <Build Include="dbo\Stored Procedures\spAddEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\spEmployeeList.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateEmployee.sql" />
+    <Build Include="dbo\Stored Procedures\spHotelGuestUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\spHotelGuestAdd.sql" />
+    <Build Include="dbo\Stored Procedures\spHotelGuestGet.sql" />
+    <Build Include="dbo\Stored Procedures\spHotelGuestGetList.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="com.WanderingTurtle.EventDatabase.refactorlog" />
   </ItemGroup>
 </Project>

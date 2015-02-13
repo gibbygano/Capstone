@@ -73,7 +73,7 @@ namespace com.WanderingTurtle.DataAccess
         // if successful, an Employee type object named myEmployee will be returned holding all of the employee information
         // Ryan Blake, February 5th
 
-        public static Employee getEmployee(string firstName, string lastName)
+        public static Employee GetEmployee(string firstName, string lastName)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
 
