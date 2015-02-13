@@ -90,6 +90,8 @@
     <Build Include="dbo\Stored Procedures\spCityStateReadCity.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadState.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadCityState.sql" />
+    <Build Include="dbo\Tables\SupplierApplication.sql" />
+    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
