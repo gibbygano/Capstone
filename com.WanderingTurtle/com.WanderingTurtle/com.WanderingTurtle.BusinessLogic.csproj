@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EmployeeManager.cs" />
     <Compile Include="OrderManager.cs" />
     <Compile Include="EventManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
