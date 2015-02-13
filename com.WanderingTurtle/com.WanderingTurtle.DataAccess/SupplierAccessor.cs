@@ -1,29 +1,31 @@
-﻿using com.WanderingTurtle.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using com.WanderingTurtle.Common;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace com.WanderingTurtle.DataAccess
 {
     public class SupplierAccessor
     {
+        /// <summary>
+        /// Retrieves Supplier information from the Database using a Stored Procedure.
+        /// Creates a Supplier object.
+        /// 
+        /// Created by Tyler Collins 02/03/15
+        /// </summary>
+        /// <param name="supplierID">Requires a SupplierID to SELECT the the correct Supplier record.</param>
+        /// <returns>Supplier object</returns>
         public static Supplier GetSupplier(string supplierID)
         {
-            /*
-             * Retrieves Supplier information from database based on SupplierID and returns a Supplier Object.
-             *
-             * Created by Tyler Collins 02/03/15
-             */
-
             Supplier supplierToRetrieve = new Supplier();
-            string query = "Select SupplierID, CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierType, ApplicationID, UserID "
-                + "From Supplier Where SupplierID = '" + supplierID + "' and Active=1";
-            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlConnection conn = DatabaseConnection.GetConnection();
+            string storedProcedure = "spSelectSupplier";
+            SqlCommand cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
@@ -44,9 +46,8 @@ namespace com.WanderingTurtle.DataAccess
                     supplierToRetrieve.Zip = reader.GetString(6);
                     supplierToRetrieve.PhoneNumber = reader.GetString(7);
                     supplierToRetrieve.EmailAddress = reader.GetString(8);
-                    supplierToRetrieve.SupplierTypeID = reader.GetInt32(9);
-                    supplierToRetrieve.ApplicationID = reader.GetInt32(10);
-                    supplierToRetrieve.UserID = reader.GetInt32(11);
+                    supplierToRetrieve.ApplicationID = reader.GetInt32(9);
+                    supplierToRetrieve.UserID = reader.GetInt32(10);
                 }
                 else
                 {
@@ -70,13 +71,13 @@ namespace com.WanderingTurtle.DataAccess
         //{
         //    /*
         //     * Retrieves Supplier information from database based on SupplierID or CompanyName and returns a Supplier Object.
-        //     *
-        //     * Created by Tyler Collins 02/03/15
+        //     * 
+        //     * Created by Tyler Collins 02/03/15 
         //     */
 
         //    Supplier supplierToRetrieve = new Supplier();
         //    string query;
-        //    SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+        //    SqlConnection conn = DatabaseConnection.GetConnection();
 
         //    if (isSupplierID)
         //    {
@@ -132,22 +133,22 @@ namespace com.WanderingTurtle.DataAccess
         //    return supplierToRetrieve;
         //}
 
+        /// <summary>
+        /// Retrieves all Supplier data from the Database using a Stored Procedure.
+        /// Creates a Supplier object from retrieved data.
+        /// Adds Supplier object to List of Supplier objects.
+        /// 
+        /// Created by Tyler Collins 02/03/2015
+        /// </summary>
+        /// <returns>List of Supplier objects</returns>
         public static List<Supplier> GetSupplierList()
         {
-            /*
-             * Retrieves Supplier information from database based on SupplierID and creates a Supplier Object.
-             * Adds Supplier Object to a List of Supplier Objects.
-             * Repeats for every supplier in the table.
-             * Returns List of Supplier Objects
-             *
-             * Created by Tyler Collins 02/03/15
-             */
             List<Supplier> supplierList = new List<Supplier>();
 
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT SupplierID, CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierTypeID, ApplicationID, UserID "
-                + "FROM Suppliers WHERE Active=1";
-            var cmd = new SqlCommand(query, conn);
+            var conn = DatabaseConnection.GetConnection();
+            string storedProcedure = "spSelectSupplierList";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
@@ -169,9 +170,8 @@ namespace com.WanderingTurtle.DataAccess
                         currentSupplier.Zip = reader.GetString(6);
                         currentSupplier.PhoneNumber = reader.GetString(7);
                         currentSupplier.EmailAddress = reader.GetString(8);
-                        currentSupplier.SupplierTypeID = reader.GetInt32(9);
-                        currentSupplier.ApplicationID = reader.GetInt32(10);
-                        currentSupplier.UserID = reader.GetInt32(11);
+                        currentSupplier.ApplicationID = reader.GetInt32(9);
+                        currentSupplier.UserID = reader.GetInt32(10);
 
                         supplierList.Add(currentSupplier);
                     }
@@ -193,18 +193,19 @@ namespace com.WanderingTurtle.DataAccess
 
             return supplierList;
         }
-
+        /// <summary>
+        /// INSERTs a Supplier into the Database using a Stored Procedure.
+        /// 
+        /// Created by Tyler Collins 02/04/2015
+        /// </summary>
+        /// <param name="supplierToAdd">Requires a Supplier object to INSERT</param>
+        /// <returns>Returns the number of rows affected.</returns>
         public static int AddSupplier(Supplier supplierToAdd)
         {
-            /*
-             * Takes a Supplier Object to INSERT a Supplier into the database.
-             *
-             * Created by Tyler Collins 02/04/15
-             */
-            var conn = DatabaseConnection.GetDatabaseConnection();
-
+            var conn = DatabaseConnection.GetConnection();
             string storedProcedure = "spInsertSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@CompanyName", supplierToAdd.CompanyName);
             cmd.Parameters.AddWithValue("@FirstName", supplierToAdd.FirstName);
@@ -214,15 +215,14 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Zip", supplierToAdd.Zip);
             cmd.Parameters.AddWithValue("@PhoneNumber", supplierToAdd.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
-            cmd.Parameters.AddWithValue("@SupplierTypeID", supplierToAdd.SupplierTypeID);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", supplierToAdd.UserID);
 
-            int numRows;
+            int rowsAffected;
             try
             {
                 conn.Open();
-                numRows = cmd.ExecuteNonQuery();
+                rowsAffected = cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -232,27 +232,26 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return numRows;
+            return rowsAffected;
         }
 
-        public static int UpdateSupplier(Supplier newSupplierInfo)
+        /// <summary>
+        /// UPDATEs a Supplier record in the Database with new using a Stored Procedure.
+        /// 
+        /// Created by Tyler Collins 02/04/2015
+        /// Updated by Tyler Collins 02/11/2015
+        /// </summary>
+        /// <param name="newSupplierInfo">Requires the Supplier object containing the new information</param>
+        /// <param name="oldSupplierInfo">Requires the Supplier object to replace that matches the record in the Database</param>
+        /// <returns>Returns the number of rows affected.</returns>
+        public static int UpdateSupplier(Supplier newSupplierInfo, Supplier oldSupplierInfo)
         {
-            /*
-             * Takes a Supplier Object.
-             * Retrieves Supplier data based on passed Supplier Object.
-             * Creates duplicate Supplier Object with original data.
-             * Updates database with passed Supplier Object data WHERE database data = original Supplier Object data.
-             *
-             * Created by Tyler Collins 02/04/15
-             */
-            Supplier oldSupplierInfo = new Supplier();
-            oldSupplierInfo = GetSupplier((newSupplierInfo.SupplierID).ToString());
 
-            var conn = DatabaseConnection.GetDatabaseConnection();
+            var conn = DatabaseConnection.GetConnection();
             string storedProcedure = "spUpdateSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            //Need to look at spUpdateSupplier Stored Procedure
             //Updated Supplier Info:
             cmd.Parameters.AddWithValue("@CompanyName", newSupplierInfo.CompanyName);
             cmd.Parameters.AddWithValue("@FirstName", newSupplierInfo.FirstName);
@@ -262,9 +261,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Zip", newSupplierInfo.Zip);
             cmd.Parameters.AddWithValue("@PhoneNumber", newSupplierInfo.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", newSupplierInfo.EmailAddress);
-            cmd.Parameters.AddWithValue("@SupplierTypeID", newSupplierInfo.SupplierTypeID);
             cmd.Parameters.AddWithValue("@ApplicationID", newSupplierInfo.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", newSupplierInfo.UserID);
+
 
             //Old Supplier Info
             cmd.Parameters.AddWithValue("@SupplierID", oldSupplierInfo.SupplierID);
@@ -276,7 +275,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@originalZip", oldSupplierInfo.Zip);
             cmd.Parameters.AddWithValue("@originalPhoneNumber", oldSupplierInfo.PhoneNumber);
             cmd.Parameters.AddWithValue("@originalEmailAddress", oldSupplierInfo.EmailAddress);
-            cmd.Parameters.AddWithValue("@originalSupplierTypeID", oldSupplierInfo.SupplierTypeID);
             cmd.Parameters.AddWithValue("@originalApplicationID", oldSupplierInfo.ApplicationID);
             cmd.Parameters.AddWithValue("@originalUserID", oldSupplierInfo.UserID);
 
@@ -299,17 +297,19 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
+        /// <summary>
+        /// DELETEs (Sets Boolean Active field to false) a Supplier record in Database using a Stored Procedure.
+        /// 
+        /// Created by Tyler Collins 02/05/2015
+        /// </summary>
+        /// <param name="supplierToDelete">Requires the Supplier object which matches the record to be DELETED in the Database.</param>
+        /// <returns>Returns the number of rows affected</returns>
         public static int DeleteSupplier(Supplier supplierToDelete)
         {
-            /*
-             * Takes a Supplier Object to match to a record in the database.
-             * Updates a Supplier record in database to set Active field to false.
-             *
-             * Created by Tyler Collins 02/05/15
-             */
-            var conn = DatabaseConnection.GetDatabaseConnection();
+            var conn = DatabaseConnection.GetConnection();
             string storedProcedure = "spDeleteSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@CompanyName", supplierToDelete.CompanyName);
             cmd.Parameters.AddWithValue("@FirstName", supplierToDelete.FirstName);
@@ -319,7 +319,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Zip", supplierToDelete.Zip);
             cmd.Parameters.AddWithValue("@PhoneNumber", supplierToDelete.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToDelete.EmailAddress);
-            cmd.Parameters.AddWithValue("@SupplierTypeID", supplierToDelete.SupplierTypeID);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToDelete.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", supplierToDelete.UserID);
             cmd.Parameters.AddWithValue("@SupplierID", supplierToDelete.SupplierID);
