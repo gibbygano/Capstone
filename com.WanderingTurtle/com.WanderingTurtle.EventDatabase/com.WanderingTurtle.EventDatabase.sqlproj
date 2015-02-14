@@ -91,6 +91,8 @@
     <Build Include="dbo\Stored Procedures\spCityStateReadCity.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadState.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadCityState.sql" />
+    <Build Include="dbo\Stored Procedures\spSearchBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectBookingFull.sql" />
     <Build Include="dbo\Tables\SupplierApplication.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
     <Build Include="dbo\Tables\Employee.sql" />
@@ -102,6 +104,23 @@
     <Build Include="dbo\Stored Procedures\spHotelGuestAdd.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestGet.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestGetList.sql" />
+    <Build Include="dbo\Tables\ItemListing.sql" />
+    <Build Include="dbo\Tables\Lists.sql" />
+    <Build Include="dbo\Tables\EventType.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllEventItems.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectEventItem.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllSuppliers.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectSupplier.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectItemListing.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllItemListings.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateItemListing.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteItemListing.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateLists.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllLists.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectLists.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateEventType.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllEventTypes.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectEventType.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

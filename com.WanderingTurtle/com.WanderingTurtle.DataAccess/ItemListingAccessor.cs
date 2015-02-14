@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.DataAccess
 
                     //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
                     itemListingToRetrieve.QuantityOffered = reader.GetInt32(5);
-                    itemListingToRetrieve.ProductSize = reader.GetInt32(6);
+                    itemListingToRetrieve.ProductSize = reader.GetString(6);
                 }
                 else
                 {
@@ -101,7 +101,7 @@ namespace com.WanderingTurtle.DataAccess
 
                         //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
                         currentItemListing.QuantityOffered = reader.GetInt32(5);
-                        currentItemListing.ProductSize = reader.GetInt32(6);
+                        currentItemListing.ProductSize = reader.GetString(6);
 
                         itemListingList.Add(currentItemListing);
                     }
@@ -120,6 +120,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
+
+            return itemListingList;
         }
 
         /// <summary>
@@ -138,7 +140,7 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@StartDate", itemListingToAdd.StartDate);
             cmd.Parameters.AddWithValue("@EndDate", itemListingToAdd.EndDate);
-            cmd.Parameters.AddWithValue("@EventItemID", itemListingToAdd.EventItemID);
+            cmd.Parameters.AddWithValue("@EventItemID", itemListingToAdd.EventID);
             cmd.Parameters.AddWithValue("@Price", itemListingToAdd.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToAdd.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", itemListingToAdd.ProductSize);
@@ -178,7 +180,7 @@ namespace com.WanderingTurtle.DataAccess
             //newItemListing
             cmd.Parameters.AddWithValue("@StartDate", newItemListing.StartDate);
             cmd.Parameters.AddWithValue("@EndDate", newItemListing.EndDate);
-            cmd.Parameters.AddWithValue("@EventItemID", newItemListing.EventItemID);
+            cmd.Parameters.AddWithValue("@EventItemID", newItemListing.EventID);
             cmd.Parameters.AddWithValue("@Price", newItemListing.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", newItemListing.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", newItemListing.ProductSize);
@@ -187,7 +189,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@ItemListID", oldItemListing.ItemListID);
             cmd.Parameters.AddWithValue("@StartDate", oldItemListing.StartDate);
             cmd.Parameters.AddWithValue("@EndDate", oldItemListing.EndDate);
-            cmd.Parameters.AddWithValue("@EventItemID", oldItemListing.EventItemID);
+            cmd.Parameters.AddWithValue("@EventItemID", oldItemListing.EventID);
             cmd.Parameters.AddWithValue("@Price", oldItemListing.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", oldItemListing.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", oldItemListing.ProductSize);
@@ -228,7 +230,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@ItemListID", itemListingToDelete.ItemListID);
             cmd.Parameters.AddWithValue("@StartDate", itemListingToDelete.StartDate);
             cmd.Parameters.AddWithValue("@EndDate", itemListingToDelete.EndDate);
-            cmd.Parameters.AddWithValue("@EventItemID", itemListingToDelete.EventItemID);
+            cmd.Parameters.AddWithValue("@EventItemID", itemListingToDelete.EventID);
             cmd.Parameters.AddWithValue("@Price", itemListingToDelete.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToDelete.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", itemListingToDelete.ProductSize);

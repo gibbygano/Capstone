@@ -18,7 +18,7 @@ namespace com.WanderingTurtle
         // into the AddEmployee method of the EmployeeAccessor class
 
         // Failure: Exception is thrown if database is not available or 
-        // new employee cannot be created in the database for anyr reason
+        // new employee cannot be created in the database for any reason
 
         // Success: An int value is returned to the method to show rows affected
         public int AddNewEmployee(Employee newEmployee)
@@ -82,7 +82,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return EmployeeAccessor.getEmployeeList();
+                return EmployeeAccessor.GetEmployeeList();
             }
             catch (Exception ex)
             {

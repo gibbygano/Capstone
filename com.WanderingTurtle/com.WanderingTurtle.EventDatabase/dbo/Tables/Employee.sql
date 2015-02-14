@@ -10,7 +10,7 @@ CREATE TABLE [dbo].[employee] (
 ) ON [PRIMARY]
 GO
 
-/* ***************************** adding foreign keys ******************************************************** */
+/* ***************************** adding foreign key ******************************************************** */
 
 ALTER TABLE [dbo].[employee] WITH NOCHECK ADD CONSTRAINT [FK_employee] FOREIGN KEY([userID])
 REFERENCES [dbo].[userLogin] ([userID])

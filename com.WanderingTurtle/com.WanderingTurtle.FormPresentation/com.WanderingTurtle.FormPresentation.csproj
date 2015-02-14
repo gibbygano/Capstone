@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddBooking.xaml.cs">
+      <DependentUpon>AddBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddEditUser.xaml.cs">
       <DependentUpon>AddEditUser.xaml</DependentUpon>
     </Compile>
@@ -65,6 +68,12 @@
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddItemListing.xaml.cs">
+      <DependentUpon>AddItemListing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListingList.xaml.cs">
+      <DependentUpon>ListingList.xaml</DependentUpon>
+	  </Compile>
     <Compile Include="Lists.xaml.cs">
       <DependentUpon>Lists.xaml</DependentUpon>
     </Compile>
@@ -92,9 +101,16 @@
     <Compile Include="ListUsers.xaml.cs">
       <DependentUpon>ListUsers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateBooking.xaml.cs">
+      <DependentUpon>UpdateBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewList.xaml.cs">
       <DependentUpon>ViewList.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddEditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +129,10 @@
     </Page>
     <Page Include="EditExistingEvent.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListingList.xaml">
+	<SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lists.xaml">
@@ -166,6 +186,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="AddSupplier.xaml">
+    </Page>
+    <Page Include="AddItemListing.xaml">
+<SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewList.xaml">
       <SubType>Designer</SubType>

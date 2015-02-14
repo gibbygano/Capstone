@@ -18,8 +18,16 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddNewEvent : Window
     {
+        EventManager myMan = new EventManager();
         public AddNewEvent()
         {
+
+            var TempList = myMan.RetrieveEventTypeList();
+
+            cboxType.ItemBindingGroup = TempList;
+
+
+
             InitializeComponent();
         }
 
@@ -36,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
             var eventToSubmit = new Event();
 
 
-            eventToSubmit.EventItemName = txtEventName;
+            eventToSubmit.EventItemName = txtEventName.Text;
 
             //Checks and instantiates the minimum and maximum guest numbers
             try
@@ -67,7 +75,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
 
-                if (!Validator.ValidateDecimal(eventToSubmitPricePerPerson))
+                if (!Validator.ValidateDecimal(this.txtPrice.Text))
                 {
                     throw new Exception("Not a valid Price");
                 }
@@ -98,7 +106,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                throw new Exception(exce.ToString());
+                throw new Exception(ex.ToString());
             }
 
 
@@ -107,11 +115,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (radOnSiteYes.IsChecked == true)
                 {
-                    eventToSubmit.onSite = true;
+                    eventToSubmit.OnSite = true;
                 }
                 else if (radOnSiteNo.IsChecked == true)
                 {
-                    eventToSubmit.onSite = false;
+                    eventToSubmit.OnSite = false;
                 }
                 else
                 {
@@ -129,11 +137,11 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (radTranspNo.IsChecked == true)
                 {
-                    eventToSubmit.transportation = false;
+                    eventToSubmit.Transportation = false;
                 }
                 else if (radTranspYes.IsChecked == true)
                 {
-                    eventToSubmit.transportation = true;
+                    eventToSubmit.Transportation = true;
                 }
                 else
                 {
@@ -145,12 +153,14 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show(ex.ToString());
             }
 
-            eventToSubmit.EventTypeID = 1;
+            int TypeSelected = cboxType.SelectedIndex;
+
+            eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
 
             // BLL SubmitEvent here.
                 // case here for eventTypes
 
-            AddNewEvent(eventToSubmit); 
+            myMan.AddNewEvent(eventToSubmit); 
 
         }
             
@@ -160,5 +170,5 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
              
-        }
     }
+}
