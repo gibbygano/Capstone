@@ -19,6 +19,8 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class SubmitEvent : Window
     {
         EventManager myMan = new EventManager();
+        productManager prodMan = new productManager();
+
         public SubmitEvent(String s)
         {
             txtEventName.Text = s;
@@ -32,36 +34,11 @@ namespace com.WanderingTurtle.FormPresentation
 
             ItemListing.EventItemName = txtEventName.Text;
 
-            //Checks and instantiates the minimum and maximum guest numbers
-            try
-            {
-
-                if (!Validator.ValidateInt(txtMaxGuest.Text))
-                {
-                    throw new Exception("Not a valid amount of guests");
-
-                }
-                else
-                {
-                    int x;
-                    int y;
-                    int.TryParse(txtMaxGuest.Text, out x);
-                    int.TryParse(txtMaxGuest.Text, out y);
-
-                    ItemListing.MaxNumGuests = x;
-                    ItemListing.MinNumGuests = y;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
             // Checks and instantiates the Price of tickets.
             try
             {
 
-                if (!Validator.ValidateDecimal(ItemListing.Price))
+                if (!Validator.ValidateDecimal(txtPrice.Text))
                 {
                     throw new Exception("Not a valid Price");
                 }
@@ -70,9 +47,9 @@ namespace com.WanderingTurtle.FormPresentation
                     ItemListing.PricePerPerson = Convert.ToDecimal(txtPrice);
                 }
             }
-            catch (Exception exc)
+            catch (Exception ex)
             {
-                MessageBox.Show(exc.ToString());
+                MessageBox.Show(ex.ToString());
             }
 
 
@@ -94,15 +71,9 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new Exception(ex.ToString());
             }
+            // Need a method to submit the EventListing to the DB
+            productMan.AddItemListing(ItemListing);
 
-            ItemListing.EventTypeID = 1;
-
-            // BLL SubmitEvent here.
-                // case here for eventTypes
-
-            myMan.AddNewListItem(ItemListing); 
-
-        }
         }
     }
 }

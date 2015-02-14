@@ -65,6 +65,9 @@
     <Compile Include="AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddItemListings.xaml.cs">
+      <DependentUpon>AddItemListings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
     </Compile>
@@ -73,7 +76,7 @@
     </Compile>
     <Compile Include="ListingList.xaml.cs">
       <DependentUpon>ListingList.xaml</DependentUpon>
-	  </Compile>
+    </Compile>
     <Compile Include="Lists.xaml.cs">
       <DependentUpon>Lists.xaml</DependentUpon>
     </Compile>
@@ -119,6 +122,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddItemListings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddNewEvent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,7 +139,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListingList.xaml">
-	<SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Lists.xaml">
@@ -188,7 +195,7 @@
     <Page Include="AddSupplier.xaml">
     </Page>
     <Page Include="AddItemListing.xaml">
-<SubType>Designer</SubType>
+      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateBooking.xaml">
