@@ -1,0 +1,6 @@
+﻿CREATE PROCEDURE spSelectAllSuppliers
+AS
+	SELECT *
+	FROM Supplier
+	WHERE Active = 1
+	RETURN @@ROWCOUNT
