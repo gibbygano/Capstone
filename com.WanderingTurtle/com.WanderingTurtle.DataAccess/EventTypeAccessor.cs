@@ -54,8 +54,8 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EventName", newEventType.EventName);
 
-            cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventItemName);
-            cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventItemID);
+            cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventName);
+            cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventTypeID);
             
             try
             {
@@ -88,8 +88,8 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.CommandType = CommandType.StoredProcedure;
             //Set up parameters for EventType
-            cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventItemName);
-            cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventItemID);
+            cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventName);
+            cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventTypeID);
             
             try
             {
@@ -114,7 +114,7 @@ namespace com.WanderingTurtle.DataAccess
         //retrieves all EventTypes, Makes a List of EventTypes, Returns the List of EventTypes
         public static List<EventType> getEventTypeList()
         {
-            var EventTypeList = new List<Event>();
+            var EventTypeList = new List<EventType>();
 
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -155,9 +155,9 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         //gets an eventTypeID, retrieves data from databases, Returns an Event object
-        public static Event getEventType(String eventTypeID)
+        public static EventType getEventType(String eventTypeID)
         {
-            var theEventType = new EventType();
+            EventType theEventType = new EventType();
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "SELECT EventTypeID, EventName" + 
@@ -170,7 +170,7 @@ namespace com.WanderingTurtle.DataAccess
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows == true)
                 {
-                    theEventType.EventTypeD = reader.GetInt32(0);
+                    theEventType.EventTypeID = reader.GetInt32(0);
                     theEventType.EventName = reader.GetString(1);
                     
                 }
