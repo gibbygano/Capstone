@@ -1,0 +1,20 @@
+﻿<Window x:Class="com.WanderingTurtle.FormPresentation.ListingList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ListingList" Height="488" Width="910">
+    <Grid>
+        <ListView HorizontalAlignment="Left" Height="365" Margin="10,10,0,0" VerticalAlignment="Top" Width="739" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="140" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
+                    <GridViewColumn Width="160" Header="Event Start Date" DisplayMemberBinding="{Binding EventStartDate}" />
+                    <GridViewColumn Width="160" Header="Event End Date" DisplayMemberBinding="{Binding EventEndDate}" />
+                    <GridViewColumn Width="60" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
+                    <GridViewColumn Width="100" Header="Price" DisplayMemberBinding="{Binding Price}" />
+                    <GridViewColumn Width="100" Header="Reserved" DisplayMemberBinding="{Binding CurrentNumGuests}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Window>

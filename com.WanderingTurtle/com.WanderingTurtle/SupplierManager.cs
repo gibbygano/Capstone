@@ -16,6 +16,61 @@ namespace com.WanderingTurtle
         {
             //default constructor
         }
+        public Supplier RetrieveSupplier(string supplierID)
+        {
+            try
+            {
+                return SupplierAccessor.GetSupplier(supplierID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<Supplier> RetrieveSupplierList()
+        {
+            try
+            {
+                return SupplierAccessor.GetSupplierList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public int AddANewSupplier(Supplier supplierToAdd)
+        {
+            try
+            {
+                return SupplierAccessor.AddSupplier(supplierToAdd);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public int EditSupplier(Supplier oldSupplier, Supplier newSupplier)
+        {
+            try
+            {
+                return SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public int ArchiveSupplier(Supplier supplierToDelete)
+        {
+            try
+            {
+                return SupplierAccessor.DeleteSupplier(supplierToDelete);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         /// <summary>
         /// Gets a single Supplier Application Record from the Data Access layer
         /// Throws any exceptions caught by the DAL

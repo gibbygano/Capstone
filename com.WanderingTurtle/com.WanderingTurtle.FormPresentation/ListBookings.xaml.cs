@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -22,6 +24,51 @@ namespace com.WanderingTurtle.FormPresentation
         public ListBookings()
         {
             InitializeComponent();
+        }
+
+        private void btnAddBooking_Click(object sender, RoutedEventArgs e)
+        {
+            AddBooking myBooking;
+
+            if (AddBooking.Instance == null)
+            {
+                myBooking = new AddBooking();
+                myBooking.Show();
+            }
+            else
+            {
+                myBooking = AddBooking.Instance;
+                myBooking.BringToFront();
+
+                //Creates a sound effect through the System.Media and  flash from accessibility
+
+                System.Media.SystemSounds.Exclamation.Play();
+            }
+        }
+
+        private void lvEmployeesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateBooking myBooking;
+            string id = lvBookingList.SelectedItems[0].ToString();
+            if (UpdateBooking.Instance == null)
+            {
+                myBooking = new UpdateBooking(id);
+                myBooking.Show();
+            }
+            else
+            {
+                myBooking = UpdateBooking.Instance;
+                myBooking.BringToFront();
+
+                //Creates a sound effect through the System.Media and  flash from accessibility
+
+                System.Media.SystemSounds.Exclamation.Play();
+            }
         }
     }
 }

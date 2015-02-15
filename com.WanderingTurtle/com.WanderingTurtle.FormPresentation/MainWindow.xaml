@@ -13,21 +13,21 @@
             <TabItem Header="Listings" >
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            
+
             <TabItem Header="Bookings">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
-            
+
             <TabItem Header="Users">
                 <Grid Background="#FFE5E5E5" x:Name="LayoutRoot">
-                        <local:ListUsers  />
+                    <local:ListUsers  />
                 </Grid>
             </TabItem>
-            
+
             <TabItem Header="Suppliers">
 
                 <Grid Background="#FFE5E5E5">
-                    
+
                 </Grid>
 
             </TabItem>

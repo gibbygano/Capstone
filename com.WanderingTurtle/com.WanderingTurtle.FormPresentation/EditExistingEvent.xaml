@@ -29,7 +29,11 @@
         <TextBox x:Name="txtEndTime" HorizontalAlignment="Left" Height="23" Margin="173,188,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="52"/>
         <Label Content="End Time:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="106,184,0,0" RenderTransformOrigin="1.342,0.308"/>
         <Label Content="Event Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="316,41,0,0" RenderTransformOrigin="0.526,0.654"/>
-        <ComboBox x:Name="cboxType" HorizontalAlignment="Left" Margin="391,45,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cboxType" HorizontalAlignment="Left" Margin="391,45,0,0" VerticalAlignment="Top" Width="120"
+         ItemsSource="{Binding Path=RetrieveEventTypeList()}" 
+            DisplayMemberPath="EventTypeName" 
+            SelectedValuePath="EventTypeID" 
+            SelectedValue="{Binding EventTypeID}" />
         <Label Content="On Site?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="344,378,0,0" RenderTransformOrigin="1.342,0.308"/>
         <Canvas HorizontalAlignment="Left" Height="55" Margin="378,400,0,-31" VerticalAlignment="Top" Width="58">
             <RadioButton x:Name="radOnSiteYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10"/>

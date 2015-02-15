@@ -19,18 +19,14 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ViewList : Window
     {
         private EventManager myMan = new EventManager();
-        private List<Event> myEventList = myMan.RetrieveEventList();
+        List<Event> myEventList;
 
+        // This is where we instantiate our window and populate the EventList with "myEventList" items.
         public ViewList()
         {
-            InitializeComponent();
-            /*
-            lvEvents.Items.Clear();
-            foreach(Event toFill in myEventList)
-            {
-                lvEvents.Items.Add(toFill);
-            }
-             * */
+            
+            myEventList = myMan.RetrieveEventList();
+            InitializeComponent(); 
             lvEvents.ItemsSource = myEventList;
         }
 
@@ -41,18 +37,21 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
+        // Calls the delete method from the BLL to archive an event.
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Event EventToDelete = (Event)lvEvents.SelectedItems[0];
-            ArchiveAnEvent(EventToDelete);
+            myMan.ArchiveAnEvent(EventToDelete);
         }
 
+        // Calls the AddEvent window for the user to input information into
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
             Window AddEvent = new AddNewEvent();
             AddEvent.Show();
         }
 
+        // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             Window EditEvent = new EditExistingEvent();
