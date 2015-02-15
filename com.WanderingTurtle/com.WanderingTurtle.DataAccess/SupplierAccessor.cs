@@ -146,7 +146,7 @@ namespace com.WanderingTurtle.DataAccess
             List<Supplier> supplierList = new List<Supplier>();
 
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string storedProcedure = "spSelectSupplierList";
+            string storedProcedure = "spSelectAllSuppliers";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
