@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Justin Pennington 2/14/15
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,18 @@ using System.Data;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    class ListsAccessor
+    public class ListsAccessor
     {
-        public static List<Lists> getListsList(string inListName)
+
+        //Justin Pennington 2/14/15
+        public static List<Lists> GetListsList()
         {
             var myLists = new List<Lists>();
 
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT SupplierID, ItemListID, DateListed " +
-            "FROM Lists";
-            var cmd = new SqlCommand(query, conn);
+            string cmdText = "spSelectAllLists";
+            var cmd = new SqlCommand(cmdText, conn);
 
             try
             {
@@ -56,16 +58,17 @@ namespace com.WanderingTurtle.DataAccess
             return myLists;
         }
 
-        public static Lists getLists(string inSupplierID, string inItemListID)
+        //Justin Pennington 2/14/15
+        public static Lists GetLists(string inSupplierID, string inItemListID)
         {
             var theLists = new Lists();
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT SupplierID, ItemListID, DateListed"  +
-            "FROM Lists WHERE ItemListID = " + inItemListID + "AND SupplierID = " + inSupplierID;
-            var cmd = new SqlCommand(query, conn);
+            string cmdText = "spSelectLists";
+            var cmd = new SqlCommand(cmdText, conn);
 
-
+            cmd.Parameters.AddWithValue("@SupplierID", inSupplierID);
+            cmd.Parameters.AddWithValue("@ItemListID", inItemListID);
             //Put retrieved data into objects
             try
             {
@@ -93,6 +96,8 @@ namespace com.WanderingTurtle.DataAccess
             }
             return theLists;
         }
+
+        //Justin Pennington 2/14/15
         public static int AddLists(Lists newLists)
         {
             //Connect to Database
@@ -125,6 +130,8 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+
+        //Justin Pennington 2/14/15
         public static int UpdateLists(Lists oldList, Lists newList)
         {
             //connect to Database
@@ -164,6 +171,8 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+
+        //Justin Pennington 2/14/15
         public static int DeleteLists(Lists inLists)
         {
             //make connection to Database

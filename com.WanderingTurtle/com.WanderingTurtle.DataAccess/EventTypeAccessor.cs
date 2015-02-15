@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Justin Pennington 2/14/15
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,13 @@ using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    class EventTypeAccessor
+    public class EventTypeAccessor
     {
+        //Justin Pennington 2/14/15
         //input parameter of EventType, will add the event type to the database, will return a 0 if it fails and a 1 if it was successful (false/true)
-        public static int addEventType(EventType newEventType)
+        public static int AddEventType(EventType newEventType)
         {
+
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertEventType";
             var cmd = new SqlCommand(cmdText, conn);
@@ -41,9 +44,10 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
+        //Justin Pennington 2/14/15
         //needs the event object that is having its name being changed and the new name
         //Returns the number of rows affected (should be 1)
-        public static int updateEventType(EventType oldEventType, EventType newEventType)
+        public static int UpdateEventType(EventType oldEventType, EventType newEventType)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spUpdateEventType";
@@ -111,17 +115,17 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+        //Justin Pennington 2/14/15
         //retrieves all EventTypes, Makes a List of EventTypes, Returns the List of EventTypes
-        public static List<EventType> getEventTypeList()
+        public static List<EventType> GetEventTypeList()
         {
             var EventTypeList = new List<EventType>();
 
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT EventTypeID, EventName "+
-            "FROM EventType";
+            string query = "spSelectAllEventTypes";
             var cmd = new SqlCommand(query, conn);
-
+            
             try
             {
                 conn.Open();
@@ -154,15 +158,16 @@ namespace com.WanderingTurtle.DataAccess
             return EventTypeList;
         }
 
+        //Justin Pennington 2/14/15
         //gets an eventTypeID, retrieves data from databases, Returns an Event object
-        public static EventType getEventType(String eventTypeID)
+        public static EventType GetEventType(String eventTypeID)
         {
             EventType theEventType = new EventType();
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT EventTypeID, EventName" + 
-            "FROM EventType WHERE EventTypeID = " + eventTypeID;
-            var cmd = new SqlCommand(query, conn);
+            string cmdText = "spSelectEventType";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.Parameters.AddWithValue("@EventTypeID", eventTypeID);
 
             try
             {

@@ -11,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    internal class EventAccessor
+    public class EventAccessor
     {
+        //Justin Pennington 2/14/15
         //creates a new event item in the database, using an event object that is passed in
-        public static int addEvent(Event newEvent)
+        public static int AddEvent(Event newEvent)
         {
             //Connect To Database
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -54,9 +55,11 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
+
+        //Justin Pennington 2/14/15
         //needs the event object that is having its name being changed and the new name
         //Returns the number of rows affected (should be 1)
-        public static int updateEvent(Event oldEvent, Event newEvent)
+        public static int UpdateEvent(Event oldEvent, Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spUpdateEventItem";
@@ -107,6 +110,8 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+
+        //Justin Pennington 2/14/15
         //requires: Event object, Boolean value for active/inactive
         //returns number of rows affected
         public static int DeleteEventItem(Event newEvent)
@@ -148,17 +153,16 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
+        //Justin Pennington 2/14/15
         //retrieves all Events and returns a List of Event objects
-        public static List<Event> getEventList()
+        public static List<Event> GetEventList()
         {
             var EventList = new List<Event>();
 
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT EventItemID, EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests," +
-            "CurrentNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active " +
-            "FROM EventItem";
-            var cmd = new SqlCommand(query, conn);
+            string cmdText = "spSelectAllEventItems";
+            var cmd = new SqlCommand(cmdText, conn);
 
             try
             {
@@ -202,17 +206,19 @@ namespace com.WanderingTurtle.DataAccess
             return EventList;
         }
 
+
+        //Justin Pennington 2/14/15
         //retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
-        public static Event getEvent(String eventID)
+        public static Event GetEvent(String eventID)
         {
             var theEvent = new Event();
             // set up the database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "SELECT EventItemID, EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests," +
-            "CurrentNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active " +
-            "FROM EventItem WHERE EventItemID = " + eventID;
-            var cmd = new SqlCommand(query, conn);
+            string cmdText = "spSelectEventItem";
+            var cmd = new SqlCommand(cmdText, conn);
 
+
+            cmd.Parameters.AddWithValue("@EventItemID", eventID);
             try
             {
                 conn.Open();
