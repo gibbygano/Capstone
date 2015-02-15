@@ -21,15 +21,30 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private int _userID;
         private int _supplierID;
-        private SupplierManger _manager = new SupplierManger();
-        private List<Supplier> _suppliers = _manager.RetriveSupplierList();
+        private SupplierManager _manager = new SupplierManager();
+        private List<Supplier> _suppliers;
+        private Supplier _UpdatableSupplier;
 
+        //Constructs the object and will fill the list of suppliers
+        //created by Will Fritz 2/6/15
+        //edited by will fritz 2/15/15
         public AddSupplier()
         {
+            try
+            {
+                _suppliers = _manager.RetrieveSupplierList();
+            }
+            catch (Exception)
+            {
+                lblError.Content = "there was an error accessing the database";
+            }
             InitializeComponent();
         }
 
         //////////////////////Windows Events//////////////////////////////
+
+        //Will fill the list and set error message to nothing
+        //created by Will Fritz 2/6/15
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblError.Content = "";
@@ -37,6 +52,8 @@ namespace com.WanderingTurtle.FormPresentation
             btnEdit.IsEnabled = false;
         }
 
+        //Will validtate the feilds and edit the current supplier
+        //created by Will Fritz 2/6/15
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (Validate() == false)
@@ -53,11 +70,14 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        //Will get selected supplier and fill the add/edit tab with info
+        //created by Will Fritz 2/6/15
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             try
             { 
                 Supplier supplierToUpdate = (Supplier)lvSuppliersList.SelectedItems[0];
+                _UpdatableSupplier = supplierToUpdate;
                 FillUpdateList(supplierToUpdate);
                 tabControl.SelectedIndex = 0;
             }
@@ -67,6 +87,8 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        //Will get selected supplier and delete it (archive)
+        //created by Will Fritz 2/6/15
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -82,6 +104,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
+        //Will validate the fields and call add supplier method
+        //created by Will Fritz 2/6/15
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (Validate() == false)
@@ -91,7 +115,7 @@ namespace com.WanderingTurtle.FormPresentation
             else
             {
                 lblError.Content = "";
-                AddSupplier();
+                AddTheSupplier();
             }
         }
 
@@ -103,7 +127,7 @@ namespace com.WanderingTurtle.FormPresentation
         //Created By Will Fritz 2/4/15
         public bool Validate()
         {
-            if (!Validator.ValidateString(txtEmail.Text) || !Validator.ValidateString(txtAddress1.Text) || !Validator.ValidateString(txtCompanyDescription.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidateString(txtPhoneNumber.Text) || !Validator.ValidateString(txtZip.Text) || !Validator.ValidateString(txtUserID.Text))
+            if (!Validator.ValidateString(txtEmail.Text) || !Validator.ValidateString(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidateString(txtPhoneNumber.Text) || !Validator.ValidateString(txtZip.Text) || !Validator.ValidateString(txtUserID.Text))
             {
                 lblError.Content = "You must fill out all of the feilds and dropdowns before you can continue.";
                 return false;
@@ -124,17 +148,28 @@ namespace com.WanderingTurtle.FormPresentation
             return true;
         }
 
-        //Fills the list view with the suppliers
+        //Fills the list view with the suppliers with a fresh list of suppliers
         //created by Will Fritz 2/6/15
+        //edited by will fritz 2/15/15
         public void FillList()
         {
+            try
+            {
+                _suppliers = _manager.RetrieveSupplierList();
+            }
+            catch (Exception)
+            {
+                lblError.Content = "there was an error accessing the database";
+            }
+
             lvSuppliersList.Items.Clear();
             lvSuppliersList.ItemsSource = _suppliers;
         }
 
         //This will send a supplier object to the business logic layer
         //Created by Will Fritz 2/6/15
-        private void AddSupplier()
+        //edited by will fritz 2/15/15
+        private void AddTheSupplier()
         {
             try
             {
@@ -163,12 +198,11 @@ namespace com.WanderingTurtle.FormPresentation
         private void FillUpdateList(Supplier supplierUpdate)
         {
             txtCompanyName.Text = supplierUpdate.CompanyName;
-            txtCompanyDescription.Text = supplierUpdate.CompanyDescription;
-            txtFirstName.Text = supplierUpdate.FistName;
+            txtFirstName.Text = supplierUpdate.FirstName;
             txtLastName.Text = supplierUpdate.LastName;
             txtAddress1.Text = supplierUpdate.Address1;
             txtAddress2.Text = supplierUpdate.Address2;
-            txtEmail.Text = supplierUpdate.Email;
+            txtEmail.Text = supplierUpdate.EmailAddress;
             txtPhoneNumber.Text = supplierUpdate.PhoneNumber;
             txtZip.Text = supplierUpdate.Zip;
             txtUserID.Text = supplierUpdate.UserID.ToString();
@@ -180,6 +214,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         //This will send a supplier object to the business logic layer
         //Created by Will Fritz 2/6/15
+        //edited by will fritz 2/15/15
         private void EditSupplier()
         {
             try
@@ -198,7 +233,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 tempSupplier.SupplierID = _supplierID;
 
-                _manager.EditSupplier(tempSupplier);
+                _manager.EditSupplier(_UpdatableSupplier, tempSupplier);
             }
             catch (Exception)
             {
@@ -206,12 +241,11 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        //this will clear all the feilds 
+        //this will clear all the feilds
         //created by Will Fritz 2/6/15
         private void ClearFeilds()
         {
             txtCompanyName.Text = "";
-            txtCompanyDescription.Text = "";
             txtFirstName.Text = "";
             txtLastName.Text = "";
             txtAddress1.Text = "";
