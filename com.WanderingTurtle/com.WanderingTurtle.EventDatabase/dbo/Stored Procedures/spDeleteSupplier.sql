@@ -8,7 +8,6 @@
 	@Zip 					varchar(10), 
 	@PhoneNumber 			varchar(15), 
 	@EmailAddress 			varchar(100), 
-	@SupplierTypeID 		int, 
 	@ApplicationID 			int, 
 	@UserID 				int, 
 	@SupplierID 			int
@@ -26,7 +25,6 @@ AS
 		AND Zip = @Zip
 		AND PhoneNumber = @PhoneNumber
 		AND EmailAddress = @EmailAddress
-		AND SupplierTypeID = @SupplierTypeID
 		AND ApplicationID = @ApplicationID
 		AND UserID = @UserID
 		AND Active = 1
