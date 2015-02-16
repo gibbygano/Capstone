@@ -1,12 +1,11 @@
 CREATE PROCEDURE [dbo].[spAddEmployee]
-	(@employeeID 					int,
-	 @firstName 					varchar(50),
+	(@firstName 					varchar(50),
 	 @lastName	 					varchar(50),
-	 @userID						int,
-	 @active						bit)
+	 @empPassword					varchar(8),
+	 @empLevel						int)
 	
 AS
-	INSERT INTO employee ([employeeID], [firstName], [lastName], [userID], [active])
-		VALUES(@employeeID, @firstName, @lastName, @userID, @active)
+	INSERT INTO employee ([firstName], [lastName], [empPassword], [empLevel])
+		VALUES(@firstName, @lastName, @empPassword, @empLevel)
 		
 GO
