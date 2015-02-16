@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -132,7 +133,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                _listslist = _prodMan.RetriveListsList();
+                _listslist = _prodMan.RetrieveListsList();
                 List<Supplier> suppliers = new List<Supplier>();
                 List<ItemListing> itemlisting = new List<ItemListing>();
                 List<Event> events = new List<Event>();
