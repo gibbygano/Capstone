@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[SupplierApplication](
 	[ApplicationID] [int] IDENTITY(100,1) NOT NULL,
 	[CompanyName] [varchar](255) NOT NULL,
-	[CompanyDescription] [varchar](255) NOT NULL,
+	[CompanyDescription] [varchar](255) NULL,
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NOT NULL,
 	[Address1] [varchar](255) NOT NULL,

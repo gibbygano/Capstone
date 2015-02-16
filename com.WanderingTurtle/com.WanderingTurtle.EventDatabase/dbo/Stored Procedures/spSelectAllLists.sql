@@ -1,0 +1,5 @@
+﻿CREATE PROCEDURE spSelectAllLists
+AS
+	SELECT *
+	FROM Lists
+	RETURN @@ROWCOUNT

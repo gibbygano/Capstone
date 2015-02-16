@@ -8,7 +8,6 @@
 	[Zip] [varchar](10) NOT NULL,
 	[PhoneNumber] [varchar](15) NOT NULL,
 	[EmailAddress] [varchar](100) NOT NULL,
-	[SupplierTypeID] [int] NOT NULL,
 	[ApplicationID] [int] NOT NULL,
 	[UserID] [int] NOT NULL,
 	[Active] [int] NOT NULL

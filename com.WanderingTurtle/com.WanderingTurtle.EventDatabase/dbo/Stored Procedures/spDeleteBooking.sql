@@ -1,4 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[spDeleteBooking]
+﻿/*************************created by: Tony Noel************************************************/
+
+CREATE PROCEDURE [dbo].[spDeleteBooking]
 	(@BookingID 	int,
 	
 	@original_GuestID		int,

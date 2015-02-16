@@ -1,0 +1,26 @@
+﻿<Window x:Name="UpdateBooking1" x:Class="com.WanderingTurtle.FormPresentation.UpdateBooking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UpdateBooking" Height="387" Width="415" Loaded="UpdateBooking1_Loaded">
+    <Grid Margin="0,0,0,-1">
+        <Label x:Name="lblGeneralUpBooking" Content="Please add requested information below to update the booking." HorizontalAlignment="Left" Margin="24,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblUpBookingEmpID" Content="EmployeeID: " HorizontalAlignment="Left" Margin="57,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <TextBox x:Name="tbUpBookingEmpID" HorizontalAlignment="Left" Height="23" Margin="141,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="3"/>
+        <Label x:Name="lblUpBookingGuestID" Content="GuestID: " HorizontalAlignment="Left" Margin="57,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <TextBox x:Name="tbUpBookingGuestID" HorizontalAlignment="Left" Height="23" Margin="141,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="3"/>
+        <Label x:Name="lblUpBookingItemID" Content="ItemListID: " HorizontalAlignment="Left" Margin="57,159,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <ComboBox x:Name="comboUpBookingItem" HorizontalAlignment="Left" Margin="141,207,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblUpBookingQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="57,234,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <TextBox x:Name="tbUpBookingQuantity" HorizontalAlignment="Left" Height="23" Margin="141,237,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="2"/>
+        <Label x:Name="lblUpBookingDate" Content="Date:" HorizontalAlignment="Left" Margin="57,262,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <DatePicker x:Name="dtpUpBooking" HorizontalAlignment="Left" Margin="141,313,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblUpBooking" Content="BookingID: " HorizontalAlignment="Left" Margin="57,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <Label x:Name="lblUpBookingBookingID" Content="record" HorizontalAlignment="Left" Margin="138,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <Label x:Name="lblUpBookingItemID1" Content="record" HorizontalAlignment="Left" Margin="138,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <CheckBox x:Name="checkUpItemID" Content="Click to update ItemID" HorizontalAlignment="Left" Margin="141,186,0,0" VerticalAlignment="Top" Checked="checkUpItemID_Checked"/>
+        <Label x:Name="lblUpBookingDate1" Content="record" HorizontalAlignment="Left" Margin="141,260,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <CheckBox x:Name="checkUpDate" Content="Click to update Date" HorizontalAlignment="Left" Margin="141,290,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnUpBooking" Content="Update Booking" HorizontalAlignment="Left" Margin="305,327,0,0" VerticalAlignment="Top" Width="92" Click="Button_Click"/>
+
+    </Grid>
+</Window>

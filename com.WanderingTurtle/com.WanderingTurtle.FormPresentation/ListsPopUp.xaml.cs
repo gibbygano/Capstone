@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -19,30 +21,37 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListsPopUp : Window
     {
         public static ListsPopUp Instance;
-        private ProductMangager _prodMang = new ProductMangager();
-        private SupplierManger _supplierMang = new SupplierManger();
+        private ProductManager _prodMang = new ProductManager();
+        private SupplierManager _supplierMang = new SupplierManager();
         private List<ItemListing> _itemListings;
         private List<Supplier> _suppliers;
         private bool _isEdit = false; //used to decide weather it will create or edit a lists object
         private Lists _oldLists;
 
+        //sets instance to this object
+        //created by will fritz 2/11/15
         public ListsPopUp()
         {
             InitializeComponent();
             Instance = this;
         }
 
+        //fills the list of suppliers and item lsitings when window is loaded
+        //created by will fritz 2/11/15
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             FillLists();
         }
 
+        //sets instance to null when window is closed
+        //created by will fritz 2/11/15
         private void Window_Closed(object sender, EventArgs e)
         {
             Instance = null;
         }
 
         //check if listings and supplier has been selected and creates new lists item if _isEdit = false and vise versa
+        //created by will fritz 2/11/15
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -51,7 +60,7 @@ namespace com.WanderingTurtle.FormPresentation
                 Supplier supplier = (Supplier)cboSelectSupplier.SelectedItem;
 
                 Lists newLists = new Lists();
-                newLists.ItemListingID = itemListing.ItemListingID;
+                newLists.ItemListID = itemListing.ItemListID;
                 newLists.SupplierID = supplier.SupplierID;
                 newLists.DateListed = new DateTime();
 
@@ -84,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                lblError.Content = "You Must Select a ItemListing and a Supplier";
+                lblError.Content = "You Must Select a ItemListing and a Supplier Or there was an error with the database";
             }
         }
 
@@ -95,13 +104,21 @@ namespace com.WanderingTurtle.FormPresentation
         //created by Will Fritz 2/11/15
         public void FillLists()
         {
-            _itemListings = _prodMang.RetrieveItemListingList();
-            _suppliers = _supplierMang.RetriveSupplierList();
-            
-            lvList.Items.Clear();
-            lvList.ItemsSource = _itemListings;
+            try
+            {
+                _itemListings = _prodMang.RetrieveItemListingList();
+                _suppliers = _supplierMang.RetrieveSupplierList();
 
-            cboSelectSupplier.ItemsSource = _suppliers;
+                lvList.Items.Clear();
+                lvList.ItemsSource = _itemListings;
+
+                cboSelectSupplier.ItemsSource = _suppliers;
+            }
+            catch (Exception)
+            {
+                lblError.Content = "Failed to get a list of suppliers and item listings from the database";
+            }
+            
         }
 
         //makes the form edit a current lists item, and will select the old values in the form

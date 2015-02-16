@@ -25,21 +25,29 @@ namespace com.WanderingTurtle.FormPresentation
 
         
         Event Unrevised = new Event();
-
+        EventManager myMan = new EventManager();
        
-        public EditExistingEventEvent(Event EventToEdit)
+        public EditExistingEvent(Event EventToEdit)
         {
-            txtEventName.Text = EventToEdit.EventName;
+
+            //Fills the form with info from the Editable Event
+            // Hunter Lind (Last update: 2/14/15)
+            txtEventName.Text = EventToEdit.EventItemName;
             InitializeComponent();
 
-            txtMaxGuest.Text = EventToEdit.MaxNumGuests;
-            txtMinGuest.Text = EventToEdit.MinNumGuests;
+            txtMaxGuest.Text = EventToEdit.MaxNumGuests.ToString();
+            txtMinGuest.Text = EventToEdit.MinNumGuests.ToString();
 
             DateStart.Text = EventToEdit.EventStartDate.ToString();
             dateEnd.Text = EventToEdit.EventEndDate.ToString();
             
             txtPrice.Text = EventToEdit.PricePerPerson.ToString();
             rtxtDescrip.AppendText(EventToEdit.Description);
+
+
+            var TempList = myMan.RetrieveEventTypeList();
+            cboxType.ItemsSource = TempList;
+            cboxType.SelectedItem = EventToEdit.EventTypeID;
 
 
             if(EventToEdit.Transportation == true)
@@ -69,7 +77,7 @@ namespace com.WanderingTurtle.FormPresentation
             var eventToSubmit = new Event();
 
 
-            eventToSubmit.EventItemName = txtEventName;
+            eventToSubmit.EventItemName = txtEventName.Text;
 
             //Checks and instantiates the minimum and maximum guest numbers
             try
@@ -100,7 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
 
-                if (!Validator.ValidateDecimal(eventToSubmitPricePerPerson))
+                if (!Validator.ValidateDecimal(txtPrice.Text))
                 {
                     throw new Exception("Not a valid Price");
                 }
@@ -131,7 +139,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                throw new Exception(exce.ToString());
+                throw new Exception(ex.ToString());
             }
 
 
@@ -140,11 +148,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (radOnSiteYes.IsChecked == true)
                 {
-                    eventToSubmit.onSite = true;
+                    eventToSubmit.OnSite = true;
                 }
                 else if (radOnSiteNo.IsChecked == true)
                 {
-                    eventToSubmit.onSite = false;
+                    eventToSubmit.OnSite = false;
                 }
                 else
                 {
@@ -162,11 +170,11 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (radTranspNo.IsChecked == true)
                 {
-                    eventToSubmit.transportation = false;
+                    eventToSubmit.Transportation = false;
                 }
                 else if (radTranspYes.IsChecked == true)
                 {
-                    eventToSubmit.transportation = true;
+                    eventToSubmit.Transportation = true;
                 }
                 else
                 {
@@ -178,12 +186,12 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show(ex.ToString());
             }
 
-            eventToSubmit.EventTypeID = 1;
+            
 
 
-            EditEvent(Unrevised, eventToSubmit);
+            myMan.EditEvent(Unrevised, eventToSubmit);
             // BLL SubmitEvent here.
-                // case here for eventTypes
+            // case here for eventTypes
              
         }
 
