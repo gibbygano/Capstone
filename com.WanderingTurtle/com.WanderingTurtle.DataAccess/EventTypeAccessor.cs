@@ -58,8 +58,8 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EventName", newEventType.EventName);
 
-            cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventName);
-            cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventTypeID);
+            cmd.Parameters.AddWithValue("@originalEventTypeID", oldEventType.EventName);
+            cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventTypeID);
             
             try
             {
@@ -92,8 +92,8 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.CommandType = CommandType.StoredProcedure;
             //Set up parameters for EventType
-            cmd.Parameters.AddWithValue("@original_EventTypeID", oldEventType.EventName);
-            cmd.Parameters.AddWithValue("@original_EventName", oldEventType.EventTypeID);
+            cmd.Parameters.AddWithValue("@originalEventTypeID", oldEventType.EventName);
+            cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventTypeID);
             
             try
             {
