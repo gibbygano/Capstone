@@ -30,7 +30,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@hotelGuestPIN", newHotelGuest.HotelGuestPIN);
 
             try
             {
@@ -86,7 +85,6 @@ namespace com.WanderingTurtle.DataAccess
                         reader.GetString(5), //Address2
                         reader.GetString(6), //PhoneNumber
                         reader.GetString(7), //EmailAdddress
-                        reader.GetInt32(8) //HotelGuestPIN
                    );
                 }
                 else
@@ -136,7 +134,6 @@ namespace com.WanderingTurtle.DataAccess
                                 reader.GetString(5), //Address2
                                 reader.GetString(6), //PhoneNumber
                                 reader.GetString(7), //EmailAdddress
-                                reader.GetInt32(8) //HotelGuestPIN
                             )
                         );
                     }
@@ -178,7 +175,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@hotelGuestPIN", newHotelGuest.HotelGuestPIN);
 
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
             cmd.Parameters.AddWithValue("@firstName", oldHotelGuest.FirstName);
@@ -188,7 +184,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address1", oldHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", oldHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", oldHotelGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@hotelGuestPIN", oldHotelGuest.HotelGuestPIN);
 
             try
             {

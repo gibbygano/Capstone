@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -22,11 +22,14 @@ namespace com.WanderingTurtle.FormPresentation
     {
         public static AddBooking Instance;
         public OrderManager myManager = new OrderManager();
+
+        public List<com.WanderingTurtle.Common.ListItem> myEventList;
         public AddBooking()
         {
+            myEventList = myManager.RetrieveListItemList();
             InitializeComponent();
             Instance = this;
-            loadTypes();
+            lvAddBookingListItems.ItemsSource = myEventList;
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
@@ -44,19 +47,14 @@ namespace com.WanderingTurtle.FormPresentation
             string empID = tbAddBookingEmpID.Text;
             string guest = tbAddBookingGuestID.Text;
             int itemListID;
+            string selected;
             string quantity = tbAddBookingQuantity.Text;
-            string date = dtpAddBooking.Text;
             int eID, gID, qID;
-            DateTime d;
             Booking myBooking;
 
-            if (comboAddBookingItem.Text != "")
+            if (selectedItem() == false)
             {
-                itemListID = ((ListItem)comboAddBookingItem.SelectedItem).ItemListID;
-            }
-            else
-            {
-                MessageBox.Show("Please select an event from the drop down list.");
+                MessageBox.Show("Please select an event!");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -75,28 +73,19 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show("Please review the quantity entered. Must be a 2 digit number or less.");
                 btnAddBookingAdd.IsEnabled = true;
             }
-            if (!Validator.ValidateDateTime(date))
-            {
-                MessageBox.Show("Please review the date.");
-                btnAddBookingAdd.IsEnabled = true;
-            }
             else
             {
+                selected = lvAddBookingListItems.SelectedItems[0].ToString();
+
                 int.TryParse(empID, out eID);
                 int.TryParse(guest, out gID);
+                int.TryParse(selected, out itemListID); 
                 int.TryParse(quantity, out qID);
-                DateTime.TryParse(date, out d);
-                myBooking = new Booking(gID, eID, d);
+
+                myBooking = new Booking(gID, eID, itemListID, qID);
                 //calls to booking manager to add a booking. BookingID is auto-generated in database
                 myManager.AddaBooking(myBooking);
-                //allows for retrieval of the booking just made inorder to collect the auto-generated BookingID 
-                var getBooking = myManager.getSearchBooking(myBooking);
-
-                //needs bookingline to be added to the orderManager- would pass the three ints to manager to be
-                //turned into a bookingLineItem object and added to database.
-                //ex: myManager.AddBookingLineItem(getBooking.BookingID, itemListID, qID);
-
-                //Need LineItems to be added to order manager.
+         
                 MessageBox.Show("The booking has been successfully added.");
                 clearFields();
                 btnAddBookingAdd.IsEnabled = true;
@@ -106,26 +95,37 @@ namespace com.WanderingTurtle.FormPresentation
 
         }//end method addBooking()
 
+        /*attempts to turn selected into a string object.
+         * if successful, returns true.
+         * if not returns false         */
+        private bool selectedItem()
+        {
+            bool works = false;
+            try
+            {
+                string selected = lvAddBookingListItems.SelectedItems[0].ToString();
+                works = true;
+                return works;
+
+            }
+            catch
+            {
+                return works;
+            }
+        }
+
         /*Sets form fields back to null after an add has been successfully completed
          * Tony Noel-2/11/15
          */
+
+        
         public void clearFields()
         {
             tbAddBookingEmpID.Text = null;
             tbAddBookingGuestID.Text = null;
-            comboAddBookingItem.Text = null;
+           
             tbAddBookingQuantity.Text = null;
         }
 
-        private void loadTypes()
-        {
-            var bType = myManager.RetrieveBookingOpsList();
-            comboAddBookingItem.DisplayMemberPath = "EventName";
-            comboAddBookingItem.SelectedValue = "ItemListID";  //to get this int later use ((LaptopTypes)cbEditsType.SelectedItem).TypesID;
-            for (int i = 0; i < bType.Count; i++)
-            {
-                this.comboAddBookingItem.Items.Add(bType[i]);
-            }
-        }
     }
 }

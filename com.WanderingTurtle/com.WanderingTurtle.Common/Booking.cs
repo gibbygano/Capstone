@@ -15,24 +15,27 @@ namespace com.WanderingTurtle.Common
         public int GuestID { get; set; }
         public int EmployeeID { get; set; }
         public int ItemListID { get; set; }
-        public int BookingQuantity { get; set; }
+        public int Quantity { get; set; }
         public DateTime DateBooked { get; set; }
 
         public Booking()
         {
 
         }
-        public Booking(int guestID, int empID, DateTime dateBooked)
+        public Booking(int guestID, int empID, int itemID, int bQuantity)
         {
             GuestID = guestID;
             EmployeeID = empID;
-            DateBooked = dateBooked;
+            ItemListID = itemID;
+            Quantity = bQuantity;
         }
         public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked)
         {
             BookingID = bookingID;
             GuestID = guestID;
             EmployeeID = empID;
+            ItemListID = itemID;
+            Quantity = bQuantity;
             DateBooked = dateBooked;
         }
     }
