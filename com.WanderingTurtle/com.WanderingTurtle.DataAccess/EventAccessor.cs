@@ -81,15 +81,18 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
             cmd.Parameters.AddWithValue("@Active", newEvent.Active);
 
-            cmd.Parameters.AddWithValue("@original_EventItemName", oldEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@original_EventID", oldEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@original_EventStartTime", oldEvent.EventStartDate);
-            cmd.Parameters.AddWithValue("@original_EventEndTime", oldEvent.EventEndDate);
-            cmd.Parameters.AddWithValue("@original_MaxNumberOfGuests", oldEvent.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@original_PricePerPerson", oldEvent.PricePerPerson);
-            cmd.Parameters.AddWithValue("@original_Transportation", oldEvent.Transportation);
-            cmd.Parameters.AddWithValue("@original_EventDescription", oldEvent.Description);
-            cmd.Parameters.AddWithValue("@original_Active", oldEvent.Active);
+            cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);
+            cmd.Parameters.AddWithValue("@originalEventID", oldEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@originalEventStartTime", oldEvent.EventStartDate);
+            cmd.Parameters.AddWithValue("@originalEventEndTime", oldEvent.EventEndDate);
+            cmd.Parameters.AddWithValue("@originalMaxNumberOfGuests", oldEvent.MaxNumGuests);
+            cmd.Parameters.AddWithValue("@originalMinNumberOfGuests", oldEvent.MinNumGuests);
+            cmd.Parameters.AddWithValue("@originalCurrentNumberOfGuests", oldEvent.CurrentNumGuests);
+            cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);
+            cmd.Parameters.AddWithValue("@originalPricePerPerson", oldEvent.PricePerPerson);
+            cmd.Parameters.AddWithValue("@originalTransportation", oldEvent.Transportation);
+            cmd.Parameters.AddWithValue("@originalEventDescription", oldEvent.Description);
+            cmd.Parameters.AddWithValue("@originalActive", oldEvent.Active);
             try
             {
                 conn.Open();
@@ -124,15 +127,15 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Active", 0);
 
-            cmd.Parameters.AddWithValue("@original_EventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@original_EventID", newEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@original_EventStartTime", newEvent.EventStartDate);
-            cmd.Parameters.AddWithValue("@original_EventEndTime", newEvent.EventEndDate);
-            cmd.Parameters.AddWithValue("@original_MaxNumberOfGuests", newEvent.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@original_PricePerPerson", newEvent.PricePerPerson);
-            cmd.Parameters.AddWithValue("@original_Transportation", newEvent.Transportation);
-            cmd.Parameters.AddWithValue("@original_EventDescription", newEvent.Description);
-            cmd.Parameters.AddWithValue("@original_Active", newEvent.Active);
+            cmd.Parameters.AddWithValue("@originalEventItemName", newEvent.EventItemName);
+            cmd.Parameters.AddWithValue("@originalEventID", newEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@originalEventStartTime", newEvent.EventStartDate);
+            cmd.Parameters.AddWithValue("@originalEventEndTime", newEvent.EventEndDate);
+            cmd.Parameters.AddWithValue("@originalMaxNumberOfGuests", newEvent.MaxNumGuests);
+            cmd.Parameters.AddWithValue("@originalPricePerPerson", newEvent.PricePerPerson);
+            cmd.Parameters.AddWithValue("@originalTransportation", newEvent.Transportation);
+            cmd.Parameters.AddWithValue("@originalEventDescription", newEvent.Description);
+            cmd.Parameters.AddWithValue("@originalActive", newEvent.Active);
             try
             {
                 conn.Open();

@@ -1,6 +1,6 @@
-﻿CREATE PROCEDURE spUpdateEventType(@EventTypeID int, @EventName varchar)
+﻿CREATE PROCEDURE spUpdateEventType(@EventTypeID int, @EventName varchar, @originalEventName varchar)
 AS
-	UPDATE spUpdateEventType
+	UPDATE EventType
 	SET EventName = @EventName
-	WHERE EventTypeID = @EventTypeID AND EventName = @EventName
+	WHERE EventTypeID = @EventTypeID AND EventName = @originalEventName
 	RETURN @@ROWCOUNT

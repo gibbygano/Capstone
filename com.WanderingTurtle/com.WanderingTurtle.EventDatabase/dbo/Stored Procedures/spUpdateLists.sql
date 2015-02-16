@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE spUpdateLists(@ItemListID int, @SupplierID int, @DateListed date)
+﻿CREATE PROCEDURE spUpdateLists(@ItemListID int, @SupplierID int, @DateListed date, @originalDateListed date)
 AS
 	UPDATE Lists
 	SET
@@ -6,5 +6,5 @@ AS
 	WHERE
 		ItemListID = @ItemListID AND
 		SupplierID = @SupplierID AND
-		DateListed = @DateListed
+		DateListed = @originalDateListed
 	RETURN @@ROWCOUNT

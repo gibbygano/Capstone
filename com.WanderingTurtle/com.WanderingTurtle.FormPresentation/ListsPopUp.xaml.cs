@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -115,7 +116,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                lblError.Content = "Failed to get a list of suppliers and item listings from the database"
+                lblError.Content = "Failed to get a list of suppliers and item listings from the database";
             }
             
         }
