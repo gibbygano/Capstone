@@ -2,7 +2,6 @@
 CREATE PROCEDURE [dbo].[spUpdateBooking]
 	(@GuestID		int,
 	@EmployeeID		int,
-	@DateBooked		datetime,
 	@ItemListID		int,
 	@Quantity		int,
 	
@@ -17,12 +16,13 @@ BEGIN
 	UPDATE Booking
 		SET GuestID = @GuestID,
 		EmployeeID = @EmployeeID,
-		DateBooked = @DateBooked
+		ItemListID = @ItemListID,
+		Quantity = @Quantity
 	WHERE BookingID = @original_BookingID
 		AND GuestID = @original_GuestID
 		AND EmployeeID = @original_EmployeeID
-		AND ItemListID = @original_EmployeeID
-		AND Quantity = @original_EmployeeID
+		AND ItemListID = @original_ItemListID
+		AND Quantity = @original_Quantity
 		AND DateBooked = @original_DateBooked
 END		
 	RETURN @@ROWCOUNT

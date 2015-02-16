@@ -3,13 +3,13 @@ CREATE PROCEDURE [dbo].[spAddBooking]
 	@GuestID		int,
 	@EmployeeID		int,
 	@ItemListID		int,
-	@Quantity		int,
-	@DateBooked		datetime
+	@Quantity		int
+	
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    INSERT INTO Booking(GuestID, EmployeeID, ItemListID, Quantity, DateBooked)
-    VALUES(@GuestID, @EmployeeID, @ItemListID, @Quantity, @DateBooked)
+    INSERT INTO Booking(GuestID, EmployeeID, ItemListID, Quantity)
+    VALUES(@GuestID, @EmployeeID, @ItemListID, @Quantity)
 
 END
