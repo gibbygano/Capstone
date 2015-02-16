@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.DataAccess
                         inEmployee.EmployeeID = (int)reader.GetValue(0);
                         inEmployee.FirstName = reader.GetValue(1).ToString();
                         inEmployee.LastName = reader.GetValue(2).ToString();
-                        inEmployee.UserID = (int)reader.GetValue(3);
+                        inEmployee.Level = (int)reader.GetValue(3);
                         inEmployee.Active = (bool)reader.GetValue(4);
 
                         employeeList.Add(inEmployee);
@@ -111,7 +111,7 @@ namespace com.WanderingTurtle.DataAccess
                     myEmployee.EmployeeID = (int)reader.GetValue(0);
                     myEmployee.FirstName = reader.GetValue(1).ToString();
                     myEmployee.LastName = reader.GetValue(2).ToString();
-                    myEmployee.UserID = (int)reader.GetValue(3);
+                    myEmployee.Level = (int)reader.GetValue(3);
                     myEmployee.Active = (bool)reader.GetValue(4);
                 }
                 else
@@ -153,11 +153,10 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@employeeID", newEmployee.EmployeeID);
             cmd.Parameters.AddWithValue("@firstName", newEmployee.FirstName);
             cmd.Parameters.AddWithValue("@lastName", newEmployee.LastName);
-            cmd.Parameters.AddWithValue("@userID", newEmployee.UserID);
             cmd.Parameters.AddWithValue("@active", true);
+            cmd.Parameters.AddWithValue("@empLevel", newEmployee.Level);
 
             try
             {
@@ -206,11 +205,11 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@employeeID", updatedEmployee.EmployeeID);
             cmd.Parameters.AddWithValue("@firstName", updatedEmployee.FirstName);
             cmd.Parameters.AddWithValue("@lastName", updatedEmployee.LastName);
-            cmd.Parameters.AddWithValue("@userID", updatedEmployee.UserID);
+            cmd.Parameters.AddWithValue("@usrPassword", updatedEmployee.Password);
             cmd.Parameters.AddWithValue("@active", updatedEmployee.Active);
+            cmd.Parameters.AddWithValue("@empLevel", updatedEmployee.Level);
 
             cmd.Parameters.AddWithValue("@original_employeeID", originalEmployee.EmployeeID);
             cmd.Parameters.AddWithValue("@original_firstName", originalEmployee.FirstName);

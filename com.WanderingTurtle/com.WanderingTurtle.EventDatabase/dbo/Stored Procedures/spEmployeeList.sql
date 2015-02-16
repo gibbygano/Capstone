@@ -1,7 +1,7 @@
 CREATE PROCEDURE [dbo].[spEmployeeList]
 AS
-	SELECT employeeID, firstName, lastName, userID, active
-	FROM employee
-	WHERE active = '1'
+	SELECT employeeID, firstName, lastName, empLevel
+	FROM employee 
+	WHERE active = '1' 
 	
 GO
