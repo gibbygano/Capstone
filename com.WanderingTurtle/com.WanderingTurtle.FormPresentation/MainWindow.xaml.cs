@@ -22,6 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class MainWindow : Window
     {
+        Employee userEmployee = new Employee();
 
         public MainWindow()
         {
@@ -30,8 +31,17 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            // collect the values from the form
+            userEmployee.EmployeeID = int.Parse(txtUserID.Text);
+            userEmployee.UserPassword = txtUserPassword.Text;
 
         }
+
+        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Window AddEmployee = new AddEmployee();
+            AddEmployee.Show();
+        }
+
     }
 }
