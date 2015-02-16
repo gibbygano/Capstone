@@ -1,0 +1,55 @@
+﻿<Window x:Class="com.WanderingTurtle.FormPresentation.AddEditHotelGuest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddEditHotelGuest" Height="300" Width="300">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label x:Name="lblTitle" Content="lblTitle" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <Grid Margin="5,0" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Guest ID:" />
+            <Label Grid.Row="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="First Name:" />
+            <Label Grid.Row="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Last Name:" />
+            <Label Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Address1:" />
+            <Label Grid.Row="4" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Address2:" />
+            <Label Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="ZIP Code:" />
+            <Label Grid.Row="6" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Phone Number:" />
+            <Label Grid.Row="7" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Email Address:" />
+            <TextBox x:Name="txtGuestID" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtFirstName" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtLastName" Grid.Column="1" Grid.Row="2" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtAddress1" Grid.Column="1" Grid.Row="3" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtAddress2" Grid.Column="1" Grid.Row="4" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtZipCode" Grid.Column="1" Grid.Row="5" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtPhoneNumber" Grid.Column="1" Grid.Row="6" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+            <TextBox x:Name="txtEmailAddress" Grid.Column="1" Grid.Row="7" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnSubmit" Content="Submit" Grid.Column="0" Margin="5,0" />
+            <Button x:Name="btnReset" Content="Reset" Grid.Column="1" Margin="5,0" />
+            <Button x:Name="btnCancel" Content="Cancel" Grid.Column="2" Margin="5,0" />
+        </Grid>
+    </Grid>
+</Window>
