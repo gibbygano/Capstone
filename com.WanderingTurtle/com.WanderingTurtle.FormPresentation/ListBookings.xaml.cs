@@ -25,7 +25,10 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
         }
-
+        /*Code to link to the AddBooking form
+         * Opens the AddBooking form when the "Add" button on the list screen is selected.
+         * Tony Noel- 2/15/15
+         */
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
             AddBooking myBooking;
@@ -38,7 +41,7 @@ namespace com.WanderingTurtle.FormPresentation
             else
             {
                 myBooking = AddBooking.Instance;
-                myBooking.BringToFront();
+                myBooking.Activate();
 
                 //Creates a sound effect through the System.Media and  flash from accessibility
 
@@ -51,24 +54,24 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateBooking myBooking;
-            string id = lvBookingList.SelectedItems[0].ToString();
-            if (UpdateBooking.Instance == null)
-            {
-                myBooking = new UpdateBooking(id);
-                myBooking.Show();
-            }
-            else
-            {
-                myBooking = UpdateBooking.Instance;
-                myBooking.BringToFront();
+        //private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
+        //{
+        //    UpdateBooking myBooking;
+        //    string id = lvBookingList.SelectedItems[0].ToString();
+        //    if (UpdateBooking.Instance == null)
+        //    {
+        //        myBooking = new UpdateBooking(id);
+        //        myBooking.Show();
+        //    }
+        //    else
+        //    {
+        //        myBooking = UpdateBooking.Instance;
+        //        myBooking.BringToFront();
 
-                //Creates a sound effect through the System.Media and  flash from accessibility
+        //        //Creates a sound effect through the System.Media and  flash from accessibility
 
-                System.Media.SystemSounds.Exclamation.Play();
-            }
-        }
+        //        System.Media.SystemSounds.Exclamation.Play();
+        //    }
+        //}
     }
 }
