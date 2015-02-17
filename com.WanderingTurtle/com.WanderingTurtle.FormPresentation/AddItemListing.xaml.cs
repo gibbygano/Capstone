@@ -18,18 +18,18 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for AddItemListings.xaml
     /// </summary>
-    public partial class AddItemListings : Window
+    public partial class AddItemListing : Window
     {
         EventManager myMan = new EventManager();
         ProductManager prodMan = new ProductManager();
 
-        public AddItemListings()
+        public AddItemListing()
         {
 
             InitializeComponent();
         }
 
-        public AddItemListings(Event EventToAddListingOf)
+        public AddItemListing(Event EventToAddListingOf)
         {
             InitializeComponent();
             txtEventName.Text = EventToAddListingOf.EventItemName;
