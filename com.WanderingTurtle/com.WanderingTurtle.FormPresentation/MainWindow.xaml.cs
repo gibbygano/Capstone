@@ -33,7 +33,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             // collect the values from the form
             userEmployee.EmployeeID = int.Parse(txtUserID.Text);
-            userEmployee.UserPassword = txtUserPassword.Text;
+            userEmployee.Password = txtUserPassword.Text;
 
         }
 

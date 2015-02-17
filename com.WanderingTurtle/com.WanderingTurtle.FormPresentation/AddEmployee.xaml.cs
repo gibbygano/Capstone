@@ -61,7 +61,7 @@ namespace com.WanderingTurtle.FormPresentation
                 newEmployeeUser.FirstName = this.txtFirstName.Text;
                 newEmployeeUser.LastName = this.txtLastName.Text;
                 newEmployeeUser.Active = this.chkActiveEmployee.IsChecked.Value;
-                newEmployeeUser.UserPassword = this.txtPassword.Text;
+                newEmployeeUser.Password = this.txtPassword.Text;
                 //TBD newEmployeeUser.Admin = this.chkActiveEmployee.IsChecked.Value;
             }
             catch (Exception ax)
