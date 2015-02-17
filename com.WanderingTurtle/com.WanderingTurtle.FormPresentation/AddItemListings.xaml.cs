@@ -9,26 +9,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
+
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for AddItemListings.xaml
     /// </summary>
-    public partial class AddItemListings : Window
+    public partial class AddItemListing : Window
     {
         EventManager myMan = new EventManager();
-        OrderManager orMan = new OrderManager();
 
-        public AddItemListings()
+        ProductManager prodMan = new ProductManager();
+
+        public AddItemListing()
         {
-
+            
             InitializeComponent();
         }
 
-        public AddItemListings(Event EventToAddListingOf)
+        public AddItemListing(Event EventToAddListingOf)
         {
             InitializeComponent();
             txtEventName.Text = EventToAddListingOf.EventItemName;
@@ -79,7 +83,7 @@ namespace com.WanderingTurtle.FormPresentation
             // Adds ItemListing to the DB
 
             // Hunter Lind 2/14/15
-            myMan.AddItemListing(newListing);
+            prodMan.AddItemListing(newListing);
         }
     }
 }
