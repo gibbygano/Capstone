@@ -41,7 +41,9 @@ namespace com.WanderingTurtle.DataAccess
                     BookingToGet.BookingID = reader.GetInt32(0);
                     BookingToGet.GuestID = reader.GetInt32(1);
                     if (!reader.IsDBNull(2)) BookingToGet.EmployeeID = reader.GetInt32(2);
-                    BookingToGet.DateBooked = reader.GetDateTime(3);
+                    BookingToGet.ItemListID = reader.GetInt32(3);
+                    BookingToGet.Quantity = reader.GetInt32(4);
+                    BookingToGet.DateBooked = reader.GetDateTime(5);
                 }
                 else
                 {
@@ -86,10 +88,12 @@ namespace com.WanderingTurtle.DataAccess
                         var currentBook = new ListItem();
 
                         currentBook.ItemListID = reader.GetInt32(0);
-                        currentBook.BookingQuantity = reader.GetInt32(1);
-                        currentBook.EventID = reader.GetInt32(2);
-                        currentBook.EventName = reader.GetString(3);
-                        currentBook.EventDescription = reader.GetString(4);
+                        currentBook.QuantityOffered = reader.GetInt32(1);
+                        currentBook.StartDate = reader.GetDateTime(2);
+                        currentBook.EndDate = reader.GetDateTime(3);
+                        currentBook.EventID = reader.GetInt32(4);
+                        currentBook.EventName = reader.GetString(5);
+                        currentBook.EventDescription = reader.GetString(6);
 
                         BookingOpsList.Add(currentBook);
                     }
@@ -109,61 +113,6 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
             return BookingOpsList;
-        }
-
-
-        /*searchBooking() takes a booking objects and uses the spSearchBooking to locate a booking where the 
-         * bookingID is unknown. Useful when a new booking has just been added to the database as a way to retrieve the bookingID
-         * under the hood.
-         * Returns a booking object complete with the bookingID.
-         * Tony Noel- 2/12/15
-         */
-        public static Booking searchBooking(Booking toSearch)
-        {
-            Booking BookingToGet = new Booking();
-
-            //establish connection
-            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSearchBooking";
-            //create a Sql Command
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@guestID", toSearch.GuestID); //This is the parameter passing portion of the code.
-            cmd.Parameters.AddWithValue("@empID", toSearch.EmployeeID);
-            cmd.Parameters.AddWithValue("@date", toSearch.DateBooked);
-
-
-            try
-            {
-                //open connection
-                conn.Open();
-                //execute the command and capture the results to a SqlDataReader
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows == true)
-                {
-                    reader.Read();
-
-                    BookingToGet.BookingID = reader.GetInt32(0);
-                    BookingToGet.GuestID = reader.GetInt32(1);
-                    if (!reader.IsDBNull(2)) BookingToGet.EmployeeID = reader.GetInt32(2);
-                    BookingToGet.DateBooked = reader.GetDateTime(3);
-                }
-                else
-                {
-                    var up = new ApplicationException("The BookingID provided does not match any records on file.");
-                    throw up;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return BookingToGet;
         }
 
         /* getBookingList- a method used to collect a list of bookings from the database
@@ -193,7 +142,9 @@ namespace com.WanderingTurtle.DataAccess
                         currentBook.BookingID = reader.GetInt32(0);
                         currentBook.GuestID = reader.GetInt32(1);
                         if (!reader.IsDBNull(2)) currentBook.EmployeeID = reader.GetInt32(2);
-                        currentBook.DateBooked = reader.GetDateTime(3);
+                        currentBook.ItemListID = reader.GetInt32(3);
+                        currentBook.Quantity = reader.GetInt32(4);
+                        currentBook.DateBooked = reader.GetDateTime(5);
 
                         BookingList.Add(currentBook);
                     }
@@ -233,7 +184,9 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@GuestID", toAdd.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toAdd.EmployeeID);
-            cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
+            cmd.Parameters.AddWithValue("@ItemListID", toAdd.ItemListID);
+            cmd.Parameters.AddWithValue("@Quantity", toAdd.Quantity);
+            
 
             try
             {
@@ -270,11 +223,14 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@GuestID", toUpdate.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toUpdate.EmployeeID);
-            cmd.Parameters.AddWithValue("@DateBooked", toUpdate.DateBooked);
+            cmd.Parameters.AddWithValue("@ItemListID", toUpdate.ItemListID);
+            cmd.Parameters.AddWithValue("@Quantity", toUpdate.Quantity);
 
             cmd.Parameters.AddWithValue("@original_BookingID", oldOne.BookingID);
             cmd.Parameters.AddWithValue("@original_GuestID", oldOne.GuestID);
             cmd.Parameters.AddWithValue("@original_EmployeeID", oldOne.EmployeeID);
+            cmd.Parameters.AddWithValue("@original_ItemListID", oldOne.ItemListID);
+            cmd.Parameters.AddWithValue("@original_Quantity", oldOne.Quantity);
             cmd.Parameters.AddWithValue("@original_DateBooked", oldOne.DateBooked);
 
             try
@@ -312,7 +268,8 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@BookingID", toDelete.BookingID);
             cmd.Parameters.AddWithValue("@original_GuestID", toDelete.GuestID);
             cmd.Parameters.AddWithValue("@original_EmployeeID", toDelete.EmployeeID);
-            cmd.Parameters.AddWithValue("@original_DateBooked", toDelete.DateBooked);
+            cmd.Parameters.AddWithValue("@original_ItemListID", toDelete.ItemListID);
+            cmd.Parameters.AddWithValue("@original_Quantity",toDelete.Quantity);
 
             try
             {

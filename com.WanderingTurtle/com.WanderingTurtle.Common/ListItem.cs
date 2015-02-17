@@ -19,10 +19,9 @@ namespace com.WanderingTurtle.Common
 
         }
 
-        public ListItem(int itemListID, int quantity, int eventID, string eventName, string eventDescription, int qOffered, DateTime start, DateTime end)
+        public ListItem(int itemListID, int eventID, string eventName, string eventDescription, int qOffered, DateTime start, DateTime end)
         {
             ItemListID = itemListID;
-            BookingQuantity = quantity;
             EventID = eventID;
             EventName = eventName;
             EventDescription = eventDescription;

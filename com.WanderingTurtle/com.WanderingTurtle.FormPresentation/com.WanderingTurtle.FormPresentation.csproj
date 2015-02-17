@@ -39,6 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -59,8 +61,8 @@
     <Compile Include="AddBooking.xaml.cs">
       <DependentUpon>AddBooking.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddEditUser.xaml.cs">
-      <DependentUpon>AddEditUser.xaml</DependentUpon>
+    <Compile Include="AddEditHotelGuest.xaml.cs">
+      <DependentUpon>AddEditHotelGuest.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
@@ -83,14 +85,8 @@
     <Compile Include="ListsPopUp.xaml.cs">
       <DependentUpon>ListsPopUp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddUser.xaml.cs">
-      <DependentUpon>AddUser.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ListBookings.xaml.cs">
       <DependentUpon>ListBookings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ListEmployees.xaml.cs">
-      <DependentUpon>ListEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListEvents.xaml.cs">
       <DependentUpon>ListEvents.xaml</DependentUpon>
@@ -101,8 +97,8 @@
     <Compile Include="ListSuppliers.xaml.cs">
       <DependentUpon>ListSuppliers.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListUsers.xaml.cs">
-      <DependentUpon>ListUsers.xaml</DependentUpon>
+    <Compile Include="ListTheEmployees.xaml.cs">
+      <DependentUpon>ListTheEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateBooking.xaml.cs">
       <DependentUpon>UpdateBooking.xaml</DependentUpon>
@@ -114,7 +110,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddEditUser.xaml">
+    <Page Include="AddEditHotelGuest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,10 +123,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddNewEvent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,10 +146,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListEmployees.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ListEvents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,7 +158,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListUsers.xaml">
+    <Page Include="ListTheEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,8 +7,8 @@
         /// </summary>
         public int HotelGuestID { get; set; }
 
-        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
-            : base(FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, HotelGuestPIN)
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress)
+            : base(FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress)
         {
             this.HotelGuestID = HotelGuestID;
         }
@@ -30,9 +30,7 @@
 
         public string EmailAddress { get; set; }
 
-        public int HotelGuestPIN { get; set; }
-
-        public NewHotelGuest(string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress, int HotelGuestPIN)
+        public NewHotelGuest(string FirstName, string LastName, string Address1, string Address2, string Zip, string PhoneNumber, string EmailAddress)
         {
             this.FirstName = FirstName;
             this.LastName = LastName;
@@ -41,7 +39,6 @@
             this.Zip = Zip;
             this.PhoneNumber = PhoneNumber;
             this.EmailAddress = EmailAddress;
-            this.HotelGuestPIN = HotelGuestPIN;
         }
     }
 }

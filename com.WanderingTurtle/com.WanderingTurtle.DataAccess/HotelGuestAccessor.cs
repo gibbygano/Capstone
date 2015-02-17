@@ -27,10 +27,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@lastName", newHotelGuest.LastName);
             cmd.Parameters.AddWithValue("@zip", newHotelGuest.Zip);
             cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address1);
-            cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address2);
+            cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@hotelGuestPIN", newHotelGuest.HotelGuestPIN);
 
             try
             {
@@ -85,8 +84,7 @@ namespace com.WanderingTurtle.DataAccess
                         reader.GetString(4), //Address1
                         reader.GetString(5), //Address2
                         reader.GetString(6), //PhoneNumber
-                        reader.GetString(7), //EmailAdddress
-                        reader.GetInt32(8) //HotelGuestPIN
+                        reader.GetString(7) //EmailAdddress
                    );
                 }
                 else
@@ -135,8 +133,7 @@ namespace com.WanderingTurtle.DataAccess
                                 reader.GetString(4), //Address1
                                 reader.GetString(5), //Address2
                                 reader.GetString(6), //PhoneNumber
-                                reader.GetString(7), //EmailAdddress
-                                reader.GetInt32(8) //HotelGuestPIN
+                                reader.GetString(7) //EmailAdddress
                             )
                         );
                     }
@@ -175,20 +172,18 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@lastName", newHotelGuest.LastName);
             cmd.Parameters.AddWithValue("@zip", newHotelGuest.Zip);
             cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address1);
-            cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address2);
+            cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@hotelGuestPIN", newHotelGuest.HotelGuestPIN);
 
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
-            cmd.Parameters.AddWithValue("@firstName", oldHotelGuest.FirstName);
-            cmd.Parameters.AddWithValue("@lastName", oldHotelGuest.LastName);
-            cmd.Parameters.AddWithValue("@zip", oldHotelGuest.Zip);
-            cmd.Parameters.AddWithValue("@address1", oldHotelGuest.Address1);
-            cmd.Parameters.AddWithValue("@address1", oldHotelGuest.Address2);
-            cmd.Parameters.AddWithValue("@phoneNumber", oldHotelGuest.PhoneNumber);
-            cmd.Parameters.AddWithValue("@email", oldHotelGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@hotelGuestPIN", oldHotelGuest.HotelGuestPIN);
+            cmd.Parameters.AddWithValue("@original_firstName", oldHotelGuest.FirstName);
+            cmd.Parameters.AddWithValue("@original_lastName", oldHotelGuest.LastName);
+            cmd.Parameters.AddWithValue("@original_zip", oldHotelGuest.Zip);
+            cmd.Parameters.AddWithValue("@original_address1", oldHotelGuest.Address1);
+            cmd.Parameters.AddWithValue("@original_address2", oldHotelGuest.Address2);
+            cmd.Parameters.AddWithValue("@original_phoneNumber", oldHotelGuest.PhoneNumber);
+            cmd.Parameters.AddWithValue("@original_email", oldHotelGuest.EmailAddress);
 
             try
             {

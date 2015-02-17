@@ -1,22 +1,24 @@
 ﻿<Window x:Class="com.WanderingTurtle.FormPresentation.AddEmployee"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddEmployee" Height="300" Width="300">
+        Title="AddEmployee" Height="250" Width="500">
     <Grid Background="#FFE5E5E5">
-        <Label Content="Employee ID" HorizontalAlignment="Left" Margin="26,18,0,0" VerticalAlignment="Top" Height="31" Width="86"/>
-        <Label Content="First Name" HorizontalAlignment="Left" Margin="34,10,0,0" VerticalAlignment="Top" Height="31" Grid.Row="1"/>
-        <Label Content="Last Name" HorizontalAlignment="Left" Margin="35,18,0,0" VerticalAlignment="Top" Height="23" Grid.Row="2"/>
-        <TextBox x:Name="txtEmployeeID" HorizontalAlignment="Left" Height="23" Margin="117,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="0"/>
-        <TextBox  x:Name="txtFirstName" HorizontalAlignment="Left" Height="23" Margin="117,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-        <TextBox x:Name="txtLastName" HorizontalAlignment="Left" Height="23" Margin="117,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Grid.Row="2"/>
-        <Button x:Name="btnAddEmployee" Content="Submit" HorizontalAlignment="Left" Margin="117,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Click="btnAddEmployee_Click"/>
-        <Label x:Name="lblErrorMessage" HorizontalAlignment="Left" Margin="19,15,0,0" Grid.Row="3" VerticalAlignment="Top" Width="254" Height="21"/>
+        <Label Content="First Name" HorizontalAlignment="Left" Margin="13,14,0,0" VerticalAlignment="Top" Height="31"/>
+        <Label Content="Last Name" HorizontalAlignment="Left" Margin="219,18,0,0" VerticalAlignment="Top" Height="23"/>
+        <TextBox  x:Name="txtFirstName" KeyboardNavigation.TabIndex="0" HorizontalAlignment="Left" Height="23" Margin="85,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtLastName" KeyboardNavigation.TabIndex="1" HorizontalAlignment="Left" Height="23" Margin="290,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169"/>
+        <Button x:Name="btnAddEmployee" Content="Submit" HorizontalAlignment="Left" Margin="86,21,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="btnAddEmployee_Click"/>
+        <Label x:Name="lblErrorMessage" HorizontalAlignment="Left" Margin="13,20,0,0" VerticalAlignment="Top" Width="461" Height="31" Grid.Row="3"/>
+        <CheckBox x:Name="chkActiveEmployee" IsChecked="True" KeyboardNavigation.TabIndex="4" Content="Active" HorizontalAlignment="Left" Margin="334,26,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox x:Name="txtPassword" KeyboardNavigation.TabIndex="2" HorizontalAlignment="Left" Height="23" Margin="86,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="14,20,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Admin" KeyboardNavigation.TabIndex="3" Content="Admin" HorizontalAlignment="Left" Margin="256,26,0,0" Grid.Row="1" VerticalAlignment="Top"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
-            <RowDefinition Height="50" />
+
         </Grid.RowDefinitions>
     </Grid>
 </Window>

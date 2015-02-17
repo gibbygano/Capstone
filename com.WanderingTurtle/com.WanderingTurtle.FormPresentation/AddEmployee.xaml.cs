@@ -20,59 +20,54 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEmployee : Window
     {
-        UserLoginManager myEmployeeManager = new UserLoginManager();
-        UserLogin newUser = new UserLogin();
+        Employee newEmployeeUser = new Employee();
+        EmployeeManager myManager = new EmployeeManager();
 
+        /// <summary>
+        /// Initialize form 
+        /// 
+        /// </summary>
         public AddEmployee()
         {
             InitializeComponent();
         }
+        
+        // Pat Banks - February 15, 2015
+        // Parameters: text fields from form
+        // Desc.: Method takes values for a new employee from the form and passes values
+        //        into the AddNewEmployee method of the EmployeeManager class
+        // Failure: Exception is thrown if database is not available or 
+        //          new employee cannot be created in the database for any reason
+        // Success: A user is added to the database
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate() == false)
-            {
-                return;
-            }
-            else
-            {
-                lblErrorMessage.Content = "";
-                AddNewEmployee();
-            }
-
-            // collect the values from the form
-            newUser.UserID = int.Parse(this.txtEmployeeID.Text);
-            newUser.FirstName = this.txtFirstName.Text;
-            newUser.LastName = this.txtLastName.Text;
-
-        }
-
-        public bool Validate()
-        {
-            if (!Validator.ValidateString(txtLastName.Text) || !Validator.ValidateString(txtFirstName.Text))
-            {
-                lblErrorMessage.Content = "Please fill out the name field.";
-                return false;
-            }
-            
-            return true;
-        }
-
-        public void AddNewEmployee()
-        {
             try
             {
-                Employee myEmployee = new Employee();
+                if (!Validator.ValidateString(txtLastName.Text))
+                {
+                   lblErrorMessage.Content = "Please fill out the last name field.";
+                } 
+                else if(!Validator.ValidateString(txtFirstName.Text))
+                {           
+                    lblErrorMessage.Content = "Please fill out the first name field.";
+                }
+                else if(!Validator.ValidateString(txtPassword.Text))
+                {
+                    lblErrorMessage.Content = "Please enter a password.";
+                }
 
-                myEmployee.FirstName = txtFirstName.Text;
-                myEmployee.LastName = txtLastName.Text;
-
-                myEmployeeManager.AddAnEmployee(myEmployee);
+                // collect the values from the form
+                newEmployeeUser.FirstName = this.txtFirstName.Text;
+                newEmployeeUser.LastName = this.txtLastName.Text;
+                newEmployeeUser.Active = this.chkActiveEmployee.IsChecked.Value;
+                newEmployeeUser.Password = this.txtPassword.Text;
+                //TBD newEmployeeUser.Admin = this.chkActiveEmployee.IsChecked.Value;
             }
-            catch (Exception)
+            catch (Exception ax)
             {
-                lblErrorMessage.Content = "There was an error adding the employee.";
-            }
-        }
+                MessageBox.Show(ax.ToString());
+            }            
+        }        
     }
 }
