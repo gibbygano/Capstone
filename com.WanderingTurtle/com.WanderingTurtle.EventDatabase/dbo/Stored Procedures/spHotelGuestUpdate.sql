@@ -24,7 +24,7 @@ BEGIN
 			[Address1] = @address1,
 			[Address2] = @address2,
 			[PhoneNumber] = @phoneNumber,
-			EmailAddress = @email,
+			EmailAddress = @email
 	WHERE HotelGuestID = @original_hotelGuestID
 		AND [FirstName] = @original_firstName
 		AND [LastName] = @original_lastName
