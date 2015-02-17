@@ -5,13 +5,16 @@ CREATE PROCEDURE [dbo].[spDeleteBooking]
 	
 	@original_GuestID		int,
 	@original_EmployeeID	int,
-	@original_DateBooked	datetime)
+	@original_ItemListID	int,
+	@original_Quantity		int
+	)
 AS
 BEGIN
 	DELETE FROM Booking
 	WHERE BookingID = @BookingID
 		AND GuestID = @original_GuestID
 		AND EmployeeID = @original_EmployeeID
-		AND DateBooked = @original_DateBooked
+		AND ItemListID = @original_ItemListID
+		AND Quantity = @original_Quantity
 END		
 	RETURN @@ROWCOUNT

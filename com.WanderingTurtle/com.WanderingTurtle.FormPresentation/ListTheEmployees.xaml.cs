@@ -11,17 +11,29 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for ListEmployee.xaml
+    /// Interaction logic for ListTheEmployees.xaml
     /// </summary>
-    public partial class ListEmployee : UserControl
+    public partial class ListTheEmployees : UserControl
     {
-        public ListEmployee()
+        private EmployeeManager myEmployees = new EmployeeManager();
+        List<Employee> employeeList;
+
+        public ListTheEmployees()
         {
+            employeeList = myEmployees.FetchListEmployees();
             InitializeComponent();
+            lvEmployeesList.ItemsSource = employeeList;
         }
+
+
+
+
+
     }
 }

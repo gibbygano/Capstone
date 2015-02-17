@@ -24,10 +24,16 @@ namespace com.WanderingTurtle.FormPresentation
         // This is where we instantiate our window and populate the EventList with "myEventList" items.
         public ViewList()
         {
-            
-            myEventList = myMan.RetrieveEventList();
-            InitializeComponent(); 
-            lvEvents.ItemsSource = myEventList;
+            InitializeComponent();
+            try
+            {
+                myEventList = myMan.RetrieveEventList();
+                lvEvents.ItemsSource = myEventList;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("No database able to be accessed for event list");
+            }
         }
 
 
