@@ -160,8 +160,14 @@ namespace com.WanderingTurtle.FormPresentation
             // BLL SubmitEvent here.
                 // case here for eventTypes
 
-            myMan.AddNewEvent(eventToSubmit); 
-
+            try
+            {
+                myMan.AddNewEvent(eventToSubmit);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
             
 

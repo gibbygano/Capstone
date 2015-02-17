@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -20,7 +21,8 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class AddItemListings : Window
     {
         EventManager myMan = new EventManager();
-        OrderManager orMan = new OrderManager();
+
+        ProductManager prodMan = new ProductManager();
 
         public AddItemListings()
         {
@@ -79,7 +81,7 @@ namespace com.WanderingTurtle.FormPresentation
             // Adds ItemListing to the DB
 
             // Hunter Lind 2/14/15
-            myMan.AddItemListing(newListing);
+            prodMan.AddItemListing(newListing);
         }
     }
 }
