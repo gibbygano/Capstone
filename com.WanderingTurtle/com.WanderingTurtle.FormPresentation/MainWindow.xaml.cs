@@ -81,8 +81,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
-            Window AddListing= new AddItemListings();
-            AddListing.Show();
+            Window AddItemListings = new AddItemListing();
+            AddItemListings.Show();
         }
 
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
