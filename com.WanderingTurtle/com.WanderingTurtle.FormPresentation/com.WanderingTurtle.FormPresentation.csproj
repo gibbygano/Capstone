@@ -61,14 +61,9 @@
     <Compile Include="AddBooking.xaml.cs">
       <DependentUpon>AddBooking.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="AddEditHotelGuest.xaml.cs">
       <DependentUpon>AddEditHotelGuest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddEditUser.xaml.cs">
-      <DependentUpon>AddEditUser.xaml</DependentUpon>
-    </Compile>
-
     <Compile Include="AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
@@ -116,10 +111,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddEditHotelGuest.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
