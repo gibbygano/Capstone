@@ -84,7 +84,7 @@ namespace com.WanderingTurtle.DataAccess
                         reader.GetString(4), //Address1
                         reader.GetString(5), //Address2
                         reader.GetString(6), //PhoneNumber
-                        reader.GetString(7), //EmailAdddress
+                        reader.GetString(7) //EmailAdddress
                    );
                 }
                 else
@@ -133,7 +133,7 @@ namespace com.WanderingTurtle.DataAccess
                                 reader.GetString(4), //Address1
                                 reader.GetString(5), //Address2
                                 reader.GetString(6), //PhoneNumber
-                                reader.GetString(7), //EmailAdddress
+                                reader.GetString(7) //EmailAdddress
                             )
                         );
                     }
