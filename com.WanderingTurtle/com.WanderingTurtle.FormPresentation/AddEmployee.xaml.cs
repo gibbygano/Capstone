@@ -46,15 +46,15 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (!Validator.ValidateString(txtLastName.Text))
                 {
-                   lblErrorMessage.Content = "Please fill out the last name field.";
+                   lblMessage.Content = "Please fill out the last name field.";
                 } 
                 else if(!Validator.ValidateString(txtFirstName.Text))
                 {           
-                    lblErrorMessage.Content = "Please fill out the first name field.";
+                    lblMessage.Content = "Please fill out the first name field.";
                 }
                 else if(!Validator.ValidateString(txtPassword.Text))
                 {
-                    lblErrorMessage.Content = "Please enter a password.";
+                    lblMessage.Content = "Please enter a password.";
                 }
 
                 // collect the values from the form
@@ -62,7 +62,18 @@ namespace com.WanderingTurtle.FormPresentation
                 newEmployeeUser.LastName = this.txtLastName.Text;
                 newEmployeeUser.Active = this.chkActiveEmployee.IsChecked.Value;
                 newEmployeeUser.Password = this.txtPassword.Text;
-                //TBD newEmployeeUser.Admin = this.chkActiveEmployee.IsChecked.Value;
+                newEmployeeUser.Level = int.Parse(this.txtUserLevel.Text);
+
+                int result = myManager.AddNewEmployee(newEmployeeUser);
+
+                if (result == 1)
+                {
+                    lblMessage.Content = "employee added successfully";
+                }
+                else
+                {
+                    lblMessage.Content = "There was problem adding to the db";
+                }
             }
             catch (Exception ax)
             {

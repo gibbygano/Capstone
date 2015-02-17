@@ -6,34 +6,41 @@
     <Grid Background="#FFE5E5E5">
         <TabControl HorizontalAlignment="Left" Height="457" Margin="0,31,0,0" VerticalAlignment="Top" Width="933">
             <TabItem Header="Events">
-                <Grid Background="#FFE5E5E5" />
-
-
+                <Grid Background="#FFE5E5E5" >
+                    <Button x:Name="btnAddEvent" Content="Add Event" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddEvent_Click" />
+                </Grid>
             </TabItem>
             <TabItem Header="Listings" >
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" >
+                    <Button x:Name="btnAddListing" Content="Add Listing" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddListing_Click" />
+                </Grid>
             </TabItem>
 
             <TabItem Header="Bookings">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddBooking_Click" />
+                </Grid>
             </TabItem>
 
             <TabItem Header="Suppliers">
 
                 <Grid Background="#FFE5E5E5">
-
+                    <Button x:Name="btnAddSupplier" Content="Add Supplier" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddSupplier_Click" />
                 </Grid>
 
             </TabItem>
             <TabItem Header="Employees">
-                <!-- x:Name gives the grid a name;  local: ListEmployee references the user control List Employees-->
+                <!-- x:Name gives the grid a name;  local: ListTheEmployees references the user control ListTheEmployees-->
                 <Grid Background="#FFE5E5E5" x:Name="LayoutEmployeeList">
                     <local:ListTheEmployees />
                     <Button x:Name="btnAddEmployee" Content="Add Employee" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddEmployee_Click" />
                 </Grid>
             </TabItem>
             <TabItem Header="Hotel Guests">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+
+                    <Button x:Name="btnAddGuest" Content="Add Guest" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddGuest_Click" />
+                </Grid>
             </TabItem>
 
         </TabControl>

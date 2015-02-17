@@ -4,15 +4,16 @@
         Title="AddEmployee" Height="250" Width="500">
     <Grid Background="#FFE5E5E5">
         <Label Content="First Name" HorizontalAlignment="Left" Margin="13,14,0,0" VerticalAlignment="Top" Height="31"/>
-        <Label Content="Last Name" HorizontalAlignment="Left" Margin="219,18,0,0" VerticalAlignment="Top" Height="23"/>
+        <Label Content="Last Name" HorizontalAlignment="Left" Margin="224,18,0,0" VerticalAlignment="Top" Height="23"/>
         <TextBox  x:Name="txtFirstName" KeyboardNavigation.TabIndex="0" HorizontalAlignment="Left" Height="23" Margin="85,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtLastName" KeyboardNavigation.TabIndex="1" HorizontalAlignment="Left" Height="23" Margin="290,18,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169"/>
         <Button x:Name="btnAddEmployee" Content="Submit" HorizontalAlignment="Left" Margin="86,21,0,0" Grid.Row="2" VerticalAlignment="Top" Width="75" Click="btnAddEmployee_Click"/>
-        <Label x:Name="lblErrorMessage" HorizontalAlignment="Left" Margin="13,20,0,0" VerticalAlignment="Top" Width="461" Height="31" Grid.Row="3"/>
-        <CheckBox x:Name="chkActiveEmployee" IsChecked="True" KeyboardNavigation.TabIndex="4" Content="Active" HorizontalAlignment="Left" Margin="334,26,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label x:Name="lblMessage" HorizontalAlignment="Left" Margin="13,20,0,0" VerticalAlignment="Top" Width="461" Height="31" Grid.Row="3"/>
+        <CheckBox x:Name="chkActiveEmployee" IsChecked="True" KeyboardNavigation.TabIndex="4" Content="Active" HorizontalAlignment="Left" Margin="290,21,0,0" VerticalAlignment="Top" Grid.Row="2"/>
         <TextBox x:Name="txtPassword" KeyboardNavigation.TabIndex="2" HorizontalAlignment="Left" Height="23" Margin="86,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="Password" HorizontalAlignment="Left" Margin="14,20,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <CheckBox x:Name="Admin" KeyboardNavigation.TabIndex="3" Content="Admin" HorizontalAlignment="Left" Margin="256,26,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Content="User Level"  HorizontalAlignment="Left" Margin="229,17,0,0" Grid.Row="1" VerticalAlignment="Top" />
+        <TextBox x:Name="txtUserLevel" KeyboardNavigation.TabIndex="3" HorizontalAlignment="Left" Height="23" Margin="298,20,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="66"/>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
