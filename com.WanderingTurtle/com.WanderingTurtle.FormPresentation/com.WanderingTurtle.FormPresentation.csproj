@@ -73,9 +73,6 @@
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddItemListing.xaml.cs">
-      <DependentUpon>AddItemListing.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ListingList.xaml.cs">
       <DependentUpon>ListingList.xaml</DependentUpon>
     </Compile>
@@ -181,10 +178,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="AddSupplier.xaml">
-    </Page>
-    <Page Include="AddItemListing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateBooking.xaml">
       <SubType>Designer</SubType>
