@@ -12,7 +12,7 @@ namespace com.WanderingTurtle.DataAccess
     {
         
         // Ryan Blake
-        // February 12, 2015
+        // February 12, 2015 || Updated: February 16, 2015
 
         // Paramaters: N/A
 
@@ -49,7 +49,8 @@ namespace com.WanderingTurtle.DataAccess
                         inEmployee.FirstName = reader.GetValue(1).ToString();
                         inEmployee.LastName = reader.GetValue(2).ToString();
                         inEmployee.Level = (int)reader.GetValue(3);
-                        inEmployee.Active = (bool)reader.GetValue(4);
+                        // inEmployee.Level = (bool)reader.GetValue(3); removed, not needed. 
+                        // The stored procedure will only return active employees. -- Ryan
 
                         employeeList.Add(inEmployee);
                     }
@@ -155,7 +156,7 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@firstName", newEmployee.FirstName);
             cmd.Parameters.AddWithValue("@lastName", newEmployee.LastName);
-            cmd.Parameters.AddWithValue("@active", true);
+            cmd.Parameters.AddWithValue("@empPassword", newEmployee.Password);
             cmd.Parameters.AddWithValue("@empLevel", newEmployee.Level);
 
             try
@@ -214,7 +215,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_employeeID", originalEmployee.EmployeeID);
             cmd.Parameters.AddWithValue("@original_firstName", originalEmployee.FirstName);
             cmd.Parameters.AddWithValue("@original_lastName", originalEmployee.LastName);
-            cmd.Parameters.AddWithValue("@original_userID", originalEmployee.UserID);
+            cmd.Parameters.AddWithValue("@original_empLevel", originalEmployee.Level);
             cmd.Parameters.AddWithValue("@original_active", originalEmployee.Active);
 
             try

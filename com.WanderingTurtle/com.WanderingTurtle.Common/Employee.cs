@@ -6,8 +6,8 @@ using System.Text;
 namespace com.WanderingTurtle.Common
 {
     // Ryan Blake
-    // February 2015
-    public class Employee : UserLogin
+    // February 2015 || Updated: February 16, 2015 -- Removed inheritance.
+    public class Employee
     {
         public int EmployeeID { get; set; }
 
