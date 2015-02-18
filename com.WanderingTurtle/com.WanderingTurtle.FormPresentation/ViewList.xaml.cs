@@ -21,7 +21,9 @@ namespace com.WanderingTurtle.FormPresentation
         private EventManager myMan = new EventManager();
         List<Event> myEventList;
 
-        // This is where we instantiate our window and populate the EventList with "myEventList" items.
+        /// <summary>
+        /// Instantiates this form and attempts to populate the Event Listview
+        /// </summary>
         public ViewList()
         {
             InitializeComponent();
@@ -32,32 +34,32 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch(Exception ex)
             {
-                MessageBox.Show("No database able to be accessed for event list");
+                MessageBox.Show("No events in the database exist");
             }
         }
 
-
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        // Calls the delete method from the BLL to archive an event.
+        /// <summary>
+        /// Uses the EventManager to archive a completed / no longer offered event.
+        /// It uses the selected event to delete a specific item.
+        /// </summary>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Event EventToDelete = (Event)lvEvents.SelectedItems[0];
             myMan.ArchiveAnEvent(EventToDelete);
         }
 
-        // Calls the AddEvent window for the user to input information into
+        /// <summary>
+        /// Opens the AddEventWindow so the user can input new event information
+        /// </summary>
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
             Window AddEvent = new AddNewEvent();
             AddEvent.Show();
         }
 
-        // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
+        /// <summary>
+        /// Opens the EditEvent form using the selected event in the eventlist to autopopulate said form. 
+        /// </summary>
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             Window EditEvent = new EditExistingEvent();

@@ -32,12 +32,21 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
         }
 
+
+
+        /// <summary>
+        /// Creates an instance of this form and fills the txtEventName with the text of the selected event.
+        /// </summary>
+        /// <param name="EventToAddListingOf">Object containing the base event for the listing to add</param>
         public AddItemListing(Event EventToAddListingOf)
         {
             InitializeComponent();
             txtEventName.Text = EventToAddListingOf.EventItemName;
         }
 
+        /// <summary>
+        /// Creates a new ItemListing to send to the database using user inputted values on this form.
+        /// </summary>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             ItemListing newListing = new ItemListing();

@@ -21,39 +21,25 @@ namespace com.WanderingTurtle.FormPresentation
         EventManager myMan = new EventManager();
         public AddNewEvent()
         {
-
             var TempList = myMan.RetrieveEventTypeList();
-
             cboxType.ItemsSource = TempList;
-
-
-
             InitializeComponent();
         }
 
         /// <summary>
-        // Constructs and submits a new event using a form filled out by a user
-        //
-        // Pre requesits: Form is completely filled out. 
-        // Post requesits: Using user inputted information, we submit an event to the database for storage.
+        /// Constructs and submits a new event using a form filled out by a user
         /// </summary>
-
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            
             var eventToSubmit = new Event();
-
-
             eventToSubmit.EventItemName = txtEventName.Text;
 
-            //Checks and instantiates the minimum and maximum guest numbers
             try
             {
-
+                // Number of Guests //
                 if (!Validator.ValidateInt(txtMaxGuest.Text) || !Validator.ValidateInt(txtMinGuest.Text))
                 {
                     throw new Exception("Not a valid amount of guests");
-
                 }
                 else
                 {
@@ -61,20 +47,11 @@ namespace com.WanderingTurtle.FormPresentation
                     int y;
                     int.TryParse(txtMaxGuest.Text, out x);
                     int.TryParse(txtMaxGuest.Text, out y);
-
                     eventToSubmit.MaxNumGuests = x;
                     eventToSubmit.MinNumGuests = y;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
 
-            // Checks and instantiates the Price of tickets.
-            try
-            {
-
+                // Price //
                 if (!Validator.ValidateDecimal(this.txtPrice.Text))
                 {
                     throw new Exception("Not a valid Price");
@@ -83,17 +60,8 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice);
                 }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.ToString());
-            }
-
-
-            //Checks and insantiates the Date and Time of the event
-            try
-            {
-
+                
+                // Start + End date //
                 if (!Validator.ValidateDateTime(DateStart.Text + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + txtEndTime.Text))
                 {
                     throw new Exception("Your dates are wrong");
@@ -103,16 +71,8 @@ namespace com.WanderingTurtle.FormPresentation
                     eventToSubmit.EventStartDate = DateTime.Parse(DateStart.Text + txtStartTime.Text);
                     eventToSubmit.EventEndDate = DateTime.Parse(dateEnd.Text + txtEndTime.Text);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
 
-
-            // Checks the radio buttons for on site
-            try
-            {
+                // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
                     eventToSubmit.OnSite = true;
@@ -125,16 +85,8 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new Exception("Please fill in the on site field");
                 }
-            }
-            catch (Exception tf)
-            {
-                throw tf;
-            }
 
-            // Checks the radio buttons for transportation
-            try
-            {
-
+                // Provided transport //
                 if (radTranspNo.IsChecked == true)
                 {
                     eventToSubmit.Transportation = false;
@@ -147,34 +99,17 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new Exception("Please fill out the Transportation field");
                 }
+
+                int TypeSelected = cboxType.SelectedIndex;
+
+                eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
+
+                myMan.AddNewEvent(eventToSubmit);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-
-            int TypeSelected = cboxType.SelectedIndex;
-
-            eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
-
-            // BLL SubmitEvent here.
-                // case here for eventTypes
-
-            try
-            {
-                myMan.AddNewEvent(eventToSubmit);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
-            
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-             
     }
 }
