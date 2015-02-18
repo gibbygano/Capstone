@@ -14,11 +14,11 @@ namespace com.WanderingTurtle
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public int AddHotelGuest(NewHotelGuest newHotelGuest)
+        public bool AddHotelGuest(NewHotelGuest newHotelGuest)
         {
             try
             {
-                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest);
+                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0 ? true : false;
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace com.WanderingTurtle
         {
             try
             {
-                return HotelGuestAccessor.HotelGuestGetList();
+                return HotelGuestAccessor.HotelGuestGet();
             }
             catch (Exception ex)
             {
@@ -65,11 +65,11 @@ namespace com.WanderingTurtle
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public int UpdateHotelGuest(HotelGuest oldHotelGuest, NewHotelGuest newHotelGuest)
+        public bool UpdateHotelGuest(HotelGuest oldHotelGuest, NewHotelGuest newHotelGuest)
         {
             try
             {
-                return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest);
+                return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0 ? true : false;
             }
             catch (Exception ex)
             {

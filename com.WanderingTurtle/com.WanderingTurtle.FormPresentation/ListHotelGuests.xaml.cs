@@ -17,11 +17,21 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ListHotelGuest.xaml
     /// </summary>
-    public partial class ListHotelGuest : UserControl
+    public partial class ListHotelGuests : UserControl
     {
-        public ListHotelGuest()
+        public ListHotelGuests()
         {
             InitializeComponent();
         }
+
+
+        private void btnAddGuest_Click(object sender, RoutedEventArgs e)
+        {
+            Window AddEditHotelGuest = new AddEditHotelGuest();
+            AddEditHotelGuest.Show();
+        }
+
+
+
     }
 }

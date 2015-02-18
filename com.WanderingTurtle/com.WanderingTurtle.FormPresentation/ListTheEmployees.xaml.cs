@@ -31,9 +31,11 @@ namespace com.WanderingTurtle.FormPresentation
             lvEmployeesList.ItemsSource = employeeList;
         }
 
-
-
-
+        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Window AddEmployee = new AddEmployee();
+            AddEmployee.Show();
+        }
 
     }
 }

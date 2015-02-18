@@ -12,11 +12,10 @@
                     <GridViewColumn Width ="100" Header="Employee ID" DisplayMemberBinding="{Binding EmployeeID}"  />
                     <GridViewColumn Width ="100" Header="First Name" DisplayMemberBinding="{Binding FirstName}" />
                     <GridViewColumn Width ="150" Header="Last Name" DisplayMemberBinding="{Binding LastName}" />
-                    <GridViewColumn Width ="50" Header="Active" DisplayMemberBinding="{Binding Active}"/>
-                    <GridViewColumn Width ="150" Header="Password" />
+                    <GridViewColumn Width ="50" Header="Level" DisplayMemberBinding="{Binding Level}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-
+        <Button x:Name="btnAddEmployee" Content="Add Employee" HorizontalAlignment="Left" Margin="14,370,0,0" VerticalAlignment="Top" Click="btnAddEmployee_Click" />
     </Grid>
 </UserControl>

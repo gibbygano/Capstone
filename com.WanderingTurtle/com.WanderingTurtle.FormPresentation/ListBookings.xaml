@@ -9,17 +9,16 @@
         <ListView x:Name="lvBookingList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="561" Margin="9,5,0,0" SelectionChanged="lvEmployeesList_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width ="75" Header="Booking ID" />
-                    <GridViewColumn Width ="50" Header="Guest ID" />
-                    <GridViewColumn Width ="100" Header="Employee ID" />
-                    <GridViewColumn Header="Item ID" Width="50"/>
-                    <GridViewColumn Header="Quantity" Width="50"/>
-                    <GridViewColumn Header="Date" Width="150"/>
+                    <GridViewColumn Width ="75" Header="Booking ID" DisplayMemberBinding="{Binding BookingID}"  />
+                    <GridViewColumn Width ="50" Header="Guest ID" DisplayMemberBinding="{Binding GuestID}" />
+                    <GridViewColumn Width ="100" Header="Employee ID" DisplayMemberBinding="{Binding EmployeeID}"  />
+                    <GridViewColumn Header="Item ID" Width="50" DisplayMemberBinding="{Binding ItemListID}" />
+                    <GridViewColumn Header="Quantity" Width="50" DisplayMemberBinding="{Binding Quantity}" />
+                    <GridViewColumn Header="Date" Width="150" DisplayMemberBinding="{Binding DateBooked}" />
                 </GridView>
             </ListView.View>
         </ListView>
         <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddBooking_Click" />
-        <Button x:Name="btnUpdateBooking" Content="Update Booking" HorizontalAlignment="Left" Margin="116,370,0,0" VerticalAlignment="Top" Click="btnUpdateBooking_Click" />
-        <Button x:Name="btnDeleteBooking" Content="Delete Booking" HorizontalAlignment="Left" Margin="227,371,0,0" VerticalAlignment="Top" />
+
     </Grid>
 </UserControl>

@@ -37,11 +37,5 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddEmployee = new AddEmployee();
-            AddEmployee.Show();
-        }
-
     }
 }

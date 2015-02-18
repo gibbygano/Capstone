@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.BusinessLogic", "com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj", "{825BA7B8-C006-4EF9-B596-700B863A2296}"
 EndProject
@@ -14,6 +14,21 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.WebPresentation", "com.WanderingTurtle.WebPresentation\com.WanderingTurtle.WebPresentation.csproj", "{206B1F04-3B68-45FA-A097-44953DCC547B}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "com.WanderingTurtle.EventDatabase", "com.WanderingTurtle.EventDatabase\com.WanderingTurtle.EventDatabase.sqlproj", "{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerNeeded", "{73D0F04F-D745-44FA-9968-F60D5AACB181}"
+	ProjectSection(SolutionItems) = preProject
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginUpdate.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginUpdate.sql
+		com.WanderingTurtle.EventDatabase\dbo\Tables\UserLogin.sql = com.WanderingTurtle.EventDatabase\dbo\Tables\UserLogin.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem Code", "Problem Code", "{78738C71-D7C3-4536-B6FB-D371B918B2DE}"
+	ProjectSection(SolutionItems) = preProject
+		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml
+		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

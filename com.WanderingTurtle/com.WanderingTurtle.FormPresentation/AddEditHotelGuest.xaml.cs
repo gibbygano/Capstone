@@ -1,16 +1,8 @@
 ﻿using com.WanderingTurtle.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -97,13 +89,13 @@ namespace com.WanderingTurtle.FormPresentation
             else
             {
                 this.txtGuestID.Text = CurrentHotelGuest.HotelGuestID.ToString();
-                this.txtFirstName.Text = CurrentHotelGuest.FirstName.ToString();
-                this.txtLastName.Text = CurrentHotelGuest.LastName.ToString();
-                this.txtAddress1.Text = CurrentHotelGuest.Address1.ToString();
-                this.txtAddress2.Text = CurrentHotelGuest.Address2.ToString();
-                this.txtZipCode.Text = CurrentHotelGuest.Zip.ToString();
-                this.txtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber.ToString();
-                this.txtEmailAddress.Text = CurrentHotelGuest.EmailAddress.ToString();
+                this.txtFirstName.Text = CurrentHotelGuest.FirstName;
+                this.txtLastName.Text = CurrentHotelGuest.LastName;
+                this.txtAddress1.Text = CurrentHotelGuest.Address1;
+                this.txtAddress2.Text = CurrentHotelGuest.Address2;
+                this.txtZipCode.Text = CurrentHotelGuest.Zip;
+                this.txtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
+                this.txtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
             }
             this.txtFirstName.Focus();
         }
@@ -163,9 +155,10 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
+            bool result;
             if (CurrentHotelGuest == null)
             {
-                _hotelGuestManager.AddHotelGuest(
+                result = _hotelGuestManager.AddHotelGuest(
                     new NewHotelGuest(
                         txtFirstName.Text,
                         txtLastName.Text,
@@ -179,7 +172,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                _hotelGuestManager.UpdateHotelGuest(
+                result = _hotelGuestManager.UpdateHotelGuest(
                     CurrentHotelGuest,
                     new NewHotelGuest(
                         txtFirstName.Text,
@@ -192,6 +185,8 @@ namespace com.WanderingTurtle.FormPresentation
                     )
                 );
             }
+
+            if (result) { this.Close(); }
         }
 
         private void txtInput_KeyUp(object sender, KeyEventArgs e)

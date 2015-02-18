@@ -28,9 +28,9 @@ namespace com.WanderingTurtle.DataAccess
         //
         //Exceptions: SqlException - when the program cannot access the database
         //            ApplicationException - when there are no entries in database
-        public UserLogin getUserLogin(int id, string password)
+        public Employee getUserLogin(int id, string password)
         {
-            UserLogin loginUser = new UserLogin();
+            Employee loginUser = new Employee();
 
             var conn = DatabaseConnection.GetDatabaseConnection(); //find out the class where the database string will be held and place it in here
             var query = @"spUserLoginGet";
@@ -47,9 +47,9 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     reader.Read();
 
-                    loginUser.UserID = (int)reader.GetValue(0);
-                    loginUser.UserPassword = reader.GetValue(1).ToString();
-                    loginUser.UserLevel = reader.GetChar(2);
+                    loginUser.EmployeeID = (int)reader.GetValue(0);
+                    loginUser.Password = reader.GetValue(1).ToString();
+                    loginUser.Level = reader.GetInt32(2);
                 }
                 else
                 {
@@ -74,62 +74,7 @@ namespace com.WanderingTurtle.DataAccess
             return loginUser;
         }
 
-        //Summary: allows the user to get all the login information in the
-        //database
-        //
-        //Parameters: none
-        //
-        //Exceptions: SqlException - when the program cannot access the database
-        //            ApplicationException - when there are no entries in database
-        public List<UserLogin> getUserLoginList()
-        {
-            List<UserLogin> loginList = new List<UserLogin>();
-            UserLogin loginUser;
-
-            var conn = DatabaseConnection.GetDatabaseConnection(); //find out the class where the database string will be held and place it in here
-            var query = @"spUserLoginGetList";
-            var cmd = new SqlCommand(query, conn);
-
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        loginUser = new UserLogin();
-
-                        loginUser.UserID = (int)reader.GetValue(0);
-                        loginUser.UserPassword = reader.GetValue(1).ToString();
-                        loginUser.UserLevel = reader.GetChar(2);
-
-                        loginList.Add(loginUser);
-                    }
-                }
-                else
-                {
-                    throw new ApplicationException("There are no users in the database.");
-                }
-
-                //loginList = tempGetUserLoginList();
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                //conn.Close();
-            }
-
-            return loginList;
-        }
+       
 
         //Summary: temporary using this to retrieve data for getUserLogin until the database is hooked up
         //

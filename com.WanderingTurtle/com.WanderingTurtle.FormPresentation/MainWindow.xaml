@@ -5,35 +5,48 @@
         Title="MainWindow" Height="525" Width="950">
     <Grid Background="#FFE5E5E5">
         <TabControl HorizontalAlignment="Left" Height="457" Margin="0,31,0,0" VerticalAlignment="Top" Width="933">
-            <TabItem Header="Events">
-                <Grid Background="#FFE5E5E5" />
-
-
+            <TabItem Header="Events" >
+                <Grid Background="#FFE5E5E5"  x:Name="LayoutEventList">
+                    <local:ListEvents />
+                    
+                </Grid>
             </TabItem>
+            
             <TabItem Header="Listings" >
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" x:Name="LayoutListingList">
+                    <local:ListTheListings />
+                  
+                </Grid>
             </TabItem>
 
             <TabItem Header="Bookings">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" x:Name="LayoutBookingList">
+                    <local:ListBookings />
+                    
+
+                </Grid>
             </TabItem>
 
             <TabItem Header="Suppliers">
 
-                <Grid Background="#FFE5E5E5">
-
+                <Grid Background="#FFE5E5E5" x:Name="LayoutSupplierList">
+                    <local:ListSuppliers />                    
                 </Grid>
 
             </TabItem>
+            
             <TabItem Header="Employees">
-                <!-- x:Name gives the grid a name;  local: ListEmployee references the user control List Employees-->
+                <!-- x:Name gives the grid a name;  local: ListTheEmployees references the user control ListTheEmployees-->
                 <Grid Background="#FFE5E5E5" x:Name="LayoutEmployeeList">
                     <local:ListTheEmployees />
-                    <Button x:Name="btnAddEmployee" Content="Add Employee" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddEmployee_Click" />
                 </Grid>
             </TabItem>
+            
+            
             <TabItem Header="Hotel Guests">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" x:Name="LayoutGuestList">
+                    <local:ListHotelGuests />
+                </Grid>
             </TabItem>
 
         </TabControl>
@@ -42,6 +55,5 @@
         <TextBox x:Name="txtUserID" HorizontalAlignment="Left" Height="23" Margin="469,4,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="txtUserPassword" HorizontalAlignment="Left" Height="23" Margin="657,5,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnLogin" Content="Login" HorizontalAlignment="Left" Margin="788,7,0,0" VerticalAlignment="Top" Width="75" Click="btnLogin_Click"/>
-        <Label x:Name="lblErrorMessage" Content="Error message" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Width="401"/>
     </Grid>
 </Window>
