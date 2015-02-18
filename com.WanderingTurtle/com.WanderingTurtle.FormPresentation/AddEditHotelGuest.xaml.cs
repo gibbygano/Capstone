@@ -37,6 +37,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         public HotelGuest CurrentHotelGuest { get; private set; }
 
+        public bool completed { get; private set; }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -155,10 +157,9 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            bool result;
             if (CurrentHotelGuest == null)
             {
-                result = _hotelGuestManager.AddHotelGuest(
+                completed = _hotelGuestManager.AddHotelGuest(
                     new NewHotelGuest(
                         txtFirstName.Text.Trim(),
                         txtLastName.Text.Trim(),
@@ -172,7 +173,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                result = _hotelGuestManager.UpdateHotelGuest(
+                completed = _hotelGuestManager.UpdateHotelGuest(
                     CurrentHotelGuest,
                     new NewHotelGuest(
                         txtFirstName.Text.Trim(),
@@ -186,7 +187,12 @@ namespace com.WanderingTurtle.FormPresentation
                 );
             }
 
-            if (result) { this.Close(); }
+            if (completed) { this.Close(); }
+        }
+
+        private void txtInput_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            ((TextBox)sender).SelectAll();
         }
 
         private void txtInput_KeyUp(object sender, KeyEventArgs e)

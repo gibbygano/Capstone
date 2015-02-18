@@ -32,14 +32,14 @@
             <Label Grid.Row="5" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="ZIP Code:" />
             <Label Grid.Row="6" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Phone Number:" />
             <Label Grid.Row="7" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Email Address:" />
-            <TextBox Grid.Column="1" Grid.Row="0" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtGuestID" IsReadOnly="True" />
-            <TextBox Grid.Column="1" Grid.Row="1" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtFirstName" />
-            <TextBox Grid.Column="1" Grid.Row="2" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtLastName" />
-            <TextBox Grid.Column="1" Grid.Row="3" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtAddress1" />
-            <TextBox Grid.Column="1" Grid.Row="4" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtAddress2" />
-            <TextBox Grid.Column="1" Grid.Row="5" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtZipCode" />
-            <TextBox Grid.Column="1" Grid.Row="6" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtPhoneNumber" />
-            <TextBox Grid.Column="1" Grid.Row="7" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" x:Name="txtEmailAddress" />
+            <TextBox Grid.Column="1" Grid.Row="0" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtGuestID" IsReadOnly="True" />
+            <TextBox Grid.Column="1" Grid.Row="1" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtFirstName" />
+            <TextBox Grid.Column="1" Grid.Row="2" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtLastName" />
+            <TextBox Grid.Column="1" Grid.Row="3" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtAddress1" />
+            <TextBox Grid.Column="1" Grid.Row="4" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtAddress2" />
+            <TextBox Grid.Column="1" Grid.Row="5" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtZipCode" />
+            <TextBox Grid.Column="1" Grid.Row="6" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtPhoneNumber" />
+            <TextBox Grid.Column="1" Grid.Row="7" Padding="1" TextWrapping="Wrap" VerticalContentAlignment="Center" VerticalAlignment="Center" TextChanged="txtInput_TextChanged" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="txtEmailAddress" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
