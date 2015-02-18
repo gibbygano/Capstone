@@ -62,10 +62,10 @@ namespace com.WanderingTurtle.DataAccess
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spHotelGuestSelect";
+            var cmdText = "spHotelGuestGet";
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@@hotelGuestID", hotelGuestID);
+            cmd.Parameters.AddWithValue("@hotelGuestID", hotelGuestID);
 
             try
             {
@@ -80,11 +80,11 @@ namespace com.WanderingTurtle.DataAccess
                         reader.GetInt32(0), //HotelGuestID
                         reader.GetString(1), //FirstName
                         reader.GetString(2), //LastName
-                        reader.GetString(3), //Zip
                         reader.GetString(4), //Address1
-                        reader.GetString(5), //Address2
-                        reader.GetString(6), //PhoneNumber
-                        reader.GetString(7) //EmailAdddress
+                        !reader.IsDBNull(5) ? reader.GetString(5) : null, //Address2
+                        reader.GetString(3), //Zip
+                        !reader.IsDBNull(6) ? reader.GetString(6) : null, //PhoneNumber
+                        !reader.IsDBNull(7) ? reader.GetString(7) : null //EmailAdddress
                    );
                 }
                 else
@@ -106,11 +106,11 @@ namespace com.WanderingTurtle.DataAccess
         /// Gets a list of all Hotel Guests
         /// </summary>
         /// <returns>List of HotelGuest Objects</returns>
-        public static List<HotelGuest> HotelGuestGetList()
+        public static List<HotelGuest> HotelGuestGet()
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spHotelGuestSelect";
+            var cmdText = "spHotelGuestGetList";
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -129,11 +129,11 @@ namespace com.WanderingTurtle.DataAccess
                                 reader.GetInt32(0), //HotelGuestID
                                 reader.GetString(1), //FirstName
                                 reader.GetString(2), //LastName
-                                reader.GetString(3), //Zip
                                 reader.GetString(4), //Address1
-                                reader.GetString(5), //Address2
-                                reader.GetString(6), //PhoneNumber
-                                reader.GetString(7) //EmailAdddress
+                                !reader.IsDBNull(5) ? reader.GetString(5) : null, //Address2
+                                reader.GetString(3), //Zip
+                                !reader.IsDBNull(6) ? reader.GetString(6) : null, //PhoneNumber
+                                !reader.IsDBNull(7) ? reader.GetString(7) : null //EmailAdddress
                             )
                         );
                     }
