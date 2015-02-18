@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ViewList" Height="521" Width="951">
     <Grid>
-        <ListView x:Name="lvEvents" HorizontalAlignment="Left" Height="419" Margin="10,10,0,0" VerticalAlignment="Top" Width="923" SelectionChanged="ListView_SelectionChanged">
+        <ListView x:Name="lvEvents" HorizontalAlignment="Left" Height="419" Margin="10,10,0,0" VerticalAlignment="Top" Width="923" >
             <ListView.View>
                 <GridView>
                     <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an

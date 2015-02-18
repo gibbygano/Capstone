@@ -115,6 +115,7 @@
     <Build Include="dbo\Stored Procedures\spUpdateEventType.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllEventTypes.sql" />
     <Build Include="dbo\Stored Procedures\spSelectEventType.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectEmployeeWithID.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

@@ -29,9 +29,9 @@ namespace com.WanderingTurtle.Common
             ItemListID = itemID;
             Quantity = bQuantity;
         }
-        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked)
+        public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked)
         {
-            BookingID = bookingID;
+            //BookingID = bookingID;
             GuestID = guestID;
             EmployeeID = empID;
             ItemListID = itemID;

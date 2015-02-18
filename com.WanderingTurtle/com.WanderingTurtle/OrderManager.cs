@@ -60,7 +60,7 @@ namespace com.WanderingTurtle
          * Specific exception: trouble accessing the server.
         * Created By: Tony Noel - 2/13/15
         * */
-        public List<ListItem> RetrieveListItemList()
+        public List<ListItemObject> RetrieveListItemList()
         {
             try
             {

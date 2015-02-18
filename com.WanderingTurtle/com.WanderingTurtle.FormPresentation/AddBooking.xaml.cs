@@ -22,8 +22,10 @@ namespace com.WanderingTurtle.FormPresentation
     {
         public static AddBooking Instance;
         public OrderManager myManager = new OrderManager();
+        public EmployeeManager myEmp = new EmployeeManager();
+        public HotelGuestManager myGuest = new HotelGuestManager();
 
-        public List<com.WanderingTurtle.Common.ListItem> myEventList;
+        public List<ListItemObject> myEventList;
         public AddBooking()
         {
             myEventList = myManager.RetrieveListItemList();
@@ -35,6 +37,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
             addBooking();
+
         }
         /*addBooking()- a method to collect all information from the form and turn them into strings
          * Then after taking each variable and testing them in their specific validation method, parses them 
@@ -46,8 +49,8 @@ namespace com.WanderingTurtle.FormPresentation
         {
             string empID = tbAddBookingEmpID.Text;
             string guest = tbAddBookingGuestID.Text;
-            int itemListID;
-            string selected;
+            ListItemObject selected;
+            DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
             int eID, gID, qID;
             Booking myBooking;
@@ -58,31 +61,33 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            if (!Validator.ValidateInt(empID))
+            if (isEmp(empID) == false)
             {
-                MessageBox.Show("Please review the Employee ID. Must be a three digit number.");
+                MessageBox.Show("Please review the Employee ID. A record of this employee is not on file.");
                 btnAddBookingAdd.IsEnabled = true;
+                return;
             }
-            if (!Validator.ValidateInt(guest))
+            if (isGuest(guest) == false)
             {
-                MessageBox.Show("Please review the Guest ID. Must be a three digit number.");
+                MessageBox.Show("Please review the Guest ID. A record of this guest is not on file.");
                 btnAddBookingAdd.IsEnabled = true;
+                return;
             }
-            if (!Validator.ValidateInt(quantity))
+            if (okQuantity(quantity) == false)
             {
-                MessageBox.Show("Please review the quantity entered. Must be a 2 digit number or less.");
+                MessageBox.Show("Please review the quantity entered. Must be a number and cannot excede the quantity offered for the event.");
                 btnAddBookingAdd.IsEnabled = true;
+                return;
             }
             else
             {
-                selected = lvAddBookingListItems.SelectedItems[0].ToString();
+                selected = getSelectedItem();
 
                 int.TryParse(empID, out eID);
                 int.TryParse(guest, out gID);
-                int.TryParse(selected, out itemListID); 
                 int.TryParse(quantity, out qID);
-
-                myBooking = new Booking(gID, eID, itemListID, qID);
+        
+                myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
                 //calls to booking manager to add a booking. BookingID is auto-generated in database
                 myManager.AddaBooking(myBooking);
          
@@ -103,7 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
             bool works = false;
             try
             {
-                string selected = lvAddBookingListItems.SelectedItems[0].ToString();
+                getSelectedItem();
                 works = true;
                 return works;
 
@@ -112,6 +117,89 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 return works;
             }
+        }
+        /*method to create ListItemObject from listView
+         * returns the selected item.
+         * Tony Noel 2/18/15
+         */
+        private ListItemObject getSelectedItem()
+        {
+            ListItemObject selected = (ListItemObject)lvAddBookingListItems.SelectedItems[0];
+            return selected;
+        }
+        /**
+         * validates that a guest entered is an int,
+         * parses it into one and passes it through HotelGuestHandler to check against database
+         * if guest is found, returns true.
+         * Else it returns false.
+         * Tony Noel- 2/17/15
+         */
+        private bool isGuest(string guest)
+        {
+            bool works = false;
+            int guestID;
+            try
+            {
+                Validator.ValidateInt(guest);
+                int.TryParse(guest, out guestID);
+                myGuest.GetHotelGuest(guestID);
+                works = true;
+                return works;
+
+            }
+            catch
+            {
+                return works;
+            }
+        }
+        /**
+         * validates that a empID entered is an int,
+         * parses it into one and passes it through EmployeeHandler to check against database
+         * if emp is found, returns true.
+         * Else it returns false.
+         * Tony Noel- 2/17/15
+         */
+        private bool isEmp(string emp)
+        {
+            bool works = false;
+            int empID;
+            try
+            {
+                Validator.ValidateInt(emp);
+                int.TryParse(emp, out empID);
+                myEmp.FetchEmployee(empID);
+                works = true;
+                return works;
+
+            }
+            catch
+            {
+                return works;
+            }
+        }
+        /*method to check a quantity
+         * takes a string
+         * if the string is successfully parsed, and the variable it parses to is less
+         * than the myItem.QuantityOffered - return true
+         * else return false.
+         * Tony Noel 2/18/2015
+         */
+        private bool okQuantity(string quantity)
+        {
+            bool works = false;
+            int q;
+            int.TryParse(quantity, out q);
+            ListItemObject myItem = getSelectedItem();
+            if (Validator.ValidateInt(quantity) == true && q <= myItem.QuantityOffered )
+            {
+                works = true;
+                return works;
+            }
+            else 
+            {
+                return works;
+            }
+
         }
 
         /*Sets form fields back to null after an add has been successfully completed

@@ -69,9 +69,9 @@ namespace com.WanderingTurtle.DataAccess
          * 
          * Tony Noel- 2/13/15
          */
-        public static List<ListItem> getListItems()
+        public static List<ListItemObject> getListItems()
         {
-            var BookingOpsList = new List<ListItem>();
+            var BookingOpsList = new List<ListItemObject>();
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectBookingFull";
@@ -85,7 +85,7 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     while (reader.Read())
                     {
-                        var currentBook = new ListItem();
+                        var currentBook = new ListItemObject();
 
                         currentBook.ItemListID = reader.GetInt32(0);
                         currentBook.QuantityOffered = reader.GetInt32(1);
@@ -186,6 +186,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EmployeeID", toAdd.EmployeeID);
             cmd.Parameters.AddWithValue("@ItemListID", toAdd.ItemListID);
             cmd.Parameters.AddWithValue("@Quantity", toAdd.Quantity);
+            cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
             
 
             try

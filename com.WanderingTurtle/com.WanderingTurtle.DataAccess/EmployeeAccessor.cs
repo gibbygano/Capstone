@@ -131,6 +131,54 @@ namespace com.WanderingTurtle.DataAccess
             }
             return myEmployee;
         }
+        /*Overloaded method-follows same principle as GetEmployee, 
+         * but takes an int of empID instead
+         * if it fails, throws exception
+         * if successful, returns the employee record.
+         * Tony Noel- 2/18/15
+         */
+        public static Employee GetEmployee(int empID)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+
+            var cmdText = "spSelectEmployeeWithID";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@EmployeeID", empID);
+
+            Employee myEmployee = new Employee();
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    myEmployee.EmployeeID = (int)reader.GetValue(0);
+                    myEmployee.FirstName = reader.GetValue(1).ToString();
+                    myEmployee.LastName = reader.GetValue(2).ToString();
+                    myEmployee.Level = (int)reader.GetValue(3);
+                    myEmployee.Active = (bool)reader.GetValue(4);
+                }
+                else
+                {
+                    var ax = new ApplicationException("Specific employee not found, check your search parameters and try again.");
+                    throw ax;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return myEmployee;
+        }
 
         // Ryan Blake
         // February 15, 2015

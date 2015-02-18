@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="EditExistingEvent" Height="514" Width="670">
     <Grid>
-        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="173,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="173,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="txtMinGuest" HorizontalAlignment="Left" Height="23" Margin="173,73,0,0" TextWrapping="Wrap" Text="Min" VerticalAlignment="Top" Width="43"/>
         <Label Content="Event Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="91,41,0,0" RenderTransformOrigin="0.526,0.654"/>
         <Label Content="Capacity:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,69,0,0" RenderTransformOrigin="1.342,0.308"/>

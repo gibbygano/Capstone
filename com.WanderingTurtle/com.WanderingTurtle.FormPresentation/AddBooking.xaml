@@ -11,7 +11,7 @@
         <Label x:Name="lblAddBookingItemID" Content="ItemList:" HorizontalAlignment="Left" Margin="45,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
         <Label x:Name="lblAddBookingQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="335,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
         <TextBox x:Name="tbAddBookingQuantity" HorizontalAlignment="Left" Height="23" Margin="420,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="2"/>
-        <Button x:Name="btnAddBookingAdd" Content="Add Booking" HorizontalAlignment="Left" Margin="560,306,0,0" VerticalAlignment="Top" Width="90" Click="btnAddBookingAdd_Click"/>
+        <Button x:Name="btnAddBookingAdd" Content="Add Booking" HorizontalAlignment="Left" Margin="543,297,0,0" VerticalAlignment="Top" Width="90" Click="btnAddBookingAdd_Click"/>
         <ListView x:Name="lvAddBookingListItems" HorizontalAlignment="Left" Height="124" Margin="45,158,0,0" VerticalAlignment="Top" Width="613">
             <ListView.View>
                 <GridView>

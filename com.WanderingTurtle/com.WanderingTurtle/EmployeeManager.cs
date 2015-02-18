@@ -118,5 +118,22 @@ namespace com.WanderingTurtle
                 throw ex;
             }
         }
+        /*Overloaded Method- accepts an int to pass to accessor to search database for an employee record
+         * Successful- returns the employee record
+         * If it fails, throws an exception
+         * Tony Noel- 2/18/15
+         */
+        public Employee FetchEmployee(int empID)
+        {
+            try
+            {
+                return EmployeeAccessor.GetEmployee(empID);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

@@ -42,7 +42,7 @@
     <Compile Include="Booking.cs" />
     <Compile Include="BookingLineItem.cs" />
     <Compile Include="EventType.cs" />
-    <Compile Include="ListItem.cs" />
+    <Compile Include="ListItemObject.cs" />
     <Compile Include="CityState.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Event.cs" />
