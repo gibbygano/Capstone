@@ -19,4 +19,4 @@ INSERT INTO Supplier
 	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active) 
 VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationID, @UserID, 1)
 SET @SupplierID = SCOPE_IDENTITY()
-RETURN @@ERROR
+RETURN @@ROWCOUNT

@@ -61,9 +61,9 @@ GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate)
 VALUES
-('Francisco'' Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '66685', '555-542-8796', 'franciscotours@gmail.com', '2014-12-22', 1, '2015-01-01'),
-('Harry''s Boat Rides', 'Harry', 'Bertleson', '19925 Wilmington Ave', 'Suite 206', '66686',  '555-874-9663', 'harrythehammer@gmail.com', '2014-02-06', 1, '2014-06-12'),
-('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '66685', '555-766-1124', 'info@theyregrapetours.com', '2015-01-22', 1, '2015-02-12')
+('Francisco'' Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', '2014-12-22', 1, '2015-01-01'),
+('Harry''s Boat Rides', 'Harry', 'Bertleson', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', '2014-02-06', 1, '2014-06-12'),
+('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', '2015-01-22', 1, '2015-02-12')
 GO
 
 INSERT INTO [dbo].[EventItem] (EventItemName, EventStartTime, EventEndTime, CurrentNumberOfGuests, MaxNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active)
@@ -101,4 +101,11 @@ VALUES
 (2, 101, 101, 2, CURRENT_TIMESTAMP),
 (3, 102, 102, 5, CURRENT_TIMESTAMP),
 (4, 104, 102, 1, CURRENT_TIMESTAMP)
+GO
+
+INSERT INTO [dbo].[Employee] (firstName, lastName, userID, Active)
+VALUES
+('Phil', 'Robinson', 100, 1),
+('Benny', 'Albertson', 104, 1),
+('Suzanne', 'Colletes', 105, 1)
 GO
