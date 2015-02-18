@@ -24,6 +24,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerN
 		com.WanderingTurtle.EventDatabase\dbo\Tables\UserLogin.sql = com.WanderingTurtle.EventDatabase\dbo\Tables\UserLogin.sql
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem Code", "Problem Code", "{78738C71-D7C3-4536-B6FB-D371B918B2DE}"
+	ProjectSection(SolutionItems) = preProject
+		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml
+		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

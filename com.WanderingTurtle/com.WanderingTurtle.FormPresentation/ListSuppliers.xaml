@@ -4,19 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-            d:DesignHeight="400" d:DesignWidth="700">
+            d:DesignHeight="400" d:DesignWidth="900">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lvEmployeesList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="561" Margin="9,5,0,0">
+        <ListView x:Name="lvSuppliersList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="855" Margin="9,5,0,0">
             <ListView.View>
+
                 <GridView>
-                    <GridViewColumn Width ="100" Header="Column Name" />
-                    <GridViewColumn Width ="100" Header="Column Name" />
-                    <GridViewColumn Width ="150" Header="Column Name" />
+                    <GridViewColumn Width ="175" Header="Company Name" DisplayMemberBinding="{Binding CompanyName}"/>
+                    <GridViewColumn Width ="125" Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+                    <GridViewColumn Width ="150" Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+                    <GridViewColumn Width ="150" Header="Address" DisplayMemberBinding="{Binding Address1}"/>
+                    <GridViewColumn Width ="150" Header="Email Address" DisplayMemberBinding="{Binding EmailAddress}"/>
+                    <GridViewColumn Width ="90" Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnAddSupplier" Content="Add Supplier" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" />
-        <Button x:Name="btnUpdateSupplier" Content="Update Supplier" HorizontalAlignment="Left" Margin="116,370,0,0" VerticalAlignment="Top" />
-        <Button x:Name="btnDeleteSupplier" Content="Delete Supplier" HorizontalAlignment="Left" Margin="227,371,0,0" VerticalAlignment="Top" />
+        <Label x:Name="lblError" Content="Error Messages" HorizontalAlignment="Left" Margin="375,366,0,0" VerticalAlignment="Top" Foreground="Red" Height="25" Width="376"/>
+        <Button x:Name="btnAddSupplier" Content="Add Supplier" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddSupplier_Click" />
     </Grid>
 </UserControl>

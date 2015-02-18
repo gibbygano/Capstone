@@ -21,10 +21,16 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListBookings : UserControl
     {
+        private OrderManager myBookings = new OrderManager();
+        List<Booking> bookingList;
+
         public ListBookings()
         {
+            bookingList = myBookings.RetrieveBookingList();
             InitializeComponent();
+            lvBookingList.ItemsSource = bookingList;
         }
+
         /*Code to link to the AddBooking form
          * Opens the AddBooking form when the "Add" button on the list screen is selected.
          * Tony Noel- 2/15/15
@@ -54,8 +60,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        //private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
-        //{
+        private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
+        {
         //    UpdateBooking myBooking;
         //    string id = lvBookingList.SelectedItems[0].ToString();
         //    if (UpdateBooking.Instance == null)
@@ -72,6 +78,6 @@ namespace com.WanderingTurtle.FormPresentation
 
         //        System.Media.SystemSounds.Exclamation.Play();
         //    }
-        //}
+        }
     }
 }

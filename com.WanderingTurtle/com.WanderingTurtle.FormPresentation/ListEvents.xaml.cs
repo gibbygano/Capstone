@@ -17,11 +17,51 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ListEventss.xaml
     /// </summary>
-    public partial class ListEventss : UserControl
+    public partial class ListEvents : UserControl
     {
-        public ListEventss()
+        private EventManager myMan = new EventManager();
+        List<Event> myEventList;
+        
+        // This is where we instantiate our window and populate the EventList with "myEventList" items.
+        public ListEvents()
         {
             InitializeComponent();
+            try
+            {
+                myEventList = myMan.RetrieveEventList();
+                lvEvents.ItemsSource = myEventList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("No database able to be accessed for event list");
+            }
+        }
+
+         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        // Calls the delete method from the BLL to archive an event.
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Event EventToDelete = (Event)lvEvents.SelectedItems[0];
+            myMan.ArchiveAnEvent(EventToDelete);
+        }
+
+        // Calls the AddEvent window for the user to input information into
+        private void btnAddEvent_Click(object sender, RoutedEventArgs e)
+        {
+            Window AddEvent = new AddNewEvent();
+            AddEvent.Show();
+        }
+
+        // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Window EditEvent = new EditExistingEvent();
+            EditEvent.Show();
         }
     }
+
 }

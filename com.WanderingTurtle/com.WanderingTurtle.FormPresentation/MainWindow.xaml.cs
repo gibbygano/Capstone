@@ -37,59 +37,5 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddEmployee = new AddEmployee();
-            AddEmployee.Show();
-        }
-
-        private void btnAddGuest_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddEditHotelGuest = new AddEditHotelGuest();
-            AddEditHotelGuest.Show();
-        }
-
-        private void btnAddBooking_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddBooking = new AddBooking();
-            AddBooking.Show();
-
-
-            //AddBooking myBooking;
-
-            //if (AddBooking.Instance == null)
-            //{
-            //    myBooking = new AddBooking();
-            //    myBooking.Show();
-            //}
-            //else
-            //{
-            //    myBooking = AddBooking.Instance;
-            //    myBooking.Activate();
-
-            //    //Creates a sound effect through the System.Media and  flash from accessibility
-
-            //    System.Media.SystemSounds.Exclamation.Play();
-            //}
-        }
-
-        private void btnAddEvent_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddEvent = new AddNewEvent();
-            AddEvent.Show();
-        }
-
-        private void btnAddListing_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddItemListings = new AddItemListing();
-            AddItemListings.Show();
-        }
-
-        private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
-        {
-            Window AddSupplier = new AddSupplier();
-            AddSupplier.Show();
-        }
-
     }
 }
