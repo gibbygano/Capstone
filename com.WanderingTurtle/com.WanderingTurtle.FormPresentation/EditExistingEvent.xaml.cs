@@ -27,11 +27,13 @@ namespace com.WanderingTurtle.FormPresentation
         Event Unrevised = new Event();
         EventManager myMan = new EventManager();
        
+
+        /// <summary>
+        /// Populates the forms fields for editing.
+        /// </summary>
+        /// <param name="EventToEdit">The Event we are going to edit</param>
         public EditExistingEvent(Event EventToEdit)
         {
-
-            //Fills the form with info from the Editable Event
-            // Hunter Lind (Last update: 2/14/15)
             txtEventName.Text = EventToEdit.EventItemName;
             InitializeComponent();
 
@@ -69,24 +71,21 @@ namespace com.WanderingTurtle.FormPresentation
             }
             
         }
-        
+        /// <summary>
+        /// Creates a new event to replace the old version of the EventToEdit
+        /// </summary>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            
-            
             var eventToSubmit = new Event();
-
-
             eventToSubmit.EventItemName = txtEventName.Text;
 
             //Checks and instantiates the minimum and maximum guest numbers
             try
             {
-
+                // Number Of Guests //
                 if (!Validator.ValidateInt(txtMaxGuest.Text) || !Validator.ValidateInt(txtMinGuest.Text))
                 {
                     throw new Exception("Not a valid amount of guests");
-
                 }
                 else
                 {
@@ -94,20 +93,11 @@ namespace com.WanderingTurtle.FormPresentation
                     int y;
                     int.TryParse(txtMaxGuest.Text, out x);
                     int.TryParse(txtMaxGuest.Text, out y);
-
                     eventToSubmit.MaxNumGuests = x;
                     eventToSubmit.MinNumGuests = y;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
 
-            // Checks and instantiates the Price of tickets.
-            try
-            {
-
+                // Price //
                 if (!Validator.ValidateDecimal(txtPrice.Text))
                 {
                     throw new Exception("Not a valid Price");
@@ -116,17 +106,8 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice);
                 }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.ToString());
-            }
 
-
-            //Checks and insantiates the Date and Time of the event
-            try
-            {
-
+                // Date Start + End //
                 if (!Validator.ValidateDateTime(DateStart.Text + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + txtEndTime.Text))
                 {
                     throw new Exception("Your dates are wrong");
@@ -136,16 +117,8 @@ namespace com.WanderingTurtle.FormPresentation
                     eventToSubmit.EventStartDate = DateTime.Parse(DateStart.Text + txtStartTime.Text);
                     eventToSubmit.EventEndDate = DateTime.Parse(dateEnd.Text + txtEndTime.Text);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
 
-
-            // Checks the radio buttons for on site
-            try
-            {
+                // On-Site //
                 if (radOnSiteYes.IsChecked == true)
                 {
                     eventToSubmit.OnSite = true;
@@ -158,16 +131,8 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new Exception("Please fill in the on site field");
                 }
-            }
-            catch (Exception tf)
-            {
-                throw tf;
-            }
 
-            // Checks the radio buttons for transportation
-            try
-            {
-
+                // Transportation //
                 if (radTranspNo.IsChecked == true)
                 {
                     eventToSubmit.Transportation = false;
@@ -180,25 +145,14 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new Exception("Please fill out the Transportation field");
                 }
+
+                // Submit the events
+                myMan.EditEvent(Unrevised, eventToSubmit);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
-
-            
-
-
-            myMan.EditEvent(Unrevised, eventToSubmit);
-            // BLL SubmitEvent here.
-            // case here for eventTypes
-             
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-         
     }
 }
