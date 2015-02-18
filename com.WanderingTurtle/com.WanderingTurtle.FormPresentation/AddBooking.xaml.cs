@@ -138,6 +138,11 @@ namespace com.WanderingTurtle.FormPresentation
         {
             bool works = false;
             int guestID;
+            if (guest == "")
+            {
+                return works;
+            }
+
             try
             {
                 Validator.ValidateInt(guest);
@@ -163,6 +168,12 @@ namespace com.WanderingTurtle.FormPresentation
         {
             bool works = false;
             int empID;
+
+            if (emp == "")
+            {
+                return works;
+            }
+
             try
             {
                 Validator.ValidateInt(emp);
