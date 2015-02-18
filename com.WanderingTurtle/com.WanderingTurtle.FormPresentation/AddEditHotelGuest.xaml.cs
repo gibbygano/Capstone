@@ -105,49 +105,49 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void Submit()
         {
-            if (!Validator.ValidateString(txtFirstName.Text, 1, 50))
+            if (!Validator.ValidateString(txtFirstName.Text.Trim(), 1, 50))
             {
                 ChangeTitle("Please enter a First Name");
                 txtFirstName.Focus();
                 txtFirstName.SelectAll();
                 return;
             }
-            if (!Validator.ValidateString(txtLastName.Text, 1, 50))
+            if (!Validator.ValidateString(txtLastName.Text.Trim(), 1, 50))
             {
                 ChangeTitle("Please enter a Last Name");
                 txtLastName.Focus();
                 txtLastName.SelectAll();
                 return;
             }
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text, 1, 255))
+            if (txtAddress1.Text.Trim() == "" /*!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim(), 1, 255)*/)
             {
                 ChangeTitle("Please enter an Address");
                 txtAddress1.Focus();
                 txtAddress1.SelectAll();
                 return;
             }
-            if (txtAddress2.Text != "" && !Validator.ValidateAlphaNumeric(txtAddress2.Text, 0, 255))
-            {
-                ChangeTitle("Please enter an Address");
-                txtAddress2.Focus();
-                txtAddress2.SelectAll();
-                return;
-            }
-            if (!Validator.ValidateAlphaNumeric(txtZipCode.Text, 5, 10))
+            //if (txtAddress2.Text.Trim() != "" && !Validator.ValidateAlphaNumeric(txtAddress2.Text.Trim(), 0, 255))
+            //{
+            //    ChangeTitle("Please enter an Address");
+            //    txtAddress2.Focus();
+            //    txtAddress2.SelectAll();
+            //    return;
+            //}
+            if (!Validator.ValidateAlphaNumeric(txtZipCode.Text.Trim(), 5, 10))
             {
                 ChangeTitle("Please enter a Zip Code");
                 txtZipCode.Focus();
                 txtZipCode.SelectAll();
                 return;
             }
-            if (txtPhoneNumber.Text != "" && !Validator.ValidatePhone(txtPhoneNumber.Text))
+            if (txtPhoneNumber.Text != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
             {
                 ChangeTitle("Please enter a valid Phone Number");
                 txtPhoneNumber.Focus();
                 txtPhoneNumber.SelectAll();
                 return;
             }
-            if (txtEmailAddress.Text != "" && !Validator.ValidateEmail(txtEmailAddress.Text))
+            if (txtEmailAddress.Text.Trim() != "" && !Validator.ValidateEmail(txtEmailAddress.Text.Trim()))
             {
                 ChangeTitle("Please enter a valid Email Address");
                 txtEmailAddress.Focus();
@@ -160,13 +160,13 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 result = _hotelGuestManager.AddHotelGuest(
                     new NewHotelGuest(
-                        txtFirstName.Text,
-                        txtLastName.Text,
-                        txtAddress1.Text,
-                        txtAddress2.Text,
-                        txtZipCode.Text,
-                        txtPhoneNumber.Text,
-                        txtEmailAddress.Text
+                        txtFirstName.Text.Trim(),
+                        txtLastName.Text.Trim(),
+                        txtAddress1.Text.Trim(),
+                        txtAddress2.Text.Trim(),
+                        txtZipCode.Text.Trim(),
+                        txtPhoneNumber.Text.Trim(),
+                        txtEmailAddress.Text.Trim()
                     )
                 );
             }
@@ -175,13 +175,13 @@ namespace com.WanderingTurtle.FormPresentation
                 result = _hotelGuestManager.UpdateHotelGuest(
                     CurrentHotelGuest,
                     new NewHotelGuest(
-                        txtFirstName.Text,
-                        txtLastName.Text,
-                        txtAddress1.Text,
-                        txtAddress2.Text,
-                        txtZipCode.Text,
-                        txtPhoneNumber.Text,
-                        txtEmailAddress.Text
+                        txtFirstName.Text.Trim(),
+                        txtLastName.Text.Trim(),
+                        txtAddress1.Text.Trim(),
+                        txtAddress2.Text.Trim(),
+                        txtZipCode.Text.Trim(),
+                        txtPhoneNumber.Text.Trim(),
+                        txtEmailAddress.Text.Trim()
                     )
                 );
             }
