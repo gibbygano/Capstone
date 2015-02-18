@@ -5,7 +5,7 @@
 	[EventItemID] [int] NOT NULL,
 	[Price] [money] NOT NULL,
 	[QuantityOffered] [int] NOT NULL,
-	[ProductSize] [varchar] NOT NULL,
+	[ProductSize] [varchar](50) NOT NULL,
 	[Active]	[bit] NOT NULL
  CONSTRAINT [PK_ItemListing] PRIMARY KEY CLUSTERED 
 (

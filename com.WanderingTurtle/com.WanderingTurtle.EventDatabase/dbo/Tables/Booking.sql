@@ -4,7 +4,7 @@
 	[EmployeeID]    int             NULL,
 	[ItemListID]	int				NOT NULL,
 	[Quantity]		int				NOT NULL,
-	[DateBooked]    Timestamp		
+	[DateBooked]    DATETIME		
 		CONSTRAINT [pk_BookingID] PRIMARY KEY CLUSTERED ([BookingID] ASC)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON ) ON [PRIMARY]
 	

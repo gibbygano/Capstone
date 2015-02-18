@@ -10,14 +10,13 @@ CREATE PROCEDURE spInsertSupplier
 	@Zip 			varchar(10), 
 	@PhoneNumber 	varchar(15), 
 	@EmailAddress 	varchar(100), 
-	@SupplierTypeID int, 
 	@ApplicationID 	int, 
 	@UserID 		int, 
 	@SupplierID 	int OUTPUT
 	)
 AS
 INSERT INTO Supplier
-	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierTypeID, ApplicationID, UserID, Active) 
-VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @SupplierTypeID, @ApplicationID, @UserID, 1)
+	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active) 
+VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationID, @UserID, 1)
 SET @SupplierID = SCOPE_IDENTITY()
 RETURN @@ERROR

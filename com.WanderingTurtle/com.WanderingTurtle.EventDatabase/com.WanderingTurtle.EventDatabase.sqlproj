@@ -23,7 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <GenerateCreateScript>False</GenerateCreateScript>
+    <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -64,11 +64,6 @@
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\UserLogin.sql" />
-    <Build Include="dbo\Stored Procedures\spUserLoginGet.sql" />
-    <Build Include="dbo\Stored Procedures\spUserLoginGetList.sql" />
-    <Build Include="dbo\Stored Procedures\spUserLoginAdd.sql" />
-    <Build Include="dbo\Stored Procedures\spUserLoginUpdate.sql" />
     <Build Include="dbo\Tables\Booking.sql" />
     <Build Include="dbo\Tables\EventItem.sql" />
     <Build Include="dbo\Tables\Supplier.sql" />
@@ -123,5 +118,8 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment2.sql" />
   </ItemGroup>
 </Project>
