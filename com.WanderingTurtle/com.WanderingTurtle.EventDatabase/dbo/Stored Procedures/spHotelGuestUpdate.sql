@@ -24,16 +24,15 @@ BEGIN
 			[Address1] = @address1,
 			[Address2] = @address2,
 			[PhoneNumber] = @phoneNumber,
-			EmailAddress = @email
+			[EmailAddress] = @email
 	WHERE HotelGuestID = @original_hotelGuestID
 		AND [FirstName] = @original_firstName
 		AND [LastName] = @original_lastName
-		AND	[LastName] = @lastName
-		AND	[Zip] = @zip
-		AND	[Address1] = @address1
-		AND	[Address2] = @address2
-		AND	[PhoneNumber] = @phoneNumber
-		AND	EmailAddress = @email
+		AND	[Zip] = @original_zip
+		AND	[Address1] = @original_address1
+		AND	[Address2] = @original_address2
+		AND	[PhoneNumber] = @original_phoneNumber
+		AND	[EmailAddress] = @original_email
 
 	RETURN @@ROWCOUNT
 
