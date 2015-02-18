@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[employee] (
+CREATE TABLE [dbo].[Employee] (
 	[employeeID] 					[int]					NOT NULL IDENTITY(100, 1),
 	[firstName]						[varchar](50)			NOT NULL,
 	[lastName]						[varchar](50)			NOT NULL,

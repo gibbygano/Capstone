@@ -48,7 +48,7 @@ VALUES
 ('Rose', 'Tyler', '73078', '6453 Benton Ave.', ' ','223-456-1234', ' '),
 ('Martha', 'Jones', '73078', '6453 Benton Ave.', ' ', ' ', ' '),
 ('Susan', 'Foreman', '73102', '3345 Main St.', 'Apt. 4432', ' ', ' '),
-('Barbara', 'Wright', '73012', '5634 Main St.',' ', '456-223-1234', ' '),
+('Barbara', 'Wright', '73102', '5634 Main St.',' ', '456-223-1234', ' '),
 ('Peter', 'Capaldi', '52641', '2232 Benton Ave.', ' ', '319-217-4455', 'doctorwho@kirkwood.edu'),
 ('Clara', 'Oswald', '52641', '1455 Benton. Ave', ' ', '319-931-9983', ' ')
 GO
