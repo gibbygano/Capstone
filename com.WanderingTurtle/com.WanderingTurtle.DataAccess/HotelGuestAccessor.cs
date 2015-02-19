@@ -56,7 +56,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Get a list of all HotelGuest Objects
         /// </summary>
-        /// <param name="hotelGuestID">Optional Paramater to specify a hotel gust to look up</param>
+        /// <param name="hotelGuestID">Optional Parameter to specify a hotel gust to look up</param>
         /// <returns></returns>
         public static List<HotelGuest> HotelGuestGet(int? hotelGuestID = null)
         {
@@ -111,6 +111,8 @@ namespace com.WanderingTurtle.DataAccess
             return list;
         }
 
+        /********************  Methods not used in Sprint 1 ************************************************/
+
         /// <summary>
         /// Updates a hotel guest with new information
         /// </summary>
@@ -163,5 +165,9 @@ namespace com.WanderingTurtle.DataAccess
 
             return numRows;
         }
+
+
+
+
     }
 }
