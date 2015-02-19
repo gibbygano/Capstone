@@ -26,6 +26,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+<<<<<<< HEAD
+=======
         /// Edit an Existing Hotel Guest
         /// </summary>
         /// <param name="hotelGuest"></param>
@@ -41,6 +43,7 @@ namespace com.WanderingTurtle.FormPresentation
         public HotelGuest CurrentHotelGuest { get; private set; }
 
         /// <summary>
+>>>>>>> origin/master
         /// Parameter marks whether a database command was successful
         /// </summary
         /// Miguel Santana 2/18/2015>
@@ -245,5 +248,23 @@ namespace com.WanderingTurtle.FormPresentation
             cboZip.ItemsSource = new CityStateManager().GetCityStateList();
             ResetFields();
         }
+
+        /********************  Methods not used in Sprint 1 ************************************************/
+        /// <summary>
+        /// Edit an Existing Hotel Guest
+        /// </summary>
+        /// <param name="hotelGuest"></param>
+        /// Miguel Santana 2/18/2015
+        public AddEditHotelGuest(HotelGuest hotelGuest)
+        {
+            InitializeComponent();
+
+            this.CurrentHotelGuest = hotelGuest;
+            this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
+        }
+
+
+
+
     }
 }

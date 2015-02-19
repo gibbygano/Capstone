@@ -98,22 +98,23 @@ namespace com.WanderingTurtle.FormPresentation
 
                 result = myManager.AddNewEmployee(newEmployeeUser);
 
-            } catch (Exception ax)
+                    if (result == 1)
+                    {
+                        MessageBox.Show("Employee added successfully");
+                    }
+            } 
+            catch (Exception ax)
             {
-                throw ax;
+                MessageBox.Show(ax.Message);
             }
 
-
-            if (result == 1)
-            {
-                MessageBox.Show("Employee added successfully");
-
-            }
-            else
-            {
-                MessageBox.Show("There was problem adding the employee to the database");
-            }
         }
+
+        // Pat Banks - February 19, 2015
+        // Parameters: returns list data
+        // Desc.: Defines employee roles for the combo box
+        // Failure: none
+        // Success: box is filled and available for use on the form
 
         private List<RoleData> RetrieveUserLevelList()
         {

@@ -9,60 +9,6 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class BookingAccessor
     {
-        /* getBooking- a method used to select a booking record from the database
-        * Takes an input of an int- the BookingID number to locate the requested record.
-        * Output is a booking object to hold the booking record.
-        * Specific Exception thrown is if the BookingID isn't on file.
-        * Created By: Tony Noel - 2/3/15
-        * */
-
-        public static Booking getBooking(int BookingID)
-        {
-            Booking BookingToGet = new Booking();
-
-            //establish connection
-            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectBooking";
-            //create a Sql Command
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@bookingID", BookingID); //This is the parameter passing portion of the code.
-
-            try
-            {
-                //open connection
-                conn.Open();
-                //execute the command and capture the results to a SqlDataReader
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows == true)
-                {
-                    reader.Read();
-
-                    BookingToGet.BookingID = reader.GetInt32(0);
-                    BookingToGet.GuestID = reader.GetInt32(1);
-                    if (!reader.IsDBNull(2)) BookingToGet.EmployeeID = reader.GetInt32(2);
-                    BookingToGet.ItemListID = reader.GetInt32(3);
-                    BookingToGet.Quantity = reader.GetInt32(4);
-                    BookingToGet.DateBooked = reader.GetDateTime(5);
-                }
-                else
-                {
-                    var up = new ApplicationException("The BookingID provided does not match any records on file.");
-                    throw up;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return BookingToGet;
-        }
-
         /*Creates a list of options, has an ItemListID, Quantity, and some event info
          * to help populate drop downs/ lists for Add and update Bookings
          *Returns a list of BookingOptions objects 
@@ -170,6 +116,7 @@ namespace com.WanderingTurtle.DataAccess
          * inputs a Booking object to be inserted
          * Output is the number of rows affected by the insert
          * Created By: Tony Noel - 2/3/15
+         * Updated By:  Pat Banks - 2/19/15 (exception  handling if add wasn't successful)
          * */
 
         public static int addBooking(Booking toAdd)
@@ -187,12 +134,18 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@ItemListID", toAdd.ItemListID);
             cmd.Parameters.AddWithValue("@Quantity", toAdd.Quantity);
             cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
-            
 
             try
             {
                 conn.Open();
                 rowsAffected = (int)cmd.ExecuteNonQuery();
+
+                //added exception handling pb 2/19/15
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Error adding new database entry");
+                }
+
             }
             catch (Exception)
             {
@@ -206,11 +159,67 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
+/********************  Methods not used in Sprint 1 ************************************************/
+
+        /* getBooking- a method used to select a booking record from the database
+            * Takes an input of an int- the BookingID number to locate the requested record.
+            * Output is a booking object to hold the booking record.
+            * Specific Exception thrown is if the BookingID isn't on file.
+            * Created By: Tony Noel - 2/3/15
+            * */
+
+        public static Booking getBooking(int BookingID)
+        {
+            Booking BookingToGet = new Booking();
+
+            //establish connection
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSelectBooking";
+            //create a Sql Command
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@bookingID", BookingID); //This is the parameter passing portion of the code.
+
+            try
+            {
+                //open connection
+                conn.Open();
+                //execute the command and capture the results to a SqlDataReader
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+
+                    BookingToGet.BookingID = reader.GetInt32(0);
+                    BookingToGet.GuestID = reader.GetInt32(1);
+                    if (!reader.IsDBNull(2)) BookingToGet.EmployeeID = reader.GetInt32(2);
+                    BookingToGet.ItemListID = reader.GetInt32(3);
+                    BookingToGet.Quantity = reader.GetInt32(4);
+                    BookingToGet.DateBooked = reader.GetDateTime(5);
+                }
+                else
+                {
+                    var up = new ApplicationException("The BookingID provided does not match any records on file.");
+                    throw up;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return BookingToGet;
+        }
+
         /* UpdateBooking- a method used to update a booking in the database
-         * inputs are the original Booking object along with a booking object to update
-         * Output is the rows affected by the update
-         * Created By: Tony Noel - 2/3/15
-         * */
+     * inputs are the original Booking object along with a booking object to update
+     * Output is the rows affected by the update
+     * Created By: Tony Noel - 2/3/15
+     * */
 
         public static int updateBooking(Booking oldOne, Booking toUpdate)
         {
@@ -270,7 +279,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_GuestID", toDelete.GuestID);
             cmd.Parameters.AddWithValue("@original_EmployeeID", toDelete.EmployeeID);
             cmd.Parameters.AddWithValue("@original_ItemListID", toDelete.ItemListID);
-            cmd.Parameters.AddWithValue("@original_Quantity",toDelete.Quantity);
+            cmd.Parameters.AddWithValue("@original_Quantity", toDelete.Quantity);
 
             try
             {
