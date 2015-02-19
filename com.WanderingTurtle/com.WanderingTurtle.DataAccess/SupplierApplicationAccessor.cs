@@ -57,7 +57,7 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Updates an ecisting Supplier Application Record already in the Database
+        /// Updates an existing Supplier Application Record already in the Database
         /// </summary>
         /// <param name="oldApplication">A SupplierApplication Object that contains all the information of the record to be changed</param>
         /// <param name="oldApplication">A SupplierApplication Object that contains all the information to change in the record</param>
@@ -173,7 +173,7 @@ namespace com.WanderingTurtle.DataAccess
             return ApplicationList;
         }
         /// <summary>
-        /// Retrieves a signle Supplier Application Records from the Database
+        /// Retrieves a single Supplier Application Records from the Database
         /// </summary>
         /// <returns>SupplierApplication object</returns>
         /// Created by Matt Lapka 2/8/15

@@ -56,7 +56,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Get a list of all HotelGuest Objects
         /// </summary>
-        /// <param name="hotelGuestID">Optional Paramater to specify a hotel gust to look up</param>
+        /// <param name="hotelGuestID">Optional Paramater to specify a hotel guest to look up</param>
         /// <returns></returns>
         public static List<HotelGuest> HotelGuestGet(int? hotelGuestID = null)
         {
