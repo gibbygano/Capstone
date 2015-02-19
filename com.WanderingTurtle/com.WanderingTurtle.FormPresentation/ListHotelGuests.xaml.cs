@@ -52,7 +52,9 @@ namespace com.WanderingTurtle.FormPresentation
             AddEditHotelGuest.Show();
         }
 
-
-
+        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
+        {
+            refreshList();
+        }
     }
 }

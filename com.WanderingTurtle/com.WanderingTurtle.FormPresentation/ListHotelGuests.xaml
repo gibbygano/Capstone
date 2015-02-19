@@ -20,5 +20,6 @@
             </ListView.View>
         </ListView>
         <Button x:Name="btnAddGuest" Content="Add Guest" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddGuest_Click" />
+        <Button x:Name="btnRefreshList" Content="Refresh List" HorizontalAlignment="Left" Margin="109,370,0,0" VerticalAlignment="Top" Width="74" Click="btnRefreshList_Click" />
     </Grid>
 </UserControl>

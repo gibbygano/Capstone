@@ -26,9 +26,9 @@ namespace com.WanderingTurtle.FormPresentation
 
         public ListBookings()
         {
-            bookingList = myBookings.RetrieveBookingList();
+            
             InitializeComponent();
-            lvBookingList.ItemsSource = bookingList;
+            RefreshBookings();
         }
 
         /*Code to link to the AddBooking form
@@ -54,7 +54,18 @@ namespace com.WanderingTurtle.FormPresentation
                 System.Media.SystemSounds.Exclamation.Play();
             }
         }
+        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshBookings();
+        }
 
+        private void RefreshBookings()
+        {
+            bookingList = myBookings.RetrieveBookingList();
+            lvBookingList.ItemsSource = bookingList;
+        }
+
+        
         private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
         {
         //    UpdateBooking myBooking;
@@ -74,5 +85,7 @@ namespace com.WanderingTurtle.FormPresentation
         //        System.Media.SystemSounds.Exclamation.Play();
         //    }
         }
+
+
     }
 }
