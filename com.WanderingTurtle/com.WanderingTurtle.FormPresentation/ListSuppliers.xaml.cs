@@ -65,9 +65,9 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Supplier supplierToUpdate = (Supplier)lvSuppliersList.SelectedItems[0];
-                AddSupplier addSupplier = new AddSupplier();
-                addSupplier.FillUpdateList(supplierToUpdate);
+                AddSupplier addSupplier = new AddSupplier();                
                 addSupplier.Show();
+                addSupplier.FillUpdateList(supplierToUpdate);
             }
             catch (Exception)
             {

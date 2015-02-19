@@ -21,10 +21,10 @@
             </ListView.View>
         </ListView>
         <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddSupplier" Content="Add Supplier" Click="btnAddSupplier_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnDelete" Content="Delete Supplier" Click="btnDelete_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnUpdate" Content="Update Supplier" Click="btnUpdate_Click" />
-            <Label Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="lblError" Content="Error Messages" Foreground="Red" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" />
+            <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnAddSupplier" Content="Add Supplier" Click="btnAddSupplier_Click" />
+            <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnDelete" Content="Delete Supplier" Click="btnDelete_Click" />
+            <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnUpdate" Content="Update Supplier" Click="btnUpdate_Click" />
+            <Label Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="lblError" Content="Error Messages" Foreground="Red" VerticalAlignment="Center" />
         </WrapPanel>
     </Grid>
 </UserControl>
