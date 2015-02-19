@@ -134,16 +134,16 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     while (reader.Read())
                     {
-                        var currentEvent = new Event();
+                        var currentEvent = new EventType();
 
-                        currentEvent.EventItemID = reader.GetInt32(0);
-                        currentEvent.EventItemName = reader.GetString(1);
-                        
+                        currentEvent.EventTypeID = (int)reader.GetValue(0);
+                        currentEvent.EventName = reader.GetString(1);
+                        EventTypeList.Add(currentEvent);
                     }
                 }
                 else
                 {
-                    var ax = new ApplicationException("Data not found!");
+                    var ax = new ApplicationException("Event Types not found!");
                     throw ax;
                 }
             }

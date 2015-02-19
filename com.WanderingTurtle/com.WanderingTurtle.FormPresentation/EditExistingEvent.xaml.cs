@@ -22,12 +22,8 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
         }
-
-        
         Event Unrevised = new Event();
         EventManager myMan = new EventManager();
-       
-
         /// <summary>
         /// Populates the forms fields for editing.
         /// </summary>
