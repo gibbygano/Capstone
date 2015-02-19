@@ -38,13 +38,13 @@ namespace com.WanderingTurtle.FormPresentation
             this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
         }
 
+        public HotelGuest CurrentHotelGuest { get; private set; }
+
         /// <summary>
         /// Parameter marks whether a database command was successful
         /// </summary
         /// Miguel Santana 2/18/2015>
-        public bool completed { get; private set; }
-
-        public HotelGuest CurrentHotelGuest { get; private set; }
+        public bool result { get; private set; }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -172,7 +172,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (CurrentHotelGuest == null)
             {
-                completed = _hotelGuestManager.AddHotelGuest(
+                result = _hotelGuestManager.AddHotelGuest(
                     new NewHotelGuest(
                         txtFirstName.Text.Trim(),
                         txtLastName.Text.Trim(),
@@ -186,7 +186,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                completed = _hotelGuestManager.UpdateHotelGuest(
+                result = _hotelGuestManager.UpdateHotelGuest(
                     CurrentHotelGuest,
                     new NewHotelGuest(
                         txtFirstName.Text.Trim(),
@@ -200,7 +200,7 @@ namespace com.WanderingTurtle.FormPresentation
                 );
             }
 
-            if (completed) { this.Close(); }
+            if (result) { this.Close(); }
         }
 
         /// <summary>

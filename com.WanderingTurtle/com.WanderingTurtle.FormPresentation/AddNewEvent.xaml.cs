@@ -23,6 +23,15 @@ namespace com.WanderingTurtle.FormPresentation
         {
             var TempList = myMan.RetrieveEventTypeList();
             
+            List<EventType> TempList = myMan.RetrieveEventTypeList();
+            try
+            {
+                cboxType.ItemsSource = TempList;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             //cboxType.ItemsSource = TempList;
             InitializeComponent();
             cboxType.ItemsSource = TempList;
