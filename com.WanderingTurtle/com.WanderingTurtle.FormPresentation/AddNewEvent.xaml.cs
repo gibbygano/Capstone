@@ -22,9 +22,10 @@ namespace com.WanderingTurtle.FormPresentation
         public AddNewEvent()
         {
             var TempList = myMan.RetrieveEventTypeList();
-            cboxType.ItemsSource = TempList;
+            
             //cboxType.ItemsSource = TempList;
             InitializeComponent();
+            cboxType.ItemsSource = TempList;
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿CREATE PROCEDURE spSelectAllItemListings
 AS
-	SELECT *
+	SELECT StartDate, EndDate, ItemListID, EventItemID, Price, QuantityOffered, ProductSize
 	FROM ItemListing
 	WHERE Active = 1
-	RETURN @@ROWCOUNT

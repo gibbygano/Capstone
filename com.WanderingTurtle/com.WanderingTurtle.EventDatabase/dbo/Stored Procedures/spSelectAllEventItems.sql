@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE spSelectAllEventItems
 AS
-	SELECT *
+	SELECT EventItemID, EventItemName, EventStartTime, EventEndTime, MaxNumberOfGuests, CurrentNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active
 	FROM EventItem
 	WHERE Active = 1
-	RETURN @@ROWCOUNT
+	

@@ -179,6 +179,7 @@ namespace com.WanderingTurtle.DataAccess
 
                         currentEvent.EventItemID = reader.GetInt32(0);
                         currentEvent.EventItemName = reader.GetString(1);
+                        currentEvent.EventStartDate = (DateTime)reader.GetValue(2);
                         currentEvent.EventEndDate = (DateTime)reader.GetValue(3);
                         currentEvent.MaxNumGuests = reader.GetInt32(4);
                         currentEvent.CurrentNumGuests = reader.GetInt32(5);
