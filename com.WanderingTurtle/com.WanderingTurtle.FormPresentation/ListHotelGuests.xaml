@@ -13,7 +13,7 @@
                     <GridViewColumn Width ="100" Header="Last Name"     DisplayMemberBinding="{Binding LastName}"       />
                     <GridViewColumn Width ="150" Header="Address 1"     DisplayMemberBinding="{Binding Address1}"       />
                     <GridViewColumn Width ="150" Header="Address 2"     DisplayMemberBinding="{Binding Address2}"       />
-                    <GridViewColumn Width ="100" Header="ZIP"           DisplayMemberBinding="{Binding Zip}"            />
+                    <GridViewColumn Width ="100" Header="ZIP"           DisplayMemberBinding="{Binding CityState.Zip}"  />
                     <GridViewColumn Width ="100" Header="Phone Number"  DisplayMemberBinding="{Binding PhoneNumber}"    />
                     <GridViewColumn Width ="150" Header="E-Mail"        DisplayMemberBinding="{Binding EmailAddress}"   />
                 </GridView>
