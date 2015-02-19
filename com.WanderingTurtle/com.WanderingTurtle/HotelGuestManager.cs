@@ -63,6 +63,10 @@ namespace com.WanderingTurtle
             }
         }
 
+
+
+
+        /********************  Methods not used in Sprint 1 ************************************************/
         /// <summary>
         /// Updates a hotel guest with new informatino
         /// </summary>
@@ -81,5 +85,7 @@ namespace com.WanderingTurtle
                 throw ex;
             }
         }
+
+
     }
 }

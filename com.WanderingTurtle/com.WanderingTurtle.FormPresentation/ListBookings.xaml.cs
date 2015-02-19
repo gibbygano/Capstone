@@ -28,7 +28,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             
             InitializeComponent();
-            RefreshBookings();
+            RefreshBookingsList();
         }
 
         /*Code to link to the AddBooking form
@@ -56,34 +56,23 @@ namespace com.WanderingTurtle.FormPresentation
         }
         private void btnRefreshList_Click(object sender, RoutedEventArgs e)
         {
-            RefreshBookings();
+            RefreshBookingsList();
         }
 
-        private void RefreshBookings()
+        private void RefreshBookingsList()
         {
-            bookingList = myBookings.RetrieveBookingList();
-            lvBookingList.ItemsSource = bookingList;
+            try
+            {
+                bookingList = myBookings.RetrieveBookingList();
+                lvBookingList.ItemsSource = bookingList;
+                lvBookingList.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to retrieve booking list from the database. \n" + ex.Message);
+            }
+
         }
 
-        
-        private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
-        {
-        //    UpdateBooking myBooking;
-        //    string id = lvBookingList.SelectedItems[0].ToString();
-        //    if (UpdateBooking.Instance == null)
-        //    {
-        //        myBooking = new UpdateBooking(id);
-        //        myBooking.Show();
-        //    }
-        //    else
-        //    {
-        //        myBooking = UpdateBooking.Instance;
-        //        myBooking.BringToFront();
-
-        //        //Creates a sound effect through the System.Media and  flash from accessibility
-
-        //        System.Media.SystemSounds.Exclamation.Play();
-        //    }
-        }
     }
 }

@@ -17,6 +17,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "com.WanderingTurtle.EventDa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerNeeded", "{73D0F04F-D745-44FA-9968-F60D5AACB181}"
 	ProjectSection(SolutionItems) = preProject
+		com.WanderingTurtle.DataAccess\BookingLineItemAccessor.cs = com.WanderingTurtle.DataAccess\BookingLineItemAccessor.cs
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql
@@ -28,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem Code", "Problem Cod
 	ProjectSection(SolutionItems) = preProject
 		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml
 		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs
+		UpdateBookingclickMethod.txt = UpdateBookingclickMethod.txt
 	EndProjectSection
 EndProject
 Global
