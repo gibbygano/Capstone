@@ -19,9 +19,30 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListHotelGuests : UserControl
     {
+        HotelGuestManager _HotelGuestManager = new HotelGuestManager();
+
         public ListHotelGuests()
         {
             InitializeComponent();
+            refreshList();
+        }
+
+
+        /// <summary>
+        /// Repopulates the list of hotel guests to display
+        /// 2015-02-18 - Daniel Collingwood 
+        /// </summary>
+        private void refreshList()
+        {
+            try
+            {
+                var hotelGuestList =_HotelGuestManager.GetHotelGuestList();
+                lvHotelGuestList.ItemsSource = hotelGuestList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
+            }
         }
 
 
