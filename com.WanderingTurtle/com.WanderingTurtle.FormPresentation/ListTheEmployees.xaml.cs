@@ -33,9 +33,31 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            Window AddEmployee = new AddEmployee();
-            AddEmployee.Show();
-        }
+            AddEmployee newEmployee;
 
+            if (AddEmployee.Instance == null)
+            {
+                newEmployee = new AddEmployee();
+                newEmployee.Show();
+            }
+            else
+            {
+                newEmployee = AddEmployee.Instance;
+                newEmployee.Activate();
+
+                //Creates a sound effect through the System.Media and  flash from accessibility
+
+                System.Media.SystemSounds.Exclamation.Play();
+            }
+
+
+        }
+        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
+        {
+            employeeList = myEmployees.FetchListEmployees();
+            lvEmployeesList.ItemsSource = employeeList;
+
+            lvEmployeesList.Items.Refresh();
+        }
     }
 }

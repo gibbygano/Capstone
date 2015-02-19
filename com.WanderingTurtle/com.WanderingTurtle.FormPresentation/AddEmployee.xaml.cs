@@ -20,6 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEmployee : Window
     {
+        public static AddEmployee Instance;
         Employee newEmployeeUser = new Employee();
         EmployeeManager myManager = new EmployeeManager();
 
@@ -30,6 +31,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEmployee()
         {
             InitializeComponent();
+            Instance = this;
         }
         
         // Pat Banks - February 15, 2015
@@ -46,15 +48,16 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (!Validator.ValidateString(txtLastName.Text))
                 {
-                   lblMessage.Content = "Please fill out the last name field.";
+                    MessageBox.Show("Please fill out the last name field.");
+
                 } 
                 else if(!Validator.ValidateString(txtFirstName.Text))
-                {           
-                    lblMessage.Content = "Please fill out the first name field.";
+                {
+                    MessageBox.Show("Please fill out the first name field.");
                 }
                 else if(!Validator.ValidateString(txtPassword.Text))
                 {
-                    lblMessage.Content = "Please enter a password.";
+                    MessageBox.Show("Please enter a password.");
                 }
 
                 // collect the values from the form
@@ -68,17 +71,23 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result == 1)
                 {
-                    lblMessage.Content = "employee added successfully";
+                    MessageBox.Show("employee added successfully");
+
                 }
                 else
                 {
-                    lblMessage.Content = "There was problem adding to the db";
+                    MessageBox.Show("There was problem adding to the db");
                 }
             }
             catch (Exception ax)
             {
                 MessageBox.Show(ax.ToString());
             }            
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Instance = null;
         }        
     }
 }
