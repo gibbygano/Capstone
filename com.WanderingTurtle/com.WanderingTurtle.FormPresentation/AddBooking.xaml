@@ -1,18 +1,24 @@
 ﻿<Window x:Name="AddBooking1" x:Class="com.WanderingTurtle.FormPresentation.AddBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddBooking" Height="375.4" Width="670.5" Closed="AddBooking_Closed" WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,4,17.6">
+        Title="AddBooking" Height="375.4" Width="700" Closed="AddBooking_Closed" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,2,1" Background="#FFE5E5E5">
         <Label x:Name="lblGeneralAddBooking" Content="Please add requested information below to complete the booking." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblAddBookingEmpID" Content="EmployeeID: " HorizontalAlignment="Left" Margin="45,59,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
-        <TextBox x:Name="tbAddBookingEmpID" HorizontalAlignment="Left" Height="23" Margin="129,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="3"/>
-        <Label x:Name="lblAddBookingGuestID" Content="GuestID: " HorizontalAlignment="Left" Margin="45,90,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
-        <TextBox x:Name="tbAddBookingGuestID" HorizontalAlignment="Left" Height="23" Margin="129,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="3"/>
-        <Label x:Name="lblAddBookingItemID" Content="ItemList:" HorizontalAlignment="Left" Margin="45,127,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
-        <Label x:Name="lblAddBookingQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="335,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
-        <TextBox x:Name="tbAddBookingQuantity" HorizontalAlignment="Left" Height="23" Margin="420,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="2"/>
-        <Button x:Name="btnAddBookingAdd" Content="Add Booking" HorizontalAlignment="Left" Margin="543,297,0,0" VerticalAlignment="Top" Width="90" Click="btnAddBookingAdd_Click"/>
-        <ListView x:Name="lvAddBookingListItems" HorizontalAlignment="Left" Height="124" Margin="45,158,0,0" VerticalAlignment="Top" Width="613">
+        <Label x:Name="lblAddBookingEmpID" Content="EmployeeID: " HorizontalAlignment="Left" Margin="50,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        
+<TextBox x:Name="tbAddBookingEmpID" HorizontalAlignment="Left" Height="23" Margin="129,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="3"/>
+        <Label x:Name="lblAddBookingGuestID" Content="Guest Name: " HorizontalAlignment="Left" Margin="48,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <Label x:Name="lblAddBookingItemID" Content="ItemList:" HorizontalAlignment="Left" Margin="34,151,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <Label x:Name="lblAddBookingQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="66,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
+        <TextBox x:Name="tbAddBookingQuantity" HorizontalAlignment="Left" Height="23" Margin="129,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="2"/>
+        <Button x:Name="btnAddBookingAdd" Content="Add Booking" HorizontalAlignment="Left" Margin="34,306,0,0" VerticalAlignment="Top" Width="90" Click="btnAddBookingAdd_Click"/>
+        <ComboBox x:Name="cboHotelGuests" HorizontalAlignment="Left" Margin="129,94,0,0" VerticalAlignment="Top" Width="204"
+            ItemsSource="{Binding Path=RetrieveGuestList()}" 
+            DisplayMemberPath="FullName" 
+            SelectedValuePath="HotelGuestID"
+            SelectedValue="{Binding id}" />
+
+        <ListView x:Name="lvAddBookingListItems" HorizontalAlignment="Left" Height="124" Margin="34,177,0,0" VerticalAlignment="Top" Width="613">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width ="50" Header="ItemID" DisplayMemberBinding="{Binding ItemListID}"/>
@@ -25,6 +31,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        
 
     </Grid>
 </Window>

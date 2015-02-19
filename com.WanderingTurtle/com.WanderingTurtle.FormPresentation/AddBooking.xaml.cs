@@ -32,12 +32,15 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Instance = this;
             lvAddBookingListItems.ItemsSource = myEventList;
+
+            //creating a list for the dropdown userLevel
+            cboHotelGuests.ItemsSource = RetrieveGuestList();
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
             addBooking();
-
+            
         }
         /*addBooking()- a method to collect all information from the form and turn them into strings
          * Then after taking each variable and testing them in their specific validation method, parses them 
@@ -48,7 +51,8 @@ namespace com.WanderingTurtle.FormPresentation
         public void addBooking()
         {
             string empID = tbAddBookingEmpID.Text;
-            string guest = tbAddBookingGuestID.Text;
+            //string guest = tbAddBookingGuestID.Text;
+            string guest = this.cboHotelGuests.ToString();
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
@@ -67,12 +71,12 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            if (isGuest(guest) == false)
-            {
-                MessageBox.Show("Please review the Guest ID. A record of this guest is not on file.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
+    //if (isGuest(guest) == false)
+    //{
+    //    MessageBox.Show("Please review the Guest ID. A record of this guest is not on file.");
+    //    btnAddBookingAdd.IsEnabled = true;
+    //    return;
+    //}
             if (okQuantity(quantity) == false)
             {
                 MessageBox.Show("Please review the quantity entered. Must be a number and cannot excede the quantity offered for the event.");
@@ -134,29 +138,31 @@ namespace com.WanderingTurtle.FormPresentation
          * Else it returns false.
          * Tony Noel- 2/17/15
          */
-        private bool isGuest(string guest)
-        {
-            bool works = false;
-            int guestID;
-            if (guest == "")
-            {
-                return works;
-            }
+        //private bool isGuest(string guest)
+        //{
+        //    bool works = false;
+        //    int guestID;
+        //    if (guest == "")
+        //    {
+        //        return works;
+        //    }
 
-            try
-            {
-                Validator.ValidateInt(guest);
-                int.TryParse(guest, out guestID);
-                myGuest.GetHotelGuest(guestID);
-                works = true;
-                return works;
+        //    try
+        //    {
+        //        Validator.ValidateInt(guest);
+        //        int.TryParse(guest, out guestID);
+        //        myGuest.GetHotelGuest(guestID);
+        //        works = true;
+        //        return works;
 
-            }
-            catch
-            {
-                return works;
-            }
-        }
+        //    }
+        //    catch
+        //    {
+        //        return works;
+        //    }
+        //}
+
+
         /**
          * validates that a empID entered is an int,
          * parses it into one and passes it through EmployeeHandler to check against database
@@ -221,7 +227,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void clearFields()
         {
             tbAddBookingEmpID.Text = null;
-            tbAddBookingGuestID.Text = null;
+//tbAddBookingGuestID.Text = null;
            
             tbAddBookingQuantity.Text = null;
         }
@@ -231,5 +237,18 @@ namespace com.WanderingTurtle.FormPresentation
             Instance = null;
         }
 
+        // Pat Banks - February 19, 2015
+        // Parameters: returns list data
+        // Desc.: Defines employee roles for the combo box
+        // Failure: none
+        // Success: box is filled and available for use on the form
+
+        private List<HotelGuest> RetrieveGuestList()
+        {
+            List<HotelGuest> dropDownData = new List<HotelGuest>();
+            dropDownData = myGuest.GetHotelGuestList();
+
+            return dropDownData;
+        }
     }
 }
