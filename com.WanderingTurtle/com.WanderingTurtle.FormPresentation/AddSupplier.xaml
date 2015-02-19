@@ -36,25 +36,6 @@
                     <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="154,382,0,0" VerticalAlignment="Top" Width="129" Height="47" Click="btnEdit_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Update/Delete">
-                <Grid Background="#FFE5E5E5" Margin="0,0,0.4,-2.8">
-                    <ListView x:Name="lvSuppliersList" HorizontalAlignment="Left" Height="383" VerticalAlignment="Top" Width="942">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width ="140" Header="Company Name" DisplayMemberBinding="{Binding CompanyName}"/>
-                                <GridViewColumn Width ="100" Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
-                                <GridViewColumn Width ="100" Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
-                                <GridViewColumn Width ="150" Header="Address" DisplayMemberBinding="{Binding Address1}"/>
-                                <GridViewColumn Width ="150" Header="Email Address" DisplayMemberBinding="{Binding EmailAddress}"/>
-                                <GridViewColumn Width ="140" Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}"/>
-
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Button x:Name="btnUpdate" Content="Update Supplier" HorizontalAlignment="Left" Margin="10,389,0,0" VerticalAlignment="Top" Width="136" Height="47" Click="btnUpdate_Click"/>
-                    <Button x:Name="btnDelete" Content="Delete Supplier" HorizontalAlignment="Left" Margin="167,388,0,0" VerticalAlignment="Top" Width="139" Height="48" Click="btnDelete_Click"/>
-                </Grid>
-            </TabItem>
         </TabControl>
     </Grid>
 </Window>

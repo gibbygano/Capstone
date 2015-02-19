@@ -53,5 +53,7 @@
             this.PhoneNumber = PhoneNumber;
             this.EmailAddress = EmailAddress;
         }
+
+        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }
 }
