@@ -25,25 +25,9 @@ namespace com.WanderingTurtle.FormPresentation
             this.myTitle = "Add New Hotel Guest";
         }
 
-        /// <summary>
-<<<<<<< HEAD
-=======
-        /// Edit an Existing Hotel Guest
-        /// </summary>
-        /// <param name="hotelGuest"></param>
-        /// Miguel Santana 2/18/2015
-        public AddEditHotelGuest(HotelGuest hotelGuest)
-        {
-            InitializeComponent();
-
-            this.CurrentHotelGuest = hotelGuest;
-            this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
-        }
-
         public HotelGuest CurrentHotelGuest { get; private set; }
 
         /// <summary>
->>>>>>> origin/master
         /// Parameter marks whether a database command was successful
         /// </summary
         /// Miguel Santana 2/18/2015>
@@ -250,6 +234,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /********************  Methods not used in Sprint 1 ************************************************/
+
         /// <summary>
         /// Edit an Existing Hotel Guest
         /// </summary>
@@ -262,9 +247,5 @@ namespace com.WanderingTurtle.FormPresentation
             this.CurrentHotelGuest = hotelGuest;
             this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
         }
-
-
-
-
     }
 }
