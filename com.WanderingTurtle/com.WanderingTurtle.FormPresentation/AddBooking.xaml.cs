@@ -226,7 +226,7 @@ namespace com.WanderingTurtle.FormPresentation
             tbAddBookingQuantity.Text = null;
         }
 
-        private void AddBooking1_Closed(object sender, EventArgs e)
+        private void AddBooking_Closed(object sender, EventArgs e)
         {
             Instance = null;
         }

@@ -4,7 +4,9 @@
         xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
         Title="MainWindow" Height="525" Width="950">
     <Grid Background="#FFE5E5E5">
-        <TabControl HorizontalAlignment="Left" Height="457" Margin="0,31,0,0" VerticalAlignment="Top" Width="933">
+        
+        <TabControl x:Name="tabNames" IsEnabled="True" HorizontalAlignment="Left" Height="457" Margin="0,31,0,0" VerticalAlignment="Top" Width="933">
+                    
             <TabItem Header="Events" >
                 <Grid Background="#FFE5E5E5"  x:Name="LayoutEventList">
                     <local:ListEvents />
@@ -12,7 +14,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Listings" >
+            <TabItem Header="Listings">
                 <Grid Background="#FFE5E5E5" x:Name="LayoutListingList">
                     <local:ListTheListings />
                   

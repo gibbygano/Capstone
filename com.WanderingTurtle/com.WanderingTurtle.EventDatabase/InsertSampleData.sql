@@ -103,9 +103,3 @@ VALUES
 (4, 104, 102, 1, CURRENT_TIMESTAMP)
 GO
 
-INSERT INTO [dbo].[Employee] (firstName, lastName, userID, Active)
-VALUES
-('Phil', 'Robinson', 100, 1),
-('Benny', 'Albertson', 104, 1),
-('Suzanne', 'Colletes', 105, 1)
-GO
