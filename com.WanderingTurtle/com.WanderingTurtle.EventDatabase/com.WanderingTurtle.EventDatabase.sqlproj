@@ -95,7 +95,6 @@
     <Build Include="dbo\Stored Procedures\spHotelGuestUpdate.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestAdd.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestGet.sql" />
-    <Build Include="dbo\Stored Procedures\spHotelGuestGetList.sql" />
     <Build Include="dbo\Tables\ItemListing.sql" />
     <Build Include="dbo\Tables\Lists.sql" />
     <Build Include="dbo\Tables\EventType.sql" />

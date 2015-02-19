@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@firstName", newHotelGuest.FirstName);
             cmd.Parameters.AddWithValue("@lastName", newHotelGuest.LastName);
-            cmd.Parameters.AddWithValue("@zip", newHotelGuest.Zip);
+            cmd.Parameters.AddWithValue("@zip", newHotelGuest.CityState.Zip);
             cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address1);
             cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
@@ -54,11 +54,11 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Gets a hotel guest by id
+        /// Get a list of all HotelGuest Objects
         /// </summary>
-        /// <param name="hotelGuestID">the id of a hotel guest to retrieve</param>
-        /// <returns>HotelGuest object retrieved from database</returns>
-        public static HotelGuest HotelGuestGet(int hotelGuestID)
+        /// <param name="hotelGuestID">Optional Paramater to specify a hotel gust to look up</param>
+        /// <returns></returns>
+        public static List<HotelGuest> HotelGuestGet(int? hotelGuestID = null)
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
@@ -66,53 +66,6 @@ namespace com.WanderingTurtle.DataAccess
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@hotelGuestID", hotelGuestID);
-
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    reader.Read();
-
-                    return new HotelGuest(
-                        reader.GetInt32(0), //HotelGuestID
-                        reader.GetString(1), //FirstName
-                        reader.GetString(2), //LastName
-                        reader.GetString(4), //Address1
-                        !reader.IsDBNull(5) ? reader.GetString(5) : null, //Address2
-                        reader.GetString(3), //Zip
-                        !reader.IsDBNull(6) ? reader.GetString(6) : null, //PhoneNumber
-                        !reader.IsDBNull(7) ? reader.GetString(7) : null //EmailAdddress
-                   );
-                }
-                else
-                {
-                    throw new ApplicationException("Hotel Guest ID number did not match any records.");
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-
-        /// <summary>
-        /// Gets a list of all Hotel Guests
-        /// </summary>
-        /// <returns>List of HotelGuest Objects</returns>
-        public static List<HotelGuest> HotelGuestGet()
-        {
-            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-
-            var cmdText = "spHotelGuestGetList";
-            SqlCommand cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
 
             List<HotelGuest> list = new List<HotelGuest>();
             try
@@ -129,18 +82,22 @@ namespace com.WanderingTurtle.DataAccess
                                 reader.GetInt32(0), //HotelGuestID
                                 reader.GetString(1), //FirstName
                                 reader.GetString(2), //LastName
-                                reader.GetString(4), //Address1
-                                !reader.IsDBNull(5) ? reader.GetString(5) : null, //Address2
-                                reader.GetString(3), //Zip
-                                !reader.IsDBNull(6) ? reader.GetString(6) : null, //PhoneNumber
-                                !reader.IsDBNull(7) ? reader.GetString(7) : null //EmailAdddress
+                                reader.GetString(3), //Address1
+                                !reader.IsDBNull(4) ? reader.GetString(4) : null, //Address2
+                                new CityState(
+                                    reader.GetString(5), //Zip
+                                    reader.GetString(6), //City
+                                    reader.GetString(7) //State
+                                ),
+                                !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
+                                !reader.IsDBNull(9) ? reader.GetString(9) : null //EmailAdddress
                             )
                         );
                     }
                 }
                 else
                 {
-                    throw new ApplicationException("Hotel Guest ID number did not match any records.");
+                    throw new ApplicationException(hotelGuestID == null ? "Could not find any Hotel Guests" : "Hotel Guest ID number did not match any records.");
                 }
             }
             catch (Exception)
@@ -170,7 +127,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@firstName", newHotelGuest.FirstName);
             cmd.Parameters.AddWithValue("@lastName", newHotelGuest.LastName);
-            cmd.Parameters.AddWithValue("@zip", newHotelGuest.Zip);
+            cmd.Parameters.AddWithValue("@zip", newHotelGuest.CityState.Zip);
             cmd.Parameters.AddWithValue("@address1", newHotelGuest.Address1);
             cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
@@ -179,7 +136,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
             cmd.Parameters.AddWithValue("@original_firstName", oldHotelGuest.FirstName);
             cmd.Parameters.AddWithValue("@original_lastName", oldHotelGuest.LastName);
-            cmd.Parameters.AddWithValue("@original_zip", oldHotelGuest.Zip);
+            cmd.Parameters.AddWithValue("@original_zip", oldHotelGuest.CityState.Zip);
             cmd.Parameters.AddWithValue("@original_address1", oldHotelGuest.Address1);
             cmd.Parameters.AddWithValue("@original_address2", oldHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@original_phoneNumber", oldHotelGuest.PhoneNumber);

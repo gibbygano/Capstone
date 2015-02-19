@@ -1,9 +1,12 @@
 ﻿CREATE PROCEDURE [dbo].[spHotelGuestGet]
-    @hotelGuestID 	int
+	@hotelGuestID int = null
 AS
 BEGIN
-    SELECT [HotelGuestID],[FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[EmailAddress]
-    FROM [dbo].[HotelGuest]
-    WHERE [HotelGuestID] = @hotelGuestID
+    SELECT [HotelGuestID],[FirstName],[LastName],[Address1],[Address2],[HotelGuest].[Zip],[City],[State],[PhoneNumber],[EmailAddress]
+    FROM [dbo].[HotelGuest], [dbo].[CityState]
+	WHERE [HotelGuest].[Zip] = [CityState].[Zip]
+		AND (@hotelGuestID IS NULL OR ([HotelGuestID] = @hotelGuestID))
+
+	RETURN @@ROWCOUNT
 
 END

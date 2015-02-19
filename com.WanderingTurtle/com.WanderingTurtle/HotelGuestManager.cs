@@ -14,6 +14,7 @@ namespace com.WanderingTurtle
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
+        /// Miguel Santana 2/18/2015
         public bool AddHotelGuest(NewHotelGuest newHotelGuest)
         {
             try
@@ -31,11 +32,13 @@ namespace com.WanderingTurtle
         /// </summary>
         /// <param name="hotelGuestID">the id of a hotel guest to retrieve</param>
         /// <returns>HotelGuest object retrieved from database</returns>
+        /// Miguel Santana 2/18/2015
         public HotelGuest GetHotelGuest(int hotelGuestID)
         {
             try
             {
-                return HotelGuestAccessor.HotelGuestGet(hotelGuestID);
+                List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestID);
+                return (list.Count == 1) ? list.ElementAt(0) : null;
             }
             catch (Exception ex)
             {
@@ -47,6 +50,7 @@ namespace com.WanderingTurtle
         /// Gets a list of all Hotel Guests
         /// </summary>
         /// <returns>List of HotelGuest Objects</returns>
+        /// Miguel Santana 2/18/2015
         public List<HotelGuest> GetHotelGuestList()
         {
             try
@@ -65,6 +69,7 @@ namespace com.WanderingTurtle
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
+        /// Miguel Santana 2/18/2015
         public bool UpdateHotelGuest(HotelGuest oldHotelGuest, NewHotelGuest newHotelGuest)
         {
             try
