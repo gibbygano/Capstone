@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ListingList" Height="488" Width="910">
     <Grid>
-        <ListView HorizontalAlignment="Left" Height="365" Margin="10,10,0,0" VerticalAlignment="Top" Width="739" SelectionChanged="ListView_SelectionChanged">
+        <ListView SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="140" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
@@ -15,6 +15,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
     </Grid>
 </Window>
