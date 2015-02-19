@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                return CityStateAccessor.CityStateGetList();
+                return CityStateAccessor.CityStateGet();
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                List<CityState> list = CityStateAccessor.CityStateGetList();
+                List<CityState> list = CityStateAccessor.CityStateGet(zip);
                 return (list.Count == 1) ? list.ElementAt(0) : null;
             }
             catch (Exception ex)

@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="zip"></param>
         /// <returns>List of CityState Objects</returns>
         /// Miguel Santana 2/18/2015
-        public static List<CityState> CityStateGetList(String zip = null)
+        public static List<CityState> CityStateGet(String zip = null)
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
