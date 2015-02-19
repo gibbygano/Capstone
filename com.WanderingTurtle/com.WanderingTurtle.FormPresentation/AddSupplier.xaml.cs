@@ -83,7 +83,7 @@ namespace com.WanderingTurtle.FormPresentation
         //Created By Will Fritz 2/4/15
         public bool Validate()
         {
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidateAlphaNumeric(txtPhoneNumber.Text) || !Validator.ValidateAlphaNumeric(txtZip.Text))
+            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidatePhone(txtPhoneNumber.Text) || !Validator.ValidateAlphaNumeric(txtZip.Text))
             {
                 lblError.Content = "You must fill out all of the feilds before you can continue.";
                 return false;
