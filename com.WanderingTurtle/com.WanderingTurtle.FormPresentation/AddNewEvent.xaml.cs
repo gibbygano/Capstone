@@ -21,8 +21,15 @@ namespace com.WanderingTurtle.FormPresentation
         EventManager myMan = new EventManager();
         public AddNewEvent()
         {
-            var TempList = myMan.RetrieveEventTypeList();
-            cboxType.ItemsSource = TempList;
+            List<EventType> TempList = myMan.RetrieveEventTypeList();
+            try
+            {
+                cboxType.ItemsSource = TempList;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
             //cboxType.ItemsSource = TempList;
             InitializeComponent();
         }
