@@ -55,11 +55,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void lvEmployeesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
         {
         //    UpdateBooking myBooking;

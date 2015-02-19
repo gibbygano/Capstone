@@ -29,13 +29,5 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-            // collect the values from the form
-            userEmployee.EmployeeID = int.Parse(txtUserID.Text);
-            userEmployee.Password = txtUserPassword.Text;
-
-        }
-
     }
 }

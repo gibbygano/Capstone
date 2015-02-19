@@ -31,9 +31,25 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEmployee()
         {
             InitializeComponent();
+
+            //creating a list for the dropdown userLevel
+            cboUserLevel.ItemsSource = RetrieveUserLevelList();
+
             Instance = this;
+            this.Title = "Add Employee";
         }
-        
+
+        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            addEmployee();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Instance = null;
+
+        }
+
         // Pat Banks - February 15, 2015
         // Parameters: text fields from form
         // Desc.: Method takes values for a new employee from the form and passes values
@@ -41,53 +57,74 @@ namespace com.WanderingTurtle.FormPresentation
         // Failure: Exception is thrown if database is not available or 
         //          new employee cannot be created in the database for any reason
         // Success: A user is added to the database
-
-        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        private void addEmployee()
         {
+            int result;
+
+            if (!Validator.ValidateString(txtFirstName.Text))
+            {
+                MessageBox.Show("Please fill out the first name field.");
+                txtFirstName.Focus();
+                return;
+            }
+            if (!Validator.ValidateString(txtLastName.Text))
+            {
+                MessageBox.Show("Please fill out the last name field.");
+                txtLastName.Focus();
+                return;
+            }
+            if (!Validator.ValidateAlphaNumeric(txtPassword.Text, 4, 8))
+            {
+                MessageBox.Show("Please enter a password with between 4 and 8 characters.");
+                txtPassword.Focus();
+                return;
+            }
+
+            if (cboUserLevel.Text == "" || cboUserLevel.Text == null)
+            {
+                MessageBox.Show("Please select a user level.");
+                cboUserLevel.Focus();
+                return;
+            }
+            
             try
             {
-                if (!Validator.ValidateString(txtLastName.Text))
-                {
-                    MessageBox.Show("Please fill out the last name field.");
-
-                } 
-                else if(!Validator.ValidateString(txtFirstName.Text))
-                {
-                    MessageBox.Show("Please fill out the first name field.");
-                }
-                else if(!Validator.ValidateString(txtPassword.Text))
-                {
-                    MessageBox.Show("Please enter a password.");
-                }
-
                 // collect the values from the form
                 newEmployeeUser.FirstName = this.txtFirstName.Text;
                 newEmployeeUser.LastName = this.txtLastName.Text;
                 newEmployeeUser.Active = this.chkActiveEmployee.IsChecked.Value;
                 newEmployeeUser.Password = this.txtPassword.Text;
-                newEmployeeUser.Level = int.Parse(this.txtUserLevel.Text);
+                newEmployeeUser.Level = int.Parse(this.cboUserLevel.SelectedValue.ToString());
 
-                int result = myManager.AddNewEmployee(newEmployeeUser);
+                result = myManager.AddNewEmployee(newEmployeeUser);
 
-                if (result == 1)
-                {
-                    MessageBox.Show("employee added successfully");
-
-                }
-                else
-                {
-                    MessageBox.Show("There was problem adding to the db");
-                }
-            }
-            catch (Exception ax)
+            } catch (Exception ax)
             {
-                MessageBox.Show(ax.ToString());
-            }            
+                throw ax;
+            }
+
+
+            if (result == 1)
+            {
+                MessageBox.Show("Employee added successfully");
+
+            }
+            else
+            {
+                MessageBox.Show("There was problem adding the employee to the database");
+            }
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private List<RoleData> RetrieveUserLevelList()
         {
-            Instance = null;
-        }        
+            List<RoleData> ListData = new List<RoleData>();
+            ListData.Add(new RoleData { id="Admin", value= 1 });
+            ListData.Add(new RoleData { id = "Concierge", value = 2 });
+            ListData.Add(new RoleData { id="DeskClerk", value=3 });
+            ListData.Add(new RoleData { id = "Valet", value = 4 });
+
+            return ListData;
+
+        }
     }
 }

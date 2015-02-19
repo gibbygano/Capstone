@@ -26,9 +26,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         public ListTheEmployees()
         {
-            employeeList = myEmployees.FetchListEmployees();
             InitializeComponent();
-            lvEmployeesList.ItemsSource = employeeList;
         }
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
@@ -50,7 +48,6 @@ namespace com.WanderingTurtle.FormPresentation
                 System.Media.SystemSounds.Exclamation.Play();
             }
 
-
         }
         private void btnRefreshList_Click(object sender, RoutedEventArgs e)
         {
@@ -58,6 +55,27 @@ namespace com.WanderingTurtle.FormPresentation
             lvEmployeesList.ItemsSource = employeeList;
 
             lvEmployeesList.Items.Refresh();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshEmployeeList();
+        }
+
+        private void RefreshEmployeeList()
+        {
+            lvEmployeesList.ItemsPanel.LoadContent();
+
+            try
+            {
+                employeeList = myEmployees.FetchListEmployees();
+                lvEmployeesList.ItemsSource = employeeList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

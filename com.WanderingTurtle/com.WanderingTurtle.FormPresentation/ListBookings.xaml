@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
             d:DesignHeight="400" d:DesignWidth="700">
     <Grid Background="#FFE5E5E5">
-        <ListView x:Name="lvBookingList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="561" Margin="9,5,0,0" SelectionChanged="lvEmployeesList_SelectionChanged">
+        <ListView x:Name="lvBookingList" HorizontalAlignment="Left" Height="350" VerticalAlignment="Top" Width="561" Margin="9,5,0,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width ="75" Header="Booking ID" DisplayMemberBinding="{Binding BookingID}"  />
