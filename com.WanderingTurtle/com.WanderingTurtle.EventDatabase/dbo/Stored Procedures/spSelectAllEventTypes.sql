@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE spSelectAllEventTypes
 AS
-	SELECT *
+	SELECT EventTypeID, EventName
 	FROM EventType
-	RETURN @@ROWCOUNT

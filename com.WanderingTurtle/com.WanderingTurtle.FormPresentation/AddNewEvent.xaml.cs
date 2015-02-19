@@ -21,6 +21,8 @@ namespace com.WanderingTurtle.FormPresentation
         EventManager myMan = new EventManager();
         public AddNewEvent()
         {
+            var TempList = myMan.RetrieveEventTypeList();
+            
             List<EventType> TempList = myMan.RetrieveEventTypeList();
             try
             {
@@ -32,6 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             //cboxType.ItemsSource = TempList;
             InitializeComponent();
+            cboxType.ItemsSource = TempList;
         }
 
         /// <summary>

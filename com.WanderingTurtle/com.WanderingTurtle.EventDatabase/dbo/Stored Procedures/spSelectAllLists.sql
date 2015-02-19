@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE spSelectAllLists
 AS
-	SELECT *
+	SELECT SupplierID, ItemListID, DateListed
 	FROM Lists
-	RETURN @@ROWCOUNT

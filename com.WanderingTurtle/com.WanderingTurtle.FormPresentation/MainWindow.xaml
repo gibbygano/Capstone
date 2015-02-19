@@ -4,54 +4,30 @@
         xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
         Title="MainWindow" Height="525" Width="950" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFE5E5E5">
-        
-        <TabControl x:Name="tabNames" IsEnabled="True" HorizontalAlignment="Left" Height="457" Margin="0,31,0,0" VerticalAlignment="Top" Width="933">
-                    
-            <TabItem Header="Events" >
-                <Grid Background="#FFE5E5E5"  x:Name="LayoutEventList">
-                    <local:ListEvents />
-                    
-                </Grid>
+        <TabControl x:Name="tabNames">
+            <TabItem Header="Events">
+                <local:ListEvents />
             </TabItem>
-            
+
             <TabItem Header="Listings">
-                <Grid Background="#FFE5E5E5" x:Name="LayoutListingList">
-                    <local:ListTheListings />
-                  
-                </Grid>
+                <local:ListTheListings />
             </TabItem>
 
             <TabItem Header="Bookings">
-                <Grid Background="#FFE5E5E5" x:Name="LayoutBookingList">
-                    <local:ListBookings />
-                    
-
-                </Grid>
+                <local:ListBookings />
             </TabItem>
 
             <TabItem Header="Suppliers">
-
-                <Grid Background="#FFE5E5E5" x:Name="LayoutSupplierList">
-                    <local:ListSuppliers />                    
-                </Grid>
-
+                <local:ListSuppliers />
             </TabItem>
-            
+
             <TabItem Header="Employees">
-                <!-- x:Name gives the grid a name;  local: ListTheEmployees references the user control ListTheEmployees-->
-                <Grid Background="#FFE5E5E5" x:Name="LayoutEmployeeList">
-                    <local:ListTheEmployees />
-                </Grid>
+                <local:ListTheEmployees />
             </TabItem>
-            
-            
+
             <TabItem Header="Hotel Guests">
-                <Grid Background="#FFE5E5E5" x:Name="LayoutGuestList">
-                    <local:ListHotelGuests />
-                </Grid>
+                <local:ListHotelGuests />
             </TabItem>
-
         </TabControl>
-
     </Grid>
 </Window>
