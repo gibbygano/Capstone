@@ -1,6 +1,7 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,6 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             this.myTitle = "Add New Hotel Guest";
+            InitializeEverything();
         }
 
         public HotelGuest CurrentHotelGuest { get; private set; }
@@ -226,11 +228,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// Populates form with required information
         /// </summary>
         /// Miguel Santana 2/18/2015
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void InitializeEverything()
         {
             ChangeMessage();
-            cboZip.ItemsSource = new CityStateManager().GetCityStateList();
+            this.cboZip.ItemsSource = RetrieveZipCodeList();
             ResetFields();
+        }
+
+        private List<CityState> RetrieveZipCodeList()
+        {
+            return new CityStateManager().GetCityStateList();
         }
 
         /********************  Methods not used in Sprint 1 ************************************************/
@@ -246,6 +253,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             this.CurrentHotelGuest = hotelGuest;
             this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
+            InitializeEverything();
         }
     }
 }
