@@ -2,6 +2,8 @@
 
 public class Supplier
 {
+    //Bryan Hurst Feb.19
+    //Object for the creation of Supplier objects with set data fields
     public int SupplierID      { get; set; }
     public string CompanyName  { get; set; }
     public string FirstName    { get; set; }
