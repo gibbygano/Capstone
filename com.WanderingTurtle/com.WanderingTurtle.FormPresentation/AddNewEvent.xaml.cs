@@ -22,6 +22,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         public AddNewEvent()
         {
+            InitializeComponent();
+            List<EventType> TempList = myMan.RetrieveEventTypeList();
 
             try
             {
@@ -32,7 +34,6 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show(ex.ToString());
             }
             //cboxType.ItemsSource = TempList;
-            InitializeComponent();
             cboxType.ItemsSource = TempList;
         }
 
@@ -42,8 +43,10 @@ namespace com.WanderingTurtle.FormPresentation
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             var eventToSubmit = new Event();
-            eventToSubmit.EventItemName = txtEventName.Text;
 
+
+            
+            eventToSubmit.EventItemName = txtEventName.Text;
             try
             {
                 // Number of Guests //
@@ -68,18 +71,18 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice);
+                    eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice.Text);
                 }
 
                 // Start + End date //
-                if (!Validator.ValidateDateTime(DateStart.Text + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + txtEndTime.Text))
+                if (!Validator.ValidateDateTime(txtStartTime.Text) || !Validator.ValidateDateTime(txtEndTime.Text))
                 {
                     throw new Exception("Your dates are wrong");
                 }
                 else
                 {
-                    eventToSubmit.EventStartDate = DateTime.Parse(DateStart.Text + txtStartTime.Text);
-                    eventToSubmit.EventEndDate = DateTime.Parse(dateEnd.Text + txtEndTime.Text);
+                    eventToSubmit.EventStartDate = DateTime.Parse(txtStartTime.Text);
+                    eventToSubmit.EventEndDate = DateTime.Parse(txtEndTime.Text);
                 }
 
                 // On-site //
@@ -110,16 +113,55 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new Exception("Please fill out the Transportation field");
                 }
 
+                eventToSubmit.Description = txtDescrip.Text;
+
                 int TypeSelected = cboxType.SelectedIndex;
+                try
+                {
+                    eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
+                }
+                catch(Exception exe)
+                {
+                    MessageBox.Show(exe.ToString());
+                }
 
-                eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
-
-                myMan.AddNewEvent(eventToSubmit);
+                MessageBox.Show("Successfully added the event!");
+                this.Close();
+                try
+                {
+                    myMan.AddNewEvent(eventToSubmit);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void clicktxtField(object sender, MouseEventArgs e)
+        {
+            var newTxtBox = (TextBox)sender;
+            newTxtBox.Text = "";
+            sender = newTxtBox;
+        }
+
+        private void txtMinGuest_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            var newTxtBox = (TextBox)sender;
+            newTxtBox.Text = "";
+            sender = newTxtBox;
+        }
+
+
+
     }
 }

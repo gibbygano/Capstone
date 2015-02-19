@@ -26,6 +26,11 @@ namespace com.WanderingTurtle.FormPresentation
         public ListEvents()
         {
             InitializeComponent();
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             try
             {
                 myEventList = myMan.RetrieveEventList();
@@ -53,14 +58,27 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
             Window AddEvent = new AddNewEvent();
-            AddEvent.Show();
+
+            if (AddEvent.ShowDialog() == false)
+            {
+                Refresh();
+            }
         }
 
         // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+
+
+
+        /// <summary>
+        /// Uses the EventManager to archive a completed / no longer offered event.
+        /// It uses the selected event to delete a specific item.
+        /// </summary>
+        private void btnDeleteEvent_Click(object sender, RoutedEventArgs e)
         {
-            Window EditEvent = new EditExistingEvent();
-            EditEvent.Show();
+            int x = lvEvents.SelectedIndex;
+            Event EventToDelete = (Event)lvEvents.Items[x];
+            myMan.ArchiveAnEvent(EventToDelete);
+            Refresh();
         }
     }
 

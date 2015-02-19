@@ -22,18 +22,19 @@ namespace com.WanderingTurtle.DataAccess
             var cmdText = "spInsertEventItem";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             //Set up Parameters For the Stored Procedure
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventStartTime", newEvent.EventStartDate);
             cmd.Parameters.AddWithValue("@EventEndTime", newEvent.EventEndDate);
             cmd.Parameters.AddWithValue("@MaxNumberOfGuests", newEvent.MaxNumGuests);
+            cmd.Parameters.AddWithValue("@MinNumberOfGuests", newEvent.MinNumGuests);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@PricePerPerson", newEvent.PricePerPerson);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
-            cmd.Parameters.AddWithValue("@Active", newEvent.Active);
 
             try
             {
