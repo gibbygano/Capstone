@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingAccessor.cs" />
-    <Compile Include="BookingLineItemAccessor.cs" />
     <Compile Include="CityStateAccessor.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="EventAccessor.cs" />

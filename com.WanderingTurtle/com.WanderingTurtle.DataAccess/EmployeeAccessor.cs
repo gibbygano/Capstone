@@ -74,63 +74,7 @@ namespace com.WanderingTurtle.DataAccess
         }
 
        
-        // Ryan Blake
-        // February 12, 2015
 
-        // Parameters: firstName || Type: string, lastName || Type: string
-
-        // Desc.: Method takes in an employee first name and last name, submits
-        // those variables to the stored procedure spSelect Employee
-        // which will return the specific employee that matches the firstName and lastName
-
-        // Failure: Exception is thrown that asks the user to try their search again
-        // becuase the employee wasn't found
-
-        // Success: An employee object is returned from the database and from the method
-        // as myEmployee
-        public static Employee GetEmployee(string firstName, string lastName)
-        {
-            var conn = DatabaseConnection.GetDatabaseConnection();
-
-            var cmdText = "spSelectEmployee";
-            var cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@firstName", firstName);
-            cmd.Parameters.AddWithValue("@lastName", lastName);
-
-            Employee myEmployee = new Employee();
-
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    reader.Read();
-                    myEmployee.EmployeeID = (int)reader.GetValue(0);
-                    myEmployee.FirstName = reader.GetValue(1).ToString();
-                    myEmployee.LastName = reader.GetValue(2).ToString();
-                    myEmployee.Level = (int)reader.GetValue(3);
-                    myEmployee.Active = (bool)reader.GetValue(4);
-                }
-                else
-                {
-                    var ax = new ApplicationException("Specific employee not found, check your search parameters and try again.");
-                    throw ax;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return myEmployee;
-        }
         /*Overloaded method-follows same principle as GetEmployee, 
          * but takes an int of empID instead
          * if it fails, throws exception
@@ -226,6 +170,9 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
+
+
+        /********************  Methods not used in Sprint 1 ************************************************/
         // Ryan Blake
         // February 12, 2015
 
@@ -283,5 +230,64 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+
+        // Ryan Blake
+        // February 12, 2015
+
+        // Parameters: firstName || Type: string, lastName || Type: string
+
+        // Desc.: Method takes in an employee first name and last name, submits
+        // those variables to the stored procedure spSelect Employee
+        // which will return the specific employee that matches the firstName and lastName
+
+        // Failure: Exception is thrown that asks the user to try their search again
+        // becuase the employee wasn't found
+
+        // Success: An employee object is returned from the database and from the method
+        // as myEmployee
+        public static Employee GetEmployee(string firstName, string lastName)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+
+            var cmdText = "spSelectEmployee";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+
+            Employee myEmployee = new Employee();
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    myEmployee.EmployeeID = (int)reader.GetValue(0);
+                    myEmployee.FirstName = reader.GetValue(1).ToString();
+                    myEmployee.LastName = reader.GetValue(2).ToString();
+                    myEmployee.Level = (int)reader.GetValue(3);
+                    myEmployee.Active = (bool)reader.GetValue(4);
+                }
+                else
+                {
+                    var ax = new ApplicationException("Specific employee not found, check your search parameters and try again.");
+                    throw ax;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return myEmployee;
+        }
+
     }
 }

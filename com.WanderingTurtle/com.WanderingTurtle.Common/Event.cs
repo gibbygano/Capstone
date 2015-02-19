@@ -2,6 +2,8 @@
 
 public class Event
 {
+    //Bryan Hurst Feb.19
+    //Object for the creation of Event objects with set data fields
     public int EventItemID         { get; set; }
     public string EventItemName    { get; set; }
     public DateTime EventStartDate { get; set; }
@@ -37,16 +39,6 @@ public class Event
 	}
 
     public Event()
-    {
-
-    }
-
-    void changeDate()
-    {
-
-    }
-
-    void modifyEventInfo()
     {
 
     }

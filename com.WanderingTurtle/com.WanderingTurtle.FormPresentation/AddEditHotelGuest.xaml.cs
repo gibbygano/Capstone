@@ -1,6 +1,7 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,19 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             this.myTitle = "Add New Hotel Guest";
-        }
-
-        /// <summary>
-        /// Edit an Existing Hotel Guest
-        /// </summary>
-        /// <param name="hotelGuest"></param>
-        /// Miguel Santana 2/18/2015
-        public AddEditHotelGuest(HotelGuest hotelGuest)
-        {
-            InitializeComponent();
-
-            this.CurrentHotelGuest = hotelGuest;
-            this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
+            InitializeEverything();
         }
 
         public HotelGuest CurrentHotelGuest { get; private set; }
@@ -151,11 +140,11 @@ namespace com.WanderingTurtle.FormPresentation
             }
             if (cboZip.SelectedItem == null)
             {
-                ChangeTitle("Please enter a Zip Code");
+                ChangeTitle("Please select a Zip Code");
                 cboZip.Focus();
                 return;
             }
-            if (txtPhoneNumber.Text != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
+            if (txtPhoneNumber.Text.Trim() != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
             {
                 ChangeTitle("Please enter a valid Phone Number");
                 txtPhoneNumber.Focus();
@@ -239,11 +228,32 @@ namespace com.WanderingTurtle.FormPresentation
         /// Populates form with required information
         /// </summary>
         /// Miguel Santana 2/18/2015
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void InitializeEverything()
         {
             ChangeMessage();
-            cboZip.ItemsSource = new CityStateManager().GetCityStateList();
+            this.cboZip.ItemsSource = RetrieveZipCodeList();
             ResetFields();
+        }
+
+        private List<CityState> RetrieveZipCodeList()
+        {
+            return new CityStateManager().GetCityStateList();
+        }
+
+        /********************  Methods not used in Sprint 1 ************************************************/
+
+        /// <summary>
+        /// Edit an Existing Hotel Guest
+        /// </summary>
+        /// <param name="hotelGuest"></param>
+        /// Miguel Santana 2/18/2015
+        public AddEditHotelGuest(HotelGuest hotelGuest)
+        {
+            InitializeComponent();
+
+            this.CurrentHotelGuest = hotelGuest;
+            this.myTitle = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
+            InitializeEverything();
         }
     }
 }

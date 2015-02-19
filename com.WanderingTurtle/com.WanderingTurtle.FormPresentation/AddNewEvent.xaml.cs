@@ -18,18 +18,17 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddNewEvent : Window
     {
-        EventManager myMan = new EventManager();
+        private EventManager myMan = new EventManager();
+
         public AddNewEvent()
         {
-
             InitializeComponent();
-            
             List<EventType> TempList = myMan.RetrieveEventTypeList();
             try
             {
                 cboxType.ItemsSource = TempList;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -73,7 +72,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice.Text);
                 }
-                
+
                 // Start + End date //
                 if (!Validator.ValidateDateTime(txtStartTime.Text) || !Validator.ValidateDateTime(txtEndTime.Text))
                 {

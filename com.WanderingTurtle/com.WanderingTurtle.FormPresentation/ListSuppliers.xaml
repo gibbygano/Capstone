@@ -21,5 +21,7 @@
         </ListView>
         <Label x:Name="lblError" Content="Error Messages" HorizontalAlignment="Left" Margin="375,366,0,0" VerticalAlignment="Top" Foreground="Red" Height="25" Width="376"/>
         <Button x:Name="btnAddSupplier" Content="Add Supplier" HorizontalAlignment="Left" Margin="14,369,0,0" VerticalAlignment="Top" Click="btnAddSupplier_Click" />
+        <Button x:Name="btnDelete" Content="Delete Supplier" HorizontalAlignment="Left" Margin="194,369,0,0" VerticalAlignment="Top" Width="94" Height="22" Click="btnDelete_Click"/>
+        <Button x:Name="btnUpdate" Content="Update Supplier" HorizontalAlignment="Left" Margin="92,369,0,11" Width="97" Click="btnUpdate_Click"/>
     </Grid>
 </UserControl>

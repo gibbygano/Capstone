@@ -51,10 +51,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
         private void btnRefreshList_Click(object sender, RoutedEventArgs e)
         {
-            employeeList = myEmployees.FetchListEmployees();
-            lvEmployeesList.ItemsSource = employeeList;
-
-            lvEmployeesList.Items.Refresh();
+            RefreshEmployeeList();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -70,10 +67,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 employeeList = myEmployees.FetchListEmployees();
                 lvEmployeesList.ItemsSource = employeeList;
+                lvEmployeesList.Items.Refresh();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Unable to retrieve employee list from the database. \n" + ex.Message);
             }
 
         }

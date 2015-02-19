@@ -1,0 +1,20 @@
+     
+        private void btnUpdateBooking_Click(object sender, RoutedEventArgs e)
+        {
+        //    UpdateBooking myBooking;
+        //    string id = lvBookingList.SelectedItems[0].ToString();
+        //    if (UpdateBooking.Instance == null)
+        //    {
+        //        myBooking = new UpdateBooking(id);
+        //        myBooking.Show();
+        //    }
+        //    else
+        //    {
+        //        myBooking = UpdateBooking.Instance;
+        //        myBooking.BringToFront();
+
+        //        //Creates a sound effect through the System.Media and  flash from accessibility
+
+        //        System.Media.SystemSounds.Exclamation.Play();
+        //    }
+        }

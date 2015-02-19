@@ -15,6 +15,12 @@ namespace com.WanderingTurtle.DataAccess
     {
 
         //Justin Pennington 2/14/15
+        /// <summary>
+        /// Returns a list of all listings
+        /// </summary>
+        /// <returns>
+        /// myLists
+        /// </returns>
         public static List<Lists> GetListsList()
         {
             var myLists = new List<Lists>();
@@ -59,6 +65,14 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         //Justin Pennington 2/14/15
+        /// <summary>
+        /// Returns a list of listing objects based on the parameters sent with the method call
+        /// </summary>
+        /// <param name="inSupplierID">Object holding SupplierID</param>
+        /// <param name="inItemListID">Object holding ItemListID</param>
+        /// <returns>
+        /// theLists
+        /// </returns>
         public static Lists GetLists(string inSupplierID, string inItemListID)
         {
             var theLists = new Lists();
@@ -98,6 +112,13 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         //Justin Pennington 2/14/15
+        /// <summary>
+        /// Adds new lists object
+        /// </summary>
+        /// <param name="newLists">Object holding new listing data</param>
+        /// <returns>
+        /// rowsAffected
+        /// </returns>
         public static int AddLists(Lists newLists)
         {
             //Connect to Database
@@ -132,6 +153,15 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         //Justin Pennington 2/14/15
+        /// <summary>
+        /// Updates database information and compares old information with current database values
+        /// to ensure that the database has not been modified in the meantime
+        /// </summary>
+        /// <param name="oldList">Old values to ensure data has not been modified</param>
+        /// <param name="newList">New values to be written to database</param>
+        /// <returns>
+        /// rowsAffected
+        /// </returns>
         public static int UpdateLists(Lists oldList, Lists newList)
         {
             //connect to Database
@@ -173,6 +203,13 @@ namespace com.WanderingTurtle.DataAccess
 
 
         //Justin Pennington 2/14/15
+        /// <summary>
+        /// Marks passed Lists as inactive
+        /// </summary>
+        /// <param name="inLists">List to be deactivated</param>
+        /// <returns>
+        /// rowsAffected
+        /// </returns>
         public static int DeleteLists(Lists inLists)
         {
             //make connection to Database

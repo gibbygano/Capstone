@@ -13,25 +13,7 @@ namespace com.WanderingTurtle
         { 
         
         }
-        /* RetrieveBooking- a method used to request a booking from the data access layer and database
-        * Takes an input of an int- the BookingID number to locate the requested record.
-        * Output is a booking object to hold the booking record.
-        * Specific Exception thrown is if there was an issue accessing the data.
-        * Created By: Tony Noel - 2/5/15
-        * */
-        public Booking RetrieveBooking (int bookingID)
-        {
-            try
-            {
-                var bookingToGet = BookingAccessor.getBooking(bookingID);
-                return bookingToGet;
-            }
-            catch (Exception)
-            {
-                var ax = new ApplicationException("There was a problem accessing your data.");
-                throw ax;
-            }
-        }
+  
 
         /* RetrieveBookingList- a method used to retrieve a list of bookings through the data access layer, from
          * the database
@@ -78,12 +60,26 @@ namespace com.WanderingTurtle
         * Takes an input of a booking object
          * Returns an int- the number of rows affected.
         * Created By: Tony Noel - 2/5/15
+         * Updated By: Pat Banks - 2/19/15 exception handling
         * */
         public int AddaBooking(Booking newBooking)
         {
-            var numRows = BookingAccessor.addBooking(newBooking);
-            return numRows;
+            try
+            {
+                var numRows = BookingAccessor.addBooking(newBooking);
+                return numRows;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
+
+             
+
+/********************  Methods not used in Sprint 1 ************************************************/
+
 
         /* EditBooking- a method used to update a booking through the data access layer 
          * to be added to the database
@@ -115,5 +111,26 @@ namespace com.WanderingTurtle
             var numRows = BookingAccessor.deleteBooking(RetrieveBooking(bookingID));
             return numRows;
         }
+
+        /* RetrieveBooking- a method used to request a booking from the data access layer and database
+  * Takes an input of an int- the BookingID number to locate the requested record.
+  * Output is a booking object to hold the booking record.
+  * Specific Exception thrown is if there was an issue accessing the data.
+  * Created By: Tony Noel - 2/5/15
+  * */
+        public Booking RetrieveBooking(int bookingID)
+        {
+            try
+            {
+                var bookingToGet = BookingAccessor.getBooking(bookingID);
+                return bookingToGet;
+            }
+            catch (Exception)
+            {
+                var ax = new ApplicationException("There was a problem accessing your data.");
+                throw ax;
+            }
+        }
+
     }
 }

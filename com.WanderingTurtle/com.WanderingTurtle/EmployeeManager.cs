@@ -33,36 +33,7 @@ namespace com.WanderingTurtle
             }
         }
 
-        // Ryan Blake
-        // February 12, 2015
 
-        // Parameters: oldEmployee || Type: Employee, newEmployee || Type: Employee
-
-        // Desc.: Method takes in new and old employee parameters and then submits them to the 
-        // Data Access Layer method to update the employee record for oldEmployee
-        // with the the information held in newEmployee
-
-        // Failure: EmployeeAccessor method will throw exception to Manager 
-        // saying that the employee could not be found to edit
-
-        // Success: Employee information is updatd in the table and 
-        // an integer is returned to represent rows affected
-
-        // Additional: This will also take the place of a 'Delete' method
-        // The user will simply mark the employee inactive which will change the 
-        // bit value in the table to a 0 to represent false
-        public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
-        {
-            try
-            {
-                return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
-            }
-            catch (Exception ex)
-            {
-                
-                throw ex;
-            }
-        }
 
         // Ryan Blake
         // February 12, 2015
@@ -91,6 +62,58 @@ namespace com.WanderingTurtle
             }
         }
 
+
+        /*Overloaded Method- accepts an int to pass to accessor to search database for an employee record
+         * Successful- returns the employee record
+         * If it fails, throws an exception
+         * Tony Noel- 2/18/15
+         */
+        public Employee FetchEmployee(int empID)
+        {
+            try
+            {
+                return EmployeeAccessor.GetEmployee(empID);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        /********************  Methods not used in Sprint 1 ************************************************/
+
+        // Ryan Blake
+        // February 12, 2015
+
+        // Parameters: oldEmployee || Type: Employee, newEmployee || Type: Employee
+
+        // Desc.: Method takes in new and old employee parameters and then submits them to the 
+        // Data Access Layer method to update the employee record for oldEmployee
+        // with the the information held in newEmployee
+
+        // Failure: EmployeeAccessor method will throw exception to Manager 
+        // saying that the employee could not be found to edit
+
+        // Success: Employee information is updatd in the table and 
+        // an integer is returned to represent rows affected
+
+        // Additional: This will also take the place of a 'Delete' method
+        // The user will simply mark the employee inactive which will change the 
+        // bit value in the table to a 0 to represent false
+        public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
+        {
+            try
+            {
+                return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         // Ryan Blake
         // February 12, 2015
 
@@ -111,23 +134,6 @@ namespace com.WanderingTurtle
             try
             {
                 return EmployeeAccessor.GetEmployee(firstName, lastName);
-            }
-            catch (Exception ex)
-            {
-                
-                throw ex;
-            }
-        }
-        /*Overloaded Method- accepts an int to pass to accessor to search database for an employee record
-         * Successful- returns the employee record
-         * If it fails, throws an exception
-         * Tony Noel- 2/18/15
-         */
-        public Employee FetchEmployee(int empID)
-        {
-            try
-            {
-                return EmployeeAccessor.GetEmployee(empID);
             }
             catch (Exception ex)
             {
