@@ -140,11 +140,11 @@ namespace com.WanderingTurtle.FormPresentation
             }
             if (cboZip.SelectedItem == null)
             {
-                ChangeTitle("Please enter a Zip Code");
+                ChangeTitle("Please select a Zip Code");
                 cboZip.Focus();
                 return;
             }
-            if (txtPhoneNumber.Text != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
+            if (txtPhoneNumber.Text.Trim() != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
             {
                 ChangeTitle("Please enter a valid Phone Number");
                 txtPhoneNumber.Focus();
@@ -252,7 +252,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
 
             this.CurrentHotelGuest = hotelGuest;
-            this.myTitle = "Editing Hotel Guest: " + CurrentHotelGuest.FirstName + " " + CurrentHotelGuest.LastName;
+            this.myTitle = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
         }
     }
