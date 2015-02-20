@@ -1,8 +1,8 @@
 <Window x:Class="com.WanderingTurtle.FormPresentation.AddEditHotelGuest"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddEditHotelGuest" Height="350" Width="350" WindowStartupLocation="CenterScreen">
-    <Grid Margin="5">
+        Title="AddEditHotelGuest" Height="375" Width="350" WindowStartupLocation="CenterScreen">
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -34,14 +34,14 @@
             <Label Grid.Row="5" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="ZIP Code:" />
             <Label Grid.Row="6" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Phone Number:" />
             <Label Grid.Row="7" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Email Address:" />
-            <TextBox  Grid.Column="1" Grid.Row="0" Margin="0,5" Padding="1" TabIndex="0" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtGuestID" IsReadOnly="True" IsTabStop="False" />
-            <TextBox  Grid.Column="1" Grid.Row="1" Margin="0,5" Padding="1" TabIndex="1" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtFirstName" />
-            <TextBox  Grid.Column="1" Grid.Row="2" Margin="0,5" Padding="1" TabIndex="2" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtLastName" />
-            <TextBox  Grid.Column="1" Grid.Row="3" Margin="0,5" Padding="1" TabIndex="3" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtAddress1" />
-            <TextBox  Grid.Column="1" Grid.Row="4" Margin="0,5" Padding="1" TabIndex="4" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtAddress2" />
-            <ComboBox Grid.Column="1" Grid.Row="5" Margin="0,5" Padding="1" TabIndex="5" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="cboZip_GotKeyboardFocus"   DisplayMemberPath="GetZipStateCity"  x:Name="cboZip" />
-            <TextBox  Grid.Column="1" Grid.Row="6" Margin="0,5" Padding="1" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtPhoneNumber" MaxLength="12" />
-            <TextBox  Grid.Column="1" Grid.Row="7" Margin="0,5" Padding="1" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtEmailAddress" />
+            <TextBox  Grid.Column="1" Grid.Row="0" Height="{DynamicResource TextBoxHeight}" TabIndex="0" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged" x:Name="txtGuestID" IsReadOnly="True" IsTabStop="False" />
+            <TextBox  Grid.Column="1" Grid.Row="1" Height="{DynamicResource TextBoxHeight}" TabIndex="1" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtFirstName" />
+            <TextBox  Grid.Column="1" Grid.Row="2" Height="{DynamicResource TextBoxHeight}" TabIndex="2" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtLastName" />
+            <TextBox  Grid.Column="1" Grid.Row="3" Height="{DynamicResource TextBoxHeight}" TabIndex="3" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtAddress1" />
+            <TextBox  Grid.Column="1" Grid.Row="4" Height="{DynamicResource TextBoxHeight}" TabIndex="4" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtAddress2" />
+            <ComboBox Grid.Column="1" Grid.Row="5" Height="{DynamicResource TextBoxHeight}" TabIndex="5" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="cboZip_GotKeyboardFocus"   DisplayMemberPath="GetZipStateCity" x:Name="cboZip" />
+            <TextBox  Grid.Column="1" Grid.Row="6" Height="{DynamicResource TextBoxHeight}" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtPhoneNumber" MaxLength="12" />
+            <TextBox  Grid.Column="1" Grid.Row="7" Height="{DynamicResource TextBoxHeight}" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtEmailAddress" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
