@@ -203,7 +203,7 @@ namespace com.WanderingTurtle.FormPresentation
                 txtAddress1.SelectAll();
                 return;
             }
-            if (txtAddress2.Text.Trim() != null && !Validator.ValidateAlphaNumeric(txtAddress2.Text.Trim(), 0, 255))
+            if (txtAddress2.Text.Trim() != "" && !Validator.ValidateAlphaNumeric(txtAddress2.Text.Trim(), 0, 255))
             {
                 ChangeTitle("Error adding Address2", LabelErrorColor.Error);
                 txtAddress2.Focus();
