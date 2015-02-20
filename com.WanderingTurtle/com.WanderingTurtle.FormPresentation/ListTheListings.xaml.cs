@@ -46,7 +46,10 @@ namespace com.WanderingTurtle.FormPresentation
 
             private void btnAddListing_Click(object sender, RoutedEventArgs e)
             {
-                Window AddItemListings = new AddItemListing();
+
+                int x = lvEvents.SelectedIndex;
+                Event EventToList = (Event)lvEvents.Items[x];
+                Window AddItemListings = new AddItemListing(EventToList);
                 AddItemListings.Show();
             }
 
@@ -55,6 +58,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Window EditEvent = new EditExistingEvent();
                 EditEvent.Show();
+            }
+
+            private void btnAddListing_Click_1(object sender, RoutedEventArgs e)
+            {
+
             }
         }
 

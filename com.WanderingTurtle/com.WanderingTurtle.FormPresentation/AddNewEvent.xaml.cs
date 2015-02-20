@@ -58,7 +58,7 @@ namespace com.WanderingTurtle.FormPresentation
                     int x;
                     int y;
                     int.TryParse(txtMaxGuest.Text, out x);
-                    int.TryParse(txtMaxGuest.Text, out y);
+                    int.TryParse(txtMinGuest.Text, out y);
                     eventToSubmit.MaxNumGuests = x;
                     eventToSubmit.MinNumGuests = y;
                 }
@@ -115,26 +115,15 @@ namespace com.WanderingTurtle.FormPresentation
                 eventToSubmit.Description = txtDescrip.Text;
 
                 int TypeSelected = cboxType.SelectedIndex;
-                try
-                {
-                    eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
-                }
-                catch(Exception exe)
-                {
-                    MessageBox.Show(exe.ToString());
-                }
 
-                MessageBox.Show("Successfully added the event!");
-                this.Close();
-                try
+                eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
+
+                if(myMan.AddNewEvent(eventToSubmit) == 1);
                 {
-                    myMan.AddNewEvent(eventToSubmit);
+                    MessageBox.Show("Successfully Added Event");
+                    this.Close();
                 }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
+                            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());

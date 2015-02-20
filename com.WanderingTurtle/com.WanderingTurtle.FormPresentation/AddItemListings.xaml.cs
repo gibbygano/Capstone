@@ -84,7 +84,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                MessageBox.Show(ex.ToString());
             }
 
             //BLL: As of 2/14/15 this method is missing. Must be added. 

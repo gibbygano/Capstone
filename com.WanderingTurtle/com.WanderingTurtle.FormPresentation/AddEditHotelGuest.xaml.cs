@@ -5,9 +5,20 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace com.WanderingTurtle.FormPresentation
 {
+    /// <summary>
+    /// Enum for setting error status of <paramref name="lblTitle"/>
+    /// </summary>
+    /// Miguel Santana 2/19/2015
+    internal enum LabelErrorColor
+    {
+        Default,
+        Error
+    }
+
     /// <summary>
     /// Interaction logic for AddEditHotelGuest.xaml
     /// </summary>
@@ -74,10 +85,33 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="message"></param>
         /// Miguel Santana 2/18/2015
-        private void ChangeTitle(String message)
+        private void ChangeTitle(String message, LabelErrorColor color = LabelErrorColor.Default)
         {
             this.Title = message;
             this.lblTitle.Content = message;
+            var test = this.lblTitle.Background;
+
+            switch (color)
+            {
+                case LabelErrorColor.Default:
+                    this.lblTitle.Background = null;
+                    break;
+
+                case LabelErrorColor.Error:
+                    this.lblTitle.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Populates form with required information
+        /// </summary>
+        /// Miguel Santana 2/18/2015
+        private void InitializeEverything()
+        {
+            ChangeMessage();
+            this.cboZip.ItemsSource = RetrieveZipCodeList();
+            ResetFields();
         }
 
         /// <summary>
@@ -111,49 +145,86 @@ namespace com.WanderingTurtle.FormPresentation
             this.txtFirstName.Focus();
         }
 
+        private List<CityState> RetrieveZipCodeList()
+        {
+            return new CityStateManager().GetCityStateList();
+        }
+
         /// <summary>
         /// Validate fields and submit data to HotelGuestManager
         /// </summary>
         /// Miguel Santana 2/18/2015
         private void Submit()
         {
+            if (CurrentHotelGuest != null)
+            {
+                if (CurrentHotelGuest.FirstName.Equals(txtFirstName.Text.Trim())
+                    && CurrentHotelGuest.LastName.Equals(txtLastName.Text.Trim())
+                    && CurrentHotelGuest.Address1.Equals(txtAddress1.Text.Trim())
+                    && CurrentHotelGuest.Address2.Equals(txtAddress2.Text.Trim())
+                    && CurrentHotelGuest.CityState.Zip.Equals(((CityState)cboZip.SelectedItem).Zip)
+                    && CurrentHotelGuest.PhoneNumber.Equals(txtPhoneNumber.Text.Trim())
+                    && CurrentHotelGuest.EmailAddress.Equals(txtEmailAddress.Text.Trim()))
+                {
+                    switch (MessageBox.Show(this, "No data was changed. Would you like to keep editing?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Warning))
+                    {
+                        case MessageBoxResult.Cancel:
+                        case MessageBoxResult.No:
+                            this.Close();
+                            break;
+
+                        case MessageBoxResult.OK:
+                        case MessageBoxResult.Yes:
+                        default:
+                            return;
+                    }
+                }
+            }
+
             if (!Validator.ValidateString(txtFirstName.Text.Trim(), 1, 50))
             {
-                ChangeTitle("Please enter a First Name");
+                ChangeTitle("Please enter a First Name", LabelErrorColor.Error);
                 txtFirstName.Focus();
                 txtFirstName.SelectAll();
                 return;
             }
             if (!Validator.ValidateString(txtLastName.Text.Trim(), 1, 50))
             {
-                ChangeTitle("Please enter a Last Name");
+                ChangeTitle("Please enter a Last Name", LabelErrorColor.Error);
                 txtLastName.Focus();
                 txtLastName.SelectAll();
                 return;
             }
-            if (txtAddress1.Text.Trim() == "")
+            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim(), 1, 255))
             {
-                ChangeTitle("Please enter an Address");
+                ChangeTitle("Please enter an Address", LabelErrorColor.Error);
                 txtAddress1.Focus();
                 txtAddress1.SelectAll();
                 return;
             }
+            if (txtAddress2.Text.Trim() != null && !Validator.ValidateAlphaNumeric(txtAddress2.Text.Trim(), 0, 255))
+            {
+                ChangeTitle("Error adding Address2", LabelErrorColor.Error);
+                txtAddress2.Focus();
+                txtAddress2.SelectAll();
+                return;
+            }
             if (cboZip.SelectedItem == null)
             {
-                ChangeTitle("Please select a Zip Code");
+                ChangeTitle("Please select a Zip Code", LabelErrorColor.Error);
                 cboZip.Focus();
                 return;
             }
             if (txtPhoneNumber.Text.Trim() != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Phone Number");
+                ChangeTitle("Please enter a valid Phone Number", LabelErrorColor.Error);
                 txtPhoneNumber.Focus();
                 txtPhoneNumber.SelectAll();
                 return;
             }
             if (txtEmailAddress.Text.Trim() != "" && !Validator.ValidateEmail(txtEmailAddress.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Email Address");
+                ChangeTitle("Please enter a valid Email Address", LabelErrorColor.Error);
                 txtEmailAddress.Focus();
                 txtEmailAddress.SelectAll();
                 return;
@@ -189,7 +260,15 @@ namespace com.WanderingTurtle.FormPresentation
                 );
             }
 
-            if (result) { this.Close(); }
+            if (result)
+            {
+                MessageBox.Show(this, "Your Request was Processed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(this, "Error Processing Request", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -224,24 +303,7 @@ namespace com.WanderingTurtle.FormPresentation
             ChangeMessage();
         }
 
-        /// <summary>
-        /// Populates form with required information
-        /// </summary>
-        /// Miguel Santana 2/18/2015
-        private void InitializeEverything()
-        {
-            ChangeMessage();
-            this.cboZip.ItemsSource = RetrieveZipCodeList();
-            ResetFields();
-        }
-
-        private List<CityState> RetrieveZipCodeList()
-        {
-            return new CityStateManager().GetCityStateList();
-        }
-
-        /********************  Methods not used in Sprint 1 ************************************************/
-
+        ///********************  Methods not used in Sprint 1 ************************************************/
         /// <summary>
         /// Edit an Existing Hotel Guest
         /// </summary>

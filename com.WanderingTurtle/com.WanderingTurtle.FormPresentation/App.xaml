@@ -4,6 +4,6 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Thickness x:Key="Button Margin">0,3,5,0</Thickness>
-        <Thickness x:Key="Button Padding">20,10</Thickness>
+        <Thickness x:Key="Button Padding">7,3</Thickness>
     </Application.Resources>
 </Application>

@@ -3,7 +3,7 @@
 CREATE PROCEDURE [dbo].[spSelectAllBookings]
 AS
 BEGIN
-	SELECT * 
+	SELECT BookingID, GuestID, EmployeeID, ItemListID, Quantity, DateBooked
 	FROM Booking 
 END
 
