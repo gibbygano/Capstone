@@ -6,6 +6,9 @@ using System.Text;
 
 namespace com.WanderingTurtle.DataAccess
 {
+    /// <summary>
+    /// Creates a connection string to connect to the database
+    /// </summary>
     public class DatabaseConnection
     {
         private const string ConnectionString = @"Data Source=localhost;Initial Catalog=com.WanderingTurtle.EventDatabase;Integrated Security=True";

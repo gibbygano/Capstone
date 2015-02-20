@@ -9,6 +9,14 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class BookingLineItemAccessor
     {
+        /// <summary>
+        /// Returns a BookingLineItem based on input parameters
+        /// </summary>
+        /// <param name="bookingID"></param>
+        /// <param name="ItemListID"></param>
+        /// <returns>
+        /// bliToReturn
+        /// </returns>
         public static BookingLineItem getBookingLineItem(int bookingID, int ItemListID)
         {
             var bliToReturn = new BookingLineItem();
@@ -100,7 +108,13 @@ namespace com.WanderingTurtle.DataAccess
             return bliList;
         }
 
-
+        /// <summary>
+        /// Marks passed BookingLineItem as inactive
+        /// </summary>
+        /// <param name="itemToDelete"></param>
+        /// <returns>
+        /// Execution command
+        /// </returns>
         public static int deleteBookingLineItem(BookingLineItem itemToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -126,7 +140,13 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
         }
-
+        /// <summary>
+        /// Adds new BookingLineItem object
+        /// </summary>
+        /// <param name="itemToAdd"></param>
+        /// <returns>
+        /// Execution command
+        /// </returns>
         public static int addBookingLineItem(BookingLineItem itemToAdd)
         {
 
@@ -155,7 +175,15 @@ namespace com.WanderingTurtle.DataAccess
 
 
         }
-
+        /// <summary>
+        /// Updates database information and compares old information with current database values
+        /// to ensure that the database has not been modified in the meantime
+        /// </summary>
+        /// <param name="oldList">Old values to ensure data has not been modified</param>
+        /// <param name="newList">New values to be written to database</param>
+        /// <returns>
+        /// Execution command
+        /// </returns>
         public static int updateBookingLineItem(BookingLineItem newItem, BookingLineItem oldItem)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

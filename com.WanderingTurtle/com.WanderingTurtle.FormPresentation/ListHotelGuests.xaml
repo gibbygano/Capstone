@@ -21,15 +21,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <ToolBarPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Padding="5" x:Name="btnAddGuest"    Content="Add Guest"    Click="btnAddGuest_Click" />
-                <Button Padding="5" x:Name="btnRefreshList" Content="Refresh List" Click="btnRefreshList_Click" />
-            </ToolBarPanel>
-        </Grid>
+        <WrapPanel Grid.Row="1">
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddGuest"    Content="Add Guest"    Click="btnAddGuest_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnRefreshList" Content="Refresh List" Click="btnRefreshList_Click" />
+        </WrapPanel>
     </Grid>
 </UserControl>
