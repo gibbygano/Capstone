@@ -7,5 +7,4 @@ CREATE PROCEDURE [dbo].[spAddEmployee]
 AS
 	INSERT INTO employee ([firstName], [lastName], [empPassword], [empLevel])
 		VALUES(@firstName, @lastName, @empPassword, @empLevel)
-		
-GO
+RETURN @@ROWCOUNT		

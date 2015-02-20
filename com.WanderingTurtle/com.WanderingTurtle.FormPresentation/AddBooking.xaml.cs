@@ -20,12 +20,11 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking : Window
     {
-        public static AddBooking Instance;
         public OrderManager myManager = new OrderManager();
         public EmployeeManager myEmp = new EmployeeManager();
         public HotelGuestManager myGuest = new HotelGuestManager();
-
         public List<ListItemObject> myEventList;
+
         public AddBooking()
         {
             myEventList = myManager.RetrieveListItemList();
@@ -38,9 +37,9 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
-            addBooking();
-            
+            addBooking();           
         }
+
         /*addBooking()- a method to collect all information from the form and turn them into strings
          * Then after taking each variable and testing them in their specific validation method, parses them 
          * into the correct variable needed to be stored as a booking and line item object.
@@ -50,7 +49,6 @@ namespace com.WanderingTurtle.FormPresentation
         public void addBooking()
         {
             string empID = tbAddBookingEmpID.Text;
-            //string guest = tbAddBookingGuestID.Text;
             string guest = this.cboHotelGuests.ToString();
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
@@ -58,42 +56,60 @@ namespace com.WanderingTurtle.FormPresentation
             int eID, gID, qID;
             Booking myBooking;
 
-            if (selectedItem() == false)
-            {
-                MessageBox.Show("Please select an event!");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
+
             if (isEmp(empID) == false)
             {
                 MessageBox.Show("Please review the Employee ID. A record of this employee is not on file.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            if (okQuantity(quantity) == false)
+
+            if (cboHotelGuests.Text == "" || cboHotelGuests.Text == null)
             {
-                MessageBox.Show("Please review the quantity entered. Must be a number and cannot excede the quantity offered for the event.");
+                MessageBox.Show("Please select a Hotel Guest.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            else
+            int.TryParse(quantity, out qID);
+            if (okQuantity(quantity) == false || qID <= 0)
+            {
+                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
+                btnAddBookingAdd.IsEnabled = true;
+                return;
+            }
+
+
+            if (selectedItem() == false)
+            {
+                MessageBox.Show("Please select an event!");
+                btnAddBookingAdd.IsEnabled = true;
+                return;
+            }
+            try
             {
                 selected = getSelectedItem();
-
+                
                 int.TryParse(empID, out eID);
-                int.TryParse(guest, out gID);
-                int.TryParse(quantity, out qID);
+
+                gID = int.Parse(this.cboHotelGuests.SelectedValue.ToString());
         
                 myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
-                //calls to booking manager to add a booking. BookingID is auto-generated in database
-                myManager.AddaBooking(myBooking);
-         
-                MessageBox.Show("The booking has been successfully added.");
-                clearFields();
-                btnAddBookingAdd.IsEnabled = true;
+           
+                //calls to booking manager to add a booking. BookingID is auto-generated in database                
+                int result = myManager.AddaBooking(myBooking);
 
-            }//end else
-            
+                if (result == 1)
+                {
+                    MessageBox.Show("The booking has been successfully added.");
+                    // closes window after add
+                    this.Close();
+                }
+
+            } //end try
+            catch (Exception ax)
+            {
+                MessageBox.Show(ax.Message);
+            }
 
         }//end method addBooking()
 
@@ -108,7 +124,6 @@ namespace com.WanderingTurtle.FormPresentation
                 getSelectedItem();
                 works = true;
                 return works;
-
             }
             catch
             {
@@ -181,23 +196,17 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        /*Sets form fields back to null after an add has been successfully completed
-         * Tony Noel-2/11/15
-         */
-
+//        /*Sets form fields back to null after an add has been successfully completed
+//         * Tony Noel-2/11/15
+//         */
         
-        public void clearFields()
-        {
-            tbAddBookingEmpID.Text = null;
-//tbAddBookingGuestID.Text = null;
+//        public void clearFields()
+//        {
+//            tbAddBookingEmpID.Text = null;
+////tbAddBookingGuestID.Text = null;
            
-            tbAddBookingQuantity.Text = null;
-        }
-
-        private void AddBooking_Closed(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+//            tbAddBookingQuantity.Text = null;
+//        }
 
         // Pat Banks - February 19, 2015
         // Parameters: returns list data

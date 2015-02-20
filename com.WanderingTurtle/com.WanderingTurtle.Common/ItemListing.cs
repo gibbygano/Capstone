@@ -7,6 +7,7 @@ namespace com.WanderingTurtle.Common
 {
     /// <summary>
     /// Creates an ItemListing Object. Contains specific information about the event listing
+    /// Created by Matt Lapka 2/5/15
     /// </summary>
     public class ItemListing
     {

@@ -21,7 +21,6 @@
                     <GridViewColumn Width="30"  Header="Max"                DisplayMemberBinding="{Binding MaxNumGuests}"       />
                     <GridViewColumn Width="100" Header="Transportation"     DisplayMemberBinding="{Binding Transportation}"     />
                     <GridViewColumn Width="100" Header="On-Site"            DisplayMemberBinding="{Binding OnSite}"             />
-                    <GridViewColumn Width="100" Header="Reserved"           DisplayMemberBinding="{Binding CurrentNumGuests}"   />
                 </GridView>
             </ListView.View>
         </ListView>

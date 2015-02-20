@@ -7,10 +7,6 @@ CREATE PROCEDURE [dbo].[spAddBooking]
 	@DateBooked		DateTime
 	
 AS
-BEGIN
-    SET NOCOUNT ON;
-
     INSERT INTO Booking(GuestID, EmployeeID, ItemListID, Quantity, DateBooked)
     VALUES(@GuestID, @EmployeeID, @ItemListID, @Quantity, @DateBooked)
-
-END
+RETURN @@ROWCOUNT

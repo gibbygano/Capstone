@@ -38,15 +38,17 @@ namespace com.WanderingTurtle.FormPresentation
 
         //Will fill the list and set error message to nothing
         //created by Will Fritz 2/6/15
+        //edited by will fritz 2/19/15
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblError.Content = "";
             btnEdit.IsEnabled = false;
-            fillComboBox();
+            fillComboBox();            
         }
 
         //Will validtate the feilds and edit the current supplier
         //created by Will Fritz 2/6/15
+        //edited by will fritz 2/19/15
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (Validate() == false)
@@ -64,6 +66,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         //Will validate the fields and call add supplier method
         //created by Will Fritz 2/6/15
+        //edited by will fritz 2/19/15
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (Validate() == false)
@@ -85,25 +88,59 @@ namespace com.WanderingTurtle.FormPresentation
         //checks to see if all the feilds are fill out and formated with the correct data
         //It returns a false if there is an invalid feilds(s) and will output an error message to the lblError label
         //Created By Will Fritz 2/4/15
+        //edited by will fritz 2/19/15
         public bool Validate()
         {
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidatePhone(txtPhoneNumber.Text) || cboZip.SelectedItem == null)
+            if (!Validator.ValidateAlphaNumeric(txtCompanyName.Text.Trim()))
             {
-                lblError.Content = "You must fill out all of the feilds before you can continue.";
+                lblError.Content = "Company Name field must be filled out and not contain special characters";
                 return false;
             }
             else if (!Validator.ValidateInt(txtUserID.Text))
             {
-                lblError.Content = "User ID feild must be a numeric value";
+                lblError.Content = "User ID field must filled out and be a numeric value and must be 10 digits or less";
                 return false;
             }
-            else if (!Validator.ValidateEmail(txtEmail.Text))
+            else if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
             {
-                lblError.Content = "Not a valid email address";
+                lblError.Content = "Not a valid e-mail address";
+                return false;
+            }
+            else if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            {
+                lblError.Content = "The phone number must filled out and be formated correctly (10 digits)";
+                return false;
+            }
+            else if (cboZip.SelectedItem == null)
+            {
+                lblError.Content = "You must select an zip from the drop down";
+                return false;
+            }
+            else if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
+            {
+                lblError.Content = "The address must be filled out and not contain special characters (spaces allowed)";
+                return false;
+            }
+            else if (!Validator.ValidateString(txtFirstName.Text.Trim()))
+            {
+                lblError.Content = "The fist name field filled out and must not contain special characters (No Spaces)";
+                return false;
+            }
+            else if (!Validator.ValidateString(txtLastName.Text.Trim()))
+            {
+                lblError.Content = "The last name field must be filled out and not contain special characters (No Spaces)";
                 return false;
             }
 
-            _userID = Int32.Parse(txtUserID.Text);
+
+            try
+            {
+                _userID = Int32.Parse(txtUserID.Text);
+            }
+            catch (Exception ex)
+            {
+                lblError.Content = "User ID must be numeric";
+            }
 
             return true;
         }
@@ -117,36 +154,37 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Supplier tempSupplier = new Supplier();
 
-                tempSupplier.CompanyName = txtCompanyName.Text;
-                tempSupplier.FirstName = txtFirstName.Text;
-                tempSupplier.LastName = txtLastName.Text;
-                tempSupplier.Address1 = txtAddress1.Text;
-                tempSupplier.Address2 = txtAddress2.Text;
+                tempSupplier.CompanyName = txtCompanyName.Text.Trim();
+                tempSupplier.FirstName = txtFirstName.Text.Trim();
+                tempSupplier.LastName = txtLastName.Text.Trim();
+                tempSupplier.Address1 = txtAddress1.Text.Trim();
+                tempSupplier.Address2 = txtAddress2.Text.Trim();
                 tempSupplier.PhoneNumber = txtPhoneNumber.Text;
                 tempSupplier.Zip = cboZip.Text;
-                tempSupplier.EmailAddress = txtEmail.Text;
+                tempSupplier.EmailAddress = txtEmail.Text.Trim();
                 tempSupplier.UserID = _userID;
 
                 _manager.AddANewSupplier(tempSupplier);
 
                 System.Windows.Forms.MessageBox.Show("Supplier was added to the database");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                lblError.Content = "There was an error adding the supplier";
+                MessageBox.Show(ex.Message);
             }
         }
 
         //This will fill the add/edit tab feilds with the data from a selected Supplier from the list view
         //Created by Will Fritz 2/6/15
+        //edited by will fritz 2/19/15
         public void FillUpdateList(Supplier supplierUpdate)
         {
-            txtCompanyName.Text = supplierUpdate.CompanyName;
-            txtFirstName.Text = supplierUpdate.FirstName;
-            txtLastName.Text = supplierUpdate.LastName;
-            txtAddress1.Text = supplierUpdate.Address1;
-            txtAddress2.Text = supplierUpdate.Address2;
-            txtEmail.Text = supplierUpdate.EmailAddress;
+            txtCompanyName.Text = supplierUpdate.CompanyName.Trim();
+            txtFirstName.Text = supplierUpdate.FirstName.Trim();
+            txtLastName.Text = supplierUpdate.LastName.Trim();
+            txtAddress1.Text = supplierUpdate.Address1.Trim();
+            txtAddress2.Text = supplierUpdate.Address2.Trim();
+            txtEmail.Text = supplierUpdate.EmailAddress.Trim();
             txtPhoneNumber.Text = supplierUpdate.PhoneNumber;
             cboZip.Text = supplierUpdate.Zip;
             txtUserID.Text = supplierUpdate.UserID.ToString();

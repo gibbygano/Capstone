@@ -43,10 +43,6 @@ namespace com.WanderingTurtle.FormPresentation
                 RefreshBookingsList();   
             }
         }
-        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshBookingsList();
-        }
 
         private void RefreshBookingsList()
         {
