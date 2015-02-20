@@ -48,13 +48,15 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddGuest_Click(object sender, RoutedEventArgs e)
         {
-            Window AddEditHotelGuest = new AddEditHotelGuest();
-            AddEditHotelGuest.Show();
+            AddEditHotelGuest AddEditHotelGuest = new AddEditHotelGuest();
+            if (AddEditHotelGuest.ShowDialog() == false)
+            {
+                if (AddEditHotelGuest.result)
+                {
+                    refreshList();
+                }
+            }
         }
 
-        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
-        {
-            refreshList();
-        }
     }
 }

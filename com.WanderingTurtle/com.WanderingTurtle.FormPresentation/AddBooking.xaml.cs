@@ -30,7 +30,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             myEventList = myManager.RetrieveListItemList();
             InitializeComponent();
-            Instance = this;
             lvAddBookingListItems.ItemsSource = myEventList;
 
             //creating a list for the dropdown userLevel
@@ -71,12 +70,6 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-    //if (isGuest(guest) == false)
-    //{
-    //    MessageBox.Show("Please review the Guest ID. A record of this guest is not on file.");
-    //    btnAddBookingAdd.IsEnabled = true;
-    //    return;
-    //}
             if (okQuantity(quantity) == false)
             {
                 MessageBox.Show("Please review the quantity entered. Must be a number and cannot excede the quantity offered for the event.");
@@ -131,37 +124,6 @@ namespace com.WanderingTurtle.FormPresentation
             ListItemObject selected = (ListItemObject)lvAddBookingListItems.SelectedItems[0];
             return selected;
         }
-        /**
-         * validates that a guest entered is an int,
-         * parses it into one and passes it through HotelGuestHandler to check against database
-         * if guest is found, returns true.
-         * Else it returns false.
-         * Tony Noel- 2/17/15
-         */
-        //private bool isGuest(string guest)
-        //{
-        //    bool works = false;
-        //    int guestID;
-        //    if (guest == "")
-        //    {
-        //        return works;
-        //    }
-
-        //    try
-        //    {
-        //        Validator.ValidateInt(guest);
-        //        int.TryParse(guest, out guestID);
-        //        myGuest.GetHotelGuest(guestID);
-        //        works = true;
-        //        return works;
-
-        //    }
-        //    catch
-        //    {
-        //        return works;
-        //    }
-        //}
-
 
         /**
          * validates that a empID entered is an int,
@@ -234,7 +196,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void AddBooking_Closed(object sender, EventArgs e)
         {
-            Instance = null;
+            this.Close();
         }
 
         // Pat Banks - February 19, 2015
