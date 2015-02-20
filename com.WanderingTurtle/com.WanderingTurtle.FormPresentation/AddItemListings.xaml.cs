@@ -14,7 +14,10 @@ using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 
-
+// Worked on by:
+///Hunter
+////Fritz
+/////Matthew 10:15
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
@@ -25,7 +28,8 @@ namespace com.WanderingTurtle.FormPresentation
         EventManager myMan = new EventManager();
 
         ProductManager prodMan = new ProductManager();
-
+        
+        //populates our Combo box for the user to pick from
         public AddItemListing()
         {
 
@@ -47,47 +51,58 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-           
-            ItemListing newListing = new ItemListing();
-
-            newListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
-            // Tries to validate information to put into the newListing object.
-            if (!Validator.ValidateDateTime(DateStart.Text + " " + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + " " + txtEndTime.Text))
+            if (eventCbox.SelectedIndex > -1)
             {
-                MessageBox.Show("Your dates are wrong");
+                ItemListing newListing = new ItemListing();
+
+                newListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
+                // Tries to validate information to put into the newListing object.
+                if (!Validator.ValidateDateTime(DateStart.Text + " " + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + " " + txtEndTime.Text) || (txtEndTime.Text=="00:00" && txtStartTime.Text =="00:00"))
+                {
+                    MessageBox.Show("Your dates/or and times are wrong");
+                    return;
+                }
+                else
+                {
+                    newListing.StartDate = DateTime.Parse(DateStart.Text + " " + txtStartTime.Text);
+                    newListing.EndDate = DateTime.Parse(DateStart.Text + " " + txtEndTime.Text);
+                }
+
+                if (!Validator.ValidateDecimal(txtPrice.Text) || txtPrice.Text=="00.00")
+                {
+                    MessageBox.Show("Your price is not formatted correctly. Please use the ##.## format.");
+                    return;
+                }
+                else
+                {
+                    newListing.Price = Decimal.Parse(txtPrice.Text);
+                }
+
+                if (!Validator.ValidateInt(txtSeats.Text) || Int32.Parse(txtSeats.Text) < 0)
+                {
+                        MessageBox.Show("The number of seats available at your event is incorrectly formatted");
+                        return;
+                }
+                else
+                {
+                    newListing.QuantityOffered = int.Parse(txtSeats.Text);
+                }
+
+
+                try
+                {
+                    prodMan.AddItemListing(newListing);
+                    MessageBox.Show("Listing successfully added!");
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error adding the Item Listing.");
+                }
             }
             else
             {
-                newListing.StartDate = DateTime.Parse(DateStart.Text + " " + txtStartTime.Text);
-                newListing.EndDate = DateTime.Parse(DateStart.Text + " " + txtEndTime.Text);
-            }
-
-            if (!Validator.ValidateDecimal(txtPrice.Text))
-            {
-                MessageBox.Show("Your price is not formatted correctly. Please use the ##.## format.");
-            }
-            else
-            {
-                newListing.Price = Decimal.Parse(txtPrice.Text);
-            }
-
-            if (!Validator.ValidateInt(txtSeats.Text))
-            {
-                MessageBox.Show("The number of seats available at your event is incorrectly formatted");
-            }
-            else
-            {
-                newListing.QuantityOffered = int.Parse(txtSeats.Text);
-            }
-
-            try
-            {
-                prodMan.AddItemListing(newListing);
-                this.Close();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("There was an error adding the Item Lsiting.");
+                MessageBox.Show("Please select an Event to List!");
             }
 
 

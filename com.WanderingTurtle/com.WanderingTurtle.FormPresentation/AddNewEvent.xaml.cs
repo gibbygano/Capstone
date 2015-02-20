@@ -27,6 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
+                cboxType.Items.Clear();
                 cboxType.ItemsSource = TempList;
             }
             catch (Exception ex)
@@ -53,21 +54,37 @@ namespace com.WanderingTurtle.FormPresentation
                 if (!Validator.ValidateInt(txtMaxGuest.Text) || !Validator.ValidateInt(txtMinGuest.Text))
                 {
                     MessageBox.Show("Not a valid amount of guests");
+                    return;
+                }
+
+                else if (Int32.Parse(txtMaxGuest.Text) > Int32.Parse(txtMinGuest.Text))
+                {
+                    if (Int32.Parse(txtMinGuest.Text) > 0)
+                    {
+                        int x;
+                        int y;
+                        int.TryParse(txtMaxGuest.Text, out x);
+                        int.TryParse(txtMinGuest.Text, out y);
+                        eventToSubmit.MaxNumGuests = x;
+                        eventToSubmit.MinNumGuests = y;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your minimum guests don't make sense!");
+                        return;
+                    }
                 }
                 else
                 {
-                    int x;
-                    int y;
-                    int.TryParse(txtMaxGuest.Text, out x);
-                    int.TryParse(txtMinGuest.Text, out y);
-                    eventToSubmit.MaxNumGuests = x;
-                    eventToSubmit.MinNumGuests = y;
+                    MessageBox.Show("Your minimum and maximum guests don't make sense!");
+                    return;
                 }
 
                 // Price //
                 if (!Validator.ValidateDecimal(this.txtPrice.Text))
                 {
                     MessageBox.Show("Not a valid Price");
+                    return;
                 }
                 else
                 {
@@ -78,6 +95,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (!Validator.ValidateDateTime(txtStartTime.Text) || !Validator.ValidateDateTime(txtEndTime.Text))
                 {
                     MessageBox.Show("Your dates are wrong");
+                    return;
                 }
                 else
                 {
@@ -97,6 +115,7 @@ namespace com.WanderingTurtle.FormPresentation
                 else
                 {
                     MessageBox.Show("Please fill in the on site field");
+                    return;
                 }
 
                 // Provided transport //
@@ -111,6 +130,7 @@ namespace com.WanderingTurtle.FormPresentation
                 else
                 {
                     MessageBox.Show("Please fill out the Transportation field");
+                    return;
                 }
 
                 eventToSubmit.Description = txtDescrip.Text;
@@ -123,15 +143,27 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     MessageBox.Show("Please select an event type.");
                 }
-
-                eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
+                if (cboxType.SelectedIndex > -1)
+                {
+                    eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
+                }
+                else
+                {
+                    MessageBox.Show("Please select an event type!");
+                    return;
+                }
+                if(String.IsNullOrEmpty(txtEventName.Text))
+                {
+                    MessageBox.Show("Please enter an event name.");
+                    return;
+                }
 
                 if(myMan.AddNewEvent(eventToSubmit) == 1);
                 {
                     MessageBox.Show("Successfully Added Event");
                     this.Close();
                 }
-                            }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
