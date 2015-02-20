@@ -56,23 +56,10 @@ namespace com.WanderingTurtle.FormPresentation
             int eID, gID, qID;
             Booking myBooking;
 
-            if (selectedItem() == false)
-            {
-                MessageBox.Show("Please select an event!");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
+
             if (isEmp(empID) == false)
             {
                 MessageBox.Show("Please review the Employee ID. A record of this employee is not on file.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
-
-            int.TryParse(quantity, out qID);
-            if (okQuantity(quantity) == false || qID <= 0)
-            {
-                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -83,7 +70,21 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
+            int.TryParse(quantity, out qID);
+            if (okQuantity(quantity) == false || qID <= 0)
+            {
+                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
+                btnAddBookingAdd.IsEnabled = true;
+                return;
+            }
 
+
+            if (selectedItem() == false)
+            {
+                MessageBox.Show("Please select an event!");
+                btnAddBookingAdd.IsEnabled = true;
+                return;
+            }
             try
             {
                 selected = getSelectedItem();

@@ -24,12 +24,21 @@ namespace com.WanderingTurtle.FormPresentation
         private EmployeeManager myEmployees = new EmployeeManager();
         List<Employee> employeeList;
 
+        /// <summary>
+        /// Generates a list of employees
+        /// Pat Banks 2/19/15
+        /// </summary>
         public ListTheEmployees()
         {
             InitializeComponent();
             RefreshEmployeeList();
         }
 
+        /// <summary>
+        /// Adding the employee to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             AddEmployee newAddWindow = new AddEmployee();
@@ -37,15 +46,13 @@ namespace com.WanderingTurtle.FormPresentation
             if (newAddWindow.ShowDialog() == false)
             {
                 RefreshEmployeeList();
-
             }
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            RefreshEmployeeList();
-        }
-
+        /// <summary>
+        ///  Refreshes list
+        ///  Pat Banks 2/19/15
+        /// </summary>
         private void RefreshEmployeeList()
         {
             lvEmployeesList.ItemsPanel.LoadContent();
@@ -60,7 +67,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show("Unable to retrieve employee list from the database. \n" + ex.Message);
             }
-
         }
     }
 }

@@ -57,13 +57,13 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (!Validator.ValidateString(txtFirstName.Text))
             {
-                MessageBox.Show("Please fill out the first name field.");
+                MessageBox.Show("Please fill out the first name field with a valid name.");
                 txtFirstName.Focus();
                 return;
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
-                MessageBox.Show("Please fill out the last name field.");
+                MessageBox.Show("Please fill out the last name field with a valid name.");
                 txtLastName.Focus();
                 return;
             }
