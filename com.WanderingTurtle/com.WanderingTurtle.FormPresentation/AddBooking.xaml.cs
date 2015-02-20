@@ -68,9 +68,11 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            if (okQuantity(quantity) == false)
+
+            int.TryParse(quantity, out qID);
+            if (okQuantity(quantity) == false || qID <= 0)
             {
-                MessageBox.Show("Please review the quantity entered. Must be a number and cannot excede the quantity offered for the event.");
+                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -87,7 +89,7 @@ namespace com.WanderingTurtle.FormPresentation
                 selected = getSelectedItem();
                 
                 int.TryParse(empID, out eID);
-                int.TryParse(quantity, out qID);
+
                 gID = int.Parse(this.cboHotelGuests.SelectedValue.ToString());
         
                 myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
