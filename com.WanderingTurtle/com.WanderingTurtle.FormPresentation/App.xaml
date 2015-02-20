@@ -8,5 +8,7 @@
         <Thickness x:Key="Button Padding">10,5</Thickness>
         <SolidColorBrush x:Key="Standard" Color="#FFE5E5E5" />
         <System:Double x:Key="TextBoxHeight">30</System:Double>
+        <Thickness x:Key="Grid Margin">5</Thickness>
+        <System:Double x:Key="Main Font Size">12</System:Double>
     </Application.Resources>
 </Application>
