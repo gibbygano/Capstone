@@ -143,7 +143,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EventItemID", itemListingToAdd.EventID);
             cmd.Parameters.AddWithValue("@Price", itemListingToAdd.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToAdd.QuantityOffered);
-            cmd.Parameters.AddWithValue("@ProductSize", itemListingToAdd.ProductSize);
+            cmd.Parameters.AddWithValue("@ProductSize", 1);
 
             int rowsAffected;
             try

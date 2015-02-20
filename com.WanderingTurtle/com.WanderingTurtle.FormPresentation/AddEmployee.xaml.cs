@@ -20,7 +20,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEmployee : Window
     {
-        public static AddEmployee Instance;
         Employee newEmployeeUser = new Employee();
         EmployeeManager myManager = new EmployeeManager();
 
@@ -35,19 +34,14 @@ namespace com.WanderingTurtle.FormPresentation
             //creating a list for the dropdown userLevel
             cboUserLevel.ItemsSource = RetrieveUserLevelList();
 
-            Instance = this;
             this.Title = "Add Employee";
         }
 
+        // Pat Banks - February 15, 2015
+        // Calls method to add employee
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             addEmployee();
-        }
-
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Instance = null;
-
         }
 
         // Pat Banks - February 15, 2015
@@ -73,9 +67,10 @@ namespace com.WanderingTurtle.FormPresentation
                 txtLastName.Focus();
                 return;
             }
-            if (!Validator.ValidateAlphaNumeric(txtPassword.Text, 4, 8))
+            if (!Validator.ValidatePassword(txtPassword.Text))
             {
-                MessageBox.Show("Please enter a password with between 4 and 8 characters.");
+                MessageBox.Show("Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " + 
+                                " \n lowercase letter\n UPPERCASE LETTER \n Number \nSpecial Character (not space)");
                 txtPassword.Focus();
                 return;
             }
@@ -101,13 +96,14 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result == 1)
                     {
                         MessageBox.Show("Employee added successfully");
+                        //closes window after successful add
+                        this.Close();
                     }
             } 
             catch (Exception ax)
             {
                 MessageBox.Show(ax.Message);
             }
-
         }
 
         // Pat Banks - February 19, 2015
@@ -125,7 +121,6 @@ namespace com.WanderingTurtle.FormPresentation
             ListData.Add(new RoleData { id = "Valet", value = 4 });
 
             return ListData;
-
         }
     }
 }

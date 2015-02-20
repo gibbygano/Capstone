@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -19,16 +21,22 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheListings : UserControl
     {
-        private EventManager myMan = new EventManager();
-        List<Event> myEventList;
+
+        private OrderManager ordMan = new OrderManager();
+        List<ListItemObject> myListingList;
 
         public ListTheListings()
         {
             InitializeComponent();
+            refreshData();
+        }
+
+        private void refreshData()
+        {
             try
             {
-                myEventList = myMan.RetrieveEventList();
-                lvEvents.ItemsSource = myEventList;
+                myListingList = ordMan.RetrieveListItemList();
+                lvEvents.ItemsSource = myListingList;
             }
             catch (Exception ex)
             {
@@ -36,38 +44,36 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
-
-
-            private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            {
-
-            }
-
-            private void btnAddListing_Click(object sender, RoutedEventArgs e)
-            {
-
-                int x = lvEvents.SelectedIndex;
-                Event EventToList = (Event)lvEvents.Items[x];
-                Window AddItemListings = new AddItemListing(EventToList);
-                AddItemListings.Show();
-            }
-
-            // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
-            private void btnEdit_Click(object sender, RoutedEventArgs e)
-            {
-                Window EditEvent = new EditExistingEvent();
-                EditEvent.Show();
-            }
-
-            private void btnAddListing_Click_1(object sender, RoutedEventArgs e)
-            {
-
-            }
         }
 
+        private void btnAddListing_Click(object sender, RoutedEventArgs e)
+        {
+            Window AddItemListings = new AddItemListing();
+            if (AddItemListings.ShowDialog() == false)
+            {
+                refreshData();
+            }
 
+        }
 
+        // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Window EditEvent = new EditExistingEvent();
+            EditEvent.Show();
+        }
 
+        private void btnAddListing_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
+
+
+
+
+}
 

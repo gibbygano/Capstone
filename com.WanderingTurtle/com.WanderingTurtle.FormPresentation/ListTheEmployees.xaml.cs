@@ -27,31 +27,18 @@ namespace com.WanderingTurtle.FormPresentation
         public ListTheEmployees()
         {
             InitializeComponent();
+            RefreshEmployeeList();
         }
 
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            AddEmployee newEmployee;
+            AddEmployee newAddWindow = new AddEmployee();
 
-            if (AddEmployee.Instance == null)
+            if (newAddWindow.ShowDialog() == false)
             {
-                newEmployee = new AddEmployee();
-                newEmployee.Show();
+                RefreshEmployeeList();
+
             }
-            else
-            {
-                newEmployee = AddEmployee.Instance;
-                newEmployee.Activate();
-
-                //Creates a sound effect through the System.Media and  flash from accessibility
-
-                System.Media.SystemSounds.Exclamation.Play();
-            }
-
-        }
-        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshEmployeeList();
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

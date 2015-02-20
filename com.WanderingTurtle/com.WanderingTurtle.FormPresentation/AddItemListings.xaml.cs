@@ -28,20 +28,18 @@ namespace com.WanderingTurtle.FormPresentation
 
         public AddItemListing()
         {
-            
+
             InitializeComponent();
-        }
-
-
-
-        /// <summary>
-        /// Creates an instance of this form and fills the txtEventName with the text of the selected event.
-        /// </summary>
-        /// <param name="EventToAddListingOf">Object containing the base event for the listing to add</param>
-        public AddItemListing(Event EventToAddListingOf)
-        {
-            InitializeComponent();
-            txtEventName.Text = EventToAddListingOf.EventItemName;
+            List<Event> myList = myMan.RetrieveEventList();
+            try
+            {
+                eventCbox.Items.Clear();
+                eventCbox.ItemsSource = myList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -49,50 +47,57 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
+           
             ItemListing newListing = new ItemListing();
+
+            newListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
+            // Tries to validate information to put into the newListing object.
+            if (!Validator.ValidateDateTime(DateStart.Text + " " + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + " " + txtEndTime.Text))
+            {
+                MessageBox.Show("Your dates are wrong");
+            }
+            else
+            {
+                newListing.StartDate = DateTime.Parse(DateStart.Text + " " + txtStartTime.Text);
+                newListing.EndDate = DateTime.Parse(DateStart.Text + " " + txtEndTime.Text);
+            }
+
+            if (!Validator.ValidateDecimal(txtPrice.Text))
+            {
+                MessageBox.Show("Your price is not formatted correctly. Please use the ##.## format.");
+            }
+            else
+            {
+                newListing.Price = Decimal.Parse(txtPrice.Text);
+            }
+
+            if (!Validator.ValidateInt(txtSeats.Text))
+            {
+                MessageBox.Show("The number of seats available at your event is incorrectly formatted");
+            }
+            else
+            {
+                newListing.QuantityOffered = int.Parse(txtSeats.Text);
+            }
 
             try
             {
-                // Tries to validate information to put into the newListing object.
-                if (!Validator.ValidateDateTime(DateStart.Text + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + txtEndTime.Text))
-                {
-                    throw new Exception("Your dates are wrong");
-                }
-                else
-                {
-                    newListing.StartDate = DateTime.Parse(DateStart.Text + txtStartTime.Text);
-                    newListing.EndDate = DateTime.Parse(dateEnd.Text + txtEndTime.Text);
-                }
-
-                if(!Validator.ValidateDecimal(txtPrice.Text))
-                {
-                    throw new Exception("Your price is not formatted correctly. Please use the ##.## format.");
-                }
-                else
-                {
-                    newListing.Price = Decimal.Parse(txtPrice.Text);
-                }
-
-                if(!Validator.ValidateInt(txtSeats.Text))
-                {
-                    throw new Exception("The number of seats available at your event is incorrectly formatted");
-                }
-                else
-                {
-                    newListing.QuantityOffered = int.Parse(txtSeats.Text);
-                }
+                prodMan.AddItemListing(newListing);
+                this.Close();
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("There was an error adding the Item Lsiting.");
             }
+
+
+
 
             //BLL: As of 2/14/15 this method is missing. Must be added. 
             // Should accept Param: ItemListing
             // Adds ItemListing to the DB
 
             // Hunter Lind 2/14/15
-            prodMan.AddItemListing(newListing);
         }
     }
 }

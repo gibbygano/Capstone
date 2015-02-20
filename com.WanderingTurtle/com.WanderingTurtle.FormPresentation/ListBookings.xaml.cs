@@ -25,8 +25,7 @@ namespace com.WanderingTurtle.FormPresentation
         List<Booking> bookingList;
 
         public ListBookings()
-        {
-            
+        {            
             InitializeComponent();
             RefreshBookingsList();
         }
@@ -37,26 +36,12 @@ namespace com.WanderingTurtle.FormPresentation
          */
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            AddBooking myBooking;
+            AddBooking myBooking = new AddBooking();
 
-            if (AddBooking.Instance == null)
+            if (myBooking.ShowDialog() == false)
             {
-                myBooking = new AddBooking();
-                myBooking.Show();
+                RefreshBookingsList();   
             }
-            else
-            {
-                myBooking = AddBooking.Instance;
-                myBooking.Activate();
-
-                //Creates a sound effect through the System.Media and  flash from accessibility
-
-                System.Media.SystemSounds.Exclamation.Play();
-            }
-        }
-        private void btnRefreshList_Click(object sender, RoutedEventArgs e)
-        {
-            RefreshBookingsList();
         }
 
         private void RefreshBookingsList()

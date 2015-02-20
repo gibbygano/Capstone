@@ -20,7 +20,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking : Window
     {
-        public static AddBooking Instance;
         public OrderManager myManager = new OrderManager();
         public EmployeeManager myEmp = new EmployeeManager();
         public HotelGuestManager myGuest = new HotelGuestManager();
@@ -30,15 +29,18 @@ namespace com.WanderingTurtle.FormPresentation
         {
             myEventList = myManager.RetrieveListItemList();
             InitializeComponent();
-            Instance = this;
             lvAddBookingListItems.ItemsSource = myEventList;
+
+            //creating a list for the dropdown userLevel
+            cboHotelGuests.ItemsSource = RetrieveGuestList();
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
             addBooking();
-
+            
         }
+
         /*addBooking()- a method to collect all information from the form and turn them into strings
          * Then after taking each variable and testing them in their specific validation method, parses them 
          * into the correct variable needed to be stored as a booking and line item object.
@@ -48,7 +50,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void addBooking()
         {
             string empID = tbAddBookingEmpID.Text;
-            string guest = tbAddBookingGuestID.Text;
+            string guest = this.cboHotelGuests.ToString();
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
@@ -67,36 +69,45 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            if (isGuest(guest) == false)
-            {
-                MessageBox.Show("Please review the Guest ID. A record of this guest is not on file.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
             if (okQuantity(quantity) == false)
             {
                 MessageBox.Show("Please review the quantity entered. Must be a number and cannot excede the quantity offered for the event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            else
+
+            if (cboHotelGuests.Text == "" || cboHotelGuests.Text == null)
+            {
+                MessageBox.Show("Please select a Hotel Guest.");
+                btnAddBookingAdd.IsEnabled = true;
+                return;
+            }
+
+            try
             {
                 selected = getSelectedItem();
-
+                
                 int.TryParse(empID, out eID);
-                int.TryParse(guest, out gID);
                 int.TryParse(quantity, out qID);
+                gID = int.Parse(this.cboHotelGuests.SelectedValue.ToString());
         
                 myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
-                //calls to booking manager to add a booking. BookingID is auto-generated in database
-                myManager.AddaBooking(myBooking);
-         
-                MessageBox.Show("The booking has been successfully added.");
-                clearFields();
-                btnAddBookingAdd.IsEnabled = true;
+           
+                //calls to booking manager to add a booking. BookingID is auto-generated in database                
+                int result = myManager.AddaBooking(myBooking);
 
-            }//end else
-            
+                if (result == 1)
+                {
+                    MessageBox.Show("The booking has been successfully added.");
+                    // closes window after add
+                    this.Close();
+                }
+
+            } //end try
+            catch (Exception ax)
+            {
+                MessageBox.Show(ax.Message);
+            }
 
         }//end method addBooking()
 
@@ -111,7 +122,6 @@ namespace com.WanderingTurtle.FormPresentation
                 getSelectedItem();
                 works = true;
                 return works;
-
             }
             catch
             {
@@ -127,36 +137,7 @@ namespace com.WanderingTurtle.FormPresentation
             ListItemObject selected = (ListItemObject)lvAddBookingListItems.SelectedItems[0];
             return selected;
         }
-        /**
-         * validates that a guest entered is an int,
-         * parses it into one and passes it through HotelGuestHandler to check against database
-         * if guest is found, returns true.
-         * Else it returns false.
-         * Tony Noel- 2/17/15
-         */
-        private bool isGuest(string guest)
-        {
-            bool works = false;
-            int guestID;
-            if (guest == "")
-            {
-                return works;
-            }
 
-            try
-            {
-                Validator.ValidateInt(guest);
-                int.TryParse(guest, out guestID);
-                myGuest.GetHotelGuest(guestID);
-                works = true;
-                return works;
-
-            }
-            catch
-            {
-                return works;
-            }
-        }
         /**
          * validates that a empID entered is an int,
          * parses it into one and passes it through EmployeeHandler to check against database
@@ -216,20 +197,27 @@ namespace com.WanderingTurtle.FormPresentation
         /*Sets form fields back to null after an add has been successfully completed
          * Tony Noel-2/11/15
          */
-
         
         public void clearFields()
         {
             tbAddBookingEmpID.Text = null;
-            tbAddBookingGuestID.Text = null;
+//tbAddBookingGuestID.Text = null;
            
             tbAddBookingQuantity.Text = null;
         }
 
-        private void AddBooking_Closed(object sender, EventArgs e)
-        {
-            Instance = null;
-        }
+        // Pat Banks - February 19, 2015
+        // Parameters: returns list data
+        // Desc.: Defines employee roles for the combo box
+        // Failure: none
+        // Success: box is filled and available for use on the form
 
+        private List<HotelGuest> RetrieveGuestList()
+        {
+            List<HotelGuest> dropDownData = new List<HotelGuest>();
+            dropDownData = myGuest.GetHotelGuestList();
+
+            return dropDownData;
+        }
     }
 }
