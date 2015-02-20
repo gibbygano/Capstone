@@ -121,4 +121,7 @@
   <ItemGroup>
     <PostDeploy Include="InsertSampleData.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CreateDatabase.publish.xml" />
+  </ItemGroup>
 </Project>
