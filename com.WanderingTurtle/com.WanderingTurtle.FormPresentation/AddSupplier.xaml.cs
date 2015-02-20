@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -21,8 +22,9 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private int _userID;
         private SupplierManager _manager = new SupplierManager();
-        private List<Supplier> _suppliers;
         private Supplier _UpdatableSupplier;
+        private List<CityState> _zips;
+        private CityStateManager _cityStateManager = new CityStateManager();
 
         //Constructs the object and will fill the list of suppliers
         //created by Will Fritz 2/6/15
@@ -40,6 +42,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             lblError.Content = "";
             btnEdit.IsEnabled = false;
+            fillComboBox();
         }
 
         //Will validtate the feilds and edit the current supplier
@@ -54,8 +57,8 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 lblError.Content = "";
                 EditSupplier();
-                ClearFeilds();
                 ListSuppliers.Instance.FillList();
+                this.Close();
             }
         }
 
@@ -72,6 +75,7 @@ namespace com.WanderingTurtle.FormPresentation
                 lblError.Content = "";
                 AddTheSupplier();
                 ListSuppliers.Instance.FillList();
+                this.Close();
             }
         }
 
@@ -83,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
         //Created By Will Fritz 2/4/15
         public bool Validate()
         {
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidatePhone(txtPhoneNumber.Text) || !Validator.ValidateAlphaNumeric(txtZip.Text))
+            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidatePhone(txtPhoneNumber.Text) || cboZip.SelectedItem == null)
             {
                 lblError.Content = "You must fill out all of the feilds before you can continue.";
                 return false;
@@ -119,15 +123,17 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Address1 = txtAddress1.Text;
                 tempSupplier.Address2 = txtAddress2.Text;
                 tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                tempSupplier.Zip = txtZip.Text;
+                tempSupplier.Zip = cboZip.Text;
                 tempSupplier.EmailAddress = txtEmail.Text;
                 tempSupplier.UserID = _userID;
 
                 _manager.AddANewSupplier(tempSupplier);
+
+                System.Windows.Forms.MessageBox.Show("Supplier was added to the database");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                lblError.Content = ex.Message; //"There was an error adding the supplier";
+                lblError.Content = "There was an error adding the supplier";
             }
         }
 
@@ -142,7 +148,7 @@ namespace com.WanderingTurtle.FormPresentation
             txtAddress2.Text = supplierUpdate.Address2;
             txtEmail.Text = supplierUpdate.EmailAddress;
             txtPhoneNumber.Text = supplierUpdate.PhoneNumber;
-            txtZip.Text = supplierUpdate.Zip;
+            cboZip.Text = supplierUpdate.Zip;
             txtUserID.Text = supplierUpdate.UserID.ToString();
 
             _UpdatableSupplier = supplierUpdate;
@@ -166,33 +172,38 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Address1 = txtAddress1.Text;
                 tempSupplier.Address2 = txtAddress2.Text;
                 tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                tempSupplier.Zip = txtZip.Text;
+                tempSupplier.Zip = cboZip.Text;
                 tempSupplier.EmailAddress = txtEmail.Text;
                 tempSupplier.UserID = _userID;
 
                 tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
-
+                
                 _manager.EditSupplier(_UpdatableSupplier, tempSupplier);
+
+                System.Windows.Forms.MessageBox.Show("The Supplier was succefully edited");
             }
             catch (Exception)
             {
-                lblError.Content = "There was an error editing the supplier";
+                System.Windows.Forms.MessageBox.Show("There was an error editing the supplier");
             }
         }
 
-        //this will clear all the feilds
-        //created by Will Fritz 2/6/15
-        private void ClearFeilds()
+        //fills the zip code combo box
+        //created by will fritz 2/19/2015
+        private void fillComboBox()
         {
-            txtCompanyName.Text = "";
-            txtFirstName.Text = "";
-            txtLastName.Text = "";
-            txtAddress1.Text = "";
-            txtAddress2.Text = "";
-            txtEmail.Text = "";
-            txtPhoneNumber.Text = "";
-            txtZip.Text = "";
-            txtUserID.Text = "";
+            try
+            {
+                _zips = _cityStateManager.GetCityStateList();
+                cboZip.ItemsSource = _zips;
+            }
+            catch (Exception)
+            {
+                lblError.Content = "There was a problem retriving the list of zip codes";
+            }
+
+
+           
         }
     }
 }
