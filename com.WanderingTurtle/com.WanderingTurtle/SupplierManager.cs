@@ -16,6 +16,13 @@ namespace com.WanderingTurtle
         {
             //default constructor
         }
+         /// <summary>
+        /// Gets a single Supplier  from the Data Access layer
+        /// Throws any exceptions caught by the DAL
+        /// </summary>
+        /// <param name="supplierID">string ID of the application to be retrieved</param>
+        /// <returns>Supplier object</returns>
+        /// Created by Reece Maas 2/18/15
         public Supplier RetrieveSupplier(string supplierID)
         {
             try
@@ -27,6 +34,12 @@ namespace com.WanderingTurtle
                 throw ex;
             }
         }
+         /// <summary>
+        /// Gets a list of Suppliers  from the Data Access layer
+        /// Throws any exceptions caught by the DAL
+        /// </summary>
+        /// <returns>Supplier List</returns>
+        /// Created by Reece Maas 2/18/15
         public List<Supplier> RetrieveSupplierList()
         {
             try
@@ -38,6 +51,13 @@ namespace com.WanderingTurtle
                 throw ex;
             }
         }
+        /// <summary>
+        /// Adds a single Supplier to the database
+        /// Throws any exceptions caught by the DAL
+        /// </summary>
+        /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
+        /// <returns>Supplier object</returns>
+        /// Created by Reece Maas 2/18/15
         public int AddANewSupplier(Supplier supplierToAdd)
         {
             try
@@ -49,6 +69,14 @@ namespace com.WanderingTurtle
                 throw ex;
             }
         }
+        /// <summary>
+        /// Updates a Supplier 
+        /// Throws any exceptions caught by the DAL
+        /// </summary>
+        /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
+        /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
+        /// <returns>updated Supplier</returns>
+        /// Created by Reece Maas 2/18/15
         public int EditSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
             try
