@@ -43,6 +43,7 @@ namespace com.WanderingTurtle.FormPresentation
             lblError.Content = "";
             btnEdit.IsEnabled = false;
             fillComboBox();
+            
         }
 
         //Will validtate the feilds and edit the current supplier
@@ -87,23 +88,56 @@ namespace com.WanderingTurtle.FormPresentation
         //Created By Will Fritz 2/4/15
         public bool Validate()
         {
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text) || !Validator.ValidateString(txtCompanyName.Text) || !Validator.ValidateString(txtFirstName.Text) || !Validator.ValidateString(txtLastName.Text) || !Validator.ValidatePhone(txtPhoneNumber.Text) || cboZip.SelectedItem == null)
+            if (!Validator.ValidateAlphaNumeric(txtCompanyName.Text))
             {
-                lblError.Content = "You must fill out all of the feilds before you can continue.";
+                lblError.Content = "Company Name field must be filled out and not contain special characters";
                 return false;
             }
             else if (!Validator.ValidateInt(txtUserID.Text))
             {
-                lblError.Content = "User ID feild must be a numeric value";
+                lblError.Content = "User ID field must filled out and be a numeric value and must be 10 digits or less";
                 return false;
             }
             else if (!Validator.ValidateEmail(txtEmail.Text))
             {
-                lblError.Content = "Not a valid email address";
+                lblError.Content = "Not a valid e-mail address";
+                return false;
+            }
+            else if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            {
+                lblError.Content = "The phone number must filled out and be formated correctly (10 digits)";
+                return false;
+            }
+            else if (cboZip.SelectedItem == null)
+            {
+                lblError.Content = "You must select an zip from the drop down";
+                return false;
+            }
+            else if(!Validator.ValidateAlphaNumeric(txtAddress1.Text))
+            {
+                lblError.Content = "The address must be filled out and not contain special characters (spaces allowed)";
+                return false;
+            }
+            else if (!Validator.ValidateString(txtFirstName.Text))
+            {
+                lblError.Content = "The fist name field filled out and must not contain special characters (No Spaces)";
+                return false;
+            }
+            else if(!Validator.ValidateString(txtLastName.Text))
+            {
+                lblError.Content = "The last name field must be filled out and not contain special characters (No Spaces)";
                 return false;
             }
 
-            _userID = Int32.Parse(txtUserID.Text);
+
+            try
+            {
+                _userID = Int32.Parse(txtUserID.Text);
+            }
+            catch (Exception ex)
+            {
+                lblError.Content = "User ID must be numeric";
+            }
 
             return true;
         }
@@ -131,9 +165,9 @@ namespace com.WanderingTurtle.FormPresentation
 
                 System.Windows.Forms.MessageBox.Show("Supplier was added to the database");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                lblError.Content = "There was an error adding the supplier";
+                MessageBox.Show(ex.Message);
             }
         }
 
