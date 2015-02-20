@@ -1,7 +1,7 @@
 ﻿<Window x:Class="com.WanderingTurtle.FormPresentation.AddSupplier"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add Supplier" Height="548.739" Width="969.2" Loaded="Window_Loaded">
+        Title="Add Supplier" WindowStartupLocation="CenterScreen" Height="548.739" Width="969.2" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="484.8" />

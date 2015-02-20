@@ -23,8 +23,8 @@ namespace com.WanderingTurtle.FormPresentation
         public OrderManager myManager = new OrderManager();
         public EmployeeManager myEmp = new EmployeeManager();
         public HotelGuestManager myGuest = new HotelGuestManager();
-
         public List<ListItemObject> myEventList;
+
         public AddBooking()
         {
             myEventList = myManager.RetrieveListItemList();
@@ -37,8 +37,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
-            addBooking();
-            
+            addBooking();           
         }
 
         /*addBooking()- a method to collect all information from the form and turn them into strings
@@ -194,17 +193,17 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        /*Sets form fields back to null after an add has been successfully completed
-         * Tony Noel-2/11/15
-         */
+//        /*Sets form fields back to null after an add has been successfully completed
+//         * Tony Noel-2/11/15
+//         */
         
-        public void clearFields()
-        {
-            tbAddBookingEmpID.Text = null;
-//tbAddBookingGuestID.Text = null;
+//        public void clearFields()
+//        {
+//            tbAddBookingEmpID.Text = null;
+////tbAddBookingGuestID.Text = null;
            
-            tbAddBookingQuantity.Text = null;
-        }
+//            tbAddBookingQuantity.Text = null;
+//        }
 
         // Pat Banks - February 19, 2015
         // Parameters: returns list data
