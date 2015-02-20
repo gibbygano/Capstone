@@ -24,6 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             List<EventType> TempList = myMan.RetrieveEventTypeList();
+
             try
             {
                 cboxType.ItemsSource = TempList;

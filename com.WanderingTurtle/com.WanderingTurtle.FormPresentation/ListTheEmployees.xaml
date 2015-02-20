@@ -21,7 +21,7 @@
 
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddEmployee" Content="Add Employee" Click="btnAddEmployee_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnRefreshList" Content="Refresh List" Click="btnRefreshList_Click" />
+           
         </WrapPanel>
     </Grid>
 </UserControl>

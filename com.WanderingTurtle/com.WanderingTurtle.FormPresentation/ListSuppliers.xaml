@@ -23,7 +23,7 @@
         <WrapPanel Grid.Row="1">
             <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnAddSupplier" Content="Add Supplier" Click="btnAddSupplier_Click" />
             <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnDelete" Content="Delete Supplier" Click="btnDelete_Click" />
-            <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnUpdate" Content="Update Supplier" Click="btnUpdate_Click" />
+            <Button Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="btnUpdate" Content="Update Supplier" Click="btnUpdate_Click" IsEnabled="False" Visibility="Hidden" />
             <Label Padding="{DynamicResource Button Padding}" Margin="{DynamicResource Button Margin}" x:Name="lblError" Content="Error Messages" Foreground="Red" VerticalAlignment="Center" />
         </WrapPanel>
     </Grid>

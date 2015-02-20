@@ -25,7 +25,6 @@
                     <Label Content="Address 2" HorizontalAlignment="Left" Margin="10,229,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
                     <TextBox x:Name="txtAddress2" HorizontalAlignment="Left" Height="30" Margin="130,232,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135"/>
                     <Label Content="zip" HorizontalAlignment="Left" Margin="10,284,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
-                    <TextBox x:Name="txtZip" HorizontalAlignment="Left" Height="30" Margin="130,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135" MaxLength="10"/>
                     <Label Content="Phone Number" HorizontalAlignment="Left" Margin="431,10,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
                     <TextBox x:Name="txtPhoneNumber" HorizontalAlignment="Left" Height="30" Margin="551,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135" MaxLength="15"/>
                     <Label Content="Email Address" HorizontalAlignment="Left" Margin="431,66,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Height="34" Width="108"/>
@@ -34,6 +33,7 @@
                     <TextBox x:Name="txtUserID" HorizontalAlignment="Left" Height="31" Margin="551,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="0" Width="135"/>
                     <Button x:Name="btnSubmit" Content="Add Supplier" HorizontalAlignment="Left" Margin="10,382,0,0" VerticalAlignment="Top" Width="126" Height="47" Click="btnSubmit_Click"/>
                     <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="154,382,0,0" VerticalAlignment="Top" Width="129" Height="47" Click="btnEdit_Click"/>
+                    <ComboBox x:Name="cboZip" HorizontalAlignment="Left" Margin="130,284,0,0" VerticalAlignment="Top" Width="135" Height="34" DisplayMemberPath="Zip"/>
                 </Grid>
             </TabItem>
         </TabControl>

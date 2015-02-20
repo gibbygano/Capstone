@@ -12,7 +12,7 @@ namespace com.WanderingTurtle
         //Created by Matt Lapka 2/1/15
         public static bool ValidateString(string inputToValidate)
         {
-            return Regex.IsMatch(inputToValidate, @"^[a-zA-Z]+$");
+            return Regex.IsMatch(inputToValidate, @"^[a-zA-Z']+$");
         }
 
         //Validates that the given string only contains letters (no numbers)
@@ -22,7 +22,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z]+$");
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z']+$");
             }
             else
             {
@@ -37,7 +37,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars && inputToValidate.Length <= maxNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z]+$");
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z']+$");
             }
             else
             {
@@ -94,7 +94,7 @@ namespace com.WanderingTurtle
         //Created by Matt Lapka 2/1/15
         public static bool ValidateAlphaNumeric(string inputToValidate)
         {
-            return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9]+$");
+            return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9\s]+$");
         }
 
         //Validates that the given string is alphanumeric (only numbers & letters) & meets minimum length
@@ -103,7 +103,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9]+$");
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9\s]+$");
             }
             else
             {
@@ -117,7 +117,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars && inputToValidate.Length <= maxNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9]+$");
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9\s]+$");
             }
             else
             {

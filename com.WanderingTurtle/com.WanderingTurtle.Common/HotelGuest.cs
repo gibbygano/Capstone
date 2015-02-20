@@ -35,6 +35,14 @@
 
         public string EmailAddress { get; private set; }
 
+        public string FullName
+        {
+            get
+            {
+                return LastName + ", " + FirstName;
+            }
+        }
+
         public NewHotelGuest(string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress)
         {
             this.FirstName = FirstName;
