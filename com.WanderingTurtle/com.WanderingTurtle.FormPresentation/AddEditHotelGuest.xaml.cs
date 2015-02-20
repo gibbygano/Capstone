@@ -123,7 +123,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (CurrentHotelGuest == null)
             {
-                this.txtGuestID.Text = null;
                 this.txtFirstName.Text = null;
                 this.txtLastName.Text = null;
                 this.txtAddress1.Text = null;
@@ -134,7 +133,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                this.txtGuestID.Text = CurrentHotelGuest.HotelGuestID.ToString();
                 this.txtFirstName.Text = CurrentHotelGuest.FirstName;
                 this.txtLastName.Text = CurrentHotelGuest.LastName;
                 this.txtAddress1.Text = CurrentHotelGuest.Address1;
@@ -304,8 +302,7 @@ namespace com.WanderingTurtle.FormPresentation
             ChangeMessage();
         }
 
-        /********************  Methods not used in Sprint 1 ************************************************/
-
+        ///********************  Methods not used in Sprint 1 ************************************************/
         /// <summary>
         /// Edit an Existing Hotel Guest
         /// </summary>

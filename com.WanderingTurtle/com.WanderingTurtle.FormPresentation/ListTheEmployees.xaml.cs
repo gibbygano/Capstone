@@ -1,4 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheEmployees : UserControl
     {
         private EmployeeManager myEmployees = new EmployeeManager();
-        List<Employee> employeeList;
+        private List<Employee> employeeList;
 
         /// <summary>
         /// Generates a list of employees
@@ -66,6 +66,22 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 MessageBox.Show("Unable to retrieve employee list from the database. \n" + ex.Message);
+            }
+        }
+
+        private void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = this.lvEmployeesList.SelectedItem;
+            if (selectedItem == null)
+            {
+                MessageBox.Show("Please select a row to edit");
+                return;
+            }
+            AddEmployee newAddWindow = new AddEmployee((Employee)selectedItem);
+
+            if (newAddWindow.ShowDialog() == false)
+            {
+                RefreshEmployeeList();
             }
         }
     }
