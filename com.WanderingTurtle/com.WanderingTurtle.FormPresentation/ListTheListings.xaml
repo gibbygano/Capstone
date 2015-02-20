@@ -21,7 +21,7 @@
             </ListView.View>
         </ListView>
         <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddListing" Content="Add Listing" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddListing" Content="Add Listing" Click="btnAddListing_Click" />
         </WrapPanel>
     </Grid>
 </UserControl>

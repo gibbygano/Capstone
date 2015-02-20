@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="AddItemListings" Height="283" Width="417">
     <Grid>
-        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="104,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="104,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285" IsEnabled="False"/>
         <Label Content="Item Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="22,22,0,0" RenderTransformOrigin="0.526,0.654"/>
         <DatePicker x:Name="DateStart" HorizontalAlignment="Left" Margin="104,82,0,0" VerticalAlignment="Top"/>
         <Label Content="Start Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,81,0,0" RenderTransformOrigin="1.342,0.308"/>

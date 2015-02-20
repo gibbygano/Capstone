@@ -45,17 +45,21 @@ namespace com.WanderingTurtle.FormPresentation
         //created by Will Fritz 2/6/15
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
-                _manager.ArchiveSupplier(supplierToDelete);
-                FillList();
-            }
-            catch (Exception ex)
-            {
-                lblError.Content = ex.Message;//"You Must Select A Supplier Before You Can Delete";
-            }
-
+                try
+                {
+                    Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
+                    
+                    MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirm Delete", System.Windows.MessageBoxButton.YesNo);
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                        _manager.ArchiveSupplier(supplierToDelete);
+                    }
+                    FillList();
+                }
+                catch (Exception)
+                {
+                    lblError.Content = "You Must Select A Supplier Before You Can Delete";
+                }
         }
 
         //Will get selected supplier and fill the add/edit tab with info
