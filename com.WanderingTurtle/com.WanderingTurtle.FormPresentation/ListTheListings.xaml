@@ -11,12 +11,10 @@
         <ListView Grid.Row="0" x:Name="lvEvents" SelectionChanged="ListView_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="140" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
-                    <GridViewColumn Width="100" Header="Event Start Date" DisplayMemberBinding="{Binding EventStartDate}" />
-                    <GridViewColumn Width="100" Header="Event End Date" DisplayMemberBinding="{Binding EventEndDate}" />
-                    <GridViewColumn Width="60" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
-                    <GridViewColumn Width="100" Header="Price" DisplayMemberBinding="{Binding Price}" />
-                    <GridViewColumn Width="100" Header="Reserved" DisplayMemberBinding="{Binding CurrentNumGuests}" />
+                    <GridViewColumn Width="140" Header="Event Name" DisplayMemberBinding="{Binding EventName}" />
+                    <GridViewColumn Width="100" Header="Event Start Date" DisplayMemberBinding="{Binding StartDate}" />
+                    <GridViewColumn Width="100" Header="Event End Date" DisplayMemberBinding="{Binding EndDate}" />
+                    <GridViewColumn Width="60" Header="Seats" DisplayMemberBinding="{Binding QuantityOffered}" />
                 </GridView>
             </ListView.View>
         </ListView>
