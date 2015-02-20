@@ -52,7 +52,7 @@ namespace com.WanderingTurtle.FormPresentation
                 // Number of Guests //
                 if (!Validator.ValidateInt(txtMaxGuest.Text) || !Validator.ValidateInt(txtMinGuest.Text))
                 {
-                    throw new Exception("Not a valid amount of guests");
+                    MessageBox.Show("Not a valid amount of guests");
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace com.WanderingTurtle.FormPresentation
                 // Price //
                 if (!Validator.ValidateDecimal(this.txtPrice.Text))
                 {
-                    throw new Exception("Not a valid Price");
+                    MessageBox.Show("Not a valid Price");
                 }
                 else
                 {
@@ -77,12 +77,12 @@ namespace com.WanderingTurtle.FormPresentation
                 // Start + End date //
                 if (!Validator.ValidateDateTime(txtStartTime.Text) || !Validator.ValidateDateTime(txtEndTime.Text))
                 {
-                    throw new Exception("Your dates are wrong");
+                    MessageBox.Show("Your dates are wrong");
                 }
                 else
                 {
-                    eventToSubmit.EventStartDate = DateTime.Parse(txtStartTime.Text);
-                    eventToSubmit.EventEndDate = DateTime.Parse(txtEndTime.Text);
+                    eventToSubmit.EventStartDate = DateTime.Parse(DateStart.Text + " " + txtStartTime.Text);
+                    eventToSubmit.EventEndDate = DateTime.Parse(DateStart.Text + " " + txtEndTime.Text);
                 }
 
                 // On-site //
@@ -96,7 +96,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new Exception("Please fill in the on site field");
+                    MessageBox.Show("Please fill in the on site field");
                 }
 
                 // Provided transport //
@@ -110,12 +110,19 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new Exception("Please fill out the Transportation field");
+                    MessageBox.Show("Please fill out the Transportation field");
                 }
 
                 eventToSubmit.Description = txtDescrip.Text;
 
-                int TypeSelected = cboxType.SelectedIndex;
+                try
+                {
+                    int TypeSelected = cboxType.SelectedIndex;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("Please select an event type.");
+                }
 
                 eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
 
