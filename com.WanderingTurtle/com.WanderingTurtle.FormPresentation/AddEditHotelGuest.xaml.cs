@@ -304,23 +304,6 @@ namespace com.WanderingTurtle.FormPresentation
             ChangeMessage();
         }
 
-
-        /// <summary>
-        /// Populates form with required information
-        /// </summary>
-        /// Miguel Santana 2/18/2015
-        private void InitializeEverything()
-        {
-            ChangeMessage();
-            this.cboZip.ItemsSource = RetrieveZipCodeList();
-            ResetFields();
-        }
-
-        private List<CityState> RetrieveZipCodeList()
-        {
-            return new CityStateManager().GetCityStateList();
-        }
-
         /********************  Methods not used in Sprint 1 ************************************************/
 
         /// <summary>
@@ -336,6 +319,5 @@ namespace com.WanderingTurtle.FormPresentation
             this.myTitle = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
         }
-
     }
 }
