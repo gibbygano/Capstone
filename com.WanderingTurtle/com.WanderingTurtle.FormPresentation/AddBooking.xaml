@@ -1,7 +1,7 @@
 ﻿<Window x:Name="AddBooking1" x:Class="com.WanderingTurtle.FormPresentation.AddBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AddBooking" Height="375.4" Width="700" Closed="AddBooking_Closed" WindowStartupLocation="CenterScreen">
+        Title="AddBooking" Height="375.4" Width="700" WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,2,1" Background="#FFE5E5E5">
         <Label x:Name="lblGeneralAddBooking" Content="Please add requested information below to complete the booking." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblAddBookingEmpID" Content="EmployeeID: " HorizontalAlignment="Left" Margin="50,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
@@ -11,12 +11,12 @@
         <Label x:Name="lblAddBookingItemID" Content="ItemList:" HorizontalAlignment="Left" Margin="34,151,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
         <Label x:Name="lblAddBookingQuantity" Content="Quantity:" HorizontalAlignment="Left" Margin="66,125,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.579,-0.615"/>
         <TextBox x:Name="tbAddBookingQuantity" KeyboardNavigation.TabIndex="2" HorizontalAlignment="Left" Height="23" Margin="129,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" UndoLimit="2"/>
-        <Button x:Name="btnAddBookingAdd" Content="Add Booking" HorizontalAlignment="Left" Margin="34,306,0,0" VerticalAlignment="Top" Width="90" Click="btnAddBookingAdd_Click" Padding="{DynamicResource Button Padding}"/>
+        <Button x:Name="btnAddBookingAdd" Content="Submit" HorizontalAlignment="Left" Margin="34,306,0,0" VerticalAlignment="Top" Width="90" Click="btnAddBookingAdd_Click" Padding="{DynamicResource Button Padding}"/>
         <ComboBox x:Name="cboHotelGuests" KeyboardNavigation.TabIndex="1" HorizontalAlignment="Left" Margin="129,94,0,0" VerticalAlignment="Top" Width="204"
             ItemsSource="{Binding Path=RetrieveGuestList()}" 
             DisplayMemberPath="FullName" 
             SelectedValuePath="HotelGuestID"
-            SelectedValue="{Binding id}" />
+            SelectedValue="{Binding HotelGuestID}" />
 
         <ListView x:Name="lvAddBookingListItems" HorizontalAlignment="Left" Height="124" Margin="34,177,0,0" VerticalAlignment="Top" Width="613">
             <ListView.View>
