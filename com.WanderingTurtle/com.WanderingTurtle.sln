@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.BusinessLogic", "com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj", "{825BA7B8-C006-4EF9-B596-700B863A2296}"
 EndProject
@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem Code", "Problem Cod
 		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs
 		UpdateBookingclickMethod.txt = UpdateBookingclickMethod.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.Web", "com.WanderingTurtle.Web\com.WanderingTurtle.Web.csproj", "{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,8 +66,15 @@ Global
 		{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{206B1F04-3B68-45FA-A097-44953DCC547B} = {78738C71-D7C3-4536-B6FB-D371B918B2DE}
 	EndGlobalSection
 EndGlobal
