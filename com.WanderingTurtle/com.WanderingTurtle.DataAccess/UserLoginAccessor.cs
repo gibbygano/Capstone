@@ -45,7 +45,7 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     reader.Read();
 
-                    return null
+                    return null;
                     //    new Employee(
                     //    (int)reader.GetValue(0), //EmployeeID
                     //);
