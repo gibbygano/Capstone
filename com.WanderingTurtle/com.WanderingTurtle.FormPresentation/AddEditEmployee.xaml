@@ -23,11 +23,11 @@
             <Label Grid.Row="1" Content="Last Name"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" />
             <Label Grid.Row="2" Content="Password"   VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" />
             <Label Grid.Row="3" Content="User Level" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" VerticalAlignment="Center" />
-            <TextBox  Grid.Row="0" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="txtFirstName" Height="{DynamicResource TextBoxHeight}" />
-            <TextBox  Grid.Row="1" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="txtLastName"  Height="{DynamicResource TextBoxHeight}" />
-            <TextBox  Grid.Row="2" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="1" x:Name="txtPassword"  Height="{DynamicResource TextBoxHeight}" />
-            <CheckBox Grid.Row="2" Grid.Column="2" TabIndex="4" Grid.ColumnSpan="1" x:Name="chkActiveEmployee" IsChecked="True"  Content="Active" HorizontalAlignment="Center" Margin="5,0" VerticalAlignment="Center" />
-            <ComboBox Grid.Row="3" Grid.Column="1" TabIndex="5" Grid.ColumnSpan="1" x:Name="cboUserLevel" ItemsSource="{Binding Path=RetrieveUserLevelList()}" DisplayMemberPath="id" SelectedValuePath="value" SelectedValue="{Binding id}" Height="{DynamicResource TextBoxHeight}" />
+            <TextBox  Grid.Row="0" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="txtFirstName" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
+            <TextBox  Grid.Row="1" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="txtLastName"  Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
+            <TextBox  Grid.Row="2" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="1" x:Name="txtPassword"  Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
+            <CheckBox Grid.Row="2" Grid.Column="2" TabIndex="4" Grid.ColumnSpan="1" x:Name="chkActiveEmployee" IsChecked="True"  Content="Active" HorizontalAlignment="Center" Margin="5,0" VerticalAlignment="Center" IsEnabled="False" />
+            <ComboBox Grid.Row="3" Grid.Column="1" TabIndex="5" Grid.ColumnSpan="1" x:Name="cboUserLevel" ItemsSource="{Binding Path=RetrieveUserLevelList()}" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
         </Grid>
         <Button Grid.Row="1" x:Name="btnAddEmployee" Content="Submit" Click="btnAddEmployee_Click" Padding="{DynamicResource Button Padding}" />
     </Grid>
