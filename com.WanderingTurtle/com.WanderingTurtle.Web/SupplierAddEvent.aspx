@@ -3,12 +3,12 @@
     <form id="addEventForm">
     <div>
     <h1>Add a New Event</h1>
-        Event Name: <asp:TextBox ID="txtEventName" runat="server"></asp:TextBox><br />
+        Event Name: <asp:TextBox ID="txtEventName" runat="server" MaxLength="255"></asp:TextBox><br />
         Event Type: <asp:DropDownList ID="comboEventTypeList" runat="server" AppendDataBoundItems="True"></asp:DropDownList><br />
         Description:<br />
         <asp:TextBox ID="txtDescription" runat="server" Rows="4" TextMode="MultiLine" MaxLength="255"></asp:TextBox><br />
         Is the event on site?<br />
-        <asp:RadioButtonList ID="radOnSite" runat="server" style="display: inline;" CssClass="fixed" OnClick="doStuff()" OnSelectedIndexChanged="radOnSite_SelectedIndexChanged" AutoPostBack="True">
+        <asp:RadioButtonList ID="radOnSite" runat="server" style="display: inline;" CssClass="fixed" OnSelectedIndexChanged="radOnSite_SelectedIndexChanged" AutoPostBack="True">
             <asp:ListItem Text="Yes"  Value="True" Selected="False" />
             <asp:ListItem Text="No"  Value="False" Selected="False" />
         </asp:RadioButtonList>
@@ -21,6 +21,7 @@
         <asp:Button ID="btnSubmitEvent" runat="server" Text="Submit New Event" Visible="True" OnClick="btnSubmitEvent_Click" />
     </div>
         <div id="pageErrors">
+           
             <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
         </div>
     </form>

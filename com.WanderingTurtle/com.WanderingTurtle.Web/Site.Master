@@ -24,7 +24,7 @@
     <header>
         <div class="content-wrapper">
             <div class="float-left">
-                <p class="site-title"><a runat="server" href="~/">your logo here</a></p>
+                <p class="site-title"><a runat="server" href="~/"><img src="Images/Logo_White.png" width="150" /></a></p>
             </div>
             <div class="float-right">
                 <section id="login">
@@ -64,7 +64,7 @@
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - Wandering Turtle Resort</p>
             </div>
         </div>
     </footer>

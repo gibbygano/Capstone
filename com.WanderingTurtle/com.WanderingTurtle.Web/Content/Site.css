@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: #006AA1;
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
@@ -105,7 +105,7 @@ h5, h6 {
 }
 
     .main-content {
-        background: url("../Images/accent.png") no-repeat;
+        /*background: url("../Images/accent.png") no-repeat; */
         padding-left: 10px;
         padding-top: 30px;
     }
@@ -133,6 +133,7 @@ footer {
     font-family: Rockwell, Consolas, "Courier New", Courier, monospace;
     font-size: 2.3em;
     margin: 0;
+    background-color: #006AA1;
 }
 
 .site-title a, .site-title a:hover, .site-title a:active {
@@ -194,12 +195,12 @@ ul#menu {
 
         ul#menu li a {
             background: none;
-            color: #999;
+            color: #FFF;
             text-decoration: none;
         }
 
         ul#menu li a:hover {
-            color: #333;
+            color: #d3dce0;
             text-decoration: none;
         }
 
@@ -567,6 +568,9 @@ tr.pager td {
    white-space:nowrap;
 }
 
+#pageErrors{
+    color: red;
+}
 
 input[type="radio"]{
     width: 20px;

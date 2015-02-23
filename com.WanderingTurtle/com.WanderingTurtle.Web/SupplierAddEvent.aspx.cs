@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,11 +21,11 @@ namespace com.WanderingTurtle.Web
         private string _errorMessage = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             //notes -- need the if statement to ensure this only gets run the firs time
             //enableeventvalidation needs to be false
             //autopostback needs to be true
-            if (!Page.IsPostBack) 
+            if (!Page.IsPostBack)
             {
                 try
                 {
@@ -52,8 +53,8 @@ namespace com.WanderingTurtle.Web
 
         protected void radOnSite_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if (radOnSite.SelectedValue=="True")
+
+            if (radOnSite.SelectedValue == "True")
             {
                 //set transportation to false and keep it hidden because tranportation is not needed
                 lblTransportation.Visible = false;
@@ -62,7 +63,6 @@ namespace com.WanderingTurtle.Web
             }
             else
             {
-                showError(radOnSite.SelectedValue.ToString());
                 //make transportation question visible
                 radTransportation.Visible = true;
                 lblTransportation.Visible = true;
@@ -79,34 +79,64 @@ namespace com.WanderingTurtle.Web
 
         protected void btnSubmitEvent_Click(object sender, EventArgs e)
         {
+            bool stop = false;
+            int errorCount = 0;
             //validate!
-            if (!Validator.ValidateAlphaNumeric(txtEventName.Text,1))
+            if (!Validator.ValidateAlphaNumeric(txtEventName.Text, 1))
             {
-                showError("You must enter an event name!");
-                return;
+                txtEventName.ToolTip = "You must enter a valid event name!";
+                txtEventName.BorderColor = Color.Red;
+                stop = true;
+                errorCount++;
             }
-            else if (comboEventTypeList.SelectedIndex < 1)
+            if (comboEventTypeList.SelectedIndex < 1)
             {
-                showError("You must select an event type!");
-                return;
+                comboEventTypeList.ToolTip = "You must select an event type!";
+                comboEventTypeList.BorderColor = Color.Red;
+                stop = true;
+                errorCount++;
             }
-            else if (!Validator.ValidateAlphaNumeric(txtDescription.Text, 1))
+            if (String.IsNullOrEmpty(txtDescription.Text))
             {
-                showError("Please enter a brief description");
-                return;
+                txtDescription.ToolTip = "Please enter a brief description";
+                txtDescription.BorderColor = Color.Red;
+                stop = true;
+                errorCount++;
             }
-            else if (radOnSite.SelectedIndex < 0)
+            if (radOnSite.SelectedIndex < 0)
             {
-                showError("Please select if this will be an on site event.");
-                return;
+                radOnSite.ToolTip = "Please select if this will be an on site event.";
+                radOnSite.BorderColor = Color.Red;
+                stop = true;
+                errorCount++;
             }
-            else if (radTransportation.SelectedIndex <0)
+            if (radTransportation.SelectedIndex < 0)
             {
-                showError("Please indicate whether or not you will provide transportation to the event.");
-                return;
+                radTransportation.ToolTip = "Please indicate whether or not you will provide transportation to the event.";
+                radTransportation.BorderColor = Color.Red;
+                stop = true;
+                //only add error count if this questions is visible
+                if (radTransportation.Visible)
+                {
+                    errorCount++;
+                }
             }
+            if (stop)
+            {
+                showError("You have " + errorCount + " errors that need to be fixed.");
+                return;
+            }            
             else
             {
+
+                //reset border colors
+                txtEventName.BorderColor = Color.Black;
+                txtDescription.BorderColor = Color.Black;
+                comboEventTypeList.BorderColor = Color.Black;
+                radTransportation.BorderColor = Color.Black;
+                radOnSite.BorderColor = Color.Black;
+
+
                 try
                 {
                     //create new Event
@@ -137,19 +167,27 @@ namespace com.WanderingTurtle.Web
                     int rows = _myEventManager.AddNewEvent(currentEvent);
                     if (rows == 1)
                     {
-                        showError("Event Successfully added!");
-                     }
-
+                        Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Event Added Successfully!\")</SCRIPT>");
+                    }
+                    clearForm();
                 }
                 catch (Exception ex)
                 {
                     showError(ex.Message);
                 }
-                
-                
             }
-            
+        }
 
+        private void clearForm()
+        {
+            txtEventName.Text = "";
+            txtDescription.Text = "";
+            comboEventTypeList.SelectedIndex = 0;
+            radOnSite.SelectedIndex = -1;
+            radTransportation.SelectedIndex = -1;
+            radTransportation.Visible = false;
+            lblTransportation.Visible = false;
+            showError("");
         }
     }
 }
