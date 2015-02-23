@@ -19,17 +19,17 @@ namespace com.WanderingTurtle.Common
     /// </remarks>
     public class Employee
     {
-        public int? EmployeeID { get; private set; }
+        public int? EmployeeID { get; set; }
 
-        public string FirstName { get; private set; }
+        public string FirstName { get; set; }
 
-        public string LastName { get; private set; }
+        public string LastName { get; set; }
 
-        public string Password { get; private set; }
+        public string Password { get; set; }
 
-        public bool Active { get; private set; }
+        public bool Active { get; set; }
 
-        public RoleData Level { get; private set; }
+        public RoleData Level { get; set; }
 
         public Employee(int EmployeeID, string FirstName, string LastName, string Password, int Level, bool Active = true)
         {
@@ -40,6 +40,8 @@ namespace com.WanderingTurtle.Common
         {
             SetValues(null, FirstName, LastName, Password, Level, Active);
         }
+
+        public Employee() { }
 
         private void SetValues(int? EmployeeID, string FirstName, string LastName, string Password, int Level, bool Active)
         {

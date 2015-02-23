@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.DataAccess
                         inEmployee.EmployeeID = (int)reader.GetValue(0);
                         inEmployee.FirstName = reader.GetValue(1).ToString();
                         inEmployee.LastName = reader.GetValue(2).ToString();
-                        inEmployee.Level = (int)reader.GetValue(3);
+                        inEmployee.Level = (RoleData)reader.GetValue(3);
                         // inEmployee.Level = (bool)reader.GetValue(3); removed, not needed. 
                         // The stored procedure will only return active employees. -- Ryan
 
@@ -104,7 +104,7 @@ namespace com.WanderingTurtle.DataAccess
                     myEmployee.EmployeeID = (int)reader.GetValue(0);
                     myEmployee.FirstName = reader.GetValue(1).ToString();
                     myEmployee.LastName = reader.GetValue(2).ToString();
-                    myEmployee.Level = (int)reader.GetValue(3);
+                    myEmployee.Level = (RoleData)reader.GetValue(3);
                     myEmployee.Active = (bool)reader.GetValue(4);
                 }
                 else
@@ -269,7 +269,7 @@ namespace com.WanderingTurtle.DataAccess
                     myEmployee.EmployeeID = (int)reader.GetValue(0);
                     myEmployee.FirstName = reader.GetValue(1).ToString();
                     myEmployee.LastName = reader.GetValue(2).ToString();
-                    myEmployee.Level = (int)reader.GetValue(3);
+                    myEmployee.Level = (RoleData)reader.GetValue(3);
                     myEmployee.Active = (bool)reader.GetValue(4);
                 }
                 else
