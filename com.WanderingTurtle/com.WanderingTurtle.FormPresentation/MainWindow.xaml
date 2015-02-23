@@ -9,6 +9,8 @@
     </Window.Resources>
     <Grid Background="{DynamicResource Standard}">
         <TabControl x:Name="tabNames" Background="{DynamicResource Standard}">
+
+            
             <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Events">
                 <local:ListEvents FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
@@ -32,6 +34,9 @@
             <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Hotel Guests">
                 <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
+            <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Invoices">
+            </TabItem>
+
         </TabControl>
     </Grid>
 </Window>

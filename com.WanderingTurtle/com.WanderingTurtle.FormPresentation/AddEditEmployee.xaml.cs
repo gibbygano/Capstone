@@ -16,17 +16,23 @@ using System.Windows.Shapes;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
+    /// Pat Banks
+    /// Created: 2015/02/02
     /// Interaction logic for AddEmployee.xaml
     /// </summary>
+    /// <remarks>
+    /// </remarks>
     public partial class AddEmployee : Window
     {
         private EmployeeManager myManager = new EmployeeManager();
 
         /// <summary>
         /// Pat Banks
-        /// Initialize form
-        ///
+        /// Created:  2015/02/02
+        /// Constructs the add employee form and fills the combo box.
         /// </summary>
+        /// <remarks>
+        /// </remarks>
         public AddEmployee()
         {
             InitializeComponent();
@@ -60,8 +66,20 @@ namespace com.WanderingTurtle.FormPresentation
 
         public Employee CurrentEmployee { get; private set; }
 
-        // Pat Banks - February 15, 2015
-        // Calls method to add employee
+ 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/02/15
+        /// Calls method to add employee
+        /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated:  2015/02/22
+        /// Added method to update employee
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentEmployee == null) { employeeAdd(); } else { employeeUpdate(); }
