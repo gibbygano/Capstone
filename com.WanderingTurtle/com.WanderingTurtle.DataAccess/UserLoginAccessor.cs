@@ -30,8 +30,6 @@ namespace com.WanderingTurtle.DataAccess
         //            ApplicationException - when there are no entries in database
         public Employee getUserLogin(int id, string password)
         {
-            Employee loginUser = new Employee();
-
             var conn = DatabaseConnection.GetDatabaseConnection(); //find out the class where the database string will be held and place it in here
             var query = @"spUserLoginGet";
             var cmd = new SqlCommand(query, conn);
@@ -47,9 +45,12 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     reader.Read();
 
-                    loginUser.EmployeeID = (int)reader.GetValue(0);
-                    loginUser.Password = reader.GetValue(1).ToString();
-                    loginUser.Level = reader.GetInt32(2);
+                    return null
+                    //    new Employee(
+                    //    (int)reader.GetValue(0), //EmployeeID
+                    //);
+                    //loginUser.Password = reader.GetValue(1).ToString();
+                    //loginUser.Level = (RoleData)reader.GetInt32(2);
                 }
                 else
                 {
@@ -68,13 +69,9 @@ namespace com.WanderingTurtle.DataAccess
             }
             finally
             {
-                //conn.Close();
+                conn.Close();
             }
-
-            return loginUser;
         }
-
-       
 
         //Summary: temporary using this to retrieve data for getUserLogin until the database is hooked up
         //
