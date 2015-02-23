@@ -39,6 +39,20 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeEverything();
         }
 
+        /// <summary>
+        /// Edit an Existing Hotel Guest
+        /// </summary>
+        /// <param name="hotelGuest"></param>
+        /// Miguel Santana 2/18/2015
+        public AddEditHotelGuest(HotelGuest hotelGuest)
+        {
+            InitializeComponent();
+
+            this.CurrentHotelGuest = hotelGuest;
+            this.myTitle = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
+            InitializeEverything();
+        }
+
         public HotelGuest CurrentHotelGuest { get; private set; }
 
         /// <summary>
@@ -300,21 +314,6 @@ namespace com.WanderingTurtle.FormPresentation
         private void txtInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             ChangeMessage();
-        }
-
-        ///********************  Methods not used in Sprint 1 ************************************************/
-        /// <summary>
-        /// Edit an Existing Hotel Guest
-        /// </summary>
-        /// <param name="hotelGuest"></param>
-        /// Miguel Santana 2/18/2015
-        public AddEditHotelGuest(HotelGuest hotelGuest)
-        {
-            InitializeComponent();
-
-            this.CurrentHotelGuest = hotelGuest;
-            this.myTitle = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
-            InitializeEverything();
         }
     }
 }
