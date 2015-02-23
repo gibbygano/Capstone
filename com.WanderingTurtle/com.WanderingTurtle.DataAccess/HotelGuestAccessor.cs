@@ -12,6 +12,7 @@ namespace com.WanderingTurtle.DataAccess
     {
         /// <summary>
         /// Creates a new Hotel Guest in the database
+        /// Created By Miguel Santana
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
@@ -55,7 +56,11 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Get a list of all HotelGuest Objects
+        /// Created by Miguel Santana
         /// </summary>
+        ///<remarks>
+        /// Updated by Rose Steffensmeier 02/23/2015
+        /// </remarks>
         /// <param name="hotelGuestID">Optional Parameter to specify a hotel gust to look up</param>
         /// <returns></returns>
         public static List<HotelGuest> HotelGuestGet(int? hotelGuestID = null)
@@ -90,7 +95,8 @@ namespace com.WanderingTurtle.DataAccess
                                     reader.GetString(7) //State
                                 ),
                                 !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
-                                !reader.IsDBNull(9) ? reader.GetString(9) : null //EmailAdddress
+                                !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
+                                reader.GetBoolean(10) //Active
                             )
                         );
                     }
@@ -111,11 +117,13 @@ namespace com.WanderingTurtle.DataAccess
             return list;
         }
 
-        /********************  Methods not used in Sprint 1 ************************************************/
-
         /// <summary>
         /// Updates a hotel guest with new information
+        /// Created by Miguel Santana
         /// </summary>
+        ///<remarks>
+        /// Updated by Rose Steffensmeier 02/23/2015
+        /// </remarks>
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
@@ -134,6 +142,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@active", newHotelGuest.Active);
 
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
             cmd.Parameters.AddWithValue("@original_firstName", oldHotelGuest.FirstName);
@@ -143,6 +152,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_address2", oldHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@original_phoneNumber", oldHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@original_email", oldHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@original_active", oldHotelGuest.Active);
 
             try
             {
@@ -165,9 +175,5 @@ namespace com.WanderingTurtle.DataAccess
 
             return numRows;
         }
-
-
-
-
     }
 }
