@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE spDeleteEventItem
 	(
 	@EventItemName 			varchar(255), 
-	@EventStartTime 		datetime2, 
-	@EventEndTime 			datetime2, 
 	@CurrentNumberOfGuests 	int, 
 	@MaxNumberOfGuests 		int, 
 	@MinNumberOfGuests 		int, 
@@ -19,8 +17,6 @@ AS
 		Active = 1
 		AND EventItemID = @EventItemID
 		AND EventItemName = @EventItemName
-		AND EventStartTime = @EventStartTime
-		AND EventEndTime = @EventEndTime
 		AND CurrentNumberOfGuests = @CurrentNumberOfGuests
 		AND MaxNumberOfGuests = @MaxNumberOfGuests
 		AND MinNumberOfGuests = @MinNumberOfGuests

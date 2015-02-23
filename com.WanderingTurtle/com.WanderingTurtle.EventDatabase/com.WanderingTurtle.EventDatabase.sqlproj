@@ -61,6 +61,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Booking.sql" />
@@ -114,6 +115,13 @@
     <Build Include="dbo\Stored Procedures\spSelectEventType.sql" />
     <Build Include="dbo\Stored Procedures\spSelectEmployeeWithID.sql" />
     <Build Include="dbo\Stored Procedures\spInsertItemListing.sql" />
+    <Build Include="dbo\Tables\SupplierFeedbackRecord.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllSupplierFeedbackRecords.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectSupplierFeedbackRecord.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertSupplierFeedbackRecord.sql" />
+    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateSupplierFeedbackRecord.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteSupplierFeedbackRecord.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

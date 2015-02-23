@@ -1,8 +1,6 @@
 ﻿CREATE TABLE [dbo].[EventItem](
 	[EventItemID] [int] NOT NULL IDENTITY(100,1),
 	[EventItemName] [varchar](255) NOT NULL,
-	[EventStartTime] [datetime2] NOT NULL,
-	[EventEndTime] [datetime2] NOT NULL,
 	[CurrentNumberOfGuests] [int] NOT NULL DEFAULT(0),
 	[MaxNumberOfGuests] [int] NOT NULL,
 	[MinNumberOfGuests] [int],

@@ -1,8 +1,6 @@
 ﻿CREATE PROCEDURE spUpdateEventItem
 	(
 	@EventItemName 					varchar(255), 
-	@EventStartTime 				datetime2, 
-	@EventEndTime 					datetime2, 
 	@CurrentNumberOfGuests 			int, 
 	@MaxNumberOfGuests 				int, 
 	@MinNumberOfGuests 				int, 
@@ -13,8 +11,6 @@
 	@EventDescription 				varchar(255),
 	@EventItemID					int,
 	@originalEventItemName 			varchar(255), 
-	@originalEventStartTime 		datetime2, 
-	@originalEventEndTime 			datetime2, 
 	@originalCurrentNumberOfGuests 	int, 
 	@originalMaxNumberOfGuests 		int, 
 	@originalMinNumberOfGuests 		int, 
@@ -27,8 +23,6 @@
 AS
 	UPDATE EventItem SET
 		EventItemName = @EventItemName, 
-		EventStartTime = @EventStartTime, 
-		EventEndTime = @EventEndTime, 
 		CurrentNumberOfGuests = @CurrentNumberOfGuests, 
 		MaxNumberOfGuests = @MaxNumberOfGuests, 
 		MinNumberOfGuests = @MinNumberOfGuests, 
@@ -41,8 +35,6 @@ AS
 		Active = 1
 		AND EventItemID = @EventItemID
 		AND EventItemName = @originalEventItemName
-		AND EventStartTime = @originalEventStartTime
-		AND EventEndTime = @originalEventEndTime
 		AND CurrentNumberOfGuests = @originalCurrentNumberOfGuests
 		AND MaxNumberOfGuests = @originalMaxNumberOfGuests
 		AND MinNumberOfGuests = @originalMinNumberOfGuests

@@ -6,6 +6,9 @@
 	[Price] [money] NOT NULL,
 	[QuantityOffered] [int] NOT NULL,
 	[ProductSize] [varchar](50) NOT NULL,
+	[SupplierID] [int] NOT NULL,
+	[EventStartTime] [dateTime2] NOT NULL,
+	[EventEndTime] [dateTime2] NOT NULL,
 	[Active]	[bit] NOT NULL
  CONSTRAINT [PK_ItemListing] PRIMARY KEY CLUSTERED 
 (

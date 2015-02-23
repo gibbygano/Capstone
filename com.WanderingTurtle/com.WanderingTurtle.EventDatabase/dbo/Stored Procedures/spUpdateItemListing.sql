@@ -2,12 +2,18 @@
 	@ItemListID int, 
 	@StartDate date,
 	@EndDate date, 
+	@EventStartTime dateTime2,
+	@EventEndTime dateTime2,
+	@SupplierID int,
 	@EventItemID int,
 	@Price money, 
 	@QuantityOffered int, 
 	@ProductSize varchar,
 	@originalStartDate date,
 	@originalEndDate date, 
+	@originalEventStartTime dateTime2,
+	@originalEventEndTime dateTime2,
+	@originalSupplierID int,
 	@originalEventItemID int,
 	@originalPrice money, 
 	@originalQuantityOffered int, 
@@ -20,7 +26,10 @@ AS
 		EventItemID = @EventItemID,
 		Price = @Price,
 		QuantityOffered = @QuantityOffered,
-		ProductSize = @ProductSize
+		ProductSize = @ProductSize,
+		EventEndTime = @EventEndTime,
+		EventStartTime = @EventStartTime,
+		SupplierID = @SupplierID
 	WHERE
 		ItemListID = @ItemListID
 		AND StartDate = @originalStartDate
@@ -29,5 +38,8 @@ AS
 		AND Price = @originalPrice
 		AND QuantityOffered = @originalQuantityOffered
 		AND ProductSize = @originalProductSize
+		AND EventEndTime = @originalEventEndTime
+		AND EventStartTime = @originalEventStartTime
+		AND SupplierID = @originalSupplierID
 		AND Active = 1
 	RETURN @@ROWCOUNT
