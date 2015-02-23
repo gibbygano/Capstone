@@ -59,7 +59,7 @@ namespace com.WanderingTurtle.FormPresentation
                 // Tries to validate information to put into the newListing object.
                 if (!Validator.ValidateDateTime(DateStart.Text + " " + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + " " + txtEndTime.Text) || (txtEndTime.Text=="00:00" && txtStartTime.Text =="00:00"))
                 {
-                    MessageBox.Show("Your dates/or and times are wrong");
+                    MessageBox.Show("Your dates and/or times are wrong");
                     return;
                 }
                 else
@@ -104,15 +104,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show("Please select an Event to List!");
             }
-
-
-
-
-            //BLL: As of 2/14/15 this method is missing. Must be added. 
-            // Should accept Param: ItemListing
-            // Adds ItemListing to the DB
-
-            // Hunter Lind 2/14/15
         }
     }
 }

@@ -20,6 +20,10 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private EventManager myMan = new EventManager();
 
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Initializes the form and populates a combobox with event types. 
+        /// </summary>
         public AddNewEvent()
         {
             InitializeComponent();
@@ -34,20 +38,18 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.ToString());
             }
-            //cboxType.ItemsSource = TempList;
-            cboxType.ItemsSource = TempList;
         }
 
         /// <summary>
-        /// Constructs and submits a new event using a form filled out by a user
+        /// Hunter Lind || 2015/2/23
+        /// Constructs an Event to add to the database, based on validated user input.
+        /// Updated to no longer include Dates for events.
         /// </summary>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
             var eventToSubmit = new Event();
-
-
-            
             eventToSubmit.EventItemName = txtEventName.Text;
+
             try
             {
                 // Number of Guests //
@@ -91,18 +93,6 @@ namespace com.WanderingTurtle.FormPresentation
                     eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice.Text);
                 }
 
-                // Start + End date //
-                if (!Validator.ValidateDateTime(txtStartTime.Text) || !Validator.ValidateDateTime(txtEndTime.Text))
-                {
-                    MessageBox.Show("Your dates are wrong");
-                    return;
-                }
-                else
-                {
-                    eventToSubmit.EventStartDate = DateTime.Parse(DateStart.Text + " " + txtStartTime.Text);
-                    eventToSubmit.EventEndDate = DateTime.Parse(DateStart.Text + " " + txtEndTime.Text);
-                }
-
                 // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
@@ -139,7 +129,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     int TypeSelected = cboxType.SelectedIndex;
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     MessageBox.Show("Please select an event type.");
                 }
@@ -158,7 +148,7 @@ namespace com.WanderingTurtle.FormPresentation
                     return;
                 }
 
-                if(myMan.AddNewEvent(eventToSubmit) == 1);
+                if(myMan.AddNewEvent(eventToSubmit) == 1)
                 {
                     MessageBox.Show("Successfully Added Event");
                     this.Close();
@@ -170,6 +160,10 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Clears text fields when they are selected by the mouse.
+        /// </summary>
         private void clicktxtField(object sender, MouseEventArgs e)
         {
             var newTxtBox = (TextBox)sender;
@@ -177,19 +171,15 @@ namespace com.WanderingTurtle.FormPresentation
             sender = newTxtBox;
         }
 
-        private void txtMinGuest_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Clears text fields when they become focused by the Keyboard.
+        /// </summary>
         private void GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             var newTxtBox = (TextBox)sender;
             newTxtBox.Text = "";
             sender = newTxtBox;
         }
-
-
-
     }
 }

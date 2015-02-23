@@ -9,23 +9,15 @@
         <Label Content="Event Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,13,0,0" RenderTransformOrigin="0.526,0.654"/>
         <Label Content="Capacity:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,41,0,0" RenderTransformOrigin="1.342,0.308"/>
         <TextBox x:Name="txtMaxGuest" HorizontalAlignment="Left" Height="23" Margin="152,45,0,0" TextWrapping="Wrap" Text="Max" VerticalAlignment="Top" Width="43" GotMouseCapture="clicktxtField" TabIndex="4" GotKeyboardFocus="GotKeyboardFocus"/>
-        <DatePicker x:Name="DateStart" HorizontalAlignment="Left" Margin="99,73,0,0" VerticalAlignment="Top" TabIndex="6"/>
-        <Label Content="Start Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,70,0,0" RenderTransformOrigin="1.342,0.308"/>
-        <TextBox x:Name="txtStartTime" HorizontalAlignment="Left" Height="23" Margin="99,102,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="52" TabIndex="8"/>
-        <Label Content="Start Time:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,97,0,0" RenderTransformOrigin="1.342,0.308"/>
         <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="23" Margin="317,45,0,0" TextWrapping="Wrap" Text="00.00" VerticalAlignment="Top" Width="52" GotMouseCapture="clicktxtField" TabIndex="5" GotKeyboardFocus="GotKeyboardFocus"/>
         <Label Content="Price (USD) $" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="243,42,0,0" RenderTransformOrigin="1.342,0.308"/>
-        <Label Content="Provided Transportation?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,235,0,0" RenderTransformOrigin="1.342,0.308"/>
-        <Canvas HorizontalAlignment="Left" Height="54" Margin="90,268,0,0" VerticalAlignment="Top" Width="58">
+        <Label Content="Provided Transportation?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,170,0,0" RenderTransformOrigin="1.342,0.308"/>
+        <Canvas HorizontalAlignment="Left" Height="54" Margin="127,203,0,0" VerticalAlignment="Top" Width="58">
             <RadioButton x:Name="radTranspYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="11"/>
             <RadioButton x:Name="radTranspNo" Content="No" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="12"/>
         </Canvas>
-        <Label Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,130,0,0" RenderTransformOrigin="1.342,0.308"/>
+        <Label Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,73,0,0" RenderTransformOrigin="1.342,0.308"/>
         <Button x:Name="SubmitBtn" Content="Submit" HorizontalAlignment="Left" Margin="380,326,0,0" VerticalAlignment="Top" Width="76" Click="SubmitBtn_Click" TabIndex="15"/>
-        <DatePicker x:Name="dateEnd" HorizontalAlignment="Left" Margin="317,72,0,0" VerticalAlignment="Top" TabIndex="7"/>
-        <Label Content="End Date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="251,70,0,0" RenderTransformOrigin="1.342,0.308"/>
-        <TextBox x:Name="txtEndTime" HorizontalAlignment="Left" Height="23" Margin="317,101,0,0" TextWrapping="Wrap" Text="00:00" VerticalAlignment="Top" Width="52" TabIndex="9"/>
-        <Label Content="End Time:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,97,0,0" RenderTransformOrigin="1.342,0.308"/>
         <Label Content="Event Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="242,13,0,0" RenderTransformOrigin="0.526,0.654"/>
         <ComboBox x:Name="cboxType" HorizontalAlignment="Left" Margin="317,17,0,0" VerticalAlignment="Top" Width="120" 
             DisplayMemberPath="EventName" 
@@ -33,12 +25,12 @@
             SelectedValue="{Binding EventTypeID}" TabIndex="2" >
             <ComboBox Height="100" Width="120"/>
         </ComboBox>
-        <Label Content="On Site?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="272,235,0,0" RenderTransformOrigin="1.342,0.308"/>
-        <Canvas HorizontalAlignment="Left" Height="54" Margin="298,268,0,0" VerticalAlignment="Top" Width="58">
+        <Label Content="On Site?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,170,0,0" RenderTransformOrigin="1.342,0.308"/>
+        <Canvas HorizontalAlignment="Left" Height="54" Margin="270,203,0,0" VerticalAlignment="Top" Width="58">
             <RadioButton x:Name="radOnSiteYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="13"/>
             <RadioButton x:Name="radOnSiteNo" Content="No" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="14"/>
         </Canvas>
-        <TextBox x:Name="txtDescrip" HorizontalAlignment="Left" Height="93" Margin="99,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" TabIndex="10" />
+        <TextBox x:Name="txtDescrip" HorizontalAlignment="Left" Height="93" Margin="99,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" TabIndex="10" RenderTransformOrigin="0.499,0.528" />
 
     </Grid>
 </Window>

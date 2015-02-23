@@ -22,13 +22,19 @@ namespace com.WanderingTurtle.FormPresentation
         private EventManager myMan = new EventManager();
         List<Event> myEventList;
         
-        // This is where we instantiate our window and populate the EventList with "myEventList" items.
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Fills our Listview with events and initializes the window.
+        /// </summary>
         public ListEvents()
         {
             InitializeComponent();
             Refresh();
         }
-
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Refreshes our Listview, a handy method instead of having to re-type code.
+        /// </summary>
         private void Refresh()
         {
             try
@@ -36,25 +42,28 @@ namespace com.WanderingTurtle.FormPresentation
                 myEventList = myMan.RetrieveEventList();
                 lvEvents.ItemsSource = myEventList;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("No database able to be accessed for event list");
             }
         }
 
-         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        // Calls the delete method from the BLL to archive an event.
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Unimplemented delete button code.
+        /// Will be implemented by: 2015/2/27
+        /// </summary>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             Event EventToDelete = (Event)lvEvents.SelectedItems[0];
             myMan.ArchiveAnEvent(EventToDelete);
         }
 
-        // Calls the AddEvent window for the user to input information into
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Opens a new AddNewEvent window for the user to interact with. 
+        /// When the window closes, we refresh our listview.
+        /// </summary>
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
             Window AddEvent = new AddNewEvent();
@@ -65,13 +74,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
-
-
-
         /// <summary>
-        /// Uses the EventManager to archive a completed / no longer offered event.
-        /// It uses the selected event to delete a specific item.
+        /// Hunter Lind || 2015/2/23
+        /// Archives a no longer offered event. 
         /// </summary>
         private void btnDeleteEvent_Click(object sender, RoutedEventArgs e)
         {
