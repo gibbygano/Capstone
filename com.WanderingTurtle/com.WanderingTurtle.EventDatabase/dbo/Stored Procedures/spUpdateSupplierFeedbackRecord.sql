@@ -16,5 +16,5 @@ AS
 		AND SupplierID = @SupplierID
 		AND EmployeeID = @EmployeeID
 		AND Rating = @originalRating
-		AND Nots = @originalNotes
+		AND Notes = @originalNotes
 	RETURN @@ROWCOUNT

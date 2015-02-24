@@ -1,25 +1,25 @@
-﻿CREATE TABLE [dbo].[SupplierApplication](
-	[ApplicationID] [int] IDENTITY(100,1) NOT NULL,
-	[CompanyName] [varchar](255) NOT NULL,
-	[CompanyDescription] [varchar](255) NULL,
-	[FirstName] [varchar](50) NOT NULL,
-	[LastName] [varchar](50) NOT NULL,
-	[Address1] [varchar](255) NOT NULL,
-	[Address2] [varchar](255) ,
-	[Zip] [varchar](10) NOT NULL,
-	[PhoneNumber] [varchar](15) NOT NULL,
-	[EmailAddress] [varchar](100) NOT NULL,
-	[ApplicationDate] [date] NOT NULL,
-	[Approved] [bit] NOT NULL DEFAULT 0,
-	[ApprovalDate] [date] NULL
- CONSTRAINT [PK_SupplierApplication] PRIMARY KEY CLUSTERED 
-(
-	[ApplicationID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+﻿CREATE TABLE [dbo].[SupplierApplication] (
+    [ApplicationID]      INT           IDENTITY (100, 1) NOT NULL,
+    [CompanyName]        VARCHAR (255) NOT NULL,
+    [CompanyDescription] VARCHAR (255) NULL,
+    [FirstName]          VARCHAR (50)  NOT NULL,
+    [LastName]           VARCHAR (50)  NOT NULL,
+    [Address1]           VARCHAR (255) NOT NULL,
+    [Address2]           VARCHAR (255) NULL,
+    [Zip]                VARCHAR (10)  NOT NULL,
+    [PhoneNumber]        VARCHAR (15)  NOT NULL,
+    [EmailAddress]       VARCHAR (100) NOT NULL,
+    [ApplicationDate]    DATE          NOT NULL,
+    [Approved]           BIT           NOT NULL,
+    [ApprovalDate]       DATE          NULL,
+    CONSTRAINT [PK_SupplierApplication] PRIMARY KEY CLUSTERED ([ApplicationID] ASC) ON [PRIMARY]
+) ON [PRIMARY];
 GO
-CREATE INDEX SupplierApplicationIndex
-ON [SupplierApplication] (ApplicationID)
+CREATE NONCLUSTERED INDEX [SupplierApplicationIndex]
+    ON [dbo].[SupplierApplication]([ApplicationID] ASC);
 GO
-CREATE INDEX SupplierApplicationNameIndex
-ON [SupplierApplication] (CompanyName)
+CREATE NONCLUSTERED INDEX [SupplierApplicationNameIndex]
+    ON [dbo].[SupplierApplication]([CompanyName] ASC);
+GO
+ALTER TABLE [dbo].[SupplierApplication]
+    ADD DEFAULT 0 FOR [Approved];

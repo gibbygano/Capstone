@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE spSelectItemListing(@ItemListID int)
 AS
-	SELECT StartDate, EndDate, ItemListID, EventItemID, Price, QuantityOffered, ProductSize, SupplierID, EventStartTime, EventEndTime
+	SELECT StartDate, EndDate, ItemListID, EventItemID, Price, QuantityOffered, ProductSize, SupplierID
 	FROM ItemListing
 	WHERE ItemListID = @ItemListID
 	AND Active = 1

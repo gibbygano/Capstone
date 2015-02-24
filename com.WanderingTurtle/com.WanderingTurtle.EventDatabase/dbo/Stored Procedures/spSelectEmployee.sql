@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[spSelectEmployee]	
+﻿CREATE PROCEDURE [dbo].[spSelectEmployee]	
 	(@firstName						varchar(50),
 	 @lastName						varchar(50),
 	 @active						bit)

@@ -1,20 +1,27 @@
-﻿CREATE TABLE [dbo].[ItemListing](
-	[ItemListID] [int] IDENTITY(100,1) NOT NULL,
-	[StartDate] [date] NOT NULL,
-	[EndDate] [date] NOT NULL,
-	[EventItemID] [int] NOT NULL,
-	[Price] [money] NOT NULL,
-	[QuantityOffered] [int] NOT NULL,
-	[ProductSize] [varchar](50) NOT NULL,
-	[SupplierID] [int] NOT NULL,
-	[EventStartTime] [dateTime2] NOT NULL,
-	[EventEndTime] [dateTime2] NOT NULL,
-	[Active]	[bit] NOT NULL
- CONSTRAINT [PK_ItemListing] PRIMARY KEY CLUSTERED 
-(
-	[ItemListID] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+﻿CREATE TABLE [dbo].[ItemListing] (
+    [ItemListID]            INT          IDENTITY (100, 1) NOT NULL,
+    [StartDate]             DATETIME     NOT NULL,
+    [EndDate]               DATETIME     NOT NULL,
+    [EventItemID]           INT          NOT NULL,
+    [Price]                 MONEY        NOT NULL,
+    [QuantityOffered]       INT          NOT NULL,
+    [ProductSize]           VARCHAR (50) NOT NULL,
+    [SupplierID]            INT          NOT NULL,
+    [Active]                BIT          NOT NULL,
+    [CurrentNumberOfGuests] INT          NOT NULL,
+    [MaxNumberOfGuests]     INT          NOT NULL,
+    [MinNumberOfGuests]     INT          NULL,
+    CONSTRAINT [PK_ItemListing] PRIMARY KEY CLUSTERED ([ItemListID] ASC) ON [PRIMARY]
+) ON [PRIMARY];
 GO
-CREATE INDEX ItemListingIndex
-ON [ItemListing] (ItemListID, StartDate, EndDate, Price, QuantityOffered)
+CREATE NONCLUSTERED INDEX [ItemListingIndex]
+    ON [dbo].[ItemListing]([ItemListID] ASC, [StartDate] ASC, [EndDate] ASC, [Price] ASC, [QuantityOffered] ASC);
+GO
+ALTER TABLE [dbo].[ItemListing]
+    ADD DEFAULT (0) FOR [CurrentNumberOfGuests];
+GO
+ALTER TABLE [dbo].[ItemListing]
+    ADD DEFAULT (0) FOR [MaxNumberOfGuests];
+GO
+ALTER TABLE [dbo].[ItemListing]
+    ADD DEFAULT (0) FOR [MinNumberOfGuests];

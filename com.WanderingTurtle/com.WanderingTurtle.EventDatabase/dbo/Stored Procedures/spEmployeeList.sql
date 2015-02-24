@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[spEmployeeList]
+﻿CREATE PROCEDURE [dbo].[spEmployeeList]
 AS
 	SELECT employeeID, firstName, lastName, empLevel
 	FROM employee 

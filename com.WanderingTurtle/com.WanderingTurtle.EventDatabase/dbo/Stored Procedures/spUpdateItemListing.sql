@@ -27,8 +27,6 @@ AS
 		Price = @Price,
 		QuantityOffered = @QuantityOffered,
 		ProductSize = @ProductSize,
-		EventEndTime = @EventEndTime,
-		EventStartTime = @EventStartTime,
 		SupplierID = @SupplierID
 	WHERE
 		ItemListID = @ItemListID
@@ -38,8 +36,6 @@ AS
 		AND Price = @originalPrice
 		AND QuantityOffered = @originalQuantityOffered
 		AND ProductSize = @originalProductSize
-		AND EventEndTime = @originalEventEndTime
-		AND EventStartTime = @originalEventStartTime
 		AND SupplierID = @originalSupplierID
 		AND Active = 1
 	RETURN @@ROWCOUNT

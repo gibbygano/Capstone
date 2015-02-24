@@ -12,21 +12,20 @@
  */
  
 CREATE TABLE [dbo].[CityState] (
-	[Zip]		varchar(10)		NOT NULL,
-	[City]		varchar(50) 	NOT NULL,
-	[State]		varchar(50) 	NOT NULL,
-		CONSTRAINT [pk_Zip] PRIMARY KEY CLUSTERED ([Zip] ASC)
-	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON ) ON [PRIMARY]
+    [Zip]   VARCHAR (10) NOT NULL,
+    [City]  VARCHAR (50) NOT NULL,
+    [State] VARCHAR (50) NOT NULL,
+    CONSTRAINT [pk_Zip] PRIMARY KEY CLUSTERED ([Zip] ASC) ON [PRIMARY]
 ) ON [PRIMARY];
 GO
 /* Note - Do we want these indices clustered or nonclustered? Currently using nonclustered. 
 	-Daniel Collingwood 
 */
-CREATE NONCLUSTERED INDEX ix_CityStateZip 
-    ON dbo.CityState(Zip);
+CREATE NONCLUSTERED INDEX [ix_CityStateZip]
+    ON [dbo].[CityState]([Zip] ASC);
 GO
-CREATE NONCLUSTERED INDEX ix_CityStateCity
-    ON dbo.CityState(City);
+CREATE NONCLUSTERED INDEX [ix_CityStateCity]
+    ON [dbo].[CityState]([City] ASC);
 GO
-CREATE NONCLUSTERED INDEX ix_CityStateState
-    ON dbo.CityState(State);
+CREATE NONCLUSTERED INDEX [ix_CityStateState]
+    ON [dbo].[CityState]([State] ASC);
