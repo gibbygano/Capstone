@@ -18,13 +18,15 @@ namespace com.WanderingTurtle.Common
         public decimal Price { get; set; }
         public int QuantityOffered { get; set; }
         public string ProductSize { get; set; } //not sure if we need this anymore
-
+        public int MaxNumGuests { get; set; }
+        public int MinNumGuests { get; set; }
+        public int CurrentNumGuests { get; set; }
         public ItemListing()
         {
             //default constructor
         }
 
-        public ItemListing(int itemListID, int eventID, DateTime startDate, DateTime endDate, decimal price, int quantityOffered, string productSize)
+        public ItemListing(int itemListID, int eventID, DateTime startDate, DateTime endDate, decimal price, int quantityOffered, string productSize, int maxNumGuests, int minNumGuests, int currentNumGuests)
         {
             ItemListID = itemListID;
             EventID = eventID;
@@ -33,6 +35,9 @@ namespace com.WanderingTurtle.Common
             Price = price;
             QuantityOffered = quantityOffered;
             ProductSize = productSize;
+            MaxNumGuests = maxNumGuests;
+            MinNumGuests = minNumGuests;
+            CurrentNumGuests = currentNumGuests;
         }
     }
 }
