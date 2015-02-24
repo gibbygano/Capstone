@@ -4,13 +4,8 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="com.WanderingTurtle.FormPresentation.AddNewEvent"
         Title="Add a New Event" WindowStartupLocation="CenterScreen" Height="389.5" Width="485.355">
     <Grid Margin="0,0,2,0">
-        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="99,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" />
-        <TextBox x:Name="txtMinGuest" HorizontalAlignment="Left" Height="23" Margin="99,45,0,0" TextWrapping="Wrap" Text="Min" VerticalAlignment="Top" Width="43" GotMouseCapture="clicktxtField" TabIndex="3" GotKeyboardFocus="GotKeyboardFocus" TextChanged="txtMinGuest_TextChanged"/>
+        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="99,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" MaxLength="255" />
         <Label Content="Event Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,13,0,0" RenderTransformOrigin="0.526,0.654"/>
-        <Label Content="Capacity:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,41,0,0" RenderTransformOrigin="1.342,0.308"/>
-        <TextBox x:Name="txtMaxGuest" HorizontalAlignment="Left" Height="23" Margin="152,45,0,0" TextWrapping="Wrap" Text="Max" VerticalAlignment="Top" Width="43" GotMouseCapture="clicktxtField" TabIndex="4" GotKeyboardFocus="GotKeyboardFocus"/>
-        <TextBox x:Name="txtPrice" HorizontalAlignment="Left" Height="23" Margin="317,45,0,0" TextWrapping="Wrap" Text="00.00" VerticalAlignment="Top" Width="52" GotMouseCapture="clicktxtField" TabIndex="5" GotKeyboardFocus="GotKeyboardFocus"/>
-        <Label Content="Price (USD) $" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="243,42,0,0" RenderTransformOrigin="1.342,0.308"/>
         <Label Content="Provided Transportation?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,170,0,0" RenderTransformOrigin="1.342,0.308"/>
         <Canvas HorizontalAlignment="Left" Height="54" Margin="127,203,0,0" VerticalAlignment="Top" Width="58">
             <RadioButton x:Name="radTranspYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="11"/>
@@ -30,7 +25,7 @@
             <RadioButton x:Name="radOnSiteYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="13"/>
             <RadioButton x:Name="radOnSiteNo" Content="No" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="14"/>
         </Canvas>
-        <TextBox x:Name="txtDescrip" HorizontalAlignment="Left" Height="93" Margin="99,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" TabIndex="10" RenderTransformOrigin="0.499,0.528" />
+        <TextBox x:Name="txtDescrip" HorizontalAlignment="Left" Height="93" Margin="99,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" TabIndex="10" RenderTransformOrigin="0.499,0.528" MaxLength="255" />
 
     </Grid>
 </Window>

@@ -66,11 +66,11 @@ VALUES
 ('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', '2015-01-22', 1, '2015-02-12')
 GO
 
-INSERT INTO [dbo].[EventItem] (EventItemName, EventStartTime, EventEndTime, CurrentNumberOfGuests, MaxNumberOfGuests, MinNumberOfGuests, EventTypeID, PricePerPerson, EventOnsite, Transportation, EventDescription, Active)
+INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transportation, EventDescription, Active)
 VALUES
-('Non-Creepy Boat Ride', '00:00:00', '01:00:00', 0, 10, 1, 100, 15.00, 0, 0, 'A totally non creepy midnight boat ride down the river.', 1 ),
-('Jungle Tour', '13:00:00', '15:00:00', 2, 30, 5, 101, 25.00, 0, 1, 'A Majestic Jungle Tour. Not safe for kids under 12.', 1 ),
-('Market Excursion', '10:00:00', '12:00:00', 5, 50, 2, 101, 5.00, 0, 1, 'Tour the local marketplace. Haggle your way to some great stuff!', 1 )
+('Non-Creepy Boat Ride', 100, 0, 0, 'A totally non creepy midnight boat ride down the river.', 1 ),
+('Jungle Tour', 101, 0, 1, 'A Majestic Jungle Tour. Not safe for kids under 12.', 1 ),
+('Market Excursion', 102, 0, 1, 'Tour the local marketplace. Haggle your way to some great stuff!', 1 )
 GO
 
 INSERT INTO [dbo].[EventType] (EventName)
@@ -81,11 +81,11 @@ VALUES
 ('Entertainment')
 GO
 
-INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, QuantityOffered, ProductSize, Active)
+INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, QuantityOffered, ProductSize, Active, SupplierID)
 VALUES
-('2015-03-01', '2015-03-01', 100, 15.00, 10, 'One Boat', 1),
-('2015-03-01', '2015-03-01', 101, 25.00, 30, 'One Excursion', 1),
-('2015-03-01', '2015-03-01', 102, 5.00, 50, 'One Trip', 1)
+('2015-03-01', '2015-03-01', 100, 15.00, 10, 'One Boat', 1, 100),
+('2015-03-01', '2015-03-01', 101, 25.00, 30, 'One Excursion', 1, 100),
+('2015-03-01', '2015-03-01', 102, 5.00, 50, 'One Trip', 1, 100)
 GO
 
 INSERT INTO [dbo].[Lists]  (SupplierID, ItemListID, DateListed)

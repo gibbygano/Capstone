@@ -18,37 +18,46 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class EditExistingEvent : Window
     {
-        public EditExistingEvent()
-        {
-            InitializeComponent();
-        }
         Event Unrevised = new Event();
+        Event eventToSubmit = new Event();
+
         EventManager myMan = new EventManager();
         /// <summary>
-        /// Populates the forms fields for editing.
+        /// Hunter Lind || 2015/2/23
+        /// 
+        /// Fills out our form with information from EventToEdit.
+        /// Also saves an Unrevised version of EventToEdit.
         /// </summary>
         /// <param name="EventToEdit">The Event we are going to edit</param>
         public EditExistingEvent(Event EventToEdit)
         {
-            txtEventName.Text = EventToEdit.EventItemName;
             InitializeComponent();
+            Unrevised = EventToEdit;
 
-            txtMaxGuest.Text = EventToEdit.MaxNumGuests.ToString();
-            txtMinGuest.Text = EventToEdit.MinNumGuests.ToString();
+            eventToSubmit.Active = EventToEdit.Active;
+            eventToSubmit.Description = EventToEdit.Description;
+            eventToSubmit.EventTypeID = EventToEdit.EventTypeID;
+            eventToSubmit.OnSite = EventToEdit.OnSite;
+            eventToSubmit.Transportation = EventToEdit.Transportation;
+            eventToSubmit.EventItemName = EventToEdit.EventItemName;
+            eventToSubmit.EventItemID = EventToEdit.EventItemID;
 
-            DateStart.Text = EventToEdit.EventStartDate.ToString();
-            dateEnd.Text = EventToEdit.EventEndDate.ToString();
-            
-            txtPrice.Text = EventToEdit.PricePerPerson.ToString();
-            rtxtDescrip.AppendText(EventToEdit.Description);
+            List<EventType> myList = myMan.RetrieveEventTypeList();
+            try
+            {
+                cboxType.Items.Clear();
+                cboxType.ItemsSource = myList;
+                cboxType.SelectedIndex = EventToEdit.EventTypeID;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
 
+            txtEventName.Text = EventToEdit.EventItemName;
+            txtDescrip.AppendText(EventToEdit.Description);
 
-            var TempList = myMan.RetrieveEventTypeList();
-            cboxType.ItemsSource = TempList;
-            cboxType.SelectedItem = EventToEdit.EventTypeID;
-
-
-            if(EventToEdit.Transportation == true)
+            if (EventToEdit.Transportation == true)
             {
                 radTranspYes.IsChecked = true;
             }
@@ -57,64 +66,34 @@ namespace com.WanderingTurtle.FormPresentation
                 radTranspNo.IsChecked = true;
             }
 
-            if(EventToEdit.OnSite == true)
+            if (EventToEdit.OnSite == true)
             {
                 radOnSiteYes.IsChecked = true;
             }
             else
             {
-                radOnSiteNo.IsChecked =  true;
+                radOnSiteNo.IsChecked = true;
             }
-            
+
         }
+
         /// <summary>
-        /// Creates a new event to replace the old version of the EventToEdit
+        /// Hunter Lind || 2015/2/23
+        /// 
+        /// Creates an event to replace the old version of itself.
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            var eventToSubmit = new Event();
             eventToSubmit.EventItemName = txtEventName.Text;
 
             //Checks and instantiates the minimum and maximum guest numbers
+            eventToSubmit.EventItemName = txtEventName.Text;
+
             try
             {
-                // Number Of Guests //
-                if (!Validator.ValidateInt(txtMaxGuest.Text) || !Validator.ValidateInt(txtMinGuest.Text))
-                {
-                    throw new Exception("Not a valid amount of guests");
-                }
-                else
-                {
-                    int x;
-                    int y;
-                    int.TryParse(txtMaxGuest.Text, out x);
-                    int.TryParse(txtMaxGuest.Text, out y);
-                    eventToSubmit.MaxNumGuests = x;
-                    eventToSubmit.MinNumGuests = y;
-                }
-
-                // Price //
-                if (!Validator.ValidateDecimal(txtPrice.Text))
-                {
-                    throw new Exception("Not a valid Price");
-                }
-                else
-                {
-                    eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice);
-                }
-
-                // Date Start + End //
-                if (!Validator.ValidateDateTime(DateStart.Text + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + txtEndTime.Text))
-                {
-                    throw new Exception("Your dates are wrong");
-                }
-                else
-                {
-                    eventToSubmit.EventStartDate = DateTime.Parse(DateStart.Text + txtStartTime.Text);
-                    eventToSubmit.EventEndDate = DateTime.Parse(dateEnd.Text + txtEndTime.Text);
-                }
-
-                // On-Site //
+                // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
                     eventToSubmit.OnSite = true;
@@ -125,10 +104,11 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new Exception("Please fill in the on site field");
+                    MessageBox.Show("Please fill in the on site field");
+                    return;
                 }
 
-                // Transportation //
+                // Provided transport //
                 if (radTranspNo.IsChecked == true)
                 {
                     eventToSubmit.Transportation = false;
@@ -139,7 +119,33 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new Exception("Please fill out the Transportation field");
+                    MessageBox.Show("Please fill out the Transportation field");
+                    return;
+                }
+
+                eventToSubmit.Description = txtDescrip.Text;
+
+                try
+                {
+                    int TypeSelected = cboxType.SelectedIndex;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Please select an event type.");
+                }
+                if (cboxType.SelectedIndex > -1)
+                {
+                    eventToSubmit.EventTypeID = (int)cboxType.SelectedValue;
+                }
+                else
+                {
+                    MessageBox.Show("Please select an event type!");
+                    return;
+                }
+                if (String.IsNullOrEmpty(txtEventName.Text))
+                {
+                    MessageBox.Show("Please enter an event name.");
+                    return;
                 }
 
                 // Submit the events

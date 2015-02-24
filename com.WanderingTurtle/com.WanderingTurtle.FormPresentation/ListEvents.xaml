@@ -15,15 +15,16 @@
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL
                     to the datafields within our Event object.-->
                     <GridViewColumn Width="140" Header="Event Name"         DisplayMemberBinding="{Binding EventItemName}"      />
-                    <GridViewColumn Width="30"  Header="Min"                DisplayMemberBinding="{Binding MinNumGuests}"       />
-                    <GridViewColumn Width="30"  Header="Max"                DisplayMemberBinding="{Binding MaxNumGuests}"       />
                     <GridViewColumn Width="100" Header="Transportation"     DisplayMemberBinding="{Binding Transportation}"     />
                     <GridViewColumn Width="100" Header="On-Site"            DisplayMemberBinding="{Binding OnSite}"             />
                 </GridView>
             </ListView.View>
         </ListView>
         <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddEvent" Content="Add Event"    Click="btnAddEvent_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddEvent" Content="Add"    Click="btnAddEvent_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnArchiveEvent" Content="Delete" Click="btnArchiveEvent_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnEditEvent" Content="Edit" Click="btnEditEvent_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewDetails" Content="View Event Details"    Click="btnViewEventDetails" />
         </WrapPanel>
     </Grid>
 </UserControl>

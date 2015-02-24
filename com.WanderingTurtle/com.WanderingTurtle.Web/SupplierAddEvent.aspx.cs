@@ -158,11 +158,13 @@ namespace com.WanderingTurtle.Web
                     /*****************TEST DATA****************************************/
                     //these are added for testing purposes until Event can be reworked.
                     //need to be removed once that is fixed
+                    /*
                     currentEvent.EventStartDate = DateTime.Now;
                     currentEvent.EventEndDate = DateTime.Now;
                     currentEvent.PricePerPerson = (decimal)15.00;
                     currentEvent.MinNumGuests = 0;
                     currentEvent.MaxNumGuests = 15;
+                     * */
                     /******************************************************************/
                     int rows = _myEventManager.AddNewEvent(currentEvent);
                     if (rows == 1)

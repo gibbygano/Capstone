@@ -62,7 +62,8 @@ namespace com.WanderingTurtle.FormPresentation
         // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Window EditEvent = new EditExistingEvent();
+            Event EventToEdit = (Event)lvEvents.SelectedItem;
+            Window EditEvent = new EditExistingEvent(EventToEdit);
             EditEvent.Show();
         }
 

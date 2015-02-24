@@ -52,47 +52,6 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                // Number of Guests //
-                if (!Validator.ValidateInt(txtMaxGuest.Text) || !Validator.ValidateInt(txtMinGuest.Text))
-                {
-                    MessageBox.Show("Not a valid amount of guests");
-                    return;
-                }
-
-                else if (Int32.Parse(txtMaxGuest.Text) > Int32.Parse(txtMinGuest.Text))
-                {
-                    if (Int32.Parse(txtMinGuest.Text) > 0)
-                    {
-                        int x;
-                        int y;
-                        int.TryParse(txtMaxGuest.Text, out x);
-                        int.TryParse(txtMinGuest.Text, out y);
-                        eventToSubmit.MaxNumGuests = x;
-                        eventToSubmit.MinNumGuests = y;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Your minimum guests don't make sense!");
-                        return;
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Your minimum and maximum guests don't make sense!");
-                    return;
-                }
-
-                // Price //
-                if (!Validator.ValidateDecimal(this.txtPrice.Text))
-                {
-                    MessageBox.Show("Not a valid Price");
-                    return;
-                }
-                else
-                {
-                    eventToSubmit.PricePerPerson = Convert.ToDecimal(txtPrice.Text);
-                }
-
                 // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
@@ -129,7 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     int TypeSelected = cboxType.SelectedIndex;
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     MessageBox.Show("Please select an event type.");
                 }
@@ -142,13 +101,13 @@ namespace com.WanderingTurtle.FormPresentation
                     MessageBox.Show("Please select an event type!");
                     return;
                 }
-                if(String.IsNullOrEmpty(txtEventName.Text))
+                if (String.IsNullOrEmpty(txtEventName.Text))
                 {
                     MessageBox.Show("Please enter an event name.");
                     return;
                 }
 
-                if(myMan.AddNewEvent(eventToSubmit) == 1)
+                if (myMan.AddNewEvent(eventToSubmit) == 1)
                 {
                     MessageBox.Show("Successfully Added Event");
                     this.Close();
@@ -181,5 +140,6 @@ namespace com.WanderingTurtle.FormPresentation
             newTxtBox.Text = "";
             sender = newTxtBox;
         }
+
     }
 }
