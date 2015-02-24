@@ -64,6 +64,7 @@ namespace com.WanderingTurtle.DataAccess
 
             // set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
+
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
@@ -73,6 +74,7 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);
             cmd.Parameters.AddWithValue("@originalEventID", oldEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@originalEventTypeID", oldEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);
             cmd.Parameters.AddWithValue("@originalTransportation", oldEvent.Transportation);
             cmd.Parameters.AddWithValue("@originalEventDescription", oldEvent.Description);
@@ -104,18 +106,19 @@ namespace com.WanderingTurtle.DataAccess
         public static int DeleteEventItem(Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spDeleteEvent";
+            var cmdText = "spDeleteEventItem";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Active", 0);
 
-            cmd.Parameters.AddWithValue("@originalEventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@originalEventID", newEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@originalTransportation", newEvent.Transportation);
-            cmd.Parameters.AddWithValue("@originalEventDescription", newEvent.Description);
-            cmd.Parameters.AddWithValue("@originalActive", newEvent.Active);
+            cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
+            cmd.Parameters.AddWithValue("@EventID", newEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
+            cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
+            cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
+            cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
             try
             {
                 conn.Open();
