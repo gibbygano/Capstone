@@ -65,20 +65,20 @@ namespace com.WanderingTurtle.DataAccess
             // set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
 
+
+            cmd.Parameters.AddWithValue("@EventItemID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
-            cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
-            cmd.Parameters.AddWithValue("@Active", newEvent.Active);
+            cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);      
 
             cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);
-            cmd.Parameters.AddWithValue("EventItemID", oldEvent.EventItemID);
+            
             cmd.Parameters.AddWithValue("@originalEventTypeID", oldEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);
             cmd.Parameters.AddWithValue("@originalTransportation", oldEvent.Transportation);
             cmd.Parameters.AddWithValue("@originalEventDescription", oldEvent.Description);
-            cmd.Parameters.AddWithValue("@originalActive", oldEvent.Active);
             try
             {
                 conn.Open();
