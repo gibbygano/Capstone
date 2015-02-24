@@ -111,10 +111,9 @@ namespace com.WanderingTurtle.DataAccess
             var rowsAffected = 0;
 
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@Active", 0);
 
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@EventID", newEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@EventItemID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
