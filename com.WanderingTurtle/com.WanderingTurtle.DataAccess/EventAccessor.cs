@@ -26,12 +26,7 @@ namespace com.WanderingTurtle.DataAccess
 
             //Set up Parameters For the Stored Procedure
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@EventStartTime", newEvent.EventStartDate);
-            cmd.Parameters.AddWithValue("@EventEndTime", newEvent.EventEndDate);
-            cmd.Parameters.AddWithValue("@MaxNumberOfGuests", newEvent.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@MinNumberOfGuests", newEvent.MinNumGuests);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
-            cmd.Parameters.AddWithValue("@PricePerPerson", newEvent.PricePerPerson);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
@@ -70,27 +65,15 @@ namespace com.WanderingTurtle.DataAccess
             // set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@EventStartTime", newEvent.EventStartDate);
-            cmd.Parameters.AddWithValue("@EventEndTime", newEvent.EventEndDate);
-            cmd.Parameters.AddWithValue("@MaxNumberOfGuests", newEvent.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@MinNumberOfGuests", newEvent.MinNumGuests);
-            cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", newEvent.CurrentNumGuests);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
-            cmd.Parameters.AddWithValue("@PricePerPerson", newEvent.PricePerPerson);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
             cmd.Parameters.AddWithValue("@Active", newEvent.Active);
 
             cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);
             cmd.Parameters.AddWithValue("@originalEventID", oldEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@originalEventStartTime", oldEvent.EventStartDate);
-            cmd.Parameters.AddWithValue("@originalEventEndTime", oldEvent.EventEndDate);
-            cmd.Parameters.AddWithValue("@originalMaxNumberOfGuests", oldEvent.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@originalMinNumberOfGuests", oldEvent.MinNumGuests);
-            cmd.Parameters.AddWithValue("@originalCurrentNumberOfGuests", oldEvent.CurrentNumGuests);
             cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);
-            cmd.Parameters.AddWithValue("@originalPricePerPerson", oldEvent.PricePerPerson);
             cmd.Parameters.AddWithValue("@originalTransportation", oldEvent.Transportation);
             cmd.Parameters.AddWithValue("@originalEventDescription", oldEvent.Description);
             cmd.Parameters.AddWithValue("@originalActive", oldEvent.Active);
@@ -130,10 +113,6 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@originalEventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@originalEventID", newEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@originalEventStartTime", newEvent.EventStartDate);
-            cmd.Parameters.AddWithValue("@originalEventEndTime", newEvent.EventEndDate);
-            cmd.Parameters.AddWithValue("@originalMaxNumberOfGuests", newEvent.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@originalPricePerPerson", newEvent.PricePerPerson);
             cmd.Parameters.AddWithValue("@originalTransportation", newEvent.Transportation);
             cmd.Parameters.AddWithValue("@originalEventDescription", newEvent.Description);
             cmd.Parameters.AddWithValue("@originalActive", newEvent.Active);
@@ -180,17 +159,11 @@ namespace com.WanderingTurtle.DataAccess
 
                         currentEvent.EventItemID = reader.GetInt32(0);
                         currentEvent.EventItemName = reader.GetString(1);
-                        currentEvent.EventStartDate = (DateTime)reader.GetValue(2);
-                        currentEvent.EventEndDate = (DateTime)reader.GetValue(3);
-                        currentEvent.MaxNumGuests = reader.GetInt32(4);
-                        currentEvent.CurrentNumGuests = reader.GetInt32(5);
-                        currentEvent.MinNumGuests = reader.GetInt32(6);
-                        currentEvent.EventTypeID = reader.GetInt32(7);
-                        currentEvent.PricePerPerson = reader.GetDecimal(8);
-                        currentEvent.OnSite = reader.GetBoolean(9);
-                        currentEvent.Transportation = reader.GetBoolean(10);
-                        currentEvent.Description = reader.GetString(11);
-                        currentEvent.Active = reader.GetBoolean(12);
+                        currentEvent.EventTypeID = reader.GetInt32(2);
+                        currentEvent.OnSite = reader.GetBoolean(3);
+                        currentEvent.Transportation = reader.GetBoolean(4);
+                        currentEvent.Description = reader.GetString(5);
+                        currentEvent.Active = reader.GetBoolean(6);
                         EventList.Add(currentEvent);
                     }
                 }
@@ -232,16 +205,11 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     theEvent.EventItemID = reader.GetInt32(0);
                     theEvent.EventItemName = reader.GetString(1);
-                    theEvent.EventEndDate = (DateTime)reader.GetValue(3);
-                    theEvent.MaxNumGuests = reader.GetInt32(4);
-                    theEvent.CurrentNumGuests = reader.GetInt32(5);
-                    theEvent.MinNumGuests = reader.GetInt32(6);
-                    theEvent.EventTypeID = reader.GetInt32(7);
-                    theEvent.PricePerPerson = reader.GetDecimal(8);
-                    theEvent.OnSite = reader.GetBoolean(9);
-                    theEvent.Transportation = reader.GetBoolean(10);
-                    theEvent.Description = reader.GetString(11);
-                    theEvent.Active = reader.GetBoolean(12);
+                    theEvent.EventTypeID = reader.GetInt32(2);
+                    theEvent.OnSite = reader.GetBoolean(3);
+                    theEvent.Transportation = reader.GetBoolean(4);
+                    theEvent.Description = reader.GetString(5);
+                    theEvent.Active = reader.GetBoolean(6);
                 }
                 else
                 {
