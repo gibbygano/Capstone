@@ -73,7 +73,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Active", newEvent.Active);
 
             cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@originalEventID", oldEvent.EventItemID);
+            cmd.Parameters.AddWithValue("EventItemID", oldEvent.EventItemID);
             cmd.Parameters.AddWithValue("@originalEventTypeID", oldEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);
             cmd.Parameters.AddWithValue("@originalTransportation", oldEvent.Transportation);
