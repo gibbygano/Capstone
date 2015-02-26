@@ -13,35 +13,51 @@ namespace com.WanderingTurtle.Common
     /// </summary>
     /// <remarks>
     /// Miguel Santana
-    /// Updated: 2015/02/22
+    /// Updated: 2015/26/22
     ///
-    /// Created non-default constructor to be used in assigning values.
+    /// Created non-default constructors to be used in assigning values.
     /// </remarks>
     public class Employee
     {
-        public int? EmployeeID { get; set; }
+        public int? EmployeeID { get; private set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; private set; }
 
-        public string LastName { get; set; }
+        public string LastName { get; private set; }
 
-        public string Password { get; set; }
+        public string Password { get; private set; }
 
-        public bool Active { get; set; }
+        public RoleData Level { get; private set; }
 
-        public RoleData Level { get; set; }
+        public bool Active { get; private set; }
 
+        /// <summary>
+        /// Use for creating an employee object with an ID
+        /// </summary>
+        /// <param name="EmployeeID">Employee ID</param>
+        /// <param name="FirstName">Employee First Name</param>
+        /// <param name="LastName">Employee Last Name</param>
+        /// <param name="Password">Employee Password</param>
+        /// <param name="Level">Employee User Level</param>
+        /// <param name="Active">Employee Active</param>
         public Employee(int EmployeeID, string FirstName, string LastName, string Password, int Level, bool Active = true)
         {
             SetValues(EmployeeID, FirstName, LastName, Password, Level, Active);
         }
 
+        /// <summary>
+        /// Use for creating a new employee.
+        /// </summary>
+        /// <remarks>Does not have an Employee ID</remarks>
+        /// <param name="FirstName">Employee First Name</param>
+        /// <param name="LastName">Employee Last Name</param>
+        /// <param name="Password">Employee Password</param>
+        /// <param name="Level">Employee User Level</param>
+        /// <param name="Active">Employee Active</param>
         public Employee(string FirstName, string LastName, string Password, int Level, bool Active = true)
         {
             SetValues(null, FirstName, LastName, Password, Level, Active);
         }
-
-        public Employee() { }
 
         private void SetValues(int? EmployeeID, string FirstName, string LastName, string Password, int Level, bool Active)
         {
