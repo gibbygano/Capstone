@@ -42,6 +42,7 @@
     <Compile Include="CityStateManager.cs" />
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="HotelGuestManager.cs" />
+    <Compile Include="InvoiceManager.cs" />
     <Compile Include="OrderManager.cs" />
     <Compile Include="EventManager.cs" />
     <Compile Include="ProductManager.cs" />

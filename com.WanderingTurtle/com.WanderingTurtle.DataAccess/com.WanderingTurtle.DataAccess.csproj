@@ -48,6 +48,7 @@
     <Compile Include="EmployeeAccessor.cs" />
     <Compile Include="EventTypeAccessor.cs" />
     <Compile Include="HotelGuestAccessor.cs" />
+    <Compile Include="InvoiceAccessor.cs" />
     <Compile Include="ListsAccessor.cs" />
     <Compile Include="ItemListingAccessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
