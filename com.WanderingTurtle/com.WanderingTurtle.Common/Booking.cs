@@ -17,7 +17,6 @@ namespace com.WanderingTurtle.Common
         public int ItemListID { get; set; }
         public int Quantity { get; set; }
         public DateTime DateBooked { get; set; }
-
         public Booking()
         {
 
@@ -38,5 +37,25 @@ namespace com.WanderingTurtle.Common
             Quantity = bQuantity;
             DateBooked = dateBooked;
         }
+
+    }
+    /// <summary>
+    /// Pat Banks
+    /// created on:  2015/02/25
+    /// 
+    /// Booking Details inherits from a Booking. Object holds additional information for a booking to show on an invoice.
+    /// </summary>
+    /// <remarks>
+    /// </remarks>
+    public class BookingDetails : Booking
+    {
+        public decimal Price { get; set; }
+        public string EventItemName { get; set; }
+        public DateTime StartDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public int InvoiceID { get; set; }
+
+        public BookingDetails() : base() { }
+
     }
 }

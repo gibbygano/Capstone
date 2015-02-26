@@ -25,9 +25,12 @@ namespace com.WanderingTurtle.FormPresentation
         private List<Employee> employeeList;
 
         /// <summary>
-        /// Generates a list of employees
-        /// Pat Banks 2/19/15
+        /// Created by Pat Banks 2015/02/19
+        /// Displays and refreshes the list of active employees
         /// </summary>
+        /// <remarks>
+        /// </remarks>
+
         public ListTheEmployees()
         {
             InitializeComponent();
@@ -35,7 +38,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Adding the employee to the database
+        /// Created by Pat Banks 2015/02/19
+        /// Displays add Employee window for user to add additional employees to the system
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -50,9 +54,11 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///  Refreshes list
-        ///  Pat Banks 2/19/15
+        /// Created by Pat Banks 2015/02/19
+        /// Retrieves a list of employees from the database to display
         /// </summary>
+        /// <remarks>
+        /// </remarks>
         private void RefreshEmployeeList()
         {
             lvEmployeesList.ItemsPanel.LoadContent();
