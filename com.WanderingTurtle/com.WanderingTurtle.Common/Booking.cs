@@ -17,25 +17,39 @@ namespace com.WanderingTurtle.Common
         public int ItemListID { get; set; }
         public int Quantity { get; set; }
         public DateTime DateBooked { get; set; }
+        public bool Cancel { get; set; }
+        public decimal Refund { get; set; }
+
         public Booking()
         {
 
         }
-        public Booking(int guestID, int empID, int itemID, int bQuantity)
-        {
-            GuestID = guestID;
-            EmployeeID = empID;
-            ItemListID = itemID;
-            Quantity = bQuantity;
-        }
+        /* public Booking(int guestID, int empID, int itemID, int bQuantity)
+         {
+             GuestID = guestID;
+             EmployeeID = empID;
+             ItemListID = itemID;
+             Quantity = bQuantity;
+         }*/
         public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked)
         {
-            //BookingID = bookingID;
+
             GuestID = guestID;
             EmployeeID = empID;
             ItemListID = itemID;
             Quantity = bQuantity;
             DateBooked = dateBooked;
+        }
+        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, bool cancel, decimal refund)
+        {
+            BookingID = bookingID;
+            GuestID = guestID;
+            EmployeeID = empID;
+            ItemListID = itemID;
+            Quantity = bQuantity;
+            DateBooked = dateBooked;
+            Cancel = cancel;
+            Refund = refund;
         }
 
     }
