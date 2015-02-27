@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public static int HotelGuestAdd(NewHotelGuest newHotelGuest)
+        public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spHotelGuestAdd";
@@ -96,7 +96,8 @@ namespace com.WanderingTurtle.DataAccess
                                 ),
                                 !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
                                 !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
-                                reader.GetBoolean(10) //Active
+                                (int?)reader.GetValue(10), //Room
+                                reader.GetBoolean(11) //Active
                             )
                         );
                     }
@@ -127,7 +128,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public static int HotelGuestUpdate(HotelGuest oldHotelGuest, NewHotelGuest newHotelGuest)
+        public static int HotelGuestUpdate(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spHotelGuestUpdate";
@@ -142,6 +143,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@room", newHotelGuest.Room);
             cmd.Parameters.AddWithValue("@active", newHotelGuest.Active);
 
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
@@ -152,6 +154,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_address2", oldHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@original_phoneNumber", oldHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@original_email", oldHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@original_room", oldHotelGuest.Room);
             cmd.Parameters.AddWithValue("@original_active", oldHotelGuest.Active);
 
             try

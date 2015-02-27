@@ -7,7 +7,8 @@
     [Address2]     VARCHAR (255) NULL,
     [PhoneNumber]  VARCHAR (15)  NULL,
     [EmailAddress] VARCHAR (100) NULL,
-    [Active]       BIT           NULL,
+	[Room]		   int			 NULL UNIQUE,
+    [Active]       BIT           NOT NULL,
     CONSTRAINT [pk_HotelGuest] PRIMARY KEY CLUSTERED ([HotelGuestID] ASC)
 ) ON [PRIMARY];
 
@@ -16,4 +17,4 @@ ALTER TABLE [dbo].[HotelGuest]
     ADD CONSTRAINT [fk_HotelGuest_CityState] FOREIGN KEY ([Zip]) REFERENCES [dbo].[CityState] ([Zip]);
 GO
 ALTER TABLE [dbo].[HotelGuest]
-    ADD DEFAULT 0 FOR [Active];
+    ADD DEFAULT 1 FOR [Active];

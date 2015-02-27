@@ -6,6 +6,7 @@
 	@address2 varchar(255),
 	@phoneNumber varchar(15),
 	@email varchar(100),
+	@room int,
 	@active bit,
 	
 	@original_hotelGuestID int,
@@ -16,6 +17,7 @@
 	@original_address2 varchar(255),
 	@original_phoneNumber varchar(15),
 	@original_email varchar(100),
+	@original_room int,
 	@original_active bit
 AS
 BEGIN
@@ -27,6 +29,7 @@ BEGIN
 			[Address2] = @address2,
 			[PhoneNumber] = @phoneNumber,
 			[EmailAddress] = @email,
+			[Room] = @room,
 			[Active] = @active
 	WHERE HotelGuestID = @original_hotelGuestID
 		AND [FirstName] = @original_firstName
@@ -36,6 +39,7 @@ BEGIN
 		AND	[Address2] = @original_address2
 		AND	[PhoneNumber] = @original_phoneNumber
 		AND	[EmailAddress] = @original_email
+		AND [Room] = @original_room
 		AND [Active] = @original_active
 
 	RETURN @@ROWCOUNT
