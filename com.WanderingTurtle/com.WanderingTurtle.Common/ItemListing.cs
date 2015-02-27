@@ -21,6 +21,7 @@ namespace com.WanderingTurtle.Common
         public int MaxNumGuests { get; set; }
         public int MinNumGuests { get; set; }
         public int CurrentNumGuests { get; set; }
+        public int SupplierID { get; set; }
         public ItemListing()
         {
             //default constructor
