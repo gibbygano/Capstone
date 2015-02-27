@@ -1,6 +1,7 @@
 ﻿<Window x:Class="com.WanderingTurtle.FormPresentation.EditExistingEvent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{DynamicResource WindowStyle}"
         Title="EditExistingEvent" Height="405.045" Width="547.612">
     <Grid>
         <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="173,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
