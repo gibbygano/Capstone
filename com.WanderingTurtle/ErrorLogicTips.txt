@@ -1,0 +1,49 @@
+Data Access Layer
+
+try
+{
+	if (reader.HasRows == true)
+	 {
+		  while (reader.Read())
+		  {
+				//reading from reader
+		  }
+	 }
+	 else
+	 {
+		  // throws error to BLL
+		  var ax = new ApplicationException("Data not found!");
+		  throw ax;
+	 }
+}
+catch (Exception)
+{
+	// throws scary errors to user
+	 throw;
+}
+finally
+{
+	 conn.Close();
+}
+
+Business Logic Layer
+try
+{
+	 return SomeAccessor.GetSomeList();
+}
+catch (Exception ex)
+{
+	// throws error to Presentation Layer
+	 throw ex;
+}
+
+Presentation Layer
+try
+{
+	//reading/displaying input
+}
+catch (Exception ex)
+{
+	//Catches error from BLL and displays to user
+	 MessageBox.Show(ex.Message);
+}
