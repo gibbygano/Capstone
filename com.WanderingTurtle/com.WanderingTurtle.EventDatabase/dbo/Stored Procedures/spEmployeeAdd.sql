@@ -6,6 +6,6 @@
 	 @active						bit)
 	
 AS
-	INSERT INTO employee ([firstName], [lastName], [empPassword], [empLevel], [active])
+	INSERT INTO [Employee] ([firstName], [lastName], [empPassword], [empLevel], [active])
 		VALUES(@firstName, @lastName, @empPassword, @empLevel, @active)
 RETURN @@ROWCOUNT		

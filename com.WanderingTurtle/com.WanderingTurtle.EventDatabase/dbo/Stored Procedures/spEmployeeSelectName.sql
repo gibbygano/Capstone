@@ -5,7 +5,7 @@
 
 AS
 	SELECT employeeID, firstName, lastName, empLevel, active
-	FROM employee
+	FROM [Employee]
 	WHERE firstName = @firstName 
 		AND lastName = @lastName
 		
