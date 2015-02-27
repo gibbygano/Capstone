@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="itemListID">Requires the ItemListID to SELECT the correct ItemListing record.</param>
         /// <returns>ItemListing object</returns>
-		///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
+	///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static ItemListing GetItemListing(string itemListID)
         {
 
@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.DataAccess
             SqlCommand cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-			cmd.Parameters.AddWithValue("@ItemListID", itemListID);
+	    cmd.Parameters.AddWithValue("@ItemListID", itemListID);
 			
             try
             {
@@ -48,9 +48,9 @@ namespace com.WanderingTurtle.DataAccess
                     //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
                     itemListingToRetrieve.QuantityOffered = reader.GetInt32(5);
                     itemListingToRetrieve.ProductSize = reader.GetString(6);
-					itemListingToRetrieve.MaxNumGuests = reader.GetInt32(7);
-					itemListingToRetrieve.MinNumGuests = reader.GetInt32(8);
-					itemListingToRetrieve.CurrentNumGuests = reader.GetInt32(9);
+	            itemListingToRetrieve.MaxNumGuests = reader.GetInt32(7);
+		    itemListingToRetrieve.MinNumGuests = reader.GetInt32(8);
+		    itemListingToRetrieve.CurrentNumGuests = reader.GetInt32(9);
 					
                 }
                 else
@@ -80,7 +80,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created by Tyler Collins 02/10/2015
         /// </summary>
         /// <returns>List of ItemListing objects</returns>
-		///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
+	///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static List<ItemListing> GetItemListingList()
         {
             List<ItemListing> itemListingList = new List<ItemListing>();
@@ -110,9 +110,9 @@ namespace com.WanderingTurtle.DataAccess
                         //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
                         currentItemListing.QuantityOffered = reader.GetInt32(5);
                         currentItemListing.ProductSize = reader.GetString(6);
-						currentItemListing.MaxNumGuests = reader.GetInt32(7);
-						currentItemListing.MinNumGuests = reader.GetInt32(8);
-						currentItemListing.CurrentNumGuests = reader.GetInt32(9);
+			currentItemListing.MaxNumGuests = reader.GetInt32(7);
+			currentItemListing.MinNumGuests = reader.GetInt32(8);
+			currentItemListing.CurrentNumGuests = reader.GetInt32(9);
 
                         itemListingList.Add(currentItemListing);
                     }
@@ -142,7 +142,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="itemListingToAdd">Requires an ItemListing object to INSERT</param>
         /// <returns>Returns the number of rows affected.</returns>
-		///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
+	///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static int AddItemListing(ItemListing itemListingToAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -156,9 +156,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Price", itemListingToAdd.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToAdd.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", 1);
-			cmd.Parameters.AddWithValue("@MaxNumGuests", "itemListingToAdd.MaxNumGuests);
-			cmd.Parameters.AddWithValue("@MinNumGuests", "itemListingToAdd.MinNumGuests);
-			cmd.Parameters.AddWithValue("@CurrentNumGuests", "itemListingToAdd.CurrentNumGuests);
+	    cmd.Parameters.AddWithValue("@MaxNumGuests", "itemListingToAdd.MaxNumGuests);
+	    cmd.Parameters.AddWithValue("@MinNumGuests", "itemListingToAdd.MinNumGuests);
+	    cmd.Parameters.AddWithValue("@CurrentNumGuests", "itemListingToAdd.CurrentNumGuests);
 
             int rowsAffected;
             try
@@ -185,7 +185,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="newItemListing">Requires the ItemListing object containing the new information</param>
         /// <param name="oldItemListing">Requires the ItemListing object to replace that matches the record in the Database</param>
         /// <returns>Returns the number of rows affected.</returns>
-		///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
+	///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static int UpdateItemListing(ItemListing newItemListing, ItemListing oldItemListing)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -200,9 +200,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Price", newItemListing.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", newItemListing.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", newItemListing.ProductSize);
-			cmd.Parameters.AddWithValue("@MaxNumGuests", newItemListing.MaxNumGuests);
-			cmd.Parameters.AddWithValue("@MinNumGuests", newItemListing.MinNumGuests);
-			cmd.Parameters.AddWithValue("@CurrentNumGuests", newItemListing.CurrentNumGuests);
+	    cmd.Parameters.AddWithValue("@MaxNumGuests", newItemListing.MaxNumGuests);
+	    cmd.Parameters.AddWithValue("@MinNumGuests", newItemListing.MinNumGuests);
+	    cmd.Parameters.AddWithValue("@CurrentNumGuests", newItemListing.CurrentNumGuests);
 
             //oldItemListing
             cmd.Parameters.AddWithValue("@ItemListID", oldItemListing.ItemListID);
@@ -212,9 +212,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Price", oldItemListing.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", oldItemListing.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", oldItemListing.ProductSize);
-			cmd.Parameters.AddWithValue("@MaxNumGuests", oldItemListing.MaxNumGuests);
-			cmd.Parameters.AddWithValue("@MinNumGuests", oldItemListing.MinNumGuests);
-			cmd.Parameters.AddWithValue("@CurrentNumGuests", oldItemListing.CurrentNumGuests);
+	    cmd.Parameters.AddWithValue("@MaxNumGuests", oldItemListing.MaxNumGuests);
+	    cmd.Parameters.AddWithValue("@MinNumGuests", oldItemListing.MinNumGuests);
+	    cmd.Parameters.AddWithValue("@CurrentNumGuests", oldItemListing.CurrentNumGuests);
 
             int rowsAffected;
 
@@ -242,7 +242,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="itemListingToDelete">Requires the ItemListing object which matches the record to be DELETED in the Database.</param>
         /// <returns>Returns the number of rows affected.</returns>
-		///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
+	///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static int DeleteItemListing(ItemListing itemListingToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -257,9 +257,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Price", itemListingToDelete.Price);
             cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToDelete.QuantityOffered);
             cmd.Parameters.AddWithValue("@ProductSize", itemListingToDelete.ProductSize);
-			cmd.Parameters.AddWithValue("@MaxNumGuests", itemListingToDelete.MaxNumGuests);
-			cmd.Parameters.AddWithValue("@MinNumGuests", itemListingToDelete.MinNumGuests);
-			cmd.Parameters.AddWithValue("@CurrentNumGuests", itemListingToDelete.CurrentNumGuests);
+	    cmd.Parameters.AddWithValue("@MaxNumGuests", itemListingToDelete.MaxNumGuests);
+	    cmd.Parameters.AddWithValue("@MinNumGuests", itemListingToDelete.MinNumGuests);
+	    cmd.Parameters.AddWithValue("@CurrentNumGuests", itemListingToDelete.CurrentNumGuests);
 
             int rowsAffected;
 
