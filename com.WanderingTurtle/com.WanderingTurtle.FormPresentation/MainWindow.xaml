@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
         xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
-        Title="MainWindow" Height="525" Width="950" MinHeight="125" WindowStartupLocation="CenterScreen">
+        Title="Main Window" Height="525" Width="950" MinHeight="125" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <System:Double x:Key="Tab Font Size">15</System:Double>
     </Window.Resources>
@@ -35,6 +35,7 @@
                 <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
             <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Invoices">
+                <local:ListInvoices FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
 
         </TabControl>

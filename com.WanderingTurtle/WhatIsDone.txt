@@ -1,0 +1,8 @@
+On The Backlog - Mark complete after ALL the following are completed.
+
+What Is Done?
+
+1.  Tested - No pop ups from business logic - bubble up to Presentation Layer
+2.  Working - Item behaves according to business rules/requirements
+3.  Commented - according to standardized comments
+4.  Input Validation - Message boxes appear to user.  Use Validation methods.

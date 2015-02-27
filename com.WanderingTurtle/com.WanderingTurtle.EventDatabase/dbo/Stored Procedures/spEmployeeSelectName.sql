@@ -1,11 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[spSelectEmployee]	
+﻿CREATE PROCEDURE [dbo].[spEmployeeSelectName]	
 	(@firstName						varchar(50),
-	 @lastName						varchar(50),
-	 @active						bit)
+	 @lastName						varchar(50)
+)
 
 AS
 	SELECT employeeID, firstName, lastName, empLevel, active
-	FROM employee
+	FROM [Employee]
 	WHERE firstName = @firstName 
 		AND lastName = @lastName
 		

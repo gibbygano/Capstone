@@ -82,6 +82,9 @@
     <Compile Include="AddEditHotelGuest.xaml.cs">
       <DependentUpon>AddEditHotelGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewInvoice.xaml.cs">
+      <DependentUpon>ViewInvoice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddItemListings.xaml.cs">
       <DependentUpon>AddItemListings.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,9 @@
     </Compile>
     <Compile Include="ListingList.xaml.cs">
       <DependentUpon>ListingList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListInvoices.xaml.cs">
+      <DependentUpon>ListInvoices.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lists.xaml.cs">
       <DependentUpon>Lists.xaml</DependentUpon>
@@ -130,6 +136,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewInvoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddItemListings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListingList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ListInvoices.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

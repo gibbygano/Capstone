@@ -22,8 +22,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class MainWindow : Window
     {
-        Employee userEmployee = new Employee();
-
         public MainWindow()
         {
             InitializeComponent();

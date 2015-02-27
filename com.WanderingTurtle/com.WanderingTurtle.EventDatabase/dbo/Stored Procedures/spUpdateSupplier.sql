@@ -19,7 +19,6 @@
 	@originalZip 			varchar(10), 
 	@originalPhoneNumber 	varchar(15), 
 	@originalEmailAddress 	varchar(100), 
-	@originalSupplierTypeID int, 
 	@originalApplicationID 	int, 
 	@originalUserID 		int
 	)

@@ -40,8 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Booking.cs" />
-    <Compile Include="BookingLineItem.cs" />
     <Compile Include="EventType.cs" />
+    <Compile Include="Invoice.cs" />
     <Compile Include="ListItemObject.cs" />
     <Compile Include="CityState.cs" />
     <Compile Include="Employee.cs" />
@@ -53,6 +53,7 @@
     <Compile Include="RoleData.cs" />
     <Compile Include="Supplier.cs" />
     <Compile Include="SupplierApplication.cs" />
+    <Compile Include="SupplierFeedbackRecord.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
