@@ -26,9 +26,10 @@ namespace com.WanderingTurtle.FormPresentation
         private List<CityState> _zips;
         private CityStateManager _cityStateManager = new CityStateManager();
 
-        //Constructs the object and will fill the list of suppliers
-        //created by Will Fritz 2/6/15
-        //edited by will fritz 2/15/15
+        /// <summary>
+        /// Constructs the object and will fill the list of suppliers
+        /// created by Will Fritz 2/6/15
+        /// </summary>
         public AddSupplier()
         {
             InitializeComponent();
@@ -36,9 +37,15 @@ namespace com.WanderingTurtle.FormPresentation
 
         //////////////////////Windows Events//////////////////////////////
 
-        //Will fill the list and set error message to nothing
-        //created by Will Fritz 2/6/15
-        //edited by will fritz 2/19/15
+        /// <summary>
+        /// Will fill the list and set error message to nothing
+        /// created by Will Fritz 2/6/15
+        /// </summary>
+        /// /// <remarks>
+        /// edited by will fritz 2/19/15
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             lblError.Content = "";
@@ -46,9 +53,15 @@ namespace com.WanderingTurtle.FormPresentation
             fillComboBox();            
         }
 
-        //Will validtate the feilds and edit the current supplier
-        //created by Will Fritz 2/6/15
-        //edited by will fritz 2/19/15
+        /// <summary>
+        /// Will validtate the feilds and edit the current supplier
+        /// created by Will Fritz 2/6/15
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 2/19/15
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             if (Validate() == false)
@@ -64,9 +77,15 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        //Will validate the fields and call add supplier method
-        //created by Will Fritz 2/6/15
-        //edited by will fritz 2/19/15
+        /// <summary>
+        /// Will validate the fields and call add supplier method
+        /// created by Will Fritz 2/6/15
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 2/19/15
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (Validate() == false)
@@ -85,10 +104,15 @@ namespace com.WanderingTurtle.FormPresentation
 
         /////////////////////////////Custom Methods/////////////////////////////////////
 
-        //checks to see if all the feilds are fill out and formated with the correct data
-        //It returns a false if there is an invalid feilds(s) and will output an error message to the lblError label
-        //Created By Will Fritz 2/4/15
-        //edited by will fritz 2/19/15
+        /// <summary>
+        /// checks to see if all the feilds are fill out and formated with the correct data
+        /// It returns a false if there is an invalid feilds(s) and will output an error message to the lblError label
+        /// Created By Will Fritz 2/4/15
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 2/19/15
+        /// </remarks>
+        /// <returns></returns>
         public bool Validate()
         {
             if (!Validator.ValidateAlphaNumeric(txtCompanyName.Text.Trim()))
@@ -145,9 +169,14 @@ namespace com.WanderingTurtle.FormPresentation
             return true;
         }
 
-        //This will send a supplier object to the business logic layer
-        //Created by Will Fritz 2/6/15
-        //edited by will fritz 2/15/15
+        /// <summary>
+        /// This will send a supplier object to the business logic layer
+        /// Created by Will Fritz 2/6/15
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 2/15/15
+        /// Added a conformation message box
+        /// </remarks>
         private void AddTheSupplier()
         {
             try
@@ -168,15 +197,21 @@ namespace com.WanderingTurtle.FormPresentation
 
                 System.Windows.Forms.MessageBox.Show("Supplier was added to the database");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("There was a problem adding the supplier to the database");
             }
         }
 
-        //This will fill the add/edit tab feilds with the data from a selected Supplier from the list view
-        //Created by Will Fritz 2/6/15
-        //edited by will fritz 2/19/15
+        /// <summary>
+        /// This will fill the add/edit tab feilds with the data from a selected Supplier from the list view
+        /// Created by Will Fritz 2/6/15
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 2/15/15
+        /// changed zip to a drop down
+        /// </remarks>
+        /// <param name="supplierUpdate"></param>
         public void FillUpdateList(Supplier supplierUpdate)
         {
             txtCompanyName.Text = supplierUpdate.CompanyName.Trim();
@@ -195,9 +230,14 @@ namespace com.WanderingTurtle.FormPresentation
             btnEdit.IsEnabled = true;
         }
 
-        //This will send a supplier object to the business logic layer
-        //Created by Will Fritz 2/6/15
-        //edited by will fritz 2/15/15
+        /// <summary>
+        /// This will send a supplier object to the business logic layer
+        /// Created by Will Fritz 2/6/15
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 2/15/15
+        /// added conformation message box
+        /// </remarks>
         private void EditSupplier()
         {
             try
@@ -220,14 +260,16 @@ namespace com.WanderingTurtle.FormPresentation
 
                 System.Windows.Forms.MessageBox.Show("The Supplier was succefully edited");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("There was an error editing the supplier");
+                System.Windows.Forms.MessageBox.Show(ex.Message);
             }
         }
 
-        //fills the zip code combo box
-        //created by will fritz 2/19/2015
+        /// <summary>
+        /// fills the zip code combo box
+        /// created by will fritz 2/19/2015
+        /// </summary>
         private void fillComboBox()
         {
             try
@@ -237,7 +279,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                lblError.Content = "There was a problem retriving the list of zip codes";
+                System.Windows.Forms.MessageBox.Show("There was a problem retriving the list of zip codes");
             }
 
 

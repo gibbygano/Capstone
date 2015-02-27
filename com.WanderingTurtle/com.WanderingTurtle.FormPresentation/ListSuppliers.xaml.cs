@@ -26,6 +26,10 @@ namespace com.WanderingTurtle.FormPresentation
         private List<Supplier> _suppliers;
         public static ListSuppliers Instance;
 
+        /// <summary>
+        /// This will fill the list of suppliers and set this object to the "Instance variable"
+        /// Created by will fritz 15/2/6
+        /// </summary>
         public ListSuppliers()
         {
             InitializeComponent();
@@ -33,16 +37,24 @@ namespace com.WanderingTurtle.FormPresentation
             Instance = this;
         }
 
-        //opens the AddSupplier window
-        //ceated by Pat
+        /// <summary>
+        /// opens the AddSupplier window
+        /// ceated by Pat 15/2/6
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
         {
             Window AddSupplier = new AddSupplier();
             AddSupplier.Show();
         }
 
-        //Will get selected supplier and delete it (archive)
-        //created by Will Fritz 2/6/15
+        /// <summary>
+        /// Will get selected supplier and delete it (archive)
+        /// Created by Will Fritz 15/2/6
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
                 try
@@ -58,12 +70,16 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 catch (Exception)
                 {
-                    lblError.Content = "You Must Select A Supplier Before You Can Delete";
+                    System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Delete");
                 }
         }
 
-        //Will get selected supplier and fill the add/edit tab with info
-        //created by Will Fritz 2/6/15
+        /// <summary>
+        /// Will get selected supplier and fill the add/edit tab with info
+        /// Created by Will Fritz 15/2/6
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -75,13 +91,17 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                lblError.Content = "You Must Select A Supplier Before You Can Update";
+                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Update");
             }
         }
 
-        //Fills the list view with the suppliers with a fresh list of suppliers
-        //created by Will Fritz 2/6/15
-        //edited by will fritz 2/19/15
+        /// <summary>
+        /// Fills the list view with the suppliers with a fresh list of suppliers
+        /// created by Will Fritz 15/2/6
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 15/2/19
+        /// </remarks>
         public void FillList()
         {
             try
@@ -93,7 +113,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                lblError.Content = "there was an error accessing the database";
+                System.Windows.Forms.MessageBox.Show("there was an error accessing the database");
             }
 
         }

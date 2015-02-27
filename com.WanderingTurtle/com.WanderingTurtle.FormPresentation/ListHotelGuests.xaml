@@ -23,6 +23,9 @@
         </ListView>
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddGuest"    Content="Add Guest"    Click="btnAddGuest_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Update Guest"  x:Name="btnUpdateGuest" Click="btnUpdateGuest_Click"/>
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Archive Guest"  x:Name="btnArchiveGuest" Click="btnArchiveGuest_Click" IsEnabled="False"/>
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Reset"  x:Name="btnReset" Click="btnReset_Click"/>
         </WrapPanel>
     </Grid>
 </UserControl>
