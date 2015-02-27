@@ -33,6 +33,7 @@
             </TabItem>
 
             <TabItem Header="Invoices">
+                <local:ListInvoices />
             </TabItem>
         </TabControl>
     </Grid>
