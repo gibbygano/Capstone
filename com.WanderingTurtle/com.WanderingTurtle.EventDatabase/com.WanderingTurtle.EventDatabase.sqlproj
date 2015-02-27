@@ -120,6 +120,7 @@
     <Build Include="dbo\Stored Procedures\spInsertSupplierFeedbackRecord.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateSupplierFeedbackRecord.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteSupplierFeedbackRecord.sql" />
+    <Build Include="dbo\Stored Procedures\spHotelGuestArchive.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

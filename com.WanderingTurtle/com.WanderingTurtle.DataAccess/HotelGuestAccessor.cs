@@ -175,5 +175,63 @@ namespace com.WanderingTurtle.DataAccess
 
             return numRows;
         }
+
+        /// <summary>
+        /// Archives a hotel guest
+        /// Created by Rose Steffensmeier 2015/02/26
+        /// </summary>
+        /// <param name="oldHotelGuestID"></param>
+        /// <param name="newHotelGuestID"></param>
+        /// <param name="oldActive"></param>
+        /// <param name="newActive"></param>
+        /// <exception cref="ApplicationException">the hotel guest doesn't exist or couldn't be found</exception>
+        /// <exception cref="SqlException">the connection didn't happen or there is something wrong with the stored procedure</exception>
+        /// <exception cref="Exception">an exception that wasn't expected happens</exception>
+        /// <returns>rows edited</returns>
+        public static int HotelGuestArchive(HotelGuest oldGuest, bool newActive)
+        {
+            int rowsAffected = 0;
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spHotelGuestArchive";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //parameters not wanting to be in stored procedure
+            cmd.Parameters.AddWithValue("@active", newActive);
+            cmd.Parameters.AddWithValue("@original_hotelGuestID", oldGuest.HotelGuestID);
+            cmd.Parameters.AddWithValue("@original_firstName", oldGuest.FirstName);
+            cmd.Parameters.AddWithValue("@original_lastName", oldGuest.LastName);
+            cmd.Parameters.AddWithValue("@original_zip", oldGuest.CityState.Zip);
+            cmd.Parameters.AddWithValue("@original_address1", oldGuest.Address1);
+            cmd.Parameters.AddWithValue("@original_address2", oldGuest.Address2);
+            cmd.Parameters.AddWithValue("@original_phoneNumber", oldGuest.PhoneNumber);
+            cmd.Parameters.AddWithValue("@original_emailAddress", oldGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@original_active", oldGuest.Active);
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Concurrency Violation");
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
     }
 }
