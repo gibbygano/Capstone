@@ -28,12 +28,12 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// </remarks>
         /// <param name="SelectedInvoice">retrieves InvoiceDetails from the form</param>
-        public ViewInvoice(InvoiceDetails SelectedInvoice)
+        public ViewInvoice(int selectedHotelGuestID)
         {
             InitializeComponent();
             var invoiceToView = new InvoiceDetails();
 
-            invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(SelectedInvoice.HotelGuestID);
+            invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
             lblGuestNameLookup.Content = invoiceToView.GetFullName;
             lblGuestID.Content = invoiceToView.HotelGuestID.ToString();

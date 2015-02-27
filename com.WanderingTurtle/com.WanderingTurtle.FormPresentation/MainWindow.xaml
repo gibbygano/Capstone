@@ -19,10 +19,6 @@
                 <local:ListTheListings FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
 
-            <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Bookings">
-                <local:ListBookings FontSize="{DynamicResource Main Font Size}" />
-            </TabItem>
-
             <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Suppliers">
                 <local:ListSuppliers FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
@@ -34,10 +30,6 @@
             <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Hotel Guests">
                 <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" />
             </TabItem>
-            <TabItem FontSize="{DynamicResource Tab Font Size}" Header="Invoices">
-                <local:ListInvoices FontSize="{DynamicResource Main Font Size}" />
-            </TabItem>
-
         </TabControl>
     </Grid>
 </Window>

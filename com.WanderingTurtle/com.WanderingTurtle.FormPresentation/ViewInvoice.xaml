@@ -24,12 +24,12 @@
                 <ColumnDefinition Width="271*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" x:Name="lblGuestName" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="26" Margin="0,4" Width="85"  />
+            <Label Grid.Row="0" Grid.Column="0" x:Name="lblGuestName" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="26" Margin="0,4" Width="80"  />
             <Label Grid.Row="0" Grid.Column="1" x:Name="lblGuestNameLookup" VerticalContentAlignment="Center" Margin="0,1" />
             <Label  Grid.Row="0" Grid.Column="2" x:Name="lblGuestID"  VerticalContentAlignment="Center" Margin="47,2,31,0" />
             <Label Grid.Row="1" Grid.Column="0" x:Name="lblCheckInDate" Content="Checked In:" HorizontalAlignment="Right"  VerticalAlignment="Center" Height="26" Margin="0,4" Width="75" />
             <Label  Grid.Row="1" Grid.Column="2" x:Name="lblInvoiceID"  VerticalContentAlignment="Center" Margin="47,2,31,0" />
-            <Label Grid.Row="2" Grid.Column="0" x:Name="lblRoomNum" Content="Room #:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="26" Margin="0,4" Width="75" />
+            <Label Grid.Row="2" Grid.Column="0" x:Name="lblRoomNum" Content="Room #:" HorizontalAlignment="Right" VerticalAlignment="Center" Height="26" Margin="0,4" Width="60" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,0,0,2.807">
             <Grid.RowDefinitions>

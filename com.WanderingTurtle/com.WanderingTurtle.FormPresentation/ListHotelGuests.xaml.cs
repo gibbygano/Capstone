@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -55,6 +56,31 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     refreshList();
                 }
+            }
+        }
+
+        private void btnCheckOutGuest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnViewGuest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int invoiceToView = lvHotelGuestList.SelectedIndex;
+
+                ViewInvoice custInvoice = new ViewInvoice(invoiceToView);
+
+                if (custInvoice.ShowDialog() == false)
+                {
+                   // RefreshInvoiceList();
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No Invoice selected, please select an Invoice and try again");
             }
         }
 
