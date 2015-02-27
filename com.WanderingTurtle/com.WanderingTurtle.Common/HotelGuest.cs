@@ -1,34 +1,17 @@
 ﻿namespace com.WanderingTurtle.Common
 {
-    public class HotelGuest : NewHotelGuest
+    public class HotelGuest 
     {
         /// <summary>
-        /// Create a HotelGuest object. To create a HotelGuestObject without an id, use NewHotelGuest
+        /// Create a HotelGuest object.
         /// </summary>
         /// Miguel Santana 2/18/2015
         /// <remarks>
         /// Rose Steffensmeier
-        /// Updated: 02/23/2015
+        /// Updated: 2015/02/27
         /// </remarks>
-        public int HotelGuestID { get; private set; }
+        public int? HotelGuestID { get; private set; }
 
-        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, bool Active = true)
-            : base(FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Active)
-        {
-            this.HotelGuestID = HotelGuestID;
-        }
-    }
-
-    /// <summary>
-    /// Create a HotelGuest without an ID
-    /// </summary>
-    /// Miguel Santana 2/18/2015
-    /// <remarks>
-    /// Rose Steffensmeier
-    /// Updated: 02/23/2015
-    /// </remarks>
-    public class NewHotelGuest
-    {
         public string FirstName { get; private set; }
 
         public string LastName { get; private set; }
@@ -45,9 +28,20 @@
 
         public bool Active { get; private set; }
 
+        public int? Room { get; private set; }
 
-        public NewHotelGuest(string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, bool Active = true)
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, bool Active = true)
         {
+            SetValues(HotelGuestID, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, Active);
+        }
+        public HotelGuest(string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, bool Active = true)
+        {
+            SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, Active);
+        }
+
+        private void SetValues(int? HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, bool Active)
+        {
+            this.HotelGuestID = HotelGuestID;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Address1 = Address1;
@@ -55,6 +49,7 @@
             this.CityState = CityState;
             this.PhoneNumber = PhoneNumber;
             this.EmailAddress = EmailAddress;
+            this.Room = Room;
             this.Active = Active;
         }
 

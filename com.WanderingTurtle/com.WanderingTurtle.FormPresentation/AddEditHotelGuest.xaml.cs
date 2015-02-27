@@ -10,16 +10,6 @@ using System.Windows.Media;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Enum for setting error status of <paramref name="lblTitle"/>
-    /// </summary>
-    /// Miguel Santana 2/19/2015
-    internal enum LabelErrorColor
-    {
-        Default,
-        Error
-    }
-
-    /// <summary>
     /// Interaction logic for AddEditHotelGuest.xaml
     /// </summary>
     public partial class AddEditHotelGuest : Window
@@ -100,22 +90,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="message"></param>
         /// Miguel Santana 2/18/2015
-        private void ChangeTitle(String message, LabelErrorColor color = LabelErrorColor.Default)
+        private void ChangeTitle(String message)
         {
             this.Title = message;
-            this.lblTitle.Content = message;
-            var test = this.lblTitle.Background;
-
-            switch (color)
-            {
-                case LabelErrorColor.Default:
-                    this.lblTitle.Background = null;
-                    break;
-
-                case LabelErrorColor.Error:
-                    this.lblTitle.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                    break;
-            }
         }
 
         /// <summary>
@@ -144,6 +121,7 @@ namespace com.WanderingTurtle.FormPresentation
                 this.cboZip.SelectedItem = null;
                 this.txtPhoneNumber.Text = null;
                 this.txtEmailAddress.Text = null;
+                this.txtRoomNumber.Text = null;
             }
             else
             {
@@ -154,6 +132,7 @@ namespace com.WanderingTurtle.FormPresentation
                 foreach (CityState _cityState in this.cboZip.Items) { if (_cityState.Zip == CurrentHotelGuest.CityState.Zip) { this.cboZip.SelectedItem = _cityState; } }
                 this.txtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
                 this.txtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
+                this.txtRoomNumber.Text = CurrentHotelGuest.Room.ToString();
             }
             this.txtFirstName.Focus();
         }
@@ -165,8 +144,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Validate fields and submit data to HotelGuestManager
-        /// </summary>
         /// Miguel Santana 2/18/2015
+        /// </summary>
+        ///<remarks>
+        ///Updated By Rose Steffensmeier 2015/02/26
+        ///</remarks>
         private void Submit()
         {
             if (CurrentHotelGuest != null)
@@ -196,48 +178,55 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (!Validator.ValidateString(txtFirstName.Text.Trim(), 1, 50))
             {
-                ChangeTitle("Please enter a First Name", LabelErrorColor.Error);
+                ChangeTitle("Please enter a First Name");
                 txtFirstName.Focus();
                 txtFirstName.SelectAll();
                 return;
             }
             if (!Validator.ValidateString(txtLastName.Text.Trim(), 1, 50))
             {
-                ChangeTitle("Please enter a Last Name", LabelErrorColor.Error);
+                ChangeTitle("Please enter a Last Name");
                 txtLastName.Focus();
                 txtLastName.SelectAll();
                 return;
             }
             if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim(), 1, 255))
             {
-                ChangeTitle("Please enter an Address", LabelErrorColor.Error);
+                ChangeTitle("Please enter an Address");
                 txtAddress1.Focus();
                 txtAddress1.SelectAll();
                 return;
             }
             if (txtAddress2.Text.Trim() != "" && !Validator.ValidateAlphaNumeric(txtAddress2.Text.Trim(), 0, 255))
             {
-                ChangeTitle("Error adding Address2", LabelErrorColor.Error);
+                ChangeTitle("Error adding Address2");
                 txtAddress2.Focus();
                 txtAddress2.SelectAll();
                 return;
             }
             if (cboZip.SelectedItem == null)
             {
-                ChangeTitle("Please select a Zip Code", LabelErrorColor.Error);
+                ChangeTitle("Please select a Zip Code");
                 cboZip.Focus();
                 return;
             }
             if (txtPhoneNumber.Text.Trim() != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Phone Number", LabelErrorColor.Error);
+                ChangeTitle("Please enter a valid Phone Number");
                 txtPhoneNumber.Focus();
                 txtPhoneNumber.SelectAll();
                 return;
             }
             if (txtEmailAddress.Text.Trim() != "" && !Validator.ValidateEmail(txtEmailAddress.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Email Address", LabelErrorColor.Error);
+                ChangeTitle("Please enter a valid Email Address");
+                txtEmailAddress.Focus();
+                txtEmailAddress.SelectAll();
+                return;
+            }
+            if (txtRoomNumber.Text.Trim() != "" && !Validator.ValidateNumeric(txtRoomNumber.Text.Trim()))
+            {
+                ChangeTitle("Please enter a valid Room Number");
                 txtEmailAddress.Focus();
                 txtEmailAddress.SelectAll();
                 return;
@@ -246,14 +235,15 @@ namespace com.WanderingTurtle.FormPresentation
             if (CurrentHotelGuest == null)
             {
                 result = _hotelGuestManager.AddHotelGuest(
-                    new NewHotelGuest(
+                    new HotelGuest(
                         txtFirstName.Text.Trim(),
                         txtLastName.Text.Trim(),
                         txtAddress1.Text.Trim(),
                         txtAddress2.Text.Trim(),
                         (CityState)cboZip.SelectedItem,
                         txtPhoneNumber.Text.Trim(),
-                        txtEmailAddress.Text.Trim()
+                        txtEmailAddress.Text.Trim(),
+                        int.Parse(txtRoomNumber.Text.Trim())
                     )
                 );
             }
@@ -261,14 +251,15 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 result = _hotelGuestManager.UpdateHotelGuest(
                     CurrentHotelGuest,
-                    new NewHotelGuest(
+                    new HotelGuest(
                         txtFirstName.Text.Trim(),
                         txtLastName.Text.Trim(),
                         txtAddress1.Text.Trim(),
                         txtAddress2.Text.Trim(),
                         (CityState)cboZip.SelectedItem,
                         txtPhoneNumber.Text.Trim(),
-                        txtEmailAddress.Text.Trim()
+                        txtEmailAddress.Text.Trim(),
+                        int.Parse(txtRoomNumber.Text.Trim())
                     )
                 );
             }

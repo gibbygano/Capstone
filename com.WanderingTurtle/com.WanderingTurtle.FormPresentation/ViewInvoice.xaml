@@ -1,6 +1,7 @@
 ﻿<Window x:Class="com.WanderingTurtle.FormPresentation.ViewInvoice"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{DynamicResource WindowStyle}"
         Title="View Invoice" Height="380" Width="700" WindowStartupLocation="CenterScreen" Background="{DynamicResource Standard}">
     <Grid Margin="5">
         <Grid.RowDefinitions>

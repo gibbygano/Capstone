@@ -84,5 +84,68 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Brings up AddEditHotelGuest to edit chosen guest.
+        /// Created By Rose Steffensmeier 2015/02/26
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="ApplicationException">
+        /// When a guest isn't chosen, the exception will throw.
+        /// </exception>
+        /// <exception cref="Exception">
+        /// Unexpected Exception is thrown.
+        /// </exception>
+        /// <returns>nothing</returns>
+        private void btnUpdateGuest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                HotelGuest thisGuest = (HotelGuest)lvHotelGuestList.SelectedItem;
+
+                if (thisGuest == null)
+                    throw new ApplicationException("You must choose a guest.");
+
+                AddEditHotelGuest temp = new AddEditHotelGuest(thisGuest);
+                temp.Show();
+                refreshList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Archives a guest, then refreshes the list.
+        /// Created by Rose Steffensmeier 2015/02/26
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="ApplicationException">
+        /// When a guest has not been chosen.
+        /// </exception>
+        private void btnArchiveGuest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                HotelGuest thisGuest = (HotelGuest)lvHotelGuestList.SelectedItem;
+
+                if (thisGuest == null)
+                    throw new ApplicationException("You must choose a guest.");
+
+                _HotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
+                refreshList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            refreshList();
+        }
     }
 }

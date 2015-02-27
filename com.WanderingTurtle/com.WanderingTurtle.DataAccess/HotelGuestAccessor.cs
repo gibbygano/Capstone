@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public static int HotelGuestAdd(NewHotelGuest newHotelGuest)
+        public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spHotelGuestAdd";
@@ -96,7 +96,8 @@ namespace com.WanderingTurtle.DataAccess
                                 ),
                                 !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
                                 !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
-                                reader.GetBoolean(10) //Active
+                                (int?)reader.GetValue(10), //Room
+                                reader.GetBoolean(11) //Active
                             )
                         );
                     }
@@ -127,7 +128,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public static int HotelGuestUpdate(HotelGuest oldHotelGuest, NewHotelGuest newHotelGuest)
+        public static int HotelGuestUpdate(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spHotelGuestUpdate";
@@ -142,6 +143,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@room", newHotelGuest.Room);
             cmd.Parameters.AddWithValue("@active", newHotelGuest.Active);
 
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
@@ -152,6 +154,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_address2", oldHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@original_phoneNumber", oldHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@original_email", oldHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@original_room", oldHotelGuest.Room);
             cmd.Parameters.AddWithValue("@original_active", oldHotelGuest.Active);
 
             try
@@ -174,6 +177,64 @@ namespace com.WanderingTurtle.DataAccess
             }
 
             return numRows;
+        }
+
+        /// <summary>
+        /// Archives a hotel guest
+        /// Created by Rose Steffensmeier 2015/02/26
+        /// </summary>
+        /// <param name="oldHotelGuestID"></param>
+        /// <param name="newHotelGuestID"></param>
+        /// <param name="oldActive"></param>
+        /// <param name="newActive"></param>
+        /// <exception cref="ApplicationException">the hotel guest doesn't exist or couldn't be found</exception>
+        /// <exception cref="SqlException">the connection didn't happen or there is something wrong with the stored procedure</exception>
+        /// <exception cref="Exception">an exception that wasn't expected happens</exception>
+        /// <returns>rows edited</returns>
+        public static int HotelGuestArchive(HotelGuest oldGuest, bool newActive)
+        {
+            int rowsAffected = 0;
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spHotelGuestArchive";
+            var cmd = new SqlCommand(cmdText, conn);
+
+            //parameters not wanting to be in stored procedure
+            cmd.Parameters.AddWithValue("@active", newActive);
+            cmd.Parameters.AddWithValue("@original_hotelGuestID", oldGuest.HotelGuestID);
+            cmd.Parameters.AddWithValue("@original_firstName", oldGuest.FirstName);
+            cmd.Parameters.AddWithValue("@original_lastName", oldGuest.LastName);
+            cmd.Parameters.AddWithValue("@original_zip", oldGuest.CityState.Zip);
+            cmd.Parameters.AddWithValue("@original_address1", oldGuest.Address1);
+            cmd.Parameters.AddWithValue("@original_address2", oldGuest.Address2);
+            cmd.Parameters.AddWithValue("@original_phoneNumber", oldGuest.PhoneNumber);
+            cmd.Parameters.AddWithValue("@original_emailAddress", oldGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@original_active", oldGuest.Active);
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Concurrency Violation");
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
         }
     }
 }
