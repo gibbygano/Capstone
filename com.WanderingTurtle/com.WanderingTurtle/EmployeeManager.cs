@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using System;
+using System.Collections.Generic;
 
 namespace com.WanderingTurtle
 {
     public class EmployeeManager
     {
-        // Ryan Blake 
-        // February 12, 2015
-
-        // Parameters: newEmployee  ||  Type: Employee
-
-        // Desc.: Method takes in newEmployee and passes it as a parameter
-        // into the AddEmployee method of the EmployeeAccessor class
-
-        // Failure: Exception is thrown if database is not available or 
-        // new employee cannot be created in the database for any reason
-
         // Success: An int value is returned to the method to show rows affected
+        /// <summary>
+        /// Ryan Blake
+        /// Created: 2015/02/12
+        /// Method takes in newEmployee and passes it as a parameter into the AddEmployee method of the EmployeeAccessor class
+        /// </summary>
+        /// <param name="newEmployee"></param>
+        /// <exception cref="Exception">Exception is thrown if database is not available or new employee cannot be created in the database for any reason</exception>
+        /// <returns>An int value is returned to the method to show rows affected</returns>
         public int AddNewEmployee(Employee newEmployee)
         {
             try
@@ -33,74 +28,20 @@ namespace com.WanderingTurtle
             }
         }
 
-
-
-        // Ryan Blake
-        // February 12, 2015
-
-        // Parameters: N/A
-
-        // Desc.: Method makes a call to getEmployeeList 
-        // method from the EmployeeAccessor to retrieve a 
-        // list of all active employees
-
-        // Failure: Exception is thrown from Accessor that states 
-        // that employee could not be found in the database
-
-        // Success: The employee list is retrieved and returned 
-        // up to the presentation layer (calling method)
-        public List<Employee> FetchListEmployees()
-        {
-            try
-            {
-                return EmployeeAccessor.GetEmployeeList();
-            }
-            catch (Exception ex)
-            {
-                
-                throw ex;
-            }
-        }
-
-
-        /*Overloaded Method- accepts an int to pass to accessor to search database for an employee record
-         * Successful- returns the employee record
-         * If it fails, throws an exception
-         * Tony Noel- 2/18/15
-         */
-        public Employee FetchEmployee(int empID)
-        {
-            try
-            {
-                return EmployeeAccessor.GetEmployee(empID);
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
-        /********************  Methods not used in Sprint 1 ************************************************/
-
-        // Ryan Blake
-        // February 12, 2015
-
-        // Parameters: oldEmployee || Type: Employee, newEmployee || Type: Employee
-
-        // Desc.: Method takes in new and old employee parameters and then submits them to the 
-        // Data Access Layer method to update the employee record for oldEmployee
-        // with the the information held in newEmployee
-
-        // Failure: EmployeeAccessor method will throw exception to Manager 
-        // saying that the employee could not be found to edit
-
-        // Success: Employee information is updatd in the table and 
-        // an integer is returned to represent rows affected
-
-        // Additional: This will also take the place of a 'Delete' method
-        // The user will simply mark the employee inactive which will change the 
-        // bit value in the table to a 0 to represent false
+        /// <summary>
+        /// Ryan Blake
+        /// Created: 2015/02/12
+        /// Method takes in new and old employee parameters and then submits them to the Data Access Layer method to update the employee record for oldEmploy
+        /// </summary>
+        /// <remarks>
+        /// This will also take the place of a 'Delete' method
+        ///     The user will simply mark the employee inactive which will change the
+        ///     bit value in the table to a 0 to represent false
+        /// </remarks>
+        /// <param name="oldEmployee"></param>
+        /// <param name="newEmployee"></param>
+        /// <exception cref="Exception">EmployeeAccessor method will throw exception to Manager saying that the employee could not be found to edit</exception>
+        /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
         public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
         {
             try
@@ -109,26 +50,44 @@ namespace com.WanderingTurtle
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
 
-        // Ryan Blake
-        // February 12, 2015
+        /// <summary>
+        /// Ryan Blake
+        /// Created: 2015/02/12
+        /// Method takes in two parameters that will hold the employee's
+        ///     first and last name. This information is passed to the access layer
+        ///     where it is used to find the employee in question and return that
+        ///     employee's information to the method and then to the presentation
+        ///     layer calling method
+        /// </summary>
+        /// <param name="empID"></param>
+        /// <exception cref="Exception">An exception is thrown from the Access Layer asking the user to try their search again</exception>
+        /// <returns>The employee object is returned to the method successfully</returns>
+        public Employee FetchEmployee(int empID)
+        {
+            try
+            {
+                return EmployeeAccessor.GetEmployee(empID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
-        // Parameters: firstName || Type: string, lastName || Type: string
-
-        // Desc.: Method takes in two parameters that will hold the employee's
-        // first and last name. This information is passed to the access layer
-        // where it is used to find the employee in question and return that 
-        // employee's information to the method and then to the presentation 
-        // layer calling method
-
-        // Failure: An exception is thrown from the Access Layer asking the user to 
-        // try their search again
-
-        // Success: The employee object is returned to the method successfully
+        /// <summary>
+        /// Ryan Blake
+        /// Created: 2015/02/12
+        /// Method takes in new and old employee parameters and then submits them to the
+        ///     Data Access Layer method to update the employee record for oldEmployee
+        ///     with the the information held in newEmployee
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
         public Employee FetchEmployee(string firstName, string lastName)
         {
             try
@@ -137,7 +96,25 @@ namespace com.WanderingTurtle
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+        }
 
+        /// <summary>
+        /// Ryan Blake
+        /// Created: 2015/02/12
+        /// Method makes a call to getEmployeeList method from the EmployeeAccessor to retrieve a list of all active employees
+        /// </summary>
+        /// <exception cref="Exception">Exception is thrown from Accessor that states that employee could not be found in the database</exception>
+        /// <returns>The employee list is retrieved and returned up to the presentation layer (calling method)</returns>
+        public List<Employee> FetchListEmployees()
+        {
+            try
+            {
+                return EmployeeAccessor.GetEmployeeList();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
         }

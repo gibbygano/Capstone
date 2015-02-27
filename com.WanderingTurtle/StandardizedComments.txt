@@ -1,0 +1,48 @@
+Standard Presentation layer method header comments.
+
+/// <summary>
+/// Hunter Lind
+/// Created: 2015/02/20
+/// 
+/// Constructs and submits a new event using a form filled out by a user.
+/// </summary>
+/// <remarks>
+/// Ryan Blake
+/// Updated: yyyy/mm/dd
+/// 
+/// Fixed your code
+/// </remarks>
+/// <param name="sender"></param>
+/// <param name="e"></param>
+
+
+Standard DAL/BLL method header commenting
+
+/// <summary>
+/// Created by Matt Lapka 2015/02/08
+/// Inserts a new Supplier Application Record into the Database
+/// </summary>
+/// <remarks>
+/// Updated by Hunter Lind 2015/02/20
+/// Used as an example in class.
+/// </remarks>
+/// <param name="supplierApplicationToAdd">A Supplier Application Object that contains all the information to be added</param>
+/// <exception cref="SQLException">Insert Fails</exception>
+/// <returns>Rows edited</returns>
+
+
+Standard Common object commenting
+
+/// <summary>
+/// Bryan Hurst
+/// Created: 2015/02/19
+/// 
+/// Class for the creation of Event Objects with set data fields
+/// </summary>
+/// <remarks>
+/// Hunter Lind
+/// Updated: yyyy/mm/dd
+/// 
+/// Used as example.
+/// </remarks>
+		

@@ -55,6 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
             this.CurrentEmployee = employee;
             this.Title = "Editing: " + CurrentEmployee.GetFullName;
             this.chkActiveEmployee.IsEnabled = true;
+            this.txtPassword.IsEnabled = false;
             ReloadComboBox();
 
             this.txtFirstName.Text = CurrentEmployee.FirstName;
@@ -66,7 +67,6 @@ namespace com.WanderingTurtle.FormPresentation
 
         public Employee CurrentEmployee { get; private set; }
 
- 
         /// <summary>
         /// Pat Banks
         /// Created:  2015/02/15
@@ -162,7 +162,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result == 1)
                 {
-                    MessageBox.Show("Employee added successfully");
+                    MessageBox.Show("Employee updated successfully");
                     //closes window after successful add
                     this.Close();
                 }

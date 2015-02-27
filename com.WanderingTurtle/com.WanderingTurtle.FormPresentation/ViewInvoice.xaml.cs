@@ -35,12 +35,24 @@ namespace com.WanderingTurtle.FormPresentation
 
             invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(SelectedInvoice.HotelGuestID);
 
-            txtGuestName.Text = invoiceToView.GetFullName;
-            txtInvoiceID.Text = invoiceToView.InvoiceID.ToString();
+            lblGuestNameLookup.Content = invoiceToView.GetFullName;
+            lblGuestID.Content = invoiceToView.HotelGuestID.ToString();
+            lblInvoiceID.Content = invoiceToView.InvoiceID.ToString();
             
             //fill the booking list
             myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
             lvCustomerBookings.ItemsSource = myBookingList;
+        }
+
+        private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddBooking myBooking = new AddBooking();
+            
+
+            if (myBooking.ShowDialog() == false)
+            {
+                //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
+            }
         }
 
     }

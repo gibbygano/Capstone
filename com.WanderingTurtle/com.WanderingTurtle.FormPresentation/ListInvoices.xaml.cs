@@ -68,7 +68,12 @@ namespace com.WanderingTurtle.FormPresentation
                 InvoiceDetails invoiceToView = (InvoiceDetails)lvInvoiceList.SelectedItem;
 
                 ViewInvoice custInvoice = new ViewInvoice(invoiceToView);
-                custInvoice.Show();
+
+                if (custInvoice.ShowDialog() == false)
+                {
+                    RefreshInvoiceList();
+                }
+
             }
             catch (Exception)
             {
