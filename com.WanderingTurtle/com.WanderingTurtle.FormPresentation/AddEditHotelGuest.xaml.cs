@@ -165,8 +165,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Validate fields and submit data to HotelGuestManager
-        /// </summary>
         /// Miguel Santana 2/18/2015
+        /// </summary>
+        ///<remarks>
+        ///Updated By Rose Steffensmeier 2015/02/26
+        ///</remarks>
         private void Submit()
         {
             if (CurrentHotelGuest != null)
