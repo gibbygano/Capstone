@@ -4,11 +4,37 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="com.WanderingTurtle.FormPresentation.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#FFE5E5E5" />
+        <Style TargetType="{x:Type Window}" x:Key="WindowStyle">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
+        </Style>
+        <Style TargetType="{x:Type UserControl}" x:Key="UserControlStyle">
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        <Style TargetType="{x:Type TabControl}" x:Name="tabNames">
+            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
+        </Style>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <System:Double x:Key="TextBoxHeight">30</System:Double>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+        </Style>
+        <Thickness x:Key="Grid Margin">5</Thickness>
+        <!--<Thickness x:Key="Button Spacing">0,3,5,0</Thickness>-->
+
+        <!-- These Need to be removed -->
         <Thickness x:Key="Button Margin">0,3,5,0</Thickness>
         <Thickness x:Key="Button Padding">10,5</Thickness>
         <SolidColorBrush x:Key="Standard" Color="#FFE5E5E5" />
-        <System:Double x:Key="TextBoxHeight">30</System:Double>
-        <Thickness x:Key="Grid Margin">5</Thickness>
         <System:Double x:Key="Main Font Size">12</System:Double>
     </Application.Resources>
 </Application>
