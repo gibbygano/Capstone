@@ -158,7 +158,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@ProductSize", 1);
 	    cmd.Parameters.AddWithValue("@MaxNumGuests", "itemListingToAdd.MaxNumGuests);
 	    cmd.Parameters.AddWithValue("@MinNumGuests", "itemListingToAdd.MinNumGuests);
-	    cmd.Parameters.AddWithValue("@CurrentNumGuests", "itemListingToAdd.CurrentNumGuests);
+	    cmd.Parameters.AddWithValue("@CurrentNumGuests", itemListingToAdd.CurrentNumGuests);
 
             int rowsAffected;
             try
