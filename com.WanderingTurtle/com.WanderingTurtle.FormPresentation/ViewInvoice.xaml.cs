@@ -17,8 +17,9 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ViewInvoice : Window
     {
-        public InvoiceManager myInvoiceManager = new InvoiceManager();
-        public List<BookingDetails> myBookingList;
+        private InvoiceManager myInvoiceManager = new InvoiceManager();
+        private HotelGuestManager myGuestManager = new HotelGuestManager();
+        private List<BookingDetails> myBookingList;
 
         /// <summary>
         /// Pat Banks
@@ -38,13 +39,20 @@ namespace com.WanderingTurtle.FormPresentation
             lblGuestNameLookup.Content = invoiceToView.GetFullName;
             lblGuestID.Content = invoiceToView.HotelGuestID.ToString();
             lblInvoiceID.Content = invoiceToView.InvoiceID.ToString();
+            lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
+            lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
             
             //fill the booking list
             myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
             lvCustomerBookings.ItemsSource = myBookingList;
         }
-
-        private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
+      
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
             AddBooking myBooking = new AddBooking();
             
@@ -53,6 +61,45 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void btnEditGuest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                HotelGuest selectedGuest = new HotelGuest();
+                int selectedGuestID = int.Parse(lblGuestID.Content.ToString());
+
+                //retrieve the guest information
+                selectedGuest = myGuestManager.GetHotelGuest(selectedGuestID);
+
+                AddEditHotelGuest temp = new AddEditHotelGuest(selectedGuest);
+
+                if (temp.ShowDialog() == false)
+                {
+                    //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditBooking_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

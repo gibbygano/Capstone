@@ -16,6 +16,10 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
+        /// <remarks>
+        /// Updated by Pat Banks 2/27/2015
+        /// Stored Procedure updated to create an invoice record automatically when adding a hotel guest
+        /// </remarks>
         public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -31,6 +35,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@address2", newHotelGuest.Address2);
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@room", newHotelGuest.Room);
 
             try
             {

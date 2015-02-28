@@ -1,4 +1,7 @@
-﻿CREATE PROCEDURE [dbo].[spHotelGuestAdd]
+﻿/* -------------------------Add Hotel Guest Stored Procedures ---------------------------created by: Miguel Santana*/
+/* Added insert into Invoice table for when a hotel guest checks in - Pat Banks  02/27/15 */
+
+CREATE PROCEDURE [dbo].[spHotelGuestAdd]
 	@firstName varchar(50),
 	@lastName varchar(50),
 	@zip varchar(10),
@@ -9,9 +12,17 @@
 	@room int
 AS
 BEGIN
-	INSERT INTO [HotelGuest] ([FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[Room],[EmailAddress]) 
+	DECLARE @guestID int, @rowCount int
+	INSERT INTO [HotelGuest] ([FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[EmailAddress], [Room]) 
 	VALUES (@firstName, @lastName, @zip, @address1, @address2, @phoneNumber, @email, @room)
-	 
+
+	SET @guestID = @@IDENTITY
+	SET @rowCount = @@ROWCOUNT
+	IF @rowCount = 1
+		INSERT INTO [Invoice] (HotelGuestID, Active, DateOpened)
+		VALUES (@guestID, DEFAULT, CURRENT_TIMESTAMP)
+
 	RETURN @@ROWCOUNT
 
 END
+

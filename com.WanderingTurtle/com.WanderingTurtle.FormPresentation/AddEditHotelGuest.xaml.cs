@@ -64,6 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             Submit();
+             
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE spSelectInvoiceBookings
+﻿/********Created by Pat Banks 2/27/2015 *********/
+CREATE PROCEDURE spSelectInvoiceBookings
 (@hotelGuestID int)
 AS
 	SELECT Distinct BookingID, Booking.GuestID, Booking.ItemListID, Booking.Quantity, ItemListing.Price,ItemListing.StartDate, EventItem.EventItemName

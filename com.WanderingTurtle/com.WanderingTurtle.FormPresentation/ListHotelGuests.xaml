@@ -13,9 +13,10 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="50" Header="ID" DisplayMemberBinding="{Binding HotelGuestID}" />
+                    <GridViewColumn Width="90" Header="Room Number"    DisplayMemberBinding="{Binding Room}"/>
                     <GridViewColumn Width ="100" Header="First Name"    DisplayMemberBinding="{Binding FirstName}" />
                     <GridViewColumn Width ="100" Header="Last Name"     DisplayMemberBinding="{Binding LastName}" />
-                    <GridViewColumn Width="90" Header="Room Number"    DisplayMemberBinding="{Binding Room}"/>
+
                     <GridViewColumn Width ="150" Header="Address 1"     DisplayMemberBinding="{Binding Address1}" />
                     <GridViewColumn Width ="50" Header="Address 2"     DisplayMemberBinding="{Binding Address2}" />
                     <GridViewColumn Width ="50" Header="ZIP"           DisplayMemberBinding="{Binding CityState.Zip}" />
@@ -26,11 +27,9 @@
         </ListView>
         <WrapPanel Grid.Row="1">
 
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddGuest"    Content="Add Guest"    Click="btnAddGuest_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnRegisterGuest"    Content="Register Guest"    Click="btnRegisterGuest_Click" />
 				<Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewGuest"    Content="View Guest"    Click="btnViewGuest_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Update Guest"  x:Name="btnUpdateGuest" Click="btnUpdateGuest_Click"/>
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Archive Guest"  x:Name="btnArchiveGuest" Click="btnArchiveGuest_Click" IsEnabled="False"/>
-				<Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnCheckOutGuest"    Content="Check Out Guest"    Click="btnCheckOutGuest_Click" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnCheckOutGuest"    Content="Check Out Guest"    Click="btnCheckOutGuest_Click" />
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Reset"  x:Name="btnReset" Click="btnReset_Click"/>
 
         </WrapPanel>
