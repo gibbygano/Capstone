@@ -39,18 +39,18 @@ VALUES
 ('Robin', 'Lowell', '@uth0r3$', 4, DEFAULT)
 GO
 
-INSERT INTO [dbo].[HotelGuest] (FirstName, LastName, Zip, Address1, Address2, PhoneNumber, EmailAddress)
+INSERT INTO [dbo].[HotelGuest] (FirstName, LastName, Zip, Address1, Address2, PhoneNumber, EmailAddress, Room)
 VALUES
-('David', 'Tennant', '52404', '234 33rd Ave SW', ' ', '319-258-4566', 'comewithme@yahoo.com'),
-('Edward', 'Elric', '52641', '2234 Benton Ave', ' ', ' ', ' '),
-('Alphonse', 'Elric', '10001', '123 Wall St.', 'Apt. 114', ' ', 'fullmetal@gmail.com'),
-('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave.', ' ', '123-145-9908',' '),
-('Rose', 'Tyler', '73078', '6453 Benton Ave.', ' ','223-456-1234', ' '),
-('Martha', 'Jones', '73078', '6453 Benton Ave.', ' ', ' ', ' '),
-('Susan', 'Foreman', '73102', '3345 Main St.', 'Apt. 4432', ' ', ' '),
-('Barbara', 'Wright', '73102', '5634 Main St.',' ', '456-223-1234', ' '),
-('Peter', 'Capaldi', '52641', '2232 Benton Ave.', ' ', '319-217-4455', 'doctorwho@kirkwood.edu'),
-('Clara', 'Oswald', '52641', '1455 Benton. Ave', ' ', '319-931-9983', ' ')
+('David', 'Tennant', '52404', '234 33rd Ave SW', ' ', '319-258-4566', 'comewithme@yahoo.com', 101),
+('Edward', 'Elric', '52641', '2234 Benton Ave', ' ', ' ', ' ', 102),
+('Alphonse', 'Elric', '10001', '123 Wall St', 'Apt 114', ' ', 'fullmetal@gmail.com', 103),
+('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', ' ', '123-145-9908',' ', 104),
+('Rose', 'Tyler', '73078', '6453 Benton Ave', ' ','223-456-1234', ' ', 105),
+('Martha', 'Jones', '73078', '6453 Benton Ave', ' ', ' ', ' ', 201),
+('Susan', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', ' ', ' ', 202),
+('Barbara', 'Wright', '73102', '5634 Main St',' ', '456-223-1234', ' ', 203),
+('Peter', 'Capaldi', '52641', '2232 Benton Ave', ' ', '319-217-4455', 'doctorwho@kirkwood.edu', 204),
+('Clara', 'Oswald', '52641', '1455 Benton. Ave', ' ', '319-931-9983', ' ', 205)
 GO
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active)
 VALUES

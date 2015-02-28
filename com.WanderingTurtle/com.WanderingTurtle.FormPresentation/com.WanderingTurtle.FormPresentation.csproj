@@ -109,21 +109,6 @@
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ListingList.xaml.cs">
-      <DependentUpon>ListingList.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ListInvoices.xaml.cs">
-      <DependentUpon>ListInvoices.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Lists.xaml.cs">
-      <DependentUpon>Lists.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ListsPopUp.xaml.cs">
-      <DependentUpon>ListsPopUp.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ListBookings.xaml.cs">
-      <DependentUpon>ListBookings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ListEvents.xaml.cs">
       <DependentUpon>ListEvents.xaml</DependentUpon>
     </Compile>
@@ -167,26 +152,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditExistingEvent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListingList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListInvoices.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Lists.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListsPopUp.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ListBookings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

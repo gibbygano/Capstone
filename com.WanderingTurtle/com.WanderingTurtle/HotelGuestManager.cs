@@ -15,7 +15,7 @@ namespace com.WanderingTurtle
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
         /// Miguel Santana 2/18/2015
-        public bool AddHotelGuest(NewHotelGuest newHotelGuest)
+        public bool AddHotelGuest(HotelGuest newHotelGuest)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace com.WanderingTurtle
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
         /// Miguel Santana 2/18/2015
-        public bool UpdateHotelGuest(HotelGuest oldHotelGuest, NewHotelGuest newHotelGuest)
+        public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
         {
             try
             {

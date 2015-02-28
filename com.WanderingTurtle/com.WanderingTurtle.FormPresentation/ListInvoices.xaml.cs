@@ -63,22 +63,22 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnViewInvoice_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                InvoiceDetails invoiceToView = (InvoiceDetails)lvInvoiceList.SelectedItem;
+            //try
+            //{
+            //    InvoiceDetails invoiceToView = (InvoiceDetails)lvInvoiceList.SelectedItem;
 
-                ViewInvoice custInvoice = new ViewInvoice(invoiceToView);
+            //    ViewInvoice custInvoice = new ViewInvoice(invoiceToView);
 
-                if (custInvoice.ShowDialog() == false)
-                {
-                    RefreshInvoiceList();
-                }
+            //    if (custInvoice.ShowDialog() == false)
+            //    {
+            //        RefreshInvoiceList();
+            //    }
 
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("No Invoice selected, please select an Invoice and try again");
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("No Invoice selected, please select an Invoice and try again");
+            //}
         }
     }
 }
