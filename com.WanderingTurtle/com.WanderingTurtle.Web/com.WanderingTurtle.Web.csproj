@@ -189,6 +189,7 @@
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="SupplierAddEvent.aspx" />
+    <Content Include="SupplierViewEvents.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -285,6 +286,13 @@
     </Compile>
     <Compile Include="SupplierAddEvent.aspx.designer.cs">
       <DependentUpon>SupplierAddEvent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierViewEvents.aspx.cs">
+      <DependentUpon>SupplierViewEvents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupplierViewEvents.aspx.designer.cs">
+      <DependentUpon>SupplierViewEvents.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
