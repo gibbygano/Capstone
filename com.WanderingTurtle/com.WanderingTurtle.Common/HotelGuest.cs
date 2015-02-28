@@ -39,11 +39,6 @@
             SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, Active);
         }
 
-        public HotelGuest()
-        {
-            
-        }
-
         private void SetValues(int? HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, bool Active)
         {
             this.HotelGuestID = HotelGuestID;

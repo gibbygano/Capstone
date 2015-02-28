@@ -17,8 +17,8 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ViewInvoice : Window
     {
-        private InvoiceManager myInvoiceManager = new InvoiceManager();
-        private HotelGuestManager myGuestManager = new HotelGuestManager();
+        private InvoiceManager myInvoiceManager;
+        private HotelGuestManager myGuestManager;
         private List<BookingDetails> myBookingList;
 
         /// <summary>
@@ -32,21 +32,20 @@ namespace com.WanderingTurtle.FormPresentation
         public ViewInvoice(int selectedHotelGuestID)
         {
             InitializeComponent();
-            var invoiceToView = new InvoiceDetails();
 
-            invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+            var invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
             lblGuestNameLookup.Content = invoiceToView.GetFullName;
             lblGuestID.Content = invoiceToView.HotelGuestID.ToString();
             lblInvoiceID.Content = invoiceToView.InvoiceID.ToString();
             lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
             lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
-            
+
             //fill the booking list
             myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
             lvCustomerBookings.ItemsSource = myBookingList;
         }
-      
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,11 +54,11 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
             AddBooking myBooking = new AddBooking();
-            
 
             if (myBooking.ShowDialog() == false)
             {
-                //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
+                //TBD need new form
+                //lvCustomerBookings = myInvoiceManager.RetrieveBookingDetailsList(int.Parse(lblAddBookingGuestID.Content.ToString()));
             }
         }
 
@@ -73,15 +72,10 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                HotelGuest selectedGuest = new HotelGuest();
-                int selectedGuestID = int.Parse(lblGuestID.Content.ToString());
-
                 //retrieve the guest information
-                selectedGuest = myGuestManager.GetHotelGuest(selectedGuestID);
+                HotelGuest selectedGuest = myGuestManager.GetHotelGuest(int.Parse(lblGuestID.Content.ToString()));
 
-                AddEditHotelGuest temp = new AddEditHotelGuest(selectedGuest);
-
-                if (temp.ShowDialog() == false)
+                if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false)
                 {
                     //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
                 }

@@ -26,7 +26,7 @@
             </TabItem>
 
             <TabItem Header="Hotel Guests">
-                <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" Loaded="ListHotelGuests_Loaded" />
+                <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" />
 
             </TabItem>
         </TabControl>
