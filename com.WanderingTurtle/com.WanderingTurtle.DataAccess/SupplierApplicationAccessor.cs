@@ -13,11 +13,12 @@ namespace com.WanderingTurtle.DataAccess
     {
 
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Inserts a new Supplier Application Record into the Database
         /// </summary>
         /// <param name="supplierApplicationToAdd">A Supplier Application Object that contains all the information to be added</param>
         /// <returns>int # of rows affected</returns>
-        /// Created by Matt Lapka 2/8/15
         public static int AddSupplierApplication(SupplierApplication supplierApplicationToAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -57,12 +58,13 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Updates an existing Supplier Application Record already in the Database
         /// </summary>
         /// <param name="oldApplication">A SupplierApplication Object that contains all the information of the record to be changed</param>
-        /// <param name="oldApplication">A SupplierApplication Object that contains all the information to change in the record</param>
+        /// <param name="newApplication">A SupplierApplication Object that contains all the information to change in the record</param>
         /// <returns>int # of rows affected</returns>
-        /// Created by Matt Lapka 2/8/15
         public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -118,10 +120,11 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected; 
         }
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Retrieves a list of all Supplier Application Records from the Database
         /// </summary>
         /// <returns>List of SupplierApplication objects</returns>
-        /// Created by Matt Lapka 2/8/15
         public static List<SupplierApplication> GetSupplierApplicationList()
         {
             var ApplicationList = new List<SupplierApplication>();
@@ -173,10 +176,12 @@ namespace com.WanderingTurtle.DataAccess
             return ApplicationList;
         }
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Retrieves a single Supplier Application Records from the Database
         /// </summary>
+        /// <param name="SupplierApplicationID">A string of the SupplierApplicationID of the Supplier Application to be fetched</param>
         /// <returns>SupplierApplication object</returns>
-        /// Created by Matt Lapka 2/8/15
         public static SupplierApplication GetSupplierApplication(String SupplierApplicationID)
         {
             var currentSupplierApplication = new SupplierApplication();

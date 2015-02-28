@@ -100,12 +100,13 @@ namespace com.WanderingTurtle
             }
         }
         /// <summary>
+        /// Matt Lapka
+        /// 2015/02/08
         /// Gets a single Supplier Application Record from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
         /// <param name="applicationID">string ID of the application to be retrieved</param>
         /// <returns>SupplierApplication object</returns>
-        /// Created by Matt Lapka 2/8/15
         public SupplierApplication RetrieveSupplierApplication(string applicationID)
         {
             try
@@ -120,11 +121,12 @@ namespace com.WanderingTurtle
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Gets a list of Supplier Application Records from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
         /// <returns>List of SupplierApplication objects</returns>
-        /// Created by Matt Lapka 2/8/15
         public List<SupplierApplication> RetrieveSupplierApplicationList()
         {
             try
@@ -139,12 +141,13 @@ namespace com.WanderingTurtle
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Add a single Supplier Application Record to the database
         /// Throws any exceptions caught by the DAL
         /// </summary>
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
         /// <returns>int # of rows affected</returns>
-        /// Created by Matt Lapka 2/8/15
         public int AddASupplierApplication(SupplierApplication newSupplierApp)
         {
             try
@@ -159,13 +162,14 @@ namespace com.WanderingTurtle
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/02/08
         /// Updates a Supplier Application Record
         /// Throws any exceptions caught by the DAL
         /// </summary>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
         /// <returns>int # of rows affected</returns>
-        /// Created by Matt Lapka 2/8/15
         public int EditSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication newSupplierApp)
         {
             try

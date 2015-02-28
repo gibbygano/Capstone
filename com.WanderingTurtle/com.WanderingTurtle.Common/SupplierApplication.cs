@@ -6,9 +6,10 @@ using System.Text;
 namespace com.WanderingTurtle.Common
 {
     /// <summary>
-    /// Obejct to hold information pertaining to a Supplier Application
+    /// Matt Lapka
+    /// Created: 2015/02/08
+    /// Object to hold information pertaining to a Supplier Application
     /// </summary>
-    /// Created by Matt Lapka 2/8/15
     public class SupplierApplication
     {
         public int ApplicationID { get; set; }
