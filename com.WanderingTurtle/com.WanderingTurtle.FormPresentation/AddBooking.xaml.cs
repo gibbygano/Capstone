@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -21,7 +22,6 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class AddBooking : Window
     {
         public OrderManager myManager = new OrderManager();
-        public EmployeeManager myEmp = new EmployeeManager();
         public HotelGuestManager myGuest = new HotelGuestManager();
         public List<ListItemObject> myEventList;
 
@@ -144,7 +144,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Validator.ValidateInt(emp);
                 int.TryParse(emp, out empID);
-                myEmp.FetchEmployee(empID);
+                EmployeeManager.FetchEmployee(empID);
                 works = true;
                 return works;
 
