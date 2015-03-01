@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.FormPresentation", "com.WanderingTurtle.FormPresentation\com.WanderingTurtle.FormPresentation.csproj", "{347D0A6F-3698-4E42-AACE-CA07F1168701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.WebPresentation", "com.WanderingTurtle.WebPresentation\com.WanderingTurtle.WebPresentation.csproj", "{206B1F04-3B68-45FA-A097-44953DCC547B}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "com.WanderingTurtle.EventDatabase", "com.WanderingTurtle.EventDatabase\com.WanderingTurtle.EventDatabase.sqlproj", "{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerNeeded", "{73D0F04F-D745-44FA-9968-F60D5AACB181}"
