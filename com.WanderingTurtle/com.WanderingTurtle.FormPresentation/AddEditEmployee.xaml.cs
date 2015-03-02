@@ -24,8 +24,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </remarks>
     public partial class AddEmployee : Window
     {
-        private EmployeeManager myManager = new EmployeeManager();
-
         /// <summary>
         /// Pat Banks
         /// Created:  2015/02/02
@@ -110,7 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                result = myManager.AddNewEmployee(
+                result = EmployeeManager.AddNewEmployee(
                     new Employee(
                         this.txtFirstName.Text,
                         this.txtLastName.Text,
@@ -149,7 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                result = myManager.EditCurrentEmployee(
+                result = EmployeeManager.EditCurrentEmployee(
                     CurrentEmployee,
                     new Employee(
                         this.txtFirstName.Text,
