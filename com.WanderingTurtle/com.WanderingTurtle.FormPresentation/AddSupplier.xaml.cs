@@ -48,7 +48,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            lblError.Content = "";
             btnEdit.IsEnabled = false;
             fillComboBox();            
         }
@@ -70,7 +69,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                lblError.Content = "";
                 EditSupplier();
                 ListSuppliers.Instance.FillList();
                 this.Close();
@@ -94,7 +92,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                lblError.Content = "";
                 AddTheSupplier();
                 ListSuppliers.Instance.FillList();
                 this.Close();
@@ -117,42 +114,42 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateAlphaNumeric(txtCompanyName.Text.Trim()))
             {
-                lblError.Content = "Company Name field must be filled out and not contain special characters";
+                MessageBox.Show("Company Name field must be filled out and not contain special characters");
                 return false;
             }
             else if (!Validator.ValidateInt(txtUserID.Text))
             {
-                lblError.Content = "User ID field must filled out and be a numeric value and must be 10 digits or less";
+                MessageBox.Show("User ID field must filled out and be a numeric value and must be 10 digits or less");
                 return false;
             }
             else if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
             {
-                lblError.Content = "Not a valid e-mail address";
+                MessageBox.Show("Not a valid e-mail address");
                 return false;
             }
             else if (!Validator.ValidatePhone(txtPhoneNumber.Text))
             {
-                lblError.Content = "The phone number must filled out and be formated correctly (10 digits)";
+                MessageBox.Show("The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
                 return false;
             }
             else if (cboZip.SelectedItem == null)
             {
-                lblError.Content = "You must select an zip from the drop down";
+                MessageBox.Show("You must select an zip from the drop down");
                 return false;
             }
             else if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
             {
-                lblError.Content = "The address must be filled out and not contain special characters (spaces allowed)";
+                MessageBox.Show("The address must be filled out and not contain special characters (spaces allowed)");
                 return false;
             }
             else if (!Validator.ValidateString(txtFirstName.Text.Trim()))
             {
-                lblError.Content = "The fist name field filled out and must not contain special characters (No Spaces)";
+                MessageBox.Show("The fist name field filled out and must not contain special characters (No Spaces)");
                 return false;
             }
             else if (!Validator.ValidateString(txtLastName.Text.Trim()))
             {
-                lblError.Content = "The last name field must be filled out and not contain special characters (No Spaces)";
+                MessageBox.Show("The last name field must be filled out and not contain special characters (No Spaces)");
                 return false;
             }
 
@@ -161,9 +158,9 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 _userID = Int32.Parse(txtUserID.Text);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                lblError.Content = "User ID must be numeric";
+                MessageBox.Show("User ID must be numeric");
             }
 
             return true;

@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using System.ComponentModel;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -57,21 +58,21 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-                try
+            try
+            {
+                Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
+
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirm Delete", System.Windows.MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
-                    
-                    MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirm Delete", System.Windows.MessageBoxButton.YesNo);
-                    if (messageBoxResult == MessageBoxResult.Yes)
-                    {
-                        _manager.ArchiveSupplier(supplierToDelete);
-                    }
-                    FillList();
+                    _manager.ArchiveSupplier(supplierToDelete);
                 }
-                catch (Exception)
-                {
-                    System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Delete");
-                }
+                FillList();
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Delete");
+            }
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Supplier supplierToUpdate = (Supplier)lvSuppliersList.SelectedItems[0];
-                AddSupplier addSupplier = new AddSupplier();                
+                AddSupplier addSupplier = new AddSupplier();
                 addSupplier.Show();
                 addSupplier.FillUpdateList(supplierToUpdate);
             }
@@ -117,5 +118,51 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
         }
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+        private GridViewColumnHeader _sortColumn;
+        
+        /// <summary>
+        /// This method will sort the listview column in both asending and desending order
+        /// Created by Will Fritz 15/2/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvSupplierListHeaderClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
+            if (column == null)
+            {
+                return;
+            }
+
+            if (_sortColumn == column)
+            {
+                // Toggle sorting direction 
+                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+            else
+            {
+                _sortColumn = column;
+                _sortDirection = ListSortDirection.Ascending;
+            }
+
+            string header = string.Empty;
+
+            // if binding is used and property name doesn't match header content 
+            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
+
+            if (b != null)
+            {
+                header = b.Path.Path;
+            }
+
+            ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvSuppliersList.ItemsSource);
+            resultDataView.SortDescriptions.Clear();
+            resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
+        }
+
+
     }
 }

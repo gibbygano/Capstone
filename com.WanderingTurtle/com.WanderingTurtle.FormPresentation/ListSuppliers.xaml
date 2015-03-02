@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="lvSuppliersList">
+        <ListView Grid.Row="0" x:Name="lvSuppliersList" GridViewColumnHeader.Click="lvSupplierListHeaderClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width ="175" Header="Company Name" DisplayMemberBinding="{Binding CompanyName}" />

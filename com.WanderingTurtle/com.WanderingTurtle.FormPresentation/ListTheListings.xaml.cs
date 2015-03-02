@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation
                 myListingList = ordMan.RetrieveListItemList();
                 lvEvents.ItemsSource = myListingList;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("No database able to be accessed for event list");
             }
