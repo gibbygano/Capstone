@@ -67,7 +67,6 @@
     <Build Include="dbo\Tables\EventItem.sql" />
     <Build Include="dbo\Tables\Supplier.sql" />
     <Build Include="dbo\Stored Procedures\spAddBooking.sql" />
-    <Build Include="dbo\Stored Procedures\spDeleteBooking.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteEventItem.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteSupplier.sql" />
     <Build Include="dbo\Stored Procedures\spInsertEventItem.sql" />

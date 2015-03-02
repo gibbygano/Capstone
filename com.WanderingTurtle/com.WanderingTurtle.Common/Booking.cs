@@ -8,6 +8,7 @@ namespace com.WanderingTurtle.Common
     /* Booking- a class used to create a booking object
          * Has a default constructor and a constructor that takes 3 int arguments and a DateTime argument
          * Created By: Tony Noel - 2/3/15
+     * Updated - Tony Noel 15/3/2
          * */
     public class Booking
     {
@@ -19,6 +20,7 @@ namespace com.WanderingTurtle.Common
         public DateTime DateBooked { get; set; }
         public bool Cancel { get; set; }
         public decimal Refund { get; set; }
+        public bool Active { get; set; }
 
         public Booking()
         {
@@ -40,7 +42,7 @@ namespace com.WanderingTurtle.Common
             Quantity = bQuantity;
             DateBooked = dateBooked;
         }
-        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, bool cancel, decimal refund)
+        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, bool cancel, decimal refund, bool active)
         {
             BookingID = bookingID;
             GuestID = guestID;
@@ -50,6 +52,7 @@ namespace com.WanderingTurtle.Common
             DateBooked = dateBooked;
             Cancel = cancel;
             Refund = refund;
+            Active = active;
         }
 
     }

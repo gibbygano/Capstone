@@ -219,6 +219,7 @@ namespace com.WanderingTurtle.DataAccess
      * inputs are the original Booking object along with a booking object to update
      * Output is the rows affected by the update
      * Created By: Tony Noel - 2/3/15
+         * Updated - TOny Noel 15/3/2
      * */
 
         public static int updateBooking(Booking oldOne, Booking toUpdate)
@@ -231,10 +232,10 @@ namespace com.WanderingTurtle.DataAccess
             //Set command type to stored procedure and add parameters
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@GuestID", toUpdate.GuestID);
-            cmd.Parameters.AddWithValue("@EmployeeID", toUpdate.EmployeeID);
-            cmd.Parameters.AddWithValue("@ItemListID", toUpdate.ItemListID);
             cmd.Parameters.AddWithValue("@Quantity", toUpdate.Quantity);
+            cmd.Parameters.AddWithValue("@Refund", toUpdate.Refund);
+            cmd.Parameters.AddWithValue("@Cancel", toUpdate.Cancel);
+            cmd.Parameters.AddWithValue("@Active", toUpdate.Active);
 
             cmd.Parameters.AddWithValue("@original_BookingID", oldOne.BookingID);
             cmd.Parameters.AddWithValue("@original_GuestID", oldOne.GuestID);
@@ -242,6 +243,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_ItemListID", oldOne.ItemListID);
             cmd.Parameters.AddWithValue("@original_Quantity", oldOne.Quantity);
             cmd.Parameters.AddWithValue("@original_DateBooked", oldOne.DateBooked);
+            cmd.Parameters.AddWithValue("@original_Refund", oldOne.Refund);
+            cmd.Parameters.AddWithValue("@original_Cancel", oldOne.Cancel);
+            cmd.Parameters.AddWithValue("@original_Active", oldOne.Active);
 
             try
             {
@@ -259,43 +263,6 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        /* DeleteBooking- a method used to delete a booking in the database
-         * inputs are the Booking object to delete
-         * Output is the rows affected by the update
-         * Created By: Tony Noel - 2/3/15
-         * */
-
-        public static int deleteBooking(Booking toDelete)
-        {
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spDeleteBooking";
-            var cmd = new SqlCommand(cmdText, conn);
-            int rowsAffected = 0;
-
-            //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@BookingID", toDelete.BookingID);
-            cmd.Parameters.AddWithValue("@original_GuestID", toDelete.GuestID);
-            cmd.Parameters.AddWithValue("@original_EmployeeID", toDelete.EmployeeID);
-            cmd.Parameters.AddWithValue("@original_ItemListID", toDelete.ItemListID);
-            cmd.Parameters.AddWithValue("@original_Quantity", toDelete.Quantity);
-
-            try
-            {
-                conn.Open();
-                rowsAffected = (int)cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return rowsAffected;
-        }
+       
     }
 }

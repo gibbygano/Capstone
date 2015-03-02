@@ -99,19 +99,6 @@ namespace com.WanderingTurtle
         }
 
 
-        /* ArchiveBooking- a method used to request to delete a booking through the data access layer and from database
-        * Takes an input of an int- the BookingID number to locate the requested record.
-        * The booking ID number is first passed through the RetrieveBooking method to return a Booking Object, after which it may be 
-         * passed to the deleteBooking method in the BookingAccessor layer.
-         * Returns an int- the number of rows affected.
-        * Created By: Tony Noel - 2/5/15
-        * */
-        public int ArchiveBooking(int bookingID)
-        {
-            var numRows = BookingAccessor.deleteBooking(RetrieveBooking(bookingID));
-            return numRows;
-        }
-
         /* RetrieveBooking- a method used to request a booking from the data access layer and database
   * Takes an input of an int- the BookingID number to locate the requested record.
   * Output is a booking object to hold the booking record.
