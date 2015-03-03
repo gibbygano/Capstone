@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.BusinessLogic", "com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj", "{825BA7B8-C006-4EF9-B596-700B863A2296}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.DataAccess", "com.WanderingTurtle.DataAccess\com.WanderingTurtle.DataAccess.csproj", "{49D534C8-8BF7-4624-873C-4809D555BC99}"
@@ -11,14 +9,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.Common"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.FormPresentation", "com.WanderingTurtle.FormPresentation\com.WanderingTurtle.FormPresentation.csproj", "{347D0A6F-3698-4E42-AACE-CA07F1168701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.WebPresentation", "com.WanderingTurtle.WebPresentation\com.WanderingTurtle.WebPresentation.csproj", "{206B1F04-3B68-45FA-A097-44953DCC547B}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "com.WanderingTurtle.EventDatabase", "com.WanderingTurtle.EventDatabase\com.WanderingTurtle.EventDatabase.sqlproj", "{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerNeeded", "{73D0F04F-D745-44FA-9968-F60D5AACB181}"
 	ProjectSection(SolutionItems) = preProject
 		com.WanderingTurtle.Common\BookingLineItem.cs = com.WanderingTurtle.Common\BookingLineItem.cs
 		com.WanderingTurtle.DataAccess\BookingLineItemAccessor.cs = com.WanderingTurtle.DataAccess\BookingLineItemAccessor.cs
+		com.WanderingTurtle.FormPresentation\ListBookings.xaml = com.WanderingTurtle.FormPresentation\ListBookings.xaml
+		com.WanderingTurtle.FormPresentation\ListBookings.xaml.cs = com.WanderingTurtle.FormPresentation\ListBookings.xaml.cs
+		com.WanderingTurtle.FormPresentation\ListingList.xaml = com.WanderingTurtle.FormPresentation\ListingList.xaml
+		com.WanderingTurtle.FormPresentation\ListingList.xaml.cs = com.WanderingTurtle.FormPresentation\ListingList.xaml.cs
+		com.WanderingTurtle.FormPresentation\ListInvoices.xaml = com.WanderingTurtle.FormPresentation\ListInvoices.xaml
+		com.WanderingTurtle.FormPresentation\ListInvoices.xaml.cs = com.WanderingTurtle.FormPresentation\ListInvoices.xaml.cs
+		com.WanderingTurtle.FormPresentation\Lists.xaml = com.WanderingTurtle.FormPresentation\Lists.xaml
+		com.WanderingTurtle.FormPresentation\Lists.xaml.cs = com.WanderingTurtle.FormPresentation\Lists.xaml.cs
+		com.WanderingTurtle.FormPresentation\ListsPopUp.xaml = com.WanderingTurtle.FormPresentation\ListsPopUp.xaml
+		com.WanderingTurtle.FormPresentation\ListsPopUp.xaml.cs = com.WanderingTurtle.FormPresentation\ListsPopUp.xaml.cs
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spDeleteBooking.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spDeleteBooking.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql
@@ -64,10 +71,6 @@ Global
 		{347D0A6F-3698-4E42-AACE-CA07F1168701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{347D0A6F-3698-4E42-AACE-CA07F1168701}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{347D0A6F-3698-4E42-AACE-CA07F1168701}.Release|Any CPU.Build.0 = Release|Any CPU
-		{206B1F04-3B68-45FA-A097-44953DCC547B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{206B1F04-3B68-45FA-A097-44953DCC547B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{206B1F04-3B68-45FA-A097-44953DCC547B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{206B1F04-3B68-45FA-A097-44953DCC547B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D1FFEF7-1B8A-44A6-9E03-7104E2C354B6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -81,8 +84,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{206B1F04-3B68-45FA-A097-44953DCC547B} = {78738C71-D7C3-4536-B6FB-D371B918B2DE}
 	EndGlobalSection
 EndGlobal

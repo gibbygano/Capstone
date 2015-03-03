@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierAddEvent.aspx.cs" Inherits="com.WanderingTurtle.Web.SupplierAddEvent" MasterPageFile="Site.Master" EnableEventValidation="False" %>
 <asp:Content ContentPlaceholderID="MainContent" runat="server" ID="body">
-    <form id="addEventForm">
     <div>
     <h1>Add a New Event</h1>
         Event Name: <asp:TextBox ID="txtEventName" runat="server" MaxLength="255"></asp:TextBox><br />
@@ -24,5 +23,4 @@
            
             <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
         </div>
-    </form>
 </asp:Content>

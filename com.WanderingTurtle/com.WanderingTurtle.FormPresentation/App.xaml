@@ -18,7 +18,7 @@
             <Setter Property="FontSize" Value="13" />
         </Style>
         <Style TargetType="{x:Type Button}">
-            <Setter Property="Padding" Value="10,5" />
+            <Setter Property="Padding" Value="8,2" />
             <Setter Property="FontSize" Value="13" />
         </Style>
         <System:Double x:Key="TextBoxHeight">30</System:Double>
@@ -29,7 +29,7 @@
             <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
         </Style>
         <Thickness x:Key="Grid Margin">5</Thickness>
-        <!--<Thickness x:Key="Button Spacing">0,3,5,0</Thickness>-->
+        <Thickness x:Key="Button Spacing">0,3,5,0</Thickness>
 
         <!-- These Need to be removed -->
         <Thickness x:Key="Button Margin">0,3,5,0</Thickness>

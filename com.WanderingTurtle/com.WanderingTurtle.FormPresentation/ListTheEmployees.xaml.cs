@@ -21,7 +21,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheEmployees : UserControl
     {
-        private EmployeeManager myEmployees = new EmployeeManager();
         private List<Employee> employeeList;
 
         /// <summary>
@@ -65,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                employeeList = myEmployees.FetchListEmployees();
+                employeeList = EmployeeManager.FetchListEmployees();
                 lvEmployeesList.ItemsSource = employeeList;
                 lvEmployeesList.Items.Refresh();
             }

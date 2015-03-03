@@ -13,62 +13,6 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Created by Pat Banks 2015/02/25
-        /// Retrieves a list of all open invoices from the database.
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <returns>List of open Invoices</returns>
-        public static List<InvoiceDetails> getAllInvoiceList()
-        {
-            var openInvoiceList = new List<InvoiceDetails>();
-            var conn = DatabaseConnection.GetDatabaseConnection();
-
-            string query = "spSelectAllInvoices";
-
-            var cmd = new SqlCommand(query, conn);
-
-            try
-            {
-                conn.Open();
-                var reader = cmd.ExecuteReader();
-
-                if (reader.HasRows == true)
-                {
-                    while (reader.Read())
-                    {
-                        var currentOpenInvoice = new InvoiceDetails();
-
-                        currentOpenInvoice.InvoiceID = reader.GetInt32(0);
-                        currentOpenInvoice.HotelGuestID = reader.GetInt32(1);
-                        currentOpenInvoice.DateOpened = reader.GetDateTime(2);
-                        currentOpenInvoice.Active = reader.GetBoolean(3);
-                        currentOpenInvoice.GuestLastName = reader.GetValue(4).ToString();
-                        currentOpenInvoice.GuestFirstName = reader.GetValue(5).ToString();
-                        
-                        openInvoiceList.Add(currentOpenInvoice);
-                    }
-                }
-                else
-                {
-                    var ax = new ApplicationException("Invoice data not found!");
-                    throw ax;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return openInvoiceList;
-
-        }//end getInvoices()
-
-
-        /// <summary>
-        /// Created by Pat Banks 2015/02/25
         /// Retrieves the bookings for a guest
         /// </summary>
         /// <param name="GuestID">A Hotel Guest's ID</param>
@@ -153,6 +97,7 @@ namespace com.WanderingTurtle.DataAccess
                     guestInvoice.Active = reader.GetBoolean(3);
                     guestInvoice.GuestLastName = reader.GetValue(4).ToString();
                     guestInvoice.GuestFirstName = reader.GetValue(5).ToString();
+                    guestInvoice.GuestRoomNum = reader.GetInt32(6);
                 }
                 else
                 {

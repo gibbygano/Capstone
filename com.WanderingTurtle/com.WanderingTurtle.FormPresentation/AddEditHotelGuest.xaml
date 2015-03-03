@@ -5,19 +5,16 @@
         Title="AddEditHotelGuest" Height="375" Width="350" WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-            <Label x:Name="lblTitle" Content="lblTitle" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-        </ScrollViewer>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -33,23 +30,25 @@
             <Label Grid.Row="4" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="ZIP Code:" />
             <Label Grid.Row="5" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Phone Number:" />
             <Label Grid.Row="6" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Email Address:" />
-            <TextBox  Grid.Column="1" Grid.Row="0" Height="{DynamicResource TextBoxHeight}" TabIndex="0" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtFirstName" />
-            <TextBox  Grid.Column="1" Grid.Row="1" Height="{DynamicResource TextBoxHeight}" TabIndex="1" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtLastName" />
-            <TextBox  Grid.Column="1" Grid.Row="2" Height="{DynamicResource TextBoxHeight}" TabIndex="2" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtAddress1" />
-            <TextBox  Grid.Column="1" Grid.Row="3" Height="{DynamicResource TextBoxHeight}" TabIndex="3" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtAddress2" />
-            <ComboBox Grid.Column="1" Grid.Row="4" Height="{DynamicResource TextBoxHeight}" TabIndex="4" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="cboZip_GotKeyboardFocus"   DisplayMemberPath="GetZipStateCity" x:Name="cboZip" />
-            <TextBox  Grid.Column="1" Grid.Row="5" Height="{DynamicResource TextBoxHeight}" TabIndex="5" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtPhoneNumber" MaxLength="12" />
-            <TextBox  Grid.Column="1" Grid.Row="6" Height="{DynamicResource TextBoxHeight}" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtEmailAddress" />
+            <Label Grid.Row="7" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Room Number:" />
+            <TextBox  Grid.Column="1" Grid.Row="0" TabIndex="0" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtFirstName" />
+            <TextBox  Grid.Column="1" Grid.Row="1" TabIndex="1" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtLastName" />
+            <TextBox  Grid.Column="1" Grid.Row="2" TabIndex="2" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtAddress1" />
+            <TextBox  Grid.Column="1" Grid.Row="3" TabIndex="3" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtAddress2" />
+            <ComboBox Grid.Column="1" Grid.Row="4" TabIndex="4" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="cboZip_GotKeyboardFocus"   DisplayMemberPath="GetZipStateCity" x:Name="cboZip" />
+            <TextBox  Grid.Column="1" Grid.Row="5" TabIndex="5" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtPhoneNumber" MaxLength="12" />
+            <TextBox  Grid.Column="1" Grid.Row="6" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtEmailAddress" />
+            <TextBox  Grid.Column="1" Grid.Row="7" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" TextChanged="txtInput_TextChanged"  x:Name="txtRoomNumber" />
         </Grid>
-        <Grid Grid.Row="2" Margin="0,5,0,0">
+        <Grid Grid.Row="1" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Padding="{DynamicResource Button Padding}" TabIndex="8"  Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
-            <Button Grid.Column="1" Padding="{DynamicResource Button Padding}" TabIndex="9"  Content="Reset"  x:Name="btnReset"  Click="btnReset_Click"  Margin="2.5,0" />
-            <Button Grid.Column="2" Padding="{DynamicResource Button Padding}" TabIndex="10" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
+            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
+            <Button Grid.Column="1" TabIndex="9"  Content="Reset"  x:Name="btnReset"  Click="btnReset_Click"  Margin="2.5,0" />
+            <Button Grid.Column="2" TabIndex="10" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
         </Grid>
     </Grid>
 </Window>

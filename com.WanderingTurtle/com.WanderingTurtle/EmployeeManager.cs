@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace com.WanderingTurtle
 {
-    public class EmployeeManager
+    public static class EmployeeManager
     {
         // Success: An int value is returned to the method to show rows affected
         /// <summary>
@@ -16,7 +16,7 @@ namespace com.WanderingTurtle
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">Exception is thrown if database is not available or new employee cannot be created in the database for any reason</exception>
         /// <returns>An int value is returned to the method to show rows affected</returns>
-        public int AddNewEmployee(Employee newEmployee)
+        public static int AddNewEmployee(Employee newEmployee)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace com.WanderingTurtle
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">EmployeeAccessor method will throw exception to Manager saying that the employee could not be found to edit</exception>
         /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
-        public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
+        public static int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace com.WanderingTurtle
         /// <param name="empID"></param>
         /// <exception cref="Exception">An exception is thrown from the Access Layer asking the user to try their search again</exception>
         /// <returns>The employee object is returned to the method successfully</returns>
-        public Employee FetchEmployee(int empID)
+        public static Employee FetchEmployee(int empID)
         {
             try
             {
@@ -88,7 +88,7 @@ namespace com.WanderingTurtle
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         /// <returns></returns>
-        public Employee FetchEmployee(string firstName, string lastName)
+        public static Employee FetchEmployee(string firstName, string lastName)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace com.WanderingTurtle
         /// </summary>
         /// <exception cref="Exception">Exception is thrown from Accessor that states that employee could not be found in the database</exception>
         /// <returns>The employee list is retrieved and returned up to the presentation layer (calling method)</returns>
-        public List<Employee> FetchListEmployees()
+        public static List<Employee> FetchListEmployees()
         {
             try
             {

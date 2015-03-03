@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -21,7 +22,6 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class AddBooking : Window
     {
         public OrderManager myManager = new OrderManager();
-        public EmployeeManager myEmp = new EmployeeManager();
         public HotelGuestManager myGuest = new HotelGuestManager();
         public List<ListItemObject> myEventList;
 
@@ -70,18 +70,18 @@ namespace com.WanderingTurtle.FormPresentation
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            int.TryParse(quantity, out qID);
-            if (okQuantity(quantity) == false || qID <= 0)
+            
+            if (lvAddBookingListItems.SelectedIndex.Equals(-1))
             {
-                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
+                MessageBox.Show("Please select an event!");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
 
-
-            if (selectedItem() == false)
+            int.TryParse(quantity, out qID);
+            if (okQuantity(quantity) == false || qID <= 0)
             {
-                MessageBox.Show("Please select an event!");
+                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -113,23 +113,6 @@ namespace com.WanderingTurtle.FormPresentation
 
         }//end method addBooking()
 
-        /*attempts to turn selected into a string object.
-         * if successful, returns true.
-         * if not returns false         */
-        private bool selectedItem()
-        {
-            bool works = false;
-            try
-            {
-                getSelectedItem();
-                works = true;
-                return works;
-            }
-            catch
-            {
-                return works;
-            }
-        }
         /*method to create ListItemObject from listView
          * returns the selected item.
          * Tony Noel 2/18/15
@@ -161,7 +144,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Validator.ValidateInt(emp);
                 int.TryParse(emp, out empID);
-                myEmp.FetchEmployee(empID);
+                EmployeeManager.FetchEmployee(empID);
                 works = true;
                 return works;
 

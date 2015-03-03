@@ -9,31 +9,25 @@
         <TabControl x:Name="tabNames">
 
             <TabItem Header="Events">
-                <local:ListEvents />
+                <local:ListEvents FontSize="{DynamicResource Main Font Size}"/>
             </TabItem>
 
             <TabItem Header="Listings">
-                <local:ListTheListings />
-            </TabItem>
-
-            <TabItem Header="Bookings">
-                <local:ListBookings />
+                <local:ListTheListings FontSize="{DynamicResource Main Font Size}"/>
             </TabItem>
 
             <TabItem Header="Suppliers">
-                <local:ListSuppliers />
+                <local:ListSuppliers FontSize="{DynamicResource Main Font Size}" />
+
             </TabItem>
 
             <TabItem Header="Employees">
-                <local:ListTheEmployees />
+                <local:ListTheEmployees FontSize="{DynamicResource Main Font Size}"/>
             </TabItem>
 
             <TabItem Header="Hotel Guests">
-                <local:ListHotelGuests />
-            </TabItem>
+                <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" />
 
-            <TabItem Header="Invoices">
-                <local:ListInvoices />
             </TabItem>
         </TabControl>
     </Grid>

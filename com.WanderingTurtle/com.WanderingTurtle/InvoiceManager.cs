@@ -10,26 +10,7 @@ namespace com.WanderingTurtle.BusinessLogic
     public class InvoiceManager
     {
 
-        /// <summary>
-        /// Created By Pat Banks 2015/02/25
-        /// Retrieves List of Invoices for a hotel guest
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        /// <returns>List of Invoice Information</returns>
-        public List<InvoiceDetails> RetrieveInvoiceList()
-        {
-            try
-            {
-                return InvoiceAccessor.getAllInvoiceList();
-            }
-            catch (Exception)
-            {
-                var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
-                throw ax;
-            }
-        }
-        /// <summary>
+         /// <summary>
         /// Created by Pat Banks 2015/02/25
         /// Retrieves booking information for a hotel guest
         /// </summary>

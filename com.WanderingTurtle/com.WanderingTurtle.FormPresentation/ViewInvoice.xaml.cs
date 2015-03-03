@@ -17,8 +17,9 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ViewInvoice : Window
     {
-        public InvoiceManager myInvoiceManager = new InvoiceManager();
-        public List<BookingDetails> myBookingList;
+        private InvoiceManager myInvoiceManager;
+        private HotelGuestManager myGuestManager;
+        private List<BookingDetails> myBookingList;
 
         /// <summary>
         /// Pat Banks
@@ -28,31 +29,71 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// </remarks>
         /// <param name="SelectedInvoice">retrieves InvoiceDetails from the form</param>
-        public ViewInvoice(InvoiceDetails SelectedInvoice)
+        public ViewInvoice(int selectedHotelGuestID)
         {
             InitializeComponent();
-            var invoiceToView = new InvoiceDetails();
 
-            invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(SelectedInvoice.HotelGuestID);
+            var invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
             lblGuestNameLookup.Content = invoiceToView.GetFullName;
             lblGuestID.Content = invoiceToView.HotelGuestID.ToString();
             lblInvoiceID.Content = invoiceToView.InvoiceID.ToString();
-            
+            lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
+            lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
+
             //fill the booking list
             myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
             lvCustomerBookings.ItemsSource = myBookingList;
         }
 
-        private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
             AddBooking myBooking = new AddBooking();
-            
 
             if (myBooking.ShowDialog() == false)
             {
-                //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
+                //TBD need new form
+                //lvCustomerBookings = myInvoiceManager.RetrieveBookingDetailsList(int.Parse(lblAddBookingGuestID.Content.ToString()));
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void btnEditGuest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //retrieve the guest information
+                HotelGuest selectedGuest = myGuestManager.GetHotelGuest(int.Parse(lblGuestID.Content.ToString()));
+
+                if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false)
+                {
+                    //myBookingList = myInvoiceManager.RetrieveBookingDetailsList(HotelGuestID);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditBooking_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

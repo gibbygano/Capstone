@@ -28,7 +28,6 @@ namespace com.WanderingTurtle.FormPresentation
             refreshList();
         }
 
-
         /// <summary>
         /// Repopulates the list of hotel guests to display
         /// 2015-02-18 - Daniel Collingwood 
@@ -46,8 +45,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
-        private void btnAddGuest_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
         {
             AddEditHotelGuest AddEditHotelGuest = new AddEditHotelGuest();
             if (AddEditHotelGuest.ShowDialog() == false)
@@ -56,6 +59,42 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     refreshList();
                 }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCheckOutGuest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnViewGuest_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int invoiceToView = lvHotelGuestList.SelectedIndex;
+
+                ViewInvoice custInvoice = new ViewInvoice(invoiceToView);
+
+                if (custInvoice.ShowDialog() == false)
+                {
+                   // RefreshInvoiceList();
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No Invoice selected, please select an Invoice and try again");
             }
         }
 
