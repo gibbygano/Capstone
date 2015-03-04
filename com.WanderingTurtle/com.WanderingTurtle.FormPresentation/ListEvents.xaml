@@ -26,6 +26,8 @@
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnArchiveEvent" Content="Delete" Click="btnArchiveEvent_Click" />
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnEditEvent" Content="Edit" Click="btnEditEvent_Click" />
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewDetails" Content="View Event Details"    Click="btnViewEventDetails" />
+            <TextBox x:Name="txtSearchInput" Width="127" Margin ="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}"/>
+            <Button x:Name ="btnSearch" Content="Search" Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Width="127" Click="btnSearch_Click"/> 
         </WrapPanel>
     </Grid>
 </UserControl>

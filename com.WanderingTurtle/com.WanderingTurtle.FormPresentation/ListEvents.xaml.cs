@@ -143,5 +143,41 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show("Please select an event to edit");
             }
         }
+
+        /// <summary>
+        /// Justin Pennington
+        /// Created: 2015/3/4
+        /// 
+        /// Searches through the retrieved Event List (myEventList) and populates the listview with results
+        /// that Contain the text in the txtSearchInput (NOT case sensitive)
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            //List<Event> myTempList = new List<Event>();
+            if (!txtSearchInput.Text.Equals("") && !txtSearchInput.Text.Equals("*"))
+            {
+
+                List<Event> myTempList = new List<Event>();
+                //Lambda Version
+                myTempList.AddRange(myEventList.Where(s => s.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper()))
+                    .Select(s => s));
+                //LINQ version
+                //myTempList.AddRange(
+                //        from inEvent in myEventList
+                //        where inEvent.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper())
+                //        select inEvent); 
+ 
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
+                lvEvents.ItemsSource = myTempList;
+            }
+            else if (txtSearchInput.Text.Equals("*"))
+            {
+                lvEvents.ItemsSource = myEventList;
+            }
+        }
     }
 }
