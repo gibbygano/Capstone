@@ -12,16 +12,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
-    /// <summary>
-    /// Interaction logic for ListHotelGuest.xaml
-    /// </summary>
     public partial class ListHotelGuests : UserControl
     {
         HotelGuestManager _HotelGuestManager = new HotelGuestManager();
+        InvoiceManager myInvoiceManager = new InvoiceManager();
 
+        /// <summary>
+        /// Created by Pat Banks 2015/02/17
+        /// Initializes the UI that displays a list of active hotel guests
+        /// </summary>
         public ListHotelGuests()
         {
             InitializeComponent();
@@ -29,14 +32,19 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Created by Daniel Collingwood  2015-02-18
         /// Repopulates the list of hotel guests to display
-        /// 2015-02-18 - Daniel Collingwood 
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated 2015/03/03
+        /// Changed display items for list of guests retrieved from the invoice manager
+        /// </remarks>
         private void refreshList()
         {
             try
             {
-                var hotelGuestList =_HotelGuestManager.GetHotelGuestList();
+                var hotelGuestList = myInvoiceManager.RetrieveAllInvoiceDetails();
                 lvHotelGuestList.ItemsSource = hotelGuestList;
             }
             catch (Exception ex)
@@ -46,55 +54,52 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Created by Pat Banks 2015/03/03
         /// 
+        /// Opens UI to create a new guest
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">default event parameters</param>
+        /// <param name="e">default event parameters</param>
         private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
         {
-            AddEditHotelGuest AddEditHotelGuest = new AddEditHotelGuest();
-            if (AddEditHotelGuest.ShowDialog() == false)
+            AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
+
+            //When the UI closes, the Hotel Guest list will refresh
+            if (addEditHotelGuest.ShowDialog() == false)
             {
-                if (AddEditHotelGuest.result)
-                {
-                    refreshList();
-                }
+                refreshList();
             }
         }
 
         /// <summary>
+        /// Created by Pat Banks 2015/02/27
         /// 
+        /// Populates AddEditInvoice UI based on selected guest
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCheckOutGuest_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">default event arguments</param>
+        /// <param name="e">default event arguments</param>
         private void btnViewGuest_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int invoiceToView = lvHotelGuestList.SelectedIndex;
+                InvoiceDetails selectedGuest = (InvoiceDetails)lvHotelGuestList.SelectedItem;
 
-                ViewInvoice custInvoice = new ViewInvoice(invoiceToView);
+                if (selectedGuest == null)
+                {
+                    MessageBox.Show("Please select a row to edit");
+                    return;
+                }
+
+                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);            
 
                 if (custInvoice.ShowDialog() == false)
                 {
-                   // RefreshInvoiceList();
+                    refreshList();
                 }
-
             }
             catch (Exception)
             {
-                MessageBox.Show("No Invoice selected, please select an Invoice and try again");
+                MessageBox.Show("Please select a guest and try again");
             }
         }
 
@@ -155,11 +160,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void btnReset_Click(object sender, RoutedEventArgs e)
-        {
-            refreshList();
         }
     }
 }

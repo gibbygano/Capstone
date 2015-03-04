@@ -12,25 +12,19 @@
         <ListView Grid.Row="0" x:Name="lvHotelGuestList" ItemsSource="{Binding hotelGuestList}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="50" Header="ID" DisplayMemberBinding="{Binding HotelGuestID}" />
-                    <GridViewColumn Width="90" Header="Room Number"    DisplayMemberBinding="{Binding Room}"/>
-                    <GridViewColumn Width ="100" Header="First Name"    DisplayMemberBinding="{Binding FirstName}" />
-                    <GridViewColumn Width ="100" Header="Last Name"     DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn Width="30" Header="ID" DisplayMemberBinding="{Binding HotelGuestID}" />
+                    <GridViewColumn Width="50" Header="Room #"    DisplayMemberBinding="{Binding GuestRoomNum}"/>
+                    <GridViewColumn Width="150" Header="Date Registered" DisplayMemberBinding="{Binding DateOpened, StringFormat='{}{0:D}'}" />
+                    <GridViewColumn Width ="100" Header="Last Name"     DisplayMemberBinding="{Binding GuestLastName}" />
+                    <GridViewColumn Width ="100" Header="First Name"    DisplayMemberBinding="{Binding GuestFirstName}" />
 
-                    <GridViewColumn Width ="150" Header="Address 1"     DisplayMemberBinding="{Binding Address1}" />
-                    <GridViewColumn Width ="50" Header="Address 2"     DisplayMemberBinding="{Binding Address2}" />
-                    <GridViewColumn Width ="50" Header="ZIP"           DisplayMemberBinding="{Binding CityState.Zip}" />
-                    <GridViewColumn Width ="100" Header="Phone Number"  DisplayMemberBinding="{Binding PhoneNumber}" />
-                    <GridViewColumn Width ="150" Header="E-Mail"        DisplayMemberBinding="{Binding EmailAddress}" />
                 </GridView>
             </ListView.View>
         </ListView>
         <WrapPanel Grid.Row="1">
 
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnRegisterGuest"    Content="Register Guest"    Click="btnRegisterGuest_Click" />
-				<Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewGuest"    Content="View Guest"    Click="btnViewGuest_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnCheckOutGuest"    Content="Check Out Guest"    Click="btnCheckOutGuest_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Content="Reset"  x:Name="btnReset" Click="btnReset_Click"/>
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewGuest"    Content="View Guest"    Click="btnViewGuest_Click" />
 
         </WrapPanel>
     </Grid>

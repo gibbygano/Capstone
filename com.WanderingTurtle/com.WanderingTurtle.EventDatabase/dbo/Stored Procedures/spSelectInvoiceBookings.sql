@@ -1,4 +1,6 @@
 ﻿/********Created by Pat Banks 2/27/2015 *********/
+/************* creates a list of all bookings related to one hotel guest ***********************/
+
 CREATE PROCEDURE spSelectInvoiceBookings
 (@hotelGuestID int)
 AS

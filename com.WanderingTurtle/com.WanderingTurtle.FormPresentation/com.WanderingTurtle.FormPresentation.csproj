@@ -100,6 +100,9 @@
     <Compile Include="AddEditHotelGuest.xaml.cs">
       <DependentUpon>AddEditHotelGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ArchiveInvoice.xaml.cs">
+      <DependentUpon>ArchiveInvoice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewInvoice.xaml.cs">
       <DependentUpon>ViewInvoice.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AddEditHotelGuest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ArchiveInvoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

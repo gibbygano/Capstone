@@ -71,7 +71,8 @@ namespace com.WanderingTurtle.Common
         public DateTime StartDate { get; set; }
         public decimal TotalPrice { get; set; }
         public int InvoiceID { get; set; }
-
+        public decimal GetTotalCost { get { return (this.Quantity * this.Price) ; } }
+       
         public BookingDetails() : base() { }
 
     }

@@ -15,22 +15,13 @@ using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
-    /// <summary>
-    /// Pat Banks
-    /// Created: 2015/02/02
-    /// Interaction logic for AddEmployee.xaml
-    /// </summary>
-    /// <remarks>
-    /// </remarks>
     public partial class AddEmployee : Window
     {
         /// <summary>
-        /// Pat Banks
-        /// Created:  2015/02/02
+        /// Created by Pat Banks 2015/02/02
+        /// 
         /// Constructs the add employee form and fills the combo box.
         /// </summary>
-        /// <remarks>
-        /// </remarks>
         public AddEmployee()
         {
             InitializeComponent();
@@ -66,9 +57,8 @@ namespace com.WanderingTurtle.FormPresentation
         public Employee CurrentEmployee { get; private set; }
 
         /// <summary>
-        /// Pat Banks
-        /// Created:  2015/02/15
-        /// Calls method to add employee
+        /// Created by Pat Banks 2015/02/15
+        /// Calls method to open AddEditEmployee UI
         /// </summary>
         /// <remarks>
         /// Miguel Santana
@@ -77,15 +67,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentEmployee == null) { employeeAdd(); } else { employeeUpdate(); }
         }
 
         /// <summary>
-        /// Pat Banks
-        /// Created: 2015/02/15
+        /// Created by Pat Banks 2015/02/15
         ///
         /// Method takes values for a new employee from the form and passes values
         ///     into the AddNewEmployee method of the EmployeeManager class
@@ -198,9 +186,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks
+        /// Created by Pat Banks 2015/02/20
         ///
-        /// Validates the text fields
+        /// Validates the text fields in the form
         /// </summary>
         /// <remarks>
         /// Miguel Santana

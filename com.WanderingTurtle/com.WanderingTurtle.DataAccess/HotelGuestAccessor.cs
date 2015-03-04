@@ -203,8 +203,8 @@ namespace com.WanderingTurtle.DataAccess
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spHotelGuestArchive";
             var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
 
-            //parameters not wanting to be in stored procedure
             cmd.Parameters.AddWithValue("@active", newActive);
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldGuest.HotelGuestID);
             cmd.Parameters.AddWithValue("@original_firstName", oldGuest.FirstName);

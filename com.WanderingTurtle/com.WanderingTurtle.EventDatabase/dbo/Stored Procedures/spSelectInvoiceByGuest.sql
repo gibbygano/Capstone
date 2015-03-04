@@ -1,4 +1,7 @@
-﻿CREATE PROCEDURE spSelectInvoiceByGuest
+﻿/********Created by Pat Banks 2/27/2015 *********/
+/************* selects invoice information related to one hotel guest ***********************/
+
+CREATE PROCEDURE spSelectInvoiceByGuest
 	(@guestID int)
 AS
 BEGIN

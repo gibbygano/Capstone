@@ -21,6 +21,8 @@ namespace com.WanderingTurtle.Common
         public DateTime DateOpened { get; set; }
         public DateTime? DateClosed { get; set; }
         public Decimal? TotalPaid { get; set; }
+
+        public string GetTotalFormat { get { return String.Format("{0:C}", this.TotalPaid); } }
     }
 
     /// <summary>
