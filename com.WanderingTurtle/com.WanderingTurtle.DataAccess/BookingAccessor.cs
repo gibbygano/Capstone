@@ -91,6 +91,9 @@ namespace com.WanderingTurtle.DataAccess
                         currentBook.ItemListID = reader.GetInt32(3);
                         currentBook.Quantity = reader.GetInt32(4);
                         currentBook.DateBooked = reader.GetDateTime(5);
+                        currentBook.Cancel = reader.GetBoolean(6);
+                        currentBook.Refund = reader.GetDecimal(7);
+                        currentBook.Active = reader.GetBoolean(8);
 
                         BookingList.Add(currentBook);
                     }
@@ -196,6 +199,9 @@ namespace com.WanderingTurtle.DataAccess
                     BookingToGet.ItemListID = reader.GetInt32(3);
                     BookingToGet.Quantity = reader.GetInt32(4);
                     BookingToGet.DateBooked = reader.GetDateTime(5);
+                    BookingToGet.Cancel = reader.GetBoolean(6);
+                    BookingToGet.Refund = reader.GetDecimal(7);
+                    BookingToGet.Active = reader.GetBoolean(8);
                 }
                 else
                 {
