@@ -10,18 +10,16 @@ namespace com.WanderingTurtle
     public class OrderManager
     {
         public OrderManager()
-        { 
-        
-        }
-  
+        {
 
-        /* RetrieveBookingList- a method used to retrieve a list of bookings through the data access layer, from
-         * the database
-        * Takes no inputs
-         * Returns a list of booking objects from database.
-         * Specific exception: trouble accessing the server.
-        * Created By: Tony Noel - 2/5/15
-        * */
+        }
+
+        ///Created By: Tony Noel - 15/2/5
+        /// <summary>
+        /// RetrieveBookingList- a method used to retrieve a list of bookings through the data access layer, from the database
+        /// </summary>
+        /// <exception cref="ax-ApplicationException">trouble accessing the server.</exception>
+        /// <returns>a list of booking objects from database.</returns>
         public List<Booking> RetrieveBookingList()
         {
             try
@@ -35,13 +33,12 @@ namespace com.WanderingTurtle
             }
         }
 
-        /* RetrieveBookingOpsList- a method used to retrieve a list of booking options through the data access layer, from
-         * the database
-        * Takes no inputs
-         * Returns a list of bookingoptions objects from database.
-         * Specific exception: trouble accessing the server.
-        * Created By: Tony Noel - 2/13/15
-        * */
+        ///Created By: Tony Noel - 15/2/13
+        /// <summary>
+        /// RetrieveListItemList- a method used to retrieve a list of ListItemObjects (a subclass of Booking) through the data access layer, from the database
+        /// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
+        /// </summary>
+        /// <returns>Returns a list of ListItemObject objects from database(From the ItemListing and EventItem tables).</returns>
         public List<ListItemObject> RetrieveListItemList()
         {
             try
@@ -55,13 +52,12 @@ namespace com.WanderingTurtle
             }
         }
 
-        /* AddaBooking- a method used to send a new booking through the data access layer 
-         * to be added to the database
-        * Takes an input of a booking object
-         * Returns an int- the number of rows affected.
-        * Created By: Tony Noel - 2/5/15
-         * Updated By: Pat Banks - 2/19/15 exception handling
-        * */
+        ///Created By: Tony Noel - 15/2/5,  Updated By: Pat Banks - 2/19/15 exception handling
+        /// <summary>
+        /// AddaBooking- a method used to send a new booking through the data access layer to be added to the database
+        /// </summary>
+        /// <param name="newBooking">Takes an input of a booking object</param>
+        /// <returns>Returns an int- the number of rows affected, if add is successful</returns>
         public int AddaBooking(Booking newBooking)
         {
             try
@@ -76,21 +72,19 @@ namespace com.WanderingTurtle
 
         }
 
-             
-
-/********************  Methods not used in Sprint 1 ************************************************/
 
 
-        /* EditBooking- a method used to update a booking through the data access layer 
-         * to be added to the database
-        * Takes an input of a booking object
-         * As the BookingID number will not change, the method uses the same booking ID number to search
-         * the database through the Retrieve Booking method. This will pull the originally record into an object
-         * "oldOne". Then the original record and the new booking object that was passed to the method can both
-         * be passed to upDateBooking to be updated.
-         * Returns an int- the number of rows affected.
-        * Created By: Tony Noel - 2/5/15
-        * */
+        /********************  Methods not used in Sprint 1 ************************************************/
+
+        /// Created By: Tony Noel - 2/5/15
+        /// <summary>
+        /// EditBooking- a method used to update a booking through the data access layer to be added to the database
+        /// As the BookingID number will not change or be updated in the database the method uses the same booking ID number to search
+        /// the database through the Retrieve Booking method. This will pull the originally record into an object "oldOne". Then the 
+        /// original record and the new booking object that was passed to the method can both be passed to upDateBooking to be updated.
+        /// </summary>
+        /// <param name="newOne">Takes an input of a booking object</param>
+        /// <returns> Returns an int- the number of rows affected, if add is successful</returns>
         public int EditBooking(Booking newOne)
         {
             Booking oldOne = RetrieveBooking(newOne.BookingID);
@@ -98,19 +92,17 @@ namespace com.WanderingTurtle
             return numRows;
         }
 
-
-        /* RetrieveBooking- a method used to request a booking from the data access layer and database
-  * Takes an input of an int- the BookingID number to locate the requested record.
-  * Output is a booking object to hold the booking record.
-  * Specific Exception thrown is if there was an issue accessing the data.
-  * Created By: Tony Noel - 2/5/15
-  * */
+        /// Created By: Tony Noel - 15/2/5
+        /// <summary>
+        /// RetrieveBooking- a method used to request a booking from the data access layer and database
+        /// </summary>
+        /// <param name="bookingID">Takes an input of an int- the BookingID number to locate the requested record.</param>
+        /// <returns>Output is a booking object to hold the booking record.</returns>
         public Booking RetrieveBooking(int bookingID)
         {
             try
             {
-                var bookingToGet = BookingAccessor.getBooking(bookingID);
-                return bookingToGet;
+                return BookingAccessor.getBooking(bookingID);
             }
             catch (Exception)
             {

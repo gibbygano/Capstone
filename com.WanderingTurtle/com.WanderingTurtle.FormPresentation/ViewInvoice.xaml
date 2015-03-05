@@ -55,6 +55,7 @@
         </Grid>
         <Button Grid.Row="3" x:Name="btnAddBooking" Content="Add Booking" Padding="{DynamicResource Button Padding}" Margin="0,0,579,0" Height="30" VerticalAlignment="Top" Click="btnAddBooking_Click" />
         <Button Grid.Row="3" x:Name="btnEditBooking" Content="Edit Booking" Padding="{DynamicResource Button Padding}" Margin="119,0,460,0" Height="30" VerticalAlignment="Top" Click="btnEditBooking_Click" />
-        <Button Grid.Row="3" x:Name="btnCloseInvoice" Content="Guest Checkout" Padding="{DynamicResource Button Padding}" Margin="238,0,321,0" Click="btnCloseInvoice_Click" />
+        <Button Grid.Row="3" x:Name="btnCloseInvoice" Content="Guest Checkout" Padding="{DynamicResource Button Padding}" Margin="363,0,196,0" Click="btnCloseInvoice_Click" />
+        <Button x:Name="btnCancelBooking" Content="Cancel Booking" HorizontalAlignment="Left" Margin="239,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="107" Height="30" Click="btnCancelBooking_Click"/>
     </Grid>
 </Window>

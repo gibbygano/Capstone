@@ -5,11 +5,12 @@ using System.Text;
 
 namespace com.WanderingTurtle.Common
 {
-    /* Booking- a class used to create a booking object
-         * Has a default constructor and a constructor that takes 3 int arguments and a DateTime argument
-         * Created By: Tony Noel - 2/3/15
-     * Updated - Tony Noel 15/3/2
-         * */
+    ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2
+    /// <summary>
+    /// Booking- a class used to create a booking object. Has a default constructor, one that takes 5 arguments (which will be used in adds)
+    /// and another that takes all 9 arguments
+    /// the fields- BookingID, Cancel, Refund, and Active all have defaults in the database upon creation
+    /// </summary>
     public class Booking
     {
         public int BookingID { get; set; }
@@ -26,13 +27,15 @@ namespace com.WanderingTurtle.Common
         {
 
         }
-        /* public Booking(int guestID, int empID, int itemID, int bQuantity)
-         {
-             GuestID = guestID;
-             EmployeeID = empID;
-             ItemListID = itemID;
-             Quantity = bQuantity;
-         }*/
+
+        /// <summary>
+        /// Constructor for a booking object- 5 arguments
+        /// </summary>
+        /// <param name="guestID"></param>
+        /// <param name="empID"></param>
+        /// <param name="itemID"></param>
+        /// <param name="bQuantity"></param>
+        /// <param name="dateBooked"></param>
         public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked)
         {
 
@@ -71,8 +74,8 @@ namespace com.WanderingTurtle.Common
         public DateTime StartDate { get; set; }
         public decimal TotalPrice { get; set; }
         public int InvoiceID { get; set; }
-        public decimal GetTotalCost { get { return (this.Quantity * this.Price) ; } }
-       
+        public decimal GetTotalCost { get { return (this.Quantity * this.Price); } }
+
         public BookingDetails() : base() { }
 
     }

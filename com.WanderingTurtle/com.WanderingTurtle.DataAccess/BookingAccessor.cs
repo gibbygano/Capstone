@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Data;
 
 namespace com.WanderingTurtle.DataAccess
 {
     public class BookingAccessor
     {
-        /*Creates a list of options, has an ItemListID, Quantity, and some event info
-         * to help populate drop downs/ lists for Add and update Bookings
-         *Returns a list of BookingOptions objects 
-         * 
-         * Tony Noel- 2/13/15
-         */
+
+        /// Created by: Tony Noel 15/2/13
+        /// <summary>
+        /// Creates a list of options, has an ItemListID, Quantity, and some event info
+        /// to help populate drop downs/ lists for Add and update Bookings
+        /// </summary>
+        /// <returns>a list of ListItemObject objects (is created from two tables, ItemListing and Event Item)</returns>
         public static List<ListItemObject> getListItems()
         {
             var BookingOpsList = new List<ListItemObject>();
@@ -32,11 +34,12 @@ namespace com.WanderingTurtle.DataAccess
                     while (reader.Read())
                     {
                         var currentBook = new ListItemObject();
-
+                        //Below are found on the ItemListing table (ItemListID is a foriegn key on booking)
                         currentBook.ItemListID = reader.GetInt32(0);
                         currentBook.QuantityOffered = reader.GetInt32(1);
                         currentBook.StartDate = reader.GetDateTime(2);
                         currentBook.EndDate = reader.GetDateTime(3);
+                        //Below are found on the EventItem table
                         currentBook.EventID = reader.GetInt32(4);
                         currentBook.EventName = reader.GetString(5);
                         currentBook.EventDescription = reader.GetString(6);
@@ -61,12 +64,13 @@ namespace com.WanderingTurtle.DataAccess
             return BookingOpsList;
         }
 
-        /* getBookingList- a method used to collect a list of bookings from the database
-         * Output is a list of booking objects to hold the booking records.
-         * Specific Exception thrown is if the booking data cannot be found.
-         * Created By: Tony Noel - 2/3/15
-         * */
 
+        ///Created By: Tony Noel - 15/2/3, Updated: 15/3/3 Tony Noel
+        /// <summary>
+        /// getBookingList- a method used to collect a list of bookings from the database
+        /// </summary>
+        /// <exception cref="ApplicationException"> Specific Exception thrown is if the booking data cannot be found.</exception>
+        /// <returns>Output is a list of booking objects to hold the booking records.</returns>
         public static List<Booking> getBookingList()
         {
             var BookingList = new List<Booking>();
@@ -115,13 +119,13 @@ namespace com.WanderingTurtle.DataAccess
             return BookingList;
         }
 
-        /* AddBooking- a method used to insert a booking into the database
-         * inputs a Booking object to be inserted
-         * Output is the number of rows affected by the insert
-         * Created By: Tony Noel - 2/3/15
-         * Updated By:  Pat Banks - 2/19/15 (exception  handling if add wasn't successful)
-         * */
 
+        ///Created By: Tony Noel - 15/2/3, Updated By:  Pat Banks - 2/19/15 (exception  handling if add wasn't successful)
+        /// <summary>
+        /// AddBooking- a method used to insert a booking into the database
+        /// </summary>
+        /// <param name="toAdd">input- a Booking object to be inserted</param>
+        /// <returns>Output is the number of rows affected by the insert</returns>
         public static int addBooking(Booking toAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -162,51 +166,51 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-/********************  Methods not used in Sprint 1 ************************************************/
+        /********************  Methods not used in Sprint 1 ************************************************/
 
-        /* getBooking- a method used to select a booking record from the database
-            * Takes an input of an int- the BookingID number to locate the requested record.
-            * Output is a booking object to hold the booking record.
-            * Specific Exception thrown is if the BookingID isn't on file.
-            * Created By: Tony Noel - 2/3/15
-            * */
-
+        ///Created By: Tony Noel - 15/2/3, Updated: Tony Noel 15/3/3
+        /// <summary>
+        /// getBooking- a method used to select a specified booking record from the database
+        /// </summary>
+        /// <param name="BookingID">Takes an input of an int- the BookingID number to locate the requested record.</param>
+        /// <returns>Output is a booking object to hold the booking record.</returns>
         public static Booking getBooking(int BookingID)
         {
+            //create Booking object to store info
             Booking BookingToGet = new Booking();
 
-            //establish connection
-            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectBooking";
-            //create a Sql Command
-            SqlCommand cmd = new SqlCommand(query, conn);
-            cmd.Parameters.AddWithValue("@bookingID", BookingID); //This is the parameter passing portion of the code.
 
+            SqlCommand command = new SqlCommand(query, conn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@bookingID", BookingID);
+
+            //connect to db
             try
             {
-                //open connection
                 conn.Open();
-                //execute the command and capture the results to a SqlDataReader
-                SqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows == true)
                 {
-                    reader.Read();
-
-                    BookingToGet.BookingID = reader.GetInt32(0);
-                    BookingToGet.GuestID = reader.GetInt32(1);
-                    if (!reader.IsDBNull(2)) BookingToGet.EmployeeID = reader.GetInt32(2);
-                    BookingToGet.ItemListID = reader.GetInt32(3);
-                    BookingToGet.Quantity = reader.GetInt32(4);
-                    BookingToGet.DateBooked = reader.GetDateTime(5);
-                    BookingToGet.Cancel = reader.GetBoolean(6);
-                    BookingToGet.Refund = reader.GetDecimal(7);
-                    BookingToGet.Active = reader.GetBoolean(8);
+                    while (reader.Read())
+                    {
+                        BookingToGet.BookingID = reader.GetInt32(0);
+                        BookingToGet.GuestID = reader.GetInt32(1);
+                        BookingToGet.EmployeeID = reader.GetInt32(2);
+                        BookingToGet.ItemListID = reader.GetInt32(3);
+                        BookingToGet.Quantity = reader.GetInt32(4);
+                        BookingToGet.DateBooked = reader.GetDateTime(5);
+                        BookingToGet.Cancel = reader.GetBoolean(6);
+                        BookingToGet.Refund = reader.GetDecimal(7);
+                        BookingToGet.Active = reader.GetBoolean(8);
+                    }                
                 }
                 else
                 {
-                    var up = new ApplicationException("The BookingID provided does not match any records on file.");
-                    throw up;
+                    throw new ApplicationException("BookingID does not match an ID on record.");
                 }
             }
             catch (Exception)
@@ -217,17 +221,18 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-
             return BookingToGet;
         }
 
-        /* UpdateBooking- a method used to update a booking in the database
-     * inputs are the original Booking object along with a booking object to update
-     * Output is the rows affected by the update
-     * Created By: Tony Noel - 2/3/15
-         * Updated - TOny Noel 15/3/2
-     * */
-
+            
+        ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2
+        /// <summary>
+        /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
+        /// Quantity, Refund, Cancel, and Active
+        /// </summary>
+        /// <param name="oldOne">The original Booking object/values</param>
+        /// <param name="toUpdate">The new booking object values to replace the old</param>
+        /// <returns>Output is the rows affected by the update</returns>
         public static int updateBooking(Booking oldOne, Booking toUpdate)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -269,6 +274,6 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-       
+
     }
 }
