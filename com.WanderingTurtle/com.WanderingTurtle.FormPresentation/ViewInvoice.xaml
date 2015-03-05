@@ -69,9 +69,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="3" Grid.Column="0" x:Name="btnAddBooking" Content="Add Booking" Click="btnAddBooking_Click" />
-            <Button Grid.Row="3" Grid.Column="1" x:Name="btnEditBooking" Content="Edit Booking" Click="btnEditBooking_Click" />
-            <Button Grid.Row="3" Grid.Column="2" x:Name="btnCloseInvoice" Content="Guest Checkout" Click="btnCloseInvoice_Click" />
+            
         </Grid>
 
     </Grid>
