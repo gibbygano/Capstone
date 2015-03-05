@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.FormPresentation
     {
         /// <summary>
         /// Created by Pat Banks 2015/02/02
-        /// 
+        ///
         /// Constructs the add employee form and fills the combo box.
         /// </summary>
         public AddEmployee()
@@ -180,10 +180,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Changed to enum
         /// </remarks>
-        private List<RoleData> RetrieveUserLevelList()
-        {
-            return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData)));
-        }
+        private List<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
 
         /// <summary>
         /// Created by Pat Banks 2015/02/20
