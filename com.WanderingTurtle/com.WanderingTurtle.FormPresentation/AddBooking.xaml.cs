@@ -24,15 +24,17 @@ namespace com.WanderingTurtle.FormPresentation
         public OrderManager myManager = new OrderManager();
         public HotelGuestManager myGuest = new HotelGuestManager();
         public List<ListItemObject> myEventList;
+        public InvoiceDetails inInvoice;
 
-        public AddBooking()
+        public AddBooking(InvoiceDetails inInvoice)
         {
+            this.inInvoice = inInvoice;
+
             myEventList = myManager.RetrieveListItemList();
             InitializeComponent();
             lvAddBookingListItems.ItemsSource = myEventList;
 
-            //creating a list for the dropdown userLevel
-            cboHotelGuests.ItemsSource = RetrieveGuestList();
+            lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
@@ -49,7 +51,6 @@ namespace com.WanderingTurtle.FormPresentation
         public void addBooking()
         {
             string empID = tbAddBookingEmpID.Text;
-            string guest = this.cboHotelGuests.ToString();
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
@@ -64,12 +65,6 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            if (cboHotelGuests.Text == "" || cboHotelGuests.Text == null)
-            {
-                MessageBox.Show("Please select a Hotel Guest.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
             
             if (lvAddBookingListItems.SelectedIndex.Equals(-1))
             {
@@ -91,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
                 
                 int.TryParse(empID, out eID);
 
-                gID = int.Parse(this.cboHotelGuests.SelectedValue.ToString());
+                gID = inInvoice.HotelGuestID;
         
                 myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
            

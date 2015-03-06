@@ -23,11 +23,12 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" x:Name="lblAddBookingEmpID" Content="EmployeeID:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-            <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingGuestID" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingGuestID" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="lblAddBookingGuestName" Content="Guest Name:" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+
             <Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
 
             <TextBox  Grid.Row="0" Grid.Column="1" x:Name="tbAddBookingEmpID" TabIndex="0" UndoLimit="3" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
-            <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cboHotelGuests" TabIndex="1" ItemsSource="{Binding Path=RetrieveGuestList()}" DisplayMemberPath="FullName" SelectedValuePath="HotelGuestID" SelectedValue="{Binding id}" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
             <TextBox  Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingQuantity" TabIndex="2" UndoLimit="2" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,0,0,5">
