@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
-        Title="Add Supplier" WindowStartupLocation="CenterScreen" Height="337.731" Width="723.319" Loaded="Window_Loaded">
+        Title="Add Supplier" WindowStartupLocation="CenterScreen" Height="337.731" Width="723.319" Loaded="Window_Loaded" Closed="Window_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="567.2" />
