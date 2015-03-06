@@ -27,6 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             this.Title = "Add Employee";
             ReloadComboBox();
+            this.chkActiveEmployee.IsEnabled = false;
         }
 
         /// <summary>
@@ -43,18 +44,44 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             this.CurrentEmployee = employee;
             this.Title = "Editing: " + CurrentEmployee.GetFullName;
-            this.chkActiveEmployee.IsEnabled = true;
-            this.txtPassword.IsEnabled = false;
             ReloadComboBox();
 
-            this.txtFirstName.Text = CurrentEmployee.FirstName;
-            this.txtLastName.Text = CurrentEmployee.LastName;
-            this.txtPassword.Text = CurrentEmployee.Password;
-            this.chkActiveEmployee.IsChecked = CurrentEmployee.Active;
-            this.cboUserLevel.SelectedItem = CurrentEmployee.Level;
+            SetFields();
         }
 
         public Employee CurrentEmployee { get; private set; }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/02/19
+        ///
+        /// Defines employee roles for the combo box
+        /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated: 2015/02/22
+        ///
+        /// Changed to enum
+        /// </remarks>
+        private List<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
+
+        /// <summary>
+        /// Created by Miguel Santana 2015/03/05
+        /// Closes the window
+        /// </summary>
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Created by Miguel Santana 2015/03/05
+        /// Resets the fields
+        /// </summary>
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            SetFields();
+        }
 
         /// <summary>
         /// Created by Pat Banks 2015/02/15
@@ -65,9 +92,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated:  2015/02/22
         /// Added method to update employee
         /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentEmployee == null) { employeeAdd(); } else { employeeUpdate(); }
         }
@@ -100,7 +125,7 @@ namespace com.WanderingTurtle.FormPresentation
                     new Employee(
                         this.txtFirstName.Text,
                         this.txtLastName.Text,
-                        this.txtPassword.Text,
+                        this.txtPassword.Password,
                         (int)this.cboUserLevel.SelectedItem,
                         this.chkActiveEmployee.IsChecked.Value
                     )
@@ -140,7 +165,7 @@ namespace com.WanderingTurtle.FormPresentation
                     new Employee(
                         this.txtFirstName.Text,
                         this.txtLastName.Text,
-                        this.txtPassword.Text,
+                        string.IsNullOrEmpty(this.txtPassword.Password) ? this.txtPassword.Password : null,
                         (int)this.cboUserLevel.SelectedItem,
                         this.chkActiveEmployee.IsChecked.Value
                     )
@@ -169,18 +194,30 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks
-        /// Created: 2015/02/19
-        ///
-        /// Defines employee roles for the combo box
+        /// Created by Miguel Santana 2015/03/05
+        /// Resets the values of the fields
         /// </summary>
-        /// <remarks>
-        /// Miguel Santana
-        /// Updated: 2015/02/22
-        ///
-        /// Changed to enum
-        /// </remarks>
-        private List<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
+        private void SetFields()
+        {
+            if (CurrentEmployee == null)
+            {
+                this.txtFirstName.Text = null;
+                this.txtLastName.Text = null;
+                this.txtPassword.Password = null;
+                this.txtPassword2.Password = null;
+                this.chkActiveEmployee.IsChecked = true;
+                this.cboUserLevel.SelectedItem = null;
+            }
+            else
+            {
+                this.txtFirstName.Text = CurrentEmployee.FirstName;
+                this.txtLastName.Text = CurrentEmployee.LastName;
+                this.txtPassword.Password = null;
+                this.txtPassword2.Password = null;
+                this.chkActiveEmployee.IsChecked = CurrentEmployee.Active;
+                this.cboUserLevel.SelectedItem = CurrentEmployee.Level;
+            }
+        }
 
         /// <summary>
         /// Created by Pat Banks 2015/02/20
@@ -199,27 +236,37 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show("Please fill out the first name field with a valid name.");
                 txtFirstName.Focus();
+                txtFirstName.SelectAll();
                 return false;
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
                 MessageBox.Show("Please fill out the last name field with a valid name.");
                 txtLastName.Focus();
+                txtLastName.SelectAll();
                 return false;
             }
-            bool validatePass = (CurrentEmployee != null && this.txtPassword.Text == "") ? false : true;
-            if (validatePass && !Validator.ValidatePassword(txtPassword.Text))
+            bool validatePass = (CurrentEmployee != null && this.txtPassword.Password == "") ? false : true;
+            if (validatePass && !Validator.ValidatePassword(txtPassword.Password))
             {
                 MessageBox.Show("Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
                                 " \n lowercase letter\n UPPERCASE LETTER \n Number \nSpecial Character (not space)");
                 txtPassword.Focus();
+                txtPassword.SelectAll();
                 return false;
             }
-
+            if (validatePass && !this.txtPassword2.Password.Equals(this.txtPassword.Password))
+            {
+                MessageBox.Show("Your password must match!");
+                txtPassword2.Focus();
+                txtPassword2.SelectAll();
+                return false;
+            }
             if (cboUserLevel.Text == "" || cboUserLevel.Text == null)
             {
-                MessageBox.Show("Please select a user item.");
+                MessageBox.Show("Please select a user level.");
                 cboUserLevel.Focus();
+                cboUserLevel.IsDropDownOpen = true;
                 return false;
             }
             return true;
