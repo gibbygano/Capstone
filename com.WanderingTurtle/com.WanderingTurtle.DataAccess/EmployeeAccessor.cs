@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    public class EmployeeAccessor
+    public static class EmployeeAccessor
     {
         // Failure: an application exception will be thrown
         /// <summary>
@@ -98,7 +98,6 @@ namespace com.WanderingTurtle.DataAccess
                         reader.GetInt32(0), //EmployeeID
                         reader.GetString(1), //FirstName
                         reader.GetString(2), //LastName
-                        null, //Password
                         reader.GetInt32(3), //Level
                         reader.GetBoolean(4) //Active
                     );
@@ -160,7 +159,6 @@ namespace com.WanderingTurtle.DataAccess
                         reader.GetInt32(0), //EmployeeID
                         reader.GetString(1), //FirstName
                         reader.GetString(2), //LastName
-                        null, //Password
                         reader.GetInt32(3), //Level
                         reader.GetBoolean(4) //Active
                     );
@@ -220,7 +218,6 @@ namespace com.WanderingTurtle.DataAccess
                                 reader.GetInt32(0), //EmployeeID
                                 reader.GetString(1), //FirstName
                                 reader.GetString(2), //LastName
-                                null, //Password
                                 reader.GetInt32(3), //Level
                                 reader.GetBoolean(4) //Active
                             )
@@ -299,6 +296,52 @@ namespace com.WanderingTurtle.DataAccess
                 throw;
             }
             return rowsAffected;
+        }
+
+        /// <summary>
+        /// Arik Chadima
+        /// 2015/03/03
+        /// Checks an employee's ID and password against the database.
+        /// </summary>
+        /// <param name="employeeId">The employee's unique ID</param>
+        /// <param name="employeePassword">The employee's password</param>
+        /// <returns>The employee with the given credentials</returns>
+        public static Employee GetEmployeeLogin(int employeeId, string employeePassword)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+
+            var cmdText = "spEmployeeCheckPassword";
+            var cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@employeeId", employeeId);
+            cmd.Parameters.AddWithValue("@empPassword", employeePassword);
+
+            Employee tempEmployee = null;
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    tempEmployee = new Employee((int)reader.GetValue(0),reader.GetValue(1).ToString(),reader.GetValue(2).ToString(),(int)reader.GetValue(3), (bool)reader.GetValue(4));
+                }
+                else
+                {
+                    throw new ApplicationException("No such login is available.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return tempEmployee;
         }
     }
 }

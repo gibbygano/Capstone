@@ -118,5 +118,27 @@ namespace com.WanderingTurtle
                 throw ex;
             }
         }
+
+        /// <summary>
+        /// Arik Chadima
+        /// 2015/03/03
+        /// 
+        /// Attempts to fetch an employee with the given credentials from the access layer.
+        /// Failure: ApplicationException if the login was bad, and SqlException of some kind if it's a connection issue.
+        /// </summary>
+        /// <param name="empId">The employee's ID</param>
+        /// <param name="empPassword">the employee's Password</param>
+        /// <returns>The employee object with the given credentials.</returns>
+        public static Employee GetEmployeeLogin(int empId, string empPassword)
+        {
+            try
+            {
+                return EmployeeAccessor.GetEmployeeLogin(empId, empPassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
