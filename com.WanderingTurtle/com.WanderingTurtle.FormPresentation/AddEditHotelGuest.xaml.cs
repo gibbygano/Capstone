@@ -148,7 +148,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana 2/18/2015
         /// </summary>
         ///<remarks>
-        ///Updated By Rose Steffensmeier 2015/02/26
+        ///Updated By Rose Steffensmeier 2015/03/05
         ///</remarks>
         private void Submit()
         {
@@ -179,60 +179,61 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (!Validator.ValidateString(txtFirstName.Text.Trim(), 1, 50))
             {
-                ChangeTitle("Please enter a First Name");
+                MessageBox.Show("Please enter a First Name");
                 txtFirstName.Focus();
                 txtFirstName.SelectAll();
                 return;
             }
             if (!Validator.ValidateString(txtLastName.Text.Trim(), 1, 50))
             {
-                ChangeTitle("Please enter a Last Name");
+                MessageBox.Show("Please enter a Last Name");
                 txtLastName.Focus();
                 txtLastName.SelectAll();
                 return;
             }
             if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim(), 1, 255))
             {
-                ChangeTitle("Please enter an Address");
+                MessageBox.Show("Please enter an Address");
                 txtAddress1.Focus();
                 txtAddress1.SelectAll();
                 return;
             }
             if (txtAddress2.Text.Trim() != "" && !Validator.ValidateAlphaNumeric(txtAddress2.Text.Trim(), 0, 255))
             {
-                ChangeTitle("Error adding Address2");
+                MessageBox.Show("Error adding Address2");
                 txtAddress2.Focus();
                 txtAddress2.SelectAll();
                 return;
             }
             if (cboZip.SelectedItem == null)
             {
-                ChangeTitle("Please select a Zip Code");
+                MessageBox.Show("Please select a Zip Code");
                 cboZip.Focus();
                 return;
             }
-            if (txtPhoneNumber.Text.Trim() != "" && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
+            if ((txtPhoneNumber.Text.Trim() != "" | txtPhoneNumber.Text.Trim() != null) && !Validator.ValidatePhone(txtPhoneNumber.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Phone Number");
+                MessageBox.Show("Please enter a valid Phone Number");
                 txtPhoneNumber.Focus();
                 txtPhoneNumber.SelectAll();
                 return;
             }
-            if (txtEmailAddress.Text.Trim() != "" && !Validator.ValidateEmail(txtEmailAddress.Text.Trim()))
+            if ((txtEmailAddress.Text.Trim() != "" | txtEmailAddress.Text.Trim() != null) && !Validator.ValidateEmail(txtEmailAddress.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Email Address");
+                MessageBox.Show("Please enter a valid Email Address");
                 txtEmailAddress.Focus();
                 txtEmailAddress.SelectAll();
                 return;
             }
-            if (txtRoomNumber.Text.Trim() != "" && !Validator.ValidateNumeric(txtRoomNumber.Text.Trim()))
+            if ((txtRoomNumber.Text.Trim() != "" | txtRoomNumber.Text.Trim() != null) && !Validator.ValidateNumeric(txtRoomNumber.Text.Trim()))
             {
-                ChangeTitle("Please enter a valid Room Number");
-                txtEmailAddress.Focus();
-                txtEmailAddress.SelectAll();
+                MessageBox.Show("Please enter a valid Room Number");
+                txtRoomNumber.Focus();
+                txtRoomNumber.SelectAll();
                 return;
             }
 
+            //FormatException found in if loop
             if (CurrentHotelGuest == null)
             {
                 result = _hotelGuestManager.AddHotelGuest(

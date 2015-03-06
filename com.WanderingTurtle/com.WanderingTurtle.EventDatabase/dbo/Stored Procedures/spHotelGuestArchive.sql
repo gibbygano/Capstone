@@ -9,6 +9,7 @@
 	@original_address2 varchar(255),
 	@original_phoneNumber varchar(15),
 	@original_emailAddress varchar(100),
+	@original_room int,
 	@original_active bit)
 AS
 BEGIN
@@ -22,6 +23,7 @@ BEGIN
 		AND Address2 = @original_address2
 		AND PhoneNumber = @original_phoneNumber
 		AND EmailAddress = @original_emailAddress
+		AND Room = @original_room
 		AND Active = @original_active
 END
 RETURN @@ROWCOUNT
