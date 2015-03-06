@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }" SelectionChanged="lvEvents_SelectionChanged">
+        <ListView Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }" SelectionChanged="lvEvents_SelectionChanged" GridViewColumnHeader.Click="lvEventListHeaderClick">
             <ListView.View>
                 <GridView>
                     <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an

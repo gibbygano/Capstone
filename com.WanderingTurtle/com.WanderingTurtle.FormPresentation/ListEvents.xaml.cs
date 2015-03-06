@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -187,6 +188,51 @@ namespace com.WanderingTurtle.FormPresentation
             btnArchiveEvent.IsEnabled = true;
             btnEditEvent.IsEnabled = true;
             btnViewDetails.IsEnabled = true;
+        }
+
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+        private GridViewColumnHeader _sortColumn;
+
+        /// <summary>
+        /// This method will sort the listview column in both asending and desending order
+        /// Created by Will Fritz 15/2/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvEventListHeaderClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
+            if (column == null)
+            {
+                return;
+            }
+
+            if (_sortColumn == column)
+            {
+                // Toggle sorting direction 
+                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+            else
+            {
+                _sortColumn = column;
+                _sortDirection = ListSortDirection.Ascending;
+            }
+
+            string header = string.Empty;
+
+            // if binding is used and property name doesn't match header content 
+            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
+
+            if (b != null)
+            {
+                header = b.Path.Path;
+            }
+
+            ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEvents.ItemsSource);
+            resultDataView.SortDescriptions.Clear();
+            resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
         }
     }
 }
