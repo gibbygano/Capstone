@@ -80,8 +80,8 @@ namespace com.WanderingTurtle
         {
             try
             {
-                //return EventAccessor.DeleteEvent(eventToDelete);
-                return 1;
+                return EventAccessor.DeleteEventItem(eventToDelete);
+                
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -44,6 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
+                lvEvents.ItemsSource = "";
                 MessageBox.Show("No data to display from the database. Create an event or contact your Systems Administrator");
             }
         }
@@ -110,13 +112,13 @@ namespace com.WanderingTurtle.FormPresentation
                 case MessageBoxResult.Yes:
                     try
                     {
-                        Event EventToDelete = (Event)lvEvents.SelectedItem;
+                        Event EventToDelete = (Event)lvEvents.SelectedItems[0];
                         myMan.ArchiveAnEvent(EventToDelete);
                         Refresh();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("No Event selected, please select an Event and try again.");
+                        MessageBox.Show(ex.ToString());
                     }
                     break;
                 case MessageBoxResult.No:
@@ -170,7 +172,7 @@ namespace com.WanderingTurtle.FormPresentation
                 //        from inEvent in myEventList
                 //        where inEvent.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper())
                 //        select inEvent); 
- 
+
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
                 lvEvents.ItemsSource = myTempList;
             }
@@ -178,6 +180,59 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 lvEvents.ItemsSource = myEventList;
             }
+        }
+
+        private void lvEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnAddEvent.IsEnabled = true;
+            btnArchiveEvent.IsEnabled = true;
+            btnEditEvent.IsEnabled = true;
+            btnViewDetails.IsEnabled = true;
+        }
+
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+        private GridViewColumnHeader _sortColumn;
+
+        /// <summary>
+        /// This method will sort the listview column in both asending and desending order
+        /// Created by Will Fritz 15/2/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvEventListHeaderClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
+            if (column == null)
+            {
+                return;
+            }
+
+            if (_sortColumn == column)
+            {
+                // Toggle sorting direction 
+                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+            else
+            {
+                _sortColumn = column;
+                _sortDirection = ListSortDirection.Ascending;
+            }
+
+            string header = string.Empty;
+
+            // if binding is used and property name doesn't match header content 
+            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
+
+            if (b != null)
+            {
+                header = b.Path.Path;
+            }
+
+            ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEvents.ItemsSource);
+            resultDataView.SortDescriptions.Clear();
+            resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
         }
     }
 }
