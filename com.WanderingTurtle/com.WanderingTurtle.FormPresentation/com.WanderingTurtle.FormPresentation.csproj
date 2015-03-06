@@ -106,6 +106,9 @@
     <Compile Include="CancelBooking.xaml.cs">
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditBooking.xaml.cs">
+      <DependentUpon>EditBooking.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewInvoice.xaml.cs">
       <DependentUpon>ViewInvoice.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CancelBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -30,7 +30,7 @@
             <Label Grid.Row="1" Grid.Column="1" x:Name="lblCheckInDate"     VerticalContentAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="1" x:Name="lblRoomNum"         VerticalContentAlignment="Center" />
 
-            <Button Grid.Row="2" Grid.Column="2" x:Name="btnEditGuest" Content="Edit Guest" Click="btnEditGuest_Click" Width="75" HorizontalAlignment="Left" />
+            <Button Grid.Row="2" Grid.Column="2" x:Name="btnEditGuest" Content="Edit Guest" Click="btnEditGuest_Click" HorizontalAlignment="Left" />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>
