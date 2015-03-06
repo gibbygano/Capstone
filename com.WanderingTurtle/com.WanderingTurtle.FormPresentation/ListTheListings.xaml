@@ -13,8 +13,8 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="35" Header="ID" DisplayMemberBinding="{Binding ItemListID}" />
-                    <GridViewColumn Width="140" Header="Supplier" DisplayMemberBinding="{Binding SupplierName}"/>
-                    <GridViewColumn Width="140" Header="Event" DisplayMemberBinding="{Binding EventName}"/>
+                    <GridViewColumn Width="140" Header="Supplier" DisplayMemberBinding="{Binding SupplierName}" />
+                    <GridViewColumn Width="140" Header="Event" DisplayMemberBinding="{Binding EventName}" />
                     <GridViewColumn Width="130" Header="Event Start Date" DisplayMemberBinding="{Binding StartDate}" />
                     <GridViewColumn Width="130" Header="Event End Date" DisplayMemberBinding="{Binding EndDate}" />
                     <GridViewColumn Width="60" Header="Seats" DisplayMemberBinding="{Binding Seats}" />
@@ -23,10 +23,10 @@
             </ListView.View>
         </ListView>
         <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddListing" Content="Add" Click="btnAddListing_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnEditListing" Content="Edit" Click="btnAddListing_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewListing" Content="View" Click="btnAddListing_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddListing" Content="Add" Click="btnAddListing_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnEditListing" Content="Edit" Click="btnAddListing_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewListing" Content="View" Click="btnAddListing_Click" />
         </WrapPanel>
     </Grid>
 </UserControl>

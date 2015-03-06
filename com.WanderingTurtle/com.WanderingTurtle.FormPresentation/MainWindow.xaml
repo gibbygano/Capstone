@@ -1,8 +1,9 @@
-﻿<Window
+﻿<Controls:MetroWindow
     x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
     Style="{DynamicResource WindowStyle}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     Title="MainWindow" Height="525" Width="950" MinHeight="125"
@@ -31,4 +32,9 @@
             </TabItem>
         </TabControl>
     </Grid>
-</Window>
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Log in" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+</Controls:MetroWindow>
