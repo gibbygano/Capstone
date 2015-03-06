@@ -21,18 +21,20 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking : Window
     {
-        public OrderManager myManager = new OrderManager();
-        public HotelGuestManager myGuest = new HotelGuestManager();
         public List<ListItemObject> myEventList;
+        public InvoiceDetails inInvoice;
 
-        public AddBooking()
+        public AddBooking(InvoiceDetails inInvoice)
         {
-            myEventList = myManager.RetrieveListItemList();
+
+
+            this.inInvoice = inInvoice;
+
+            myEventList = OrderManager.RetrieveListItemList();
             InitializeComponent();
             lvAddBookingListItems.ItemsSource = myEventList;
 
-            //creating a list for the dropdown userLevel
-            cboHotelGuests.ItemsSource = RetrieveGuestList();
+            lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
@@ -49,7 +51,6 @@ namespace com.WanderingTurtle.FormPresentation
         public void addBooking()
         {
             string empID = tbAddBookingEmpID.Text;
-            string guest = this.cboHotelGuests.ToString();
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
@@ -64,12 +65,6 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            if (cboHotelGuests.Text == "" || cboHotelGuests.Text == null)
-            {
-                MessageBox.Show("Please select a Hotel Guest.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
             
             if (lvAddBookingListItems.SelectedIndex.Equals(-1))
             {
@@ -91,12 +86,12 @@ namespace com.WanderingTurtle.FormPresentation
                 
                 int.TryParse(empID, out eID);
 
-                gID = int.Parse(this.cboHotelGuests.SelectedValue.ToString());
+                gID = inInvoice.HotelGuestID;
         
                 myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
            
                 //calls to booking manager to add a booking. BookingID is auto-generated in database                
-                int result = myManager.AddaBooking(myBooking);
+                int result = OrderManager.AddaBooking(myBooking);
 
                 if (result == 1)
                 {
@@ -200,7 +195,7 @@ namespace com.WanderingTurtle.FormPresentation
         private List<HotelGuest> RetrieveGuestList()
         {
             List<HotelGuest> dropDownData = new List<HotelGuest>();
-            dropDownData = myGuest.GetHotelGuestList();
+            dropDownData = HotelGuestManager.GetHotelGuestList();
 
             return dropDownData;
         }

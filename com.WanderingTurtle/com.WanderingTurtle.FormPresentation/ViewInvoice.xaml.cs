@@ -21,8 +21,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ViewInvoice : Window
     {
-        private InvoiceManager myInvoiceManager = new InvoiceManager();
-        private HotelGuestManager myGuestManager = new HotelGuestManager();
         private List<BookingDetails> myBookingList;
         private InvoiceDetails invoiceToView;
 
@@ -55,7 +53,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void refreshGuestInformation(int selectedHotelGuestID)
         {
             //object to store guest's information
-            invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+            invoiceToView = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
             lblGuestNameLookup.Content = invoiceToView.GetFullName;
             lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
             lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
@@ -69,8 +67,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void refreshBookingList()
         {
-            myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
+
+            myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
+            lvCustomerBookings.ItemsSource = myBookingList;
         }
+
 
         /// <summary>
         /// Pat Banks
@@ -82,7 +83,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            AddBooking myBooking = new AddBooking();
+            AddBooking myBooking = new AddBooking(invoiceToView);
 
             if (myBooking.ShowDialog() == false)
             {
@@ -104,7 +105,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 //retrieve the guest information
-                HotelGuest selectedGuest = myGuestManager.GetHotelGuest(invoiceToView.HotelGuestID);
+                HotelGuest selectedGuest = HotelGuestManager.GetHotelGuest(invoiceToView.HotelGuestID);
 
                 //refreshes guest information after AddEditHotelGuest UI
                 if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false)
@@ -128,6 +129,24 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
+            if (lvCustomerBookings.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a booking to edit.");
+                return;
+            }
+
+            BookingDetails outBooking = (BookingDetails)lvCustomerBookings.SelectedItem;
+
+            EditBooking editForm = new EditBooking(invoiceToView, outBooking);
+
+
+
+            if (editForm.ShowDialog() == false)
+            {
+                refreshBookingList();
+            }
+
+
 
         }
 

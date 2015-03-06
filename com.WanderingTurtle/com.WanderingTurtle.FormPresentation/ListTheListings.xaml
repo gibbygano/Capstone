@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="lvListing" SelectionChanged="ListView_SelectionChanged">
+        <ListView Grid.Row="0" x:Name="lvListing" SelectionChanged="ListView_SelectionChanged" GridViewColumnHeader.Click="lvListingsListHeaderClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="35" Header="ID" DisplayMemberBinding="{Binding ItemListID}" />

@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
+using System.ComponentModel;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -81,6 +82,58 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+        private GridViewColumnHeader _sortColumn;
+
+        /// <summary>
+        /// This method will sort the listview column in both asending and desending order
+        /// Created by Will Fritz 15/2/27
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvListingsListHeaderClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
+            if (column == null)
+            {
+                return;
+            }
+
+            if (_sortColumn == column)
+            {
+                // Toggle sorting direction 
+                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
+            }
+            else
+            {
+                _sortColumn = column;
+                _sortDirection = ListSortDirection.Ascending;
+            }
+
+            string header = string.Empty;
+
+            // if binding is used and property name doesn't match header content 
+            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
+
+            if (b != null)
+            {
+                header = b.Path.Path;
+            }
+
+            try
+            {
+                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvListing.ItemsSource);
+                resultDataView.SortDescriptions.Clear();
+                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
             }
         }
     }

@@ -15,9 +15,10 @@
                     <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL
                     to the datafields within our Event object.-->
+                    <GridViewColumn Width="100" Header="Event Type"         DisplayMemberBinding="{Binding EventTypeName}"      />
                     <GridViewColumn Width="140" Header="Event Name"         DisplayMemberBinding="{Binding EventItemName}"      />
-                    <GridViewColumn Width="100" Header="Transportation"     DisplayMemberBinding="{Binding Transportation}"     />
-                    <GridViewColumn Width="100" Header="On-Site"            DisplayMemberBinding="{Binding OnSite}"             />
+                    <GridViewColumn Width="100" Header="Transportation"     DisplayMemberBinding="{Binding TransportString}"     />
+                    <GridViewColumn Width="100" Header="On-Site"            DisplayMemberBinding="{Binding OnSiteString}"             />
                 </GridView>
             </ListView.View>
         </ListView>

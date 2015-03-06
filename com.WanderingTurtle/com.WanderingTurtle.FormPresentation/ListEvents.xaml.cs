@@ -41,6 +41,10 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 myEventList = myMan.RetrieveEventList();
+                foreach(Event x in myEventList)
+                {
+                    x.setFields();
+                }
                 lvEvents.ItemsSource = myEventList;
             }
             catch (Exception ex)
@@ -230,9 +234,16 @@ namespace com.WanderingTurtle.FormPresentation
                 header = b.Path.Path;
             }
 
-            ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEvents.ItemsSource);
-            resultDataView.SortDescriptions.Clear();
-            resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
+            try
+            {
+                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEvents.ItemsSource);
+                resultDataView.SortDescriptions.Clear();
+                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
+            }
+            catch (Exception)
+            {
+                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
+            }
         }
     }
 }

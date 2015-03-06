@@ -37,12 +37,11 @@ namespace com.WanderingTurtle.Common
         /// <param name="EmployeeID">Employee ID</param>
         /// <param name="FirstName">Employee First Name</param>
         /// <param name="LastName">Employee Last Name</param>
-        /// <param name="Password">Employee Password</param>
         /// <param name="Level">Employee User Level</param>
         /// <param name="Active">Employee Active</param>
-        public Employee(int EmployeeID, string FirstName, string LastName, string Password, int Level, bool Active = true)
+        public Employee(int EmployeeID, string FirstName, string LastName, int Level, bool Active = true)
         {
-            SetValues(EmployeeID, FirstName, LastName, Password, Level, Active);
+            SetValues(EmployeeID, FirstName, LastName, null, Level, Active);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +12,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ArchiveInvoice : Window
     {
-        private InvoiceManager myInvoiceManager = new InvoiceManager();
-        private HotelGuestManager myGuestManager = new HotelGuestManager();
-        private OrderManager myBookingManager = new OrderManager();
         private List<BookingDetails> myBookingList;
         private Invoice invoiceToArchive;
         private Invoice originalInvoice;
@@ -27,20 +24,20 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
-        /// 
+        ///
         /// Constructs a populated form that shows the final charges for a guest and
         /// allows employee to submit to close the invoice
         /// </summary>
         /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
         public ArchiveInvoice(int selectedHotelGuestID)
         {
-            originalInvoice = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-            invoiceToArchive = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-            
-            guestToView = myGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
-            myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
+            originalInvoice = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+            invoiceToArchive = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
-            invoiceToArchive.TotalPaid = myInvoiceManager.CalculateTotalDue(myBookingList);
+            guestToView = HotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
+            myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
+
+            invoiceToArchive.TotalPaid = InvoiceManager.CalculateTotalDue(myBookingList);
 
             InitializeComponent();
             lblGuestNameLookup.Content = guestToView.GetFullName;
@@ -57,7 +54,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
-        /// 
+        ///
         /// Calls methods to archive the associated database records for the selected hotel guest
         /// </summary>
         /// <param name="sender">default event Parameter</param>
@@ -66,7 +63,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                //archive guest's bookings by changing active field to false 
+                //archive guest's bookings by changing active field to false
                 foreach (BookingDetails b in myBookingList)
                 {
                     b.Active = false;
@@ -74,15 +71,15 @@ namespace com.WanderingTurtle.FormPresentation
                 }
 
                 //archive hotel guest
-                bool guestArchive = myGuestManager.ArchiveHotelGuest(guestToView, !guestToView.Active);
-                
+                bool guestArchive = HotelGuestManager.ArchiveHotelGuest(guestToView, !guestToView.Active);
+
                 if (guestArchive == true)
                 {
                     //update invoice record with dateClosed and change active status
                     invoiceToArchive.DateClosed = DateTime.Now;
                     invoiceToArchive.Active = false;
 
-                    bool result = myInvoiceManager.ArchiveCurrentGuestInvoice(originalInvoice, invoiceToArchive);
+                    bool result = InvoiceManager.ArchiveCurrentGuestInvoice(originalInvoice, invoiceToArchive);
 
                     //Dialog appears if records were successfully archived
                     if (result == true)

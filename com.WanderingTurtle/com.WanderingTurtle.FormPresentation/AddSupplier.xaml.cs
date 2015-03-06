@@ -20,6 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddSupplier : Window
     {
+        public static AddSupplier Instance;
         private int _userID;
         private SupplierManager _manager = new SupplierManager();
         private Supplier _UpdatableSupplier;
@@ -33,6 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddSupplier()
         {
             InitializeComponent();
+            Instance = this;
         }
 
         //////////////////////Windows Events//////////////////////////////
@@ -281,6 +283,17 @@ namespace com.WanderingTurtle.FormPresentation
 
 
            
+        }
+
+        /// <summary>
+        /// necessay to make the singleton pattern work
+        /// Will Fritz 2015/3/6
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            Instance = null;
         }
     }
 }

@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="com.WanderingTurtle.FormPresentation.UserLogin"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".9*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="184" Name="loginBoxes" Visibility="Visible">
+            <Label Content="Employee ID:"/>
+            <TextBox Height="23" TextWrapping="Wrap" Text="" Name="loginUsername"/>
+            <Label Content="Password:"/>
+            <PasswordBox Name="loginPassword"/>
+            <Label Content="" Height="15"/>
+            <Button Content="Sign In" Margin="64,0,10,0" Name="loginSignInButton" Click="loginSignInButton_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="184" Name="loginLabels" Visibility="Hidden">
+            <Label Content="Logged in as:"/>
+            <Label Content="UserFname+lName" Name="lblUserName" Margin="33,0,0,0"/>
+            <Label Content="Current user role:"/>
+            <Label Content="UserRole" Name="lblUserRole" Margin="33,0,0,0"/>
+            <Label Content="" Height="5"/>
+            <Button Content="Sign Out" Margin="64,0,10,0" Name="loginSignOutButton" Click="loginSignOutButton_Click"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
