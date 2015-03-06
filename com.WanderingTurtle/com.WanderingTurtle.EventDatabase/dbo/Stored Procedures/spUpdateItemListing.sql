@@ -9,6 +9,9 @@
 	@Price money, 
 	@QuantityOffered int, 
 	@ProductSize varchar,
+	@CurrentNumberOfGuests int,
+	@MaxNumberOfGuests int,
+	@MinNumberOfGuests int,
 	@originalStartDate date,
 	@originalEndDate date, 
 	@originalEventStartTime dateTime2,
@@ -17,7 +20,10 @@
 	@originalEventItemID int,
 	@originalPrice money, 
 	@originalQuantityOffered int, 
-	@originalProductSize varchar)
+	@originalProductSize varchar,
+	@originalCurrentNumberOfGuests int,
+	@originalMaxNumberOfGuests int,
+	@originalMinNumberOfGuests int)
 AS
 	UPDATE ItemListing
 	SET 
@@ -27,7 +33,10 @@ AS
 		Price = @Price,
 		QuantityOffered = @QuantityOffered,
 		ProductSize = @ProductSize,
-		SupplierID = @SupplierID
+		SupplierID = @SupplierID,
+		CurrentNumberOfGuests = @CurrentNumberOfGuests,
+		MaxNumberOfGuests = @MaxNumberOfGuests,
+		MinNumberOfGuests = @MinNumberOfGuests
 	WHERE
 		ItemListID = @ItemListID
 		AND StartDate = @originalStartDate
@@ -37,5 +46,8 @@ AS
 		AND QuantityOffered = @originalQuantityOffered
 		AND ProductSize = @originalProductSize
 		AND SupplierID = @originalSupplierID
+		AND CurrentNumberOfGuests = @originalCurrentNumberOfGuests
+		AND MaxNumberOfGuests = @originalMaxNumberOfGuests
+		AND MinNumberOfGuests = @originalMinNumberOfGuests
 		AND Active = 1
 	RETURN @@ROWCOUNT
