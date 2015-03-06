@@ -4,7 +4,7 @@
 CREATE PROCEDURE spSelectAllInvoices
 AS
 BEGIN
-	SELECT InvoiceID, Invoice.HotelGuestID, DateOpened, Invoice.Active, HotelGuest.LastName, HotelGuest.FirstName, HotelGuest.Room
+	SELECT InvoiceID, Invoice.HotelGuestID, DateOpened, DateClosed, TotalPaid, Invoice.Active, HotelGuest.LastName, HotelGuest.FirstName, HotelGuest.Room
 	FROM Invoice, HotelGuest
 	WHERE Invoice.HotelGuestID = HotelGuest.HotelGuestID
 

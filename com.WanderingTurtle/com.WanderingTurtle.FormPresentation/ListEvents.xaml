@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }">
+        <ListView Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }" SelectionChanged="lvEvents_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
@@ -23,11 +23,11 @@
         </ListView>
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnAddEvent" Content="Add"    Click="btnAddEvent_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnArchiveEvent" Content="Delete" Click="btnArchiveEvent_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnEditEvent" Content="Edit" Click="btnEditEvent_Click" />
-            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewDetails" Content="View Event Details"    Click="btnViewEventDetails" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnArchiveEvent" Content="Delete" Click="btnArchiveEvent_Click" IsEnabled="False" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnEditEvent" Content="Edit" Click="btnEditEvent_Click" IsEnabled="False" />
+            <Button Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" x:Name="btnViewDetails" Content="View Event Details"    Click="btnViewEventDetails" IsEnabled="False" />
             <TextBox x:Name="txtSearchInput" Width="127" Margin ="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}"/>
-            <Button x:Name ="btnSearch" Content="Search" Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Width="127" Click="btnSearch_Click"/> 
+            <Button x:Name ="btnSearch" Content="Search" Margin="{DynamicResource Button Margin}" Padding="{DynamicResource Button Padding}" Width="127" Click="btnSearch_Click"/>
         </WrapPanel>
     </Grid>
 </UserControl>

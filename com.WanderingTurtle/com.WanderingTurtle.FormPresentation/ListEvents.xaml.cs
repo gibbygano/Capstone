@@ -44,6 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
+                lvEvents.ItemsSource = "";
                 MessageBox.Show("No data to display from the database. Create an event or contact your Systems Administrator");
             }
         }
@@ -110,13 +111,13 @@ namespace com.WanderingTurtle.FormPresentation
                 case MessageBoxResult.Yes:
                     try
                     {
-                        Event EventToDelete = (Event)lvEvents.SelectedItem;
+                        Event EventToDelete = (Event)lvEvents.SelectedItems[0];
                         myMan.ArchiveAnEvent(EventToDelete);
                         Refresh();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("No Event selected, please select an Event and try again.");
+                        MessageBox.Show(ex.ToString());
                     }
                     break;
                 case MessageBoxResult.No:
@@ -170,7 +171,7 @@ namespace com.WanderingTurtle.FormPresentation
                 //        from inEvent in myEventList
                 //        where inEvent.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper())
                 //        select inEvent); 
- 
+
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
                 lvEvents.ItemsSource = myTempList;
             }
@@ -178,6 +179,14 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 lvEvents.ItemsSource = myEventList;
             }
+        }
+
+        private void lvEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnAddEvent.IsEnabled = true;
+            btnArchiveEvent.IsEnabled = true;
+            btnEditEvent.IsEnabled = true;
+            btnViewDetails.IsEnabled = true;
         }
     }
 }
