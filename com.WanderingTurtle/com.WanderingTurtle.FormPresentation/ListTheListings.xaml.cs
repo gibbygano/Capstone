@@ -22,8 +22,8 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheListings : UserControl
     {
 
-        private OrderManager ordMan = new OrderManager();
-        List<ListItemObject> myListingList;
+        private ProductManager prodMan = new ProductManager();
+        List<ItemListing> myListingList;
 
         public ListTheListings()
         {
@@ -35,12 +35,13 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                myListingList = ordMan.RetrieveListItemList();
-                lvEvents.ItemsSource = myListingList;
+                myListingList = prodMan.RetrieveItemListingList();
+                lvListing.ItemsSource = myListingList;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("No database able to be accessed for event list");
+                MessageBox.Show("No database able to be accessed for Listings");
+                //MessageBox.Show(ex.ToString());
             }
         }
 
@@ -62,14 +63,21 @@ namespace com.WanderingTurtle.FormPresentation
         // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            Event EventToEdit = (Event)lvEvents.SelectedItem;
-            Window EditEvent = new EditExistingEvent(EventToEdit);
-            EditEvent.Show();
         }
 
-        private void btnAddListing_Click_1(object sender, RoutedEventArgs e)
+        private void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItems[0];
+                MessageBox.Show(prodMan.ArchiveItemListing(ListingToDelete).ToString());
 
+                refreshData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 

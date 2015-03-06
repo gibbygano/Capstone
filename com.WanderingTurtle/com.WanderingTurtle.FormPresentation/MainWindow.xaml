@@ -1,33 +1,33 @@
-﻿<Window x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
-        Style="{DynamicResource WindowStyle}"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
-        xmlns:System="clr-namespace:System;assembly=mscorlib"
-        Title="MainWindow" Height="525" Width="950" MinHeight="125" WindowStartupLocation="CenterScreen">
+﻿<Window
+    x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
+    Style="{DynamicResource WindowStyle}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    Title="MainWindow" Height="525" Width="950" MinHeight="125"
+    WindowStartupLocation="CenterScreen">
     <Grid>
         <TabControl x:Name="tabNames">
 
             <TabItem Header="Events">
-                <local:ListEvents FontSize="{DynamicResource Main Font Size}"/>
+                <local:ListEvents />
             </TabItem>
 
             <TabItem Header="Listings">
-                <local:ListTheListings FontSize="{DynamicResource Main Font Size}"/>
+                <local:ListTheListings />
             </TabItem>
 
             <TabItem Header="Suppliers">
-                <local:ListSuppliers FontSize="{DynamicResource Main Font Size}" />
-
+                <local:ListSuppliers />
             </TabItem>
 
             <TabItem Header="Employees">
-                <local:ListTheEmployees FontSize="{DynamicResource Main Font Size}"/>
+                <local:ListTheEmployees />
             </TabItem>
 
             <TabItem Header="Hotel Guests">
-                <local:ListHotelGuests FontSize="{DynamicResource Main Font Size}" />
-
+                <local:ListHotelGuests />
             </TabItem>
         </TabControl>
     </Grid>

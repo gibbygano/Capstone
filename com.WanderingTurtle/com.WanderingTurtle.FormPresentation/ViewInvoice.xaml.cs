@@ -157,5 +157,33 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show(ex.Message);
             }
         }
+
+        /// Created By: Tony Noel, 2015/03/04
+        /// <summary>
+        /// Cancel booking button to open cancel form.
+        /// First attempts to create a BookingDetails object from the lvCustomerBookings,
+        /// then passes this to the CancelBooking form if the object creation was successful. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancelBooking_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //attempts to create a booking details object with the selected line items
+                BookingDetails myBooking = (BookingDetails)lvCustomerBookings.SelectedItems[0];
+                //opens the ui and passes the booking details object in
+                CancelBooking cancel = new CancelBooking(myBooking, invoiceToView);
+                
+                if (cancel.ShowDialog() == false)
+                {
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("To cancel a booking, please select the desired booking first.", ex.Message);
+            }
+        }
     }
 }

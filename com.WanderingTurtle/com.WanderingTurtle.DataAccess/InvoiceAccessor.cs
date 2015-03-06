@@ -45,11 +45,16 @@ namespace com.WanderingTurtle.DataAccess
 
                         details.BookingID = reader.GetInt32(0);
                         details.GuestID = reader.GetInt32(1);
-                        details.ItemListID = reader.GetInt32(2);
-                        details.Quantity = reader.GetInt32(3);
-                        details.Price = reader.GetDecimal(4);
-                        details.StartDate = reader.GetDateTime(5);
-                        details.EventItemName = reader.GetValue(6).ToString();
+                        details.EmployeeID = reader.GetInt32(2);
+                        details.ItemListID = reader.GetInt32(3);
+                        details.Quantity = reader.GetInt32(4);
+                        details.DateBooked = reader.GetDateTime(5);
+                        details.Cancel = reader.GetBoolean(6);
+                        details.Refund = reader.GetDecimal(7);
+                        details.Active = reader.GetBoolean(8);
+                        details.Price = reader.GetDecimal(9);
+                        details.StartDate = reader.GetDateTime(10);
+                        details.EventItemName = reader.GetValue(11).ToString();
 
                         guestBookings.Add(details);
                     }
@@ -97,9 +102,11 @@ namespace com.WanderingTurtle.DataAccess
                     guestInvoice.HotelGuestID = reader.GetInt32(1);
                     guestInvoice.DateOpened = reader.GetDateTime(2);
                     guestInvoice.Active = reader.GetBoolean(3);
-                    guestInvoice.GuestLastName = reader.GetValue(4).ToString();
-                    guestInvoice.GuestFirstName = reader.GetValue(5).ToString();
-                    guestInvoice.GuestRoomNum = reader.GetInt32(6);
+                    if (!reader.IsDBNull(4)) guestInvoice.DateClosed = reader.GetDateTime(4);
+                    if (!reader.IsDBNull(5)) guestInvoice.TotalPaid = reader.GetDecimal(5);
+                    guestInvoice.GuestLastName = reader.GetValue(6).ToString();
+                    guestInvoice.GuestFirstName = reader.GetValue(7).ToString();
+                    guestInvoice.GuestRoomNum = reader.GetInt32(8);
                 }
                 else
                 {
@@ -150,10 +157,12 @@ namespace com.WanderingTurtle.DataAccess
                         details.InvoiceID = reader.GetInt32(0);
                         details.HotelGuestID = reader.GetInt32(1);
                         details.DateOpened = reader.GetDateTime(2);
-                        details.Active = reader.GetBoolean(3);
-                        details.GuestLastName = reader.GetValue(4).ToString();
-                        details.GuestFirstName = reader.GetValue(5).ToString();
-                        details.GuestRoomNum = reader.GetInt32(6);
+                        if (!reader.IsDBNull(3)) details.DateClosed = reader.GetDateTime(3);
+                        if (!reader.IsDBNull(4)) details.TotalPaid = reader.GetDecimal(4);
+                        details.Active = reader.GetBoolean(5);
+                        details.GuestLastName = reader.GetValue(6).ToString();
+                        details.GuestFirstName = reader.GetValue(7).ToString();
+                        details.GuestRoomNum = reader.GetInt32(8);
 
                         if (details.Active == true)
                         {

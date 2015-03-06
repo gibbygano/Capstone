@@ -188,6 +188,9 @@ namespace com.WanderingTurtle.DataAccess
         /// Archives a hotel guest
         /// Created by Rose Steffensmeier 2015/02/26
         /// </summary>
+        /// <remarks>
+        /// Last Updated Rose Steffensmeier 2015/03/05
+        /// </remarks>
         /// <param name="oldHotelGuestID"></param>
         /// <param name="newHotelGuestID"></param>
         /// <param name="oldActive"></param>
@@ -214,6 +217,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_address2", oldGuest.Address2);
             cmd.Parameters.AddWithValue("@original_phoneNumber", oldGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@original_emailAddress", oldGuest.EmailAddress);
+            cmd.Parameters.AddWithValue("@original_room", oldGuest.Room);
             cmd.Parameters.AddWithValue("@original_active", oldGuest.Active);
 
             try
