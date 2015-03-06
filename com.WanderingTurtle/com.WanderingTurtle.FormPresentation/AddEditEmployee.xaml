@@ -32,7 +32,7 @@
             <TextBox     Grid.Row="0" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="txtFirstName"      VerticalContentAlignment="Center" VerticalAlignment="Center" />
             <TextBox     Grid.Row="1" Grid.Column="1" TabIndex="1" Grid.ColumnSpan="2" x:Name="txtLastName"       VerticalContentAlignment="Center" VerticalAlignment="Center" />
             <PasswordBox Grid.Row="2" Grid.Column="1" TabIndex="2" Grid.ColumnSpan="1" x:Name="txtPassword"       VerticalContentAlignment="Center" VerticalAlignment="Center"  Tag="Testing" />
-            <PasswordBox Grid.Row="3" Grid.Column="1" TabIndex="3" Grid.ColumnSpan="1" x:Name="txtPassword2"      VerticalContentAlignment="Center" VerticalAlignment="Center" Template="{DynamicResource WatermarkedPasswordBoxTemplate}" local:PasswordBoxHelper.Watermark="Password is unchanged" />
+            <PasswordBox Grid.Row="3" Grid.Column="1" TabIndex="3" Grid.ColumnSpan="1" x:Name="txtPassword2"      VerticalContentAlignment="Center" VerticalAlignment="Center" />
             <CheckBox    Grid.Row="2" Grid.Column="2" TabIndex="4" Grid.ColumnSpan="1" x:Name="chkActiveEmployee" VerticalAlignment="Center" IsChecked="True" Content="Active" Margin="5,0,0,0" />
             <ComboBox    Grid.Row="4" Grid.Column="1" TabIndex="5" Grid.ColumnSpan="1" x:Name="cboUserLevel"      VerticalContentAlignment="Center" ItemsSource="{Binding Path=GetUserLevelList}" />
         </Grid>
