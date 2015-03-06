@@ -1,4 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,15 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ListHotelGuests : UserControl
     {
-        HotelGuestManager _HotelGuestManager = new HotelGuestManager();
-        InvoiceManager myInvoiceManager = new InvoiceManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/02/17
@@ -44,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                var hotelGuestList = myInvoiceManager.RetrieveAllInvoiceDetails();
+                var hotelGuestList = InvoiceManager.RetrieveAllInvoiceDetails();
                 lvHotelGuestList.ItemsSource = hotelGuestList;
             }
             catch (Exception ex)
@@ -55,7 +53,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
-        /// 
+        ///
         /// Opens UI to create a new guest
         /// </summary>
         /// <param name="sender">default event parameters</param>
@@ -73,7 +71,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/02/27
-        /// 
+        ///
         /// Populates AddEditInvoice UI based on selected guest
         /// </summary>
         /// <param name="sender">default event arguments</param>
@@ -90,7 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
                     return;
                 }
 
-                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);            
+                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
 
                 if (custInvoice.ShowDialog() == false)
                 {
@@ -153,7 +151,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (thisGuest == null)
                     throw new ApplicationException("You must choose a guest.");
 
-                _HotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
+                HotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
                 refreshList();
             }
             catch (Exception ex)

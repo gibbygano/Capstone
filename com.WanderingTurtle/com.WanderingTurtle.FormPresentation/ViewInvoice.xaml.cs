@@ -21,8 +21,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ViewInvoice : Window
     {
-        private InvoiceManager myInvoiceManager = new InvoiceManager();
-        private HotelGuestManager myGuestManager = new HotelGuestManager();
         private List<BookingDetails> myBookingList;
         private InvoiceDetails invoiceToView;
 
@@ -55,7 +53,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void refreshGuestInformation(int selectedHotelGuestID)
         {
             //object to store guest's information
-            invoiceToView = myInvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+            invoiceToView = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
             lblGuestNameLookup.Content = invoiceToView.GetFullName;
             lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
             lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
@@ -69,7 +67,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void refreshBookingList()
         {
-            myBookingList = myInvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
+            myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
         }
 
         /// <summary>
@@ -104,7 +102,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 //retrieve the guest information
-                HotelGuest selectedGuest = myGuestManager.GetHotelGuest(invoiceToView.HotelGuestID);
+                HotelGuest selectedGuest = HotelGuestManager.GetHotelGuest(invoiceToView.HotelGuestID);
 
                 //refreshes guest information after AddEditHotelGuest UI
                 if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false)

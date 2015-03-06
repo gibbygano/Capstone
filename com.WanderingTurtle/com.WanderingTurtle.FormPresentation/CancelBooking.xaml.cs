@@ -22,8 +22,6 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private BookingDetails myBooking;
         private InvoiceDetails myInvoice;
-        public OrderManager omBook = new OrderManager();
-        
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
@@ -72,8 +70,8 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 //Grabbing old booking information
-                
-                oldBook = omBook.RetrieveBooking(myBooking.BookingID);
+
+                oldBook = OrderManager.RetrieveBooking(myBooking.BookingID);
                 //fields to be updated 
                 
                 bool cancel = true;
@@ -83,7 +81,7 @@ namespace com.WanderingTurtle.FormPresentation
                 
                 //New booking object created with original fields and the three updated fields.
                 Booking toCancel = new Booking(oldBook.BookingID, oldBook.GuestID, oldBook.EmployeeID, oldBook.ItemListID, oldBook.Quantity, oldBook.DateBooked, cancel, refund, active);
-                int result = omBook.EditBooking(toCancel);
+                int result = OrderManager.EditBooking(toCancel);
 
                 if (result == 1)
                 {
