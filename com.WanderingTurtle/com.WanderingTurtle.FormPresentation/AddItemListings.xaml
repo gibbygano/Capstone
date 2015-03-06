@@ -26,7 +26,7 @@
         </ComboBox>
         <Label x:Name="lblSupplierName" Content="Supplier Name" HorizontalAlignment="Left" Margin="3,70,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.342,-0.538" Width="88"/>
         <ComboBox x:Name="supplierCbox" HorizontalAlignment="Left" Margin="96,67,0,0" VerticalAlignment="Top" Width="228"
-                  DisplayMemberPath="SupplierID"
+                  DisplayMemberPath="CompanyName"
                   SelectedValuePath="SupplierID"
                   SelectedValue="{Binding SupplierID}"/>
 
