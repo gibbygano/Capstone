@@ -67,8 +67,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void refreshBookingList()
         {
+
             myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
+            lvCustomerBookings.ItemsSource = myBookingList;
         }
+
 
         /// <summary>
         /// Pat Banks
@@ -80,7 +83,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            AddBooking myBooking = new AddBooking();
+            AddBooking myBooking = new AddBooking(invoiceToView);
 
             if (myBooking.ShowDialog() == false)
             {
@@ -126,6 +129,24 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
+            if (lvCustomerBookings.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a booking to edit.");
+                return;
+            }
+
+            BookingDetails outBooking = (BookingDetails)lvCustomerBookings.SelectedItem;
+
+            EditBooking editForm = new EditBooking(invoiceToView, outBooking);
+
+
+
+            if (editForm.ShowDialog() == false)
+            {
+                refreshBookingList();
+            }
+
+
 
         }
 

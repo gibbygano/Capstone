@@ -9,7 +9,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="lvHotelGuestList" ItemsSource="{Binding hotelGuestList}">
+        <ListView Grid.Row="0" x:Name="lvHotelGuestList" ItemsSource="{Binding hotelGuestList}" GridViewColumnHeader.Click="lvHotelGuestListHeaderClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="30" Header="ID" DisplayMemberBinding="{Binding HotelGuestID}" />
