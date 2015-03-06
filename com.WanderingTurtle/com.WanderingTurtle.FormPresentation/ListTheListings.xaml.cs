@@ -36,6 +36,10 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 myListingList = prodMan.RetrieveItemListingList();
+                foreach (ItemListing item in myListingList)
+                {
+                    item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
+                }
                 lvListing.ItemsSource = myListingList;
             }
             catch (Exception ex)

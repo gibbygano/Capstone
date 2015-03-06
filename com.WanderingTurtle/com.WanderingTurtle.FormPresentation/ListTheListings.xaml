@@ -17,7 +17,7 @@
                     <GridViewColumn Width="140" Header="Event" DisplayMemberBinding="{Binding EventName}"/>
                     <GridViewColumn Width="130" Header="Event Start Date" DisplayMemberBinding="{Binding StartDate}" />
                     <GridViewColumn Width="130" Header="Event End Date" DisplayMemberBinding="{Binding EndDate}" />
-                    <GridViewColumn Width="60" Header="Seats" DisplayMemberBinding="{Binding QuantityOffered}" />
+                    <GridViewColumn Width="60" Header="Seats" DisplayMemberBinding="{Binding Seats}" />
                     <GridViewColumn Width="60" Header="Attendees" DisplayMemberBinding="{Binding CurrentNumGuests}" />
                 </GridView>
             </ListView.View>

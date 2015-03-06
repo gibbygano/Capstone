@@ -27,6 +27,8 @@ namespace com.WanderingTurtle.FormPresentation
     {
         EventManager myMan = new EventManager();
 
+        SupplierManager mySupMan = new SupplierManager();
+
         ProductManager prodMan = new ProductManager();
         
         //populates our Combo box for the user to pick from
@@ -44,6 +46,16 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.ToString());
             }
+            List<Supplier> mySupplierList = mySupMan.RetrieveSupplierList();
+            try
+            {
+                supplierCbox.Items.Clear();
+                supplierCbox.ItemsSource = mySupplierList;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -56,6 +68,7 @@ namespace com.WanderingTurtle.FormPresentation
                 ItemListing newListing = new ItemListing();
 
                 newListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
+                newListing.SupplierID = Int32.Parse(supplierCbox.SelectedValue.ToString());
                 // Tries to validate information to put into the newListing object.
                 if (!Validator.ValidateDateTime(DateStart.Text + " " + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + " " + txtEndTime.Text) || (txtEndTime.Text=="00:00" && txtStartTime.Text =="00:00"))
                 {
@@ -85,10 +98,10 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    newListing.QuantityOffered = int.Parse(txtSeats.Text);
+                    newListing.MaxNumGuests = Int32.Parse(txtSeats.Text);
                 }
 
-
+                
                 try
                 {
                     prodMan.AddItemListing(newListing);

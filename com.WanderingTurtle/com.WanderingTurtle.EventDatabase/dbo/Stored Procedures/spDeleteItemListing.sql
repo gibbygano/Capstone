@@ -3,9 +3,7 @@
 	@StartDate date, 
 	@EndDate date, 
 	@EventItemID int, 
-	@Price money, 
-	@QuantityOffered int, 
-	@ProductSize varChar, 
+	@Price money,  
 	@SupplierID int,
 	@CurrentNumberOfGuests int,
 	@MaxNumberOfGuests int,
@@ -19,8 +17,6 @@ AS
 		AND EndDate = @EndDate
 		AND EventItemID = @EventItemID
 		AND Price = @Price
-		AND QuantityOffered = @QuantityOffered
-		AND ProductSize = @ProductSize
 		AND SupplierID = @SupplierID
 		AND CurrentNumberOfGuests = @CurrentNumberOfGuests
 		AND MaxNumberOfGuests = @MaxNumberOfGuests

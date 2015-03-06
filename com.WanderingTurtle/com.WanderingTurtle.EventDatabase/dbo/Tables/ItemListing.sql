@@ -4,8 +4,7 @@
     [EndDate]               DATETIME     NOT NULL,
     [EventItemID]           INT          NOT NULL,
     [Price]                 MONEY        NOT NULL,
-    [QuantityOffered]       INT          NOT NULL,
-    [ProductSize]           VARCHAR (50) NOT NULL,
+
     [SupplierID]            INT          NOT NULL,
     [Active]                BIT          NOT NULL,
     [CurrentNumberOfGuests] INT          NOT NULL,
@@ -15,7 +14,7 @@
 ) ON [PRIMARY];
 GO
 CREATE NONCLUSTERED INDEX [ItemListingIndex]
-    ON [dbo].[ItemListing]([ItemListID] ASC, [StartDate] ASC, [EndDate] ASC, [Price] ASC, [QuantityOffered] ASC);
+    ON [dbo].[ItemListing]([ItemListID] ASC, [StartDate] ASC, [EndDate] ASC, [Price] ASC);
 GO
 ALTER TABLE [dbo].[ItemListing]
     ADD DEFAULT (0) FOR [CurrentNumberOfGuests];

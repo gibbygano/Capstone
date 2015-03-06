@@ -46,12 +46,11 @@ namespace com.WanderingTurtle.DataAccess
                     itemListingToRetrieve.Price = reader.GetDecimal(4);
 
                     //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
-                    itemListingToRetrieve.QuantityOffered = reader.GetInt32(5);
-                    itemListingToRetrieve.ProductSize = reader.GetString(6);
-	                itemListingToRetrieve.MaxNumGuests = reader.GetInt32(7);
-		            itemListingToRetrieve.MinNumGuests = reader.GetInt32(8);
-		            itemListingToRetrieve.CurrentNumGuests = reader.GetInt32(9);
-                    itemListingToRetrieve.SupplierID = reader.GetInt32(10);
+                    itemListingToRetrieve.SupplierID = reader.GetInt32(5);
+	                itemListingToRetrieve.MaxNumGuests = reader.GetInt32(6);
+		            itemListingToRetrieve.MinNumGuests = reader.GetInt32(7);
+		            itemListingToRetrieve.CurrentNumGuests = reader.GetInt32(8);
+                    
 					
                 }
                 else
@@ -109,12 +108,13 @@ namespace com.WanderingTurtle.DataAccess
                         currentItemListing.Price = reader.GetDecimal(4);
 
                         //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
-                        currentItemListing.QuantityOffered = reader.GetInt32(5);
-                        currentItemListing.ProductSize = reader.GetString(6);
+                        //Updated by Justin Pennington
+                        currentItemListing.SupplierID = reader.GetInt32(5);
+                        currentItemListing.CurrentNumGuests = reader.GetInt32(6);
 		            	currentItemListing.MaxNumGuests = reader.GetInt32(7);
-		            	currentItemListing.MinNumGuests = reader.GetInt32(8);
-		            	currentItemListing.CurrentNumGuests = reader.GetInt32(9);
-                        currentItemListing.SupplierID = reader.GetInt32(10);
+                        currentItemListing.MinNumGuests = reader.GetInt32(8);
+                        currentItemListing.EventName = reader.GetString(9);
+                        currentItemListing.SupplierName = reader.GetString(10);
 
                         itemListingList.Add(currentItemListing);
                     }
@@ -127,7 +127,7 @@ namespace com.WanderingTurtle.DataAccess
             }
             catch (Exception)
             {
-
+                throw;
             }
             finally
             {
@@ -156,11 +156,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EndDate", itemListingToAdd.EndDate);
             cmd.Parameters.AddWithValue("@EventItemID", itemListingToAdd.EventID);
             cmd.Parameters.AddWithValue("@Price", itemListingToAdd.Price);
-            cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToAdd.QuantityOffered);
-            cmd.Parameters.AddWithValue("@ProductSize", 1);
-	        cmd.Parameters.AddWithValue("@MaxNumGuests", itemListingToAdd.MaxNumGuests);
-	        cmd.Parameters.AddWithValue("@MinNumGuests", itemListingToAdd.MinNumGuests);
-	        cmd.Parameters.AddWithValue("@CurrentNumGuests", itemListingToAdd.CurrentNumGuests);
+	        cmd.Parameters.AddWithValue("@MaxNumberOfGuests", itemListingToAdd.MaxNumGuests);
+	        cmd.Parameters.AddWithValue("@MinNumberOfGuests", itemListingToAdd.MinNumGuests);
+	        cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", itemListingToAdd.CurrentNumGuests);
             cmd.Parameters.AddWithValue("@SupplierID", itemListingToAdd.SupplierID);
 
             int rowsAffected;
@@ -201,8 +199,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EndDate", newItemListing.EndDate);
             cmd.Parameters.AddWithValue("@EventItemID", newItemListing.EventID);
             cmd.Parameters.AddWithValue("@Price", newItemListing.Price);
-            cmd.Parameters.AddWithValue("@QuantityOffered", newItemListing.QuantityOffered);
-            cmd.Parameters.AddWithValue("@ProductSize", newItemListing.ProductSize);
 	        cmd.Parameters.AddWithValue("@MaxNumGuests", newItemListing.MaxNumGuests);
 	        cmd.Parameters.AddWithValue("@MinNumGuests", newItemListing.MinNumGuests);
 	        cmd.Parameters.AddWithValue("@CurrentNumGuests", newItemListing.CurrentNumGuests);
@@ -214,8 +210,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EndDate", oldItemListing.EndDate);
             cmd.Parameters.AddWithValue("@EventItemID", oldItemListing.EventID);
             cmd.Parameters.AddWithValue("@Price", oldItemListing.Price);
-            cmd.Parameters.AddWithValue("@QuantityOffered", oldItemListing.QuantityOffered);
-            cmd.Parameters.AddWithValue("@ProductSize", oldItemListing.ProductSize);
 	        cmd.Parameters.AddWithValue("@MaxNumGuests", oldItemListing.MaxNumGuests);
 	        cmd.Parameters.AddWithValue("@MinNumGuests", oldItemListing.MinNumGuests);
 	        cmd.Parameters.AddWithValue("@CurrentNumGuests", oldItemListing.CurrentNumGuests);
@@ -260,8 +254,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EndDate", itemListingToDelete.EndDate);
             cmd.Parameters.AddWithValue("@EventItemID", itemListingToDelete.EventID);
             cmd.Parameters.AddWithValue("@Price", itemListingToDelete.Price);
-            cmd.Parameters.AddWithValue("@QuantityOffered", itemListingToDelete.QuantityOffered);
-            cmd.Parameters.AddWithValue("@ProductSize", itemListingToDelete.ProductSize);
 	        cmd.Parameters.AddWithValue("@MaxNumGuests", itemListingToDelete.MaxNumGuests);
 	        cmd.Parameters.AddWithValue("@MinNumGuests", itemListingToDelete.MinNumGuests);
 	        cmd.Parameters.AddWithValue("@CurrentNumGuests", itemListingToDelete.CurrentNumGuests);
