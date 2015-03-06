@@ -273,8 +273,7 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@firstName", updatedEmployee.FirstName);
             cmd.Parameters.AddWithValue("@lastName", updatedEmployee.LastName);
-            // TODO update stored procedure to compare password
-            //cmd.Parameters.AddWithValue("@password", updatedEmployee.Password);
+            cmd.Parameters.AddWithValue("@password", updatedEmployee.Password);
             cmd.Parameters.AddWithValue("@level", updatedEmployee.Level);
             cmd.Parameters.AddWithValue("@active", updatedEmployee.Active);
 
