@@ -6,16 +6,17 @@
     <asp:ListView ID="lvEvents" runat="server" OnPagePropertiesChanging="lvEvents_PagePropertiesChanging">
         <ItemTemplate>
             <tr>
+                
                 <td><%# Eval("EventItemName")%></td>
-                <td><%# Eval("EventTypeID")%></td>
-                <td><%# Eval("Transportation")%></td>
-                <td><%# Eval("OnSite") %></td>
+                <td><%# Eval("EventTypeName")%></td>
+                <td><%# Eval("TransportString")%></td>
+                <td><%# Eval("OnSiteString") %></td>
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
             <table id="tbl1" runat="server">
                 <tr id="tr1" runat="server">
-                    <td id="td1" runat="server">EventName</td>
+                    <td id="td1" runat="server">Event Name</td>
                     <td id="td2" runat="server">Event Type</td>
                     <td id="td3" runat="server">Transportation</td>
                     <td id="td4" runat="server">On-Site</td>

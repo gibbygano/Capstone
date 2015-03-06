@@ -41,6 +41,10 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 myEventList = myMan.RetrieveEventList();
+                foreach(Event x in myEventList)
+                {
+                    x.setFields();
+                }
                 lvEvents.ItemsSource = myEventList;
             }
             catch (Exception ex)

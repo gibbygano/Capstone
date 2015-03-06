@@ -20,7 +20,12 @@ namespace com.WanderingTurtle.Web
             {
                 try
                 {
+
                     _listedEvents = _myManager.RetrieveEventList();
+                    foreach (Event x in _listedEvents)
+                    {
+                        x.setFields();
+                    }
 
                     bindData();
 
