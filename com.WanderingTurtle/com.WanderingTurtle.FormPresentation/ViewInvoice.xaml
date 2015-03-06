@@ -6,9 +6,9 @@
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" x:Name="lblGeneralViewInvoice" Content="Guest Information" FontSize="16" FontWeight="Bold" />
 
@@ -20,25 +20,25 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="90" />
-                <ColumnDefinition Width="139*" />
-                <ColumnDefinition Width="154*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" x:Name="lblGuestName" Content="Guest Name:  " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Grid.Row="0" Grid.Column="1" x:Name="lblGuestNameLookup" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            <Label Grid.Row="1" Grid.Column="0" Content="Checked In:  " HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Grid.Row="1" Grid.Column="1" x:Name="lblCheckInDate" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Room #:  "  HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <Label Grid.Row="2" Grid.Column="1" x:Name="lblRoomNum" HorizontalAlignment="Left" VerticalAlignment="Center" />
-            
-<Button Grid.Row="2" Grid.Column="2" x:Name="btnEditGuest"  Content="Edit Guest"  Click="btnEditGuest_Click" Width="75" HorizontalAlignment="Left" />
+            <Label Grid.Row="0" Grid.Column="0" Content="Guest Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Checked In:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Room #:"     HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Grid.Row="0" Grid.Column="1" x:Name="lblGuestNameLookup" VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="lblCheckInDate"     VerticalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="lblRoomNum"         VerticalContentAlignment="Center" />
+
+            <Button Grid.Row="2" Grid.Column="2" x:Name="btnEditGuest" Content="Edit Guest" Click="btnEditGuest_Click" Width="75" HorizontalAlignment="Left" />
         </Grid>
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label    Grid.Row="0" Content="Bookings:" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <ListView Grid.Row="1" x:Name="lvCustomerBookings" >
+            <Label    Grid.Row="0" Content="Bookings:" FontSize="14" FontWeight="Bold" />
+            <ListView Grid.Row="1" x:Name="lvCustomerBookings">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width ="60" Header="Booking #" DisplayMemberBinding="{Binding BookingID}" />
@@ -46,31 +46,18 @@
                         <GridViewColumn Width ="75" Header="Start Time" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:t}'}" />
                         <GridViewColumn Width ="175" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
                         <GridViewColumn Width ="50" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
-                        <GridViewColumn Width ="75" Header="Ticket Price" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:C}'}"  />
+                        <GridViewColumn Width ="75" Header="Ticket Price" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:C}'}" />
                         <GridViewColumn Width ="60" Header="Total Due" DisplayMemberBinding="{Binding TotalPrice, StringFormat='{}{0:C}'}" />
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
+        <WrapPanel Grid.Row="3">
 
-        <Button Grid.Row="3" x:Name="btnAddBooking" Content="Add Booking" Padding="{DynamicResource Button Padding}" Margin="0,0,579,0" Height="30" VerticalAlignment="Top" Click="btnAddBooking_Click" />
-        <Button Grid.Row="3" x:Name="btnEditBooking" Content="Edit Booking" Padding="{DynamicResource Button Padding}" Margin="119,0,460,0" Height="30" VerticalAlignment="Top" Click="btnEditBooking_Click" />
-        <Button Grid.Row="3" x:Name="btnCloseInvoice" Content="Guest Checkout" Padding="{DynamicResource Button Padding}" Margin="363,0,196,0" Click="btnCloseInvoice_Click" />
-       <Button x:Name="btnCancelBooking" Content="Cancel Booking" HorizontalAlignment="Left" Margin="239,0,0,0" Grid.Row="3" VerticalAlignment="Top" Width="107" Height="30" Click="btnCancelBooking_Click"/>
-        <Grid Grid.Row="3" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            
-        </Grid>
-
+            <Button Content="Add Booking"    Margin="{DynamicResource Button Spacing}" Click="btnAddBooking_Click" />
+            <Button Content="Edit Booking"   Margin="{DynamicResource Button Spacing}" Click="btnEditBooking_Click" />
+            <Button Content="Guest Checkout" Margin="{DynamicResource Button Spacing}" Click="btnCloseInvoice_Click" />
+            <Button Content="Cancel Booking" Margin="{DynamicResource Button Spacing}" Click="btnCancelBooking_Click" />
+        </WrapPanel>
     </Grid>
 </Window>
