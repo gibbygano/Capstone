@@ -12,6 +12,11 @@ public class Event
     public int ProductID           { get; set; }
     public String Description      { get; set; }
     public bool Active             { get; set; }
+    public string EventTypeName   { get; set; }
+    public string TransportString { get; set; }
+
+    public string OnSiteString { get; set; }
+
 
 	public Event(int eventItemID, string eventItemName, 
     bool transportation, int eventTypeID, bool onSite, int productID, String description, bool active)
@@ -25,6 +30,27 @@ public class Event
         Description = description;
         Active = active;
 	}
+    
+    public void setFields()
+    {
+        if(Transportation == true)
+        {
+            TransportString = "Provided";
+        }
+        else
+        {
+            TransportString = "Not Provided";
+        }
+
+        if(OnSite == true)
+        {
+            OnSiteString = "Yes";
+        }
+        else
+        {
+            OnSiteString = "No";
+        }
+    }
 
     public Event()
     {

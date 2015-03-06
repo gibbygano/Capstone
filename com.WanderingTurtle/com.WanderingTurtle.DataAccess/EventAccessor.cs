@@ -165,6 +165,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentEvent.Transportation = reader.GetBoolean(4);
                         currentEvent.Description = reader.GetString(5);
                         currentEvent.Active = reader.GetBoolean(6);
+                        currentEvent.EventTypeName = reader.GetString(7);
                         EventList.Add(currentEvent);
                     }
                 }
