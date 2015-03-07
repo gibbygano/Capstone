@@ -67,7 +67,27 @@ namespace com.WanderingTurtle.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //create menu based on login -- need to create this logic
+            if (!Page.IsPostBack)
+            {
+                var stuff1 = new MenuItem();
+                var stuff2 = new MenuItem();
 
+                stuff1.NavigateUrl = "/events";
+                stuff1.Text = "View Events";
+                stuff2.NavigateUrl = "/events/add";
+                stuff2.Text = "Add an Event";
+
+                var stuffList = new List<MenuItem>();
+
+                stuffList.Add(stuff1);
+                stuffList.Add(stuff2);
+
+                for (int i = 0; i < stuffList.Count; i++)
+                {
+                    Menu1.Items.Add(stuffList[i]);
+                }
+            }
         }
     }
 }

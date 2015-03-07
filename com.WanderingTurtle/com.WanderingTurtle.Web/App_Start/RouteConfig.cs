@@ -13,6 +13,10 @@ namespace com.WanderingTurtle.Web
             var settings = new FriendlyUrlSettings();
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
+            routes.MapPageRoute(null, "events", "~/Pages/SupplierViewEvents.aspx");
+            routes.MapPageRoute(null, "events/add", "~/Pages/SupplierAddEvent.aspx");
+            
+        
         }
     }
 }

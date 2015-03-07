@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierAddEvent.aspx.cs" Inherits="com.WanderingTurtle.Web.SupplierAddEvent" MasterPageFile="Site.Master" EnableEventValidation="False" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierAddEvent.aspx.cs" Inherits="com.WanderingTurtle.Web.SupplierAddEvent" MasterPageFile="../Site.Master" EnableEventValidation="False" %>
 <asp:Content ContentPlaceholderID="MainContent" runat="server" ID="body">
     <div>
     <h1>Add a New Event</h1>
