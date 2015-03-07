@@ -1,27 +1,23 @@
 ﻿<UserControl x:Class="com.WanderingTurtle.FormPresentation.ListEvents"
              Style="{DynamicResource UserControlStyle}"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }" SelectionChanged="lvEvents_SelectionChanged" GridViewColumnHeader.Click="lvEventListHeaderClick">
-            <ListView.View>
-                <GridView>
-                    <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
+        <DataGrid Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }" SelectionChanged="lvEvents_SelectionChanged">
+            <DataGrid.Columns>
+                <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL
                     to the datafields within our Event object.-->
-                    <GridViewColumn Width="100" Header="Event Type"         DisplayMemberBinding="{Binding EventTypeName}" />
-                    <GridViewColumn Width="140" Header="Event Name"         DisplayMemberBinding="{Binding EventItemName}" />
-                    <GridViewColumn Width="100" Header="Transportation"     DisplayMemberBinding="{Binding TransportString}" />
-                    <GridViewColumn Width="100" Header="On-Site"            DisplayMemberBinding="{Binding OnSiteString}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+                <DataGridTextColumn Width="100" Header="Event Type"     Binding="{Binding EventTypeName}" />
+                <DataGridTextColumn Width="140" Header="Event Name"     Binding="{Binding EventItemName}" />
+                <DataGridTextColumn Width="100" Header="Transportation" Binding="{Binding TransportString}" />
+                <DataGridTextColumn Width="100" Header="On-Site"        Binding="{Binding OnSiteString}" />
+            </DataGrid.Columns>
+        </DataGrid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
