@@ -1,4 +1,4 @@
-﻿using com.WanderingTurtle.Common;
+﻿﻿using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -36,13 +36,16 @@ namespace com.WanderingTurtle.DataAccess
                         var currentBook = new ListItemObject();
                         //Below are found on the ItemListing table (ItemListID is a foriegn key on booking)
                         currentBook.ItemListID = reader.GetInt32(0);
-       currentBook.QuantityOffered = reader.GetInt32(1);
-                        currentBook.StartDate = reader.GetDateTime(2);
-                        currentBook.EndDate = reader.GetDateTime(3);
+    //currentBook.MaxNumberOfGuests = reader.GetInt32(1);
+    //currentBook.CurrentNumberOfGuests = reader.GetInt32(2);
+                        currentBook.StartDate = reader.GetDateTime(3);
+                        currentBook.EndDate = reader.GetDateTime(4);
                         //Below are found on the EventItem table
-                        currentBook.EventID = reader.GetInt32(4);
-                        currentBook.EventName = reader.GetString(5);
-                        currentBook.EventDescription = reader.GetString(6);
+                        currentBook.EventID = reader.GetInt32(5);
+                        currentBook.EventName = reader.GetString(6);
+                        currentBook.EventDescription = reader.GetString(7);
+                        //this is from itemlisting table
+                        currentBook.TicketPrice = reader.GetDecimal(8);
 
                         BookingOpsList.Add(currentBook);
                     }
@@ -95,9 +98,11 @@ namespace com.WanderingTurtle.DataAccess
                         currentBook.ItemListID = reader.GetInt32(3);
                         currentBook.Quantity = reader.GetInt32(4);
                         currentBook.DateBooked = reader.GetDateTime(5);
-                        currentBook.Cancel = reader.GetBoolean(6);
-                        currentBook.Refund = reader.GetDecimal(7);
-                        currentBook.Active = reader.GetBoolean(8);
+                        currentBook.Discount = reader.GetDecimal(6);
+                        currentBook.Active = reader.GetBoolean(7);
+                        currentBook.TicketPrice = reader.GetDecimal(8);
+                        currentBook.ExtendedPrice = reader.GetDecimal(9);
+                        currentBook.TotalCharge = reader.GetDecimal(10);
 
                         BookingList.Add(currentBook);
                     }
@@ -141,6 +146,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@ItemListID", toAdd.ItemListID);
             cmd.Parameters.AddWithValue("@Quantity", toAdd.Quantity);
             cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
+            cmd.Parameters.AddWithValue("@TicketPrice", toAdd.TicketPrice);
+            cmd.Parameters.AddWithValue("@ExtendedPrice", toAdd.ExtendedPrice);
+            cmd.Parameters.AddWithValue("@TotalCharge", toAdd.TotalCharge);
 
             try
             {
@@ -203,10 +211,12 @@ namespace com.WanderingTurtle.DataAccess
                         BookingToGet.ItemListID = reader.GetInt32(3);
                         BookingToGet.Quantity = reader.GetInt32(4);
                         BookingToGet.DateBooked = reader.GetDateTime(5);
-                        BookingToGet.Cancel = reader.GetBoolean(6);
-                        BookingToGet.Refund = reader.GetDecimal(7);
-                        BookingToGet.Active = reader.GetBoolean(8);
-                    }                
+                        BookingToGet.Discount = reader.GetDecimal(6);
+                        BookingToGet.Active = reader.GetBoolean(7);
+                        BookingToGet.TicketPrice = reader.GetDecimal(8);
+                        BookingToGet.ExtendedPrice = reader.GetDecimal(9);
+                        BookingToGet.TotalCharge = reader.GetDecimal(10);
+                    }
                 }
                 else
                 {
@@ -224,7 +234,7 @@ namespace com.WanderingTurtle.DataAccess
             return BookingToGet;
         }
 
-            
+
         ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2
         /// <summary>
         /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
@@ -244,9 +254,10 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@Quantity", toUpdate.Quantity);
-            cmd.Parameters.AddWithValue("@Refund", toUpdate.Refund);
-            cmd.Parameters.AddWithValue("@Cancel", toUpdate.Cancel);
+            cmd.Parameters.AddWithValue("@Refund", toUpdate.Discount);
             cmd.Parameters.AddWithValue("@Active", toUpdate.Active);
+            cmd.Parameters.AddWithValue("@ExtendedPrice", toUpdate.ExtendedPrice);
+            cmd.Parameters.AddWithValue("@TotalCharge", toUpdate.TotalCharge);
 
             cmd.Parameters.AddWithValue("@original_BookingID", oldOne.BookingID);
             cmd.Parameters.AddWithValue("@original_GuestID", oldOne.GuestID);
@@ -254,9 +265,11 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_ItemListID", oldOne.ItemListID);
             cmd.Parameters.AddWithValue("@original_Quantity", oldOne.Quantity);
             cmd.Parameters.AddWithValue("@original_DateBooked", oldOne.DateBooked);
-            cmd.Parameters.AddWithValue("@original_Refund", oldOne.Refund);
-            cmd.Parameters.AddWithValue("@original_Cancel", oldOne.Cancel);
+            cmd.Parameters.AddWithValue("@original_Discount", oldOne.Discount);
             cmd.Parameters.AddWithValue("@original_Active", oldOne.Active);
+            cmd.Parameters.AddWithValue("@original_TicketPrice", oldOne.TicketPrice);
+            cmd.Parameters.AddWithValue("@original_ExtendedPrice", oldOne.ExtendedPrice);
+            cmd.Parameters.AddWithValue("@original_TotalCharge", oldOne.TotalCharge);
 
             try
             {

@@ -326,7 +326,7 @@ namespace com.WanderingTurtle.DataAccess
                 if (reader.HasRows)
                 {
                     reader.Read();
-                    tempEmployee = new Employee((int)reader.GetValue(0),reader.GetValue(1).ToString(),reader.GetValue(2).ToString(),(int)reader.GetValue(3), (bool)reader.GetValue(4));
+                    tempEmployee = new Employee((int)reader.GetValue(0), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), (int)reader.GetValue(3));
                 }
                 else
                 {
