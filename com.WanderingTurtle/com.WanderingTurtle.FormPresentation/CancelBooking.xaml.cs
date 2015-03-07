@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
             myInvoice = invoice;
             txtBlock_cancel.Text = null;
             populateText();
-            
+
         }
         /// <summary>
         /// Attempts to populate the textblock and the Guest labels with text pertaining to the guest booking
@@ -52,7 +52,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show("Hotel Guest information was not found. ", ax.Message);
             }
-            
+
         }
 
         ///Created By: Tony Noel, 2015/03/04
@@ -67,35 +67,34 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnConfirmCancel_Click(object sender, RoutedEventArgs e)
         {
             Booking oldBook;
-            try
-            {
-                //Grabbing old booking information
+            //Needs to be retooled to include the required fields to complete a cancellation- including a refund calculation and extended price/total charge calculations
+            /* try
+             {
+                 //Grabbing old booking information
+                 oldBook = OrderManager.RetrieveBooking(myBooking.BookingID);
+                 //fields to be updated 
+                
+                 bool cancel = true;
+                 bool active = false;
+                 decimal refund = refundAmount();
+                 MessageBox.Show("Here's the refund it calculated: " + refund);
+                
+                 //New booking object created with original fields and the three updated fields.
+                 Booking toCancel = new Booking(oldBook.BookingID, oldBook.GuestID, oldBook.EmployeeID, oldBook.ItemListID, oldBook.Quantity, oldBook.DateBooked, refund, active);
+                 int result = OrderManager.EditBooking(toCancel);
+                 if (result == 1)
+                 {
+                     MessageBox.Show("The booking has been cancelled.");
+                     // closes window after cancel
+                     this.Close();
+                 }
+                
+             }
+             catch (Exception ex)
+             {
+                 MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
+             } */
 
-                oldBook = OrderManager.RetrieveBooking(myBooking.BookingID);
-                //fields to be updated 
-                
-                bool cancel = true;
-                bool active = false;
-                decimal refund = refundAmount();
-                MessageBox.Show("Here's the refund it calculated: " + refund);
-                
-                //New booking object created with original fields and the three updated fields.
-                Booking toCancel = new Booking(oldBook.BookingID, oldBook.GuestID, oldBook.EmployeeID, oldBook.ItemListID, oldBook.Quantity, oldBook.DateBooked, cancel, refund, active);
-                int result = OrderManager.EditBooking(toCancel);
-
-                if (result == 1)
-                {
-                    MessageBox.Show("The booking has been cancelled.");
-                    // closes window after cancel
-                    this.Close();
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
-            } 
-            
         }
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
@@ -114,7 +113,7 @@ namespace com.WanderingTurtle.FormPresentation
             TimeSpan ts = myBooking.StartDate - today;
             //The .Days gets the amount of days inbetween returning an int.
             int difference = ts.Days;
-            
+
             if (difference >= 3)
             {
                 refund = 1.0m;
@@ -125,7 +124,7 @@ namespace com.WanderingTurtle.FormPresentation
                 refund = 0.5m;
                 return refund;
             }
-            else 
+            else
             {
                 refund = 0.0m;
                 return refund;

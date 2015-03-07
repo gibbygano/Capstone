@@ -37,6 +37,34 @@ namespace com.WanderingTurtle.FormPresentation
                 }
             }
             InitializeComponent();
+
+            switch (Globals.UserToken != null ? Globals.UserToken.Level : RoleData.Admin)
+            {
+                case RoleData.Admin:
+                    AddTab(TabName.Events, new ListEvents());
+                    AddTab(TabName.Listings, new ListTheListings());
+                    AddTab(TabName.Suppliers, new ListSuppliers());
+                    AddTab(TabName.Employees, new ListTheEmployees());
+                    AddTab(TabName.HotelGuests, new ListHotelGuests());
+                    break;
+            }
+        }
+
+        private void AddTab(TabName tabItem, Object Control)
+        {
+            TabItem item = new TabItem();
+            item.Content = Control;
+            item.Header = Enum.GetName(typeof(TabName), tabItem);
+            TabControl.Items.Add(item);
+        }
+
+        private enum TabName
+        {
+            Events,
+            Listings,
+            Suppliers,
+            Employees,
+            HotelGuests
         }
     }
 }
