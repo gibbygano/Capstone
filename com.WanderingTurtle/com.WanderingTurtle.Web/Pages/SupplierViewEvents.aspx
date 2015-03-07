@@ -1,21 +1,28 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierViewEvents.aspx.cs" Inherits="com.WanderingTurtle.Web.SupplierViewEvents" MasterPageFile="../Site.Master" %>
 
 <%@ Import Namespace="com.WanderingTurtle.Common" %>
+<%@ Import Namespace="com.WanderingTurtle.Web" %>
+<%@ Import Namespace="com.WanderingTurtle.BusinessLogic" %>
+<%@ Import Namespace="com.WanderingTurtle" %>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
 
     <h1>Listed Events</h1>
+    <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:ListView ID="lvEvents" ItemType="Event" SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
         DeleteMethod="DeleteEvent" EnableViewState="false" runat="server" OnPagePropertiesChanging="lvEvents_PagePropertiesChanging">
         <ItemTemplate>
             <tr>
-
-                <td><%# Item.EventItemName %></td>
+                <!--show a tooltip with full event name, but only display up to 25 characters-->
+                <td title="<%# Item.EventItemName %>"><%# Item.EventItemName.Truncate(25) %></td>
                 <td><%# Item.EventTypeName %></td>
+                <!--show a tooltip with full description, but only display 20 characters-->
+                <td title='<%# Item.Description %>'><%# Item.Description.Truncate(20) %></td>
                 <td><%# Item.TransportString %></td>
                 <td><%# Item.OnSiteString %></td>
                 <td>
                     <asp:Button CommandName="Edit" Text="Edit" runat="server" />
-                   <!-- <asp:Button CommandName="Delete" Text="Delete" runat="server" /> -->
+                    <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
                 </td>
             </tr>
         </ItemTemplate>
@@ -24,8 +31,9 @@
                 <tr id="tr1" runat="server">
                     <td id="td1" class="eventheader" runat="server">Event Name</td>
                     <td id="td2" class="eventheader" runat="server">Event Type</td>
-                    <td id="td3" class="eventheader" runat="server">Transportation</td>
-                    <td id="td4" class="eventheader" runat="server">On-Site</td>
+                    <td id="td3" class="eventheader" runat="server">Description</td>
+                    <td id="td4" class="eventheader" runat="server">Transportation</td>
+                    <td id="td5" class="eventheader" runat="server">On-Site</td>
                     <td></td>
                 </tr>
                 <tr id="ItemPlaceholder" runat="server">
@@ -36,7 +44,7 @@
         <EditItemTemplate>
             <tr>
                 <td>
-                    <input name="name" value="<%# Item.EventItemName %>" maxlength="255" />
+                    <input name="name" value="<%# Item.EventItemName %>" maxlength="255" class="editInput" title="<%= nameError %>" />
                     <input type="hidden" name="EventItemID" value="<%# Item.EventItemID%>" />
                 </td>
                 <td>
@@ -59,6 +67,11 @@
                             
                         %>
                     </select>
+                </td>
+
+                <td>
+                    <textarea name="description" title="<%= descError %>"class="editInput" maxlength="255"><%# Item.Description %></textarea>
+                    
                 </td>
                 <td>
                     <asp:HiddenField ID="HiddenField2" Value="<%# transport = Item.TransportString %>" runat="server" />
@@ -98,7 +111,7 @@
                 </td>
                 <td>
 
-                    <asp:Button CommandName="Update" Text="Update" runat="server" />
+                    <asp:Button CommandName="Update" Text="Update" CausesValidation="true" runat="server" ID="btnUpdate" />
                     <asp:Button CommandName="Cancel" Text="Cancel" runat="server" />
                 </td>
             </tr>

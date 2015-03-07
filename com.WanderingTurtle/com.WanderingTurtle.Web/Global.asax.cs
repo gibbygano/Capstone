@@ -22,11 +22,26 @@ namespace com.WanderingTurtle.Web
             //  Code that runs on application shutdown
 
         }
-
-        void Application_Error(object sender, EventArgs e)
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/03/07
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Application_Error(object sender, EventArgs e)
         {
-            // Code that runs when an unhandled error occurs
-
+            var context = HttpContext.Current;
+            var exception = context.Server.GetLastError();
+            if (exception is HttpRequestValidationException)
+            {
+                context.Server.ClearError();
+                Response.Clear();
+                string url = Request.UrlReferrer.ToString();
+                Response.StatusCode = 200;
+                Response.Write("<html><head><meta http-equiv=\"refresh\" content=\"1;url=" + url + "\"><script>alert('You have entered potentially dangerous characters into a form on our website. The Wandering Turtle Resort takes security very seriously. Your IP address has been logged and authorities have been notified.'); window.location.href =\"" + url + "\";</script></head> <body></body></html>");
+                Response.End();
+                return;
+            }
         }
     }
 }
