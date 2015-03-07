@@ -122,9 +122,6 @@
     <Compile Include="UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserLoginWindow.xaml.cs">
-      <DependentUpon>UserLoginWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewInvoice.xaml.cs">
       <DependentUpon>ViewInvoice.xaml</DependentUpon>
     </Compile>
@@ -183,10 +180,6 @@
     <Page Include="UserLogin.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserLoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewInvoice.xaml">
       <SubType>Designer</SubType>

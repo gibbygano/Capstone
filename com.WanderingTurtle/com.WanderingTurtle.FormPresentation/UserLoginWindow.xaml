@@ -1,8 +1,0 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation" x:Class="com.WanderingTurtle.FormPresentation.UserLoginWindow"
-        Title="Employee Login" Height="200" Width="350">
-    <Grid>
-    </Grid>
-</Window>
