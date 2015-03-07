@@ -68,7 +68,7 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@EventItemID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);      

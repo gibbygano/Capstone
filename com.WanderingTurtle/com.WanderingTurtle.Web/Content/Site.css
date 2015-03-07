@@ -578,6 +578,29 @@ input[type="radio"]{
     vertical-align: middle;
     float: left;
 }
+/**View Events Header**/
+.eventheader{
+
+    font-weight: bold;
+    text-decoration: underline;
+
+
+}
+
+/**USER MENU STYLES*/
+
+#user_menu{
+
+    color: #fff;
+    padding: 10px;
+}
+#Menu1 a.static {
+    padding-left: 0.85em;
+    padding-right: 0.15em;
+}
+
+
+
 /********************
 *   Mobile Styles   *
 ********************/
