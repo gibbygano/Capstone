@@ -49,8 +49,8 @@ namespace com.WanderingTurtle.DataAccess
                         details.ItemListID = reader.GetInt32(3);
                         details.Quantity = reader.GetInt32(4);
                         details.DateBooked = reader.GetDateTime(5);
-                        details.Cancel = reader.GetBoolean(6);
-                        details.Refund = reader.GetDecimal(7);
+           //details.Cancel = reader.GetBoolean(6);
+          //details.Refund = reader.GetDecimal(7);
                         details.Active = reader.GetBoolean(8);
                         details.Price = reader.GetDecimal(9);
                         details.StartDate = reader.GetDateTime(10);

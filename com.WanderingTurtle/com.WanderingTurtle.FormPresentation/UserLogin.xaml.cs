@@ -79,13 +79,12 @@ namespace com.WanderingTurtle.FormPresentation
         private void loginSignInButton_Click(object sender, RoutedEventArgs e)
         {
 
-            int? empID = Validator.ValidateInt(loginUsername.Text, 0) ? (int?)Convert.ToInt32(loginUsername) : null; // nullable ints for the "failed" flag
-
+            int? empID = Validator.ValidateInt(loginUsername.Text, 0) ? (int?)Convert.ToInt32(loginUsername.Text) : null; // nullable ints for the "failed" flag
             if (empID != null)
             {
                 try
                 {
-                    Employee checkEmp = EmployeeManager.GetEmployeeLogin((int)empID,loginPassword.Password)
+                    Employee checkEmp = EmployeeManager.GetEmployeeLogin((int)empID, loginPassword.Password);
                     if (checkEmp!=null)
                     {
                         Globals.UserToken = checkEmp;
@@ -96,6 +95,10 @@ namespace com.WanderingTurtle.FormPresentation
                         // Raises the "UserLoggedIn" event. //
                         RoutedEventArgs userLoginArgs = new RoutedEventArgs(UserLogin.UserLoggedInEvent);
                         RaiseEvent(userLoginArgs);
+     // MainWindow mainForm = new MainWindow();
+
+       //mainForm.ShowDialog();
+
                         return;//ends the method here.
 
                     }

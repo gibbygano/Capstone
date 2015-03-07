@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            
+
             if (lvAddBookingListItems.SelectedIndex.Equals(-1))
             {
                 MessageBox.Show("Please select an event!");
@@ -74,37 +74,37 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
             int.TryParse(quantity, out qID);
-            if (okQuantity(quantity) == false || qID <= 0)
+            //Quantity field on the table needs to be a calculated field in order for this to work.- ListItemObject has a max#guest field and a Current#guest field that will be used to calculate quantity
+            /*if (okQuantity(quantity) == false || qID <= 0)
             {
                 MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
-            }
-            try
-            {
-                selected = getSelectedItem();
+            }*/
+            /*
+         try
+         {
+             selected = getSelectedItem();
                 
-                int.TryParse(empID, out eID);
-
-                gID = inInvoice.HotelGuestID;
-        
-                myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate);
+             int.TryParse(empID, out eID);
+             //eID = (int)Globals.UserToken.EmployeeID;
+             gID = inInvoice.HotelGuestID;
+             //This method call needs to be updated to include a calculated extended price and total charge to be added to the database.
+             //myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate, selected.TicketPrice,);
            
-                //calls to booking manager to add a booking. BookingID is auto-generated in database                
-                int result = OrderManager.AddaBooking(myBooking);
-
-                if (result == 1)
-                {
-                    MessageBox.Show("The booking has been successfully added.");
-                    // closes window after add
-                    this.Close();
-                }
-
-            } //end try
-            catch (Exception ax)
-            {
-                MessageBox.Show(ax.Message);
-            }
+             //calls to booking manager to add a booking. BookingID is auto-generated in database                
+            int result = OrderManager.AddaBooking(myBooking);
+             if (result == 1)
+             {
+                 MessageBox.Show("The booking has been successfully added.");
+                 // closes window after add
+                 this.Close();
+             }
+         } //end try
+         catch (Exception ax)
+         {
+             MessageBox.Show(ax.Message);
+         }*/
 
         }//end method addBooking()
 
