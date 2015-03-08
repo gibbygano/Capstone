@@ -68,6 +68,10 @@ namespace com.WanderingTurtle.FormPresentation
         // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
+            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItems[0];
+            EditListing temp = new EditListing(ListingEdit);
+
+
         }
 
         private void btnArchiveListing_click(object sender, RoutedEventArgs e)
