@@ -24,7 +24,8 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
 			<Label Grid.Row="0" Grid.Column="0" Content="Guest Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
@@ -34,18 +35,28 @@
 			<Label Grid.Row="4" Grid.Column="0" Content="Phone #:"    HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
 			<Label Grid.Row="5" Grid.Column="0" Content="Email:"      HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
 			<Label Grid.Row="6" Grid.Column="0" Content="Total Due: " HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-			<Label Grid.Row="0" Grid.Column="1" x:Name="lblGuestNameLookup" VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
-			<Label Grid.Row="1" Grid.Column="1" x:Name="lblCheckInDate"     VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
-			<Label Grid.Row="2" Grid.Column="1" x:Name="lblAddress"         VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
-			<Label Grid.Row="3" Grid.Column="1" x:Name="lblCityState"       VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
-			<Label Grid.Row="4" Grid.Column="1" x:Name="lblPhoneNum"        VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
-			<Label Grid.Row="5" Grid.Column="1" x:Name="lblEmail"           VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
-			<Label Grid.Row="6" Grid.Column="1" x:Name="lblTotalPrice"      VerticalContentAlignment="Center" Height="{DynamicResource TextBoxHeight}" />
+            <Label Grid.Row="0" Grid.Column="1" x:Name="lblGuestNameLookup" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="lblCheckInDate"     HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="lblAddress"         HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="3" Grid.Column="1" x:Name="lblCityState"       HorizontalContentAlignment="Left" VerticalContentAlignment="Center"  />
+            <Label Grid.Row="4" Grid.Column="1" x:Name="lblPhoneNum"       HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"  />
+            <Label Grid.Row="5" Grid.Column="1" x:Name="lblEmail"          HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"  />
+            <Label Grid.Row="6" Grid.Column="1" x:Name="lblTotalPrice"    HorizontalContentAlignment="Left"   VerticalContentAlignment="Center"  />
 			<Label Grid.Row="0" Grid.Column="2" Content="Invoice #:" HorizontalAlignment="Left" VerticalContentAlignment="Center" />
 			<Label Grid.Row="1" Grid.Column="2" Content="Room #:"    HorizontalAlignment="Left" VerticalContentAlignment="Center" />
-			<Label Grid.Row="0" Grid.Column="2" x:Name="lblInvoice" VerticalContentAlignment="Center" />
-			<Label Grid.Row="1" Grid.Column="2" x:Name="lblRoomNum" VerticalContentAlignment="Center" />
+            <Label Grid.Row="0" Grid.Column="3" x:Name="lblInvoice" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="3" x:Name="lblRoomNum" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
 		</Grid>
-		<Button Grid.Row="3" Grid.Column="1" Content="Submit" Click="btnFinalizeInvoice_Click" />
+
+        <Grid Grid.Row="3" Margin="0,5,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnFinalizeInvoice_Click" Margin="0,0,5,0"/>
+
+            <Button Grid.Column="2" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Margin="5,0,0,0" Click="BtnCancel_Click"/>
+        </Grid>
 	</Grid>
 </Window>

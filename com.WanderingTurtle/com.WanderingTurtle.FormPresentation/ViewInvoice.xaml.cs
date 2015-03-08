@@ -24,7 +24,6 @@ namespace com.WanderingTurtle.FormPresentation
         private List<BookingDetails> myBookingList;
         private InvoiceDetails invoiceToView;
 
-
         /// <summary>
         /// Pat Banks
         /// 2015/02/2015
@@ -37,10 +36,11 @@ namespace com.WanderingTurtle.FormPresentation
 
             //methods that get the form data
             refreshGuestInformation(selectedGuest.HotelGuestID);
-            refreshBookingList();
 
             //fills the list view
-            lvCustomerBookings.ItemsSource = myBookingList;
+            refreshBookingList();
+
+
         }
 
         /// <summary>
@@ -67,9 +67,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void refreshBookingList()
         {
-
-            myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
-            lvCustomerBookings.ItemsSource = myBookingList;
+            lvGuestBookings.ItemsPanel.LoadContent();
+            try
+            {
+                myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToView.HotelGuestID);
+                lvGuestBookings.ItemsSource = myBookingList;
+                lvGuestBookings.Items.Refresh();
+                lblBookingsMessage.Content = "Guest has " + myBookingList.Count + " booking(s).";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to retrieve booking list from the database. \n" + ex.Message);
+            }
         }
 
 
@@ -129,25 +138,20 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
-            if (lvCustomerBookings.SelectedItem == null)
+            if (lvGuestBookings.SelectedItem == null)
             {
                 MessageBox.Show("Please select a booking to edit.");
                 return;
             }
 
-            BookingDetails outBooking = (BookingDetails)lvCustomerBookings.SelectedItem;
+            BookingDetails outBooking = (BookingDetails)lvGuestBookings.SelectedItem;
 
             EditBooking editForm = new EditBooking(invoiceToView, outBooking);
-
-
 
             if (editForm.ShowDialog() == false)
             {
                 refreshBookingList();
             }
-
-
-
         }
 
         /// <summary>
@@ -190,13 +194,14 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 //attempts to create a booking details object with the selected line items
-                BookingDetails myBooking = (BookingDetails)lvCustomerBookings.SelectedItems[0];
+                BookingDetails myBooking = (BookingDetails)lvGuestBookings.SelectedItems[0];
                 //opens the ui and passes the booking details object in
                 CancelBooking cancel = new CancelBooking(myBooking, invoiceToView);
                 
                 if (cancel.ShowDialog() == false)
                 {
-                    
+                    refreshBookingList();
+                    Close();
                 }
             }
             catch (Exception ex)

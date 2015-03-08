@@ -88,15 +88,14 @@ namespace com.WanderingTurtle.Common
     /// Booking Details inherits from a Booking. Object holds additional information for a booking to show on an invoice.
     /// </summary>
     /// <remarks>
+    /// Updated by Pat Banks 2015/03/07
+    /// Deleted Price and total price that are no longer needed
     /// </remarks>
     public class BookingDetails : Booking
     {
-        public decimal Price { get; set; }
         public string EventItemName { get; set; }
         public DateTime StartDate { get; set; }
-        public decimal TotalPrice { get; set; }
         public int InvoiceID { get; set; }
-        public decimal GetTotalCost { get { return (this.Quantity * this.Price); } }
 
         public BookingDetails() : base() { }
 

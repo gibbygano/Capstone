@@ -17,15 +17,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>List of bookings for a hotel guest</returns>
 		public static List<BookingDetails> RetrieveBookingDetailsList(int hotelGuestId)
 		{
-			List<BookingDetails> list = InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
-
-			//get the total price for each item
-			foreach (BookingDetails b in list)
-			{
-				b.TotalPrice = b.GetTotalCost;
-			}
-
-			return list;
+			return InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
 		}
 
 		/// <summary>
@@ -37,7 +29,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		public static decimal CalculateTotalDue(List<BookingDetails> guestBookings)
 		{
 			//go through bookings to calculate amount due for a customer
-			return guestBookings.Sum(b => b.Price * b.Quantity);
+			return guestBookings.Sum(b => b.TotalCharge);
 		}
 
 		/// <summary>

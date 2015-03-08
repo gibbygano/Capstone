@@ -4,7 +4,7 @@
 CREATE PROCEDURE spSelectInvoiceBookings
 (@hotelGuestID int)
 AS
-	SELECT Distinct BookingID, Booking.GuestID, EmployeeID, Booking.ItemListID, Booking.Quantity, DateBooked, Discount, Booking.Active, ItemListing.Price,ItemListing.StartDate, EventItem.EventItemName
+	SELECT Distinct BookingID, Booking.GuestID, EmployeeID, Booking.ItemListID, Booking.Quantity, DateBooked, Discount, Booking.Active,  TicketPrice, ExtendedPrice, TotalCharge, ItemListing.StartDate, EventItem.EventItemName
 	FROM Invoice, Booking, HotelGuest, EventItem, ItemListing
 	WHERE Booking.GuestID = @hotelGuestID
 	AND Invoice.HotelGuestID = Booking.GuestID

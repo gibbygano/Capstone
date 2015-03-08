@@ -22,6 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private BookingDetails myBooking;
         private InvoiceDetails myInvoice;
+        private decimal _cancelFee = 0m;
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
@@ -33,9 +34,8 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             myBooking = booking;
             myInvoice = invoice;
-            txtBlock_cancel.Text = null;
             populateText();
-
+  
         }
         /// <summary>
         /// Attempts to populate the textblock and the Guest labels with text pertaining to the guest booking
@@ -44,9 +44,17 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                lblCancelGuestInfo.Content = "Guest: " + myInvoice.HotelGuestID + " " + myInvoice.GetFullName;
-                txtBlock_cancel.Text = "Booking ID: " + myBooking.BookingID + "\n Event Name: " + myBooking.EventItemName
-                    + "\n Start Date: " + myBooking.StartDate + "\n Quantity: " + myBooking.Quantity + "\n Ticket Price: " + myBooking.Price.ToString("c") + "\n Total: " + myBooking.TotalPrice.ToString("c");
+                lblBookingID.Content = myBooking.BookingID;
+                lblGuestName.Content = myInvoice.GetFullName;
+                lblQuantity.Content = myBooking.Quantity;
+                lblEventName.Content = myBooking.EventItemName;
+                lblDiscount.Content = myBooking.Discount;
+                lblEventTime.Content = myBooking.StartDate;
+                lblTicketPrice.Content = myBooking.TicketPrice;
+                lblTotalDue.Content = myBooking.TotalCharge;
+
+                _cancelFee = OrderManager.CalculateCancellationFee(myBooking);
+                lblCancelMessage.Content = "A fee of " + _cancelFee + " will be charged to cancel this booking.";
             }
             catch (Exception ax)
             {
@@ -68,68 +76,35 @@ namespace com.WanderingTurtle.FormPresentation
         {
             Booking oldBook;
             //Needs to be retooled to include the required fields to complete a cancellation- including a refund calculation and extended price/total charge calculations
-            /* try
+            try
              {
                  //Grabbing old booking information
                  oldBook = OrderManager.RetrieveBooking(myBooking.BookingID);
-                 //fields to be updated 
-                
-                 bool cancel = true;
-                 bool active = false;
-                 decimal refund = refundAmount();
-                 MessageBox.Show("Here's the refund it calculated: " + refund);
                 
                  //New booking object created with original fields and the three updated fields.
-                 Booking toCancel = new Booking(oldBook.BookingID, oldBook.GuestID, oldBook.EmployeeID, oldBook.ItemListID, oldBook.Quantity, oldBook.DateBooked, refund, active);
-                 int result = OrderManager.EditBooking(toCancel);
-                 if (result == 1)
-                 {
-                     MessageBox.Show("The booking has been cancelled.");
-                     // closes window after cancel
-                     this.Close();
-                 }
+                 //Booking toCancel = new Booking(oldBook.BookingID, oldBook.GuestID, oldBook.EmployeeID, oldBook.ItemListID, oldBook.Quantity, oldBook.DateBooked, refund, active);
+                 //int result = OrderManager.EditBooking(toCancel);
+                 //if (result == 1)
+                 //{
+                 //    MessageBox.Show("The booking has been cancelled.");
+                 //    // closes window after cancel
+                 //    this.Close();
+                 //}
                 
              }
              catch (Exception ex)
              {
                  MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
-             } */
+             }
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
 
         }
-        ///Created By: Tony Noel, 2015/03/04
-        /// <summary>
-        /// A method to compare two different dates and determine a refund amount.
-        /// Stores today's date, then subtracts todays date from the start date of the event-
-        /// this information stored on the BookingDetails myBooking object
-        /// Uses a TimeSpan object which represents an interval of time and is able to perform calculations on time.
-        /// The difference of days is stored on an int and used to test conditions.
-        /// </summary>
-        /// <returns>decimal containing the refund amount</returns>
-        private decimal refundAmount()
+
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            decimal refund;
-            DateTime today = DateTime.Now;
-            //TimeSpan is used to calculate date differences
-            TimeSpan ts = myBooking.StartDate - today;
-            //The .Days gets the amount of days inbetween returning an int.
-            int difference = ts.Days;
-
-            if (difference >= 3)
-            {
-                refund = 1.0m;
-                return refund;
-            }
-            if (difference < 3 && difference > 1)
-            {
-                refund = 0.5m;
-                return refund;
-            }
-            else
-            {
-                refund = 0.0m;
-                return refund;
-            }
-
 
         }
     }

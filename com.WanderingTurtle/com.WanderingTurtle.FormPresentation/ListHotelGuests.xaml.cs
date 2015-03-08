@@ -79,27 +79,21 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event arguments</param>
         private void btnViewGuest_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var selectedGuest = this.lvHotelGuestList.SelectedItem;
+
+            if (selectedGuest == null)
             {
-                InvoiceDetails selectedGuest = (InvoiceDetails)lvHotelGuestList.SelectedItem;
-
-                if (selectedGuest == null)
-                {
-                    MessageBox.Show("Please select a row to edit");
-                    return;
-                }
-
-                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
-
-                if (custInvoice.ShowDialog() == false)
-                {
-                    refreshList();
-                }
+                MessageBox.Show("Please select a guest to view.");
+                return;
             }
-            catch (Exception)
+
+            ViewInvoice custInvoice = new ViewInvoice((InvoiceDetails)selectedGuest);
+
+            if (custInvoice.ShowDialog() == false)
             {
-                MessageBox.Show("Please select a guest and try again");
+                refreshList();
             }
+
         }
 
         /// <summary>

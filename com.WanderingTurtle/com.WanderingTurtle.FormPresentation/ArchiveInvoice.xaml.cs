@@ -85,7 +85,7 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result == true)
                     {
                         MessageBox.Show("Guest Checkout Complete");
-                        this.Close();
+                        Close();
                     }
                 }
             }
@@ -93,6 +93,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -17,7 +17,7 @@ VALUES
 ('52404', 'Cedar Rapids', 'IA'),
 ('10007', 'New York City', 'NY'),
 ('10001', 'New York City', 'NY'),
-('52014', 'Chiliton', 'WI'),
+('52014', 'Chilton', 'WI'),
 ('58214', 'Arvilla', 'ND'),
 ('50229', 'Pleasantville', 'IA'),
 ('12235', 'Albany', 'NY'),
@@ -95,13 +95,13 @@ VALUES
 (102,102, GETDATE())
 GO
 
-INSERT INTO [dbo].[Booking] (GuestID, EmployeeID, ItemListID, Quantity, DateBooked)
+INSERT INTO [dbo].[Booking] (GuestID, EmployeeID, ItemListID, Quantity, DateBooked, Discount, Active, TicketPrice, ExtendedPrice, TotalCharge)
 VALUES
-(1, 103, 100, 6, CURRENT_TIMESTAMP),
-(2, 101, 101, 2, CURRENT_TIMESTAMP),
-(3, 102, 102, 5, CURRENT_TIMESTAMP),
-(4, 104, 102, 1, CURRENT_TIMESTAMP),
-(4, 104, 101, 4, CURRENT_TIMESTAMP)
+(1, 103, 100, 6, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 15.00, 90.00, 90.00),
+(2, 101, 101, 2, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 25.00, 50.00, 50.00) ,
+(3, 102, 102, 5, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 5.00, 25.00, 25.00 ),
+(4, 104, 102, 1, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 5.00, 5.00, 5.00),
+(4, 104, 101, 4, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 25.00, 100.00, 100.00)
 GO
 INSERT INTO [dbo].[Invoice] (HotelGuestID, Active, DateOpened)
 VALUES

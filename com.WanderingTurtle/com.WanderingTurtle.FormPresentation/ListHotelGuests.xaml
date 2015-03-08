@@ -7,10 +7,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList" ItemsSource="{Binding hotelGuestList}">
+        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="30" Header="ID"               Binding="{Binding HotelGuestID}" />
-                <DataGridTextColumn Width="50" Header="Room #"           Binding="{Binding GuestRoomNum}" />
+                <DataGridTextColumn Width="50" Header="ID"               Binding="{Binding HotelGuestID}" />
+                <DataGridTextColumn Width="80" Header="Room #"           Binding="{Binding GuestRoomNum}" />
                 <DataGridTextColumn Width="150" Header="Date Registered" Binding="{Binding DateOpened, StringFormat='{}{0:D}'}" />
                 <DataGridTextColumn Width ="100" Header="Last Name"      Binding="{Binding GuestLastName}" />
                 <DataGridTextColumn Width ="100" Header="First Name"     Binding="{Binding GuestFirstName}" />

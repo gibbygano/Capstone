@@ -93,5 +93,41 @@ namespace com.WanderingTurtle.BusinessLogic
 				throw ax;
 			}
 		}
+
+        ///Created By: Tony Noel, 2015/03/04
+        /// <summary>
+        /// A method to compare two different dates and determine a refund amount.
+        /// Stores today's date, then subtracts todays date from the start date of the event-
+        /// this information stored on the BookingDetails myBooking object
+        /// Uses a TimeSpan object which represents an interval of time and is able to perform calculations on time.
+        /// The difference of days is stored on an int and used to test conditions.
+        /// </summary>
+        /// <remarks>
+        /// Updated by Pat Banks 2015/03/07
+        /// </remarks>
+        /// <returns>decimal containing the total cancellation fee amount</returns>
+        public static decimal CalculateCancellationFee(BookingDetails bookingToCancel)
+        {
+            decimal feePercent;
+
+            //TimeSpan is used to calculate date differences
+            TimeSpan ts = bookingToCancel.StartDate - DateTime.Now;
+            //The .Days gets the amount of days inbetween returning an int.
+            double difference = ts.TotalDays;
+
+            if (difference >= 3)
+            {
+                feePercent = 0.0m;
+            }
+            else if (difference < 3 && difference > 1)
+            {
+                feePercent = 0.5m;
+            }
+            else
+            {
+                feePercent = 1.0m;
+            }
+            return feePercent * bookingToCancel.TotalCharge;
+        } 
 	}
 }
