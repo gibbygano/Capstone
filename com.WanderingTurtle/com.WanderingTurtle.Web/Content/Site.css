@@ -409,7 +409,17 @@ fieldset {
         font-size: 1.2em;
         margin: 5px 0 6px 0;
         padding: 5px;
-        width: 300px;
+    }
+
+    input.editInput {
+        width: 150px;
+        font-size: .75em;
+
+    }
+    .editInput {
+        width: 150px;
+        font-size: .75em;
+
     }
 
     textarea {
