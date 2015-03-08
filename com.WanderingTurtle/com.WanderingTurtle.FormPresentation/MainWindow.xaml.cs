@@ -29,7 +29,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                switch (MessageBox.Show(string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message), "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
+                switch (MessageBox.Show(
+                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
+                    "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
                 {
                     case MessageBoxResult.Yes:
                         Environment.Exit(0);
@@ -50,21 +52,25 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void AddTab(TabName tabItem, Object Control)
+        private void AddTab(string tabItem, Object Control)
         {
             TabItem item = new TabItem();
             item.Content = Control;
-            item.Header = Enum.GetName(typeof(TabName), tabItem);
+            item.Header = tabItem;
             TabControl.Items.Add(item);
         }
 
-        private enum TabName
+        private static class TabName
         {
-            Events,
-            Listings,
-            Suppliers,
-            Employees,
-            HotelGuests
+            internal static string Events { get { return "Events"; } }
+
+            internal static string Listings { get { return "Listings"; } }
+
+            internal static string Suppliers { get { return "Suppliers"; } }
+
+            internal static string Employees { get { return "Employees"; } }
+
+            internal static string HotelGuests { get { return "Hotel Guests"; } }
         }
     }
 }

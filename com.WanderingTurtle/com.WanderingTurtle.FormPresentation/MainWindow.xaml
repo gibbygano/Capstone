@@ -6,34 +6,12 @@
 	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 	Title="MainWindow" Height="525" Width="950" MinHeight="125"
 	WindowStartupLocation="CenterScreen">
-    <Grid>
-        <TabControl x:Name="TabControl">
-            <!--
-            <TabItem Header="Events">
-                <local:ListEvents />
-            </TabItem>
-
-            <TabItem Header="Listings">
-                <local:ListTheListings />
-            </TabItem>
-
-            <TabItem Header="Suppliers">
-                <local:ListSuppliers />
-            </TabItem>
-
-            <TabItem Header="Employees">
-                <local:ListTheEmployees />
-            </TabItem>
-
-            <TabItem Header="Hotel Guests">
-                <local:ListHotelGuests />
-            </TabItem>
-            -->
-        </TabControl>
-    </Grid>
-    <controls:MetroWindow.RightWindowCommands>
-        <controls:WindowCommands>
-            <Button Content="Sign Out" />
-        </controls:WindowCommands>
-    </controls:MetroWindow.RightWindowCommands>
+	<Grid>
+		<TabControl x:Name="TabControl" />
+	</Grid>
+	<controls:MetroWindow.RightWindowCommands>
+		<controls:WindowCommands>
+			<Button Content="Sign Out" />
+		</controls:WindowCommands>
+	</controls:MetroWindow.RightWindowCommands>
 </controls:MetroWindow>
