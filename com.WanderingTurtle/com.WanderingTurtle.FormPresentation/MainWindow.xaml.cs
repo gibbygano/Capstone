@@ -1,76 +1,50 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SplashScreen = com.WanderingTurtle.FormPresentation.Views.SplashScreen;
 
 namespace com.WanderingTurtle.FormPresentation
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow
-    {
-        public MainWindow()
-        {
-            try
-            {
-                ConnectionManager.TestConnection();
-            }
-            catch (Exception ex)
-            {
-                switch (MessageBox.Show(
-                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
-                    "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
-                {
-                    case MessageBoxResult.Yes:
-                        Environment.Exit(0);
-                        break;
-                }
-            }
-            InitializeComponent();
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow
+	{
+		public MainWindow()
+		{
+			try
+			{
+				ConnectionManager.TestConnection();
+			}
+			catch (Exception ex)
+			{
+				switch (Xceed.Wpf.Toolkit.MessageBox.Show(
+					string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
+					"Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
+				{
+					case MessageBoxResult.Yes:
+						Environment.Exit(0);
+						break;
+				}
+			}
+			InitializeComponent();
+		}
 
-            switch (Globals.UserToken != null ? Globals.UserToken.Level : RoleData.Admin)
-            {
-                case RoleData.Admin:
-                    AddTab(TabName.Events, new ListEvents());
-                    AddTab(TabName.Listings, new ListTheListings());
-                    AddTab(TabName.Suppliers, new ListSuppliers());
-                    AddTab(TabName.Employees, new ListTheEmployees());
-                    AddTab(TabName.HotelGuests, new ListHotelGuests());
-                    break;
-            }
-        }
+		private void BtnSignInOut_Click(object sender, RoutedEventArgs e)
+		{
+			StartUp();
+			//foreach (UIElement child in ((Grid)this.Content).Children)
+			//{
+			//    ((Grid)this.Content).Children.Remove(child);
+			//}
+		}
 
-        private void AddTab(string tabItem, Object Control)
-        {
-            TabItem item = new TabItem();
-            item.Content = Control;
-            item.Header = tabItem;
-            TabControl.Items.Add(item);
-        }
-
-        private static class TabName
-        {
-            internal static string Events { get { return "Events"; } }
-
-            internal static string Listings { get { return "Listings"; } }
-
-            internal static string Suppliers { get { return "Suppliers"; } }
-
-            internal static string Employees { get { return "Employees"; } }
-
-            internal static string HotelGuests { get { return "Hotel Guests"; } }
-        }
-    }
+		internal void StartUp()
+		{
+			this.MainContent.Content = new SplashScreen();
+		}
+	}
 }

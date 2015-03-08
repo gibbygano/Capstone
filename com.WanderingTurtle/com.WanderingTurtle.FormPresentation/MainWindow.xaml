@@ -1,17 +1,15 @@
-﻿<controls:MetroWindow
-	x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
-	Style="{DynamicResource WindowStyle}"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-	Title="MainWindow" Height="525" Width="950" MinHeight="125"
-	WindowStartupLocation="CenterScreen">
-	<Grid>
-		<TabControl x:Name="TabControl" />
-	</Grid>
-	<controls:MetroWindow.RightWindowCommands>
-		<controls:WindowCommands>
-			<Button Content="Sign Out" />
-		</controls:WindowCommands>
-	</controls:MetroWindow.RightWindowCommands>
-</controls:MetroWindow>
+﻿<ui:MetroWindow x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
+				Style="{DynamicResource WindowStyle}"
+				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	 			xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
+				xmlns:views="clr-namespace:com.WanderingTurtle.FormPresentation.Views"
+				Title="MainWindow" Height="525" Width="950" MinHeight="125"
+				WindowStartupLocation="CenterScreen">
+	<ContentControl x:Name="MainContent" Content="{Binding views:SplashScreen}" />
+	<ui:MetroWindow.RightWindowCommands>
+		<ui:WindowCommands>
+			<Button Content="Sign Out" Click="BtnSignInOut_Click" />
+		</ui:WindowCommands>
+	</ui:MetroWindow.RightWindowCommands>
+</ui:MetroWindow>

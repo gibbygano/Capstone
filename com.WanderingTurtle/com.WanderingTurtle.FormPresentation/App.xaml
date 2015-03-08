@@ -21,7 +21,7 @@
             <Style TargetType="{x:Type Window}" x:Key="WindowStyle" />
             <Style TargetType="{x:Type UserControl}" x:Key="UserControlStyle" />
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource AccentedSquareButtonStyle}">
-                <Setter Property="Padding" Value="8,2" />
+                <Setter Property="Padding" Value="8,3" />
                 <Setter Property="FontSize" Value="13" />
             </Style>
             <system:Double x:Key="TextBoxHeight">30</system:Double>

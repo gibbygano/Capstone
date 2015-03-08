@@ -115,10 +115,17 @@
     <Compile Include="CancelBooking.xaml.cs">
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SplashScreen.xaml.cs">
+      <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TabContainer.xaml.cs">
+      <DependentUpon>TabContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditBooking.xaml.cs">
       <DependentUpon>EditBooking.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Globals.cs" />
+    <Compile Include="Models\Globals.cs" />
+    <Compile Include="Models\WindowHelper.cs" />
     <Compile Include="UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
     </Compile>
@@ -166,6 +173,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CancelBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TabContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
