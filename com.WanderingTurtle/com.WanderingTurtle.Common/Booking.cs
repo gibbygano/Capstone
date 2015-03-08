@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.Common
         /// <param name="ticket"></param>
         /// <param name="extended"></param>
         /// <param name="total"></param>
-        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal refund, bool active, decimal ticket, decimal extended, decimal total)
+        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal discount, bool active, decimal ticket, decimal extended, decimal total)
         {
             BookingID = bookingID;
             GuestID = guestID;
@@ -73,13 +73,12 @@ namespace com.WanderingTurtle.Common
             ItemListID = itemID;
             Quantity = bQuantity;
             DateBooked = dateBooked;
-            Discount = refund;
+            Discount = discount;
             Active = active;
             TicketPrice = ticket;
             ExtendedPrice = extended;
             TotalCharge = total;
         }
-
     }
     /// <summary>
     /// Pat Banks
