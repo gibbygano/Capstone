@@ -118,6 +118,9 @@
     <Compile Include="EditBooking.xaml.cs">
       <DependentUpon>EditBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EditListing.xaml.cs">
+      <DependentUpon>EditListing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
@@ -149,6 +152,9 @@
     <Compile Include="ViewEventDetails.xaml.cs">
       <DependentUpon>ViewEventDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewListing.xaml.cs">
+      <DependentUpon>ViewListing.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditBooking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditListing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +248,10 @@
     <Page Include="AddSupplier.xaml">
     </Page>
     <Page Include="ViewEventDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewListing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
