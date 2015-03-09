@@ -58,6 +58,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
             Window AddItemListings = new AddItemListing();
+            AddItemListings.Show();
             if (AddItemListings.ShowDialog() == false)
             {
                 refreshData();
@@ -70,7 +71,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             ItemListing ListingEdit = (ItemListing)lvListing.SelectedItems[0];
             EditListing temp = new EditListing(ListingEdit);
-
+            temp.Show();
 
         }
 
