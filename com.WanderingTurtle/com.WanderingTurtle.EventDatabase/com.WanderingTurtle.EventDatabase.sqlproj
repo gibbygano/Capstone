@@ -101,7 +101,6 @@
     <Build Include="dbo\Stored Procedures\spSelectSupplier.sql" />
     <Build Include="dbo\Stored Procedures\spSelectItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllItemListings.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateLists.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllLists.sql" />
@@ -125,6 +124,7 @@
     <Build Include="dbo\Stored Procedures\spArchiveInvoice.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeCheckPassword.sql" />
     <Build Include="dbo\Tables\Booking.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateItemListing.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

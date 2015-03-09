@@ -30,6 +30,7 @@ namespace com.WanderingTurtle.FormPresentation
             this.inInvoice = inInvoice;
             this.inBookingDetails = inBookingDetails;
 
+
             InitializeComponent();
 
             outInvList.Add(inBookingDetails);
@@ -38,6 +39,7 @@ namespace com.WanderingTurtle.FormPresentation
             lblEditBookingEmpID.Content = inBookingDetails.EmployeeID;
             lblEditBookingGuestName.Content = inInvoice.GetFullName;
             tbEditBookingQuantity.Text = inBookingDetails.Quantity.ToString();
+            tbEditBookingDiscount.Text = inBookingDetails.Discount.ToString();
 
             lvEditBookingListItems.ItemsSource = outInvList;
         }
@@ -46,6 +48,8 @@ namespace com.WanderingTurtle.FormPresentation
         {
             int quantity;
             string inQuantity;
+            string inDiscount;
+            int discount;
 
             inQuantity = tbEditBookingQuantity.Text;
 
@@ -60,8 +64,27 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show("Please use cancel instead of setting quantity 0");
                 return;
             }
-            
+
+            inDiscount = tbEditBookingDiscount.Text;
+            int.TryParse(inDiscount, out discount);
+
+            if (inDiscount == null)
+            {
+                discount = 0;
+            }
+            else if(discount > 100)
+            {
+                MessageBox.Show("Discount cannot exceed 100.");
+                tbEditBookingDiscount.Clear();
+                tbEditBookingDiscount.Focus();
+                return;
+            }
+
+
             inBookingDetails.Quantity = quantity;
+
+            inBookingDetails.ExtendedPrice = calcExtendedPrice(inBookingDetails.TicketPrice, discount);
+
 
             newBooking = (Booking)inBookingDetails;
 
@@ -70,6 +93,15 @@ namespace com.WanderingTurtle.FormPresentation
             MessageBox.Show("Booking changed successfully.");
 
             this.Close();
+        }
+
+        private decimal calcExtendedPrice(decimal price, decimal discount)
+        {
+            decimal extendedPrice;
+
+            extendedPrice = ((100 - discount)/ 100) * price;
+
+            return extendedPrice;
         }
     }
 }
