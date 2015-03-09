@@ -42,6 +42,7 @@
         <Label  Grid.Row="4" Grid.Column="3" x:Name="lblTotalDue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
         <Label  Grid.Row="5" Grid.Column="0" x:Name="lblCancelMessage" Grid.ColumnSpan="4" FontStyle="Italic" HorizontalContentAlignment="Center" />
         <Button Grid.Row="6" Grid.Column="1" Content="Submit" x:Name="BtnSubmit" Margin="0,0,70,0" Click="btnConfirmCancel_Click" />
-        <Button Grid.Row="6" Grid.Column="2" Content="Cancel" x:Name="BtnCancel" Margin="0,0,120,0" Click="BtnCancel_Click" Grid.ColumnSpan="2" />
+        <Button Grid.Row="6" Grid.Column="2" Name="cancelButton" IsCancel="True">Cancel</Button>
+
     </Grid>
 </Window>

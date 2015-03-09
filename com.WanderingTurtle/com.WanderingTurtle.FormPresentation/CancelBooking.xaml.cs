@@ -95,7 +95,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     MessageBox.Show("The booking has been cancelled.");
                     // closes window after cancel
-                    this.Close();
+                   // this.Close();
                 }
              }
              catch (Exception ex)
