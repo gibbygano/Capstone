@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:system="clr-namespace:System;assembly=mscorlib"
 	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:child="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
 	x:Class="com.WanderingTurtle.FormPresentation.App"
 	StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -12,29 +13,33 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type Window}" x:Key="WindowStyle" />
+            <!--Style TargetType="{x:Type child:ChildWindow}" x:Key="WindowStyle" /-->
             <Style TargetType="{x:Type UserControl}" x:Key="UserControlStyle" />
-            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource AccentedSquareButtonStyle}">
+            <Style TargetType="{x:Type Button}" x:Key="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}">
                 <Setter Property="Padding" Value="8,3" />
                 <Setter Property="FontSize" Value="13" />
+                <Setter Property="controls:ButtonHelper.PreserveTextCase" Value="True" />
             </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button}" />
             <system:Double x:Key="TextBoxHeight">30</system:Double>
+            <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
                 <Setter Property="controls:TextBoxHelper.ClearTextButton" Value="True" />
-                <Setter Property="VerticalContentAlignment" Value="Center" />
             </Style>
             <Style TargetType="{x:Type ComboBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type PasswordBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Thickness x:Key="Grid Margin">5</Thickness>
             <Thickness x:Key="Button Spacing">0,0,5,0</Thickness>

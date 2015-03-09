@@ -4,47 +4,56 @@ using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation.Views
 {
-	/// <summary>
-	/// Interaction logic for TabContainer.xaml
-	/// </summary>
-	public partial class TabContainer
-	{
-		public TabContainer()
-		{
-			InitializeComponent();
+    /// <summary>
+    /// Interaction logic for TabContainer.xaml
+    /// </summary>
+    public partial class TabContainer
+    {
+        public TabContainer()
+        {
+            InitializeComponent();
 
-			switch (Globals.UserToken != null ? Globals.UserToken.Level : RoleData.Admin)
-			{
-				case RoleData.Admin:
-					AddTab(TabName.Events, new ListEvents());
-					AddTab(TabName.Listings, new ListTheListings());
-					AddTab(TabName.Suppliers, new ListSuppliers());
-					AddTab(TabName.Employees, new ListTheEmployees());
-					AddTab(TabName.HotelGuests, new ListHotelGuests());
-					break;
-			}
-		}
+            switch (Globals.UserToken != null ? Globals.UserToken.Level : RoleData.Admin)
+            {
+                case RoleData.Admin:
+                    AddTab(TabName.Events, new ListEvents());
+                    AddTab(TabName.Listings, new ListTheListings());
+                    AddTab(TabName.Suppliers, new ListSuppliers());
+                    AddTab(TabName.Employees, new ListTheEmployees());
+                    AddTab(TabName.HotelGuests, new ListHotelGuests());
+                    break;
 
-		private void AddTab(string tabName, object tabContent)
-		{
-			((TabControl)Content).Items.Add(new TabItem
-			{
-				Header = tabName,
-				Content = tabContent
-			});
-		}
+                case RoleData.Concierge:
+                    break;
 
-		private static class TabName
-		{
-			internal static string Events { get { return "Events"; } }
+                case RoleData.DeskClerk:
+                    break;
 
-			internal static string Listings { get { return "Listings"; } }
+                case RoleData.Valet:
+                    break;
+            }
+        }
 
-			internal static string Suppliers { get { return "Suppliers"; } }
+        private void AddTab(string tabName, object tabContent)
+        {
+            ((TabControl)Content).Items.Add(new TabItem
+            {
+                Header = tabName,
+                Content = tabContent
+            });
+        }
 
-			internal static string Employees { get { return "Employees"; } }
+        private static class TabName
+        {
+            internal static string Events { get { return "Events"; } }
 
-			internal static string HotelGuests { get { return "Hotel Guests"; } }
-		}
-	}
+            internal static string Listings { get { return "Listings"; } }
+
+            internal static string Suppliers { get { return "Suppliers"; } }
+
+            internal static string Employees { get { return "Employees"; } }
+
+            internal static string HotelGuests { get { return "Hotel Guests"; } }
+        }
+    }
 }
