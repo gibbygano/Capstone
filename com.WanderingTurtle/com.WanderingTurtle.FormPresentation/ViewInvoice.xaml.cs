@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -171,8 +170,8 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            try
-            {
+            //try
+            //{
                 //opens UI with guest information                  
                 ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
@@ -181,13 +180,12 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }
-
 
         /// <summary>
         /// Created by Pat Banks 2015/03/09
@@ -208,24 +206,6 @@ namespace com.WanderingTurtle.FormPresentation
             return false;
         }
 
-        private bool CheckBookingQuantity()
-        {
-            if (myBooking.Quantity == 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private bool CheckBookingDate()
-        {
-            if (myBooking.StartDate < DateTime.Now)
-            {
-                return true;
-            }
-            return false;
-        }
-
         /// Created By: Tony Noel, 2015/03/04
         /// <summary>
         /// Cancel booking button to open cancel form.
@@ -236,20 +216,28 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCancelBooking_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckBookingDate())
+            //check if something was selected
+            if (lvGuestBookings.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a booking to cancel.");
+                return;
+            }
+
+            //attempts to create a booking details object with the selected line items
+            BookingDetails myBooking = (BookingDetails)lvGuestBookings.SelectedItem;
+
+            if (CheckBookingDate(myBooking.StartDate))
             {
                 MessageBox.Show("Cancellations are not allowed for bookings in the past.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            else if (CheckBookingQuantity())
+            else if (CheckBookingQuantity(myBooking.Quantity))
             {
                 MessageBox.Show("This booking has already been cancelled.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-            
+            }       
             
             try
             {
-                //attempts to create a booking details object with the selected line items
-                BookingDetails myBooking = (BookingDetails)lvGuestBookings.SelectedItems[0];
+                
                 //opens the ui and passes the booking details object in
                 CancelBooking cancel = new CancelBooking(myBooking, invoiceToView);
                 
@@ -264,5 +252,24 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show("To cancel a booking, please select the desired booking first.", ex.Message);
             }
         }
+
+        private bool CheckBookingQuantity(int quantity)
+        {
+            if (quantity == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckBookingDate(DateTime date)
+        {
+            if (date < DateTime.Now)
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
