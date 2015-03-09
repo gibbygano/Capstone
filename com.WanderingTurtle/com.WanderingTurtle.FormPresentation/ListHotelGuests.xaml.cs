@@ -193,7 +193,8 @@ namespace com.WanderingTurtle.FormPresentation
 
             string header = string.Empty;
 
-            // if binding is used and property name doesn't match header content 
+            // if binding is used and property name doesn't match header content
+            // Rose - while working on Mask, somehow hit a NullReferenceException here, please take a look
             Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
 
             if (b != null)
