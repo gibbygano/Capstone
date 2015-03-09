@@ -1,17 +1,17 @@
-﻿<ui:MetroWindow x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
+﻿<metro:MetroWindow x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
 				Style="{DynamicResource WindowStyle}"
 				xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	 			xmlns:ui="http://metro.mahapps.com/winfx/xaml/controls"
+	 			xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
 				xmlns:views="clr-namespace:com.WanderingTurtle.FormPresentation.Views"
 				Title="MainWindow" Height="525" Width="950" MinHeight="125"
 				WindowStartupLocation="CenterScreen">
-    <ui:TransitioningContentControl x:Name="MainContent" Transition="Default">
+    <metro:TransitioningContentControl x:Name="MainContent" Transition="Default" Margin="{DynamicResource Grid Margin}">
         <views:SplashScreen />
-    </ui:TransitioningContentControl>
-    <ui:MetroWindow.RightWindowCommands>
-        <ui:WindowCommands>
+    </metro:TransitioningContentControl>
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands>
             <Button Content="Sign In/Out" Click="BtnSignInOut_Click" />
-        </ui:WindowCommands>
-    </ui:MetroWindow.RightWindowCommands>
-</ui:MetroWindow>
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+</metro:MetroWindow>
