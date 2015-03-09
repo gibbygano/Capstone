@@ -57,7 +57,7 @@ namespace com.WanderingTurtle.BusinessLogic
 			return numRows;
 		}
 
-		/********************  Methods not used in Sprint 1 ************************************************/
+
 
 		/// Created By: Tony Noel - 2/5/15
 		/// <summary>

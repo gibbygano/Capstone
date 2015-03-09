@@ -75,6 +75,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Created by Miguel Santana 2015/03/01
+        /// Opens the update employee UI with the selected employee
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = this.lvEmployeesList.SelectedItem;

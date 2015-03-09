@@ -174,7 +174,7 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        /********************  Methods not used in Sprint 1 ************************************************/
+
 
         ///Created By: Tony Noel - 15/2/3, Updated: Tony Noel 15/3/3
         /// <summary>
@@ -286,7 +286,5 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
-
-
     }
 }

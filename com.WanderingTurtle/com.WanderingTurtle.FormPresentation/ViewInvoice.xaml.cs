@@ -39,8 +39,6 @@ namespace com.WanderingTurtle.FormPresentation
 
             //fills the list view
             refreshBookingList();
-
-
         }
 
         /// <summary>
@@ -65,6 +63,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// 
         /// Calls the InvoiceManager method that retrieves a list of booking details for a selected guest
         /// </summary>
+        /// <remarks>
+        /// Updated by Pat Banks 2015/03/08
+        /// Added info to show the user how many bookings the guest has signed up for.
+        /// </remarks>
         private void refreshBookingList()
         {
             lvGuestBookings.ItemsPanel.LoadContent();
@@ -80,7 +82,6 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show("Unable to retrieve booking list from the database. \n" + ex.Message);
             }
         }
-
 
         /// <summary>
         /// Pat Banks
@@ -172,7 +173,7 @@ namespace com.WanderingTurtle.FormPresentation
                 //closes window after successful guest archival
                 if (new ArchiveInvoice(invoiceToView.HotelGuestID).ShowDialog() == false)
                 {
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)

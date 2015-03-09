@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
+    /// <summary>
+    /// Interaction logic for ArchiveInvoice.xaml
+    /// </summary>
     public partial class ArchiveInvoice : Window
     {
         private List<BookingDetails> myBookingList;
@@ -67,7 +70,11 @@ namespace com.WanderingTurtle.FormPresentation
                 foreach (BookingDetails b in myBookingList)
                 {
                     b.Active = false;
-                    //TBD:  call myBookingManager to archive records in db
+                    int numrows = OrderManager.EditBooking(b);
+                    if (numrows != 1)
+                    {
+                        MessageBox.Show("There was a problem archiving the booking");
+                    }
                 }
 
                 //archive hotel guest

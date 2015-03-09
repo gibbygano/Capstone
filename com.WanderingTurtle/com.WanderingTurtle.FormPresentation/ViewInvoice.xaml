@@ -11,6 +11,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
         <Label Grid.Row="0" x:Name="lblGeneralViewInvoice" Content="Guest Information" FontSize="16" FontWeight="Bold" />
 
         <Grid Grid.Row="1">

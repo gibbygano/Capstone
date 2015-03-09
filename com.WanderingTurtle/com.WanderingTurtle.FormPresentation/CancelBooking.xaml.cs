@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private BookingDetails myBooking;
         private InvoiceDetails myInvoice;
-        private decimal _cancelFee = 0m;
+        private decimal cancelFee = 0m;
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
@@ -38,8 +38,13 @@ namespace com.WanderingTurtle.FormPresentation
   
         }
         /// <summary>
-        /// Attempts to populate the textblock and the Guest labels with text pertaining to the guest booking
+        /// Created by Tony Noel, 2015/03/04
+        /// Attempts to populate the UI and the Guest labels with text pertaining to the guest booking
         /// </summary>
+        /// <remarks>
+        /// Updated by Pat Banks 2015/03/08
+        /// updated with new fields and formatting;  moved fee calculation to BLL
+        /// </remarks>
         public void populateText()
         {
             try
@@ -48,49 +53,50 @@ namespace com.WanderingTurtle.FormPresentation
                 lblGuestName.Content = myInvoice.GetFullName;
                 lblQuantity.Content = myBooking.Quantity;
                 lblEventName.Content = myBooking.EventItemName;
-                lblDiscount.Content = myBooking.Discount;
+                lblDiscount.Content = myBooking.Discount.ToString("p");
                 lblEventTime.Content = myBooking.StartDate;
-                lblTicketPrice.Content = myBooking.TicketPrice;
-                lblTotalDue.Content = myBooking.TotalCharge;
+                lblTicketPrice.Content = myBooking.TicketPrice.ToString("c");
+                lblTotalDue.Content = myBooking.TotalCharge.ToString("c");
 
-                _cancelFee = OrderManager.CalculateCancellationFee(myBooking);
-                lblCancelMessage.Content = "A fee of " + _cancelFee + " will be charged to cancel this booking.";
+                cancelFee = OrderManager.CalculateCancellationFee(myBooking);
+                lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
             }
             catch (Exception ax)
             {
                 MessageBox.Show("Hotel Guest information was not found. ", ax.Message);
             }
-
         }
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
-        /// A method to cancel a booking. First creates a booking object by searching for the original booking.
-        /// Obtains this information, then creates a new booking object using the old booking information, and the 
-        /// 3 updated fields that complete a cancel- cancel, refund, and active.
+        /// A method to cancel a booking.
         /// The object is then sent to the OrderManager-EditBooking method to be processed.
         /// </summary>
+        /// <remarks>
+        /// updated by Pat Banks 2015/03/08
+        /// updated fields to reflect cancellation of booking
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnConfirmCancel_Click(object sender, RoutedEventArgs e)
         {
-            Booking oldBook;
-            //Needs to be retooled to include the required fields to complete a cancellation- including a refund calculation and extended price/total charge calculations
             try
              {
-                 //Grabbing old booking information
-                 oldBook = OrderManager.RetrieveBooking(myBooking.BookingID);
+                int returnedTix = myBooking.Quantity;
+                myBooking.TotalCharge = cancelFee;
+                myBooking.Quantity = 0;
+                myBooking.TicketPrice = 0;
+                myBooking.ExtendedPrice = 0;
+                myBooking.Discount = 0;
                 
-                 //New booking object created with original fields and the three updated fields.
-                 //Booking toCancel = new Booking(oldBook.BookingID, oldBook.GuestID, oldBook.EmployeeID, oldBook.ItemListID, oldBook.Quantity, oldBook.DateBooked, refund, active);
-                 //int result = OrderManager.EditBooking(toCancel);
-                 //if (result == 1)
-                 //{
-                 //    MessageBox.Show("The booking has been cancelled.");
-                 //    // closes window after cancel
-                 //    this.Close();
-                 //}
-                
+  //TBD need to add quantity of tix back to the listing
+                int result = OrderManager.EditBooking(myBooking);
+                if (result == 1)
+                {
+                    MessageBox.Show("The booking has been cancelled.");
+                    // closes window after cancel
+                   // this.Close();
+                }
              }
              catch (Exception ex)
              {
@@ -103,9 +109,5 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
