@@ -11,16 +11,14 @@ namespace com.WanderingTurtle.Common
     /// Has a default constructor, and one to accept 2 ints, 2 strings, another int, and two datetimes
     /// Extends booking so that all information on a booking can be linked to the event information.
     /// </summary>
-    public class ListItemObject : Booking
+    public class ListItemObject : ItemListing
     {
-        public int EventID { get; set; }
-        public string EventName { get; set; }
+     
         public string EventDescription { get; set; }
         public int QuantityOffered { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+  
 
-        public ListItemObject()
+        public ListItemObject() : base()        
         {
 
         }

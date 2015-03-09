@@ -36,8 +36,8 @@ namespace com.WanderingTurtle.DataAccess
                         var currentBook = new ListItemObject();
                         //Below are found on the ItemListing table (ItemListID is a foriegn key on booking)
                         currentBook.ItemListID = reader.GetInt32(0);
-    //currentBook.MaxNumberOfGuests = reader.GetInt32(1);
-    //currentBook.CurrentNumberOfGuests = reader.GetInt32(2);
+                        currentBook.MaxNumGuests = reader.GetInt32(1);
+                        currentBook.CurrentNumGuests = reader.GetInt32(2);
                         currentBook.StartDate = reader.GetDateTime(3);
                         currentBook.EndDate = reader.GetDateTime(4);
                         //Below are found on the EventItem table
@@ -45,7 +45,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentBook.EventName = reader.GetString(6);
                         currentBook.EventDescription = reader.GetString(7);
                         //this is from itemlisting table
-                        currentBook.TicketPrice = reader.GetDecimal(8);
+                        currentBook.Price = reader.GetDecimal(8);
 
                         BookingOpsList.Add(currentBook);
                     }

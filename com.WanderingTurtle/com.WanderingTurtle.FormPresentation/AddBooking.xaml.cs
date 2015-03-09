@@ -23,6 +23,9 @@ namespace com.WanderingTurtle.FormPresentation
     {
         public List<ListItemObject> myEventList;
         public InvoiceDetails inInvoice;
+        public ProductManager addBookingProdManager = new ProductManager();
+        public ItemListing updatedItem;
+        public ItemListing originalItem;
 
         public AddBooking(InvoiceDetails inInvoice)
         {
@@ -31,10 +34,21 @@ namespace com.WanderingTurtle.FormPresentation
             this.inInvoice = inInvoice;
 
             myEventList = OrderManager.RetrieveListItemList();
+
             InitializeComponent();
+
+            foreach (ListItemObject lIO in myEventList)
+            {
+                originalItem = addBookingProdManager.RetrieveItemListing(lIO.ItemListID.ToString());
+
+                lIO.QuantityOffered = availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+            }
+
             lvAddBookingListItems.ItemsSource = myEventList;
 
             lblAddBookingGuestName.Content = inInvoice.GetFullName;
+
+            
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
@@ -54,9 +68,9 @@ namespace com.WanderingTurtle.FormPresentation
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
-            int eID, gID, qID;
+            int eID, gID, qID, discount;
             Booking myBooking;
-
+            decimal extendedPrice, totalPrice;
 
             if (isEmp(empID) == false)
             {
@@ -68,32 +82,60 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (lvAddBookingListItems.SelectedIndex.Equals(-1))
             {
-                MessageBox.Show("Please select an event!");
+                MessageBox.Show("Please select an event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
 
-            int.TryParse(quantity, out qID);
-            //Quantity field on the table needs to be a calculated field in order for this to work.- ListItemObject has a max#guest field and a Current#guest field that will be used to calculate quantity
-            /*if (okQuantity(quantity) == false || qID <= 0)
+            selected = getSelectedItem();
+
+            originalItem = addBookingProdManager.RetrieveItemListing(selected.ItemListID.ToString());
+
+            int.TryParse(tbAddBookingDiscount.Text, out discount);
+
+            if (tbAddBookingDiscount.Text == null)           
             {
-                MessageBox.Show("Please review the quantity entered. Must be a positive number and cannot excede the quantity offered for the event.");
+                discount = 0;
+            }
+            else if (discount > 100 )
+            {
+                MessageBox.Show("Discount cannot be greater than 100%. \nPlease enter a different discount.");
+                tbAddBookingDiscount.Clear();
+                tbAddBookingDiscount.Focus();
+                return;
+            }
+
+            int.TryParse(quantity, out qID);
+            //Quantity field on the table needs to be a calculated field in order for this to work.- ItemListing has a max#guest field and a Current#guest field that will be used to calculate quantity
+            if (okQuantity(quantity, availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests)) == false || qID <= 0)
+            {
+                MessageBox.Show("Please review the quantity entered:" +
+                    " \nMust be a positive number and cannot excede the quantity available for the event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
-            }*/
-            /*
+            }
+            
          try
          {
-             selected = getSelectedItem();
+             extendedPrice = calcExtendedPrice(selected.Price, discount);
+
+             totalPrice = calcTotalPrice(qID, extendedPrice); 
                 
              int.TryParse(empID, out eID);
              //eID = (int)Globals.UserToken.EmployeeID;
              gID = inInvoice.HotelGuestID;
              //This method call needs to be updated to include a calculated extended price and total charge to be added to the database.
-             //myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate, selected.TicketPrice,);
-           
+             myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate, selected.Price, extendedPrice, discount, totalPrice);
+
+             updatedItem = originalItem;
+
+             updatedItem.CurrentNumGuests = originalItem.CurrentNumGuests + qID;
+
+             //addBookingProdManager.EditItemListing(originalItem, updatedItem);
+
              //calls to booking manager to add a booking. BookingID is auto-generated in database                
             int result = OrderManager.AddaBooking(myBooking);
+
              if (result == 1)
              {
                  MessageBox.Show("The booking has been successfully added.");
@@ -104,7 +146,7 @@ namespace com.WanderingTurtle.FormPresentation
          catch (Exception ax)
          {
              MessageBox.Show(ax.Message);
-         }*/
+         }
 
         }//end method addBooking()
 
@@ -149,6 +191,29 @@ namespace com.WanderingTurtle.FormPresentation
                 return works;
             }
         }
+
+        private decimal calcExtendedPrice(decimal price, decimal discount)
+        {
+            decimal extendedPrice;
+
+            extendedPrice = ((100 - discount) / 100) * price;
+
+            return extendedPrice;
+        }
+
+        private decimal calcTotalPrice(int quantity, decimal extendedPrice)
+        {
+            return (decimal)quantity * extendedPrice;
+        }
+
+        private int availableQuantity(int maxQuantity, int currentQuantity)
+        {
+            int availableQuantity;
+
+            availableQuantity = maxQuantity - currentQuantity;
+
+            return availableQuantity;
+        }
         /*method to check a quantity
          * takes a string
          * if the string is successfully parsed, and the variable it parses to is less
@@ -156,13 +221,13 @@ namespace com.WanderingTurtle.FormPresentation
          * else return false.
          * Tony Noel 2/18/2015
          */
-        private bool okQuantity(string quantity)
+        private bool okQuantity(string quantity, int available)
         {
             bool works = false;
             int q;
             int.TryParse(quantity, out q);
-            ListItemObject myItem = getSelectedItem();
-            if (Validator.ValidateInt(quantity) == true && q <= myItem.QuantityOffered )
+            ListItemObject myItemObject = getSelectedItem();
+            if (Validator.ValidateInt(quantity) == true && q <= available )
             {
                 works = true;
                 return works;
