@@ -165,13 +165,19 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnCloseInvoice_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckFutureBookingDateAndQty() == true)
+            {
+                MessageBox.Show("Guest has bookings in the future and cannot be checked out.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             try
             {
-                //opens UI with guest information
+                //opens UI with guest information                  
                 ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
                 //closes window after successful guest archival
-                if (new ArchiveInvoice(invoiceToView.HotelGuestID).ShowDialog() == false)
+                if (myGuest.ShowDialog() == false)
                 {
                     Close();
                 }
@@ -180,6 +186,44 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+
+        /// <summary>
+        /// Created by Pat Banks 2015/03/09
+        /// 
+        /// Checks if a booking is in the future and has tickets booked
+        /// If fails, then guest cannot checkout
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckFutureBookingDateAndQty()
+        {
+            foreach (BookingDetails b in myBookingList)
+            {
+                if (b.StartDate > DateTime.Now && b.Quantity > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool CheckBookingQuantity()
+        {
+            if (myBooking.Quantity == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool CheckBookingDate()
+        {
+            if (myBooking.StartDate < DateTime.Now)
+            {
+                return true;
+            }
+            return false;
         }
 
         /// Created By: Tony Noel, 2015/03/04
@@ -192,6 +236,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCancelBooking_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckBookingDate())
+            {
+                MessageBox.Show("Cancellations are not allowed for bookings in the past.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else if (CheckBookingQuantity())
+            {
+                MessageBox.Show("This booking has already been cancelled.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            
+            
             try
             {
                 //attempts to create a booking details object with the selected line items

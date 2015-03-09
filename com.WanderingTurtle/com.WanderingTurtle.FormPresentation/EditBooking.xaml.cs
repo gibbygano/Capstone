@@ -49,7 +49,6 @@ namespace com.WanderingTurtle.FormPresentation
 
             inQuantity = tbEditBookingQuantity.Text;
 
-
             if(!int.TryParse(inQuantity, out quantity))
             {
                 MessageBox.Show("Please enter a whole number for quantity.");

@@ -37,6 +37,7 @@ namespace com.WanderingTurtle.FormPresentation
             populateText();
   
         }
+
         /// <summary>
         /// Created by Tony Noel, 2015/03/04
         /// Attempts to populate the UI and the Guest labels with text pertaining to the guest booking
@@ -103,11 +104,5 @@ namespace com.WanderingTurtle.FormPresentation
                  MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
              }
         }
-
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }
