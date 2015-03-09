@@ -1,13 +1,15 @@
 ﻿CREATE TABLE [dbo].[Booking] (
 	[BookingID] 	int				NOT NULL IDENTITY(100,1),
 	[GuestID]	    int				NOT NULL,
-	[EmployeeID]    int             NULL,
+	[EmployeeID]    int             NOT NULL,
 	[ItemListID]	int				NOT NULL,
 	[Quantity]		int				NOT NULL,
 	[DateBooked]    DATETIME		NOT NULL,
-	[Cancel]		bit				NOT NULL Default '0', /*Is booking cancelled? 0 means no.*/
-	[Refund]		decimal(3,2)    NOT NULL Default '0.0',
-	[Active]		bit				NOT NULL Default '1'
+	[Discount]		decimal(3,2)    NOT NULL Default '0.0',
+	[Active]		bit				NOT NULL Default '1',
+	[TicketPrice]   decimal(8,2)	NOT NULL,
+	[ExtendedPrice] decimal(12,2)	NOT NULL,
+	[TotalCharge]	decimal(12,2)	NOT NULL
 		CONSTRAINT [pk_BookingID] PRIMARY KEY CLUSTERED ([BookingID] ASC)
 	WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON ) ON [PRIMARY]
 	

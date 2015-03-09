@@ -5,7 +5,7 @@ using System.Text;
 
 namespace com.WanderingTurtle.Common
 {
-    ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2
+    ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2, Updated with new fields for prices Tony Noel 15/3/6
     /// <summary>
     /// Booking- a class used to create a booking object. Has a default constructor, one that takes 5 arguments (which will be used in adds)
     /// and another that takes all 9 arguments
@@ -19,9 +19,11 @@ namespace com.WanderingTurtle.Common
         public int ItemListID { get; set; }
         public int Quantity { get; set; }
         public DateTime DateBooked { get; set; }
-        public bool Cancel { get; set; }
-        public decimal Refund { get; set; }
+        public decimal Discount { get; set; }
         public bool Active { get; set; }
+        public decimal TicketPrice { get; set; }
+        public decimal ExtendedPrice { get; set; }
+        public decimal TotalCharge { get; set; }
 
         public Booking()
         {
@@ -29,14 +31,14 @@ namespace com.WanderingTurtle.Common
         }
 
         /// <summary>
-        /// Constructor for a booking object- 5 arguments
+        /// Constructor for a booking object- 8 arguments
         /// </summary>
         /// <param name="guestID"></param>
         /// <param name="empID"></param>
         /// <param name="itemID"></param>
         /// <param name="bQuantity"></param>
         /// <param name="dateBooked"></param>
-        public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked)
+        public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal ticket, decimal extended, decimal total)
         {
 
             GuestID = guestID;
@@ -44,8 +46,26 @@ namespace com.WanderingTurtle.Common
             ItemListID = itemID;
             Quantity = bQuantity;
             DateBooked = dateBooked;
+            TicketPrice = ticket;
+            ExtendedPrice = extended;
+            TotalCharge = total;
         }
-        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, bool cancel, decimal refund, bool active)
+        /// <summary>
+        /// Full constructor to take all arguments for Booking
+        /// Tony Noel- 15/3/6
+        /// </summary>
+        /// <param name="bookingID"></param>
+        /// <param name="guestID"></param>
+        /// <param name="empID"></param>
+        /// <param name="itemID"></param>
+        /// <param name="bQuantity"></param>
+        /// <param name="dateBooked"></param>
+        /// <param name="refund"></param>
+        /// <param name="active"></param>
+        /// <param name="ticket"></param>
+        /// <param name="extended"></param>
+        /// <param name="total"></param>
+        public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal discount, bool active, decimal ticket, decimal extended, decimal total)
         {
             BookingID = bookingID;
             GuestID = guestID;
@@ -53,11 +73,12 @@ namespace com.WanderingTurtle.Common
             ItemListID = itemID;
             Quantity = bQuantity;
             DateBooked = dateBooked;
-            Cancel = cancel;
-            Refund = refund;
+            Discount = discount;
             Active = active;
+            TicketPrice = ticket;
+            ExtendedPrice = extended;
+            TotalCharge = total;
         }
-
     }
     /// <summary>
     /// Pat Banks
@@ -66,15 +87,14 @@ namespace com.WanderingTurtle.Common
     /// Booking Details inherits from a Booking. Object holds additional information for a booking to show on an invoice.
     /// </summary>
     /// <remarks>
+    /// Updated by Pat Banks 2015/03/07
+    /// Deleted Price and total price that are no longer needed
     /// </remarks>
     public class BookingDetails : Booking
     {
-        public decimal Price { get; set; }
         public string EventItemName { get; set; }
         public DateTime StartDate { get; set; }
-        public decimal TotalPrice { get; set; }
         public int InvoiceID { get; set; }
-        public decimal GetTotalCost { get { return (this.Quantity * this.Price); } }
 
         public BookingDetails() : base() { }
 

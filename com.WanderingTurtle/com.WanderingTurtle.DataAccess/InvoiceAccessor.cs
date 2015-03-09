@@ -49,12 +49,13 @@ namespace com.WanderingTurtle.DataAccess
                         details.ItemListID = reader.GetInt32(3);
                         details.Quantity = reader.GetInt32(4);
                         details.DateBooked = reader.GetDateTime(5);
-                        details.Cancel = reader.GetBoolean(6);
-                        details.Refund = reader.GetDecimal(7);
-                        details.Active = reader.GetBoolean(8);
-                        details.Price = reader.GetDecimal(9);
-                        details.StartDate = reader.GetDateTime(10);
-                        details.EventItemName = reader.GetValue(11).ToString();
+                        details.Discount = reader.GetDecimal(6);
+                        details.Active = reader.GetBoolean(7);
+                        details.TicketPrice = reader.GetDecimal(8);
+                        details.ExtendedPrice = reader.GetDecimal(9);
+                        details.TotalCharge = reader.GetDecimal(10);
+                        details.StartDate = reader.GetDateTime(11);
+                        details.EventItemName = reader.GetString(12);
 
                         guestBookings.Add(details);
                     }

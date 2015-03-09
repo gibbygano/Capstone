@@ -1,48 +1,44 @@
 ﻿<Application
-    x:Class="com.WanderingTurtle.FormPresentation.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:System="clr-namespace:System;assembly=mscorlib"
-    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    StartupUri="MainWindow.xaml">
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:system="clr-namespace:System;assembly=mscorlib"
+	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+	x:Class="com.WanderingTurtle.FormPresentation.App"
+	StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="BackgroundColor" Color="#FFE5E5E5" />
-        <Style TargetType="{x:Type Window}" x:Key="WindowStyle">
-            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
-        </Style>
-        <Style TargetType="{x:Type UserControl}" x:Key="UserControlStyle">
-            <Setter Property="FontSize" Value="12" />
-        </Style>
-        <Style TargetType="{x:Type TabControl}" x:Name="tabNames">
-            <Setter Property="Background" Value="{StaticResource BackgroundColor}" />
-        </Style>
-        <Style TargetType="{x:Type TabItem}">
-            <Setter Property="FontSize" Value="13" />
-        </Style>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Padding" Value="8,2" />
-            <Setter Property="FontSize" Value="13" />
-        </Style>
-        <System:Double x:Key="TextBoxHeight">30</System:Double>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
-        </Style>
-        <Style TargetType="{x:Type ComboBox}">
-            <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
-        </Style>
-        <Style TargetType="{x:Type PasswordBox}">
-            <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
-        </Style>
-        <Style TargetType="{x:Type xctk:MaskedTextBox}">
-            <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
-        </Style>
-        <Thickness x:Key="Grid Margin">5</Thickness>
-        <Thickness x:Key="Button Spacing">0,3,5,0</Thickness>
-
-        <!-- These Need to be removed -->
-        <Thickness x:Key="Button Margin">0,3,5,0</Thickness>
-        <Thickness x:Key="Button Padding">10,5</Thickness>
-        <SolidColorBrush x:Key="Standard" Color="#FFE5E5E5" />
-        <System:Double x:Key="Main Font Size">12</System:Double>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
+                <ResourceDictionary />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type Window}" x:Key="WindowStyle" />
+            <Style TargetType="{x:Type UserControl}" x:Key="UserControlStyle" />
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource AccentedSquareButtonStyle}">
+                <Setter Property="Padding" Value="8,2" />
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <system:Double x:Key="TextBoxHeight">30</system:Double>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+                <Setter Property="controls:TextBoxHelper.ClearTextButton" Value="True" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+            </Style>
+            <Thickness x:Key="Grid Margin">5</Thickness>
+            <Thickness x:Key="Button Spacing">0,3,5,0</Thickness>
+            <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="AutoGenerateColumns" Value="False" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

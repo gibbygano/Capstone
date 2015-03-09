@@ -17,7 +17,7 @@ VALUES
 ('52404', 'Cedar Rapids', 'IA'),
 ('10007', 'New York City', 'NY'),
 ('10001', 'New York City', 'NY'),
-('52014', 'Chiliton', 'WI'),
+('52014', 'Chilton', 'WI'),
 ('58214', 'Arvilla', 'ND'),
 ('50229', 'Pleasantville', 'IA'),
 ('12235', 'Albany', 'NY'),
@@ -44,7 +44,7 @@ VALUES
 ('David', 'Tennant', '52404', '234 33rd Ave SW', ' ', '319-258-4566', 'comewithme@yahoo.com', 101),
 ('Edward', 'Elric', '52641', '2234 Benton Ave', ' ', ' ', ' ', 102),
 ('Alphonse', 'Elric', '10001', '123 Wall St', 'Apt 114', ' ', 'fullmetal@gmail.com', 103),
-('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', ' ', '123-145-9908',' ', 104),
+('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', ' ', '223-145-9908',' ', 104),
 ('Rose', 'Tyler', '73078', '6453 Benton Ave', ' ','223-456-1234', ' ', 105),
 ('Martha', 'Jones', '73078', '6453 Benton Ave', ' ', ' ', ' ', 201),
 ('Susan', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', ' ', ' ', 202),
@@ -81,11 +81,13 @@ VALUES
 ('Entertainment')
 GO
 
-INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, QuantityOffered, ProductSize, Active, SupplierID)
+INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, Active, SupplierID)
 VALUES
-('2015-03-01', '2015-03-01', 100, 15.00, 10, 'One Boat', 1, 100),
-('2015-03-01', '2015-03-01', 101, 25.00, 30, 'One Excursion', 1, 100),
-('2015-03-01', '2015-03-01', 102, 5.00, 50, 'One Trip', 1, 100)
+('2015-03-10', '2015-03-10', 100, 15.00, 1, 100),
+('2015-03-11', '2015-03-11', 101, 25.00, 1, 101),
+('2015-03-12', '2015-03-12', 102, 5.00, 1, 102),
+('2015-03-05', '2015-03-06', 101, 20.00, 1, 100),
+('2015-03-07', '2015-03-07', 102, 10.00, 1, 102)
 GO
 
 INSERT INTO [dbo].[Lists]  (SupplierID, ItemListID, DateListed)
@@ -95,13 +97,15 @@ VALUES
 (102,102, GETDATE())
 GO
 
-INSERT INTO [dbo].[Booking] (GuestID, EmployeeID, ItemListID, Quantity, DateBooked)
+INSERT INTO [dbo].[Booking] (GuestID, EmployeeID, ItemListID, Quantity, DateBooked, Discount, Active, TicketPrice, ExtendedPrice, TotalCharge)
 VALUES
-(1, 103, 100, 6, CURRENT_TIMESTAMP),
-(2, 101, 101, 2, CURRENT_TIMESTAMP),
-(3, 102, 102, 5, CURRENT_TIMESTAMP),
-(4, 104, 102, 1, CURRENT_TIMESTAMP),
-(4, 104, 101, 4, CURRENT_TIMESTAMP)
+(1, 103, 100, 6, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 15.00, 90.00, 90.00),
+(2, 101, 101, 2, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 25.00, 50.00, 50.00) ,
+(3, 102, 102, 5, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 5.00, 25.00, 25.00 ),
+(4, 104, 102, 1, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 5.00, 5.00, 5.00),
+(4, 104, 101, 4, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 25.00, 100.00, 100.00),
+(6, 104, 103, 4, '2015-03-04', DEFAULT, DEFAULT, 20.00, 80.00, 80.00),
+(7, 104, 104, 10, '2015-03-04', .10, DEFAULT, 9.00, 90.00, 90.00)
 GO
 INSERT INTO [dbo].[Invoice] (HotelGuestID, Active, DateOpened)
 VALUES

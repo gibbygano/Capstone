@@ -206,8 +206,8 @@
     <Content Include="Scripts\jquery-ui-1.11.3.js" />
     <Content Include="Scripts\jquery-ui-1.11.3.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="SupplierAddEvent.aspx" />
-    <Content Include="SupplierViewEvents.aspx" />
+    <Content Include="Pages\SupplierAddEvent.aspx" />
+    <Content Include="Pages\SupplierViewEvents.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -299,18 +299,18 @@
     <Compile Include="Site.Mobile.Master.designer.cs">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="SupplierAddEvent.aspx.cs">
+    <Compile Include="Pages\SupplierAddEvent.aspx.cs">
       <DependentUpon>SupplierAddEvent.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SupplierAddEvent.aspx.designer.cs">
+    <Compile Include="Pages\SupplierAddEvent.aspx.designer.cs">
       <DependentUpon>SupplierAddEvent.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SupplierViewEvents.aspx.cs">
+    <Compile Include="Pages\SupplierViewEvents.aspx.cs">
       <DependentUpon>SupplierViewEvents.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SupplierViewEvents.aspx.designer.cs">
+    <Compile Include="Pages\SupplierViewEvents.aspx.designer.cs">
       <DependentUpon>SupplierViewEvents.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">

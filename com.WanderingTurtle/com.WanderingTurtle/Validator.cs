@@ -30,7 +30,7 @@ namespace com.WanderingTurtle
         /// <returns>boolean value if string only contains allowed characters</returns>
         public static bool ValidateString(string inputToValidate)
         {
-            return Regex.IsMatch(inputToValidate, @"^[a-zA-Z']+$");
+            return Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z']+$");
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
             }
             else
             {
@@ -66,7 +66,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars && inputToValidate.Length <= maxNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z']+$");
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
             }
             else
             {
@@ -147,7 +147,7 @@ namespace com.WanderingTurtle
         /// <returns>boolean value if string only contains allowed characters</returns>
         public static bool ValidateAlphaNumeric(string inputToValidate)
         {
-            return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s]+$");
+            return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s-]+$");
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s]+$");
+                return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s-]+$");
             }
             else
             {
@@ -184,7 +184,7 @@ namespace com.WanderingTurtle
         {
             if (inputToValidate.Length >= minNumOfChars && inputToValidate.Length <= maxNumOfChars)
             {
-                return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s]+$");
+                return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s-]+$");
             }
             else
             {
@@ -598,6 +598,29 @@ namespace com.WanderingTurtle
             }
         }
 
+
+    }
+
+    public static class StringTool
+    {
+        /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/03/07
+        /// 
+        /// Extention method to truncate a string to the specified character length
+        /// and add an ellipses to indicate it had been truncated.
+        /// </summary>
+        /// <param name="source">string that needs to be truncated</param>
+        /// <param name="length">length to truncate the string to</param>
+        /// <returns>shortened string</returns>
+        public static string Truncate(this string source, int length)
+        {
+            if (source.Length > length)
+            {
+                source = source.Substring(0, length) + "...";
+            }
+            return source;
+        }
 
     }
 }

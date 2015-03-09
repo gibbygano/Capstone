@@ -1,34 +1,17 @@
-﻿<Window
-    x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
-    Style="{DynamicResource WindowStyle}"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:com.WanderingTurtle.FormPresentation"
-    xmlns:System="clr-namespace:System;assembly=mscorlib"
-    Title="MainWindow" Height="525" Width="950" MinHeight="125"
-    WindowStartupLocation="CenterScreen">
-    <Grid>
-        <TabControl x:Name="tabNames">
-
-            <TabItem Header="Events">
-                <local:ListEvents />
-            </TabItem>
-
-            <TabItem Header="Listings">
-                <local:ListTheListings />
-            </TabItem>
-
-            <TabItem Header="Suppliers">
-                <local:ListSuppliers />
-            </TabItem>
-
-            <TabItem Header="Employees">
-                <local:ListTheEmployees />
-            </TabItem>
-
-            <TabItem Header="Hotel Guests">
-                <local:ListHotelGuests />
-            </TabItem>
-        </TabControl>
-    </Grid>
-</Window>
+﻿<controls:MetroWindow
+	x:Class="com.WanderingTurtle.FormPresentation.MainWindow"
+	Style="{DynamicResource WindowStyle}"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+	Title="MainWindow" Height="525" Width="950" MinHeight="125"
+	WindowStartupLocation="CenterScreen">
+	<Grid>
+		<TabControl x:Name="TabControl" />
+	</Grid>
+	<controls:MetroWindow.RightWindowCommands>
+		<controls:WindowCommands>
+			<Button Content="Sign Out" />
+		</controls:WindowCommands>
+	</controls:MetroWindow.RightWindowCommands>
+</controls:MetroWindow>

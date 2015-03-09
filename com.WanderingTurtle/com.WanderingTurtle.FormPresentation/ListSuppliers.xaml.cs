@@ -42,12 +42,17 @@ namespace com.WanderingTurtle.FormPresentation
         /// opens the AddSupplier window
         /// ceated by Pat 15/2/6
         /// </summary>
+        /// <remarks>
+        /// Edited to make it a singleton pattern
+        /// By Will Fritz 15/3/6
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
         {
-            Window AddSupplier = new AddSupplier();
-            AddSupplier.Show();
+            AddSupplier addSupplier;
+            addSupplier = new AddSupplier();
+            addSupplier.ShowDialog();
         }
 
         /// <summary>
@@ -79,6 +84,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// Will get selected supplier and fill the add/edit tab with info
         /// Created by Will Fritz 15/2/6
         /// </summary>
+        /// <remarks>
+        /// Edited to make it a singleton pattern
+        /// By Will Fritz 15/3/6
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -86,8 +95,10 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Supplier supplierToUpdate = (Supplier)lvSuppliersList.SelectedItems[0];
-                AddSupplier addSupplier = new AddSupplier();
-                addSupplier.Show();
+
+                AddSupplier addSupplier;
+                addSupplier = new AddSupplier();
+                addSupplier.ShowDialog();
                 addSupplier.FillUpdateList(supplierToUpdate);
             }
             catch (Exception)
@@ -122,7 +133,7 @@ namespace com.WanderingTurtle.FormPresentation
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
         private GridViewColumnHeader _sortColumn;
-        
+
         /// <summary>
         /// This method will sort the listview column in both asending and desending order
         /// Created by Will Fritz 15/2/27

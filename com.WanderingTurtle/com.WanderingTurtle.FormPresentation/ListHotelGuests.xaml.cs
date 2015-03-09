@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
         public ListHotelGuests()
         {
             InitializeComponent();
-            refreshList();
+            RefreshGuestList();
         }
 
         /// <summary>
@@ -39,12 +39,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated 2015/03/03
         /// Changed display items for list of guests retrieved from the invoice manager
         /// </remarks>
-        private void refreshList()
+        private void RefreshGuestList()
         {
+            lvHotelGuestList.ItemsPanel.LoadContent();
+
             try
             {
                 var hotelGuestList = InvoiceManager.RetrieveAllInvoiceDetails();
                 lvHotelGuestList.ItemsSource = hotelGuestList;
+                lvHotelGuestList.Items.Refresh();
             }
             catch (Exception ex)
             {
@@ -66,7 +69,7 @@ namespace com.WanderingTurtle.FormPresentation
             //When the UI closes, the Hotel Guest list will refresh
             if (addEditHotelGuest.ShowDialog() == false)
             {
-                refreshList();
+                RefreshGuestList();
             }
         }
 
@@ -79,27 +82,21 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event arguments</param>
         private void btnViewGuest_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var selectedGuest = this.lvHotelGuestList.SelectedItem;
+
+            if (selectedGuest == null)
             {
-                InvoiceDetails selectedGuest = (InvoiceDetails)lvHotelGuestList.SelectedItem;
-
-                if (selectedGuest == null)
-                {
-                    MessageBox.Show("Please select a row to edit");
-                    return;
-                }
-
-                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
-
-                if (custInvoice.ShowDialog() == false)
-                {
-                    refreshList();
-                }
+                MessageBox.Show("Please select a guest to view.");
+                return;
             }
-            catch (Exception)
+
+            ViewInvoice custInvoice = new ViewInvoice((InvoiceDetails)selectedGuest);
+
+            if (custInvoice.ShowDialog() == false)
             {
-                MessageBox.Show("Please select a guest and try again");
+                RefreshGuestList();
             }
+
         }
 
         /// <summary>
@@ -126,7 +123,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 AddEditHotelGuest temp = new AddEditHotelGuest(thisGuest);
                 temp.Show();
-                refreshList();
+                RefreshGuestList();
             }
             catch (Exception ex)
             {
@@ -153,7 +150,7 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new ApplicationException("You must choose a guest.");
 
                 HotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
-                refreshList();
+                RefreshGuestList();
             }
             catch (Exception ex)
             {
