@@ -33,6 +33,9 @@
             <Style TargetType="{x:Type ComboBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
             </Style>
+            <Style TargetType="{x:Type PasswordBox}">
+                <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+            </Style>
             <Thickness x:Key="Grid Margin">5</Thickness>
             <Thickness x:Key="Button Spacing">0,3,5,0</Thickness>
             <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">

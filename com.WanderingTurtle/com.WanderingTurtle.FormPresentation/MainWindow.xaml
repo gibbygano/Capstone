@@ -6,10 +6,12 @@
 				xmlns:views="clr-namespace:com.WanderingTurtle.FormPresentation.Views"
 				Title="MainWindow" Height="525" Width="950" MinHeight="125"
 				WindowStartupLocation="CenterScreen">
-	<ContentControl x:Name="MainContent" Content="{Binding views:SplashScreen}" />
-	<ui:MetroWindow.RightWindowCommands>
-		<ui:WindowCommands>
-			<Button Content="Sign Out" Click="BtnSignInOut_Click" />
-		</ui:WindowCommands>
-	</ui:MetroWindow.RightWindowCommands>
+    <ui:TransitioningContentControl x:Name="MainContent" Transition="Default">
+        <views:SplashScreen />
+    </ui:TransitioningContentControl>
+    <ui:MetroWindow.RightWindowCommands>
+        <ui:WindowCommands>
+            <Button Content="Sign In/Out" Click="BtnSignInOut_Click" />
+        </ui:WindowCommands>
+    </ui:MetroWindow.RightWindowCommands>
 </ui:MetroWindow>
