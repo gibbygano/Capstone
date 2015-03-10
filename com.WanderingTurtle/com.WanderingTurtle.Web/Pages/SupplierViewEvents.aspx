@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierViewEvents.aspx.cs" Inherits="com.WanderingTurtle.Web.SupplierViewEvents" MasterPageFile="../Site.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SupplierViewEvents.aspx.cs" Inherits="com.WanderingTurtle.Web.Pages.SupplierViewEvents" MasterPageFile="../Site.Master" %>
 
 <%@ Import Namespace="com.WanderingTurtle.Common" %>
 <%@ Import Namespace="com.WanderingTurtle.Web" %>

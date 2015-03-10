@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
 
-namespace com.WanderingTurtle
+namespace com.WanderingTurtle.BusinessLogic
 {
     /// <summary>
     /// Manages CRUD Operations for data pertaining to Suppliers

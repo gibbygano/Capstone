@@ -1,9 +1,9 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
 
-namespace com.WanderingTurtle
+namespace com.WanderingTurtle.BusinessLogic
 {
     public static class EmployeeManager
     {
