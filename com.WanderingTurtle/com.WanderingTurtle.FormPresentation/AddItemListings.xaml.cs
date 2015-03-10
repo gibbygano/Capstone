@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
+using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 // Worked on by:
 ///Hunter

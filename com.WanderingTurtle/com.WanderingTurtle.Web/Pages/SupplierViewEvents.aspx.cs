@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 
-namespace com.WanderingTurtle.Web
+namespace com.WanderingTurtle.Web.Pages
 {
     public partial class SupplierViewEvents : System.Web.UI.Page
     {

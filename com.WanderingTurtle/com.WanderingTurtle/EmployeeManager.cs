@@ -1,9 +1,9 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
 
-namespace com.WanderingTurtle
+namespace com.WanderingTurtle.BusinessLogic
 {
     public static class EmployeeManager
     {
@@ -18,14 +18,7 @@ namespace com.WanderingTurtle
         /// <returns>An int value is returned to the method to show rows affected</returns>
         public static int AddNewEmployee(Employee newEmployee)
         {
-            try
-            {
-                return EmployeeAccessor.AddEmployee(newEmployee);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return EmployeeAccessor.AddEmployee(newEmployee);
         }
 
         /// <summary>
@@ -44,14 +37,7 @@ namespace com.WanderingTurtle
         /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
         public static int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
         {
-            try
-            {
-                return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
         }
 
         /// <summary>
@@ -68,14 +54,7 @@ namespace com.WanderingTurtle
         /// <returns>The employee object is returned to the method successfully</returns>
         public static Employee FetchEmployee(int empID)
         {
-            try
-            {
-                return EmployeeAccessor.GetEmployee(empID);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return EmployeeAccessor.GetEmployee(empID);
         }
 
         /// <summary>
@@ -90,14 +69,7 @@ namespace com.WanderingTurtle
         /// <returns></returns>
         public static Employee FetchEmployee(string firstName, string lastName)
         {
-            try
-            {
-                return EmployeeAccessor.GetEmployee(firstName, lastName);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return EmployeeAccessor.GetEmployee(firstName, lastName);
         }
 
         /// <summary>
@@ -109,14 +81,7 @@ namespace com.WanderingTurtle
         /// <returns>The employee list is retrieved and returned up to the presentation layer (calling method)</returns>
         public static List<Employee> FetchListEmployees()
         {
-            try
-            {
-                return EmployeeAccessor.GetEmployeeList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return EmployeeAccessor.GetEmployeeList();
         }
 
         /// <summary>
@@ -131,14 +96,7 @@ namespace com.WanderingTurtle
         /// <returns>The employee object with the given credentials.</returns>
         public static Employee GetEmployeeLogin(int empId, string empPassword)
         {
-            try
-            {
-                return EmployeeAccessor.GetEmployeeLogin(empId, empPassword);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return EmployeeAccessor.GetEmployeeLogin(empId, empPassword);
         }
     }
 }

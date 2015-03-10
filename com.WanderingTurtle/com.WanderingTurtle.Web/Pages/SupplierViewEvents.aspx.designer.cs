@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace com.WanderingTurtle.Web {
+namespace com.WanderingTurtle.Web.Pages {
     
     
     public partial class SupplierViewEvents {
