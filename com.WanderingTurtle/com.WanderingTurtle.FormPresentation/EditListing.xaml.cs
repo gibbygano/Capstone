@@ -27,12 +27,11 @@ namespace com.WanderingTurtle.FormPresentation
         public EditListing(ItemListing toEdit)
         {
             InitializeComponent();
-            List<EventType> TempList = myMan.RetrieveEventTypeList();
-
+            List<Event> myList = myMan.RetrieveEventList();
             try
             {
                 cboxEventTypes.Items.Clear();
-                cboxEventTypes.ItemsSource = TempList;
+                cboxEventTypes.ItemsSource = myList;
             }
             catch (Exception ex)
             {
