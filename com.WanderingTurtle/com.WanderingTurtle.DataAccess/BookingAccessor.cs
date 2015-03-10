@@ -34,7 +34,7 @@ namespace com.WanderingTurtle.DataAccess
                     while (reader.Read())
                     {
                         var currentBook = new ListItemObject();
-                        //Below are found on the ItemListing table (ItemListID is a foriegn key on booking)
+                        //Below are found on the ItemListing table (ItemListID is a foreign key on booking)
                         currentBook.ItemListID = reader.GetInt32(0);
                         currentBook.MaxNumGuests = reader.GetInt32(1);
                         currentBook.CurrentNumGuests = reader.GetInt32(2);
@@ -270,6 +270,37 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_TicketPrice", oldOne.TicketPrice);
             cmd.Parameters.AddWithValue("@original_ExtendedPrice", oldOne.ExtendedPrice);
             cmd.Parameters.AddWithValue("@original_TotalCharge", oldOne.TotalCharge);
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return rowsAffected;
+        }
+
+        public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spUpdateCurrentNumGuests";
+            var cmd = new SqlCommand(cmdText, conn);
+            int rowsAffected = 0;
+
+            //Set command type to stored procedure and add parameters
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+           
+            cmd.Parameters.AddWithValue("@ItemListID", itemID);
+
+            cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", newNumGuests);
+            cmd.Parameters.AddWithValue("@original_CurrentNumberOfGuests", oldNumGuests);
 
             try
             {

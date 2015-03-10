@@ -170,21 +170,28 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            //try
-            //{
+            try
+            {
                 //opens UI with guest information                  
                 ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
+                bool? result = myGuest.ShowDialog();
+
                 //closes window after successful guest archival
-                if (myGuest.ShowDialog() == false)
+                if (result.HasValue && result.Value)
                 {
                     Close();
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                else 
+                {
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -229,22 +236,22 @@ namespace com.WanderingTurtle.FormPresentation
             if (CheckBookingDate(myBooking.StartDate))
             {
                 MessageBox.Show("Cancellations are not allowed for bookings in the past.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
             else if (CheckBookingQuantity(myBooking.Quantity))
             {
                 MessageBox.Show("This booking has already been cancelled.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }       
             
             try
             {
-                
                 //opens the ui and passes the booking details object in
                 CancelBooking cancel = new CancelBooking(myBooking, invoiceToView);
                 
                 if (cancel.ShowDialog() == false)
                 {
-                    refreshBookingList();
-                    Close();
+                    refreshBookingList();  
                 }
             }
             catch (Exception ex)

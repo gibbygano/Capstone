@@ -24,18 +24,22 @@ namespace com.WanderingTurtle.FormPresentation
         public List<ListItemObject> myEventList;
         public InvoiceDetails inInvoice;
         public ProductManager addBookingProdManager = new ProductManager();
-        public ItemListing updatedItem;
+        //public ItemListing updatedItem;
         public ItemListing originalItem;
 
         public AddBooking(InvoiceDetails inInvoice)
         {
-
-
             this.inInvoice = inInvoice;
-
-            myEventList = OrderManager.RetrieveListItemList();
-
             InitializeComponent();
+
+            RefreshListItems();
+            lvEventListItems.ItemsSource = myEventList;
+            lblAddBookingGuestName.Content = inInvoice.GetFullName;
+        }
+
+        private void RefreshListItems()
+        {
+            myEventList = OrderManager.RetrieveListItemList();
 
             foreach (ListItemObject lIO in myEventList)
             {
@@ -43,12 +47,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                 lIO.QuantityOffered = availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
             }
-
-            lvAddBookingListItems.ItemsSource = myEventList;
-
-            lblAddBookingGuestName.Content = inInvoice.GetFullName;
-
-            
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
@@ -64,7 +62,7 @@ namespace com.WanderingTurtle.FormPresentation
          */
         public void addBooking()
         {
-            string empID = tbAddBookingEmpID.Text;
+            string empID = "101";
             ListItemObject selected;
             DateTime myDate = DateTime.Now;
             string quantity = tbAddBookingQuantity.Text;
@@ -80,7 +78,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
 
-            if (lvAddBookingListItems.SelectedIndex.Equals(-1))
+            if (lvEventListItems.SelectedIndex.Equals(-1))
             {
                 MessageBox.Show("Please select an event.");
                 btnAddBookingAdd.IsEnabled = true;
@@ -119,25 +117,27 @@ namespace com.WanderingTurtle.FormPresentation
          {
              extendedPrice = calcExtendedPrice(selected.Price, discount);
 
-             totalPrice = calcTotalPrice(qID, extendedPrice); 
-                
-             int.TryParse(empID, out eID);
-             //eID = (int)Globals.UserToken.EmployeeID;
+             totalPrice = calcTotalPrice(qID, extendedPrice);
+
+             eID = 100;
+//TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
              gID = inInvoice.HotelGuestID;
-             //This method call needs to be updated to include a calculated extended price and total charge to be added to the database.
+
              myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate, selected.Price, extendedPrice, discount, totalPrice);
 
-             updatedItem = originalItem;
-
-             updatedItem.CurrentNumGuests = originalItem.CurrentNumGuests + qID;
-
-             //addBookingProdManager.EditItemListing(originalItem, updatedItem);
-
              //calls to booking manager to add a booking. BookingID is auto-generated in database                
-            int result = OrderManager.AddaBooking(myBooking);
+             int result = OrderManager.AddaBooking(myBooking);
 
              if (result == 1)
              {
+                 //change quantity of guests
+                 int updatedGuests = originalItem.CurrentNumGuests + qID;
+                 int result2 = OrderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
+                 if (result2 == 1)
+                 {
+                     MessageBox.Show("Numguests changed");                     
+                 }
+
                  MessageBox.Show("The booking has been successfully added.");
                  // closes window after add
                  this.Close();
@@ -156,7 +156,7 @@ namespace com.WanderingTurtle.FormPresentation
          */
         private ListItemObject getSelectedItem()
         {
-            ListItemObject selected = (ListItemObject)lvAddBookingListItems.SelectedItems[0];
+            ListItemObject selected = (ListItemObject)lvEventListItems.SelectedItems[0];
             return selected;
         }
 
@@ -214,6 +214,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             return availableQuantity;
         }
+
         /*method to check a quantity
          * takes a string
          * if the string is successfully parsed, and the variable it parses to is less
@@ -239,30 +240,17 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-//        /*Sets form fields back to null after an add has been successfully completed
-//         * Tony Noel-2/11/15
-//         */
-        
-//        public void clearFields()
-//        {
-//            tbAddBookingEmpID.Text = null;
-////tbAddBookingGuestID.Text = null;
-           
-//            tbAddBookingQuantity.Text = null;
-//        }
-
-        // Pat Banks - February 19, 2015
-        // Parameters: returns list data
-        // Desc.: Defines employee roles for the combo box
-        // Failure: none
-        // Success: box is filled and available for use on the form
-
-        private List<HotelGuest> RetrieveGuestList()
+        /// <summary>
+        /// Created by Pat Banks 2015/03/09
+        /// 
+        /// Adds the event description to the UI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvEventListItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<HotelGuest> dropDownData = new List<HotelGuest>();
-            dropDownData = HotelGuestManager.GetHotelGuestList();
-
-            return dropDownData;
+            ListItemObject myItemObject = getSelectedItem();
+            txtEventDescription.Text = myItemObject.EventDescription;
         }
     }
 }

@@ -128,6 +128,13 @@ namespace com.WanderingTurtle.BusinessLogic
                 feePercent = 1.0m;
             }
             return feePercent * bookingToCancel.TotalCharge;
-        } 
+        }
+
+        public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
+		{
+            var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
+			return numRows;
+		}
+        
 	}
 }

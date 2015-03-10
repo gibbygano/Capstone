@@ -81,13 +81,13 @@ VALUES
 ('Entertainment')
 GO
 
-INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, Active, SupplierID)
+INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, Active, SupplierID, CurrentNumberOfGuests, MaxNumberOfGuests)
 VALUES
-('2015-03-10', '2015-03-10', 100, 15.00, 1, 100),
-('2015-03-11', '2015-03-11', 101, 25.00, 1, 101),
-('2015-03-12', '2015-03-12', 102, 5.00, 1, 102),
-('2015-03-05', '2015-03-06', 101, 20.00, 1, 100),
-('2015-03-07', '2015-03-07', 102, 10.00, 1, 102)
+('2015-03-10', '2015-03-10', 100, 15.00, 1, 100, 30, 50),
+('2015-03-11', '2015-03-11', 101, 25.00, 1, 101, 10, 15),
+('2015-03-12', '2015-03-12', 102, 5.00, 1, 102, 80, 90),
+('2015-03-05', '2015-03-06', 101, 20.00, 1, 100, 2, 5),
+('2015-03-07', '2015-03-07', 102, 10.00, 1, 102, 10,11)
 GO
 
 INSERT INTO [dbo].[Lists]  (SupplierID, ItemListID, DateListed)

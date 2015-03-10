@@ -33,7 +33,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
         public ArchiveInvoice(int selectedHotelGuestID)
-        {
+        {          
             originalInvoice = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
             invoiceToArchive = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
@@ -104,7 +104,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            this.DialogResult = false;
         }
     }
 }

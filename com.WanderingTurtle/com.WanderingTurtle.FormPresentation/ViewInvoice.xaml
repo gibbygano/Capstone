@@ -44,9 +44,9 @@
             <ListView Grid.Row="1" x:Name="lvGuestBookings">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width ="0" DisplayMemberBinding="{Binding BookingID}" />
-                        <GridViewColumn Width ="150" Header="Event Date" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:D}'}" />
-                        <GridViewColumn Width ="75" Header="Start Time" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:t}'}" />
+                        <GridViewColumn Width ="40" Header="ID" DisplayMemberBinding="{Binding ItemListID}" />
+                        <GridViewColumn Width ="80" Header="Event Date" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
+                        <GridViewColumn Width ="80" Header="Start Time" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:t}'}" />
                         <GridViewColumn Width ="176" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
                         <GridViewColumn Width ="50" Header="Qty" DisplayMemberBinding="{Binding Quantity}" />
                         <GridViewColumn Width ="90" Header="Ticket Price" DisplayMemberBinding="{Binding TicketPrice, StringFormat='{}{0:C}'}" />

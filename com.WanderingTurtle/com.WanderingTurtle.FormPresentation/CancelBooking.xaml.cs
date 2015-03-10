@@ -83,20 +83,32 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
              {
-                int returnedTix = myBooking.Quantity;
+                ProductManager myProdMan = new ProductManager();
+                ItemListing originalListItem = myProdMan.RetrieveItemListing(myBooking.ItemListID.ToString());
+
+                int newNumGuests = originalListItem.CurrentNumGuests - myBooking.Quantity;
+
+                int result1 = OrderManager.updateNumberOfGuests(myBooking.ItemListID, originalListItem.CurrentNumGuests, newNumGuests);
+
+                if (result1 == 1)
+                {
+                    MessageBox.Show("guests changed");
+                }
+                
                 myBooking.TotalCharge = cancelFee;
                 myBooking.Quantity = 0;
                 myBooking.TicketPrice = 0;
                 myBooking.ExtendedPrice = 0;
                 myBooking.Discount = 0;
                 
-  //TBD need to add quantity of tix back to the listing
+
                 int result = OrderManager.EditBooking(myBooking);
+
                 if (result == 1)
                 {
                     MessageBox.Show("The booking has been cancelled.");
                     // closes window after cancel
-                   // this.Close();
+                    this.Close();
                 }
              }
              catch (Exception ex)
