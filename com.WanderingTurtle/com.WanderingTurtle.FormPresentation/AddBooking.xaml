@@ -1,56 +1,58 @@
-﻿<Window x:Name="AddBooking1" x:Class="com.WanderingTurtle.FormPresentation.AddBooking"
+﻿<Metro:MetroWindow
+        x:Class="com.WanderingTurtle.FormPresentation.AddBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Title="AddBooking" Height="380" Width="700"
 		WindowStartupLocation="CenterScreen">
-	<Grid Margin="5">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="1*" />
-			<RowDefinition Height="2*" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
-		<Label Grid.Row="0" x:Name="lblGeneralAddBooking" Content="Please add requested information below to complete the booking." />
-		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="4*" />
-				<ColumnDefinition Width="1*" />
-			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" x:Name="lblAddBookingEmpID" Content="EmployeeID:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-			<Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingGuestID" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-			<Label Grid.Row="1" Grid.Column="1" x:Name="lblAddBookingGuestName" Content="Guest Name:" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" x:Name="lblGeneralAddBooking" Content="Please add requested information below to complete the booking." />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" x:Name="lblAddBookingEmpID" Content="EmployeeID:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingGuestID" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="lblAddBookingGuestName" Content="Guest Name:" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
 
-			<Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
 
-			<TextBox  Grid.Row="0" Grid.Column="1" x:Name="tbAddBookingEmpID" TabIndex="0" UndoLimit="3" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
-			<TextBox  Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingQuantity" TabIndex="2" UndoLimit="2" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
-		</Grid>
-		<Grid Grid.Row="2" Margin="0,0,0,5">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<Label    Grid.Row="0" x:Name="lblAddBookingItemID" Content="ItemList:" />
-			<ListView Grid.Row="1" x:Name="lvAddBookingListItems">
-				<ListView.View>
-					<GridView>
-						<GridViewColumn Width ="50" Header="ItemID" DisplayMemberBinding="{Binding ItemListID}" />
-						<GridViewColumn Width ="50" Header="EventID" DisplayMemberBinding="{Binding EventID}" />
-						<GridViewColumn Width ="100" Header="EventName" DisplayMemberBinding="{Binding EventName}" />
-						<GridViewColumn Width ="150" Header="Event Description" DisplayMemberBinding="{Binding EventDescription}" />
-						<GridViewColumn Width ="50" Header="Quantity" DisplayMemberBinding="{Binding QuantityOffered}" />
-						<GridViewColumn Width ="100" Header="StartDate" DisplayMemberBinding="{Binding StartDate}" />
-						<GridViewColumn Width ="100" Header="EndDate" DisplayMemberBinding="{Binding EndDate}" />
-					</GridView>
-				</ListView.View>
-			</ListView>
-		</Grid>
-		<Button Grid.Row="3" x:Name="btnAddBookingAdd" Content="Submit" Click="btnAddBookingAdd_Click" Padding="{DynamicResource Button Padding}" />
-	</Grid>
-</Window>
+            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="tbAddBookingEmpID" TabIndex="0" UndoLimit="3" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
+            <TextBox  Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingQuantity" TabIndex="2" UndoLimit="2" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,0,0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label    Grid.Row="0" x:Name="lblAddBookingItemID" Content="ItemList:" />
+            <ListView Grid.Row="1" x:Name="lvAddBookingListItems">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width ="50" Header="ItemID" DisplayMemberBinding="{Binding ItemListID}" />
+                        <GridViewColumn Width ="50" Header="EventID" DisplayMemberBinding="{Binding EventID}" />
+                        <GridViewColumn Width ="100" Header="EventName" DisplayMemberBinding="{Binding EventName}" />
+                        <GridViewColumn Width ="150" Header="Event Description" DisplayMemberBinding="{Binding EventDescription}" />
+                        <GridViewColumn Width ="50" Header="Quantity" DisplayMemberBinding="{Binding QuantityOffered}" />
+                        <GridViewColumn Width ="100" Header="StartDate" DisplayMemberBinding="{Binding StartDate}" />
+                        <GridViewColumn Width ="100" Header="EndDate" DisplayMemberBinding="{Binding EndDate}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Button Grid.Row="3" x:Name="btnAddBookingAdd" Content="Submit" Click="btnAddBookingAdd_Click" Padding="{DynamicResource Button Padding}" />
+    </Grid>
+</Metro:MetroWindow>

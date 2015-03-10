@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for AddNewEvent.xaml
     /// </summary>
-    public partial class AddNewEvent : Window
+    public partial class AddNewEvent 
     {
         private EventManager myMan = new EventManager();
 

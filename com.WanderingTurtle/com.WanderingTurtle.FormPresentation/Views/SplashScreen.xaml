@@ -4,7 +4,7 @@
         xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
         x:Class="com.WanderingTurtle.FormPresentation.Views.StartupScreen">
     <UserControl.Resources>
-        <Style x:Key="Header" TargetType="{x:Type Label}">
+        <Style x:Key="Header" TargetType="{x:Type TextBlock}">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
             <Setter Property="FontSize"   Value="50" />
             <Setter Property="FontWeight" Value="Bold" />
@@ -18,7 +18,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label  Grid.Row="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource Header}" Content="Welcome to the Wandering Turtle" />
+        <TextBlock  Grid.Row="0" Style="{DynamicResource Header}" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Welcome to the Wandering Turtle" />
         <Button Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnSignIn_Click" Content="Please Sign In" Style="{DynamicResource SignIn}" />
     </Grid>
 </UserControl>
