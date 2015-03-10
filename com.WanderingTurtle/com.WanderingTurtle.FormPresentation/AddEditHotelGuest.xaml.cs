@@ -49,6 +49,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana 2/18/2015
         public bool Result { get; private set; }
 
+        /// <summary>
+        /// Show Error Message
+        /// </summary>
+        /// <param name="message"></param>
+        /// Miguel Santana 2/18/2015
+        private static void ShowError(String message)
+        {
+            MessageBox.Show(message);
+        }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -73,16 +83,6 @@ namespace com.WanderingTurtle.FormPresentation
         private void cboZip_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             ((ComboBox)sender).IsDropDownOpen = true;
-        }
-
-        /// <summary>
-        /// Show Error Message
-        /// </summary>
-        /// <param name="message"></param>
-        /// Miguel Santana 2/18/2015
-        private static void ShowError(String message)
-        {
-            MessageBox.Show(message);
         }
 
         /// <summary>
@@ -140,86 +140,23 @@ namespace com.WanderingTurtle.FormPresentation
         ///</remarks>
         private void Submit()
         {
-            if (CurrentHotelGuest != null)
+            if (CurrentHotelGuest != null && ValidateChanged())
             {
-                if (CurrentHotelGuest.FirstName.Equals(TxtFirstName.Text.Trim())
-                    && CurrentHotelGuest.LastName.Equals(TxtLastName.Text.Trim())
-                    && CurrentHotelGuest.Address1.Equals(TxtAddress1.Text.Trim())
-                    && CurrentHotelGuest.Address2.Equals(TxtAddress2.Text.Trim())
-                    && CurrentHotelGuest.CityState.Zip.Equals(((CityState)CboZip.SelectedItem).Zip)
-                    && CurrentHotelGuest.PhoneNumber.Equals(TxtPhoneNumber.Text.Trim())
-                    && CurrentHotelGuest.EmailAddress.Equals(TxtEmailAddress.Text.Trim()))
+                switch (MessageBox.Show(this, "No data was changed. Would you like to keep editing?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Warning))
                 {
-                    switch (MessageBox.Show(this, "No data was changed. Would you like to keep editing?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Warning))
-                    {
-                        case MessageBoxResult.Cancel:
-                        case MessageBoxResult.No:
-                            Close();
-                            break;
+                    case MessageBoxResult.Cancel:
+                    case MessageBoxResult.No:
+                        Close();
+                        break;
 
-                        case MessageBoxResult.OK:
-                        case MessageBoxResult.Yes:
-                        default:
-                            return;
-                    }
+                    case MessageBoxResult.OK:
+                    case MessageBoxResult.Yes:
+                    default:
+                        return;
                 }
             }
 
-            if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
-            {
-                ShowError("Please enter a First Name");
-                TxtFirstName.Focus();
-                TxtFirstName.SelectAll();
-                return;
-            }
-            if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
-            {
-                ShowError("Please enter a Last Name");
-                TxtLastName.Focus();
-                TxtLastName.SelectAll();
-                return;
-            }
-            if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
-            {
-                ShowError("Please enter an Address");
-                TxtAddress1.Focus();
-                TxtAddress1.SelectAll();
-                return;
-            }
-            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
-            {
-                ShowError("Error adding Address2");
-                TxtAddress2.Focus();
-                TxtAddress2.SelectAll();
-                return;
-            }
-            if (CboZip.SelectedItem == null)
-            {
-                ShowError("Please select a Zip Code");
-                CboZip.Focus();
-                return;
-            }
-            if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
-            {
-                ShowError("Please enter a valid Phone Number");
-                TxtPhoneNumber.Focus();
-                TxtPhoneNumber.SelectAll();
-                return;
-            }
-            if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
-            {
-                ShowError("Please enter a valid Email Address");
-                TxtEmailAddress.Focus();
-                TxtEmailAddress.SelectAll();
-                return;
-            }
-            if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
-            {
-                ShowError("Please enter a valid Room Number");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
-                return;
-            }
+            if (!Validate()) { return; }
 
             //FormatException found in if loop
             if (CurrentHotelGuest == null)
@@ -288,6 +225,86 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Submit();
             }
+        }
+
+        /// <summary>
+        /// Runs validation on the input fields
+        /// </summary>
+        /// <returns>rue if valid</returns>
+        private bool Validate()
+        {
+            if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
+            {
+                ShowError("Please enter a First Name");
+                TxtFirstName.Focus();
+                TxtFirstName.SelectAll();
+                return false;
+            }
+            if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
+            {
+                ShowError("Please enter a Last Name");
+                TxtLastName.Focus();
+                TxtLastName.SelectAll();
+                return false;
+            }
+            if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
+            {
+                ShowError("Please enter an Address");
+                TxtAddress1.Focus();
+                TxtAddress1.SelectAll();
+                return false;
+            }
+            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
+            {
+                ShowError("Error adding Address2");
+                TxtAddress2.Focus();
+                TxtAddress2.SelectAll();
+                return false;
+            }
+            if (CboZip.SelectedItem == null)
+            {
+                ShowError("Please select a Zip Code");
+                CboZip.Focus();
+                return false;
+            }
+            if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
+            {
+                ShowError("Please enter a valid Phone Number");
+                TxtPhoneNumber.Focus();
+                TxtPhoneNumber.SelectAll();
+                return false;
+            }
+            if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
+            {
+                ShowError("Please enter a valid Email Address");
+                TxtEmailAddress.Focus();
+                TxtEmailAddress.SelectAll();
+                return false;
+            }
+            if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
+            {
+                ShowError("Please enter a valid Room Number");
+                TxtRoomNumber.Focus();
+                TxtRoomNumber.SelectAll();
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Checks to see if the fields have been changed
+        /// </summary>
+        /// <returns>True if valid</returns>
+        private bool ValidateChanged()
+        {
+            return CurrentHotelGuest.FirstName.Equals(TxtFirstName.Text.Trim())
+                    && CurrentHotelGuest.LastName.Equals(TxtLastName.Text.Trim())
+                    && CurrentHotelGuest.Address1.Equals(TxtAddress1.Text.Trim())
+                    && CurrentHotelGuest.Address2.Equals(TxtAddress2.Text.Trim())
+                    && CurrentHotelGuest.CityState.Zip.Equals(((CityState)CboZip.SelectedItem).Zip)
+                    && CurrentHotelGuest.PhoneNumber.Equals(TxtPhoneNumber.Text.Trim())
+                    && CurrentHotelGuest.EmailAddress.Equals(TxtEmailAddress.Text.Trim())
+                    && CurrentHotelGuest.Room.Equals(TxtRoomNumber.Text.Trim());
         }
     }
 }
