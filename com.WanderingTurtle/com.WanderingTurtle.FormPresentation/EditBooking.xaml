@@ -11,29 +11,28 @@
 			<RowDefinition Height="2*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<Label Grid.Row="0" x:Name="lblGeneralEditBooking" Content="Edit booking #" />
+        <Label Grid.Row="0" x:Name="lblGeneralEditBooking" FontSize="16" FontWeight="Bold" Content="Edit Booking for Guest" />
 		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
 				<RowDefinition Height="*" />
                 <RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width=".25*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" x:Name="lblEditBookingEmpLbl" Content="EmployeeID:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-			<Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingEmpID" Content="EMP ID HERE" VerticalAlignment="Center" HorizontalAlignment="Left" />
-			<Label Grid.Row="1" Grid.Column="0" x:Name="lblEditBookingGuestLbl" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-			<Label Grid.Row="1" Grid.Column="1" x:Name="lblEditBookingGuestName" Content="GUEST NAME HERE" HorizontalAlignment="Left" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <Label Grid.Row="0" Grid.Column="0" x:Name="lblEditBookingGuestLbl" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingGuestName" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
 
-			<Label Grid.Row="2" Grid.Column="0" x:Name="lblEditBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-
-			<TextBox  Grid.Row="2" Grid.Column="1" x:Name="tbEditBookingQuantity" TabIndex="2" UndoLimit="2" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
-            <Label Grid.Row="3" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-            <TextBox Grid.Row="3" Grid.Column="1" x:Name="tbEditBookingDiscount" TabIndex="2" UndoLimit="2" Margin="2" Height="{DynamicResource TextBoxHeight}" VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="0" x:Name="lblEditBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="tbEditBookingQuantity" TabIndex="1" UndoLimit="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            
+            <Label Grid.Row="2" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbEditBookingDiscount" TabIndex="2" UndoLimit="2"  VerticalAlignment="Center" HorizontalContentAlignment="Left"  />
 
         </Grid>
 		<Grid Grid.Row="2" Margin="0,0,0,5">
@@ -41,22 +40,35 @@
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
-			<Label    Grid.Row="0" x:Name="lblEditBookingItemID" Content="Booking to edit:" />
+            <Label    Grid.Row="0" x:Name="lblEditBookingItemID" Content="Booking to edit:" FontWeight="Bold"/>
 			<ListView Grid.Row="1" x:Name="lvEditBookingListItems">
 				<ListView.View>
-					<GridView>
-						<GridViewColumn Width ="150" Header="Event Date" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:D}'}" />
-						<GridViewColumn Width ="75" Header="Start Time" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:t}'}" />
-						<GridViewColumn Width ="175" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
-						<GridViewColumn Width ="50" Header="Quantity" DisplayMemberBinding="{Binding Quantity}" />
-						<GridViewColumn Width ="75" Header="Ticket Price" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:C}'}" />
+                    <GridView>
+                        <GridViewColumn Width ="40" Header="ID"         DisplayMemberBinding="{Binding ItemListID}" />
+                        <GridViewColumn Width ="90" Header="Start Date" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
+                        <GridViewColumn Width ="90" Header="Start Time" DisplayMemberBinding="{Binding StartDate, StringFormat='{}{0:t}'}" />
+                        <GridViewColumn Width ="150" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
+						
+                        <GridViewColumn Width ="50" Header="Qty" DisplayMemberBinding="{Binding Quantity}" />
+                        <GridViewColumn Width ="75" Header="Tix Price" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:C}'}" />
+                        <GridViewColumn Width="75" Header="Ext. Price" DisplayMemberBinding="{Binding ExtendedPrice}" />
                         <GridViewColumn Width ="75"  Header="Discount" DisplayMemberBinding="{Binding Discount }" />
-                        <GridViewColumn Width="75" Header="Extended Price" DisplayMemberBinding="{Binding ExtendedPrice}" />
-						<GridViewColumn Width ="60" Header="Total Due" DisplayMemberBinding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
+                        <GridViewColumn Width ="75" Header="Total Due" DisplayMemberBinding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
 					</GridView>
 				</ListView.View>
 			</ListView>
 		</Grid>
-		<Button Grid.Row="3" x:Name="btnEditBooking" Content="Submit" Click="btnEditBooking_Click" Padding="{DynamicResource Button Padding}" />
+
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="3" Grid.Column="1" x:Name="btnEditBooking" Content="Submit" Click="btnEditBooking_Click" VerticalAlignment="Center" />
+            <Button Grid.Row="3" Grid.Column="3"  Name="cancelButton" IsCancel="True">Cancel</Button>
+        </Grid>
 	</Grid>
 </Window>

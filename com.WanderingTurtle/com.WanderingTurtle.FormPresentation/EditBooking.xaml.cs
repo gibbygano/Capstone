@@ -36,7 +36,6 @@ namespace com.WanderingTurtle.FormPresentation
             outInvList.Add(inBookingDetails);
 
             lblGeneralEditBooking.Content = "Editing Booking #" + inBookingDetails.BookingID;
-            lblEditBookingEmpID.Content = inBookingDetails.EmployeeID;
             lblEditBookingGuestName.Content = inInvoice.GetFullName;
             tbEditBookingQuantity.Text = inBookingDetails.Quantity.ToString();
             tbEditBookingDiscount.Text = inBookingDetails.Discount.ToString();

@@ -4,12 +4,12 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
 		Style="{DynamicResource WindowStyle}"
-        Title="Add Supplier"  Height="337.731" Width="723.319"
+        Title="Add Supplier"  Height="300" Width="700"
 		Loaded="Window_Loaded" Closed="Window_Closed"
 		WindowStartupLocation="CenterScreen">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="567.2" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
@@ -58,8 +58,8 @@
 		<TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="30" Margin="159.021,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Width="192" MaxLength="100" />
 		<Label Content="User ID" HorizontalAlignment="Left" Margin="39.021,122,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" Height="34" Width="108" />
 		<TextBox x:Name="txtUserID" HorizontalAlignment="Left" Height="32" Margin="159.021,124,0,0" MaxLength="10" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Width="192" />
-		<Button x:Name="btnSubmit" Content="Add Supplier" HorizontalAlignment="Left" Margin="10,234,0,0" VerticalAlignment="Top" Width="113" Height="34" Click="btnSubmit_Click" />
-		<Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="128,234,0,0" VerticalAlignment="Top" Width="102" Height="34" Click="btnEdit_Click" />
+		<Button x:Name="btnSubmit" Content="Add Supplier" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top" Width="113" Height="34" Click="btnSubmit_Click" />
+		<Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="128,229,0,0" VerticalAlignment="Top" Width="102" Height="34" Click="btnEdit_Click" />
 		<ComboBox x:Name="cboZip" HorizontalAlignment="Left" Margin="135,159,0,0" VerticalAlignment="Top" Width="124" Height="34" DisplayMemberPath="GetZipStateCity" />
 		<xctk:MaskedTextBox x:Name="txtPhoneNumber" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" HorizontalAlignment="Left"  Width="192" Grid.Row="0" Grid.Column="1" Margin="159.6,48,0,0" Height="32" VerticalAlignment="Top" />
 	</Grid>
