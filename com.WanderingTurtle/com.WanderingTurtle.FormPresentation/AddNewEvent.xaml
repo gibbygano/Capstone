@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		x:Class="com.WanderingTurtle.FormPresentation.AddNewEvent"
-        Style="{DynamicResource WindowStyle}"
         Title="Add a New Event"  Height="389.5" Width="485.355"
 		WindowStartupLocation="CenterScreen">
 	<Grid Margin="0,0,2,0">

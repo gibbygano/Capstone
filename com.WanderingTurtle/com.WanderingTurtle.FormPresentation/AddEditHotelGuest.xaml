@@ -1,7 +1,6 @@
 <Window x:Class="com.WanderingTurtle.FormPresentation.AddEditHotelGuest"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Style="{DynamicResource WindowStyle}"
         Title="AddEditHotelGuest" Height="375" Width="350"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">

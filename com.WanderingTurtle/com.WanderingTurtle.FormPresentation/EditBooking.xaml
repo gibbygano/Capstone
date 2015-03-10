@@ -1,7 +1,6 @@
 ﻿<Window x:Name="EditBooking1" x:Class="com.WanderingTurtle.FormPresentation.EditBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Style="{DynamicResource WindowStyle}"
         Title="Edit Booking" Height="380" Width="700"
 		WindowStartupLocation="CenterScreen">
 	<Grid Margin="5">

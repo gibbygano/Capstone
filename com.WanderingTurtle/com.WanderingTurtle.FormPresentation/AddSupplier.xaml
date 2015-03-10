@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
-		Style="{DynamicResource WindowStyle}"
         Title="Add Supplier"  Height="337.731" Width="723.319"
 		Loaded="Window_Loaded" Closed="Window_Closed"
 		WindowStartupLocation="CenterScreen">

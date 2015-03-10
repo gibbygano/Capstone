@@ -17,8 +17,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type Window}" x:Key="WindowStyle" />
-            <Style TargetType="{x:Type UserControl}" x:Key="UserControlStyle" />
             <Style TargetType="{x:Type Button}" x:Key="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}">
                 <Setter Property="Padding" Value="8,3" />
                 <Setter Property="FontSize" Value="13" />

@@ -2,7 +2,6 @@
     x:Class="com.WanderingTurtle.FormPresentation.AddEmployee"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Style="{DynamicResource WindowStyle}"
     Title="AddEmployee" Height="300" Width="300"
     WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
