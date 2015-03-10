@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls;
 using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation.Views
@@ -12,26 +13,33 @@ namespace com.WanderingTurtle.FormPresentation.Views
         public TabContainer()
         {
             InitializeComponent();
-
-            switch (Globals.UserToken != null ? Globals.UserToken.Level : RoleData.Admin)
+            if (Globals.UserToken != null)
             {
-                case RoleData.Admin:
-                    AddTab(TabName.Events, new ListEvents());
-                    AddTab(TabName.Listings, new ListTheListings());
-                    AddTab(TabName.Suppliers, new ListSuppliers());
-                    AddTab(TabName.Employees, new ListTheEmployees());
-                    AddTab(TabName.HotelGuests, new ListHotelGuests());
-                    break;
+                switch (Globals.UserToken.Level)
+                {
+                    case RoleData.Admin:
+                        AddTab(TabName.Events, new ListEvents());
+                        AddTab(TabName.Listings, new ListTheListings());
+                        AddTab(TabName.Suppliers, new ListSuppliers());
+                        AddTab(TabName.Employees, new ListTheEmployees());
+                        AddTab(TabName.HotelGuests, new ListHotelGuests());
+                        break;
 
-                case RoleData.Concierge:
-                    break;
+                    case RoleData.Concierge:
+                        AddTab(TabName.HotelGuests, new ListHotelGuests());
+                        AddTab(TabName.Listings, new ListTheListings());
+                        break;
 
-                case RoleData.DeskClerk:
-                    break;
+                    case RoleData.DeskClerk:
+                        AddTab(TabName.HotelGuests, new ListHotelGuests());
+                        break;
 
-                case RoleData.Valet:
-                    break;
+                    case RoleData.Valet:
+                        AddTab(TabName.Listings, new ListTheListings());
+                        break;
+                }
             }
+            else { ErrorManager.ShowMessageDialog(this, "Could not find logged in user", "Login Error"); }
         }
 
         private void AddTab(string tabName, object tabContent)

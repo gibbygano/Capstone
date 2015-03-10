@@ -133,6 +133,7 @@
     <Compile Include="CancelBooking.xaml.cs">
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ErrorManager.cs" />
     <Compile Include="Views\Flyout.xaml.cs">
       <DependentUpon>Flyout.xaml</DependentUpon>
     </Compile>

@@ -1,6 +1,7 @@
 ﻿using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation.Views
@@ -12,6 +13,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
     {
         public StartupScreen()
         {
+            Globals.UserToken = null;
             InitializeComponent();
         }
 
@@ -23,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 new LoginDialogSettings
                 {
                     ColorScheme = window.MetroDialogOptions.ColorScheme,
-                    UsernameWatermark = "Username",
+                    UsernameWatermark = "User ID",
                     PasswordWatermark = "Password",
                     NegativeButtonVisibility = Visibility.Visible,
                     AffirmativeButtonText = "Log In"
@@ -32,6 +34,21 @@ namespace com.WanderingTurtle.FormPresentation.Views
             {
                 // MessageDialogResult messageResult = await window.ShowMessageAsync("Authentication
                 // Information", string.Format("Username: {0}\nPassword: {1}", result.Username, result.Password));
+                Exception ex = null;
+                try
+                {
+                    Globals.UserToken = EmployeeManager.GetEmployeeLogin(int.Parse(result.Username ?? "0"), result.Password);
+                }
+                catch (Exception x)
+                {
+                    ex = x;
+                }
+                if (ex != null)
+                {
+                    await ErrorManager.ShowMessageDialog(this, ex.Message);
+                    BtnSignIn_Click(sender, e);
+                    return;
+                }
                 WindowHelper.GetMainWindow(this).MainContent.Content = new TabContainer();
             }
         }
