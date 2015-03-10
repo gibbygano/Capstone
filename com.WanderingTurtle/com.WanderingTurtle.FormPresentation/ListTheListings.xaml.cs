@@ -58,7 +58,8 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
             Window AddItemListings = new AddItemListing();
-            AddItemListings.Show();
+            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
+            //AddItemListings.Show();
             if (AddItemListings.ShowDialog() == false)
             {
                 refreshData();
