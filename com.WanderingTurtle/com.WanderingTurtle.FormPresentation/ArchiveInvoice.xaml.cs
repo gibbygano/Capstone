@@ -92,7 +92,7 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result == true)
                     {
                         MessageBox.Show("Guest Checkout Complete");
-                        Close();
+                        this.DialogResult = true;
                     }
                 }
             }

@@ -96,11 +96,10 @@ namespace com.WanderingTurtle.BusinessLogic
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
-        /// A method to compare two different dates and determine a refund amount.
-        /// Stores today's date, then subtracts todays date from the start date of the event-
-        /// this information stored on the BookingDetails myBooking object
+        /// A method to compare two different dates and determine a cancellation fee amount.
+        /// Stores today's date, then subtracts todays date from the start date of the event
         /// Uses a TimeSpan object which represents an interval of time and is able to perform calculations on time.
-        /// The difference of days is stored on an int and used to test conditions.
+        /// The difference of days is stored in a double and used to test conditions.
         /// </summary>
         /// <remarks>
         /// Updated by Pat Banks 2015/03/07
@@ -112,12 +111,13 @@ namespace com.WanderingTurtle.BusinessLogic
 
             //TimeSpan is used to calculate date differences
             TimeSpan ts = bookingToCancel.StartDate - DateTime.Now;
-            //The .Days gets the amount of days inbetween returning an int.
+
+            //The .TotalDays gets the amount of days inbetween returns a double to account for partial days
             double difference = ts.TotalDays;
 
             if (difference >= 3)
             {
-                feePercent = 0.0m;
+                feePercent = 0m;
             }
             else if (difference < 3 && difference > 1)
             {

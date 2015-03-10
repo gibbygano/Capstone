@@ -35,7 +35,6 @@ namespace com.WanderingTurtle.FormPresentation
             myBooking = booking;
             myInvoice = invoice;
             populateText();
-  
         }
 
         /// <summary>

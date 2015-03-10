@@ -30,7 +30,6 @@ namespace com.WanderingTurtle.FormPresentation
             this.inInvoice = inInvoice;
             this.inBookingDetails = inBookingDetails;
 
-
             InitializeComponent();
 
             outInvList.Add(inBookingDetails);
@@ -83,7 +82,12 @@ namespace com.WanderingTurtle.FormPresentation
             inBookingDetails.Quantity = quantity;
 
             inBookingDetails.ExtendedPrice = calcExtendedPrice(inBookingDetails.TicketPrice, discount);
+//ProductManager myProdMan = new ProductManager();
+//ItemListing originalListItem = myProdMan.RetrieveItemListing(myBooking.ItemListID.ToString());
 
+//int newNumGuests = originalListItem.CurrentNumGuests - myBooking.Quantity;
+
+  //int result1 = OrderManager.updateNumberOfGuests(myBooking.ItemListID, originalListItem.CurrentNumGuests, newNumGuests);
 
             newBooking = (Booking)inBookingDetails;
 
