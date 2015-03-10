@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -161,18 +162,29 @@ namespace com.WanderingTurtle.FormPresentation
             //FormatException found in if loop
             if (CurrentHotelGuest == null)
             {
-                Result = HotelGuestManager.AddHotelGuest(
-                    new HotelGuest(
-                        TxtFirstName.Text.Trim(),
-                        TxtLastName.Text.Trim(),
-                        TxtAddress1.Text.Trim(),
-                        TxtAddress2.Text.Trim(),
-                        (CityState)CboZip.SelectedItem,
-                        TxtPhoneNumber.Text.Trim(),
-                        TxtEmailAddress.Text.Trim(),
-                        int.Parse(TxtRoomNumber.Text.Trim())
-                    )
-                );
+                try
+                {
+                    Result = HotelGuestManager.AddHotelGuest(
+                        new HotelGuest(
+                            TxtFirstName.Text.Trim(),
+                            TxtLastName.Text.Trim(),
+                            TxtAddress1.Text.Trim(),
+                            TxtAddress2.Text.Trim(),
+                            (CityState)CboZip.SelectedItem,
+                            TxtPhoneNumber.Text.Trim(),
+                            TxtEmailAddress.Text.Trim(),
+                            int.Parse(TxtRoomNumber.Text.Trim())
+                        )
+                    );
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
             else
             {

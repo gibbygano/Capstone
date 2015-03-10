@@ -3,6 +3,7 @@ using com.WanderingTurtle.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -13,10 +14,25 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="newHotelGuest">Object containing new hotel guest information</param>
 		/// <returns>Number of rows effected</returns>
-		/// Miguel Santana 2/18/2015
+        /// <remarks>
+        /// Miguel Santana 2/18/2015
+        /// Updated Rose Steffensmeier
+        /// </remarks>
+		/// 
 		public static bool AddHotelGuest(HotelGuest newHotelGuest)
 		{
-			return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+            try
+            {
+                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
