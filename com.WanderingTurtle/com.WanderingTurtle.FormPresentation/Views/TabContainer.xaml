@@ -3,6 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d">
-	<TabControl />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+            <MenuItem Header="Menu Header">
+                <MenuItem Header="MenuItem 1" />
+                <MenuItem Header="MenuItem 2" />
+            </MenuItem>
+        </Menu>
+        <TabControl Grid.Row="1" x:Name="MainTabControl" Margin="{DynamicResource Grid Margin}" />
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>TODO Current User</StatusBarItem>
+            <Separator Style="{StaticResource MetroStatusBarSeparator}" />
+            <StatusBarItem>Selected Tab:</StatusBarItem>
+            <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
+        </StatusBar>
+    </Grid>
 </UserControl>

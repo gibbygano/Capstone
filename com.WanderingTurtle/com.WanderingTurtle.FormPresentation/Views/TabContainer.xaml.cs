@@ -36,7 +36,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
 
         private void AddTab(string tabName, object tabContent)
         {
-            ((TabControl)Content).Items.Add(new TabItem
+            MainTabControl.Items.Add(new TabItem
             {
                 Header = tabName,
                 Content = tabContent
