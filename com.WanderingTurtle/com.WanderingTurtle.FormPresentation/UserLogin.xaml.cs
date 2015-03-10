@@ -29,6 +29,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </remarks>
     public partial class UserLogin : UserControl
     {
+        EmployeeManager _employeeManager = new EmployeeManager();
         #region Custom events and their event handlers
         /// <summary>
         /// Arik Chadima
@@ -84,7 +85,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 try
                 {
-                    Employee checkEmp = EmployeeManager.GetEmployeeLogin((int)empID, loginPassword.Password);
+                    Employee checkEmp = _employeeManager.GetEmployeeLogin((int)empID, loginPassword.Password);
                     if (checkEmp!=null)
                     {
                         Globals.UserToken = checkEmp;

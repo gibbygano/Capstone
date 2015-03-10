@@ -23,6 +23,7 @@ namespace com.WanderingTurtle.FormPresentation
         private BookingDetails myBooking;
         private InvoiceDetails myInvoice;
         private decimal cancelFee = 0m;
+        OrderManager _orderManager = new OrderManager();
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
@@ -59,7 +60,7 @@ namespace com.WanderingTurtle.FormPresentation
                 lblTicketPrice.Content = myBooking.TicketPrice.ToString("c");
                 lblTotalDue.Content = myBooking.TotalCharge.ToString("c");
 
-                cancelFee = OrderManager.CalculateCancellationFee(myBooking);
+                cancelFee = _orderManager.CalculateCancellationFee(myBooking);
                 lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
             }
             catch (Exception ax)
@@ -88,7 +89,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 int newNumGuests = originalListItem.CurrentNumGuests - myBooking.Quantity;
 
-                int result1 = OrderManager.updateNumberOfGuests(myBooking.ItemListID, originalListItem.CurrentNumGuests, newNumGuests);
+                int result1 = _orderManager.updateNumberOfGuests(myBooking.ItemListID, originalListItem.CurrentNumGuests, newNumGuests);
 
                 if (result1 == 1)
                 {
@@ -100,9 +101,9 @@ namespace com.WanderingTurtle.FormPresentation
                 myBooking.TicketPrice = 0;
                 myBooking.ExtendedPrice = 0;
                 myBooking.Discount = 0;
-                
 
-                int result = OrderManager.EditBooking(myBooking);
+
+                int result = _orderManager.EditBooking(myBooking);
 
                 if (result == 1)
                 {

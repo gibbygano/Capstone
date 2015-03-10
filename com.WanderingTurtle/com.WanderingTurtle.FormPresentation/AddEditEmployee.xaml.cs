@@ -9,6 +9,7 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class AddEmployee
     {
+        EmployeeManager _employeeManager = new EmployeeManager();
         /// <summary>
         /// Created by Pat Banks 2015/02/02
         ///
@@ -112,7 +113,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Debug.Assert(ChkActiveEmployee.IsChecked != null, "ChkActiveEmployee.IsChecked != null");
-                int result = EmployeeManager.AddNewEmployee(
+                int result = _employeeManager.AddNewEmployee(
                     new Employee(
                         TxtFirstName.Text,
                         TxtLastName.Text,
@@ -149,7 +150,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                int result = EmployeeManager.EditCurrentEmployee(
+                int result = _employeeManager.EditCurrentEmployee(
                     CurrentEmployee,
                     new Employee(
                         TxtFirstName.Text,

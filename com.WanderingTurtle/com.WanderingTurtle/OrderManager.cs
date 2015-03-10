@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-	public static class OrderManager
+	public class OrderManager
 	{
 		///Created By: Tony Noel - 15/2/5
 		/// <summary>
@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <exception cref="ApplicationException">trouble accessing the server.</exception>
 		/// <returns>a list of booking objects from database.</returns>
-		public static List<Booking> RetrieveBookingList()
+		public List<Booking> RetrieveBookingList()
 		{
 			return BookingAccessor.getBookingList();
 		}
@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
 		/// </summary>
 		/// <returns>Returns a list of ListItemObject objects from database(From the ItemListing and EventItem tables).</returns>
-		public static List<ListItemObject> RetrieveListItemList()
+		public List<ListItemObject> RetrieveListItemList()
 		{
 			return BookingAccessor.getListItems();
 		}
@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="newBooking">Takes an input of a booking object</param>
 		/// <returns>Returns an int- the number of rows affected, if add is successful</returns>
-		public static int AddaBooking(Booking newBooking)
+		public int AddaBooking(Booking newBooking)
 		{
 			return BookingAccessor.addBooking(newBooking);
 		}
@@ -51,7 +51,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="newOne">Takes an input of a booking object</param>
 		/// <returns> Returns an int- the number of rows affected, if add is successful</returns>
-		public static int EditBooking(Booking newOne)
+		public int EditBooking(Booking newOne)
 		{
 			Booking oldOne = RetrieveBooking(newOne.BookingID);
 			var numRows = BookingAccessor.updateBooking(oldOne, newOne);
@@ -64,7 +64,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
 		/// <returns>Output is a booking object to hold the booking record.</returns>
-		public static Booking RetrieveBooking(int bookingId)
+		public Booking RetrieveBooking(int bookingId)
 		{
 			return BookingAccessor.getBooking(bookingId);
 		}
@@ -81,7 +81,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updated by Pat Banks 2015/03/07
         /// </remarks>
         /// <returns>decimal containing the total cancellation fee amount</returns>
-        public static decimal CalculateCancellationFee(BookingDetails bookingToCancel)
+        public decimal CalculateCancellationFee(BookingDetails bookingToCancel)
         {
             decimal feePercent;
 
@@ -105,7 +105,7 @@ namespace com.WanderingTurtle.BusinessLogic
             return feePercent * bookingToCancel.TotalCharge;
         }
 
-        public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
+        public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
             return BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
 		}

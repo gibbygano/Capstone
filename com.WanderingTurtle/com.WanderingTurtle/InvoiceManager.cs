@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-	public static class InvoiceManager
+	public class InvoiceManager
 	{
 		/// <summary>
 		/// Created by Pat Banks 2015/02/25
@@ -15,7 +15,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="hotelGuestId">Hotel guest ID</param>
 		/// <returns>List of bookings for a hotel guest</returns>
-		public static List<BookingDetails> RetrieveBookingDetailsList(int hotelGuestId)
+		public List<BookingDetails> RetrieveBookingDetailsList(int hotelGuestId)
 		{
 			return InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
 		}
@@ -26,7 +26,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="guestBookings">List of bookings for a guest</param>
 		/// <returns>cost of bookings</returns>
-		public static decimal CalculateTotalDue(List<BookingDetails> guestBookings)
+		public decimal CalculateTotalDue(List<BookingDetails> guestBookings)
 		{
 			//go through bookings to calculate amount due for a customer
 			return guestBookings.Sum(b => b.TotalCharge);
@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// retrieves a list of invoices that are active
 		/// </summary>
 		/// <returns>List of all active guest invoices</returns>
-		public static List<InvoiceDetails> RetrieveAllInvoiceDetails()
+		public List<InvoiceDetails> RetrieveAllInvoiceDetails()
 		{
 			return InvoiceAccessor.GetActiveInvoiceList();
 		}
@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="hotelGuestId">Hotel Guest ID</param>
 		/// <returns>Invoice information for a hotel guest</returns>
-		public static InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
+		public InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
 		{
 			return InvoiceAccessor.GetInvoiceByGuest(hotelGuestId);
 		}
@@ -63,7 +63,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="originalInvoice">invoice that was fetched from database - used to check for concurrency errors</param>
 		/// <param name="updatedInvoice">information that needs to be updated in the database</param>
 		/// <returns>boolean true if result was successful</returns>
-		public static bool ArchiveCurrentGuestInvoice(Invoice originalInvoice, Invoice updatedInvoice)
+		public bool ArchiveCurrentGuestInvoice(Invoice originalInvoice, Invoice updatedInvoice)
 		{
 			return InvoiceAccessor.ArchiveGuestInvoice(originalInvoice, updatedInvoice) > 0;
 		}
