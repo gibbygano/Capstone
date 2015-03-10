@@ -16,14 +16,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Miguel Santana 2/18/2015
         public List<CityState> GetCityStateList()
         {
-            try
-            {
-                return CityStateAccessor.CityStateGet();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return CityStateAccessor.CityStateGet();
         }
 
 /********************  Methods not used in Sprint 1 ************************************************/
@@ -35,15 +28,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Miguel Santana 2/18/2015
         public CityState GetCityState(String zip)
         {
-            try
-            {
-                List<CityState> list = CityStateAccessor.CityStateGet(zip);
-                return (list.Count == 1) ? list.ElementAt(0) : null;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			List<CityState> list = CityStateAccessor.CityStateGet(zip);
+            return (list.Count == 1) ? list.ElementAt(0) : null;
         }
     }
 }

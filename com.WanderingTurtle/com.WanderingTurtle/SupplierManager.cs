@@ -25,14 +25,7 @@ namespace com.WanderingTurtle
         /// Created by Reece Maas 2/18/15
         public Supplier RetrieveSupplier(string supplierID)
         {
-            try
-            {
-                return SupplierAccessor.GetSupplier(supplierID);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return SupplierAccessor.GetSupplier(supplierID);
         }
          /// <summary>
         /// Gets a list of Suppliers  from the Data Access layer
@@ -42,14 +35,7 @@ namespace com.WanderingTurtle
         /// Created by Reece Maas 2/18/15
         public List<Supplier> RetrieveSupplierList()
         {
-            try
-            {
-                return SupplierAccessor.GetSupplierList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return SupplierAccessor.GetSupplierList();
         }
         /// <summary>
         /// Adds a single Supplier to the database
@@ -60,14 +46,7 @@ namespace com.WanderingTurtle
         /// Created by Reece Maas 2/18/15
         public int AddANewSupplier(Supplier supplierToAdd)
         {
-            try
-            {
-                return SupplierAccessor.AddSupplier(supplierToAdd);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return SupplierAccessor.AddSupplier(supplierToAdd);
         }
         /// <summary>
         /// Updates a Supplier 
@@ -79,25 +58,11 @@ namespace com.WanderingTurtle
         /// Created by Reece Maas 2/18/15
         public int EditSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
-            try
-            {
-                return SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier);
         }
         public int ArchiveSupplier(Supplier supplierToDelete)
         {
-            try
-            {
-                return SupplierAccessor.DeleteSupplier(supplierToDelete);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+			return SupplierAccessor.DeleteSupplier(supplierToDelete);
         }
         /// <summary>
         /// Matt Lapka
@@ -109,15 +74,7 @@ namespace com.WanderingTurtle
         /// <returns>SupplierApplication object</returns>
         public SupplierApplication RetrieveSupplierApplication(string applicationID)
         {
-            try
-            {
-                return SupplierApplicationAccessor.GetSupplierApplication(applicationID);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+			return SupplierApplicationAccessor.GetSupplierApplication(applicationID);
         }
 
         /// <summary>
@@ -129,15 +86,7 @@ namespace com.WanderingTurtle
         /// <returns>List of SupplierApplication objects</returns>
         public List<SupplierApplication> RetrieveSupplierApplicationList()
         {
-            try
-            {
-                return SupplierApplicationAccessor.GetSupplierApplicationList();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+			return SupplierApplicationAccessor.GetSupplierApplicationList();
         }
 
         /// <summary>
@@ -150,15 +99,7 @@ namespace com.WanderingTurtle
         /// <returns>int # of rows affected</returns>
         public int AddASupplierApplication(SupplierApplication newSupplierApp)
         {
-            try
-            {
-                return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+			return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp);
         }
 
         /// <summary>
@@ -172,16 +113,7 @@ namespace com.WanderingTurtle
         /// <returns>int # of rows affected</returns>
         public int EditSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication newSupplierApp)
         {
-            try
-            {
-                return SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, newSupplierApp);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
+			return SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, newSupplierApp);
         }
-     
     }
 }

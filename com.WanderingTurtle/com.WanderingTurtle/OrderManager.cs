@@ -15,15 +15,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>a list of booking objects from database.</returns>
 		public static List<Booking> RetrieveBookingList()
 		{
-			try
-			{
-				return BookingAccessor.getBookingList();
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
-				throw ax;
-			}
+			return BookingAccessor.getBookingList();
 		}
 
 		///Created By: Tony Noel - 15/2/13
@@ -34,15 +26,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>Returns a list of ListItemObject objects from database(From the ItemListing and EventItem tables).</returns>
 		public static List<ListItemObject> RetrieveListItemList()
 		{
-			try
-			{
-				return BookingAccessor.getListItems();
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
-				throw ax;
-			}
+			return BookingAccessor.getListItems();
 		}
 
 		///Created By: Tony Noel - 15/2/5,  Updated By: Pat Banks - 2/19/15 exception handling
@@ -53,8 +37,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>Returns an int- the number of rows affected, if add is successful</returns>
 		public static int AddaBooking(Booking newBooking)
 		{
-			var numRows = BookingAccessor.addBooking(newBooking);
-			return numRows;
+			return BookingAccessor.addBooking(newBooking);
 		}
 
 
@@ -83,15 +66,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>Output is a booking object to hold the booking record.</returns>
 		public static Booking RetrieveBooking(int bookingId)
 		{
-			try
-			{
-				return BookingAccessor.getBooking(bookingId);
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing your data.");
-				throw ax;
-			}
+			return BookingAccessor.getBooking(bookingId);
 		}
 
         ///Created By: Tony Noel, 2015/03/04
@@ -132,9 +107,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
-            var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
-			return numRows;
+            return BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
 		}
-        
 	}
 }
