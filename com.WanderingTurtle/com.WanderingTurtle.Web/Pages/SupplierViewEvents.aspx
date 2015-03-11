@@ -2,14 +2,19 @@
 
 <%@ Import Namespace="com.WanderingTurtle.Common" %>
 <%@ Import Namespace="com.WanderingTurtle.Web" %>
+<%@ Import Namespace="com.WanderingTurtle.Web.Pages" %>
 <%@ Import Namespace="com.WanderingTurtle.BusinessLogic" %>
 <%@ Import Namespace="com.WanderingTurtle" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
-
+    <!--Created 2015/02/27
+        Matt Lapka
+        Hunter Lind
+        View List of Events and Options to Edit or Delete
+        -->
     <h1>Listed Events</h1>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
-    <asp:ListView ID="lvEvents" ItemType="Event" SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
+    <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
         DeleteMethod="DeleteEvent" EnableViewState="false" runat="server" OnPagePropertiesChanging="lvEvents_PagePropertiesChanging">
         <ItemTemplate>
             <tr>
