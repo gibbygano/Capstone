@@ -75,7 +75,7 @@ namespace com.WanderingTurtle.BusinessLogic
        /// </summary>
        /// <param name="bookingToCancel"></param>
        /// <returns></returns>
-        public static decimal CalculateCancellationFee(BookingDetails bookingToCancel)
+        public decimal CalculateCancellationFee(BookingDetails bookingToCancel)
         {
             decimal feePercent = CalculateTime(bookingToCancel);
             if (feePercent > 1.0m)
@@ -95,12 +95,12 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updated by Pat Banks 2015/03/07, Updated Tony Noel 2015/03/10
         /// </remarks>
         /// <returns>decimal containing the total cancellation fee amount</returns>
-        public static decimal CalculateTime(BookingDetails bookingStartTime)
+        public decimal CalculateTime(BookingDetails bookingStartTime)
         {
             decimal feePercent;
             //TimeSpan is used to calculate date differences
 
-            TimeSpan ts = bookingToCancel.StartDate - DateTime.Now;
+            TimeSpan ts = bookingStartTime.StartDate - DateTime.Now;
 
             //The .TotalDays gets the amount of days inbetween returns a double to account for partial days
 
@@ -134,7 +134,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="price"></param>
         /// <param name="discount"></param>
         /// <returns></returns>
-        public static decimal calcExtendedPrice(decimal price, decimal discount)
+        public decimal calcExtendedPrice(decimal price, decimal discount)
         {
             decimal extendedPrice;
 
@@ -149,7 +149,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="quantity"></param>
         /// <param name="extendedPrice"></param>
         /// <returns></returns>
-        public static decimal calcTotalPrice(int quantity, decimal extendedPrice)
+        public decimal calcTotalPrice(int quantity, decimal extendedPrice)
         {
             return (decimal)quantity * extendedPrice;
         }
@@ -159,7 +159,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="maxQuantity"></param>
         /// <param name="currentQuantity"></param>
         /// <returns></returns>
-        public static int availableQuantity(int maxQuantity, int currentQuantity)
+        public int availableQuantity(int maxQuantity, int currentQuantity)
         {
             int availableQuantity;
 
@@ -175,13 +175,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="maxQuantity"></param>
         /// <param name="currentQuantity"></param>
         /// <returns></returns>
-        public static int spotsReservedDifference(int newQuantity, int currentQuantity)
+        public int spotsReservedDifference(int newQuantity, int currentQuantity)
         {
            int quantity = newQuantity - currentQuantity;
 
             return quantity;
         }
-        public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
+
+
+        public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
             return BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
 		}

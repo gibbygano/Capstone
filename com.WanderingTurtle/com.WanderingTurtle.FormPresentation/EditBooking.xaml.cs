@@ -64,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
             //calls to the Calculate time method in ordermanager which returns a decimal in the form of 0.0, .5, or 1.0.
             //1.0 in this method means that the startdate of the event is less than a day away, in other words too late to avoid being charged and 
             //too late to be edited or cancelled.
-            decimal time = OrderManager.CalculateTime(inBookingDetails);
+            decimal time = _orderManager.CalculateTime(inBookingDetails);
             if (time == 1.0m)
             {
                 MessageBox.Show("Due to the close proximity in time to the start date of this event, the reservation cannot be edited.");
@@ -79,12 +79,12 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 //A variable to hold the dfference between the number of guests on the original reservation, and the old reservation
-                int numGuests = OrderManager.spotsReservedDifference(quantity, inBookingDetails.Quantity);
+                int numGuests = _orderManager.spotsReservedDifference(quantity, inBookingDetails.Quantity);
 
                 // creates an ItemListing object by retrieving the record of the specific object based on it's ItemListID
                 ItemListing originalItem = myProd.RetrieveItemListing(inBookingDetails.ItemListID.ToString());
                 //assigned the difference of the MaxNumGuests - currentNum of guests
-                int quantityOffered = OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+                int quantityOffered = _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
                 
                 //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
                 if (quantityOffered == 0 && quantity > inBookingDetails.Quantity)
@@ -129,7 +129,7 @@ namespace com.WanderingTurtle.FormPresentation
             inBookingDetails.Quantity = quantity;
 
 
-            inBookingDetails.ExtendedPrice = calcExtendedPrice(inBookingDetails.TicketPrice, discount);
+   //         inBookingDetails.ExtendedPrice = calcExtendedPrice(inBookingDetails.TicketPrice, discount);
 //ProductManager myProdMan = new ProductManager();
 //ItemListing originalListItem = myProdMan.RetrieveItemListing(myBooking.ItemListID.ToString());
 

@@ -47,7 +47,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 originalItem = _productManager.RetrieveItemListing(lIO.ItemListID.ToString());
 
-                lIO.QuantityOffered = OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+                lIO.QuantityOffered = _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
             }
         }
 
@@ -107,7 +107,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             int.TryParse(quantity, out qID);
             //Quantity field on the table needs to be a calculated field in order for this to work.- ItemListing has a max#guest field and a Current#guest field that will be used to calculate quantity
-            if (okQuantity(quantity, OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests)) == false || qID <= 0)
+            if (okQuantity(quantity, _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests)) == false || qID <= 0)
             {
                 MessageBox.Show("Please review the quantity entered:" +
                     " \nMust be a positive number and cannot excede the quantity available for the event.");
@@ -117,9 +117,9 @@ namespace com.WanderingTurtle.FormPresentation
             
          try
          {
-             extendedPrice = OrderManager.calcExtendedPrice(selected.Price, discount);
+             extendedPrice = _orderManager.calcExtendedPrice(selected.Price, discount);
 
-             totalPrice = OrderManager.calcTotalPrice(qID, extendedPrice);
+             totalPrice = _orderManager.calcTotalPrice(qID, extendedPrice);
 
              eID = 100;
 //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
