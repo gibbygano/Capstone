@@ -206,14 +206,14 @@ namespace com.WanderingTurtle.DataAccess
 
             //oldItemListing
             cmd.Parameters.AddWithValue("@ItemListID", oldItemListing.ItemListID);
-            cmd.Parameters.AddWithValue("@StartDate", oldItemListing.StartDate);
-            cmd.Parameters.AddWithValue("@EndDate", oldItemListing.EndDate);
-            cmd.Parameters.AddWithValue("@EventItemID", oldItemListing.EventID);
-            cmd.Parameters.AddWithValue("@Price", oldItemListing.Price);
-            cmd.Parameters.AddWithValue("@MaxNumberOfGuests", oldItemListing.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@MinNumberOfGuests", oldItemListing.MinNumGuests);
-            cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", oldItemListing.CurrentNumGuests);
-            cmd.Parameters.AddWithValue("@SupplierID", oldItemListing.SupplierID);
+            cmd.Parameters.AddWithValue("@originalStartDate", oldItemListing.StartDate);
+            cmd.Parameters.AddWithValue("@originalEndDate", oldItemListing.EndDate);
+            cmd.Parameters.AddWithValue("@originalEventItemID", oldItemListing.EventID);
+            cmd.Parameters.AddWithValue("@originalPrice", oldItemListing.Price);
+            cmd.Parameters.AddWithValue("@originalMaxNumberOfGuests", oldItemListing.MaxNumGuests);
+            cmd.Parameters.AddWithValue("@originalMinNumberOfGuests", oldItemListing.MinNumGuests);
+            cmd.Parameters.AddWithValue("@originalCurrentNumberOfGuests", oldItemListing.CurrentNumGuests);
+            cmd.Parameters.AddWithValue("@originalSupplierID", oldItemListing.SupplierID);
 
             int rowsAffected;
 
