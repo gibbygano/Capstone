@@ -45,7 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 originalItem = addBookingProdManager.RetrieveItemListing(lIO.ItemListID.ToString());
 
-                lIO.QuantityOffered = availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+                lIO.QuantityOffered = OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
             }
         }
 
@@ -105,7 +105,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             int.TryParse(quantity, out qID);
             //Quantity field on the table needs to be a calculated field in order for this to work.- ItemListing has a max#guest field and a Current#guest field that will be used to calculate quantity
-            if (okQuantity(quantity, availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests)) == false || qID <= 0)
+            if (okQuantity(quantity, OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests)) == false || qID <= 0)
             {
                 MessageBox.Show("Please review the quantity entered:" +
                     " \nMust be a positive number and cannot excede the quantity available for the event.");
@@ -115,9 +115,9 @@ namespace com.WanderingTurtle.FormPresentation
             
          try
          {
-             extendedPrice = calcExtendedPrice(selected.Price, discount);
+             extendedPrice = OrderManager.calcExtendedPrice(selected.Price, discount);
 
-             totalPrice = calcTotalPrice(qID, extendedPrice);
+             totalPrice = OrderManager.calcTotalPrice(qID, extendedPrice);
 
              eID = 100;
 //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
@@ -192,28 +192,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private decimal calcExtendedPrice(decimal price, decimal discount)
-        {
-            decimal extendedPrice;
-
-            extendedPrice = ((100 - discount) / 100) * price;
-
-            return extendedPrice;
-        }
-
-        private decimal calcTotalPrice(int quantity, decimal extendedPrice)
-        {
-            return (decimal)quantity * extendedPrice;
-        }
-
-        private int availableQuantity(int maxQuantity, int currentQuantity)
-        {
-            int availableQuantity;
-
-            availableQuantity = maxQuantity - currentQuantity;
-
-            return availableQuantity;
-        }
 
         /*method to check a quantity
          * takes a string

@@ -23,6 +23,7 @@ namespace com.WanderingTurtle.FormPresentation
         public InvoiceDetails inInvoice;
         public BookingDetails inBookingDetails;
         List<BookingDetails> outInvList = new List<BookingDetails>();
+        public ProductManager myProd = new ProductManager();
         Booking newBooking;
 
         public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails)
@@ -43,6 +44,14 @@ namespace com.WanderingTurtle.FormPresentation
             lvEditBookingListItems.ItemsSource = outInvList;
         }
 
+        ///Created by Ryan Blake
+        ///Updated- Tony Noel, 2015/03/10 to check if the quantity is going up and see if the booking is already full
+        ///and if the booking has occured already, it cannot be changed.
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
             int quantity;
@@ -52,10 +61,47 @@ namespace com.WanderingTurtle.FormPresentation
 
             inQuantity = tbEditBookingQuantity.Text;
 
+            //calls to the Calculate time method in ordermanager which returns a decimal in the form of 0.0, .5, or 1.0.
+            //1.0 in this method means that the startdate of the event is less than a day away, in other words too late to avoid being charged and 
+            //too late to be edited or cancelled.
+            decimal time = OrderManager.CalculateTime(inBookingDetails);
+            if (time == 1.0m)
+            {
+                MessageBox.Show("Due to the close proximity in time to the start date of this event, the reservation cannot be edited.");
+                return;
+            }
             if(!int.TryParse(inQuantity, out quantity))
             {
                 MessageBox.Show("Please enter a whole number for quantity.");
                 return;
+            }
+
+            try
+            {
+                //A variable to hold the dfference between the number of guests on the original reservation, and the old reservation
+                int numGuests = OrderManager.spotsReservedDifference(quantity, inBookingDetails.Quantity);
+
+                // creates an ItemListing object by retrieving the record of the specific object based on it's ItemListID
+                ItemListing originalItem = myProd.RetrieveItemListing(inBookingDetails.ItemListID.ToString());
+                //assigned the difference of the MaxNumGuests - currentNum of guests
+                int quantityOffered = OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+                
+                //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
+                if (quantityOffered == 0 && quantity > inBookingDetails.Quantity)
+                {
+                    MessageBox.Show("This event is already full. You cannot add more guests to it.");
+                    return;
+                }
+                //Method to check the number of guests added to a reservation against the available quantity for the event
+                if (numGuests > quantityOffered)
+                {
+                    MessageBox.Show("You are attempting to add "+ numGuests+ " guests onto this reservation, however, there are only " + quantityOffered + " spots open for this event. Please alert the guest.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an issue locating the ItemListID on file.", ex.Message);
             }
 
             if (quantity < 1)
@@ -82,7 +128,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             inBookingDetails.Quantity = quantity;
 
-            inBookingDetails.ExtendedPrice = calcExtendedPrice(inBookingDetails.TicketPrice, discount);
+            inBookingDetails.ExtendedPrice = OrderManager.calcExtendedPrice(inBookingDetails.TicketPrice, discount);
 
 
             newBooking = (Booking)inBookingDetails;
@@ -94,13 +140,5 @@ namespace com.WanderingTurtle.FormPresentation
             this.Close();
         }
 
-        private decimal calcExtendedPrice(decimal price, decimal discount)
-        {
-            decimal extendedPrice;
-
-            extendedPrice = ((100 - discount)/ 100) * price;
-
-            return extendedPrice;
-        }
     }
 }

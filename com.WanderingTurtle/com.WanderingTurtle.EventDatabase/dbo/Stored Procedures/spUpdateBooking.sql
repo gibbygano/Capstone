@@ -1,8 +1,9 @@
 ﻿/*-------------------------------------Update------------created by: Tony Noel---------------- */
 CREATE PROCEDURE [dbo].[spUpdateBooking]
 	(@Quantity		int,
-	@Refund			decimal,
+	@Discount			decimal,
 	@Active			bit,
+	@TicketPrice decimal,
 	@ExtendedPrice	decimal,
 	@TotalCharge		decimal,
 	
@@ -21,8 +22,9 @@ AS
 BEGIN
 	UPDATE Booking
 		SET Quantity = @Quantity,
-			Discount = @Refund,
+			Discount = @Discount,
 			Active = @Active,
+			TicketPrice = @TicketPrice,
 			ExtendedPrice = @ExtendedPrice,
 			TotalCharge = @TotalCharge
 	WHERE BookingID = @original_BookingID
