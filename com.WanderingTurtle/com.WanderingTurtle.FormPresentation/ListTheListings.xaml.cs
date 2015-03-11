@@ -71,9 +71,13 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
-            EditListing temp = new EditListing(ListingEdit);
-            MessageBox.Show("You selected: " +  ListingEdit.ItemListID.ToString());
-            temp.Show();
+            Window EditListings = new EditListing(ListingEdit);
+            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
+            //AddItemListings.Show();
+            if (EditListings.ShowDialog() == false)
+            {
+                refreshData();
+            }
 
         }
 
@@ -147,9 +151,14 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnEditListing_click(object sender, RoutedEventArgs e)
         {
             ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
-            EditListing temp = new EditListing(ListingEdit);
-            MessageBox.Show("You selected: " +  ListingEdit.ItemListID.ToString());
-            temp.Show();
+            Window EditListings = new EditListing(ListingEdit);
+            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
+            //AddItemListings.Show();
+            if (EditListings.ShowDialog() == false)
+            {
+                refreshData();
+            }
+
         }
     }
 
