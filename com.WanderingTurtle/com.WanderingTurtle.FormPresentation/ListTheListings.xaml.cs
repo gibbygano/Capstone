@@ -70,8 +70,9 @@ namespace com.WanderingTurtle.FormPresentation
         // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItems[0];
+            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
             EditListing temp = new EditListing(ListingEdit);
+            MessageBox.Show("You selected: " +  ListingEdit.ItemListID.ToString());
             temp.Show();
 
         }
@@ -141,6 +142,14 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
             }
+        }
+
+        private void btnEditListing_click(object sender, RoutedEventArgs e)
+        {
+            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
+            EditListing temp = new EditListing(ListingEdit);
+            MessageBox.Show("You selected: " +  ListingEdit.ItemListID.ToString());
+            temp.Show();
         }
     }
 

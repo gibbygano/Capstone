@@ -1,20 +1,21 @@
-﻿using System;
-
-public class EventType
+﻿namespace com.WanderingTurtle.Common
 {
-    //Bryan Hurst Feb.19
-    //Object for the creation of EventType objects with set data fields
-    public int EventTypeID     { get; set; }
-    public string EventName    { get; set; }
-
-    public EventType()
-    {
-
-    }
-
-    public EventType(int eventTypeID, string eventName)
+	public class EventType
 	{
-        EventTypeID = eventTypeID;
-        EventName = eventName;
+		//Bryan Hurst Feb.19
+		//Object for the creation of EventType objects with set data fields
+		public int EventTypeID { get; set; }
+
+		public string EventName { get; set; }
+
+		public EventType()
+		{
+		}
+
+		public EventType(int eventTypeID, string eventName)
+		{
+			EventTypeID = eventTypeID;
+			EventName = eventName;
+		}
 	}
 }

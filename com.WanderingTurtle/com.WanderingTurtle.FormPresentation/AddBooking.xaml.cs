@@ -21,9 +21,11 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking : Window
     {
-        public List<ListItemObject> myEventList;
-        public InvoiceDetails inInvoice;
-        public ProductManager addBookingProdManager = new ProductManager();
+        List<ListItemObject> myEventList;
+        InvoiceDetails inInvoice;
+        ProductManager _productManager = new ProductManager();
+        EmployeeManager _employeeManager = new EmployeeManager();
+        OrderManager _orderManager = new OrderManager();
         //public ItemListing updatedItem;
         public ItemListing originalItem;
 
@@ -39,11 +41,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void RefreshListItems()
         {
-            myEventList = OrderManager.RetrieveListItemList();
+            myEventList = _orderManager.RetrieveListItemList();
 
             foreach (ListItemObject lIO in myEventList)
             {
-                originalItem = addBookingProdManager.RetrieveItemListing(lIO.ItemListID.ToString());
+                originalItem = _productManager.RetrieveItemListing(lIO.ItemListID.ToString());
 
                 lIO.QuantityOffered = OrderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
             }
@@ -87,7 +89,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             selected = getSelectedItem();
 
-            originalItem = addBookingProdManager.RetrieveItemListing(selected.ItemListID.ToString());
+            originalItem = _productManager.RetrieveItemListing(selected.ItemListID.ToString());
 
             int.TryParse(tbAddBookingDiscount.Text, out discount);
 
@@ -126,13 +128,13 @@ namespace com.WanderingTurtle.FormPresentation
              myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate, selected.Price, extendedPrice, discount, totalPrice);
 
              //calls to booking manager to add a booking. BookingID is auto-generated in database                
-             int result = OrderManager.AddaBooking(myBooking);
+             int result = _orderManager.AddaBooking(myBooking);
 
              if (result == 1)
              {
                  //change quantity of guests
                  int updatedGuests = originalItem.CurrentNumGuests + qID;
-                 int result2 = OrderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
+                 int result2 = _orderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
                  if (result2 == 1)
                  {
                      MessageBox.Show("Numguests changed");                     
@@ -181,7 +183,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Validator.ValidateInt(emp);
                 int.TryParse(emp, out empID);
-                EmployeeManager.FetchEmployee(empID);
+                _employeeManager.FetchEmployee(empID);
                 works = true;
                 return works;
 

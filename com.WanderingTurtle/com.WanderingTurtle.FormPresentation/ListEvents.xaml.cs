@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation
 {

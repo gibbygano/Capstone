@@ -19,6 +19,8 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Updated by Pat Banks 2/27/2015
         /// Stored Procedure updated to create an invoice record automatically when adding a hotel guest
+        /// Updated by Rose Steffensmeier 2015/03/10
+        /// Added SqlException
         /// </remarks>
         public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
@@ -46,6 +48,10 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     throw new ApplicationException("Error adding new database entry");
                 }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {

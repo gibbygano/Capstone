@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-	public static class OrderManager
+	public class OrderManager
 	{
 		///Created By: Tony Noel - 15/2/5
 		/// <summary>
@@ -13,17 +13,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <exception cref="ApplicationException">trouble accessing the server.</exception>
 		/// <returns>a list of booking objects from database.</returns>
-		public static List<Booking> RetrieveBookingList()
+		public List<Booking> RetrieveBookingList()
 		{
-			try
-			{
-				return BookingAccessor.getBookingList();
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
-				throw ax;
-			}
+			return BookingAccessor.getBookingList();
 		}
 
 		///Created By: Tony Noel - 15/2/13
@@ -32,17 +24,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
 		/// </summary>
 		/// <returns>Returns a list of ListItemObject objects from database(From the ItemListing and EventItem tables).</returns>
-		public static List<ListItemObject> RetrieveListItemList()
+		public List<ListItemObject> RetrieveListItemList()
 		{
-			try
-			{
-				return BookingAccessor.getListItems();
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
-				throw ax;
-			}
+			return BookingAccessor.getListItems();
 		}
 
 		///Created By: Tony Noel - 15/2/5,  Updated By: Pat Banks - 2/19/15 exception handling
@@ -51,10 +35,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="newBooking">Takes an input of a booking object</param>
 		/// <returns>Returns an int- the number of rows affected, if add is successful</returns>
-		public static int AddaBooking(Booking newBooking)
+		public int AddaBooking(Booking newBooking)
 		{
-			var numRows = BookingAccessor.addBooking(newBooking);
-			return numRows;
+			return BookingAccessor.addBooking(newBooking);
 		}
 
 
@@ -68,7 +51,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="newOne">Takes an input of a booking object</param>
 		/// <returns> Returns an int- the number of rows affected, if add is successful</returns>
-		public static int EditBooking(Booking newOne)
+		public int EditBooking(Booking newOne)
 		{
 			Booking oldOne = RetrieveBooking(newOne.BookingID);
 			var numRows = BookingAccessor.updateBooking(oldOne, newOne);
@@ -81,17 +64,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
 		/// <returns>Output is a booking object to hold the booking record.</returns>
-		public static Booking RetrieveBooking(int bookingId)
+		public Booking RetrieveBooking(int bookingId)
 		{
-			try
-			{
-				return BookingAccessor.getBooking(bookingId);
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing your data.");
-				throw ax;
-			}
+			return BookingAccessor.getBooking(bookingId);
 		}
 
         ///Updated by: Tony Noel 2015/03/10
@@ -149,6 +124,7 @@ namespace com.WanderingTurtle.BusinessLogic
             return feePercent;
         }
 
+
         /// Created by: 
         /// <summary>
         /// Updated- Tony Noel 2015/03/10 - moved to OrderManager as method does calculations. Changed to a public static method.
@@ -205,9 +181,7 @@ namespace com.WanderingTurtle.BusinessLogic
         }
         public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
-            var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
-			return numRows;
+            return BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
 		}
-        
 	}
 }

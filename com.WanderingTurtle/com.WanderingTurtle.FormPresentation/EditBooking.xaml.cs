@@ -25,6 +25,7 @@ namespace com.WanderingTurtle.FormPresentation
         List<BookingDetails> outInvList = new List<BookingDetails>();
         public ProductManager myProd = new ProductManager();
         Booking newBooking;
+        OrderManager _orderManager = new OrderManager();
 
         public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails)
         {
@@ -133,7 +134,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             newBooking = (Booking)inBookingDetails;
 
-            OrderManager.EditBooking(newBooking);
+            _orderManager.EditBooking(newBooking);
 
             MessageBox.Show("Booking changed successfully.");
 
