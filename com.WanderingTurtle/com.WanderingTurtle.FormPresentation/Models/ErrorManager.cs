@@ -16,21 +16,14 @@ namespace com.WanderingTurtle.FormPresentation.Models
 
         public static Task ShowMessageDialog(Control window, string message)
         {
-            return _Show(window, message, null);
+            return _Show(window, message);
         }
 
-        private static Task _Show(Control control, string message, string title)
+        private static Task _Show(Control control, string message, string title = null, MessageDialogStyle? style = null, MetroDialogSettings settings = null)
         {
             MetroWindow window = WindowHelper.GetWindow(control);
-            var mySettings = new MetroDialogSettings()
-            {
-                AffirmativeButtonText = "Hi",
-                NegativeButtonText = "Go away!",
-                FirstAuxiliaryButtonText = "Cancel",
-            };
 
-            return window.ShowMessageAsync(title, message,
-                MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, mySettings);
+            return window.ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings);
 
             //if (result != MessageDialogResult.FirstAuxiliary)
             //    await window.ShowMessageAsync("Result", "You said: " + (result == MessageDialogResult.Affirmative ? mySettings.AffirmativeButtonText : mySettings.NegativeButtonText +

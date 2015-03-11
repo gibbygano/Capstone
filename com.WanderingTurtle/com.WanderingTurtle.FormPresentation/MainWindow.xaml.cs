@@ -19,19 +19,19 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                //switch (Xceed.Wpf.Toolkit.MessageBox.Show(
-                //    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
-                //    "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
-                //{
-                //    case MessageBoxResult.Yes:
-                //        Environment.Exit(0);
-                //        break;
-                //}
+                switch (Xceed.Wpf.Toolkit.MessageBox.Show(
+                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
+                    "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
+                {
+                    case MessageBoxResult.Yes:
+                        Environment.Exit(0);
+                        break;
+                }
             }
             InitializeComponent();
         }
 
-        private async void BtnSignInOut_Click(object sender, RoutedEventArgs e)
+        private void BtnSignInOut_Click(object sender, RoutedEventArgs e)
         {
             StartUp();
         }

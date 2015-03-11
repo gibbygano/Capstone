@@ -134,9 +134,6 @@
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ErrorManager.cs" />
-    <Compile Include="Views\Flyout.xaml.cs">
-      <DependentUpon>Flyout.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
@@ -201,10 +198,6 @@
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Flyout.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SplashScreen.xaml">
       <SubType>Designer</SubType>
