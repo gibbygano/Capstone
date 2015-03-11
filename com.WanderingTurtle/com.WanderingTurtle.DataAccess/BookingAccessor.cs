@@ -77,10 +77,14 @@ namespace com.WanderingTurtle.DataAccess
         public static List<Booking> getBookingList()
         {
             var BookingList = new List<Booking>();
+            DateTime now = DateTime.Now;
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectAllBookings";
             var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Now", now);
             try
             {
                 conn.Open();
@@ -254,8 +258,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@Quantity", toUpdate.Quantity);
-            cmd.Parameters.AddWithValue("@Refund", toUpdate.Discount);
+            cmd.Parameters.AddWithValue("@Discount", toUpdate.Discount);
             cmd.Parameters.AddWithValue("@Active", toUpdate.Active);
+            cmd.Parameters.AddWithValue("@TicketPrice", toUpdate.TicketPrice);
             cmd.Parameters.AddWithValue("@ExtendedPrice", toUpdate.ExtendedPrice);
             cmd.Parameters.AddWithValue("@TotalCharge", toUpdate.TotalCharge);
 

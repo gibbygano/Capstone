@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditHotelGuest
     {
-        private String _myTitle;
+        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
         /// Create a New Hotel Guest
@@ -23,7 +23,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditHotelGuest()
         {
             InitializeComponent();
-            _myTitle = "Add New Hotel Guest";
+            Title = "Add New Hotel Guest";
 
             InitializeEverything();
         }
@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
 
             CurrentHotelGuest = hotelGuest;
-            _myTitle = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
+            Title = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
         }
 
@@ -164,7 +164,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 try
                 {
-                    Result = HotelGuestManager.AddHotelGuest(
+                    Result = _hotelGuestManager.AddHotelGuest(
                         new HotelGuest(
                             TxtFirstName.Text.Trim(),
                             TxtLastName.Text.Trim(),
@@ -188,7 +188,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                Result = HotelGuestManager.UpdateHotelGuest(
+                Result = _hotelGuestManager.UpdateHotelGuest(
                     CurrentHotelGuest,
                     new HotelGuest(
                         TxtFirstName.Text.Trim(),

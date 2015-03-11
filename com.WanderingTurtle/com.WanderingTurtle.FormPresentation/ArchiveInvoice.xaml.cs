@@ -24,6 +24,9 @@ namespace com.WanderingTurtle.FormPresentation
         private Invoice invoiceToArchive;
         private Invoice originalInvoice;
         private HotelGuest guestToView;
+        InvoiceManager _invoiceManager = new InvoiceManager();
+        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        OrderManager _orderManager = new OrderManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
@@ -33,14 +36,14 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
         public ArchiveInvoice(int selectedHotelGuestID)
-        {          
-            originalInvoice = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-            invoiceToArchive = InvoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+        {
+            originalInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+            invoiceToArchive = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
-            guestToView = HotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
-            myBookingList = InvoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
+            guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
+            myBookingList = _invoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
 
-            invoiceToArchive.TotalPaid = InvoiceManager.CalculateTotalDue(myBookingList);
+            invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
 
             InitializeComponent();
             lblGuestNameLookup.Content = guestToView.GetFullName;
@@ -70,7 +73,7 @@ namespace com.WanderingTurtle.FormPresentation
                 foreach (BookingDetails b in myBookingList)
                 {
                     b.Active = false;
-                    int numrows = OrderManager.EditBooking(b);
+                    int numrows = _orderManager.EditBooking(b);
                     if (numrows != 1)
                     {
                         MessageBox.Show("There was a problem archiving the booking");
@@ -78,7 +81,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
 
                 //archive hotel guest
-                bool guestArchive = HotelGuestManager.ArchiveHotelGuest(guestToView, !guestToView.Active);
+                bool guestArchive = _hotelGuestManager.ArchiveHotelGuest(guestToView, !guestToView.Active);
 
                 if (guestArchive == true)
                 {
@@ -86,7 +89,7 @@ namespace com.WanderingTurtle.FormPresentation
                     invoiceToArchive.DateClosed = DateTime.Now;
                     invoiceToArchive.Active = false;
 
-                    bool result = InvoiceManager.ArchiveCurrentGuestInvoice(originalInvoice, invoiceToArchive);
+                    bool result = _invoiceManager.ArchiveCurrentGuestInvoice(originalInvoice, invoiceToArchive);
 
                     //Dialog appears if records were successfully archived
                     if (result == true)

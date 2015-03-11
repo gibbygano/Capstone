@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-	public static class HotelGuestManager
+	public class HotelGuestManager
 	{
 		/// <summary>
 		/// Creates a new Hotel Guest in the database
@@ -19,20 +19,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updated Rose Steffensmeier
         /// </remarks>
 		/// 
-		public static bool AddHotelGuest(HotelGuest newHotelGuest)
+		public bool AddHotelGuest(HotelGuest newHotelGuest)
 		{
-            try
-            {
-                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
 		}
 
 		/// <summary>
@@ -41,7 +30,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="hotelGuestId">the id of a hotel guest to retrieve</param>
 		/// <returns>HotelGuest object retrieved from database</returns>
 		/// Miguel Santana 2/18/2015
-		public static HotelGuest GetHotelGuest(int hotelGuestId)
+		public HotelGuest GetHotelGuest(int hotelGuestId)
 		{
 			List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
 			return (list.Count == 1) ? list.ElementAt(0) : null;
@@ -52,7 +41,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <returns>List of HotelGuest Objects</returns>
 		/// Miguel Santana 2/18/2015
-		public static List<HotelGuest> GetHotelGuestList()
+		public List<HotelGuest> GetHotelGuestList()
 		{
 			return HotelGuestAccessor.HotelGuestGet();
 		}
@@ -64,7 +53,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="newHotelGuest">Object containing new hotel guest information</param>
 		/// <returns>Number of rows effected</returns>
 		/// Miguel Santana 2/18/2015
-		public static bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
+		public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
 		{
 			return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
 		}
@@ -77,7 +66,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="newActive"></param>
 		/// <exception cref="Exception">an exception was hit in the HotelGuestAccessor or HotelGuestAccessor can't be found</exception>
 		/// <returns>true if rows were affected, false if not</returns>
-		public static bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
+		public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
 		{
 			return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
 		}

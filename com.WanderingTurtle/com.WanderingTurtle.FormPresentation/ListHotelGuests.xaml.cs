@@ -19,7 +19,9 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ListHotelGuests : UserControl
     {
-
+        InvoiceManager _invoiceManager = new InvoiceManager();
+        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        
         /// <summary>
         /// Created by Pat Banks 2015/02/17
         /// Initializes the UI that displays a list of active hotel guests
@@ -45,7 +47,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                var hotelGuestList = InvoiceManager.RetrieveAllInvoiceDetails();
+                var hotelGuestList = _invoiceManager.RetrieveAllInvoiceDetails();
                 lvHotelGuestList.ItemsSource = hotelGuestList;
                 lvHotelGuestList.Items.Refresh();
             }
@@ -149,7 +151,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (thisGuest == null)
                     throw new ApplicationException("You must choose a guest.");
 
-                HotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
+                _hotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
                 RefreshGuestList();
             }
             catch (Exception ex)

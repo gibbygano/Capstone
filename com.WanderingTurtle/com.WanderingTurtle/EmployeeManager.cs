@@ -5,7 +5,7 @@ using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-    public static class EmployeeManager
+    public class EmployeeManager
     {
         // Success: An int value is returned to the method to show rows affected
         /// <summary>
@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">Exception is thrown if database is not available or new employee cannot be created in the database for any reason</exception>
         /// <returns>An int value is returned to the method to show rows affected</returns>
-        public static int AddNewEmployee(Employee newEmployee)
+        public int AddNewEmployee(Employee newEmployee)
         {
             return EmployeeAccessor.AddEmployee(newEmployee);
         }
@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">EmployeeAccessor method will throw exception to Manager saying that the employee could not be found to edit</exception>
         /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
-        public static int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
+        public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
         {
             return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
         }
@@ -52,7 +52,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="empID"></param>
         /// <exception cref="Exception">An exception is thrown from the Access Layer asking the user to try their search again</exception>
         /// <returns>The employee object is returned to the method successfully</returns>
-        public static Employee FetchEmployee(int empID)
+        public Employee FetchEmployee(int empID)
         {
             return EmployeeAccessor.GetEmployee(empID);
         }
@@ -67,7 +67,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         /// <returns></returns>
-        public static Employee FetchEmployee(string firstName, string lastName)
+        public Employee FetchEmployee(string firstName, string lastName)
         {
 			return EmployeeAccessor.GetEmployee(firstName, lastName);
         }
@@ -79,7 +79,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <exception cref="Exception">Exception is thrown from Accessor that states that employee could not be found in the database</exception>
         /// <returns>The employee list is retrieved and returned up to the presentation layer (calling method)</returns>
-        public static List<Employee> FetchListEmployees()
+        public List<Employee> FetchListEmployees()
         {
 			return EmployeeAccessor.GetEmployeeList();
         }
@@ -94,7 +94,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="empId">The employee's ID</param>
         /// <param name="empPassword">the employee's Password</param>
         /// <returns>The employee object with the given credentials.</returns>
-        public static Employee GetEmployeeLogin(int empId, string empPassword)
+        public Employee GetEmployeeLogin(int empId, string empPassword)
         {
 			return EmployeeAccessor.GetEmployeeLogin(empId, empPassword);
         }

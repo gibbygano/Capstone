@@ -23,6 +23,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheEmployees : UserControl
     {
         private List<Employee> employeeList;
+        EmployeeManager _employeeManager = new EmployeeManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/02/19
@@ -65,7 +66,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                employeeList = EmployeeManager.FetchListEmployees();
+                employeeList = _employeeManager.FetchListEmployees();
                 lvEmployeesList.ItemsSource = employeeList;
                 lvEmployeesList.Items.Refresh();
             }
