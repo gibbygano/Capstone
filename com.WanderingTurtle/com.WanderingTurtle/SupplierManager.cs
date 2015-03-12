@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using System;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -13,7 +14,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             //default constructor
         }
-         /// <summary>
+        /// <summary>
         /// Gets a single Supplier  from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
@@ -22,9 +23,17 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created by Reece Maas 2/18/15
         public Supplier RetrieveSupplier(string supplierID)
         {
-			return SupplierAccessor.GetSupplier(supplierID);
+            try
+            {
+                return SupplierAccessor.GetSupplier(supplierID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
-         /// <summary>
+        /// <summary>
         /// Gets a list of Suppliers  from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
@@ -32,7 +41,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created by Reece Maas 2/18/15
         public List<Supplier> RetrieveSupplierList()
         {
-			return SupplierAccessor.GetSupplierList();
+            try
+            {
+                return SupplierAccessor.GetSupplierList();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         /// <summary>
         /// Adds a single Supplier to the database
@@ -43,7 +61,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created by Reece Maas 2/18/15
         public int AddANewSupplier(Supplier supplierToAdd)
         {
-			return SupplierAccessor.AddSupplier(supplierToAdd);
+            try
+            {
+                return SupplierAccessor.AddSupplier(supplierToAdd);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
         /// <summary>
         /// Updates a Supplier 
@@ -55,11 +81,29 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created by Reece Maas 2/18/15
         public int EditSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
-			return SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier);
+            try
+            {
+                return SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
         public int ArchiveSupplier(Supplier supplierToDelete)
         {
-			return SupplierAccessor.DeleteSupplier(supplierToDelete);
+            try
+            {
+                return SupplierAccessor.DeleteSupplier(supplierToDelete);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
         /// <summary>
         /// Matt Lapka
@@ -71,7 +115,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>SupplierApplication object</returns>
         public SupplierApplication RetrieveSupplierApplication(string applicationID)
         {
-			return SupplierApplicationAccessor.GetSupplierApplication(applicationID);
+            try
+            {
+                return SupplierApplicationAccessor.GetSupplierApplication(applicationID);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
 
         /// <summary>
@@ -83,7 +136,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>List of SupplierApplication objects</returns>
         public List<SupplierApplication> RetrieveSupplierApplicationList()
         {
-			return SupplierApplicationAccessor.GetSupplierApplicationList();
+            try
+            {
+                return SupplierApplicationAccessor.GetSupplierApplicationList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+            
         }
 
         /// <summary>
@@ -96,7 +158,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int # of rows affected</returns>
         public int AddASupplierApplication(SupplierApplication newSupplierApp)
         {
-			return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp);
+            try
+            {
+                return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         /// <summary>
@@ -110,7 +180,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int # of rows affected</returns>
         public int EditSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication newSupplierApp)
         {
-			return SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, newSupplierApp);
+            try
+            {
+                return SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, newSupplierApp);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
     }
 }

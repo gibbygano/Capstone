@@ -23,7 +23,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>the asked for Lists Object or throws the exception from the DAL if there is no data</returns>
         public Lists RetrieveLists(string supplierID, string itemListID)
         {
-	        return ListsAccessor.GetLists(supplierID, itemListID);
+            try
+            {
+                return ListsAccessor.GetLists(supplierID, itemListID);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+	        
         }
 
 	    /// <summary>
@@ -34,7 +43,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>An iterative list of active Lists objects</returns>
         public List<Lists> RetrieveListsList()
 	    {
-		    return ListsAccessor.GetListsList();
+            try
+            {
+                return ListsAccessor.GetListsList();
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -46,7 +64,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int number of rows affect -- 1 if successful, 0 if not</returns>
         public int AddLists(Lists newLists)
 	    {
-		    return ListsAccessor.AddLists(newLists);
+            try
+            {
+                return ListsAccessor.AddLists(newLists);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -59,7 +86,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int number of rows affected-- should be 1</returns>
         public int EditLists(Lists newLists, Lists oldLists)
 	    {
-		    return ListsAccessor.UpdateLists(oldLists, newLists);
+            try
+            {
+                return ListsAccessor.UpdateLists(oldLists, newLists);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -72,7 +108,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int # of rows affected</returns>
         public int ArchiveLists(Lists listsToDelete)
 	    {
-		    return ListsAccessor.DeleteLists(listsToDelete);
+            try
+            {
+                return ListsAccessor.DeleteLists(listsToDelete);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -84,7 +129,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>a single ItemListing object meeting the criteria</returns>
         public ItemListing RetrieveItemListing(string itemListID)
 	    {
-		    return ItemListingAccessor.GetItemListing(itemListID);
+            try
+            {
+                return ItemListingAccessor.GetItemListing(itemListID);
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -95,7 +149,17 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>An iterative list of active ItemListing objects</returns>
         public List<ItemListing> RetrieveItemListingList()
 	    {
-		    return ItemListingAccessor.GetItemListingList();
+            try
+            {
+                return ItemListingAccessor.GetItemListingList();
+
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -107,7 +171,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int number of rows affect -- 1 if successful, 0 if not</returns>
         public int AddItemListing(ItemListing newItemListing)
 	    {
-		    return ItemListingAccessor.AddItemListing(newItemListing);
+            try
+            {
+               return ItemListingAccessor.AddItemListing(newItemListing);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -120,7 +193,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int number of rows affected-- should be 1</returns>
         public int EditItemListing(ItemListing newItemLists, ItemListing oldItemLists)
 	    {
-		    return ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists);
+            try
+            {
+                return ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
 
 	    /// <summary>
@@ -132,7 +214,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int # of rows affected</returns>
         public int ArchiveItemListing(ItemListing itemListToDelete)
 	    {
-		    return ItemListingAccessor.DeleteItemListing(itemListToDelete);
+            try
+            {
+                return ItemListingAccessor.DeleteItemListing(itemListToDelete);
+            }
+            catch (Exception ex)
+            {
+                
+                throw ex;
+            }
+		    
 	    }
     }
 }

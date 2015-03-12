@@ -23,7 +23,7 @@ namespace com.WanderingTurtle.FormPresentation
     {
         private EventManager myMan = new EventManager();
         private ProductManager prodMan = new ProductManager();
-        private ItemListing ListingOrigin;
+        private ItemListing ListingOrigin = new ItemListing();
         private ItemListing NewListing = new ItemListing();
 
         public EditListing(ItemListing toEdit)
@@ -46,9 +46,18 @@ namespace com.WanderingTurtle.FormPresentation
             txtPrice.Text = toEdit.Price.ToString();
             txtStartDate.Text = toEdit.StartDate.ToString();
             txtEndDate.Text = toEdit.EndDate.ToString();
-            
-            
-            ListingOrigin = toEdit;
+
+
+            ListingOrigin.ItemListID = toEdit.ItemListID;
+            ListingOrigin.StartDate = toEdit.StartDate;
+            ListingOrigin.EndDate = toEdit.EndDate;
+            ListingOrigin.EventID = toEdit.EventID;
+            ListingOrigin.Price = toEdit.Price;
+            ListingOrigin.MaxNumGuests = toEdit.MaxNumGuests;
+            ListingOrigin.MinNumGuests = toEdit.MinNumGuests;
+            ListingOrigin.CurrentNumGuests = toEdit.CurrentNumGuests;
+            ListingOrigin.SupplierID = toEdit.SupplierID;
+
 
     
 
@@ -58,6 +67,8 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
+                NewListing.SupplierID = ListingOrigin.SupplierID;
+                NewListing.EventID = ListingOrigin.EventID;
 
                 if (Validator.ValidateDecimal(txtPrice.Text))
                 {
@@ -107,8 +118,9 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new Exception("Start Date is invalid");
                 }
-
-                prodMan.EditItemListing(ListingOrigin, NewListing);
+                MessageBox.Show(ListingOrigin.Price.ToString());
+                prodMan.EditItemListing(NewListing, ListingOrigin);
+                this.Close();
             }
             catch(Exception ex)
             {
