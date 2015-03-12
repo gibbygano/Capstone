@@ -12,7 +12,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="1" x:Name="MainTabControl" Margin="{DynamicResource Grid Margin}" />
+        <Metro:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" Margin="{DynamicResource Grid Margin}" Metro:TabControlHelper.IsUnderlined="True" />
         <StatusBar Grid.Row="2">
             <StatusBarItem Content="Current User: "></StatusBarItem>
             <StatusBarItem Content="{Binding }"></StatusBarItem>

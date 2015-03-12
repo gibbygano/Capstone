@@ -15,10 +15,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource MetroTabControl}">
-                <Setter Property="Metro:TabControlHelper.IsUnderlined" Value="True" />
-            </Style>
-            <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}"></Style>
             <system:Double x:Key="TextBoxHeight">30</system:Double>
             <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>
