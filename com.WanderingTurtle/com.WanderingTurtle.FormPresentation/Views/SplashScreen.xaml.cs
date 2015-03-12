@@ -24,17 +24,15 @@ namespace com.WanderingTurtle.FormPresentation.Views
         {
             do
             {
-                var window = WindowHelper.GetMainWindow(this);
                 LoginDialogSettings settings = new LoginDialogSettings
                 {
-                    ColorScheme = window.MetroDialogOptions.ColorScheme,
                     UsernameWatermark = "User ID",
                     PasswordWatermark = "Password",
                     NegativeButtonVisibility = Visibility.Visible,
                     AffirmativeButtonText = "Log In",
                     InitialUsername = _user
                 };
-                LoginDialogData result = await window.ShowLoginAsync("Authentication", "Enter your credentials.", settings);
+                LoginDialogData result = await DialogBox.ShowLoginDialog(this, "Authentication", "Enter your credentials.", settings);
                 if (result == null) { break; }
                 try
                 {
@@ -45,7 +43,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     Globals.UserToken = EmployeeManager.GetEmployeeLogin(UserId, result.Password);
                 }
                 catch (Exception ex) { _exception = ex; }
-                if (_exception != null) { await ErrorManager.ShowMessageDialog(this, _exception.Message); }
+                if (_exception != null) { await DialogBox.ShowMessageDialog(this, _exception.Message); }
             } while (_exception != null);
             if (Globals.UserToken != null) { WindowHelper.GetMainWindow(this).MainContent.Content = new TabContainer(); }
         }

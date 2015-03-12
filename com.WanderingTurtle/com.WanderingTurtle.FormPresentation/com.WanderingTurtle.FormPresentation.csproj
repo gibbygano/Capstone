@@ -133,7 +133,7 @@
     <Compile Include="CancelBooking.xaml.cs">
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\ErrorManager.cs" />
+    <Compile Include="Models\DialogBox.cs" />
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>

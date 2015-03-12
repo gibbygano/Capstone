@@ -19,8 +19,8 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                switch (Xceed.Wpf.Toolkit.MessageBox.Show(
-                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
+                switch (MessageBox.Show(
+                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError Message:\r{0}", ex.Message),
                     "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
                 {
                     case MessageBoxResult.Yes:
