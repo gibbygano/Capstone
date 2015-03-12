@@ -1,11 +1,11 @@
 ﻿/*-------------------------------------Update------------created by: Tony Noel---------------- */
 CREATE PROCEDURE [dbo].[spUpdateBooking]
 	(@Quantity		int,
-	@Discount			decimal,
+	@Discount			decimal(3,2),
 	@Active			bit,
-	@TicketPrice decimal,
-	@ExtendedPrice	decimal,
-	@TotalCharge		decimal,
+	@TicketPrice decimal(8,2),
+	@ExtendedPrice	decimal(12,2),
+	@TotalCharge		decimal(12,2),
 	
 	@original_BookingID     int,
 	@original_GuestID		int,
@@ -13,11 +13,11 @@ CREATE PROCEDURE [dbo].[spUpdateBooking]
 	@original_ItemListID     int,
 	@original_Quantity     int,
 	@original_DateBooked	datetime,
-	@original_Discount			decimal,
+	@original_Discount			decimal(3,2),
 	@original_Active            bit,
-	@original_TicketPrice	decimal,
-	@original_ExtendedPrice decimal,
-	@original_TotalCharge	decimal)
+	@original_TicketPrice	decimal(8,2),
+	@original_ExtendedPrice decimal(12,2),
+	@original_TotalCharge	decimal(12,2))
 AS
 BEGIN
 	UPDATE Booking

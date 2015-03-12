@@ -62,15 +62,6 @@ namespace com.WanderingTurtle.FormPresentation
                 cancelFee = _orderManager.CalculateCancellationFee(myBooking);
                 lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
                
-                //calls to the Calculate time method in ordermanager which returns a decimal in the form of 0.0, .5, or 1.0, or 2.0.
-                //2.0 in this method means that the startdate of the event is less than 0, in other words it has
-                //already started.
-                decimal time = _orderManager.CalculateTime(myBooking);
-                // if the quantity is already at 0 or the event is in the past, submit button is not enabled.
-                if (myBooking.Quantity == 0 || time == 2.0m)
-                {
-                    BtnSubmit.IsEnabled = false;
-                }
             }
             catch (Exception ax)
             {
@@ -110,7 +101,6 @@ namespace com.WanderingTurtle.FormPresentation
                 myBooking.TicketPrice = 0;
                 myBooking.ExtendedPrice = 0;
                 myBooking.Discount = 0;
-
 
                 int result = _orderManager.EditBooking(myBooking);
 

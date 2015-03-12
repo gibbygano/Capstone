@@ -71,6 +71,14 @@ namespace com.WanderingTurtle.DataAccess
             return BookingOpsList;
         }
 
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// Retrieves the event listing information to to enable
+        /// user to see current number of spots available for a listing
+        /// </summary>
+        /// <param name="itemListID">Id for the itemListing</param>
+        /// <returns></returns>
         public static ListItemObject getEventListing(int itemListID)
         {
             var eventItemListing = new ListItemObject();
@@ -125,10 +133,14 @@ namespace com.WanderingTurtle.DataAccess
         }
 
 
-        ///Created By: Tony Noel - 15/2/3, Updated By:  Pat Banks - 2/19/15 (exception  handling if add wasn't successful)
+        ///Created By: Tony Noel - 15/2/3
         /// <summary>
         /// AddBooking- a method used to insert a booking into the database
         /// </summary>
+        /// <remarks>
+        /// Updated By:  Pat Banks -2015/02/19
+        /// exception  handling if add wasn't successful
+        /// </remarks>
         /// <param name="toAdd">input- a Booking object to be inserted</param>
         /// <returns>Output is the number of rows affected by the insert</returns>
         public static int addBooking(Booking toAdd)
@@ -288,7 +300,17 @@ namespace com.WanderingTurtle.DataAccess
 
 
 
-
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// Updates the number of attendees that will be coming to an event
+        /// </summary>
+        /// <param name="itemID">ID of the item listing</param>
+        /// <param name="oldNumGuests">Number of guests that were to attend</param>
+        /// <param name="newNumGuests">updated number of guests</param>
+        /// <returns>
+        /// number of rows affected
+        /// </returns>
         public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

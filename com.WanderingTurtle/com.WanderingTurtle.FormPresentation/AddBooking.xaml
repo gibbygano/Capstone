@@ -35,17 +35,15 @@
 
             <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
             <Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingDiscount" Content="Discount:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch"/>
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch" />
             
             
             <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingDiscount" TabIndex="2" UndoLimit="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
             <xctk:DecimalUpDown FormatString="P0" Grid.Row="2" Grid.Column="1" Value="0"  IsEnabled="{Binding ElementName=lvEventListItems}" Minimum="0" Maximum =".20" Name="udDiscount" Increment=".01" />
 
-            <Label Grid.Row="1" Grid.Column="2" Content="Discounted Ticket Price" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
-            <Label Grid.Row="2" Grid.Column="2" x:Name="lblTicketWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-            
-            <Label Grid.Row="1" Grid.Column="3" Content="Discounted Total Price" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
-            <Label Grid.Row="2" Grid.Column="3" x:Name="lblTotalWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center"  HorizontalContentAlignment="Left" />
+            <Label Grid.Row="1" Grid.Column="2" Content="Total Discounted Price" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="2" x:Name="lblTotalWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+            <Button Grid.Row="2" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Calculate Cost" Click="btnCalculateTicketPrice_Click"/>
         </Grid>
         <Grid Grid.Row="2" Margin="0,0,0,5">
             <Grid.RowDefinitions>

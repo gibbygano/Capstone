@@ -18,6 +18,14 @@ namespace com.WanderingTurtle.BusinessLogic
 			return BookingAccessor.getListItems();
 		}
 
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// Retrieves Event Listing information for the one selected item listing
+        /// Information is human readable with data from joined tables
+        /// </summary>
+        /// <param name="itemListID">ItemList ID</param>
+        /// <returns>a ListItemObject containing the item listing information</returns>
 		public ListItemObject RetrieveEventListing(int itemListID)
 		{
 			return BookingAccessor.getEventListing(itemListID);
@@ -33,8 +41,6 @@ namespace com.WanderingTurtle.BusinessLogic
 		{
 			return BookingAccessor.addBooking(newBooking);
 		}
-
-
 
 		/// Created By: Tony Noel - 2/5/15
 		/// <summary>
@@ -68,14 +74,11 @@ namespace com.WanderingTurtle.BusinessLogic
        /// Method to calculate the cancellation fee using the CalculateTime method * TotalCharge
        /// </summary>
        /// <param name="bookingToCancel"></param>
-       /// <returns></returns>
+       /// <returns>the actual fee in $ that will be charged for cancelling a booking</returns>
         public decimal CalculateCancellationFee(BookingDetails bookingToCancel)
         {
             decimal feePercent = CalculateTime(bookingToCancel);
-            if (feePercent > 1.0m)
-            {
-                feePercent = 1.0m;
-            }
+
             return feePercent * bookingToCancel.TotalCharge;
         }
 
@@ -89,7 +92,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <remarks>
         /// Updated by Pat Banks 2015/03/07, Updated Tony Noel 2015/03/10
         /// </remarks>
-        /// <returns>decimal containing the total cancellation fee amount</returns>
+        /// <returns>decimal containing the total cancellation fee % amount</returns>
         public decimal CalculateTime(BookingDetails bookingStartTime)
         {
             decimal feePercent;
@@ -101,46 +104,46 @@ namespace com.WanderingTurtle.BusinessLogic
 
             double difference = ts.TotalDays;
 
+            //if event is more than 3 days away, there is no fee charged
             if (difference >= 3)
             {
                 feePercent = 0m;
             }
-            if (difference < 3 && difference > 1)
+            //if event is between 1 and 3 days, 1/2 the total price is charged
+            else if (difference < 3 && difference > 1)
             {
                 feePercent = 0.5m;
             }
-            if (difference < 0)
-            {
-                //this is returned if the booking startdate is past today's date
-                feePercent = 2.0m;
-            }
+
+            //if event is less than 1 day away, guest pays for entire amount
             else
             {
                 feePercent = 1.0m;
             }
+
             return feePercent;
         }
 
-
-        /// Created by: 
         /// <summary>
-        /// Updated- Tony Noel 2015/03/10 - moved to OrderManager as method does calculations. Changed to a public static method.
+        /// Created by Tony Noel 2015/03/10 - 
+        /// 
+        /// Calculates the extended price of for the order of quantity of tickets multiplied by the unit price
         /// </summary>
         /// <param name="price">price of one ticket</param>
         /// <param name="quantity">number of tickets</param>
-        /// <returns></returns>
-        /// 
+        /// <returns>the extended price</returns>
         public decimal calcExtendedPrice(decimal price, int quantity)
         {
             return quantity * price;            
         }
 
-        ///Updated by: Tony Noel 2015/03/10, moved to Order manager, made public static method as it does a calculation.
         /// <summary>
+        /// Created by: Tony Noel 2015/03/10, moved to Order manager
         /// 
+        /// Calculates the total charge of discount * Extended price
         /// </summary>
-        /// <param name="discount"></param>
-        /// <param name="extendedPrice"></param>
+        /// <param name="discount">percentage from form</param>
+        /// <param name="extendedPrice">ticket price * quantity</param>
         /// <returns></returns>
         public decimal calcTotalCharge(decimal discount, decimal extendedPrice)
         {
@@ -149,6 +152,15 @@ namespace com.WanderingTurtle.BusinessLogic
             return amtToPayPercent * extendedPrice;
         }
 
+
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// Calculates the cost of one ticket with the discount given
+        /// </summary>
+        /// <param name="discount">% discount</param>
+        /// <param name="TicketPrice">cost of one ticket</param>
+        /// <returns>cost of one ticket with a discount</returns>
         public decimal calcTicketWithDiscount(decimal discount, decimal TicketPrice)
         {
             decimal amtToPayPercent = (decimal)(1 - discount);
@@ -165,7 +177,6 @@ namespace com.WanderingTurtle.BusinessLogic
         public int availableQuantity(int maxQuantity, int currentQuantity)
         {
             int availableQuantity;
-
             availableQuantity = maxQuantity - currentQuantity;
 
             return availableQuantity;
@@ -175,9 +186,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// A helper method to calculate the quantity of guests being added onto a booking compared to the original
         /// amount reserved for the booking. Returns the difference between the two.
         /// </summary>
-        /// <param name="maxQuantity"></param>
-        /// <param name="currentQuantity"></param>
-        /// <returns></returns>
+        /// <param name="newQuantity">updated number of people attending</param>
+        /// <param name="currentQuantity">current quantity of people attending</param>
+        /// <returns>number of spots different</returns>
         public int spotsReservedDifference(int newQuantity, int currentQuantity)
         {
            int quantity = newQuantity - currentQuantity;
@@ -185,7 +196,16 @@ namespace com.WanderingTurtle.BusinessLogic
             return quantity;
         }
 
-
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// Calls the Booking Accessor to update the number of guests attending an event
+        /// Needed after a booking is added, edited or cancelled
+        /// </summary>
+        /// <param name="itemID">id of the eventListing</param>
+        /// <param name="oldNumGuests">eventListing number of guests that were attending</param>
+        /// <param name="newNumGuests">new number of guests</param>
+        /// <returns>number of rows affected</returns>
         public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
             return BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);

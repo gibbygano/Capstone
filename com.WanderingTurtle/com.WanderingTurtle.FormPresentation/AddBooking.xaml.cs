@@ -27,9 +27,15 @@ namespace com.WanderingTurtle.FormPresentation
 
         EmployeeManager _employeeManager = new EmployeeManager();
         OrderManager _orderManager = new OrderManager();
-        //public ItemListing updatedItem;
         public ItemListing originalItem;
 
+        /// <summary>
+        /// Created by Tony Noel 2015/02/13
+        /// 
+        /// UI for adding a booking
+        /// Access from the View Invoice screen
+        /// </summary>
+        /// <param name="inInvoice">brings the invoice data from the prior list view</param>
         public AddBooking(InvoiceDetails inInvoice)
         {
             this.inInvoice = inInvoice;
@@ -40,6 +46,10 @@ namespace com.WanderingTurtle.FormPresentation
             lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// Extracted method to refresh the list view as needed
+        /// </summary>
         private void RefreshListItems()
         {
             lvEventListItems.ItemsPanel.LoadContent();
@@ -47,6 +57,8 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 myEventList = _orderManager.RetrieveListItemList();
+
+                //calculating the quantity of available tickets for each listing
                 foreach (ListItemObject lIO in myEventList)
                 {
                     lIO.QuantityOffered = _orderManager.availableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
@@ -59,20 +71,29 @@ namespace com.WanderingTurtle.FormPresentation
                 System.Windows.MessageBox.Show("Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
             }
 
-
         }
 
+        /// <summary>
+        /// Created by TOny Noel- 2/11/15
+        /// Handles click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
             addBooking();           
         }
 
-        /*addBooking()- a method to collect all information from the form and turn them into strings
-         * Then after taking each variable and testing them in their specific validation method, parses them 
-         * into the correct variable needed to be stored as a booking and line item object.
-         * 
-         * TOny Noel- 2/11/15
-         */
+        /// <summary>
+        /// Created by TOny Noel- 2/11/15
+        /// addBooking()- a method to collect all information from the form
+        /// Then after taking each variable and testing them in their specific validation method, parses them 
+        /// into the correct variable needed to be stored as a listItemObject
+        /// </summary>
+        /// <remarks>
+        /// Updated by:  Pat Banks 2015/03/11
+        /// Added up/down controls to allow for easier user data entry
+        /// </remarks>
         public void addBooking()
         {
             ListItemObject selected;
@@ -80,9 +101,8 @@ namespace com.WanderingTurtle.FormPresentation
             Booking myBooking;
             decimal extendedPrice, totalPrice, discount;
 
-            int qty = (int)(udAddBookingQuantity.Value);
-
-            DateTime myDate = DateTime.Now;            
+            //gets quantity from the up/down quantity field
+            int qty = (int)(udAddBookingQuantity.Value);      
             
             if (lvEventListItems.SelectedIndex.Equals(-1))
             {
@@ -107,32 +127,32 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 extendedPrice = _orderManager.calcExtendedPrice(selected.Price, qty);
-
                 totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);
 
 int eID = 101;
 //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
-             gID = inInvoice.HotelGuestID;
 
-             myBooking = new Booking(gID, eID, selected.ItemListID, qty, myDate, selected.Price, extendedPrice, discount, totalPrice);
+                 gID = inInvoice.HotelGuestID;
+             
+                 DateTime myDate = DateTime.Now;   
+                 myBooking = new Booking(gID, eID, selected.ItemListID, qty, myDate, selected.Price, extendedPrice, discount, totalPrice);
 
-             //calls to booking manager to add a booking. BookingID is auto-generated in database                
-             int result = _orderManager.AddaBooking(myBooking);
+                 //calls to booking manager to add a booking. BookingID is auto-generated in database                
+                 int result = _orderManager.AddaBooking(myBooking);
 
-             if (result == 1)
-             {
-                 //change quantity of guests
-                 int updatedGuests = originalItem.CurrentNumGuests + qty;
-                 int result2 = _orderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
-                 if (result2 == 1)
+                 if (result == 1)
                  {
-                     System.Windows.MessageBox.Show("Numguests changed");                     
-                 }
+                     //change quantity of guests
+                     int updatedGuests = originalItem.CurrentNumGuests + qty;
 
-                 System.Windows.MessageBox.Show("The booking has been successfully added.");
-                 // closes window after add
-                 this.Close();
-             }
+                     int result2 = _orderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
+                     if (result2 == 1)
+                     {
+                         System.Windows.MessageBox.Show("The booking has been successfully added.");                    
+                     }
+                     // closes window after add
+                     this.Close();
+                 }
          } //end try
          catch (Exception ax)
          {
@@ -141,10 +161,12 @@ int eID = 101;
 
         }//end method addBooking()
 
-        /*method to create ListItemObject from listView
-         * returns the selected item.
-         * Tony Noel 2/18/15
-         */
+
+        /// <summary>
+        /// Tony Noel 2/18/15
+        /// method to create ListItemObject from listView
+        /// </summary>
+        /// <returns>returns the selected item.</returns>
         private ListItemObject getSelectedItem()
         {
             ListItemObject selected = (ListItemObject)lvEventListItems.SelectedItem;
@@ -159,7 +181,7 @@ int eID = 101;
         /// <summary>
         /// Created by Pat Banks 2015/03/09
         /// 
-        /// Adds the event description to the UI
+        /// Adds the event description to the UI when the listView Item changes
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -174,10 +196,38 @@ int eID = 101;
             {
                 udAddBookingQuantity.Value = 0;
             }
+            else
+            {
+                udAddBookingQuantity.Value = 1;
+            }
 
-            lblTicketWithDiscount.Content = _orderManager.calcTicketWithDiscount((decimal)(udDiscount.Value), myItemObject.Price);
+            refreshCostsToDisplay(myItemObject);
+        }
+
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// updates the total cost with discount
+        /// </summary>
+        /// <param name="myItemObject"></param>
+        private void refreshCostsToDisplay(ListItemObject myItemObject)
+        {
+            //total cost calculations
             decimal extendedPrice = _orderManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
             lblTotalWithDiscount.Content = _orderManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
+        }
+
+        /// <summary>
+        /// Created by Pat Banks 2015/03/11
+        /// 
+        /// updates the total cost with discount
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCalculateTicketPrice_Click(object sender, RoutedEventArgs e)
+        {
+            ListItemObject myItemObject = getSelectedItem();
+            refreshCostsToDisplay(myItemObject);
         }
 
     }
