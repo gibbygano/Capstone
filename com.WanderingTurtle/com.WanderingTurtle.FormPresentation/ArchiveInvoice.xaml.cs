@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -40,22 +41,37 @@ namespace com.WanderingTurtle.FormPresentation
             originalInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
             invoiceToArchive = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
-            guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
-            myBookingList = _invoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
+            try
+            {
+                guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
+                myBookingList = _invoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
 
-            invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
+                invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
 
-            InitializeComponent();
-            lblGuestNameLookup.Content = guestToView.GetFullName;
-            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
-            lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
-            lblAddress.Content = guestToView.Address1;
-            lblCityState.Content = guestToView.CityState.GetZipStateCity;
-            lblPhoneNum.Content = guestToView.PhoneNumber;
-            lblRoomNum.Content = guestToView.Room;
-            lblInvoice.Content = invoiceToArchive.InvoiceID;
-            lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
-            lblPhoneNum.Content = guestToView.PhoneNumber;
+                InitializeComponent();
+                lblGuestNameLookup.Content = guestToView.GetFullName;
+                lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
+                lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
+                lblAddress.Content = guestToView.Address1;
+                lblCityState.Content = guestToView.CityState.GetZipStateCity;
+                lblPhoneNum.Content = guestToView.PhoneNumber;
+                lblRoomNum.Content = guestToView.Room;
+                lblInvoice.Content = invoiceToArchive.InvoiceID;
+                lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
+                lblPhoneNum.Content = guestToView.PhoneNumber;
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -98,6 +114,14 @@ namespace com.WanderingTurtle.FormPresentation
                         this.DialogResult = true;
                     }
                 }
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {

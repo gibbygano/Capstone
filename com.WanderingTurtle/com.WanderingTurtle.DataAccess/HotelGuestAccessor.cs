@@ -19,6 +19,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Updated by Pat Banks 2/27/2015
         /// Stored Procedure updated to create an invoice record automatically when adding a hotel guest
+        /// Updated Rose Steffensmeier 2015/03/12
         /// </remarks>
         public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
@@ -42,6 +43,10 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Open();
                 numRows = cmd.ExecuteNonQuery();
             }
+            catch (SqlException)
+            {
+                throw;
+            }
             catch (Exception)
             {
                 throw;
@@ -59,7 +64,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created by Miguel Santana
         /// </summary>
         ///<remarks>
-        /// Updated by Rose Steffensmeier 02/23/2015
+        /// Updated by Rose Steffensmeier 2015/03/12
         /// </remarks>
         /// <param name="hotelGuestID">Optional Parameter to specify a hotel gust to look up</param>
         /// <returns></returns>
@@ -106,6 +111,10 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     throw new ApplicationException(hotelGuestID == null ? "Could not find any Hotel Guests" : "Hotel Guest ID number did not match any records.");
                 }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
@@ -167,6 +176,10 @@ namespace com.WanderingTurtle.DataAccess
                     throw new ApplicationException("Concurrency Violation");
                 }
             }
+            catch (SqlException)
+            {
+                throw;
+            }
             catch (Exception)
             {
                 throw;
@@ -184,7 +197,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created by Rose Steffensmeier 2015/02/26
         /// </summary>
         /// <remarks>
-        /// Last Updated Rose Steffensmeier 2015/03/05
+        /// Last Updated Rose Steffensmeier 2015/03/12
         /// </remarks>
         /// <param name="oldHotelGuestID"></param>
         /// <param name="newHotelGuestID"></param>

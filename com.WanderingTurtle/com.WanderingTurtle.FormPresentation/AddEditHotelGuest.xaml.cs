@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -157,52 +158,65 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
             if (!Validate()) { return; }
-
-            //FormatException found in if loop
-            if (CurrentHotelGuest == null)
+            try
             {
-
-                Result = _hotelGuestManager.AddHotelGuest(
-                    new HotelGuest(
-                        TxtFirstName.Text.Trim(),
-                        TxtLastName.Text.Trim(),
-                        TxtAddress1.Text.Trim(),
-                        TxtAddress2.Text.Trim(),
-                        (CityState)CboZip.SelectedItem,
-                        TxtPhoneNumber.Text.Trim(),
-                        TxtEmailAddress.Text.Trim(),
-                        int.Parse(TxtRoomNumber.Text.Trim())
-                    )
-                );
-
+                //FormatException found in if loop
+                if (CurrentHotelGuest == null)
+                {
+                    Result = _hotelGuestManager.AddHotelGuest(
+                        new HotelGuest(
+                            TxtFirstName.Text.Trim(),
+                            TxtLastName.Text.Trim(),
+                            TxtAddress1.Text.Trim(),
+                            TxtAddress2.Text.Trim(),
+                            (CityState)CboZip.SelectedItem,
+                            TxtPhoneNumber.Text.Trim(),
+                            TxtEmailAddress.Text.Trim(),
+                            int.Parse(TxtRoomNumber.Text.Trim())
+                        )
+                    );
+                }
+                else
+                {
+                    Result = _hotelGuestManager.UpdateHotelGuest(
+                            CurrentHotelGuest,
+                            new HotelGuest(
+                                TxtFirstName.Text.Trim(),
+                                TxtLastName.Text.Trim(),
+                                TxtAddress1.Text.Trim(),
+                                TxtAddress2.Text.Trim(),
+                                (CityState)CboZip.SelectedItem,
+                                TxtPhoneNumber.Text.Trim(),
+                                TxtEmailAddress.Text.Trim(),
+                                int.Parse(TxtRoomNumber.Text.Trim())
+                            )
+                        );
+                }
+            
+                if (Result)
+                {
+                    MessageBox.Show(this, "Your Request was Processed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(this, "Error Processing Request", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else
+            catch (ApplicationException ex)
             {
-                Result = _hotelGuestManager.UpdateHotelGuest(
-                    CurrentHotelGuest,
-                    new HotelGuest(
-                        TxtFirstName.Text.Trim(),
-                        TxtLastName.Text.Trim(),
-                        TxtAddress1.Text.Trim(),
-                        TxtAddress2.Text.Trim(),
-                        (CityState)CboZip.SelectedItem,
-                        TxtPhoneNumber.Text.Trim(),
-                        TxtEmailAddress.Text.Trim(),
-                        int.Parse(TxtRoomNumber.Text.Trim())
-                    )
-                );
+                MessageBox.Show(ex.Message);
             }
-
-            if (Result)
+            catch (SqlException ex)
             {
-                MessageBox.Show(this, "Your Request was Processed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                Close();
+                MessageBox.Show(ex.Message);
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(this, "Error Processing Request", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message);
             }
         }
+
 
         /// <summary>
         /// Selects all on keyboard focus to allow for easier tabbing between fields

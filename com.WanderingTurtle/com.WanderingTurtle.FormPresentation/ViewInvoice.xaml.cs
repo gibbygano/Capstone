@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -123,6 +124,14 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     refreshGuestInformation(invoiceToView.HotelGuestID);
                 }
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {

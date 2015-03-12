@@ -3,6 +3,7 @@ using com.WanderingTurtle.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -20,7 +21,18 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// 
 		public bool AddHotelGuest(HotelGuest newHotelGuest)
 		{
-            return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+            try
+            {
+                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -31,8 +43,23 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// Miguel Santana 2/18/2015
 		public HotelGuest GetHotelGuest(int hotelGuestId)
 		{
-			List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
-			return (list.Count == 1) ? list.ElementAt(0) : null;
+            try
+            {
+                List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
+                return (list.Count == 1) ? list.ElementAt(0) : null;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -42,7 +69,22 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// Miguel Santana 2/18/2015
 		public List<HotelGuest> GetHotelGuestList()
 		{
-			return HotelGuestAccessor.HotelGuestGet();
+            try
+            {
+                return HotelGuestAccessor.HotelGuestGet();
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -54,7 +96,22 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// Miguel Santana 2/18/2015
 		public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
 		{
-			return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+            try
+            {
+                return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -67,7 +124,22 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>true if rows were affected, false if not</returns>
 		public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
 		{
-			return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
+            try
+            {
+                return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 	}
 }
