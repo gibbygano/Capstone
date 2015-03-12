@@ -15,7 +15,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>Returns a list of ListItemObject objects from database(From the ItemListing and EventItem tables).</returns>
 		public List<ListItemObject> RetrieveListItemList()
 		{
-			return BookingAccessor.getListItems();
+			try
+			{
+				return BookingAccessor.getListItems();
+			}
+			catch (Exception)
+			{
+				var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
+				throw ax;
+			}
 		}
 
         /// <summary>
@@ -39,7 +47,8 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>Returns an int- the number of rows affected, if add is successful</returns>
 		public int AddaBooking(Booking newBooking)
 		{
-			return BookingAccessor.addBooking(newBooking);
+			var numRows = BookingAccessor.addBooking(newBooking);
+			return numRows;
 		}
 
 		/// Created By: Tony Noel - 2/5/15
@@ -66,7 +75,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>Output is a booking object to hold the booking record.</returns>
 		public Booking RetrieveBooking(int bookingId)
 		{
-			return BookingAccessor.getBooking(bookingId);
+			try
+			{
+				return BookingAccessor.getBooking(bookingId);
+			}
+			catch (Exception)
+			{
+				var ax = new ApplicationException("There was a problem accessing your data.");
+				throw ax;
+			}
 		}
 
         ///Updated by: Tony Noel 2015/03/10
@@ -208,7 +225,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>number of rows affected</returns>
         public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
-            return BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
+            var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
+			return numRows;
 		}
+        
 	}
 }
