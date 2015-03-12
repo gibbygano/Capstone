@@ -41,7 +41,8 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     _user = UserId.ToString();
                     if (string.IsNullOrWhiteSpace(result.Password)) { throw new Exception(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
                     Globals.UserToken = EmployeeManager.GetEmployeeLogin(UserId, result.Password);
-                    if (Globals.UserToken != null) { _exception = null; }
+                    if (Globals.UserToken == null) { throw new Exception("Error setting User Token"); }
+                    else { _exception = null; }
                 }
                 catch (Exception ex) { _exception = ex; }
                 if (_exception != null) { await DialogBox.ShowMessageDialog(this, _exception.Message, "Login Error"); }
