@@ -129,8 +129,8 @@ namespace com.WanderingTurtle.FormPresentation
                 extendedPrice = _orderManager.calcExtendedPrice(selected.Price, qty);
                 totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);
 
-int eID = 101;
-//TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
+                int eID = 101;
+                //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
 
                  gID = inInvoice.HotelGuestID;
              
@@ -213,8 +213,12 @@ int eID = 101;
         private void refreshCostsToDisplay(ListItemObject myItemObject)
         {
             //total cost calculations
-            decimal extendedPrice = _orderManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
-            lblTotalWithDiscount.Content = _orderManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
+            if (myItemObject != null)
+            {
+                decimal extendedPrice = _orderManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
+                lblTotalWithDiscount.Content = _orderManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
+            }
+            return;
         }
 
         /// <summary>

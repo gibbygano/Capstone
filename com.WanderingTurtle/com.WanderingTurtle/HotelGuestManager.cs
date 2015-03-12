@@ -19,8 +19,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </remarks>
 		/// 
 		public bool AddHotelGuest(HotelGuest newHotelGuest)
-		{
-            return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+        {
+            try
+            {
+                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -31,8 +38,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// Miguel Santana 2/18/2015
 		public HotelGuest GetHotelGuest(int hotelGuestId)
 		{
-			List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
-			return (list.Count == 1) ? list.ElementAt(0) : null;
+            try
+            {
+			    List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
+			    return (list.Count == 1) ? list.ElementAt(0) : null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -42,7 +56,14 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// Miguel Santana 2/18/2015
 		public List<HotelGuest> GetHotelGuestList()
 		{
-			return HotelGuestAccessor.HotelGuestGet();
+            try
+            {
+			    return HotelGuestAccessor.HotelGuestGet();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -54,7 +75,14 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// Miguel Santana 2/18/2015
 		public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
 		{
-			return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+            try
+            {
+			    return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -66,8 +94,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <exception cref="Exception">an exception was hit in the HotelGuestAccessor or HotelGuestAccessor can't be found</exception>
 		/// <returns>true if rows were affected, false if not</returns>
 		public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
-		{
-			return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
+        {
+            try
+            {
+			    return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 	}
 }
