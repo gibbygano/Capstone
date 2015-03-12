@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle;
 using com.WanderingTurtle.BusinessLogic;
+using Xceed.Wpf.Toolkit;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -21,9 +22,9 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking : Window
     {
-        List<ListItemObject> myEventList;
+        List<ListItemObject> myEventList = new List<ListItemObject>();
         InvoiceDetails inInvoice;
-        ProductManager _productManager = new ProductManager();
+
         EmployeeManager _employeeManager = new EmployeeManager();
         OrderManager _orderManager = new OrderManager();
         //public ItemListing updatedItem;
@@ -32,23 +33,33 @@ namespace com.WanderingTurtle.FormPresentation
         public AddBooking(InvoiceDetails inInvoice)
         {
             this.inInvoice = inInvoice;
-            InitializeComponent();
 
+            InitializeComponent();
             RefreshListItems();
-            lvEventListItems.ItemsSource = myEventList;
+
             lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
         private void RefreshListItems()
         {
-            myEventList = _orderManager.RetrieveListItemList();
+            lvEventListItems.ItemsPanel.LoadContent();
 
-            foreach (ListItemObject lIO in myEventList)
+            try
             {
-                originalItem = _productManager.RetrieveItemListing(lIO.ItemListID.ToString());
-
-                lIO.QuantityOffered = _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+                myEventList = _orderManager.RetrieveListItemList();
+                foreach (ListItemObject lIO in myEventList)
+                {
+                    lIO.QuantityOffered = _orderManager.availableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
+                }
+                lvEventListItems.ItemsSource = myEventList;
+                lvEventListItems.Items.Refresh();
             }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
+            }
+
+
         }
 
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
@@ -64,68 +75,46 @@ namespace com.WanderingTurtle.FormPresentation
          */
         public void addBooking()
         {
-            string empID = "101";
             ListItemObject selected;
-            DateTime myDate = DateTime.Now;
-            string quantity = tbAddBookingQuantity.Text;
-            int eID, gID, qID, discount;
+            int gID;
             Booking myBooking;
-            decimal extendedPrice, totalPrice;
+            decimal extendedPrice, totalPrice, discount;
 
-            if (isEmp(empID) == false)
-            {
-                MessageBox.Show("Please review the Employee ID. A record of this employee is not on file.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
+            int qty = (int)(udAddBookingQuantity.Value);
 
-
+            DateTime myDate = DateTime.Now;            
+            
             if (lvEventListItems.SelectedIndex.Equals(-1))
             {
-                MessageBox.Show("Please select an event.");
+                System.Windows.MessageBox.Show("Please select an event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
 
             selected = getSelectedItem();
+            originalItem = _orderManager.RetrieveEventListing(selected.ItemListID);
 
-            originalItem = _productManager.RetrieveItemListing(selected.ItemListID.ToString());
-
-            int.TryParse(tbAddBookingDiscount.Text, out discount);
-
-            if (tbAddBookingDiscount.Text == null)           
+            if (qty == 0)
             {
-                discount = 0;
-            }
-            else if (discount > 100 )
-            {
-                MessageBox.Show("Discount cannot be greater than 100%. \nPlease enter a different discount.");
-                tbAddBookingDiscount.Clear();
-                tbAddBookingDiscount.Focus();
-                return;
-            }
-
-            int.TryParse(quantity, out qID);
-            //Quantity field on the table needs to be a calculated field in order for this to work.- ItemListing has a max#guest field and a Current#guest field that will be used to calculate quantity
-            if (okQuantity(quantity, _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests)) == false || qID <= 0)
-            {
-                MessageBox.Show("Please review the quantity entered:" +
-                    " \nMust be a positive number and cannot excede the quantity available for the event.");
+                System.Windows.MessageBox.Show("This event is full.  Please pick another event");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
-            
-         try
-         {
-             extendedPrice = _orderManager.calcExtendedPrice(selected.Price, discount);
 
-             totalPrice = _orderManager.calcTotalPrice(qID, extendedPrice);
+            //get discount from form
+            discount = (decimal)(udDiscount.Value);
 
-             eID = 100;
+            try
+            {
+                extendedPrice = _orderManager.calcExtendedPrice(selected.Price, qty);
+
+                totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);
+
+int eID = 101;
 //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
              gID = inInvoice.HotelGuestID;
 
-             myBooking = new Booking(gID, eID, selected.ItemListID, qID, myDate, selected.Price, extendedPrice, discount, totalPrice);
+             myBooking = new Booking(gID, eID, selected.ItemListID, qty, myDate, selected.Price, extendedPrice, discount, totalPrice);
 
              //calls to booking manager to add a booking. BookingID is auto-generated in database                
              int result = _orderManager.AddaBooking(myBooking);
@@ -133,21 +122,21 @@ namespace com.WanderingTurtle.FormPresentation
              if (result == 1)
              {
                  //change quantity of guests
-                 int updatedGuests = originalItem.CurrentNumGuests + qID;
+                 int updatedGuests = originalItem.CurrentNumGuests + qty;
                  int result2 = _orderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
                  if (result2 == 1)
                  {
-                     MessageBox.Show("Numguests changed");                     
+                     System.Windows.MessageBox.Show("Numguests changed");                     
                  }
 
-                 MessageBox.Show("The booking has been successfully added.");
+                 System.Windows.MessageBox.Show("The booking has been successfully added.");
                  // closes window after add
                  this.Close();
              }
          } //end try
          catch (Exception ax)
          {
-             MessageBox.Show(ax.Message);
+             System.Windows.MessageBox.Show(ax.Message);
          }
 
         }//end method addBooking()
@@ -158,66 +147,13 @@ namespace com.WanderingTurtle.FormPresentation
          */
         private ListItemObject getSelectedItem()
         {
-            ListItemObject selected = (ListItemObject)lvEventListItems.SelectedItems[0];
+            ListItemObject selected = (ListItemObject)lvEventListItems.SelectedItem;
+
+            if (selected== null)
+            {
+                System.Windows.MessageBox.Show("Please select an event.");
+            }
             return selected;
-        }
-
-        /**
-         * validates that a empID entered is an int,
-         * parses it into one and passes it through EmployeeHandler to check against database
-         * if emp is found, returns true.
-         * Else it returns false.
-         * Tony Noel- 2/17/15
-         */
-        private bool isEmp(string emp)
-        {
-            bool works = false;
-            int empID;
-
-            if (emp == "")
-            {
-                return works;
-            }
-
-            try
-            {
-                Validator.ValidateInt(emp);
-                int.TryParse(emp, out empID);
-                _employeeManager.FetchEmployee(empID);
-                works = true;
-                return works;
-
-            }
-            catch
-            {
-                return works;
-            }
-        }
-
-
-        /*method to check a quantity
-         * takes a string
-         * if the string is successfully parsed, and the variable it parses to is less
-         * than the myItem.QuantityOffered - return true
-         * else return false.
-         * Tony Noel 2/18/2015
-         */
-        private bool okQuantity(string quantity, int available)
-        {
-            bool works = false;
-            int q;
-            int.TryParse(quantity, out q);
-            ListItemObject myItemObject = getSelectedItem();
-            if (Validator.ValidateInt(quantity) == true && q <= available )
-            {
-                works = true;
-                return works;
-            }
-            else 
-            {
-                return works;
-            }
-
         }
 
         /// <summary>
@@ -230,7 +166,19 @@ namespace com.WanderingTurtle.FormPresentation
         private void lvEventListItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListItemObject myItemObject = getSelectedItem();
+
             txtEventDescription.Text = myItemObject.EventDescription;
+            udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
+
+            if (myItemObject.QuantityOffered == 0)
+            {
+                udAddBookingQuantity.Value = 0;
+            }
+
+            lblTicketWithDiscount.Content = _orderManager.calcTicketWithDiscount((decimal)(udDiscount.Value), myItemObject.Price);
+            decimal extendedPrice = _orderManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
+            lblTotalWithDiscount.Content = _orderManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
         }
+
     }
 }

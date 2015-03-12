@@ -7,17 +7,6 @@ namespace com.WanderingTurtle.BusinessLogic
 {
 	public class OrderManager
 	{
-		///Created By: Tony Noel - 15/2/5
-		/// <summary>
-		/// RetrieveBookingList- a method used to retrieve a list of bookings through the data access layer, from the database
-		/// </summary>
-		/// <exception cref="ApplicationException">trouble accessing the server.</exception>
-		/// <returns>a list of booking objects from database.</returns>
-		public List<Booking> RetrieveBookingList()
-		{
-			return BookingAccessor.getBookingList();
-		}
-
 		///Created By: Tony Noel - 15/2/13
 		/// <summary>
 		/// RetrieveListItemList- a method used to retrieve a list of ListItemObjects (a subclass of Booking) through the data access layer, from the database
@@ -27,6 +16,11 @@ namespace com.WanderingTurtle.BusinessLogic
 		public List<ListItemObject> RetrieveListItemList()
 		{
 			return BookingAccessor.getListItems();
+		}
+
+		public ListItemObject RetrieveEventListing(int itemListID)
+		{
+			return BookingAccessor.getEventListing(itemListID);
 		}
 
 		///Created By: Tony Noel - 15/2/5,  Updated By: Pat Banks - 2/19/15 exception handling
@@ -84,6 +78,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             return feePercent * bookingToCancel.TotalCharge;
         }
+
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
         /// A method to compare two different dates and determine a cancellation fee amount.
@@ -131,28 +126,36 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Updated- Tony Noel 2015/03/10 - moved to OrderManager as method does calculations. Changed to a public static method.
         /// </summary>
-        /// <param name="price"></param>
-        /// <param name="discount"></param>
+        /// <param name="price">price of one ticket</param>
+        /// <param name="quantity">number of tickets</param>
         /// <returns></returns>
-        public decimal calcExtendedPrice(decimal price, decimal discount)
+        /// 
+        public decimal calcExtendedPrice(decimal price, int quantity)
         {
-            decimal extendedPrice;
-
-            extendedPrice = ((100 - discount) / 100) * price;
-
-            return extendedPrice;
+            return quantity * price;            
         }
+
         ///Updated by: Tony Noel 2015/03/10, moved to Order manager, made public static method as it does a calculation.
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="quantity"></param>
+        /// <param name="discount"></param>
         /// <param name="extendedPrice"></param>
         /// <returns></returns>
-        public decimal calcTotalPrice(int quantity, decimal extendedPrice)
+        public decimal calcTotalCharge(decimal discount, decimal extendedPrice)
         {
-            return (decimal)quantity * extendedPrice;
+            decimal amtToPayPercent = (decimal)(1 - discount);
+
+            return amtToPayPercent * extendedPrice;
         }
+
+        public decimal calcTicketWithDiscount(decimal discount, decimal TicketPrice)
+        {
+            decimal amtToPayPercent = (decimal)(1 - discount);
+
+            return amtToPayPercent * TicketPrice;
+        }
+
         /// <summary>
         /// Updated by: Tony Noel, 2015/03/10, moved to ordermanager as it does a calculation.
         /// </summary>

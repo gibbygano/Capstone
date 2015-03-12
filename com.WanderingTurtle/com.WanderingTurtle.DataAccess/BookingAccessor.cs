@@ -10,11 +10,10 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class BookingAccessor
     {
-
         /// Created by: Tony Noel 15/2/13
         /// <summary>
         /// Creates a list of options, has an ItemListID, Quantity, and some event info
-        /// to help populate drop downs/ lists for Add and update Bookings
+        /// to help populate drop downs/ lists for Add Bookings
         /// </summary>
         /// <returns>a list of ListItemObject objects (is created from two tables, ItemListing and Event Item)</returns>
         public static List<ListItemObject> getListItems()
@@ -22,8 +21,13 @@ namespace com.WanderingTurtle.DataAccess
             var BookingOpsList = new List<ListItemObject>();
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectBookingFull";
+            string query = "spSelectListingFull";
+            DateTime now = DateTime.Now;
             var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@Now", now);
+
             try
             {
                 conn.Open();
@@ -67,24 +71,18 @@ namespace com.WanderingTurtle.DataAccess
             return BookingOpsList;
         }
 
-
-        ///Created By: Tony Noel - 15/2/3, Updated: 15/3/3 Tony Noel
-        /// <summary>
-        /// getBookingList- a method used to collect a list of bookings from the database
-        /// </summary>
-        /// <exception cref="ApplicationException"> Specific Exception thrown is if the booking data cannot be found.</exception>
-        /// <returns>Output is a list of booking objects to hold the booking records.</returns>
-        public static List<Booking> getBookingList()
+        public static ListItemObject getEventListing(int itemListID)
         {
-            var BookingList = new List<Booking>();
-            DateTime now = DateTime.Now;
+            var eventItemListing = new ListItemObject();
+
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectAllBookings";
+            string query = "spSelectOneListingFull";
+
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@itemListID", itemListID);
 
-            cmd.Parameters.AddWithValue("@Now", now);
             try
             {
                 conn.Open();
@@ -94,21 +92,19 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     while (reader.Read())
                     {
-                        var currentBook = new Booking();
-
-                        currentBook.BookingID = reader.GetInt32(0);
-                        currentBook.GuestID = reader.GetInt32(1);
-                        if (!reader.IsDBNull(2)) currentBook.EmployeeID = reader.GetInt32(2);
-                        currentBook.ItemListID = reader.GetInt32(3);
-                        currentBook.Quantity = reader.GetInt32(4);
-                        currentBook.DateBooked = reader.GetDateTime(5);
-                        currentBook.Discount = reader.GetDecimal(6);
-                        currentBook.Active = reader.GetBoolean(7);
-                        currentBook.TicketPrice = reader.GetDecimal(8);
-                        currentBook.ExtendedPrice = reader.GetDecimal(9);
-                        currentBook.TotalCharge = reader.GetDecimal(10);
-
-                        BookingList.Add(currentBook);
+                        
+                        //Below are found on the ItemListing table (ItemListID is a foreign key on booking)
+                        eventItemListing.ItemListID = reader.GetInt32(0);
+                        eventItemListing.MaxNumGuests = reader.GetInt32(1);
+                        eventItemListing.CurrentNumGuests = reader.GetInt32(2);
+                        eventItemListing.StartDate = reader.GetDateTime(3);
+                        eventItemListing.EndDate = reader.GetDateTime(4);
+                        //Below are found on the EventItem table
+                        eventItemListing.EventID = reader.GetInt32(5);
+                        eventItemListing.EventName = reader.GetString(6);
+                        eventItemListing.EventDescription = reader.GetString(7);
+                        //this is from itemlisting table
+                        eventItemListing.Price = reader.GetDecimal(8);
                     }
                 }
                 else
@@ -125,7 +121,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return BookingList;
+            return eventItemListing;
         }
 
 
@@ -150,6 +146,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@ItemListID", toAdd.ItemListID);
             cmd.Parameters.AddWithValue("@Quantity", toAdd.Quantity);
             cmd.Parameters.AddWithValue("@DateBooked", toAdd.DateBooked);
+            cmd.Parameters.AddWithValue("@Discount", toAdd.Discount);
             cmd.Parameters.AddWithValue("@TicketPrice", toAdd.TicketPrice);
             cmd.Parameters.AddWithValue("@ExtendedPrice", toAdd.ExtendedPrice);
             cmd.Parameters.AddWithValue("@TotalCharge", toAdd.TotalCharge);
@@ -177,8 +174,6 @@ namespace com.WanderingTurtle.DataAccess
 
             return rowsAffected;
         }
-
-
 
         ///Created By: Tony Noel - 15/2/3, Updated: Tony Noel 15/3/3
         /// <summary>
@@ -238,7 +233,6 @@ namespace com.WanderingTurtle.DataAccess
             return BookingToGet;
         }
 
-
         ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2
         /// <summary>
         /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
@@ -291,6 +285,9 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+
+
+
 
         public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
         {

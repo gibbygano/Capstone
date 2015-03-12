@@ -1,46 +1,57 @@
 ﻿<Window x:Name="AddBooking1" x:Class="com.WanderingTurtle.FormPresentation.AddBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Style="{DynamicResource WindowStyle}"
         Title="AddBooking" Height="400" Width="800"
 		WindowStartupLocation="CenterScreen">
-	<Grid Margin="5">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="1*" />
-			<RowDefinition Height="2*" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <Label Grid.Row="0" x:Name="lblGeneralAddBooking" FontSize="16" FontWeight="Bold" Content="Add Booking for Guest" />
-		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width=".25*" />
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="33" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width=".5*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" x:Name="lblAddBookingGuestID" Content="Guest Name:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
             <Label Grid.Row="0" Grid.Column="1" x:Name="lblAddBookingGuestName" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
 
-            <Label Grid.Row="0" Grid.Column="3" FontWeight="Bold" Content="EVENT DESCRIPTION:" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-            <TextBlock  x:Name="txtEventDescription" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-            
+            <Label Grid.Row="0" Grid.Column="4" FontWeight="Bold" Content="EVENT DESCRIPTION:" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            <TextBlock  x:Name="txtEventDescription" Grid.Row="1" Grid.Column="4" Grid.RowSpan="2" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
+
             <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
             <Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingDiscount" Content="Discount:" VerticalAlignment="Center" HorizontalAlignment="Right" />
-            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="tbAddBookingQuantity" TabIndex="1" UndoLimit="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch"/>
+            
+            
             <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingDiscount" TabIndex="2" UndoLimit="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-		</Grid>
-		<Grid Grid.Row="2" Margin="0,0,0,5">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
+            <xctk:DecimalUpDown FormatString="P0" Grid.Row="2" Grid.Column="1" Value="0"  IsEnabled="{Binding ElementName=lvEventListItems}" Minimum="0" Maximum =".20" Name="udDiscount" Increment=".01" />
+
+            <Label Grid.Row="1" Grid.Column="2" Content="Discounted Ticket Price" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="2" x:Name="lblTicketWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            
+            <Label Grid.Row="1" Grid.Column="3" Content="Discounted Total Price" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="3" x:Name="lblTotalWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center"  HorizontalContentAlignment="Left" />
+        </Grid>
+        <Grid Grid.Row="2" Margin="0,0,0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <Label    Grid.Row="0" Content="Events available:" FontWeight="Bold" />
 
             <DataGrid Grid.Row="1" x:Name="lvEventListItems" SelectionChanged="lvEventListItems_SelectionChanged">
@@ -56,7 +67,7 @@
                     <DataGridTextColumn Width ="100" Header="Ticket Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" />
                 </DataGrid.Columns>
             </DataGrid>
-		</Grid>
+        </Grid>
         <Grid Grid.Row="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

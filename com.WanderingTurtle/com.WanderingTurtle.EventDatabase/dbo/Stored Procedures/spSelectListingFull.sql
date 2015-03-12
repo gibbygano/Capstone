@@ -1,5 +1,5 @@
-﻿/**************************created by: Tony Noel- not all tables created yet********************************************/
-CREATE PROCEDURE [dbo].[spSelectBookingFull]
+﻿/**************************created by: Tony Noel- ********************************************/
+CREATE PROCEDURE [dbo].[spSelectListingFull]
 (@Now	datetime)
 AS
 BEGIN

@@ -5,11 +5,12 @@ CREATE PROCEDURE [dbo].[spAddBooking]
 	@ItemListID		int,
 	@Quantity		int,
 	@DateBooked		DateTime,
+	@Discount		Decimal,
 	@TicketPrice	Decimal,
 	@ExtendedPrice	Decimal,
 	@TotalCharge	Decimal
 	
 AS
-    INSERT INTO Booking(GuestID, EmployeeID, ItemListID, Quantity, DateBooked, TicketPrice, ExtendedPrice, TotalCharge)
-    VALUES(@GuestID, @EmployeeID, @ItemListID, @Quantity, @DateBooked, @TicketPrice, @ExtendedPrice, @TotalCharge)
+    INSERT INTO Booking(GuestID, EmployeeID, ItemListID, Quantity, DateBooked, Discount, TicketPrice, ExtendedPrice, TotalCharge)
+    VALUES(@GuestID, @EmployeeID, @ItemListID, @Quantity, @DateBooked, @Discount, @TicketPrice, @ExtendedPrice, @TotalCharge)
 RETURN @@ROWCOUNT

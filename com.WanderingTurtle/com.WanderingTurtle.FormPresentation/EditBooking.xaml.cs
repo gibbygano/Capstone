@@ -21,25 +21,31 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class EditBooking : Window
     {
         public InvoiceDetails inInvoice;
-        public BookingDetails inBookingDetails;
+        public BookingDetails originalBookingRecord;
+        public BookingDetails editedBookingRecord;
         List<BookingDetails> outInvList = new List<BookingDetails>();
-        public ProductManager myProd = new ProductManager();
+        ListItemObject listingToView = new ListItemObject();       
+
+
         Booking newBooking;
         OrderManager _orderManager = new OrderManager();
 
         public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails)
         {
             this.inInvoice = inInvoice;
-            this.inBookingDetails = inBookingDetails;
+            originalBookingRecord = inBookingDetails;
+            editedBookingRecord = inBookingDetails;
 
             InitializeComponent();
 
             outInvList.Add(inBookingDetails);
+            listingToView = _orderManager.RetrieveEventListing(inBookingDetails.ItemListID);
 
-            lblGeneralEditBooking.Content = "Editing Booking #" + inBookingDetails.BookingID;
             lblEditBookingGuestName.Content = inInvoice.GetFullName;
             tbEditBookingQuantity.Text = inBookingDetails.Quantity.ToString();
             tbEditBookingDiscount.Text = inBookingDetails.Discount.ToString();
+
+            lblAvailSeats.Content = listingToView.MaxNumGuests - listingToView.CurrentNumGuests;
 
             lvEditBookingListItems.ItemsSource = outInvList;
         }
@@ -61,41 +67,35 @@ namespace com.WanderingTurtle.FormPresentation
 
             inQuantity = tbEditBookingQuantity.Text;
 
-            //calls to the Calculate time method in ordermanager which returns a decimal in the form of 0.0, .5, or 1.0.
-            //1.0 in this method means that the startdate of the event is less than a day away, in other words too late to avoid being charged and 
-            //too late to be edited or cancelled.
-            decimal time = _orderManager.CalculateTime(inBookingDetails);
-            if (time == 1.0m)
-            {
-                MessageBox.Show("Due to the close proximity in time to the start date of this event, the reservation cannot be edited.");
-                return;
-            }
             if(!int.TryParse(inQuantity, out quantity))
             {
                 MessageBox.Show("Please enter a whole number for quantity.");
                 return;
             }
 
+            int numGuestsDifference=0;
+
             try
             {
                 //A variable to hold the dfference between the number of guests on the original reservation, and the old reservation
-                int numGuests = _orderManager.spotsReservedDifference(quantity, inBookingDetails.Quantity);
+                numGuestsDifference = _orderManager.spotsReservedDifference(quantity, editedBookingRecord.Quantity);
 
                 // creates an ItemListing object by retrieving the record of the specific object based on it's ItemListID
-                ItemListing originalItem = myProd.RetrieveItemListing(inBookingDetails.ItemListID.ToString());
+                ListItemObject originalItem = _orderManager.RetrieveEventListing(editedBookingRecord.ItemListID);
+
                 //assigned the difference of the MaxNumGuests - currentNum of guests
                 int quantityOffered = _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
                 
                 //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
-                if (quantityOffered == 0 && quantity > inBookingDetails.Quantity)
+                if (quantityOffered == 0 && quantity > editedBookingRecord.Quantity)
                 {
                     MessageBox.Show("This event is already full. You cannot add more guests to it.");
                     return;
                 }
                 //Method to check the number of guests added to a reservation against the available quantity for the event
-                if (numGuests > quantityOffered)
+                if (numGuestsDifference > quantityOffered)
                 {
-                    MessageBox.Show("You are attempting to add "+ numGuests+ " guests onto this reservation, however, there are only " + quantityOffered + " spots open for this event. Please alert the guest.");
+                    MessageBox.Show("You are attempting to add "+ numGuestsDifference+ " guests onto this reservation, however, there are only " + quantityOffered + " spots open for this event. Please alert the guest.");
                     return;
                 }
             }
@@ -117,34 +117,39 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 discount = 0;
             }
-            else if(discount > 100)
+            else if(discount > 20)
             {
-                MessageBox.Show("Discount cannot exceed 100.");
+                MessageBox.Show("Discount cannot exceed 20%");
                 tbEditBookingDiscount.Clear();
                 tbEditBookingDiscount.Focus();
                 return;
             }
 
+            //update edited booking object with new data
+            editedBookingRecord.TicketPrice = originalBookingRecord.TicketPrice;
+            editedBookingRecord.ExtendedPrice = _orderManager.calcExtendedPrice(editedBookingRecord.TicketPrice, quantity);
+            editedBookingRecord.TotalCharge = _orderManager.calcTotalCharge(discount, editedBookingRecord.ExtendedPrice);
+            editedBookingRecord.Quantity = quantity;
 
-            inBookingDetails.Quantity = quantity;
+            //send the changes to the database       
+            newBooking = (Booking)editedBookingRecord;
+            int numRows = _orderManager.EditBooking(newBooking);
+
+            if (numRows == 1)
+            {
+                MessageBox.Show("Booking changed successfully.");
+                
+                //change number of seasts available
+                ListItemObject originalEventListing = _orderManager.RetrieveEventListing(editedBookingRecord.ItemListID);
+
+                int newNumGuests = originalEventListing.CurrentNumGuests + numGuestsDifference;
+
+                int result1 = _orderManager.updateNumberOfGuests(editedBookingRecord.ItemListID, originalEventListing.CurrentNumGuests, newNumGuests);
 
 
-   //         inBookingDetails.ExtendedPrice = calcExtendedPrice(inBookingDetails.TicketPrice, discount);
-//ProductManager myProdMan = new ProductManager();
-//ItemListing originalListItem = myProdMan.RetrieveItemListing(myBooking.ItemListID.ToString());
+                this.Close();
+            }
 
-//int newNumGuests = originalListItem.CurrentNumGuests - myBooking.Quantity;
-
-
-  //int result1 = OrderManager.updateNumberOfGuests(myBooking.ItemListID, originalListItem.CurrentNumGuests, newNumGuests);
-
-            newBooking = (Booking)inBookingDetails;
-
-            _orderManager.EditBooking(newBooking);
-
-            MessageBox.Show("Booking changed successfully.");
-
-            this.Close();
         }
 
     }

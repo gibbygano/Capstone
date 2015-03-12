@@ -51,7 +51,7 @@
                         <GridViewColumn Width ="50" Header="Qty" DisplayMemberBinding="{Binding Quantity}" />
                         <GridViewColumn Width ="90" Header="Ticket Price" DisplayMemberBinding="{Binding TicketPrice, StringFormat='{}{0:C}'}" />
                         <GridViewColumn Width ="110" Header="Extended Price" DisplayMemberBinding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
-                        <GridViewColumn Width ="75" Header="Discount" DisplayMemberBinding="{Binding Discount, StringFormat='{}{0:P}'}" />
+                        <GridViewColumn Width ="75" Header="Discount" DisplayMemberBinding="{Binding Discount, StringFormat='{}{0:P}'}"/>
                         <GridViewColumn Width ="75" Header="Total Due" DisplayMemberBinding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
                     </GridView>
                 </ListView.View>

@@ -93,13 +93,12 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
              {
-                ProductManager myProdMan = new ProductManager();
-                ItemListing originalListItem = myProdMan.RetrieveItemListing(myBooking.ItemListID.ToString());
+                ListItemObject originalEventListing = _orderManager.RetrieveEventListing(myBooking.ItemListID);
 
-                int newNumGuests = originalListItem.CurrentNumGuests - myBooking.Quantity;
+                int newNumGuests = originalEventListing.CurrentNumGuests - myBooking.Quantity;
 
 
-                int result1 = _orderManager.updateNumberOfGuests(myBooking.ItemListID, originalListItem.CurrentNumGuests, newNumGuests);
+                int result1 = _orderManager.updateNumberOfGuests(myBooking.ItemListID, originalEventListing.CurrentNumGuests, newNumGuests);
 
                 if (result1 == 1)
                 {

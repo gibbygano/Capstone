@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width=".25*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width=".25*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" x:Name="lblEditBookingGuestLbl" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
@@ -33,6 +33,9 @@
             
             <Label Grid.Row="2" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" VerticalAlignment="Center" HorizontalAlignment="Right" />
             <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbEditBookingDiscount" TabIndex="2" UndoLimit="2"  VerticalAlignment="Center" HorizontalContentAlignment="Left"  />
+
+            <Label Grid.Row="2" Grid.Column="2" Content="Quantity Seats Available:  " VerticalAlignment="Center" HorizontalContentAlignment="Right" />
+            <Label  Grid.Row="2" Grid.Column="3" x:Name="lblAvailSeats" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
 
         </Grid>
 		<Grid Grid.Row="2" Margin="0,0,0,5">
@@ -50,9 +53,9 @@
                         <GridViewColumn Width ="150" Header="Event Name" DisplayMemberBinding="{Binding EventItemName}" />
 						
                         <GridViewColumn Width ="50" Header="Qty" DisplayMemberBinding="{Binding Quantity}" />
-                        <GridViewColumn Width ="75" Header="Tix Price" DisplayMemberBinding="{Binding Price, StringFormat='{}{0:C}'}" />
-                        <GridViewColumn Width="75" Header="Ext. Price" DisplayMemberBinding="{Binding ExtendedPrice}" />
-                        <GridViewColumn Width ="75"  Header="Discount" DisplayMemberBinding="{Binding Discount }" />
+                        <GridViewColumn Width ="75" Header="Tix Price" DisplayMemberBinding="{Binding TicketPrice, StringFormat='{}{0:C}'}" />
+                        <GridViewColumn Width="75" Header="Ext. Price" DisplayMemberBinding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
+                        <GridViewColumn Width ="75"  Header="Discount" DisplayMemberBinding="{Binding Discount, StringFormat='{}{0:P}'}" />
                         <GridViewColumn Width ="75" Header="Total Due" DisplayMemberBinding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
 					</GridView>
 				</ListView.View>

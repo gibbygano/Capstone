@@ -148,6 +148,18 @@ namespace com.WanderingTurtle.FormPresentation
 
             BookingDetails outBooking = (BookingDetails)lvGuestBookings.SelectedItem;
 
+            if (outBooking.StartDate < DateTime.Now)
+            {
+                MessageBox.Show("Bookings in the past cannot be edited.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (outBooking.Quantity == 0)
+            {
+                MessageBox.Show("This booking has been cancelled and cannot be edited.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             EditBooking editForm = new EditBooking(invoiceToView, outBooking);
 
             if (editForm.ShowDialog() == false)
