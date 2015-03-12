@@ -88,7 +88,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                 int newNumGuests = originalEventListing.CurrentNumGuests - myBooking.Quantity;
 
-
                 int result1 = _orderManager.updateNumberOfGuests(myBooking.ItemListID, originalEventListing.CurrentNumGuests, newNumGuests);
 
                 if (result1 == 1)

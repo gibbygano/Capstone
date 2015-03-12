@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             Title = "Add New Hotel Guest";
-
+            TxtRoomNumber.MaxLength = 4;
             InitializeEverything();
         }
 
