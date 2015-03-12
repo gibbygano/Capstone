@@ -18,7 +18,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>An int value is returned to the method to show rows affected</returns>
         public int AddNewEmployee(Employee newEmployee)
         {
-            return EmployeeAccessor.AddEmployee(newEmployee);
+            try
+            {
+                return EmployeeAccessor.AddEmployee(newEmployee);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -37,7 +44,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
         public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
         {
-            return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
+            try
+            {
+                return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -54,7 +68,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>The employee object is returned to the method successfully</returns>
         public Employee FetchEmployee(int empID)
         {
-            return EmployeeAccessor.GetEmployee(empID);
+            try
+            {
+                return EmployeeAccessor.GetEmployee(empID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -69,7 +90,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns></returns>
         public Employee FetchEmployee(string firstName, string lastName)
         {
-			return EmployeeAccessor.GetEmployee(firstName, lastName);
+            try
+            {
+                return EmployeeAccessor.GetEmployee(firstName, lastName);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -81,7 +109,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>The employee list is retrieved and returned up to the presentation layer (calling method)</returns>
         public List<Employee> FetchListEmployees()
         {
-			return EmployeeAccessor.GetEmployeeList();
+            try
+            {
+                return EmployeeAccessor.GetEmployeeList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         /// <summary>
@@ -96,7 +131,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>The employee object with the given credentials.</returns>
         public Employee GetEmployeeLogin(int empId, string empPassword)
         {
-			return EmployeeAccessor.GetEmployeeLogin(empId, empPassword);
+            try
+            {
+                return EmployeeAccessor.GetEmployeeLogin(empId, empPassword);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -16,8 +16,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="hotelGuestId">Hotel guest ID</param>
 		/// <returns>List of bookings for a hotel guest</returns>
 		public List<BookingDetails> RetrieveBookingDetailsList(int hotelGuestId)
-		{
-			return InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
+        {
+            try
+            {
+                return InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -27,9 +34,16 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="guestBookings">List of bookings for a guest</param>
 		/// <returns>cost of bookings</returns>
 		public decimal CalculateTotalDue(List<BookingDetails> guestBookings)
-		{
-			//go through bookings to calculate amount due for a customer
-			return guestBookings.Sum(b => b.TotalCharge);
+        {
+            try
+            {
+			    //go through bookings to calculate amount due for a customer
+			    return guestBookings.Sum(b => b.TotalCharge);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -39,8 +53,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <returns>List of all active guest invoices</returns>
 		public List<InvoiceDetails> RetrieveAllInvoiceDetails()
-		{
-			return InvoiceAccessor.GetActiveInvoiceList();
+        {
+            try
+            {
+                return InvoiceAccessor.GetActiveInvoiceList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -51,8 +72,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <param name="hotelGuestId">Hotel Guest ID</param>
 		/// <returns>Invoice information for a hotel guest</returns>
 		public InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
-		{
-			return InvoiceAccessor.GetInvoiceByGuest(hotelGuestId);
+        {
+            try
+            {
+                return InvoiceAccessor.GetInvoiceByGuest(hotelGuestId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 
 		/// <summary>
@@ -65,7 +93,14 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <returns>boolean true if result was successful</returns>
 		public bool ArchiveCurrentGuestInvoice(Invoice originalInvoice, Invoice updatedInvoice)
 		{
-			return InvoiceAccessor.ArchiveGuestInvoice(originalInvoice, updatedInvoice) > 0;
+            try
+            {
+			    return InvoiceAccessor.ArchiveGuestInvoice(originalInvoice, updatedInvoice) > 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 		}
 	}
 }
