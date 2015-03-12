@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     AffirmativeButtonText = "Log In",
                     InitialUsername = _user
                 };
-                LoginDialogData result = await DialogBox.ShowLoginDialog(this, "Authentication", "Enter your credentials.", settings);
+                LoginDialogData result = await DialogBox.ShowLoginDialog(this, "Enter your credentials.", "Authentication", settings);
                 if (result == null) { break; }
                 try
                 {
@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     if (Globals.UserToken != null) { _exception = null; }
                 }
                 catch (Exception ex) { _exception = ex; }
-                if (_exception != null) { await DialogBox.ShowMessageDialog(this, _exception.Message); }
+                if (_exception != null) { await DialogBox.ShowMessageDialog(this, _exception.Message, "Login Error"); }
             } while (_exception != null);
             if (Globals.UserToken != null) { WindowHelper.GetMainWindow(this).MainContent.Content = new TabContainer(); }
         }
