@@ -116,7 +116,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (qty == 0)
             {
-                System.Windows.MessageBox.Show("This event is full.  Please pick another event");
+                System.Windows.MessageBox.Show("Please enter a quanity greather than 0");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
