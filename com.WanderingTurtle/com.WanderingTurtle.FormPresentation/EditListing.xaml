@@ -9,7 +9,7 @@
 		WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -25,26 +25,26 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" FontSize="16" FontWeight="Bold" Content="Edit Event Listing" Grid.ColumnSpan="4" />
 
-        <Label Grid.Row="1" Grid.Column="0" Content="Item Name:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Item Name:" HorizontalContentAlignment="Right" />
         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="lblListingName"  HorizontalAlignment="Left" VerticalAlignment="Center" />
 
-        <Label Grid.Row="2" Grid.Column="0" Content="Supplier Name:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Supplier Name:" HorizontalContentAlignment="Right" />
         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="lblSupplierName"  HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Label Grid.Row="3" Grid.Column="0" Content="Start Date:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Start Date:" HorizontalContentAlignment="Right" />
         <DatePicker Grid.Row="3" Grid.Column="1" x:Name="dateStart" />
 
-        <Label Grid.Row="3" Grid.Column="2"  Content="Start Time:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="3" Grid.Column="2"  Content="Start Time:" HorizontalContentAlignment="Right" />
         <xctk:TimePicker Grid.Row="3" Grid.Column="3" x:Name="tpStartTime" />
 
-        <Label Grid.Row="4" Grid.Column="0" Content="End Date:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="4" Grid.Column="0" Content="End Date:" HorizontalContentAlignment="Right" />
         <DatePicker Grid.Row="4"  Grid.Column="1" x:Name="dateEnd" />
-        <Label Grid.Row="4" Grid.Column="2" Content="End Time:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="4" Grid.Column="2" Content="End Time:" HorizontalContentAlignment="Right" />
         <xctk:TimePicker Grid.Row="4" Grid.Column="3" x:Name="tpEndTime" />
 
-        <Label Grid.Row="5" Grid.Column="0" Content="Price (USD) " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="5" Grid.Column="0" Content="Price (USD):" HorizontalContentAlignment="Right" />
         <xctk:DecimalUpDown Grid.Row="5" Grid.Column="1" x:Name="udPrice" FormatString="C2" Value="0" Increment="5" />
 
-        <Label Grid.Row="5" Grid.Column="2" Content="Seats Available:  " HorizontalContentAlignment="Right" />
+        <Label Grid.Row="5" Grid.Column="2" Content="Seats Available:" HorizontalContentAlignment="Right" />
         <xctk:IntegerUpDown Grid.Row="5" Grid.Column="3" x:Name="udSeats" Value="10" Increment="5" Minimum="1" />
 
         <Grid Grid.Row="6" Grid.ColumnSpan="4" Margin="{DynamicResource Grid Margin}">

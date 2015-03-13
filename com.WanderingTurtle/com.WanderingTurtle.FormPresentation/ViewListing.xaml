@@ -20,7 +20,7 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Content="Event Type:"   Grid.Column="0" Grid.Row="0" IsEnabled="False" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Event Type:"   Grid.Column="0" Grid.Row="0" IsEnabled="False" HorizontalContentAlignment="Right" />
             <Label Content="Price:"        Grid.Column="0" Grid.Row="1" IsEnabled="False" HorizontalContentAlignment="Right" />
             <TextBox x:Name="txtEventType" Grid.Column="1" Grid.Row="0" />
             <TextBox x:Name="txtPrice"     Grid.Column="1" Grid.Row="1" IsEnabled="False" />
@@ -33,14 +33,14 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Label Content="Guests:" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsEnabled="False" />
-            <Label Content="Dates"   Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="False" />
+            <Label Content="Dates:"  Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" IsEnabled="False" />
 
             <Label Content="Current" Grid.Row="1" Grid.Column="0" IsEnabled="False" HorizontalContentAlignment="Right" />
             <Label Content="Max"     Grid.Row="2" Grid.Column="0" IsEnabled="False" HorizontalContentAlignment="Right" />
@@ -49,8 +49,8 @@
             <TextBox x:Name="txtMaxGuests"     Grid.Row="2" Grid.Column="1" IsEnabled="False" />
             <TextBox x:Name="txtMinGuests"     Grid.Row="3" Grid.Column="1" IsEnabled="False" />
 
-            <Label Content="Start" Grid.Row="1" Grid.Column="2" IsEnabled="False" />
-            <Label Content="End"   Grid.Row="2" Grid.Column="2" IsEnabled="False" />
+            <Label Content="Start" Grid.Row="1" Grid.Column="2" IsEnabled="False" HorizontalContentAlignment="Right" />
+            <Label Content="End"   Grid.Row="2" Grid.Column="2" IsEnabled="False" HorizontalContentAlignment="Right" />
             <DatePicker x:Name="txtStartDate" Grid.Row="1" Grid.Column="3" IsEnabled="False" />
             <DatePicker x:Name="txtEndDate"   Grid.Row="2" Grid.Column="3" IsEnabled="False" />
         </Grid>

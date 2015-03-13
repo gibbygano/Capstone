@@ -4,30 +4,55 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
 		x:Class="com.WanderingTurtle.FormPresentation.AddNewEvent"
         Style="{DynamicResource WindowStyle}"
-        Title="Add a New Event"  Height="389.5" Width="485.355"
+        Title="Add a New Event"  Height="400" Width="500"
 		WindowStartupLocation="CenterScreen">
-    <Grid Margin="0,0,2,0">
-        <TextBox x:Name="txtEventName" HorizontalAlignment="Left" Height="23" Margin="99,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TabIndex="1" MaxLength="255" />
-        <Label Content="Event Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="17,13,0,0" RenderTransformOrigin="0.526,0.654" />
-        <Label Content="Provided Transportation?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,170,0,0" RenderTransformOrigin="1.342,0.308" />
-        <Canvas HorizontalAlignment="Left" Height="54" Margin="127,203,0,0" VerticalAlignment="Top" Width="58">
-            <RadioButton x:Name="radTranspYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="11" />
-            <RadioButton x:Name="radTranspNo" Content="No" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="12" />
-        </Canvas>
-        <Label Content="Description:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,73,0,0" RenderTransformOrigin="1.342,0.308" />
-        <Button x:Name="SubmitBtn" Content="Submit" HorizontalAlignment="Left" Margin="380,326,0,0" VerticalAlignment="Top" Width="76" Click="SubmitBtn_Click" TabIndex="15" />
-        <Label Content="Event Type:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="242,13,0,0" RenderTransformOrigin="0.526,0.654" />
-        <ComboBox x:Name="cboxType" HorizontalAlignment="Left" Margin="317,17,0,0" VerticalAlignment="Top" Width="120"
-            DisplayMemberPath="EventName"
-            SelectedValuePath="EventTypeID"
-            SelectedValue="{Binding EventTypeID}" TabIndex="2">
-            <ComboBox Height="100" Width="120" />
-        </ComboBox>
-        <Label Content="On Site?" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,170,0,0" RenderTransformOrigin="1.342,0.308" />
-        <Canvas HorizontalAlignment="Left" Height="54" Margin="270,203,0,0" VerticalAlignment="Top" Width="58">
-            <RadioButton x:Name="radOnSiteYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="13" />
-            <RadioButton x:Name="radOnSiteNo" Content="No" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="14" />
-        </Canvas>
-        <TextBox x:Name="txtDescrip" HorizontalAlignment="Left" Height="93" Margin="99,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="232" TabIndex="10" RenderTransformOrigin="0.499,0.528" MaxLength="255" />
+    <Grid Margin="{DynamicResource Grid Margin}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Content="Event Name:"   Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" />
+        <Label Content="Event Type:"   Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" />
+        <Label Content="Description:"  Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" />
+        <TextBox x:Name="txtEventName" Grid.Row="0" Grid.Column="1" MaxLength="255" />
+        <ComboBox x:Name="cboxType"    Grid.Row="0" Grid.Column="3" TabIndex="2" DisplayMemberPath="EventName" SelectedValuePath="EventTypeID" SelectedValue="{Binding EventTypeID}" />
+        <TextBox x:Name="txtDescrip"   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="255" Style="{DynamicResource TextArea}" />
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Content="Provided Transportation?" Grid.Row="0" Grid.Column="0" />
+            <Label Content="On Site?"                 Grid.Row="0" Grid.Column="1" />
+            <Canvas  Grid.Row="1" Grid.Column="0" Margin="10,0,0,0">
+                <RadioButton x:Name="radTranspYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="11" />
+                <RadioButton x:Name="radTranspNo"  Content="No"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="12" />
+            </Canvas>
+            <Canvas Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+                <RadioButton x:Name="radOnSiteYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="13" />
+                <RadioButton x:Name="radOnSiteNo"  Content="No"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="30" TabIndex="14" />
+            </Canvas>
+        </Grid>
+        <Grid Grid.Row="3" Grid.ColumnSpan="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="SubmitBtn" Content="Submit" Grid.Column="1" Click="SubmitBtn_Click" TabIndex="15" Margin="{DynamicResource Grid Margin}" />
+        </Grid>
     </Grid>
 </Metro:MetroWindow>
