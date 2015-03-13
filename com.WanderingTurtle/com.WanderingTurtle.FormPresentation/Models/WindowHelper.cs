@@ -9,7 +9,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
     {
         public static MainWindow GetMainWindow(Control control)
         {
-            var parent = VisualTreeHelper.GetParent(control);
+            var parent = VisualTreeHelper.GetParent(control) ?? control;
             while (!(parent is MainWindow))
             {
                 parent = VisualTreeHelper.GetParent(parent);
@@ -20,12 +20,12 @@ namespace com.WanderingTurtle.FormPresentation.Models
         public static MetroWindow GetWindow(Control control)
         {
             var parent = VisualTreeHelper.GetParent(control);
-            while (!(parent is MetroWindow))
+            if (parent == null)
+            { parent = control; }
+            else
             {
-                if (parent != null)
-                {
-                    parent = VisualTreeHelper.GetParent(parent);
-                }
+                while (!(parent is MetroWindow))
+                { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
             }
             return (parent as MetroWindow);
         }

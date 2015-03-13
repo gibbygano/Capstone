@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// Show Message Dialog
         /// Miguel Santana 2015/03/11
         /// </summary>
-        /// <param name="control">Current control. In most cases use '<code>this</code>'</param>
+        /// <param name="control">Current control. In most cases use '<typeparamref name="this"/>this</typeparamref>'</param>
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <param name="style"><typeparamref name="MessageDialogStyle"/> sets the buttons visible on the dialog</param>
