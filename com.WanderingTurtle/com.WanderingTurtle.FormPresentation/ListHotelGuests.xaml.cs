@@ -1,8 +1,10 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -14,15 +16,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ListHotelGuests : UserControl
     {
-        InvoiceManager _invoiceManager = new InvoiceManager();
-        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        
+        private InvoiceManager _invoiceManager = new InvoiceManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+
         /// <summary>
         /// Created by Pat Banks 2015/02/17
         /// Initializes the UI that displays a list of active hotel guests
@@ -54,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog(this, "Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
             }
         }
 
@@ -89,7 +90,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (selectedGuest == null)
             {
-                MessageBox.Show("Please select a guest to view.");
+                DialogBox.ShowMessageDialog(this, "Please select a guest to view.");
                 return;
             }
 
@@ -99,7 +100,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 RefreshGuestList();
             }
-
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
@@ -157,21 +157,21 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (ApplicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
-
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
+
         private GridViewColumnHeader _sortColumn;
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (_sortColumn == column)
             {
-                // Toggle sorting direction 
+                // Toggle sorting direction
                 _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
             else
@@ -217,7 +217,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
+                DialogBox.ShowMessageDialog(this, "There must be data in the list before you can sort it");
             }
         }
     }

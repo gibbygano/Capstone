@@ -15,6 +15,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
             InitializeComponent();
             if (Globals.UserToken != null)
             {
+                this.CurrentUserLabel.Content = Globals.UserToken.GetFullName;
                 switch (Globals.UserToken.Level)
                 {
                     case RoleData.Admin:

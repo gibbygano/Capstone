@@ -1,5 +1,9 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,9 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
-using System.ComponentModel;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -23,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheListings : UserControl
     {
         private ProductManager prodMan = new ProductManager();
-        List<ItemListing> myListingList;
+        private List<ItemListing> myListingList;
 
         public ListTheListings()
         {
@@ -44,21 +45,19 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No database able to be accessed for Listings");
-                //MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message, "No database able to be accessed for Listings");
             }
         }
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
             Window AddItemListings = new AddItemListing();
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
+            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
             //AddItemListings.Show();
             if (AddItemListings.ShowDialog() == false)
             {
                 refreshData();
             }
-
         }
 
         private void btnArchiveListing_click(object sender, RoutedEventArgs e)
@@ -66,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
             ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItem;
             if (ListingToDelete == null)
             {
-                MessageBox.Show("Please select a row to delete.");
+                DialogBox.ShowMessageDialog(this, "Please select a row to delete.");
                 return;
             }
 
@@ -76,13 +75,13 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (numRows == 1)
                 {
-                    MessageBox.Show("Listing successfully deleted.");
+                    DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
                 }
                 refreshData();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
@@ -91,24 +90,23 @@ namespace com.WanderingTurtle.FormPresentation
             ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
             if (ListingEdit == null)
             {
-                MessageBox.Show("Please select a row to edit");
+                DialogBox.ShowMessageDialog(this, "Please select a row to edit");
                 return;
             }
 
             Window EditListings = new EditListing(ListingEdit);
 
-            
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
+            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
             //AddItemListings.Show();
             if (EditListings.ShowDialog() == false)
             {
                 refreshData();
             }
-
         }
 
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
+
         private GridViewColumnHeader _sortColumn;
 
         /// <summary>
@@ -127,7 +125,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (_sortColumn == column)
             {
-                // Toggle sorting direction 
+                // Toggle sorting direction
                 _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
             else
@@ -138,7 +136,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             string header = string.Empty;
 
-            // if binding is used and property name doesn't match header content 
+            // if binding is used and property name doesn't match header content
             Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
 
             if (b != null)
@@ -152,13 +150,10 @@ namespace com.WanderingTurtle.FormPresentation
                 resultDataView.SortDescriptions.Clear();
                 resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
+                DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
             }
         }
-
     }
-
 }
-

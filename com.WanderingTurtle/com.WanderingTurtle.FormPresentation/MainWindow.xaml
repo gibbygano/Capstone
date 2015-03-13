@@ -12,7 +12,7 @@
     </Metro:TransitioningContentControl>
     <Metro:MetroWindow.RightWindowCommands>
         <Metro:WindowCommands>
-            <Button Content="Sign In/Out" Click="BtnSignInOut_Click" />
+            <Button Content="Sign Out" Click="BtnSignOut_Click" />
         </Metro:WindowCommands>
     </Metro:MetroWindow.RightWindowCommands>
 </Metro:MetroWindow>

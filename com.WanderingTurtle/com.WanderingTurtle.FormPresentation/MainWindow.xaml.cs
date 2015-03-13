@@ -31,7 +31,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
         }
 
-        private void BtnSignInOut_Click(object sender, RoutedEventArgs e)
+        private void BtnSignOut_Click(object sender, RoutedEventArgs e)
         {
             StartUp();
         }
