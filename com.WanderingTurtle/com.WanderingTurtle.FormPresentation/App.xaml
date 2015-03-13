@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:system="clr-namespace:System;assembly=mscorlib"
 	xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     x:Class="com.WanderingTurtle.FormPresentation.App"
 	StartupUri="MainWindow.xaml">
     <Application.Resources>
@@ -15,23 +16,30 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type Metro:MetroWindow}">
+                <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+            </Style>
+
             <system:Double x:Key="TextBoxHeight">30</system:Double>
             <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>
-            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}">
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" x:Key="TextBoxStyle">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
                 <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="{StaticResource TextBoxClearTextButton}" />
             </Style>
-            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}">
-                <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
-                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
-            </Style>
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}" />
+            <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource TextBoxStyle}" />
             <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MetroPasswordBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
                 <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="{StaticResource TextBoxClearTextButton}" />
             </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource VirtualisedMetroComboBox}">
+                <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
+            </Style>
+
             <Style TargetType="{x:Type Button}" x:Key="Button" BasedOn="{StaticResource AccentedSquareButtonStyle}">
                 <Setter Property="Padding" Value="8,3" />
                 <Setter Property="FontSize" Value="13" />
@@ -41,6 +49,7 @@
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button}" />
             <Thickness x:Key="Grid Margin">5</Thickness>
             <Thickness x:Key="Button Spacing">0,0,5,0</Thickness>
+
             <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
                 <Setter Property="IsReadOnly" Value="True" />
                 <Setter Property="AutoGenerateColumns" Value="False" />
