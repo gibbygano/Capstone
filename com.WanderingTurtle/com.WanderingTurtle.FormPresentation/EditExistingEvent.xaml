@@ -23,7 +23,6 @@
         <Label Content="Event Type:"   Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" />
         <Label Content="Description:"  Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" />
         <TextBox x:Name="txtEventName" Grid.Row="0" Grid.Column="1" MaxLength="255" />
-        <ComboBox x:Name="cboxType"    Grid.Row="0" Grid.Column="3" TabIndex="2" DisplayMemberPath="EventName" SelectedValuePath="EventTypeID" SelectedValue="{Binding EventTypeID}" />
         <TextBox x:Name="txtDescrip"   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="255" Style="{DynamicResource TextArea}" />
 
         <Grid Grid.Row="2" Grid.ColumnSpan="4">
@@ -54,5 +53,6 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="SubmitBtn" Content="Submit" Grid.Column="1" Click="SubmitBtn_Click" TabIndex="15" Margin="{DynamicResource Grid Margin}" />
         </Grid>
+        <ComboBox x:Name="cboxType" Grid.Column="3" HorizontalAlignment="Left" Margin="9.6,5,0,0" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Metro:MetroWindow>
