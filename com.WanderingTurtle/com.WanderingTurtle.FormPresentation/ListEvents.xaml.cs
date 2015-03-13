@@ -63,8 +63,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Event EventToDelete = (Event)lvEvents.SelectedItems[0];
-            myMan.ArchiveAnEvent(EventToDelete);
+            try
+            {
+                Event EventToDelete = (Event)lvEvents.SelectedItems[0];
+                myMan.ArchiveAnEvent(EventToDelete);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         /// <summary>
@@ -89,7 +97,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Event eventToView = (Event)lvEvents.SelectedItem;
                 ViewEventDetails temp = new ViewEventDetails(eventToView);
-                temp.Show();
+                temp.ShowDialog();
             }
             catch (Exception)
             {
@@ -143,8 +151,11 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Event EventToEdit = (Event)lvEvents.SelectedItem;
-                EditExistingEvent temp = new EditExistingEvent(EventToEdit);
-                temp.Show();
+                EditExistingEvent editWindow = new EditExistingEvent(EventToEdit);
+                if (editWindow.ShowDialog()==false)
+                {
+                    Refresh();
+                }
             }
             catch (Exception)
             {
@@ -182,7 +193,7 @@ namespace com.WanderingTurtle.FormPresentation
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
                 lvEvents.ItemsSource = myTempList;
             }
-            else if (txtSearchInput.Text.Equals("*"))
+            else if (txtSearchInput.Text.Equals(""))
             {
                 lvEvents.ItemsSource = myEventList;
             }

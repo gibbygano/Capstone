@@ -99,7 +99,7 @@ namespace com.WanderingTurtle.Web.Pages
                 newEvent.EventTypeID = int.Parse(Request.Form["type"]);
                 newEvent.Transportation = bool.Parse(Request.Form["transport"]);
                 newEvent.OnSite = bool.Parse(Request.Form["onsite"]);
-                if (Validator.ValidateAlphaNumeric(String.Format("{0}", Request.Form["description"]).Trim(), 1, 255))
+                if (Validator.ValidateCompanyName(String.Format("{0}", Request.Form["description"]).Trim(), 1, 255))
                 {
                     newEvent.Description = String.Format("{0}", Request.Form["description"]).Trim();
                 }
@@ -107,7 +107,7 @@ namespace com.WanderingTurtle.Web.Pages
                 {
                     errorCount++;
                     stop = true;
-                    showError("You must enter a valid Description!");
+                    showError("You must enter a valid Description!" + String.Format("{0}", Request.Form["description"]).Trim());
                     return;
                 }
 

@@ -44,12 +44,22 @@ namespace com.WanderingTurtle.FormPresentation
             eventToSubmit.EventItemName = EventToEdit.EventItemName;
             eventToSubmit.EventItemID = EventToEdit.EventItemID;
 
-            List<EventType> myList = myMan.RetrieveEventTypeList();
+            List<EventType> myList;
             try
             {
+                myList = myMan.RetrieveEventTypeList();
                 cboxType.Items.Clear();
                 cboxType.ItemsSource = myList;
-                cboxType.SelectedIndex = EventToEdit.EventTypeID;
+                cboxType.DisplayMemberPath = "EventName";
+                cboxType.SelectedValuePath = "EventTypeID";
+                for (int i = 0; i < myList.Count; i++)
+                {
+                    if (myList[i].EventTypeID == EventToEdit.EventTypeID)
+                    {
+                        cboxType.SelectedValue = myList[i].EventTypeID;
+                    }
+                }
+                //cboxType.SelectedIndex = 1;
             }
             catch (Exception ex)
             {
@@ -78,6 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
         }
+
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
@@ -129,7 +140,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 try
                 {
-                    int TypeSelected = cboxType.SelectedIndex;
+                    int TypeSelected = (int)cboxType.SelectedValue;
                 }
                 catch (Exception)
                 {
@@ -150,13 +161,20 @@ namespace com.WanderingTurtle.FormPresentation
                     return;
                 }
 
+                //MessageBox.Show(Unrevised.EventItemID + Unrevised.EventItemName + Unrevised.EventTypeID + Unrevised.EventTypeName + Unrevised.Description + Unrevised.OnSite + Unrevised.Transportation + "\n" + eventToSubmit.EventItemID + eventToSubmit.EventItemName + eventToSubmit.EventTypeID + eventToSubmit.EventTypeName + eventToSubmit.Description + eventToSubmit.OnSite + eventToSubmit.Transportation);
                 // Submit the events
-                myMan.EditEvent(Unrevised, eventToSubmit);
+                if (myMan.EditEvent(Unrevised, eventToSubmit)==1)
+                {
+                    MessageBox.Show("Event Changed Successfully!");
+                    this.Close();
+                }
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
     }
 }

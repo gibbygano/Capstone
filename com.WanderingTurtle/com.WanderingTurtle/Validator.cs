@@ -17,6 +17,25 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9,.?@&!#'~*\s_;+'-]+$");
         }
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/02/28
+        /// 
+        /// Custom Validator for Company names that can contain certain special characters. Follow industry standards.
+        /// </summary>
+        /// <param name="inputToValidate">string to validate</param>
+        /// <returns>boolean value if string only contains allowed characters</returns>
+        public static bool ValidateCompanyName(string inputToValidate, int min, int max)
+        {
+            if (inputToValidate.Length >= min && inputToValidate.Length <= max)
+            {
+                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9,.?@&!#'~*\s_;+'-]+$");
+            }
+            else
+            {
+                return false;
+            }
+        }
        
         /// <summary>
         /// Matt Lapka
