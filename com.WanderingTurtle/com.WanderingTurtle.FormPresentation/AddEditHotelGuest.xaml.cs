@@ -2,10 +2,10 @@
 using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditHotelGuest
     {
-        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
         /// Create a New Hotel Guest
@@ -192,7 +192,7 @@ namespace com.WanderingTurtle.FormPresentation
                             )
                         );
                 }
-            
+
                 if (Result)
                 {
                     MessageBox.Show(this, "Your Request was Processed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -216,7 +216,6 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show(ex.Message);
             }
         }
-
 
         /// <summary>
         /// Selects all on keyboard focus to allow for easier tabbing between fields

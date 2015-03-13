@@ -36,8 +36,8 @@
             <Label Grid.Row="2" Grid.Column="1" x:Name="lblRoomNum"         VerticalContentAlignment="Center" />
 
             <Button Grid.Row="2" Grid.Column="2" x:Name="btnEditGuest" Content="Edit Guest" Click="btnEditGuest_Click" HorizontalAlignment="Left" />
-            <Label  Grid.Row="3" Grid.Column="0" Content="Bookings:" FontSize="14" FontWeight="Bold" />
-            <Label  Grid.Row="3" Grid.Column="1" x:Name="lblBookingsMessage" />
+            <Label  Grid.Row="3" Grid.Column="0" Content="Bookings:" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Bottom" />
+            <Label  Grid.Row="3" Grid.Column="1" x:Name="lblBookingsMessage" VerticalContentAlignment="Bottom" Grid.ColumnSpan="2" />
         </Grid>
         <Grid Grid.Row="2">
             <Grid.RowDefinitions>

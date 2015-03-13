@@ -6,10 +6,10 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         Style="{DynamicResource WindowStyle}"
-        Title="Add Supplier"  Height="300" Width="700"
+        Title="Add Supplier" Height="300" Width="700"
 		Loaded="Window_Loaded" Closed="Window_Closed"
 		WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />

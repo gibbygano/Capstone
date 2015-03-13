@@ -1,4 +1,7 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation
@@ -23,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListEvents : UserControl
     {
         private EventManager myMan = new EventManager();
-        List<Event> myEventList;
+        private List<Event> myEventList;
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
@@ -34,6 +36,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Refresh();
         }
+
         /// <summary>
         /// Hunter Lind || 2015/2/23
         /// Refreshes our Listview, a handy method instead of having to re-type code.
@@ -43,7 +46,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 myEventList = myMan.RetrieveEventList();
-                foreach(Event x in myEventList)
+                foreach (Event x in myEventList)
                 {
                     x.setFields();
                 }
@@ -52,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 lvEvents.ItemsSource = "";
-                MessageBox.Show("No data to display from the database. Create an event or contact your Systems Administrator");
+                DialogBox.ShowMessageDialog(this, "Create an event or contact your Systems Administrator", "No data to display from the database.");
             }
         }
 
@@ -70,14 +73,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
-            
         }
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
-        /// Opens a new AddNewEvent window for the user to interact with. 
+        /// Opens a new AddNewEvent window for the user to interact with.
         /// When the window closes, we refresh our listview.
         /// </summary>
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
@@ -90,7 +92,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
         private void btnViewEventDetails(object sender, RoutedEventArgs e)
         {
             try
@@ -101,29 +102,28 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                MessageBox.Show("No Event selected, please select an Event and try again");
+                DialogBox.ShowMessageDialog(this, "No Event selected, please select an Event and try again");
             }
         }
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
-        /// Archives a no longer offered event. 
+        /// Archives a no longer offered event.
         /// </summary>
-        private void btnArchiveEvent_Click(object sender, RoutedEventArgs e)
+        private async void btnArchiveEvent_Click(object sender, RoutedEventArgs e)
         {
-            // Configure the message box to be displayed 
+            // Configure the message box to be displayed
             string messageBoxText = "Are you sure you want to delete this event?";
             string caption = "Delete Event?";
-            MessageBoxButton button = MessageBoxButton.YesNoCancel;
-            MessageBoxImage icon = MessageBoxImage.Warning;
 
             // Display message box
-            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            MessageDialogResult result = await DialogBox.ShowMessageDialog(this, messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
 
-            // Process message box results 
+            // Process message box results
             switch (result)
             {
-                case MessageBoxResult.Yes:
+                case MessageDialogResult.Affirmative:
+                    Exception _ex = null;
                     try
                     {
                         Event EventToDelete = (Event)lvEvents.SelectedItems[0];
@@ -132,16 +132,18 @@ namespace com.WanderingTurtle.FormPresentation
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
+                        _ex = ex;
+                    }
+                    if (_ex != null)
+                    {
+                        await DialogBox.ShowMessageDialog(this, _ex.Message);
+                        _ex = null;
                     }
                     break;
-                case MessageBoxResult.No:
-                    // User pressed No button 
-                    // ... 
-                    break;
-                case MessageBoxResult.Cancel:
-                    // User pressed Cancel button 
-                    // ... 
+
+                case MessageDialogResult.Negative:
+                    // User pressed No button
+                    // ...
                     break;
             }
         }
@@ -152,21 +154,21 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Event EventToEdit = (Event)lvEvents.SelectedItem;
                 EditExistingEvent editWindow = new EditExistingEvent(EventToEdit);
-                if (editWindow.ShowDialog()==false)
+                if (editWindow.ShowDialog() == false)
                 {
                     Refresh();
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Please select an event to edit");
+                DialogBox.ShowMessageDialog(this, "Please select an event to edit");
             }
         }
 
         /// <summary>
         /// Justin Pennington
         /// Created: 2015/3/4
-        /// 
+        ///
         /// Searches through the retrieved Event List (myEventList) and populates the listview with results
         /// that Contain the text in the txtSearchInput (NOT case sensitive)
         /// </summary>
@@ -179,7 +181,6 @@ namespace com.WanderingTurtle.FormPresentation
             //List<Event> myTempList = new List<Event>();
             if (!txtSearchInput.Text.Equals("") && !txtSearchInput.Text.Equals("*"))
             {
-
                 List<Event> myTempList = new List<Event>();
                 //Lambda Version
                 myTempList.AddRange(myEventList.Where(s => s.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper()))
@@ -188,7 +189,7 @@ namespace com.WanderingTurtle.FormPresentation
                 //myTempList.AddRange(
                 //        from inEvent in myEventList
                 //        where inEvent.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper())
-                //        select inEvent); 
+                //        select inEvent);
 
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
                 lvEvents.ItemsSource = myTempList;
@@ -208,9 +209,9 @@ namespace com.WanderingTurtle.FormPresentation
             btnViewDetails.IsEnabled = true;
         }
 
-
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
+
         private GridViewColumnHeader _sortColumn;
 
         /// <summary>
@@ -229,7 +230,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (_sortColumn == column)
             {
-                // Toggle sorting direction 
+                // Toggle sorting direction
                 _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
             else
@@ -240,7 +241,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             string header = string.Empty;
 
-            // if binding is used and property name doesn't match header content 
+            // if binding is used and property name doesn't match header content
             Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
 
             if (b != null)
@@ -256,7 +257,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
+                DialogBox.ShowMessageDialog(this, "There must be data in the list before you can sort it");
             }
         }
     }

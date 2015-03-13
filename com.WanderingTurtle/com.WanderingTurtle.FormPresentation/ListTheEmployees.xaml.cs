@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheEmployees : UserControl
     {
         private List<Employee> employeeList;
-        EmployeeManager _employeeManager = new EmployeeManager();
+        private EmployeeManager _employeeManager = new EmployeeManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/02/19
@@ -72,7 +73,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to retrieve employee list from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve employee list from the database.");
             }
         }
 
@@ -87,7 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
             var selectedItem = this.lvEmployeesList.SelectedItem;
             if (selectedItem == null)
             {
-                MessageBox.Show("Please select a row to edit");
+                DialogBox.ShowMessageDialog(this, "Please select a row to edit");
                 return;
             }
             AddEmployee newAddWindow = new AddEmployee((Employee)selectedItem);
@@ -98,9 +99,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
+
         private GridViewColumnHeader _sortColumn;
 
         /// <summary>
@@ -119,7 +120,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (_sortColumn == column)
             {
-                // Toggle sorting direction 
+                // Toggle sorting direction
                 _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
             else
@@ -130,7 +131,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             string header = string.Empty;
 
-            // if binding is used and property name doesn't match header content 
+            // if binding is used and property name doesn't match header content
             Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
 
             if (b != null)
@@ -144,9 +145,9 @@ namespace com.WanderingTurtle.FormPresentation
                 resultDataView.SortDescriptions.Clear();
                 resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
+                DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
             }
         }
     }

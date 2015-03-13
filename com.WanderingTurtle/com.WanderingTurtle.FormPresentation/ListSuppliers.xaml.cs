@@ -1,5 +1,10 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,13 +16,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using System.ComponentModel;
 
 namespace com.WanderingTurtle.FormPresentation
 {
-
     /// <summary>
     /// Interaction logic for ListSuppliers.xaml
     /// </summary>
@@ -61,14 +62,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
-
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Confirm Delete", System.Windows.MessageBoxButton.YesNo);
-                if (messageBoxResult == MessageBoxResult.Yes)
+                MessageDialogResult result = await DialogBox.ShowMessageDialog(this, "Are you sure you want to delete?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
+                if (result == MessageDialogResult.Affirmative)
                 {
                     _manager.ArchiveSupplier(supplierToDelete);
                 }
@@ -76,7 +76,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Delete" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "You Must Select A Supplier Before You Can Delete");
             }
         }
 
@@ -103,7 +103,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Update" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "You Must Select A Supplier Before You Can Update");
             }
         }
 
@@ -123,15 +123,15 @@ namespace com.WanderingTurtle.FormPresentation
                 lvSuppliersList.Items.Clear();
                 lvSuppliersList.ItemsSource = _suppliers;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("there was an error accessing the database");
+                DialogBox.ShowMessageDialog(this, ex.Message, "There was an error accessing the database");
             }
-
         }
 
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
+
         private GridViewColumnHeader _sortColumn;
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (_sortColumn == column)
             {
-                // Toggle sorting direction 
+                // Toggle sorting direction
                 _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
             }
             else
@@ -161,7 +161,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             string header = string.Empty;
 
-            // if binding is used and property name doesn't match header content 
+            // if binding is used and property name doesn't match header content
             Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
 
             if (b != null)
@@ -174,12 +174,10 @@ namespace com.WanderingTurtle.FormPresentation
                 resultDataView.SortDescriptions.Clear();
                 resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("There must be data in the list before you can sort it");
+                DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
             }
         }
-
-
     }
 }

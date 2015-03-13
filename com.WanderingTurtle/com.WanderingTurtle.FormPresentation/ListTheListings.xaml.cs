@@ -1,6 +1,7 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,29 +61,36 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void btnArchiveListing_click(object sender, RoutedEventArgs e)
+        private async void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
             ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItem;
             if (ListingToDelete == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a row to delete.");
+                await DialogBox.ShowMessageDialog(this, "Please select a row to delete.");
                 return;
             }
-
+            Exception _ex = null;
             try
             {
-                int numRows = prodMan.ArchiveItemListing(ListingToDelete);
-
-                if (numRows == 1)
+                int numRows;
+                MessageDialogResult result = await DialogBox.ShowMessageDialog(this, "Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
+                switch (result)
                 {
-                    DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
+                    case MessageDialogResult.Affirmative:
+                        numRows = prodMan.ArchiveItemListing(ListingToDelete);
+                        if (numRows == 1)
+                        {
+                            await DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
+                        }
+                        refreshData();
+                        break;
                 }
-                refreshData();
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                _ex = ex;
             }
+            if (_ex != null) { await DialogBox.ShowMessageDialog(this, _ex.Message); _ex = null; }
         }
 
         private void btnEditListing_click(object sender, RoutedEventArgs e)
