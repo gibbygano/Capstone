@@ -1,5 +1,4 @@
 ﻿<UserControl x:Class="com.WanderingTurtle.FormPresentation.ListTheListings"
-             Style="{DynamicResource UserControlStyle}"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
@@ -22,7 +21,7 @@
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddListing"     Content="Add"    Click="btnAddListing_Click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnEditListing"    Content="Edit"   Click="btnEditListing_click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewListing"    Content="View"   Click="btnAddListing_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewListing"    Content="View"   Click="btnAddListing_Click" IsEnabled="False" Visibility="Hidden" />
         </WrapPanel>
     </Grid>
 </UserControl>

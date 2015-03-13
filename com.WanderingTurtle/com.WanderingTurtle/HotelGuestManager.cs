@@ -3,6 +3,7 @@ using com.WanderingTurtle.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -19,10 +20,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </remarks>
 		/// 
 		public bool AddHotelGuest(HotelGuest newHotelGuest)
-        {
+		{
             try
             {
                 return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
@@ -40,8 +45,16 @@ namespace com.WanderingTurtle.BusinessLogic
 		{
             try
             {
-			    List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
-			    return (list.Count == 1) ? list.ElementAt(0) : null;
+                List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
+                return (list.Count == 1) ? list.ElementAt(0) : null;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
@@ -58,7 +71,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		{
             try
             {
-			    return HotelGuestAccessor.HotelGuestGet();
+                return HotelGuestAccessor.HotelGuestGet();
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
@@ -77,7 +98,15 @@ namespace com.WanderingTurtle.BusinessLogic
 		{
             try
             {
-			    return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+                return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
@@ -94,10 +123,18 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// <exception cref="Exception">an exception was hit in the HotelGuestAccessor or HotelGuestAccessor can't be found</exception>
 		/// <returns>true if rows were affected, false if not</returns>
 		public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
-        {
+		{
             try
             {
-			    return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
+                return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
+            }
+            catch (ApplicationException)
+            {
+                throw;
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {

@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for EditExistingEvent.xaml
     /// </summary>
-    public partial class EditExistingEvent : Window
+    public partial class EditExistingEvent
     {
         Event Unrevised = new Event();
         Event eventToSubmit = new Event();

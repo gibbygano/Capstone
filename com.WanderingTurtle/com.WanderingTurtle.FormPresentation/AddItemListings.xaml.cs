@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for AddItemListings.xaml
     /// </summary>
-    public partial class AddItemListing : Window
+    public partial class AddItemListing 
     {
         EventManager myMan = new EventManager();
 
@@ -57,6 +57,10 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.ToString());
             }
+
+            CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
+            dateStart.BlackoutDates.Add(cdr);
+            dateEnd.BlackoutDates.Add(cdr);
         }
 
         /// <summary>
@@ -68,41 +72,24 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 ItemListing newListing = new ItemListing();
 
+                DateTime formStartDate = (DateTime)(dateStart.SelectedDate);
+                DateTime formEndDate = (DateTime)(dateEnd.SelectedDate);
+
+                DateTime formStartTime = (DateTime)(tpStartTime.Value);
+                DateTime formEndTime = (DateTime)(tpEndTime.Value);
+
                 newListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
                 newListing.SupplierID = Int32.Parse(supplierCbox.SelectedValue.ToString());
-                // Tries to validate information to put into the newListing object.
-                if (!Validator.ValidateDateTime(DateStart.Text + " " + txtStartTime.Text) || !Validator.ValidateDateTime(dateEnd.Text + " " + txtEndTime.Text) || (txtEndTime.Text=="00:00" && txtStartTime.Text =="00:00"))
-                {
-                    MessageBox.Show("Your dates and/or times are wrong");
-                    return;
-                }
-                else
-                {
-                    newListing.StartDate = DateTime.Parse(DateStart.Text + " " + txtStartTime.Text);
-                    newListing.EndDate = DateTime.Parse(DateStart.Text + " " + txtEndTime.Text);
-                }
 
-                if (!Validator.ValidateDecimal(txtPrice.Text) || txtPrice.Text=="00.00")
-                {
-                    MessageBox.Show("Your price is not formatted correctly. Please use the ##.## format.");
-                    return;
-                }
-                else
-                {
-                    newListing.Price = Decimal.Parse(txtPrice.Text);
-                }
+                //date is your existing Date object, time is the nullable DateTime object from your TimePicker
+                newListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
+                newListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
 
-                if (!Validator.ValidateInt(txtSeats.Text) || Int32.Parse(txtSeats.Text) < 0)
-                {
-                        MessageBox.Show("The number of seats available at your event is incorrectly formatted");
-                        return;
-                }
-                else
-                {
-                    newListing.MaxNumGuests = Int32.Parse(txtSeats.Text);
-                }
 
-                
+
+                newListing.Price = (decimal)(udPrice.Value);
+                newListing.MaxNumGuests = (int)(udSeats.Value);
+                                
                 try
                 {
                     prodMan.AddItemListing(newListing);

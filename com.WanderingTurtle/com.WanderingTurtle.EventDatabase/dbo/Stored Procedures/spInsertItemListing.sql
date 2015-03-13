@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE spInsertItemListing
 	(
-	@StartDate				date, 
-	@EndDate				date, 
+	@StartDate				datetime, 
+	@EndDate				datetime, 
 	@EventItemID		 	int, 
 	@Price          		money, 
 	@SupplierID				int,

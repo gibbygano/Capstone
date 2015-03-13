@@ -14,17 +14,18 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle;
 using com.WanderingTurtle.BusinessLogic;
 using Xceed.Wpf.Toolkit;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for AddBooking.xaml
     /// </summary>
-    public partial class AddBooking : Window
+    public partial class AddBooking 
     {
         List<ListItemObject> myEventList = new List<ListItemObject>();
         InvoiceDetails inInvoice;
-
+        int eID;
         EmployeeManager _employeeManager = new EmployeeManager();
         OrderManager _orderManager = new OrderManager();
         public ItemListing originalItem;
@@ -42,7 +43,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             InitializeComponent();
             RefreshListItems();
-
+            eID = (int)Globals.UserToken.EmployeeID;
             lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
@@ -116,7 +117,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (qty == 0)
             {
-                System.Windows.MessageBox.Show("This event is full.  Please pick another event");
+                System.Windows.MessageBox.Show("Please enter a quanity greather than 0");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -127,10 +128,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 extendedPrice = _orderManager.calcExtendedPrice(selected.Price, qty);
-                totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);
-
-                int eID = 101;
-                //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
+                totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);            
 
                  gID = inInvoice.HotelGuestID;
              

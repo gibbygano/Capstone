@@ -1,10 +1,10 @@
-﻿<Window
-    x:Class="com.WanderingTurtle.FormPresentation.AddEmployee"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Style="{DynamicResource WindowStyle}"
-    Title="AddEmployee" Height="300" Width="300"
-    WindowStartupLocation="CenterScreen">
+﻿<Metro:MetroWindow
+        x:Class="com.WanderingTurtle.FormPresentation.AddEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="AddEmployee" Height="300" Width="300"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -47,4 +47,4 @@
             <Button Grid.Column="2" TabIndex="8" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
         </Grid>
     </Grid>
-</Window>
+</Metro:MetroWindow>

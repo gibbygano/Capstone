@@ -1,4 +1,5 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +11,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for ViewEventDetails.xaml
     /// </summary>
-    public partial class ViewEventDetails : Window
+    public partial class ViewEventDetails
     {
         public ViewEventDetails(Event eventToView)
         {
@@ -27,7 +27,6 @@ namespace com.WanderingTurtle.FormPresentation
             lblName.Content = "Event Name: " + eventToView.EventItemName;
             lblOnSite.Content = "On-site: " + eventToView.OnSite;
             lblTransport.Content = "Transportation: " + eventToView.Transportation;
-
         }
     }
 }

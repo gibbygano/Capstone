@@ -1,5 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -10,20 +13,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Presents user with guest invoice information
     /// </summary>
-    public partial class ViewInvoice : Window
+    public partial class ViewInvoice
     {
         private List<BookingDetails> myBookingList;
         private InvoiceDetails invoiceToView;
-        InvoiceManager _invoiceManager = new InvoiceManager();
-        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private InvoiceManager _invoiceManager = new InvoiceManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
         /// Pat Banks
@@ -61,7 +62,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// 2015/03/03
-        /// 
+        ///
         /// Calls the InvoiceManager method that retrieves a list of booking details for a selected guest
         /// </summary>
         /// <remarks>
@@ -87,7 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// 2015/03/03
-        /// 
+        ///
         /// Opens the AddBooking UI as dialog box
         /// </summary>
         /// <param name="sender">default event parameter</param>
@@ -106,7 +107,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// 2015/03/03
-        /// 
+        ///
         /// Opens the EditGuest UI as dialog box
         /// </summary>
         /// <param name="sender">default event parameter</param>
@@ -124,6 +125,14 @@ namespace com.WanderingTurtle.FormPresentation
                     refreshGuestInformation(invoiceToView.HotelGuestID);
                 }
             }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -133,7 +142,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// 2015/03/03
-        /// 
+        ///
         /// Opens the EditBooking UI as dialog box
         /// </summary>
         /// <param name="sender">default event parameter</param>
@@ -171,7 +180,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// 2015/03/03
-        /// 
+        ///
         /// Opens the ArchiveInvoice UI as dialog box
         /// </summary>
         /// <param name="sender">default event parameter</param>
@@ -186,7 +195,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                //opens UI with guest information                  
+                //opens UI with guest information
                 ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
                 bool? result = myGuest.ShowDialog();
@@ -196,11 +205,10 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     Close();
                 }
-                else 
+                else
                 {
                     return;
                 }
-
             }
             catch (Exception ex)
             {
@@ -210,7 +218,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/09
-        /// 
+        ///
         /// Checks if a booking is in the future and has tickets booked
         /// If fails, then guest cannot checkout
         /// </summary>
@@ -231,7 +239,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Cancel booking button to open cancel form.
         /// First attempts to create a BookingDetails object from the lvCustomerBookings,
-        /// then passes this to the CancelBooking form if the object creation was successful. 
+        /// then passes this to the CancelBooking form if the object creation was successful.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -256,16 +264,16 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show("This booking has already been cancelled.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
-            }       
-            
+            }
+
             try
             {
                 //opens the ui and passes the booking details object in
                 CancelBooking cancel = new CancelBooking(myBooking, invoiceToView);
-                
+
                 if (cancel.ShowDialog() == false)
                 {
-                    refreshBookingList();  
+                    refreshBookingList();
                 }
             }
             catch (Exception ex)
@@ -291,6 +299,5 @@ namespace com.WanderingTurtle.FormPresentation
             }
             return false;
         }
-
     }
 }
