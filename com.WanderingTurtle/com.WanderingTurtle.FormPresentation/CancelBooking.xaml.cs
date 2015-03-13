@@ -91,22 +91,20 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result1 == 1)
                 {
-                    MessageBox.Show("guests changed");
-                }
+                    myBooking.TotalCharge = cancelFee;
+                    myBooking.Quantity = 0;
+                    myBooking.TicketPrice = 0;
+                    myBooking.ExtendedPrice = 0;
+                    myBooking.Discount = 0;
 
-                myBooking.TotalCharge = cancelFee;
-                myBooking.Quantity = 0;
-                myBooking.TicketPrice = 0;
-                myBooking.ExtendedPrice = 0;
-                myBooking.Discount = 0;
+                    int result = _orderManager.EditBooking(myBooking);
 
-                int result = _orderManager.EditBooking(myBooking);
-
-                if (result == 1)
-                {
-                    MessageBox.Show("The booking has been cancelled.");
-                    // closes window after cancel
-                    this.Close();
+                    if (result == 1)
+                    {
+                        MessageBox.Show("The booking has been cancelled.");
+                        // closes window after cancel
+                        this.Close();
+                    }
                 }
             }
             catch (Exception ex)

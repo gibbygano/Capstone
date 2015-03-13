@@ -68,10 +68,52 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void SubmitBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (eventCbox.SelectedIndex > -1)
-            {
-                ItemListing newListing = new ItemListing();
+            addItemListing();
 
+        }
+
+        private void addItemListing()
+        {
+            ItemListing newListing = null;
+
+            if (eventCbox.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Please select an Event to List!");
+                return;
+            }
+
+            if (supplierCbox.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Please select a supplier!");
+                return;
+            }
+
+            if (dateStart.Text == null || dateEnd.Text == null)
+            {
+                MessageBox.Show("Please select a date");
+                return;
+            }
+
+            if (tpStartTime.Value == null || tpEndTime.Value == null)
+            {
+                MessageBox.Show("Please select a time");
+                return;
+            }
+
+            if (udPrice.Value == 0)
+            {
+                MessageBox.Show("Please indicate a price for tickets");
+                return;
+            }
+
+            if (udSeats.Value == 0)
+            {
+                MessageBox.Show("Please indicate number of seats for the event");
+                return;
+            }
+
+            try
+            {
                 DateTime formStartDate = (DateTime)(dateStart.SelectedDate);
                 DateTime formEndDate = (DateTime)(dateEnd.SelectedDate);
 
@@ -85,25 +127,23 @@ namespace com.WanderingTurtle.FormPresentation
                 newListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
                 newListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
 
-
-
                 newListing.Price = (decimal)(udPrice.Value);
                 newListing.MaxNumGuests = (int)(udSeats.Value);
-                                
-                try
-                {
-                    prodMan.AddItemListing(newListing);
-                    MessageBox.Show("Listing successfully added!");
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("There was an error adding the Item Listing.");
-                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Please select an Event to List!");
+                throw;
+            }
+
+            try
+            {
+                prodMan.AddItemListing(newListing);
+                MessageBox.Show("Listing successfully added!");
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There was an error adding the Item Listing.");
             }
         }
     }
