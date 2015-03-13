@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
     {
         List<ListItemObject> myEventList = new List<ListItemObject>();
         InvoiceDetails inInvoice;
-
+        int eID;
         EmployeeManager _employeeManager = new EmployeeManager();
         OrderManager _orderManager = new OrderManager();
         public ItemListing originalItem;
@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             InitializeComponent();
             RefreshListItems();
-
+            eID = (int)Globals.UserToken.EmployeeID;
             lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
@@ -127,10 +127,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 extendedPrice = _orderManager.calcExtendedPrice(selected.Price, qty);
-                totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);
-
-                int eID = 101;
-                //TBD SET TO USER TOKEN - eID = (int)Globals.UserToken.EmployeeID;
+                totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);            
 
                  gID = inInvoice.HotelGuestID;
              

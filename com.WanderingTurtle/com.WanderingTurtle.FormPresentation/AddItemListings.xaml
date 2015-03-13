@@ -52,10 +52,5 @@
 
         <Button Grid.Row="6" Grid.Column="1" x:Name="SubmitBtn" Content="Submit" Click="SubmitBtn_Click" />
 
-
-
-
-
-
     </Grid>
 </Window>

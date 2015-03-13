@@ -67,20 +67,6 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
 
-        // Uses existing selected indeces to create a window that will be filled with the selected objects contents.
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
-            Window EditListings = new EditListing(ListingEdit);
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
-            //AddItemListings.Show();
-            if (EditListings.ShowDialog() == false)
-            {
-                refreshData();
-            }
-
-        }
-
         private void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
             try
@@ -161,9 +147,6 @@ namespace com.WanderingTurtle.FormPresentation
 
         }
     }
-
-
-
 
 }
 

@@ -57,6 +57,10 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 MessageBox.Show(ex.ToString());
             }
+
+            CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
+            dateStart.BlackoutDates.Add(cdr);
+            dateEnd.BlackoutDates.Add(cdr);
         }
 
         /// <summary>
