@@ -20,7 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for AddBooking.xaml
     /// </summary>
-    public partial class AddBooking : Window
+    public partial class AddBooking 
     {
         List<ListItemObject> myEventList = new List<ListItemObject>();
         InvoiceDetails inInvoice;

@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for AddItemListings.xaml
     /// </summary>
-    public partial class AddItemListing : Window
+    public partial class AddItemListing 
     {
         EventManager myMan = new EventManager();
 

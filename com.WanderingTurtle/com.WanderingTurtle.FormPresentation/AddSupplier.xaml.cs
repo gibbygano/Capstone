@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// This Window allows the administrator to directly add a suplier
     /// </summary>
-    public partial class AddSupplier : Window
+    public partial class AddSupplier 
     {
         public static AddSupplier Instance;
         private int _userID;

@@ -2,6 +2,7 @@
 using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -18,15 +19,15 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ArchiveInvoice.xaml
     /// </summary>
-    public partial class ArchiveInvoice : Window
+    public partial class ArchiveInvoice
     {
         private List<BookingDetails> myBookingList;
         private Invoice invoiceToArchive;
         private Invoice originalInvoice;
         private HotelGuest guestToView;
-        InvoiceManager _invoiceManager = new InvoiceManager();
-        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        OrderManager _orderManager = new OrderManager();
+        private InvoiceManager _invoiceManager = new InvoiceManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private OrderManager _orderManager = new OrderManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
@@ -40,22 +41,37 @@ namespace com.WanderingTurtle.FormPresentation
             originalInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
             invoiceToArchive = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
-            guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
-            myBookingList = _invoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
+            try
+            {
+                guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
+                myBookingList = _invoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
 
-            invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
+                invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
 
-            InitializeComponent();
-            lblGuestNameLookup.Content = guestToView.GetFullName;
-            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
-            lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
-            lblAddress.Content = guestToView.Address1;
-            lblCityState.Content = guestToView.CityState.GetZipStateCity;
-            lblPhoneNum.Content = guestToView.PhoneNumber;
-            lblRoomNum.Content = guestToView.Room;
-            lblInvoice.Content = invoiceToArchive.InvoiceID;
-            lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
-            lblPhoneNum.Content = guestToView.PhoneNumber;
+                InitializeComponent();
+                lblGuestNameLookup.Content = guestToView.GetFullName;
+                lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
+                lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
+                lblAddress.Content = guestToView.Address1;
+                lblCityState.Content = guestToView.CityState.GetZipStateCity;
+                lblPhoneNum.Content = guestToView.PhoneNumber;
+                lblRoomNum.Content = guestToView.Room;
+                lblInvoice.Content = invoiceToArchive.InvoiceID;
+                lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
+                lblPhoneNum.Content = guestToView.PhoneNumber;
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -98,6 +114,14 @@ namespace com.WanderingTurtle.FormPresentation
                         this.DialogResult = true;
                     }
                 }
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
