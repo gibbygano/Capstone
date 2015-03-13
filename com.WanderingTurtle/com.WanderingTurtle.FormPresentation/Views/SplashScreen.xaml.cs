@@ -2,6 +2,7 @@
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
+using System.Configuration;
 using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation.Views
@@ -23,8 +24,12 @@ namespace com.WanderingTurtle.FormPresentation.Views
 
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
+            { Globals.UserToken = new com.WanderingTurtle.Common.Employee(0, "Debugger", null, 1); }
+
             do
             {
+                if (Globals.UserToken != null) { break; }
                 LoginDialogSettings settings = new LoginDialogSettings
                 {
                     UsernameWatermark = "User ID",
