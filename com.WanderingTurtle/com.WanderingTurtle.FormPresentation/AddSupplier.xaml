@@ -62,6 +62,6 @@
         <Button x:Name="btnSubmit" Content="Add Supplier" HorizontalAlignment="Left" Margin="10,229,0,0" VerticalAlignment="Top" Width="113" Height="34" Click="btnSubmit_Click" />
         <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="128,229,0,0" VerticalAlignment="Top" Width="102" Height="34" Click="btnEdit_Click" />
         <ComboBox x:Name="cboZip" HorizontalAlignment="Left" Margin="135,159,0,0" VerticalAlignment="Top" Width="124" Height="34" DisplayMemberPath="GetZipStateCity" />
-        <xctk:MaskedTextBox x:Name="txtPhoneNumber" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" HorizontalAlignment="Left"  Width="192" Grid.Row="0" Grid.Column="1" Margin="159.6,48,0,0" Height="32" VerticalAlignment="Top" />
+        <xctk:MaskedTextBox x:Name="txtPhoneNumber" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" HorizontalAlignment="Left"  Width="192" Grid.Row="0" Grid.Column="1" Margin="160,48,0,189" Height="32" VerticalContentAlignment="Center" />
     </Grid>
 </Metro:MetroWindow>

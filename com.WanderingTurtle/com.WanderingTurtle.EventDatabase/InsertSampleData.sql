@@ -27,6 +27,10 @@ GO
 
 INSERT INTO  [dbo].[Employee]  (firstName, lastName, empPassword, empLevel, active)
 VALUES
+('Admin', 'Test', 'test', 1, DEFAULT),
+('Concierge', 'Test', 'test', 2, DEFAULT),
+('DeskClerk', 'Test', 'test', 3, DEFAULT),
+('Valet', 'Test', 'test', 4, DEFAULT),
 ('Kevin', 'Keene', 'Nin10doh', 1, DEFAULT),
 ('Ryan', 'Higa', 'F13mbl3m', 2, DEFAULT),
 ('Justin', 'Timberlake', 'S1ng3r', 3, DEFAULT),

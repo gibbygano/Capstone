@@ -18,9 +18,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddListing"     Content="Add"    Click="btnAddListing_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddListing"     Content="Add"    Click="btnAddListing_Click" />           
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnEditListing"    Content="Edit"   Click="btnEditListing_click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewListing"    Content="View"   Click="btnAddListing_Click" IsEnabled="False" Visibility="Hidden" />
         </WrapPanel>
     </Grid>

@@ -29,13 +29,12 @@ namespace com.WanderingTurtle.FormPresentation
         public EditListing(ItemListing toEdit)
         {
             InitializeComponent();
-            dateStart.DisplayDateStart = toEdit.StartDate;
-            dateEnd.DisplayDateStart = toEdit.EndDate;
+            
+            dateStart.Text = toEdit.StartDate.ToShortDateString();
+            dateEnd.Text = toEdit.EndDate.ToShortDateString();
 
-            CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
-            dateStart.BlackoutDates.Add(cdr);
-            dateEnd.BlackoutDates.Add(cdr);
-
+            tpStartTime.Value = DateTime.Parse(toEdit.StartDate.ToShortTimeString());
+            tpEndTime.Value = DateTime.Parse(toEdit.EndDate.ToShortTimeString());
 
             lblListingName.Content = toEdit.EventName.ToString();
             lblSupplierName.Content = toEdit.SupplierName.ToString();
@@ -46,8 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             dateStart.DisplayDate = toEdit.StartDate;
             dateEnd.DisplayDate = toEdit.EndDate;
-           //  tpStartTime.Value = toEdit.StartDate.ToShortTimeString;
-          //  tpEndTime.Value = t
+
 
             //date is your existing Date object, time is the nullable DateTime object from your TimePicker
             //newListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
