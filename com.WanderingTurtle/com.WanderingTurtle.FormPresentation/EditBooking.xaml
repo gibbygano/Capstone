@@ -28,13 +28,13 @@
                 <ColumnDefinition Width=".25*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" x:Name="lblEditBookingGuestLbl" Content="Guest Name:" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-            <Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingGuestName" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
+            <Label Grid.Row="0" Grid.Column="0" x:Name="lblEditBookingGuestLbl" Content="Guest Name:" HorizontalContentAlignment="Right" />
+            <Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingGuestName" Grid.ColumnSpan="2" HorizontalContentAlignment="Left" />
 
-            <Label Grid.Row="1" Grid.Column="0" x:Name="lblEditBookingQuantity" Content="Quantity:" VerticalAlignment="Center" HorizontalContentAlignment="Right" />
-            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch" />
+            <Label Grid.Row="1" Grid.Column="0" x:Name="lblEditBookingQuantity" Content="Quantity:" HorizontalContentAlignment="Right" />
+            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
 
-            <Label Grid.Row="2" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" VerticalAlignment="Center" HorizontalAlignment="Right" />
+            <Label Grid.Row="2" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" HorizontalContentAlignment="Right" />
             <xctk:DecimalUpDown FormatString="P0" Grid.Row="2" Grid.Column="1" Value="0"  IsEnabled="{Binding ElementName=lvEventListItems}" Minimum="0" Maximum =".20" Name="udDiscount" Increment=".01" />
 
             <Label Grid.Row="2" Grid.Column="2" Content="Quantity Seats Available:  " VerticalAlignment="Center" HorizontalContentAlignment="Right" />
