@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -62,15 +63,15 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (ApplicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
@@ -92,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
                     int numrows = _orderManager.EditBooking(b);
                     if (numrows != 1)
                     {
-                        MessageBox.Show("There was a problem archiving the booking");
+                        DialogBox.ShowMessageDialog(this, "There was a problem archiving the booking");
                     }
                 }
 
@@ -110,22 +111,22 @@ namespace com.WanderingTurtle.FormPresentation
                     //Dialog appears if records were successfully archived
                     if (result == true)
                     {
-                        MessageBox.Show("Guest Checkout Complete");
+                        DialogBox.ShowMessageDialog(this, "Guest Checkout Complete");
                         this.DialogResult = true;
                     }
                 }
             }
             catch (ApplicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 

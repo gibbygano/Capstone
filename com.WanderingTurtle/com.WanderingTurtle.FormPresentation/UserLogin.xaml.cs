@@ -98,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation
                 catch (Exception ex)
                 {
                     // Better Error handling can be added in the future, this is just here for dev purposes. //
-                    System.Windows.Forms.MessageBox.Show(ex.ToString());
+                    DialogBox.ShowMessageDialog(this, ex.ToString());
                 }
 
             }
@@ -126,7 +126,7 @@ namespace com.WanderingTurtle.FormPresentation
             else
             {
                 // Placeholder notification that can be moved elsewhere or removed entirely //
-                System.Windows.Forms.MessageBox.Show("User is already logged out!");
+                DialogBox.ShowMessageDialog(this, "User is already logged out!");
             }
 
             this.loginBoxes.Visibility = Visibility.Visible;

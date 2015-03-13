@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -95,25 +96,25 @@ namespace com.WanderingTurtle.FormPresentation
                 //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
                 if (quantityOffered == 0 && (numGuestsDifference > qtyToTry))
                 {
-                    MessageBox.Show("This event is already full. You cannot add more guests to it.");
+                    DialogBox.ShowMessageDialog(this, "This event is already full. You cannot add more guests to it.");
                     return;
                 }
 
                 //Method to check the number of guests added to a reservation against the available quantity for the event
                 if (numGuestsDifference > quantityOffered)
                 {
-                    MessageBox.Show("You are attempting to add "+ numGuestsDifference+ " guests onto this reservation, however, there are only " + quantityOffered + " spots open for this event. Please alert the guest.");
+                    DialogBox.ShowMessageDialog(this, "You are attempting to add " + numGuestsDifference + " guests onto this reservation, however, there are only " + quantityOffered + " spots open for this event. Please alert the guest.");
                     return;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an issue locating the ItemListID on file.", ex.Message);
+                DialogBox.ShowMessageDialog(this, "There was an issue locating the ItemListID on file.", ex.Message);
             }
 
             if (qtyToTry == 0)
             {
-                MessageBox.Show("Please use cancel instead of setting quantity 0");
+                DialogBox.ShowMessageDialog(this, "Please use cancel instead of setting quantity 0");
                 return;
             }
           
@@ -130,7 +131,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (numRows == 1)
             {
-                MessageBox.Show("Booking changed successfully.");
+                DialogBox.ShowMessageDialog(this, "Booking changed successfully.");
                 
                 //change number of seasts available
                 ListItemObject originalEventListing = _orderManager.RetrieveEventListing(editedBookingRecord.ItemListID);

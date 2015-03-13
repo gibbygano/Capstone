@@ -119,27 +119,27 @@ namespace com.WanderingTurtle.FormPresentation
         //    btnUpBooking.IsEnabled = false;
         //    if (!Validator.ValidateInt(empID))
         //    {
-        //        MessageBox.Show("Please review the Employee ID. Must be a three digit number.");
+        //        DialogBox.ShowMessageDialog("Please review the Employee ID. Must be a three digit number.");
         //        btnUpBooking.IsEnabled = true;
         //    }
         //    if (!Validator.ValidateInt(guest))
         //    {
-        //        MessageBox.Show("Please review the Guest ID. Must be a three digit number.");
+        //        DialogBox.ShowMessageDialog("Please review the Guest ID. Must be a three digit number.");
         //        btnUpBooking.IsEnabled = true;
         //    }
         //    if (!Validator.ValidateInt(itemID))
         //    {
-        //        MessageBox.Show("Please review the Item ID.");
+        //        DialogBox.ShowMessageDialog("Please review the Item ID.");
         //        btnUpBooking.IsEnabled = true;
         //    }
         //    if (!Validator.ValidateInt(quantity))
         //    {
-        //        MessageBox.Show("Please review the quantity entered. Must be a 2 digit number or less.");
+        //        DialogBox.ShowMessageDialog("Please review the quantity entered. Must be a 2 digit number or less.");
         //        btnUpBooking.IsEnabled = true;
         //    }
         //    if (!Validator.ValidateDateTime(date))
         //    {
-        //        MessageBox.Show("Please review the date.");
+        //        DialogBox.ShowMessageDialog("Please review the date.");
         //        btnUpBooking.IsEnabled = true;
         //    }
         //    else
@@ -159,7 +159,7 @@ namespace com.WanderingTurtle.FormPresentation
         //        //ex: up.EditBookingLineItem(bID, iID, qID);
 
         //        //Need LineItems to be added to order manager.
-        //        MessageBox.Show("The booking has been successfully edited.");
+        //        DialogBox.ShowMessageDialog("The booking has been successfully edited.");
         //        btnUpBooking.IsEnabled = true;
                 
                 

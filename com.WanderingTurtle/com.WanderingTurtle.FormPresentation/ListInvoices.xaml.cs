@@ -49,7 +49,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to retrieve invoice list from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog("Unable to retrieve invoice list from the database. \n" + ex.Message);
                 
             }
         }
@@ -77,7 +77,7 @@ namespace com.WanderingTurtle.FormPresentation
             //}
             //catch (Exception)
             //{
-            //    MessageBox.Show("No Invoice selected, please select an Invoice and try again");
+            //    DialogBox.ShowMessageDialog("No Invoice selected, please select an Invoice and try again");
             //}
         }
     }

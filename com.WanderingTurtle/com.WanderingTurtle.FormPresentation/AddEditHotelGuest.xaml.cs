@@ -1,8 +1,11 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -49,16 +52,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// Miguel Santana 2/18/2015
         public bool Result { get; private set; }
-
-        /// <summary>
-        /// Show Error Message
-        /// </summary>
-        /// <param name="message"></param>
-        /// Miguel Santana 2/18/2015
-        private static void ShowError(String message)
-        {
-            MessageBox.Show(message);
-        }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -133,31 +126,44 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Show Message Dialog
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <param name="style"></param>
+        /// <returns>awaitable Task of MEssageDialogResult</returns>
+        /// Miguel Santana 2015/02/18
+        /// Updated 2015/03/13
+        private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
+        {
+            return DialogBox.ShowMessageDialog(this, message, title, style);
+        }
+
+        /// <summary>
         /// Validate fields and submit data to HotelGuestManager
         /// Miguel Santana 2/18/2015
         /// </summary>
         ///<remarks>
         ///Updated By Rose Steffensmeier 2015/03/05
         ///</remarks>
-        private void Submit()
+        private async void Submit()
         {
             if (CurrentHotelGuest != null && ValidateChanged())
             {
-                switch (MessageBox.Show(this, "No data was changed. Would you like to keep editing?", "Alert", MessageBoxButton.YesNo, MessageBoxImage.Warning))
+                switch (await ShowMessage("No data was changed. Would you like to keep editing?", "Alert", MessageDialogStyle.AffirmativeAndNegative))
                 {
-                    case MessageBoxResult.Cancel:
-                    case MessageBoxResult.No:
+                    case MessageDialogResult.Affirmative:
                         Close();
                         break;
 
-                    case MessageBoxResult.OK:
-                    case MessageBoxResult.Yes:
+                    case MessageDialogResult.Negative:
                     default:
                         return;
                 }
             }
 
             if (!Validate()) { return; }
+            Exception _ex = null;
             try
             {
                 //FormatException found in if loop
@@ -195,26 +201,19 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (Result)
                 {
-                    MessageBox.Show(this, "Your Request was Processed Successfully", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ShowMessage("Your Request was Processed Successfully", "Success");
                     Close();
                 }
                 else
-                {
-                    MessageBox.Show(this, "Error Processing Request", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                { ShowMessage("Error Processing Request", "Error"); }
             }
             catch (ApplicationException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            { _ex = ex; }
             catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            { _ex = ex; }
             catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            { _ex = ex; }
+            if (_ex != null) { ShowMessage(_ex.Message); _ex = null; }
         }
 
         /// <summary>
@@ -250,55 +249,55 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
             {
-                ShowError("Please enter a First Name");
+                ShowMessage("Please enter a First Name");
                 TxtFirstName.Focus();
                 TxtFirstName.SelectAll();
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
             {
-                ShowError("Please enter a Last Name");
+                ShowMessage("Please enter a Last Name");
                 TxtLastName.Focus();
                 TxtLastName.SelectAll();
                 return false;
             }
             if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
             {
-                ShowError("Please enter an Address");
+                ShowMessage("Please enter an Address");
                 TxtAddress1.Focus();
                 TxtAddress1.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
             {
-                ShowError("Error adding Address2");
+                ShowMessage("Error adding Address2");
                 TxtAddress2.Focus();
                 TxtAddress2.SelectAll();
                 return false;
             }
             if (CboZip.SelectedItem == null)
             {
-                ShowError("Please select a Zip Code");
+                ShowMessage("Please select a Zip Code");
                 CboZip.Focus();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
             {
-                ShowError("Please enter a valid Phone Number");
+                ShowMessage("Please enter a valid Phone Number");
                 TxtPhoneNumber.Focus();
                 TxtPhoneNumber.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
             {
-                ShowError("Please enter a valid Email Address");
+                ShowMessage("Please enter a valid Email Address");
                 TxtEmailAddress.Focus();
                 TxtEmailAddress.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
             {
-                ShowError("Please enter a valid Room Number");
+                ShowMessage("Please enter a valid Room Number");
                 TxtRoomNumber.Focus();
                 TxtRoomNumber.SelectAll();
                 return false;

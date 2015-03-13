@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -63,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
 
             txtEventName.Text = EventToEdit.EventItemName;
@@ -117,7 +118,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    MessageBox.Show("Please fill in the on site field");
+                    DialogBox.ShowMessageDialog(this, "Please fill in the on site field");
                     return;
                 }
 
@@ -132,7 +133,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    MessageBox.Show("Please fill out the Transportation field");
+                    DialogBox.ShowMessageDialog(this, "Please fill out the Transportation field");
                     return;
                 }
 
@@ -144,7 +145,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Please select an event type.");
+                    DialogBox.ShowMessageDialog(this, "Please select an event type.");
                 }
                 if (cboxType.SelectedIndex > -1)
                 {
@@ -152,27 +153,27 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    MessageBox.Show("Please select an event type!");
+                    DialogBox.ShowMessageDialog(this, "Please select an event type!");
                     return;
                 }
                 if (String.IsNullOrEmpty(txtEventName.Text))
                 {
-                    MessageBox.Show("Please enter an event name.");
+                    DialogBox.ShowMessageDialog(this, "Please enter an event name.");
                     return;
                 }
 
-                //MessageBox.Show(Unrevised.EventItemID + Unrevised.EventItemName + Unrevised.EventTypeID + Unrevised.EventTypeName + Unrevised.Description + Unrevised.OnSite + Unrevised.Transportation + "\n" + eventToSubmit.EventItemID + eventToSubmit.EventItemName + eventToSubmit.EventTypeID + eventToSubmit.EventTypeName + eventToSubmit.Description + eventToSubmit.OnSite + eventToSubmit.Transportation);
+                //DialogBox.ShowMessageDialog(Unrevised.EventItemID + Unrevised.EventItemName + Unrevised.EventTypeID + Unrevised.EventTypeName + Unrevised.Description + Unrevised.OnSite + Unrevised.Transportation + "\n" + eventToSubmit.EventItemID + eventToSubmit.EventItemName + eventToSubmit.EventTypeID + eventToSubmit.EventTypeName + eventToSubmit.Description + eventToSubmit.OnSite + eventToSubmit.Transportation);
                 // Submit the events
                 if (myMan.EditEvent(Unrevised, eventToSubmit)==1)
                 {
-                    MessageBox.Show("Event Changed Successfully!");
+                    DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
                     this.Close();
                 }
                 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
         }
 

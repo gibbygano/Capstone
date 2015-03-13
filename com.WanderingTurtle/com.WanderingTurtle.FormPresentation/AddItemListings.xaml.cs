@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
+using com.WanderingTurtle.FormPresentation.Models;
 
 // Worked on by:
 ///Hunter
@@ -45,7 +46,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
             List<Supplier> mySupplierList = mySupMan.RetrieveSupplierList();
             try
@@ -55,7 +56,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
 
             CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
@@ -78,37 +79,37 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (eventCbox.SelectedIndex.Equals(-1))
             {
-                MessageBox.Show("Please select an Event to List!");
+                DialogBox.ShowMessageDialog(this, "Please select an Event to List!");
                 return;
             }
 
             if (supplierCbox.SelectedIndex.Equals(-1))
             {
-                MessageBox.Show("Please select a supplier!");
+                DialogBox.ShowMessageDialog(this, "Please select a supplier!");
                 return;
             }
 
             if (dateStart.Text == null || dateEnd.Text == null)
             {
-                MessageBox.Show("Please select a date");
+                DialogBox.ShowMessageDialog(this, "Please select a date");
                 return;
             }
 
             if (tpStartTime.Value == null || tpEndTime.Value == null)
             {
-                MessageBox.Show("Please select a time");
+                DialogBox.ShowMessageDialog(this, "Please select a time");
                 return;
             }
 
             if (udPrice.Value == 0)
             {
-                MessageBox.Show("Please indicate a price for tickets");
+                DialogBox.ShowMessageDialog(this, "Please indicate a price for tickets");
                 return;
             }
 
             if (udSeats.Value == 0)
             {
-                MessageBox.Show("Please indicate number of seats for the event");
+                DialogBox.ShowMessageDialog(this, "Please indicate number of seats for the event");
                 return;
             }
 
@@ -138,12 +139,12 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 prodMan.AddItemListing(newListing);
-                MessageBox.Show("Listing successfully added!");
+                DialogBox.ShowMessageDialog(this, "Listing successfully added!");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("There was an error adding the Item Listing.");
+                DialogBox.ShowMessageDialog(this, "There was an error adding the Item Listing.");
             }
         }
     }

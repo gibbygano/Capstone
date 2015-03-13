@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -126,42 +127,42 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
             {
-                MessageBox.Show("Company Name field must be filled out and not contain special characters");
+                DialogBox.ShowMessageDialog(this, "Company Name field must be filled out and not contain special characters");
                 return false;
             }
             else if (!Validator.ValidateInt(txtUserID.Text))
             {
-                MessageBox.Show("User ID field must filled out and be a numeric value and must be 10 digits or less");
+                DialogBox.ShowMessageDialog(this, "User ID field must filled out and be a numeric value and must be 10 digits or less");
                 return false;
             }
             else if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
             {
-                MessageBox.Show("Not a valid e-mail address");
+                DialogBox.ShowMessageDialog(this, "Not a valid e-mail address");
                 return false;
             }
             else if (!Validator.ValidatePhone(txtPhoneNumber.Text))
             {
-                MessageBox.Show("The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
+                DialogBox.ShowMessageDialog(this, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
                 return false;
             }
             else if (cboZip.SelectedItem == null)
             {
-                MessageBox.Show("You must select an zip from the drop down");
+                DialogBox.ShowMessageDialog(this, "You must select an zip from the drop down");
                 return false;
             }
             else if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
             {
-                MessageBox.Show("The address must be filled out and not contain special characters (spaces allowed)");
+                DialogBox.ShowMessageDialog(this, "The address must be filled out and not contain special characters (spaces allowed)");
                 return false;
             }
             else if (!Validator.ValidateString(txtFirstName.Text.Trim()))
             {
-                MessageBox.Show("The fist name field filled out and must not contain special characters (No Spaces)");
+                DialogBox.ShowMessageDialog(this, "The fist name field filled out and must not contain special characters (No Spaces)");
                 return false;
             }
             else if (!Validator.ValidateString(txtLastName.Text.Trim()))
             {
-                MessageBox.Show("The last name field must be filled out and not contain special characters (No Spaces)");
+                DialogBox.ShowMessageDialog(this, "The last name field must be filled out and not contain special characters (No Spaces)");
                 return false;
             }
 
@@ -172,7 +173,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                MessageBox.Show("User ID must be numeric");
+                DialogBox.ShowMessageDialog(this, "User ID must be numeric");
             }
 
             return true;
@@ -204,11 +205,11 @@ namespace com.WanderingTurtle.FormPresentation
 
                 _manager.AddANewSupplier(tempSupplier);
 
-                System.Windows.Forms.MessageBox.Show("Supplier was added to the database");
+                DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
             }
             catch (Exception)
             {
-                MessageBox.Show("There was a problem adding the supplier to the database");
+                DialogBox.ShowMessageDialog(this, "There was a problem adding the supplier to the database");
             }
         }
 
@@ -229,7 +230,7 @@ namespace com.WanderingTurtle.FormPresentation
             txtAddress1.Text = supplierUpdate.Address1.Trim();
             txtAddress2.Text = supplierUpdate.Address2.Trim();
             txtEmail.Text = supplierUpdate.EmailAddress.Trim();
-            //MessageBox.Show(supplierUpdate.PhoneNumber);
+            //DialogBox.ShowMessageDialog(supplierUpdate.PhoneNumber);
             string phone = supplierUpdate.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
             txtPhoneNumber.Text = phone;
             for (int i = 0; i < _zips.Count; i++)
@@ -276,11 +277,11 @@ namespace com.WanderingTurtle.FormPresentation
                 
                 _manager.EditSupplier(_UpdatableSupplier, tempSupplier);
 
-                System.Windows.Forms.MessageBox.Show("The Supplier was succefully edited");
+                DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
@@ -299,7 +300,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception)
             {
-                System.Windows.Forms.MessageBox.Show("There was a problem retriving the list of zip codes");
+                DialogBox.ShowMessageDialog(this, "There was a problem retriving the list of zip codes");
             }
 
 

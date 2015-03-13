@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -91,13 +92,13 @@ namespace com.WanderingTurtle.FormPresentation
                 int numRows = prodMan.EditItemListing(NewListing, ListingOrigin);
                 if (numRows == 1)
                 {
-                    MessageBox.Show("Item successfully changed.");
+                    DialogBox.ShowMessageDialog(this, "Item successfully changed.");
                     this.Close();
                 }
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
         }
         

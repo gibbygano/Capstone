@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ax)
             {
-                MessageBox.Show("Hotel Guest information was not found. ", ax.Message);
+                DialogBox.ShowMessageDialog(this, "Hotel Guest information was not found. ", ax.Message);
             }
         }
 
@@ -101,7 +102,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                     if (result == 1)
                     {
-                        MessageBox.Show("The booking has been cancelled.");
+                        DialogBox.ShowMessageDialog(this, "The booking has been cancelled.");
                         // closes window after cancel
                         this.Close();
                     }
@@ -109,7 +110,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
+                DialogBox.ShowMessageDialog(this, "An issue occured while attempting to cancel this booking.", ex.Message);
             }
         }
     }

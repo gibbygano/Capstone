@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -81,7 +82,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to retrieve booking list from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve booking list from the database.");
             }
         }
 
@@ -127,15 +128,15 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (ApplicationException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (SqlException ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
@@ -151,7 +152,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (lvGuestBookings.SelectedItem == null)
             {
-                MessageBox.Show("Please select a booking to edit.");
+                DialogBox.ShowMessageDialog(this, "Please select a booking to edit.");
                 return;
             }
 
@@ -159,13 +160,13 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (outBooking.StartDate < DateTime.Now)
             {
-                MessageBox.Show("Bookings in the past cannot be edited.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DialogBox.ShowMessageDialog(this, "Bookings in the past cannot be edited.", "Warning");
                 return;
             }
 
             if (outBooking.Quantity == 0)
             {
-                MessageBox.Show("This booking has been cancelled and cannot be edited.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DialogBox.ShowMessageDialog(this, "This booking has been cancelled and cannot be edited.", "Warning");
                 return;
             }
 
@@ -189,7 +190,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (CheckFutureBookingDateAndQty() == true)
             {
-                MessageBox.Show("Guest has bookings in the future and cannot be checked out.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DialogBox.ShowMessageDialog(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
                 return;
             }
 
@@ -212,7 +213,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 
@@ -248,7 +249,7 @@ namespace com.WanderingTurtle.FormPresentation
             //check if something was selected
             if (lvGuestBookings.SelectedItem == null)
             {
-                MessageBox.Show("Please select a booking to cancel.");
+                DialogBox.ShowMessageDialog(this, "Please select a booking to cancel.");
                 return;
             }
 
@@ -257,12 +258,12 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (CheckBookingDate(myBooking.StartDate))
             {
-                MessageBox.Show("Cancellations are not allowed for bookings in the past.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DialogBox.ShowMessageDialog(this, "Cancellations are not allowed for bookings in the past.", "Warning");
                 return;
             }
             else if (CheckBookingQuantity(myBooking.Quantity))
             {
-                MessageBox.Show("This booking has already been cancelled.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.", "Warning");
                 return;
             }
 
@@ -278,7 +279,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("To cancel a booking, please select the desired booking first.", ex.Message);
+                DialogBox.ShowMessageDialog(this, "To cancel a booking, please select the desired booking first.", ex.Message);
             }
         }
 

@@ -54,7 +54,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Unable to retrieve booking list from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog("Unable to retrieve booking list from the database. \n" + ex.Message);
             }
 
         }

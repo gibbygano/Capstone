@@ -70,7 +70,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show("Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve Hotel Guest listing from the database.");
             }
 
         }
@@ -108,7 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
             
             if (lvEventListItems.SelectedIndex.Equals(-1))
             {
-                System.Windows.MessageBox.Show("Please select an event.");
+                DialogBox.ShowMessageDialog(this, "Please select an event.");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -118,7 +118,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (qty == 0)
             {
-                System.Windows.MessageBox.Show("Please enter a quanity greather than 0");
+                DialogBox.ShowMessageDialog(this, "Please enter a quanity greather than 0");
                 btnAddBookingAdd.IsEnabled = true;
                 return;
             }
@@ -147,7 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
                      int result2 = _orderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
                      if (result2 == 1)
                      {
-                         System.Windows.MessageBox.Show("The booking has been successfully added.");                    
+                         DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");                    
                      }
                      // closes window after add
                      this.Close();
@@ -155,7 +155,7 @@ namespace com.WanderingTurtle.FormPresentation
          } //end try
          catch (Exception ax)
          {
-             System.Windows.MessageBox.Show(ax.Message);
+             DialogBox.ShowMessageDialog(this, ax.Message);
          }
 
         }//end method addBooking()
@@ -172,7 +172,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (selected== null)
             {
-                System.Windows.MessageBox.Show("Please select an event.");
+                DialogBox.ShowMessageDialog(this, "Please select an event.");
             }
             return selected;
         }
