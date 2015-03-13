@@ -16,6 +16,7 @@ using com.WanderingTurtle.BusinessLogic;
 using Xceed.Wpf.Toolkit;
 using com.WanderingTurtle.FormPresentation.Models;
 
+
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
@@ -43,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             InitializeComponent();
             RefreshListItems();
-            eID = (int)Globals.UserToken.EmployeeID;
+            eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
             lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 

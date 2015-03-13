@@ -116,7 +116,11 @@ namespace com.WanderingTurtle.DataAccess
                         currentItemListing.EventName = reader.GetString(9);
                         currentItemListing.SupplierName = reader.GetString(10);
 
-                        itemListingList.Add(currentItemListing);
+                        if (currentItemListing.EndDate > DateTime.Now)
+                        {
+                            itemListingList.Add(currentItemListing);
+                        }
+                        
                     }
                 }
                 else
@@ -200,7 +204,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EventItemID", newItemListing.EventID);
             cmd.Parameters.AddWithValue("@Price", newItemListing.Price);
             cmd.Parameters.AddWithValue("@MaxNumberOfGuests", newItemListing.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@MinNumberOfGuests", newItemListing.MinNumGuests);
             cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", newItemListing.CurrentNumGuests);
             cmd.Parameters.AddWithValue("@SupplierID", newItemListing.SupplierID);
 
@@ -211,7 +214,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@originalEventItemID", oldItemListing.EventID);
             cmd.Parameters.AddWithValue("@originalPrice", oldItemListing.Price);
             cmd.Parameters.AddWithValue("@originalMaxNumberOfGuests", oldItemListing.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@originalMinNumberOfGuests", oldItemListing.MinNumGuests);
             cmd.Parameters.AddWithValue("@originalCurrentNumberOfGuests", oldItemListing.CurrentNumGuests);
             cmd.Parameters.AddWithValue("@originalSupplierID", oldItemListing.SupplierID);
 

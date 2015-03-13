@@ -1,21 +1,19 @@
 ﻿CREATE PROCEDURE spUpdateItemListing(
-	@ItemListID int, 
 	@StartDate datetime,
 	@EndDate datetime,
-	@SupplierID int,
+	@ItemListID int,
 	@EventItemID int,
 	@Price money, 
-	@CurrentNumberOfGuests int,
 	@MaxNumberOfGuests int,
-	@MinNumberOfGuests int,
+	@CurrentNumberOfGuests int,
+	@SupplierID int,	
 	@originalStartDate datetime,
 	@originalEndDate datetime, 
-	@originalSupplierID int,
 	@originalEventItemID int,
 	@originalPrice money, 
+	@originalSupplierID int,
 	@originalCurrentNumberOfGuests int,
-	@originalMaxNumberOfGuests int,
-	@originalMinNumberOfGuests int)
+	@originalMaxNumberOfGuests int)
 AS
 	UPDATE ItemListing
 	SET 
@@ -25,8 +23,7 @@ AS
 		Price = @Price,
 		SupplierID = @SupplierID,
 		CurrentNumberOfGuests = @CurrentNumberOfGuests,
-		MaxNumberOfGuests = @MaxNumberOfGuests,
-		MinNumberOfGuests = @MinNumberOfGuests
+		MaxNumberOfGuests = @MaxNumberOfGuests
 	WHERE
 		ItemListID = @ItemListID
 		AND StartDate = @originalStartDate
@@ -36,6 +33,5 @@ AS
 		AND SupplierID = @originalSupplierID
 		AND CurrentNumberOfGuests = @originalCurrentNumberOfGuests
 		AND MaxNumberOfGuests = @originalMaxNumberOfGuests
-		AND MinNumberOfGuests = @originalMinNumberOfGuests
-		AND Active = 1
+
 	RETURN @@ROWCOUNT

@@ -11,10 +11,10 @@
                 <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL
                     to the datafields within our Event object.-->
-                <DataGridTextColumn Width="100" Header="Event Type"     Binding="{Binding EventTypeName}" />
-                <DataGridTextColumn Width="140" Header="Event Name"     Binding="{Binding EventItemName}" />
-                <DataGridTextColumn Width="100" Header="Transportation" Binding="{Binding TransportString}" />
-                <DataGridTextColumn Width="100" Header="On-Site"        Binding="{Binding OnSiteString}" />
+                <DataGridTextColumn Width="*" Header="Event Type"     Binding="{Binding EventTypeName}" />
+                <DataGridTextColumn Width="*" Header="Event Name"     Binding="{Binding EventItemName}" />
+                <DataGridTextColumn Width="*" Header="Transportation" Binding="{Binding TransportString}" />
+                <DataGridTextColumn Width="Auto" Header="On-Site"        Binding="{Binding OnSiteString}" />
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">
