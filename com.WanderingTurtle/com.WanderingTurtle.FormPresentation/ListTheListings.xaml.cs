@@ -22,7 +22,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheListings : UserControl
     {
-
         private ProductManager prodMan = new ProductManager();
         List<ItemListing> myListingList;
 
@@ -50,11 +49,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
             Window AddItemListings = new AddItemListing();
@@ -78,8 +72,12 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                MessageBox.Show(prodMan.ArchiveItemListing(ListingToDelete).ToString());
+                int numRows = prodMan.ArchiveItemListing(ListingToDelete);
 
+                if (numRows == 1)
+                {
+                    MessageBox.Show("Listing successfully deleted.");
+                }
                 refreshData();
             }
             catch (Exception ex)
@@ -96,7 +94,6 @@ namespace com.WanderingTurtle.FormPresentation
                 MessageBox.Show("Please select a row to edit");
                 return;
             }
-
 
             Window EditListings = new EditListing(ListingEdit);
 

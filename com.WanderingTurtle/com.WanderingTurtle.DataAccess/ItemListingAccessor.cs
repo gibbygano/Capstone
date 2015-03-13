@@ -257,7 +257,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EventItemID", itemListingToDelete.EventID);
             cmd.Parameters.AddWithValue("@Price", itemListingToDelete.Price);
             cmd.Parameters.AddWithValue("@MaxNumGuests", itemListingToDelete.MaxNumGuests);
-            cmd.Parameters.AddWithValue("@MinNumGuests", itemListingToDelete.MinNumGuests);
             cmd.Parameters.AddWithValue("@CurrentNumGuests", itemListingToDelete.CurrentNumGuests);
             cmd.Parameters.AddWithValue("@SupplierID", itemListingToDelete.SupplierID);
 

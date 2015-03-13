@@ -1,13 +1,12 @@
 ﻿CREATE PROCEDURE spDeleteItemListing(
 	@ItemListID int, 
-	@StartDate date, 
-	@EndDate date, 
+	@StartDate dateTime, 
+	@EndDate dateTime, 
 	@EventItemID int, 
 	@Price money,  
 	@SupplierID int,
-	@CurrentNumberOfGuests int,
-	@MaxNumberOfGuests int,
-	@MinNumberOfGuests int)
+	@CurrentNumGuests int,
+	@MaxNumGuests int)
 AS
 	UPDATE ItemListing
 	SET Active = 0
@@ -18,7 +17,6 @@ AS
 		AND EventItemID = @EventItemID
 		AND Price = @Price
 		AND SupplierID = @SupplierID
-		AND CurrentNumberOfGuests = @CurrentNumberOfGuests
-		AND MaxNumberOfGuests = @MaxNumberOfGuests
-		AND MinNumberOfGuests = @MinNumberOfGuests
+		AND CurrentNumberOfGuests = @CurrentNumGuests
+		AND MaxNumberOfGuests = @MaxNumGuests
 	RETURN @@ROWCOUNT

@@ -29,7 +29,6 @@ namespace com.WanderingTurtle.FormPresentation
         public EditListing(ItemListing toEdit)
         {
             InitializeComponent();
-
             populateFields(toEdit);
         }
 
@@ -88,8 +87,13 @@ namespace com.WanderingTurtle.FormPresentation
                 NewListing.CurrentNumGuests = ListingOrigin.CurrentNumGuests;
                 NewListing.SupplierID = ListingOrigin.SupplierID;
 
-                prodMan.EditItemListing(NewListing, ListingOrigin);
-                this.Close();
+
+                int numRows = prodMan.EditItemListing(NewListing, ListingOrigin);
+                if (numRows == 1)
+                {
+                    MessageBox.Show("Item successfully changed.");
+                    this.Close();
+                }
             }
             catch(Exception ex)
             {

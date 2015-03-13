@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="AddItemListings" Height="300" Width="500"
 		WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
