@@ -69,9 +69,15 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
+            ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItem;
+            if (ListingToDelete == null)
+            {
+                MessageBox.Show("Please select a row to delete.");
+                return;
+            }
+
             try
             {
-                ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItems[0];
                 MessageBox.Show(prodMan.ArchiveItemListing(ListingToDelete).ToString());
 
                 refreshData();
@@ -82,6 +88,27 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        private void btnEditListing_click(object sender, RoutedEventArgs e)
+        {
+            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
+            if (ListingEdit == null)
+            {
+                MessageBox.Show("Please select a row to edit");
+                return;
+            }
+
+
+            Window EditListings = new EditListing(ListingEdit);
+
+            
+            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
+            //AddItemListings.Show();
+            if (EditListings.ShowDialog() == false)
+            {
+                refreshData();
+            }
+
+        }
 
         //Class level variables needed for sorting method
         private ListSortDirection _sortDirection;
@@ -134,18 +161,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void btnEditListing_click(object sender, RoutedEventArgs e)
-        {
-            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
-            Window EditListings = new EditListing(ListingEdit);
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden 
-            //AddItemListings.Show();
-            if (EditListings.ShowDialog() == false)
-            {
-                refreshData();
-            }
-
-        }
     }
 
 }

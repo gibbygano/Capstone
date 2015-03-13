@@ -29,7 +29,16 @@ namespace com.WanderingTurtle.FormPresentation
         public EditListing(ItemListing toEdit)
         {
             InitializeComponent();
-            
+
+            populateFields(toEdit);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="toEdit"></param>
+        private void populateFields(ItemListing toEdit)
+        {
             dateStart.Text = toEdit.StartDate.ToShortDateString();
             dateEnd.Text = toEdit.EndDate.ToShortDateString();
 
@@ -39,31 +48,21 @@ namespace com.WanderingTurtle.FormPresentation
             lblListingName.Content = toEdit.EventName.ToString();
             lblSupplierName.Content = toEdit.SupplierName.ToString();
 
-//txtCurrentGuests.Text = toEdit.CurrentNumGuests.ToString();
             udSeats.Value = toEdit.MaxNumGuests;
             udPrice.Value = (decimal)(toEdit.Price);
 
             dateStart.DisplayDate = toEdit.StartDate;
             dateEnd.DisplayDate = toEdit.EndDate;
 
-
-            //date is your existing Date object, time is the nullable DateTime object from your TimePicker
-            //newListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
-           // newListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
-            
-            //ListingOrigin.ItemListID = toEdit.ItemListID;
-            //ListingOrigin.StartDate = toEdit.StartDate;
-            //ListingOrigin.EndDate = toEdit.EndDate;
-            //ListingOrigin.EventID = toEdit.EventID;
-            //ListingOrigin.Price = toEdit.Price;
-            //ListingOrigin.MaxNumGuests = toEdit.MaxNumGuests;
-            //ListingOrigin.MinNumGuests = toEdit.MinNumGuests;
-            //ListingOrigin.CurrentNumGuests = toEdit.CurrentNumGuests;
-            //ListingOrigin.SupplierID = toEdit.SupplierID;
-
-
-    
-
+            ListingOrigin.ItemListID = toEdit.ItemListID;
+            ListingOrigin.StartDate = toEdit.StartDate;
+            ListingOrigin.EndDate = toEdit.EndDate;
+            ListingOrigin.EventID = toEdit.EventID;
+            ListingOrigin.Price = toEdit.Price;
+            ListingOrigin.MaxNumGuests = toEdit.MaxNumGuests;
+            ListingOrigin.MinNumGuests = toEdit.MinNumGuests;
+            ListingOrigin.CurrentNumGuests = toEdit.CurrentNumGuests;
+            ListingOrigin.SupplierID = toEdit.SupplierID;
         }
 
         /// <summary>
@@ -75,58 +74,20 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                NewListing.SupplierID = ListingOrigin.SupplierID;
-                NewListing.EventID = ListingOrigin.EventID;
+                DateTime formStartDate = (DateTime)(dateStart.SelectedDate);
+                DateTime formEndDate = (DateTime)(dateEnd.SelectedDate);
+                DateTime formStartTime = (DateTime)(tpStartTime.Value);
+                DateTime formEndTime = (DateTime)(tpEndTime.Value);
+                NewListing.ItemListID = ListingOrigin.ItemListID;
 
-                //if (Validator.ValidateDecimal(txtPrice.Text))
-                //{
-                //    NewListing.Price = Decimal.Parse(txtPrice.Text);
-                //}
-                //else
-                //{
-                //    throw new Exception("Please enter a valid price");
-                //}
-                //if (Validator.ValidateInt(txtCurrentGuests.Text))
-                //{
-                //    NewListing.CurrentNumGuests = Int32.Parse(txtCurrentGuests.Text);
-                //}
-                //else
-                //{
-                //    throw new Exception("Current Number of Guests is invalid.");
-                //}
-                //if (Validator.ValidateInt(txtMinGuests.Text))
-                //{
-                //    NewListing.MinNumGuests = Int32.Parse(txtMinGuests.Text);
-                //}
-                //else
-                //{
-                //    throw new Exception("Minimum Number of Guests is invalid");
-                //}
-                //if (Validator.ValidateInt(txtMaxGuests.Text))
-                //{
-                //    NewListing.MaxNumGuests = Int32.Parse(txtMaxGuests.Text);
-                //}
-                //else
-                //{
-                //    throw new Exception("Maximum Number of Guests is invalid");
-                //}
-                //if (Validator.ValidateDateTime(txtStartDate.Text))
-                //{
-                //    NewListing.StartDate = DateTime.Parse(txtStartDate.Text);
-                //}
-                //else
-                //{
-                //    throw new Exception("Start Date is invalid");
-                //}
-                //if (Validator.ValidateDateTime(txtEndDate.Text))
-                //{
-                //    NewListing.EndDate = DateTime.Parse(txtEndDate.Text);
-                //}
-                //else
-                //{
-                //    throw new Exception("Start Date is invalid");
-                //}
-                MessageBox.Show(ListingOrigin.Price.ToString());
+                NewListing.EventID = ListingOrigin.EventID;
+                NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
+                NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
+                NewListing.Price = (decimal)(udPrice.Value);
+                NewListing.MaxNumGuests = (int)(udSeats.Value);
+                NewListing.CurrentNumGuests = ListingOrigin.CurrentNumGuests;
+                NewListing.SupplierID = ListingOrigin.SupplierID;
+
                 prodMan.EditItemListing(NewListing, ListingOrigin);
                 this.Close();
             }
