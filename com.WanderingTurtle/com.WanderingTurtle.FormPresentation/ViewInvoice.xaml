@@ -3,6 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Style="{DynamicResource WindowStyle}"
         Title="View Guest" Height="400" Width="830"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="5">
@@ -12,7 +13,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <Label Grid.Row="0" x:Name="lblGeneralViewInvoice" Content="Guest Information" FontSize="16" FontWeight="Bold" />
 
         <Grid Grid.Row="1">
@@ -52,7 +53,7 @@
                         <GridViewColumn Width ="50" Header="Qty" DisplayMemberBinding="{Binding Quantity}" />
                         <GridViewColumn Width ="90" Header="Ticket Price" DisplayMemberBinding="{Binding TicketPrice, StringFormat='{}{0:C}'}" />
                         <GridViewColumn Width ="110" Header="Extended Price" DisplayMemberBinding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
-                        <GridViewColumn Width ="75" Header="Discount" DisplayMemberBinding="{Binding Discount, StringFormat='{}{0:P}'}"/>
+                        <GridViewColumn Width ="75" Header="Discount" DisplayMemberBinding="{Binding Discount, StringFormat='{}{0:P}'}" />
                         <GridViewColumn Width ="75" Header="Total Due" DisplayMemberBinding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
                     </GridView>
                 </ListView.View>

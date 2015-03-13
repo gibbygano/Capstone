@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Style="{DynamicResource WindowStyle}"
         Title="Edit Booking" Height="400" Width="850"
 		WindowStartupLocation="CenterScreen">
     <Grid Margin="5">

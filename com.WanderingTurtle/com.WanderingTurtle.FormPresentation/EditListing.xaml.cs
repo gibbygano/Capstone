@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for EditListing.xaml
     /// </summary>
-    public partial class EditListing : Window
+    public partial class EditListing 
     {
         private EventManager myMan = new EventManager();
         private ProductManager prodMan = new ProductManager();

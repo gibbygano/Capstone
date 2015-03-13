@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
 		x:Class="com.WanderingTurtle.FormPresentation.AddNewEvent"
+        Style="{DynamicResource WindowStyle}"
         Title="Add a New Event"  Height="389.5" Width="485.355"
 		WindowStartupLocation="CenterScreen">
     <Grid Margin="0,0,2,0">

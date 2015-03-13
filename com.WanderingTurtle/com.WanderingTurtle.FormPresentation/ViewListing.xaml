@@ -1,6 +1,9 @@
-﻿<Window x:Class="com.WanderingTurtle.FormPresentation.ViewListing"
+﻿<Metro:MetroWindow
+        x:Class="com.WanderingTurtle.FormPresentation.ViewListing"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Style="{DynamicResource WindowStyle}"
         Title="ViewListing" Height="329" Width="406">
     <Grid>
         <TextBox x:Name="txtCurrentGuests" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" Margin="88,126,0,0" IsEnabled="False"/>
@@ -22,4 +25,4 @@
         <TextBox x:Name="txtEventType" HorizontalAlignment="Left" Height="23" Margin="97,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80"/>
 
     </Grid>
-</Window>
+</Metro:MetroWindow>

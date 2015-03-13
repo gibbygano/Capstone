@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ViewListing.xaml
     /// </summary>
-    public partial class ViewListing : Window
+    public partial class ViewListing 
     {
         public ViewListing(ItemListing toView)
         {

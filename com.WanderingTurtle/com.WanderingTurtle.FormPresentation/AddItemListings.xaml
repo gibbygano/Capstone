@@ -4,6 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Style="{DynamicResource WindowStyle}"
         Title="AddItemListings" Height="300" Width="500"
 		WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
