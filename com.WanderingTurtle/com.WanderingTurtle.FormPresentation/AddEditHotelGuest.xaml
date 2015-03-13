@@ -40,8 +40,8 @@
             <TextBox  Grid.Column="1" Grid.Row="3" TabIndex="3" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtAddress2" />
             <ComboBox Grid.Column="1" Grid.Row="4" TabIndex="4" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="cboZip_GotKeyboardFocus"   DisplayMemberPath="GetZipStateCity" x:Name="CboZip" />
             <xctk:MaskedTextBox  Mask="(000) 000-0000" Grid.Column="1" Grid.Row="5" TabIndex="5" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtPhoneNumber" MaxLength="12" />
-            <TextBox  Grid.Column="1" Grid.Row="6" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtEmailAddress" />
-            <TextBox  Grid.Column="1" Grid.Row="7" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtRoomNumber" />
+            <TextBox  Grid.Column="1" Grid.Row="6" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtEmailAddress" MaxLength="100" />
+            <TextBox  Grid.Column="1" Grid.Row="7" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtRoomNumber" MaxLength="4" />
         </Grid>
         <Grid Grid.Row="1" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>

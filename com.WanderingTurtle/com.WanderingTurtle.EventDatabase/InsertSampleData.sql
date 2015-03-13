@@ -54,9 +54,9 @@ VALUES
 GO
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active)
 VALUES
-('Francisco''s Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '66685', '555-542-8796', 'franciscotours@gmail.com', 100, 101, 1),
-('Harry''s Boat Rides', 'Harry', 'Bertleson', '19925 Wilmington Ave', 'Suite 206', '66686',  '555-874-9663', 'harrythehammer@gmail.com', 101, 102, 1),
-('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '66685', '555-766-1124', 'info@theyregrapetours.com', 102, 103, 1)
+('Francisco''s Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 101, 1),
+('Harry''s Boat Rides', 'Harry', 'Bertleson', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', 101, 102, 1),
+('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 103, 1)
 GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate)

@@ -34,7 +34,17 @@ namespace com.WanderingTurtle.FormPresentation
         public AddSupplier()
         {
             InitializeComponent();
+            btnEdit.IsEnabled = false;
+            fillComboBox();  
             Instance = this;
+        }
+        public AddSupplier(Supplier supplierToEdit)
+        {
+            InitializeComponent();
+            Instance = this;
+            this.Title = "Edit Supplier";
+            fillComboBox();  
+            FillUpdateList(supplierToEdit);
         }
 
         //////////////////////Windows Events//////////////////////////////
@@ -50,8 +60,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            btnEdit.IsEnabled = false;
-            fillComboBox();            
+            //btnEdit.IsEnabled = false;
+                      
         }
 
         /// <summary>
@@ -114,7 +124,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns></returns>
         public bool Validate()
         {
-            if (!Validator.ValidateAlphaNumeric(txtCompanyName.Text.Trim()))
+            if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
             {
                 MessageBox.Show("Company Name field must be filled out and not contain special characters");
                 return false;
@@ -188,7 +198,7 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Address1 = txtAddress1.Text.Trim();
                 tempSupplier.Address2 = txtAddress2.Text.Trim();
                 tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                tempSupplier.Zip = cboZip.Text;
+                tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text.Trim();
                 tempSupplier.UserID = _userID;
 
@@ -219,8 +229,17 @@ namespace com.WanderingTurtle.FormPresentation
             txtAddress1.Text = supplierUpdate.Address1.Trim();
             txtAddress2.Text = supplierUpdate.Address2.Trim();
             txtEmail.Text = supplierUpdate.EmailAddress.Trim();
-            txtPhoneNumber.Text = supplierUpdate.PhoneNumber;
-            cboZip.Text = supplierUpdate.Zip;
+            //MessageBox.Show(supplierUpdate.PhoneNumber);
+            string phone = supplierUpdate.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+            txtPhoneNumber.Text = phone;
+            for (int i = 0; i < _zips.Count; i++)
+            {
+                if (_zips[i].Zip == supplierUpdate.Zip)
+                {
+                    cboZip.SelectedValue = _zips[i].Zip;
+                }
+            }
+            //cboZip.SelectedValue = supplierUpdate.Zip;
             txtUserID.Text = supplierUpdate.UserID.ToString();
 
             _UpdatableSupplier = supplierUpdate;
@@ -249,7 +268,7 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Address1 = txtAddress1.Text;
                 tempSupplier.Address2 = txtAddress2.Text;
                 tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                tempSupplier.Zip = cboZip.Text;
+                tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text;
                 tempSupplier.UserID = _userID;
 
@@ -275,6 +294,8 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 _zips = _cityStateManager.GetCityStateList();
                 cboZip.ItemsSource = _zips;
+                cboZip.DisplayMemberPath = "GetZipStateCity";
+                cboZip.SelectedValuePath = "Zip";
             }
             catch (Exception)
             {

@@ -197,6 +197,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 lvEvents.ItemsSource = myEventList;
             }
+            txtSearchInput.Text = "";
         }
 
         private void lvEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)

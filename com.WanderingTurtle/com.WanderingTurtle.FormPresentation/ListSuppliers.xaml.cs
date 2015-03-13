@@ -74,9 +74,9 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 FillList();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Delete");
+                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Delete" + ex.Message);
             }
         }
 
@@ -97,13 +97,13 @@ namespace com.WanderingTurtle.FormPresentation
                 Supplier supplierToUpdate = (Supplier)lvSuppliersList.SelectedItems[0];
 
                 AddSupplier addSupplier;
-                addSupplier = new AddSupplier();
+                addSupplier = new AddSupplier(supplierToUpdate);
                 addSupplier.ShowDialog();
-                addSupplier.FillUpdateList(supplierToUpdate);
+                //addSupplier.FillUpdateList(supplierToUpdate);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Update");
+                System.Windows.Forms.MessageBox.Show("You Must Select A Supplier Before You Can Update" + ex.Message);
             }
         }
 
