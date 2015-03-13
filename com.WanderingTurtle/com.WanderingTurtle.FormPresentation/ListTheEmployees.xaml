@@ -8,10 +8,10 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" x:Name="lvEmployeesList">
             <DataGrid.Columns>
-                <DataGridTextColumn Width ="100" Header="Employee ID" Binding="{Binding EmployeeID}" />
-                <DataGridTextColumn Width ="100" Header="First Name"  Binding="{Binding FirstName}" />
-                <DataGridTextColumn Width ="150" Header="Last Name"   Binding="{Binding LastName}" />
-                <DataGridTextColumn Width ="90"  Header="Level"       Binding="{Binding Level}" />
+                <DataGridTextColumn Width ="Auto" Header="Employee ID" Binding="{Binding EmployeeID}" />
+                <DataGridTextColumn Width ="*" Header="First Name"  Binding="{Binding FirstName}" />
+                <DataGridTextColumn Width ="*" Header="Last Name"   Binding="{Binding LastName}" />
+                <DataGridTextColumn Width ="Auto"  Header="Level"       Binding="{Binding Level}" />
             </DataGrid.Columns>
         </DataGrid>
 

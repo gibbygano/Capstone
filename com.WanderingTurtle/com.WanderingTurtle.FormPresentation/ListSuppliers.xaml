@@ -8,12 +8,12 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" x:Name="lvSuppliersList">
             <DataGrid.Columns>
-                <DataGridTextColumn Width ="175" Header="Company Name"  Binding="{Binding CompanyName}" />
-                <DataGridTextColumn Width ="125" Header="First Name"    Binding="{Binding FirstName}" />
-                <DataGridTextColumn Width ="150" Header="Last Name"     Binding="{Binding LastName}" />
-                <DataGridTextColumn Width ="150" Header="Address"       Binding="{Binding Address1}" />
-                <DataGridTextColumn Width ="150" Header="Email Address" Binding="{Binding EmailAddress}" />
-                <DataGridTextColumn Width ="90"  Header="Phone Number"  Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Width ="*" Header="Company Name"  Binding="{Binding CompanyName}" />
+                <DataGridTextColumn Width ="*" Header="First Name"    Binding="{Binding FirstName}" />
+                <DataGridTextColumn Width ="*" Header="Last Name"     Binding="{Binding LastName}" />
+                <DataGridTextColumn Width ="*" Header="Address"       Binding="{Binding Address1}" />
+                <DataGridTextColumn Width ="*" Header="Email Address" Binding="{Binding EmailAddress}" />
+                <DataGridTextColumn Width ="Auto"  Header="Phone Number" Binding="{Binding PhoneNumber}" />
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">

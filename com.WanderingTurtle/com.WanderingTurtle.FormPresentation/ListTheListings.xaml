@@ -8,13 +8,13 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" x:Name="lvListing" SelectionChanged="ListView_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="35"  Header="ID"               Binding="{Binding ItemListID}" />
-                <DataGridTextColumn Width="140" Header="Supplier"         Binding="{Binding SupplierName}" />
-                <DataGridTextColumn Width="140" Header="Event"            Binding="{Binding EventName}" />
-                <DataGridTextColumn Width="130" Header="Event Start Date" Binding="{Binding StartDate}" />
-                <DataGridTextColumn Width="130" Header="Event End Date"   Binding="{Binding EndDate}" />
-                <DataGridTextColumn Width="60"  Header="Seats"            Binding="{Binding Seats}" />
-                <DataGridTextColumn Width="60"  Header="Attendees"        Binding="{Binding CurrentNumGuests}" />
+                <DataGridTextColumn Width="Auto"  Header="ID"              Binding="{Binding ItemListID}" />
+                <DataGridTextColumn Width="*" Header="Supplier"            Binding="{Binding SupplierName}" />
+                <DataGridTextColumn Width="*" Header="Event"               Binding="{Binding EventName}" />
+                <DataGridTextColumn Width="Auto" Header="Event Start Date" Binding="{Binding StartDate}" />
+                <DataGridTextColumn Width="Auto" Header="Event End Date"   Binding="{Binding EndDate}" />
+                <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}" />
+                <DataGridTextColumn Width="Auto"  Header="Attendees"       Binding="{Binding CurrentNumGuests}" />
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
