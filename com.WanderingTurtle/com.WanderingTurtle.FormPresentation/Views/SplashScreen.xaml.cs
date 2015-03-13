@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
-            { Globals.UserToken = new com.WanderingTurtle.Common.Employee(0, "Debugger", null, 1); }
+            { Globals.UserToken = new com.WanderingTurtle.Common.Employee(100, "Debugger", null, 1); }
 
             do
             {
