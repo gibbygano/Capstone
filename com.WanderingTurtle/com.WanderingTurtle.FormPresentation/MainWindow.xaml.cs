@@ -1,18 +1,8 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Views;
+using MahApps.Metro.Controls.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -30,7 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 switch (MessageBox.Show(
-                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError:\r{0}", ex.Message),
+                    string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError Message:\r{0}", ex.Message),
                     "Could not connect to the database", MessageBoxButton.YesNo, MessageBoxImage.Error))
                 {
                     case MessageBoxResult.Yes:
@@ -39,38 +29,16 @@ namespace com.WanderingTurtle.FormPresentation
                 }
             }
             InitializeComponent();
-
-            switch (Globals.UserToken != null ? Globals.UserToken.Level : RoleData.Admin)
-            {
-                case RoleData.Admin:
-                    AddTab(TabName.Events, new ListEvents());
-                    AddTab(TabName.Listings, new ListTheListings());
-                    AddTab(TabName.Suppliers, new ListSuppliers());
-                    AddTab(TabName.Employees, new ListTheEmployees());
-                    AddTab(TabName.HotelGuests, new ListHotelGuests());
-                    break;
-            }
         }
 
-        private void AddTab(string tabItem, Object Control)
+        private void BtnSignInOut_Click(object sender, RoutedEventArgs e)
         {
-            TabItem item = new TabItem();
-            item.Content = Control;
-            item.Header = tabItem;
-            TabControl.Items.Add(item);
+            StartUp();
         }
 
-        private static class TabName
+        internal void StartUp()
         {
-            internal static string Events { get { return "Events"; } }
-
-            internal static string Listings { get { return "Listings"; } }
-
-            internal static string Suppliers { get { return "Suppliers"; } }
-
-            internal static string Employees { get { return "Employees"; } }
-
-            internal static string HotelGuests { get { return "Hotel Guests"; } }
+            this.MainContent.Content = new StartupScreen();
         }
     }
 }

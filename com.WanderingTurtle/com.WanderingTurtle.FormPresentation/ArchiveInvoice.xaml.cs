@@ -2,6 +2,7 @@
 using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -12,22 +13,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for ArchiveInvoice.xaml
     /// </summary>
-    public partial class ArchiveInvoice : Window
+    public partial class ArchiveInvoice
     {
         private List<BookingDetails> myBookingList;
         private Invoice invoiceToArchive;
         private Invoice originalInvoice;
         private HotelGuest guestToView;
-        InvoiceManager _invoiceManager = new InvoiceManager();
-        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        OrderManager _orderManager = new OrderManager();
+        private InvoiceManager _invoiceManager = new InvoiceManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private OrderManager _orderManager = new OrderManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03

@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for EditBooking.xaml
     /// </summary>
-    public partial class EditBooking : Window
+    public partial class EditBooking
     {
         public InvoiceDetails inInvoice;
         public BookingDetails originalBookingRecord;

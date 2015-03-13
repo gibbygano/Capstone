@@ -1,4 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +12,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for CancelBooking.xaml
     /// </summary>
-    public partial class CancelBooking : Window
+    public partial class CancelBooking
     {
         private BookingDetails myBooking;
         private InvoiceDetails myInvoice;
         private decimal cancelFee = 0m;
-        OrderManager _orderManager = new OrderManager();
+        private OrderManager _orderManager = new OrderManager();
 
         ///Created By: Tony Noel, 2015/03/04
         /// <summary>
@@ -61,7 +61,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                 cancelFee = _orderManager.CalculateCancellationFee(myBooking);
                 lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
-               
             }
             catch (Exception ax)
             {
@@ -83,7 +82,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnConfirmCancel_Click(object sender, RoutedEventArgs e)
         {
             try
-             {
+            {
                 ListItemObject originalEventListing = _orderManager.RetrieveEventListing(myBooking.ItemListID);
 
                 int newNumGuests = originalEventListing.CurrentNumGuests - myBooking.Quantity;
@@ -94,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     MessageBox.Show("guests changed");
                 }
-                
+
                 myBooking.TotalCharge = cancelFee;
                 myBooking.Quantity = 0;
                 myBooking.TicketPrice = 0;
@@ -109,11 +108,11 @@ namespace com.WanderingTurtle.FormPresentation
                     // closes window after cancel
                     this.Close();
                 }
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
-             }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An issue occured while attempting to cancel this booking.", ex.Message);
+            }
         }
     }
 }
