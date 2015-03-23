@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// Interaction logic for UserLogin.xaml
     /// </summary>
     /// <remarks>
-    /// Routed Event code examples used and modified from MSDN to suite the needs here.
+    /// Routed Event code examples used and modified from MSDN to suit the needs here.
     /// Original example can be found here: 
     /// https://msdn.microsoft.com/en-us/library/ms752288(v=vs.100).aspx
     /// </remarks>

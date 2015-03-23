@@ -119,7 +119,6 @@
     <Build Include="dbo\Tables\Invoice.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllInvoices.sql" />
     <Build Include="dbo\Stored Procedures\spSelectInvoiceBookings.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectInvoiceByGuest.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeGet.sql" />
     <Build Include="dbo\Stored Procedures\spArchiveInvoice.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeCheckPassword.sql" />
@@ -127,6 +126,7 @@
     <Build Include="dbo\Stored Procedures\spUpdateItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateCurrentNumGuests.sql" />
     <Build Include="dbo\Stored Procedures\spSelectOneListingFull.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectInvoiceByGuest.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

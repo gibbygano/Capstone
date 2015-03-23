@@ -14,8 +14,11 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle;
 using com.WanderingTurtle.BusinessLogic;
 using Xceed.Wpf.Toolkit;
+using System.Data.SqlClient;
 using com.WanderingTurtle.FormPresentation.Models;
-
+using MahApps.Metro.Controls.Dialogs;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -24,11 +27,10 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking 
     {
-        List<ListItemObject> myEventList = new List<ListItemObject>();
+        List<ItemListingDetails> myEventList = new List<ItemListingDetails>();
         InvoiceDetails inInvoice;
         int eID;
-        EmployeeManager _employeeManager = new EmployeeManager();
-        OrderManager _orderManager = new OrderManager();
+        BookingManager _bookingManager = new BookingManager();
         public ItemListing originalItem;
 
         /// <summary>
@@ -45,7 +47,6 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             RefreshListItems();
             eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
-            lblAddBookingGuestName.Content = inInvoice.GetFullName;
         }
 
         /// <summary>
@@ -58,13 +59,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                myEventList = _orderManager.RetrieveListItemList();
-
-                //calculating the quantity of available tickets for each listing
-                foreach (ListItemObject lIO in myEventList)
-                {
-                    lIO.QuantityOffered = _orderManager.availableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
-                }
+                myEventList = _bookingManager.RetrieveActiveItemListings();
                 lvEventListItems.ItemsSource = myEventList;
                 lvEventListItems.Items.Refresh();
             }
@@ -76,99 +71,94 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by TOny Noel- 2/11/15
-        /// Handles click event
+        /// Created by Tony Noel 2015/02/13
+        /// Handles the add Booking click event
         /// </summary>
+        /// <remarks>
+        /// updated by Pat Banks 2015/03/19
+        /// Moved decision logic to Booking Manager
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
-            addBooking();           
+            //validates data from form
+            if (!Validate()) { return; }
+
+            try
+            {
+                Booking bookingToAdd = gatherFormInformation();
+
+                //get results of adding booking
+                ResultsEdit result = _bookingManager.AddBookingResult(bookingToAdd);
+
+                switch (result)
+                {
+                    case (ResultsEdit.QuantityZero):
+                        DialogBox.ShowMessageDialog(this, "Quantity of tickets must be more than zero.");
+                        break;
+
+                    case(ResultsEdit.DatabaseError):
+                        DialogBox.ShowMessageDialog(this, "Booking could not be added due to database malfunction.");
+                        break;
+
+                    case (ResultsEdit.Success):
+                        DialogBox.ShowMessageDialog(this, "The booking has been successfully added."); 
+                        this.Close();
+                        break;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
         }
 
         /// <summary>
         /// Created by TOny Noel- 2/11/15
-        /// addBooking()- a method to collect all information from the form
+        /// a method to collect all information from the form
         /// Then after taking each variable and testing them in their specific validation method, parses them 
-        /// into the correct variable needed to be stored as a listItemObject
+        /// into the correct variable needed to be stored as a ItemListingDetails
         /// </summary>
         /// <remarks>
         /// Updated by:  Pat Banks 2015/03/11
         /// Added up/down controls to allow for easier user data entry
         /// </remarks>
-        public void addBooking()
+        private Booking gatherFormInformation()
         {
-            ListItemObject selected;
-            int gID;
-            Booking myBooking;
             decimal extendedPrice, totalPrice, discount;
+            ItemListingDetails selectedItemListing = getSelectedItem();
 
             //gets quantity from the up/down quantity field
-            int qty = (int)(udAddBookingQuantity.Value);      
-            
-            if (lvEventListItems.SelectedIndex.Equals(-1))
-            {
-                DialogBox.ShowMessageDialog(this, "Please select an event.");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
-
-            selected = getSelectedItem();
-            originalItem = _orderManager.RetrieveEventListing(selected.ItemListID);
-
-            if (qty == 0)
-            {
-                DialogBox.ShowMessageDialog(this, "Please enter a quanity greather than 0");
-                btnAddBookingAdd.IsEnabled = true;
-                return;
-            }
+            int qty = (int)(udAddBookingQuantity.Value);
 
             //get discount from form
             discount = (decimal)(udDiscount.Value);
 
-            try
-            {
-                extendedPrice = _orderManager.calcExtendedPrice(selected.Price, qty);
-                totalPrice = _orderManager.calcTotalCharge(discount, extendedPrice);            
+            //calculate values for the tickets
+            extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
+            totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
-                 gID = inInvoice.HotelGuestID;
-             
-                 DateTime myDate = DateTime.Now;   
-                 myBooking = new Booking(gID, eID, selected.ItemListID, qty, myDate, selected.Price, extendedPrice, discount, totalPrice);
-
-                 //calls to booking manager to add a booking. BookingID is auto-generated in database                
-                 int result = _orderManager.AddaBooking(myBooking);
-
-                 if (result == 1)
-                 {
-                     //change quantity of guests
-                     int updatedGuests = originalItem.CurrentNumGuests + qty;
-
-                     int result2 = _orderManager.updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
-                     if (result2 == 1)
-                     {
-                         DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");                    
-                     }
-                     // closes window after add
-                     this.Close();
-                 }
-         } //end try
-         catch (Exception ax)
-         {
-             DialogBox.ShowMessageDialog(this, ax.Message);
-         }
-
-        }//end method addBooking()
-
+            Booking bookingToAdd = new Booking(inInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+            return bookingToAdd;
+        }
 
         /// <summary>
         /// Tony Noel 2/18/15
-        /// method to create ListItemObject from listView
+        /// method to create ItemListingDetails from listView
         /// </summary>
         /// <returns>returns the selected item.</returns>
-        private ListItemObject getSelectedItem()
+        private ItemListingDetails getSelectedItem()
         {
-            ListItemObject selected = (ListItemObject)lvEventListItems.SelectedItem;
+            ItemListingDetails selected = (ItemListingDetails)lvEventListItems.SelectedItem;
 
             if (selected== null)
             {
@@ -178,44 +168,18 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/09
-        /// 
-        /// Adds the event description to the UI when the listView Item changes
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvEventListItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListItemObject myItemObject = getSelectedItem();
-
-            txtEventDescription.Text = myItemObject.EventDescription;
-            udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
-
-            if (myItemObject.QuantityOffered == 0)
-            {
-                udAddBookingQuantity.Value = 0;
-            }
-            else
-            {
-                udAddBookingQuantity.Value = 1;
-            }
-
-            refreshCostsToDisplay(myItemObject);
-        }
-
-        /// <summary>
         /// Created by Pat Banks 2015/03/11
         /// 
         /// updates the total cost with discount
         /// </summary>
         /// <param name="myItemObject"></param>
-        private void refreshCostsToDisplay(ListItemObject myItemObject)
+        private void refreshCostsToDisplay(ItemListingDetails myItemObject)
         {
             //total cost calculations
             if (myItemObject != null)
             {
-                decimal extendedPrice = _orderManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
-                lblTotalWithDiscount.Content = _orderManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
+                decimal extendedPrice = _bookingManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
+                lblTotalWithDiscount.Content = _bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
             }
             return;
         }
@@ -229,9 +193,56 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCalculateTicketPrice_Click(object sender, RoutedEventArgs e)
         {
-            ListItemObject myItemObject = getSelectedItem();
+            ItemListingDetails myItemObject = getSelectedItem();
             refreshCostsToDisplay(myItemObject);
         }
 
+        /// <summary>
+        /// Created by Pat Banks 2015/03/09
+        /// 
+        /// Adds the event description to the UI when the listView Item changes
+        /// Changes up/down quantity value if booking is full
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvEventListItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ItemListingDetails myItemObject = getSelectedItem();
+
+            txtEventDescription.Text = myItemObject.EventDescription;
+            udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
+
+            if (myItemObject.QuantityOffered == 0)
+            {
+                udAddBookingQuantity.Value = 0;
+            }
+            else
+            {
+                udAddBookingQuantity.Value = 1;
+            }
+            refreshCostsToDisplay(myItemObject);
+        }
+
+        /// <summary>
+        /// Created By Pat Banks 2015/03/19
+        /// validates user input for quantity and discount %
+        /// </summary>
+        /// <returns>True or false if valid</returns>
+        private bool Validate()
+        {
+            if (!Validator.ValidateInt(udAddBookingQuantity.Value.ToString()))
+            {
+                DialogBox.ShowMessageDialog(this, "Value is not an integer.  Please re-enter.");
+                udAddBookingQuantity.Focus();
+                return false;
+            }
+            if (!Validator.ValidateDecimal(udDiscount.Value.ToString()))
+            {
+                DialogBox.ShowMessageDialog(this, "Value is not a percentage.  Please re-enter.");
+                udDiscount.Focus();
+                return false;
+            }
+            return true;
+        }
     }
 }

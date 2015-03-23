@@ -49,7 +49,8 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                var hotelGuestList = _invoiceManager.RetrieveAllInvoiceDetails();
+                var hotelGuestList = _invoiceManager.RetrieveActiveInvoiceDetails();
+
                 lvHotelGuestList.ItemsSource = hotelGuestList;
                 lvHotelGuestList.Items.Refresh();
             }
@@ -64,8 +65,8 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Opens UI to create a new guest
         /// </summary>
-        /// <param name="sender">default event parameters</param>
-        /// <param name="e">default event parameters</param>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
         {
             AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
@@ -99,125 +100,6 @@ namespace com.WanderingTurtle.FormPresentation
             if (custInvoice.ShowDialog() == false)
             {
                 RefreshGuestList();
-            }
-        }
-
-        /// <summary>
-        /// Brings up AddEditHotelGuest to edit chosen guest.
-        /// Created By Rose Steffensmeier 2015/02/26
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <exception cref="ApplicationException">
-        /// When a guest isn't chosen, the exception will throw.
-        /// </exception>
-        /// <exception cref="Exception">
-        /// Unexpected Exception is thrown.
-        /// </exception>
-        /// <returns>nothing</returns>
-        private void btnUpdateGuest_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                HotelGuest thisGuest = (HotelGuest)lvHotelGuestList.SelectedItem;
-
-                if (thisGuest == null)
-                    throw new ApplicationException("You must choose a guest.");
-
-                AddEditHotelGuest temp = new AddEditHotelGuest(thisGuest);
-                temp.Show();
-                RefreshGuestList();
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Archives a guest, then refreshes the list.
-        /// Created by Rose Steffensmeier 2015/02/26
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// <exception cref="ApplicationException">
-        /// When a guest has not been chosen.
-        /// </exception>
-        private void btnArchiveGuest_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                HotelGuest thisGuest = (HotelGuest)lvHotelGuestList.SelectedItem;
-
-                if (thisGuest == null)
-                    throw new ApplicationException("You must choose a guest.");
-
-                _hotelGuestManager.ArchiveHotelGuest(thisGuest, !thisGuest.Active);
-                RefreshGuestList();
-            }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-        }
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private GridViewColumnHeader _sortColumn;
-
-        /// <summary>
-        /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvHotelGuestListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            // Rose - while working on Mask, somehow hit a NullReferenceException here, please take a look
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvHotelGuestList.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception)
-            {
-                DialogBox.ShowMessageDialog(this, "There must be data in the list before you can sort it");
             }
         }
     }

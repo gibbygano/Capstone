@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.BusinessLogic", "com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj", "{825BA7B8-C006-4EF9-B596-700B863A2296}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.DataAccess", "com.WanderingTurtle.DataAccess\com.WanderingTurtle.DataAccess.csproj", "{49D534C8-8BF7-4624-873C-4809D555BC99}"
@@ -34,11 +36,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerN
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem Code", "Problem Code", "{78738C71-D7C3-4536-B6FB-D371B918B2DE}"
-	ProjectSection(SolutionItems) = preProject
-		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml
-		com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs = com.WanderingTurtle.FormPresentation\UpdateBooking.xaml.cs
-		UpdateBookingclickMethod.txt = UpdateBookingclickMethod.txt
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.Web", "com.WanderingTurtle.Web\com.WanderingTurtle.Web.csproj", "{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}"
 EndProject
@@ -48,6 +45,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpfulStuff", "HelpfulStuf
 		StandardizedComments.txt = StandardizedComments.txt
 		WhatIsDone.txt = WhatIsDone.txt
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceTests", "InvoiceTests\InvoiceTests.csproj", "{81CE1B5D-9F55-43DA-BF11-E38036950202}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingTests", "BookingTests\BookingTests.csproj", "{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +82,14 @@ Global
 		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -40,4 +40,29 @@ namespace com.WanderingTurtle.Common
             CurrentNumGuests = currentNumGuests;
         }
     }
+
+    ///Created by Anthony Noel: 2015/02/16
+    /// <summary>
+    /// List Item Object, extends booking.
+    /// Has a default constructor, and one to accept 2 ints, 2 strings, another int, and two datetimes
+    /// Extends booking so that all information on a booking can be linked to the event information.
+    /// </summary>
+    public class ItemListingDetails : ItemListing
+    {
+        public string EventDescription { get; set; }
+        public int QuantityOffered { get; set; }
+        
+        public ItemListingDetails() : base() { }
+
+        public ItemListingDetails(int itemListID, int eventID, string eventName, string eventDescription, int qOffered, DateTime start, DateTime end)
+        {
+            ItemListID = itemListID;
+            EventID = eventID;
+            EventName = eventName;
+            EventDescription = eventDescription;
+            QuantityOffered = qOffered;
+            StartDate = start;
+            EndDate = end;
+        }
+    }
 }

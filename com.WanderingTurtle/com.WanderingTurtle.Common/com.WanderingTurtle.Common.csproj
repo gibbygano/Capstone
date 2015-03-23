@@ -43,10 +43,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ResultsArchive.cs" />
     <Compile Include="Booking.cs" />
+    <Compile Include="ResultsEdit.cs" />
     <Compile Include="EventType.cs" />
     <Compile Include="Invoice.cs" />
-    <Compile Include="ListItemObject.cs" />
     <Compile Include="CityState.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="Event.cs" />

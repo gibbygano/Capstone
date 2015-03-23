@@ -54,7 +54,7 @@
             </Grid.RowDefinitions>
             <Label    Grid.Row="0" Content="Events available:" FontWeight="Bold" />
 
-            <DataGrid Grid.Row="1" x:Name="lvEventListItems" SelectionChanged="lvEventListItems_SelectionChanged">
+            <DataGrid Grid.Row="1" x:Name="lvEventListItems" SelectionChanged="lvEventListItems_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Width ="40" Header="ID" Binding="{Binding ItemListID}" />
                     <DataGridTextColumn Width ="90" Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />

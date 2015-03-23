@@ -69,6 +69,68 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Created by Pat Banks 2015/03/03
+        /// Creates a connection with database and 
+        /// calls the stored procedure spSelectAllInvoices
+        /// that querys the database for a list of all active invoices
+        /// </summary>
+        /// <remarks>
+        /// Updated by Pat Banks 2015/03/19
+        /// Made a generic accessor by moving if active test to InvoiceManager
+        /// </remarks>
+        /// <returns>List of InvoiceDetails</returns>
+        public static List<InvoiceDetails> GetAllInvoicesList()
+        {
+            //create list of InvoiceDetail Objects to store the invoice information
+            var guestList = new List<InvoiceDetails>();
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSelectAllInvoices";
+
+            SqlCommand command = new SqlCommand(query, conn);
+            command.CommandType = CommandType.StoredProcedure;
+
+            //connect to db and retrieve information
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        var details = new InvoiceDetails();
+
+                        details.InvoiceID = reader.GetInt32(0);
+                        details.HotelGuestID = reader.GetInt32(1);
+                        details.DateOpened = reader.GetDateTime(2);
+                        if (!reader.IsDBNull(3)) details.DateClosed = reader.GetDateTime(3);
+                        if (!reader.IsDBNull(4)) details.TotalPaid = reader.GetDecimal(4);
+                        details.Active = reader.GetBoolean(5);
+                        details.GuestLastName = reader.GetValue(6).ToString();
+                        details.GuestFirstName = reader.GetValue(7).ToString();
+                        details.GuestRoomNum = reader.GetInt32(8);
+
+                        guestList.Add(details);
+                    }
+                }
+                else
+                {
+                    throw new ApplicationException("No invoices found.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return guestList;
+        }
+
+        /// <summary>
         /// Created by Pat Banks 2015/02/25
         /// Creates a connection with database and 
         /// calls the stored procedure spSelectInvoiceByGuest 
@@ -87,7 +149,7 @@ namespace com.WanderingTurtle.DataAccess
 
             SqlCommand command = new SqlCommand(query, conn);
             command.CommandType = CommandType.StoredProcedure;
-            
+
             command.Parameters.AddWithValue("@guestID", guestID);
 
             //connect to db and retrieve information
@@ -125,67 +187,6 @@ namespace com.WanderingTurtle.DataAccess
             return guestInvoice;
         }
 
-        /// <summary>
-        /// Created by Pat Banks 2015/03/03
-        /// Creates a connection with database and 
-        /// calls the stored procedure spSelectAllInvoices
-        /// that querys the database for a list of all active invoices
-        /// </summary>
-        /// <remarks></remarks>
-        /// <returns>List of InvoiceDetails</returns>
-        public static List<InvoiceDetails> GetActiveInvoiceList()
-        {
-            //create list of InvoiceDetail Objects to store the invoice information
-            var guestList = new List<InvoiceDetails>();
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectAllInvoices";
-
-            SqlCommand command = new SqlCommand(query, conn);
-            command.CommandType = CommandType.StoredProcedure;
-
-            //connect to db and retrieve information
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        var details = new InvoiceDetails();
-
-                        details.InvoiceID = reader.GetInt32(0);
-                        details.HotelGuestID = reader.GetInt32(1);
-                        details.DateOpened = reader.GetDateTime(2);
-                        if (!reader.IsDBNull(3)) details.DateClosed = reader.GetDateTime(3);
-                        if (!reader.IsDBNull(4)) details.TotalPaid = reader.GetDecimal(4);
-                        details.Active = reader.GetBoolean(5);
-                        details.GuestLastName = reader.GetValue(6).ToString();
-                        details.GuestFirstName = reader.GetValue(7).ToString();
-                        details.GuestRoomNum = reader.GetInt32(8);
-
-                        if (details.Active == true)
-                        {
-                            guestList.Add(details);
-                        } 
-                    }
-                }
-                else
-                {
-                    throw new ApplicationException("No open invoices found.");
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return guestList;
-        }
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
@@ -221,11 +222,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Open();
                 numRows = cmd.ExecuteNonQuery();
-
-                if (numRows == 0)
-                {
-                    throw new ApplicationException("Concurrency Violation");
-                }
             }
             catch (Exception)
             {

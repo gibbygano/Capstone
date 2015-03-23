@@ -1,7 +1,4 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +10,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -24,13 +25,16 @@ namespace com.WanderingTurtle.FormPresentation
         private BookingDetails myBooking;
         private InvoiceDetails myInvoice;
         private decimal cancelFee = 0m;
-        private OrderManager _orderManager = new OrderManager();
+        private BookingManager _bookingManager = new BookingManager();
 
-        ///Created By: Tony Noel, 2015/03/04
         /// <summary>
+        ///Created By: Tony Noel, 2015/03/04
         /// A form used to cancel a booking. Displays the information about the booking.
         /// </summary>
-        /// <param name="booking">Requires an input of a BookingDetails object (received from the ViewInvoice form- lvCustomerBookings )</param>
+        /// <param name="booking">Requires an input of a BookingDetails object 
+        /// (received from the ViewInvoice form- lvCustomerBookings )
+        /// </param>
+        /// <param name="invoice">input received from ViewInvoice</param>
         public CancelBooking(BookingDetails booking, InvoiceDetails invoice)
         {
             InitializeComponent();
@@ -49,24 +53,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         public void populateText()
         {
-            try
-            {
-                lblBookingID.Content = myBooking.BookingID;
-                lblGuestName.Content = myInvoice.GetFullName;
-                lblQuantity.Content = myBooking.Quantity;
-                lblEventName.Content = myBooking.EventItemName;
-                lblDiscount.Content = myBooking.Discount.ToString("p");
-                lblEventTime.Content = myBooking.StartDate;
-                lblTicketPrice.Content = myBooking.TicketPrice.ToString("c");
-                lblTotalDue.Content = myBooking.TotalCharge.ToString("c");
+            //populating with data from objects that opened the form
+            lblBookingID.Content = myBooking.BookingID;
+            lblGuestName.Content = myInvoice.GetFullName;
+            lblQuantity.Content = myBooking.Quantity;
+            lblEventName.Content = myBooking.EventItemName;
+            lblDiscount.Content = myBooking.Discount.ToString("p");
+            lblEventTime.Content = myBooking.StartDate;
+            lblTicketPrice.Content = myBooking.TicketPrice.ToString("c");
+            lblTotalDue.Content = myBooking.TotalCharge.ToString("c");
 
-                cancelFee = _orderManager.CalculateCancellationFee(myBooking);
-                lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
-            }
-            catch (Exception ax)
-            {
-                DialogBox.ShowMessageDialog(this, "Hotel Guest information was not found. ", ax.Message);
-            }
+            cancelFee = _bookingManager.CalculateCancellationFee(myBooking);
+            lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
         }
 
         ///Created By: Tony Noel, 2015/03/04
@@ -77,6 +75,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// updated by Pat Banks 2015/03/08
         /// updated fields to reflect cancellation of booking
+        /// updated by Pat Banks 2015/03/19
+        /// moved logic to BookingManager - CancelBookingResults
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -84,33 +84,35 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                ListItemObject originalEventListing = _orderManager.RetrieveEventListing(myBooking.ItemListID);
+                //get the cancellation fee
+                myBooking.TotalCharge = cancelFee;
 
-                int newNumGuests = originalEventListing.CurrentNumGuests - myBooking.Quantity;
+                //cancel booking and get results
+                ResultsEdit result = _bookingManager.CancelBookingResults(myBooking);
 
-                int result1 = _orderManager.updateNumberOfGuests(myBooking.ItemListID, originalEventListing.CurrentNumGuests, newNumGuests);
-
-                if (result1 == 1)
+                switch (result)
                 {
-                    myBooking.TotalCharge = cancelFee;
-                    myBooking.Quantity = 0;
-                    myBooking.TicketPrice = 0;
-                    myBooking.ExtendedPrice = 0;
-                    myBooking.Discount = 0;
+                    case (ResultsEdit.ChangedByOtherUser):
+                        DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.");
+                        break;
 
-                    int result = _orderManager.EditBooking(myBooking);
-
-                    if (result == 1)
-                    {
-                        DialogBox.ShowMessageDialog(this, "The booking has been cancelled.");
-                        // closes window after cancel
+                    case (ResultsEdit.Success):
+                        DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");
                         this.Close();
-                    }
+                        break;
                 }
+            }
+            catch (ApplicationException ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "An issue occured while attempting to cancel this booking.", ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
     }

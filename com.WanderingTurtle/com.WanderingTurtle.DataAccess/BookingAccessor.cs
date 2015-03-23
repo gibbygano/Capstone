@@ -15,10 +15,10 @@ namespace com.WanderingTurtle.DataAccess
         /// Creates a list of options, has an ItemListID, Quantity, and some event info
         /// to help populate drop downs/ lists for Add Bookings
         /// </summary>
-        /// <returns>a list of ListItemObject objects (is created from two tables, ItemListing and Event Item)</returns>
-        public static List<ListItemObject> getListItems()
+        /// <returns>a list of ItemListingDetails objects (is created from two tables, ItemListing and Event Item)</returns>
+        public static List<ItemListingDetails> getListItems()
         {
-            var BookingOpsList = new List<ListItemObject>();
+            var BookingOpsList = new List<ItemListingDetails>();
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectListingFull";
@@ -37,7 +37,7 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     while (reader.Read())
                     {
-                        var currentBook = new ListItemObject();
+                        var currentBook = new ItemListingDetails();
                         //Below are found on the ItemListing table (ItemListID is a foreign key on booking)
                         currentBook.ItemListID = reader.GetInt32(0);
                         currentBook.MaxNumGuests = reader.GetInt32(1);
@@ -79,9 +79,9 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="itemListID">Id for the itemListing</param>
         /// <returns></returns>
-        public static ListItemObject getEventListing(int itemListID)
+        public static ItemListingDetails getEventListing(int itemListID)
         {
-            var eventItemListing = new ListItemObject();
+            var eventItemListing = new ItemListingDetails();
 
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();

@@ -28,7 +28,7 @@ namespace com.WanderingTurtle.FormPresentation
         private HotelGuest guestToView;
         private InvoiceManager _invoiceManager = new InvoiceManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        private OrderManager _orderManager = new OrderManager();
+        private BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
@@ -39,27 +39,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
         public ArchiveInvoice(int selectedHotelGuestID)
         {
-            originalInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-            invoiceToArchive = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-
             try
             {
-                guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
-                myBookingList = _invoiceManager.RetrieveBookingDetailsList(invoiceToArchive.HotelGuestID);
-
-                invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
-
                 InitializeComponent();
-                lblGuestNameLookup.Content = guestToView.GetFullName;
-                lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
-                lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
-                lblAddress.Content = guestToView.Address1;
-                lblCityState.Content = guestToView.CityState.GetZipStateCity;
-                lblPhoneNum.Content = guestToView.PhoneNumber;
-                lblRoomNum.Content = guestToView.Room;
-                lblInvoice.Content = invoiceToArchive.InvoiceID;
-                lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
-                lblPhoneNum.Content = guestToView.PhoneNumber;
+                originalInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+                invoiceToArchive = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+
+                guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
+                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(invoiceToArchive.HotelGuestID);
+                FillFormFields(selectedHotelGuestID);
             }
             catch (ApplicationException ex)
             {
@@ -77,43 +65,50 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
+        /// Populates form fields
+        /// </summary>
+        /// <param name="selectedHotelGuestID"></param>
+        private void FillFormFields(int selectedHotelGuestID)
+        {
+            invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
+            lblGuestNameLookup.Content = guestToView.GetFullName;
+            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
+            lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
+            lblAddress.Content = guestToView.Address1;
+            lblCityState.Content = guestToView.CityState.GetZipStateCity;
+            lblPhoneNum.Content = guestToView.PhoneNumber;
+            lblRoomNum.Content = guestToView.Room;
+            lblInvoice.Content = invoiceToArchive.InvoiceID;
+            lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
+            lblPhoneNum.Content = guestToView.PhoneNumber;
+        }
+
+        /// <summary>
+        /// Created by Pat Banks 2015/03/03
         ///
         /// Calls methods to archive the associated database records for the selected hotel guest
         /// </summary>
-        /// <param name="sender">default event Parameter</param>
-        /// <param name="e">default event Parameter</param>
+        /// <remarks>
+        /// Updated by Pat Banks 2015/03/19
+        /// Moved decision logic to Invoice Manager
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFinalizeInvoice_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //archive guest's bookings by changing active field to false
-                foreach (BookingDetails b in myBookingList)
+                ResultsArchive result = _invoiceManager.ArchiveCurrentGuestInvoice(invoiceToArchive);
+
+                switch (result)
                 {
-                    b.Active = false;
-                    int numrows = _orderManager.EditBooking(b);
-                    if (numrows != 1)
-                    {
-                        DialogBox.ShowMessageDialog(this, "There was a problem archiving the booking");
-                    }
-                }
+                    case (ResultsArchive.ChangedByOtherUser):
+                        DialogBox.ShowMessageDialog(this, "Record already changed by another user.");
+                        break;
 
-                //archive hotel guest
-                bool guestArchive = _hotelGuestManager.ArchiveHotelGuest(guestToView, !guestToView.Active);
-
-                if (guestArchive == true)
-                {
-                    //update invoice record with dateClosed and change active status
-                    invoiceToArchive.DateClosed = DateTime.Now;
-                    invoiceToArchive.Active = false;
-
-                    bool result = _invoiceManager.ArchiveCurrentGuestInvoice(originalInvoice, invoiceToArchive);
-
-                    //Dialog appears if records were successfully archived
-                    if (result == true)
-                    {
-                        DialogBox.ShowMessageDialog(this, "Guest Checkout Complete");
-                        this.DialogResult = true;
-                    }
+                    case (ResultsArchive.Success):
+                        DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        break;
                 }
             }
             catch (ApplicationException ex)
@@ -130,6 +125,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Created by Pat Banks 2015/03/07
+        /// Handles click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;

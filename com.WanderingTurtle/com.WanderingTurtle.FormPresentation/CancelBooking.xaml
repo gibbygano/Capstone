@@ -9,8 +9,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="160" />
-            <ColumnDefinition Width="75" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="92" />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -21,28 +21,28 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label  Grid.Column="0" Grid.Row="0"  Content="Booking Cancellation" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-        <Label  Grid.Column="0" Grid.Row="1"  Content="Guest Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <Label  Grid.Column="0" Grid.Row="2"  Content="Event Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <Label  Grid.Column="0" Grid.Row="3"  Content="Quantity:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <Label  Grid.Column="0" Grid.Row="4"  Content="Ticket Price:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+        <Label  Grid.Column="0" Grid.Row="0"  Content="Booking Cancellation" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,4,0,3" />
+        <Label  Grid.Column="0" Grid.Row="1"  Content="Guest Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+        <Label  Grid.Column="0" Grid.Row="2"  Content="Event Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,4,0,3" />
+        <Label  Grid.Column="0" Grid.Row="3"  Content="Quantity:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3" />
+        <Label  Grid.Column="0" Grid.Row="4"  Content="Ticket Price:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
 
-        <Label  Grid.Row="1" Grid.Column="1" x:Name="lblGuestName" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="1" Grid.Column="2" Content="Booking ID:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="1" Grid.Column="3" x:Name="lblBookingID" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <Label  Grid.Row="1" Grid.Column="1" x:Name="lblGuestName" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+        <Label  Grid.Row="1" Grid.Column="2" Content="Booking ID:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+        <Label  Grid.Row="1" Grid.Column="3" x:Name="lblBookingID" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
 
-        <Label  Grid.Row="2" Grid.Column="1" x:Name="lblEventName" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="2" Grid.Column="2" Content="Event Time:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="2" Grid.Column="3" x:Name="lblEventTime" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <Label  Grid.Row="2" Grid.Column="1" x:Name="lblEventName" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,4,0,3" />
+        <Label  Grid.Row="2" Grid.Column="2" Content="Event Time:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,4,0,3" />
+        <Label  Grid.Row="2" Grid.Column="3" x:Name="lblEventTime" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,4,0,3" />
 
-        <Label  Grid.Row="3" Grid.Column="1" x:Name="lblQuantity" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="3" Grid.Column="2" Content="Discount:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="3" Grid.Column="3" x:Name="lblDiscount" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
+        <Label  Grid.Row="3" Grid.Column="1" x:Name="lblQuantity" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3" />
+        <Label  Grid.Row="3" Grid.Column="2" Content="Discount:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3" />
+        <Label  Grid.Row="3" Grid.Column="3" x:Name="lblDiscount" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3" />
 
-        <Label  Grid.Row="4" Grid.Column="1" x:Name="lblTicketPrice" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="4" Grid.Column="2" Content="Total Due:" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" />
-        <Label  Grid.Row="4" Grid.Column="3" x:Name="lblTotalDue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
-        <Label  Grid.Row="5" Grid.Column="0" x:Name="lblCancelMessage" Grid.ColumnSpan="4" FontStyle="Italic" HorizontalContentAlignment="Center" />
+        <Label  Grid.Row="4" Grid.Column="1" x:Name="lblTicketPrice" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+        <Label  Grid.Row="4" Grid.Column="2" Content="Total Due:" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+        <Label  Grid.Row="4" Grid.Column="3" x:Name="lblTotalDue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+        <Label  Grid.Row="5" Grid.Column="0" x:Name="lblCancelMessage" Grid.ColumnSpan="4" FontStyle="Italic" HorizontalContentAlignment="Center" Height="Auto" Margin="0,3" />
         <Button Grid.Row="6" Grid.Column="1" Content="Submit" x:Name="BtnSubmit" Margin="0,0,70,0" Click="btnConfirmCancel_Click" />
         <Button Grid.Row="6" Grid.Column="2" Name="cancelButton" IsCancel="True">Cancel</Button>
     </Grid>

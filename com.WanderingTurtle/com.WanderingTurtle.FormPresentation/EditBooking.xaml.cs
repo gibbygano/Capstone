@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.FormPresentation.Models;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -23,12 +24,9 @@ namespace com.WanderingTurtle.FormPresentation
     {
         public InvoiceDetails inInvoice;
         public BookingDetails originalBookingRecord;
-        public BookingDetails editedBookingRecord;
-        List<BookingDetails> outInvList = new List<BookingDetails>();
-        ListItemObject listingToView = new ListItemObject();       
-
-        Booking newBooking;
-        OrderManager _orderManager = new OrderManager();
+        ItemListingDetails eventListingToView = new ItemListingDetails();
+        int eID;
+        BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
         /// Created by Ryan Blake 2015/03/06
@@ -40,108 +38,143 @@ namespace com.WanderingTurtle.FormPresentation
         {
             this.inInvoice = inInvoice;
             originalBookingRecord = inBookingDetails;
-            editedBookingRecord = inBookingDetails;
-
             InitializeComponent();
 
-            outInvList.Add(inBookingDetails);
-            listingToView = _orderManager.RetrieveEventListing(inBookingDetails.ItemListID);
-            listingToView.QuantityOffered = _orderManager.availableQuantity(listingToView.MaxNumGuests, listingToView.CurrentNumGuests);
-
-            lblEditBookingGuestName.Content = inInvoice.GetFullName;
-            udAddBookingQuantity.Value = originalBookingRecord.Quantity;
-            udDiscount.Value = originalBookingRecord.Discount;
-
-            lblAvailSeats.Content = listingToView.QuantityOffered;
-
-            lvEditBookingListItems.ItemsSource = outInvList;
-
-            udAddBookingQuantity.Maximum = inBookingDetails.Quantity + listingToView.QuantityOffered;
+            populateTextFields();
+            eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
         }
 
 
         /// <summary>
-        /// Created by Ryan Blake
+        /// created by Pat Banks 2015-03-19
+        /// 
+        /// populates text fields with object data
+        /// </summary>
+        /// <param name="inInvoice"></param>
+        /// <param name="inBookingDetails"></param>
+        private void populateTextFields()
+        {
+            //get latest data on the eventItemListing
+            eventListingToView = _bookingManager.RetrieveEventListing(originalBookingRecord.ItemListID);
+            eventListingToView.QuantityOffered = _bookingManager.availableQuantity(eventListingToView.MaxNumGuests, eventListingToView.CurrentNumGuests);
+
+            //populate form fields with object data
+            lblEditBookingGuestName.Content = inInvoice.GetFullName;
+            lblEventName.Content = originalBookingRecord.EventItemName;
+            lblStartDate.Content = originalBookingRecord.StartDate;
+            lblTicketPrice.Content = originalBookingRecord.TicketPrice.ToString("c");
+            lblTotalDue.Content = originalBookingRecord.TotalCharge.ToString("c");
+
+            udAddBookingQuantity.Value = originalBookingRecord.Quantity;
+            udDiscount.Value = originalBookingRecord.Discount;
+
+            lblAvailSeats.Content = eventListingToView.QuantityOffered;
+
+            //calculates the maximum quantity for the u/d 
+            udAddBookingQuantity.Maximum = originalBookingRecord.Quantity + eventListingToView.QuantityOffered;
+        }
+
+        /// <summary>
+        /// Created by Ryan Blake 2015/03/06
         ///
         /// </summary>
         /// <remarks>
         /// Updated- Tony Noel, 2015/03/10 to check if the quantity is going up and see if the booking is already full
         ///and if the booking has occured already, it cannot be changed.
         /// Updated by Pat Banks 2015/03/11 updated for use of up/down controls for quantity and discount
+        /// UPdated by Pat Banks 2015/03/19 moved decision logic to booking manager 
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
-            int qtyToTry = (int)(udAddBookingQuantity.Value);
-            decimal discountToTry = (decimal)(udDiscount.Value);
-
-            int numGuestsDifference=0;
-
-            ListItemObject originalItem = null;
-
             try
             {
-                //A variable to hold the dfference between the number of guests on the original reservation, and the old reservation
-                numGuestsDifference = _orderManager.spotsReservedDifference(qtyToTry, originalBookingRecord.Quantity);
+                //get form info
+                Booking editedBookingRecord = gatherFormInformation();
 
-                // creates an ItemListing object by retrieving the record of the specific object based on it's ItemListID
-                originalItem = _orderManager.RetrieveEventListing(editedBookingRecord.ItemListID);
-                
-                //assigned the difference of the MaxNumGuests - currentNum of guests
-                int quantityOffered = _orderManager.availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
-                
+                //get results of adding booking
+                ResultsEdit result = _bookingManager.EditBookingResult(originalBookingRecord.Quantity, editedBookingRecord);
 
-
-                //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
-                if (quantityOffered == 0 && (numGuestsDifference > qtyToTry))
+                switch (result)
                 {
-                    DialogBox.ShowMessageDialog(this, "This event is already full. You cannot add more guests to it.");
-                    return;
+                    case (ResultsEdit.QuantityZero):
+                        DialogBox.ShowMessageDialog(this, "Please use cancel instead of setting quantity 0.");
+                        break;
+                    case (ResultsEdit.Success):
+                        DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        this.Close();
+                        break;
+                    case(ResultsEdit.ListingFull):
+                        DialogBox.ShowMessageDialog(this,"This event is already full. You cannot add more guests to it.");
+                        break;
+                    case(ResultsEdit.ChangedByOtherUser):
+                        DialogBox.ShowMessageDialog(this, "Changed by another user");
+                        break;
                 }
-
-                //Method to check the number of guests added to a reservation against the available quantity for the event
-                if (numGuestsDifference > quantityOffered)
-                {
-                    DialogBox.ShowMessageDialog(this, "You are attempting to add " + numGuestsDifference + " guests onto this reservation, however, there are only " + quantityOffered + " spots open for this event. Please alert the guest.");
-                    return;
-                }
+            }
+            catch (ApplicationException ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
+            catch (SqlException ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There was an issue locating the ItemListID on file.", ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
+        }
 
-            if (qtyToTry == 0)
-            {
-                DialogBox.ShowMessageDialog(this, "Please use cancel instead of setting quantity 0");
-                return;
-            }
-          
-            //update edited booking object with new data
-            editedBookingRecord.Quantity = qtyToTry;
-            editedBookingRecord.Discount = discountToTry;
-            editedBookingRecord.TicketPrice = originalItem.Price;
-            editedBookingRecord.ExtendedPrice = _orderManager.calcExtendedPrice(editedBookingRecord.TicketPrice, editedBookingRecord.Quantity);
-            editedBookingRecord.TotalCharge = _orderManager.calcTotalCharge(editedBookingRecord.Discount, editedBookingRecord.ExtendedPrice);
-            
-            //send the changes to the database       
-            newBooking = (Booking)editedBookingRecord;
-            int numRows = _orderManager.EditBooking(newBooking);
 
-            if (numRows == 1)
-            {
-                DialogBox.ShowMessageDialog(this, "Booking changed successfully.");
-                
-                //change number of seasts available
-                ListItemObject originalEventListing = _orderManager.RetrieveEventListing(editedBookingRecord.ItemListID);
+        /// <summary>
+        /// Created by Pat Banks 2015/03/19
+        /// Gathers form data to submit to database for changes
+        /// </summary>
+        /// <returns>booking of the new information</returns>
+        private Booking gatherFormInformation()
+        {
+            decimal extendedPrice, totalPrice, discount;
 
-                int newNumGuests = originalEventListing.CurrentNumGuests + numGuestsDifference;
+            //gets quantity from the up/down quantity field
+            int qty = (int)(udAddBookingQuantity.Value);
 
-                int result1 = _orderManager.updateNumberOfGuests(editedBookingRecord.ItemListID, originalEventListing.CurrentNumGuests, newNumGuests);
+            //get discount from form
+            discount = (decimal)(udDiscount.Value);
 
-                this.Close();
-            }
+            //calculate values for the tickets
+            extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, qty);
+            totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+
+            Booking editedBooking = new Booking(originalBookingRecord.BookingID, originalBookingRecord.GuestID, eID, originalBookingRecord.ItemListID, qty, DateTime.Now, discount,originalBookingRecord.Active, originalBookingRecord.TicketPrice, extendedPrice, totalPrice);
+            return editedBooking;
+        }
+
+        /// <summary>
+        /// Handles Click event for cancel button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Created by Pat Banks 2015/03/19
+        /// Calculates the adjusted ticket price based on new data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCalculateTicketPrice_Click(object sender, RoutedEventArgs e)
+        {
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, (int)(udAddBookingQuantity.Value));
+            lblTotalDue.Content = (_bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice)).ToString("c");
+           
+ //***********************TBD NEED to look at this - not updating correctly
+            lblAvailSeats.Content = eventListingToView.QuantityOffered - _bookingManager.spotsReservedDifference((int)(udAddBookingQuantity.Value), eventListingToView.QuantityOffered);
+
         }
     }
 }
