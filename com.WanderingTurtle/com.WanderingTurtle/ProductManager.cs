@@ -13,6 +13,30 @@ namespace com.WanderingTurtle.BusinessLogic
         {
 
         }
+
+        public enum listResult
+        {
+            //item could not be found
+            NotFound = 0,
+
+            //new event could not be added
+            NotAdded,
+
+            NotChanged,
+
+            //worked
+            Success,
+
+            //Can change record
+            OkToEdit,
+
+            //concurrency error
+            ChangedByOtherUser,
+
+            DatabaseError,
+
+
+        }
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
@@ -29,33 +53,33 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
-	        
+
         }
 
-	    /// <summary>
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Calls the Data Access Later to get a list of Active Lists
         /// </summary>
         /// <returns>An iterative list of active Lists objects</returns>
         public List<Lists> RetrieveListsList()
-	    {
+        {
             try
             {
                 return ListsAccessor.GetListsList();
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
-		    
-	    }
 
-	    /// <summary>
+        }
+
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Send a new Lists object to the Data Access Layer to be added to the database
@@ -63,20 +87,20 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newLists">Lists object that contains the information to be added</param>
         /// <returns>int number of rows affect -- 1 if successful, 0 if not</returns>
         public int AddLists(Lists newLists)
-	    {
+        {
             try
             {
                 return ListsAccessor.AddLists(newLists);
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
-		    
-	    }
 
-	    /// <summary>
+        }
+
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Updates a Lists object by sending the object in its original form and the object with the updated information
@@ -84,21 +108,25 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newLists">the Lists object containing the new data</param>
         /// <param name="oldLists">the Lists object containing the original data</param>
         /// <returns>int number of rows affected-- should be 1</returns>
-        public int EditLists(Lists newLists, Lists oldLists)
-	    {
+        public listResult EditLists(Lists newLists, Lists oldLists)
+        {
             try
             {
-                return ListsAccessor.UpdateLists(oldLists, newLists);
+                if(ListsAccessor.UpdateLists(oldLists, newLists)== 1)
+                {
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    return listResult.Success;
+                }
+                return listResult.NotChanged;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
-                throw ex;
+                return listResult.DatabaseError;
             }
-		    
-	    }
 
-	    /// <summary>
+        }
+
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Archive a Lists so it does not appear in active searches
@@ -107,20 +135,20 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="listsToDelete">Lists object containing the information to delete</param>
         /// <returns>int # of rows affected</returns>
         public int ArchiveLists(Lists listsToDelete)
-	    {
+        {
             try
             {
                 return ListsAccessor.DeleteLists(listsToDelete);
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
-		    
-	    }
 
-	    /// <summary>
+        }
+
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Get a single ItemListing object from the database
@@ -128,62 +156,81 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="itemListID">the ItemListing ID in string format</param>
         /// <returns>a single ItemListing object meeting the criteria</returns>
         public ItemListing RetrieveItemListing(string itemListID)
-	    {
+        {
             try
             {
                 return ItemListingAccessor.GetItemListing(itemListID);
             }
             catch (Exception ex)
             {
-                
+
                 throw;
             }
-		    
-	    }
 
-	    /// <summary>
+        }
+
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Calls the Data Access Later to get a list of Active ItemListings
         /// </summary>
         /// <returns>An iterative list of active ItemListing objects</returns>
         public List<ItemListing> RetrieveItemListingList()
-	    {
+        {
             try
             {
-                return ItemListingAccessor.GetItemListingList();
-
+                double cacheExpirationTime = 5; //how long the cache should live (minutes)
+                var now = DateTime.Now;
+                if (DataCache._currentItemListingList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    DataCache._ItemListingListTime = now;
+                }
+                else
+                {
+                    //check time. If less than 5 min, return cache
+                    if (now > DataCache._ItemListingListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                        DataCache._ItemListingListTime = now;
+                    }
+                }
+                return DataCache._currentItemListingList;
             }
-            catch (Exception ex)
+            catch(Exception)
             {
-                
-                throw ex;
+                throw new Exception();
             }
-		    
-	    }
+        }
 
-	    /// <summary>
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Send a new ItemListing object to the Data Access Layer to be added to the database
         /// </summary>
         /// <param name="newItemListing">ItemListing object that contains the information to be added</param>
         /// <returns>int number of rows affect -- 1 if successful, 0 if not</returns>
-        public int AddItemListing(ItemListing newItemListing)
-	    {
+        public listResult AddItemListing(ItemListing newItemListing)
+        {
             try
             {
-               return ItemListingAccessor.AddItemListing(newItemListing);
+                if(ItemListingAccessor.AddItemListing(newItemListing) ==1)
+                {
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    return listResult.Success;
+                }
+                return listResult.NotAdded;
             }
             catch (Exception ex)
             {
-                
-                throw ex;
+                return listResult.DatabaseError;
             }
-		    
-	    }
 
-	    /// <summary>
+        }
+
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Updates an ItemListing object by sending the object in its original form and the object with the updated information
@@ -191,39 +238,46 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newItemList">the ItemListing object containing the new data</param>
         /// <param name="oldItemList">the ItemListing object containing the original data</param>
         /// <returns>int number of rows affected-- should be 1</returns>
-        public int EditItemListing(ItemListing newItemLists, ItemListing oldItemLists)
-	    {
+        public listResult EditItemListing(ItemListing newItemLists, ItemListing oldItemLists)
+        {
             try
             {
-                return ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists);
+                if(ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists) == 1)
+                {
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    return listResult.Success;
+                }
+                return listResult.NotChanged;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
-                throw ex;
+                return listResult.DatabaseError;
             }
-		    
-	    }
+        }
 
-	    /// <summary>
+        /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Archive an ItemListing so it does not appear in active searches
         /// </summary>
         /// <param name="itemListToDelete">ItemListing object containing the information to delete</param>
         /// <returns>int # of rows affected</returns>
-        public int ArchiveItemListing(ItemListing itemListToDelete)
-	    {
+        public listResult ArchiveItemListing(ItemListing itemListToDelete)
+        {
             try
             {
-                return ItemListingAccessor.DeleteItemListing(itemListToDelete);
+                if(ItemListingAccessor.DeleteItemListing(itemListToDelete)==1)
+                {
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    return listResult.Success;
+                }
+                return listResult.NotChanged;
             }
             catch (Exception ex)
             {
-                
-                throw ex;
+                return listResult.DatabaseError;
             }
-		    
-	    }
+
+        }
     }
 }

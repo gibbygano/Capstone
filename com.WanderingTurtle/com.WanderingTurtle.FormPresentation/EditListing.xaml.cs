@@ -89,8 +89,8 @@ namespace com.WanderingTurtle.FormPresentation
                 NewListing.SupplierID = ListingOrigin.SupplierID;
 
 
-                int numRows = prodMan.EditItemListing(NewListing, ListingOrigin);
-                if (numRows == 1)
+                var numRows = prodMan.EditItemListing(NewListing, ListingOrigin);
+                if (numRows == ProductManager.listResult.Success)
                 {
                     DialogBox.ShowMessageDialog(this, "Item successfully changed.");
                     this.Close();
