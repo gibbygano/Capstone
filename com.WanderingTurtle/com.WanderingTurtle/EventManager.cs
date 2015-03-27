@@ -29,8 +29,6 @@ namespace com.WanderingTurtle.BusinessLogic
             ChangedByOtherUser,
 
             DatabaseError,
-
-
         }
         public EventManager()
         {
@@ -109,7 +107,6 @@ namespace com.WanderingTurtle.BusinessLogic
                         //set cache to new list and update time
                         DataCache._currentEventList = list;
                         DataCache._EventListTime = now;
-
                         return list;
                     }
                     else
