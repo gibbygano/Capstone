@@ -46,9 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpfulStuff", "HelpfulStuf
 		WhatIsDone.txt = WhatIsDone.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceTests", "InvoiceTests\InvoiceTests.csproj", "{81CE1B5D-9F55-43DA-BF11-E38036950202}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookingTests", "BookingTests\BookingTests.csproj", "{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "BookingTests\Tests.csproj", "{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,10 +80,6 @@ Global
 		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA6DCDC1-4DB8-4B80-8AFA-F544F5A2EA21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81CE1B5D-9F55-43DA-BF11-E38036950202}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDA1831E-A51A-48B4-A1B8-4E6D79FF6851}.Release|Any CPU.ActiveCfg = Release|Any CPU
