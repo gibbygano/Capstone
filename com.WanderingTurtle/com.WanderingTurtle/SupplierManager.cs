@@ -2,12 +2,36 @@
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
 using System;
+using System.Linq;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
     /// <summary>
     /// Manages CRUD Operations for data pertaining to Suppliers
     /// </summary>
+    public enum SupplierResult
+        {
+            //item could not be found
+            NotFound = 0,
+
+            //new supplier could not be added
+            NotAdded,
+
+            NotChanged,
+
+            //worked
+            Success,
+
+            //Can change record
+            OkToEdit,
+
+            //concurrency error
+            ChangedByOtherUser,
+
+            DatabaseError,
+
+
+        }
     public class SupplierManager
     {
         public SupplierManager()
@@ -17,15 +41,46 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Gets a single Supplier  from the Data Access layer
         /// Throws any exceptions caught by the DAL
+        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
         /// <param name="supplierID">string ID of the application to be retrieved</param>
         /// <returns>Supplier object</returns>
         /// Created by Reece Maas 2/18/15
         public Supplier RetrieveSupplier(string supplierID)
         {
+            var now = DateTime.Now;
+            double cacheExpirationTime = 5;
+
             try
             {
-                return SupplierAccessor.GetSupplier(supplierID);
+                if (DataCache._currentSupplierList == null)
+                {
+                    return SupplierAccessor.GetSupplier(supplierID);
+                }
+                else
+                {
+                    //check time. If less than 5 min, return event from cache
+                    if (now > DataCache._SupplierListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get event from DB
+                        var currentSupplier = SupplierAccessor.GetSupplier(supplierID);
+                        return currentSupplier;
+                    }
+                    else
+                    {
+                        //get event from cached list
+                        var list = DataCache._currentSupplierList;
+                        Supplier currentSupplier = list.Where(e => e.SupplierID.ToString() == supplierID).FirstOrDefault();
+                        if (currentSupplier != null)
+                        {
+                            return currentSupplier;
+                        }
+                        else
+                        {
+                            throw new ApplicationException("Supplier not found.");
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -36,14 +91,43 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Gets a list of Suppliers  from the Data Access layer
         /// Throws any exceptions caught by the DAL
+        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
         /// <returns>Supplier List</returns>
         /// Created by Reece Maas 2/18/15
         public List<Supplier> RetrieveSupplierList()
         {
+            double cacheExpirationTime = 5; //how long the cache should live (minutes)
+            var now = DateTime.Now;
             try
             {
-                return SupplierAccessor.GetSupplierList();
+                if (DataCache._currentSupplierList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    var list = SupplierAccessor.GetSupplierList();
+                    DataCache._currentSupplierList = list;
+                    DataCache._SupplierListTime = now;
+                    return list;
+                }
+                else
+                {
+                    //check time. If less than 5 min, return cache
+
+                    if (now > DataCache._SupplierListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        var list = SupplierAccessor.GetSupplierList();
+                        //set cache to new list and update time
+                        DataCache._currentSupplierList = list;
+                        DataCache._SupplierListTime = now;
+
+                        return list;
+                    }
+                    else
+                    {
+                        return DataCache._currentSupplierList;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -55,53 +139,108 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Adds a single Supplier to the database
         /// Throws any exceptions caught by the DAL
+        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
         /// <returns>Supplier object</returns>
         /// Created by Reece Maas 2/18/15
-        public int AddANewSupplier(Supplier supplierToAdd)
+        public SupplierResult AddANewSupplier(Supplier supplierToAdd)
         {
             try
             {
-                return SupplierAccessor.AddSupplier(supplierToAdd);
+                if (SupplierAccessor.AddSupplier(supplierToAdd) == 1)
+                {
+                    //refresh cache
+                    DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();
+                    DataCache._SupplierListTime = DateTime.Now;
+                    return SupplierResult.Success;
+                }
+                else
+                {
+                    return SupplierResult.NotAdded;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return SupplierResult.ChangedByOtherUser;
+                }
+                return SupplierResult.DatabaseError;
+            }
+            catch (Exception)
+            {
+                return SupplierResult.DatabaseError;
             }
 
         }
         /// <summary>
         /// Updates a Supplier 
         /// Throws any exceptions caught by the DAL
+        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
         /// <returns>updated Supplier</returns>
         /// Created by Reece Maas 2/18/15
-        public int EditSupplier(Supplier oldSupplier, Supplier newSupplier)
+        public SupplierResult EditSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
             try
             {
-                return SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier);
+                if (SupplierAccessor.UpdateSupplier(newSupplier, oldSupplier) == 1)
+                {
+                    //update cache
+                    DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();
+                    DataCache._SupplierListTime = DateTime.Now;
+                    return SupplierResult.Success;
+                }
+                else
+                {
+                    return SupplierResult.NotChanged;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return SupplierResult.ChangedByOtherUser;
+                }
+                return SupplierResult.DatabaseError;
+            }
+            catch (Exception)
+            {
+
+                return SupplierResult.DatabaseError;
             }
             
         }
-        public int ArchiveSupplier(Supplier supplierToDelete)
+        public SupplierResult ArchiveSupplier(Supplier supplierToDelete)
         {
             try
             {
-                return SupplierAccessor.DeleteSupplier(supplierToDelete);
+                if (SupplierAccessor.DeleteSupplier(supplierToDelete) == 1)
+                {
+                    //update cache
+                    DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();
+                    DataCache._SupplierListTime = DateTime.Now;
+                    return SupplierResult.Success;
+                }
+                else
+                {
+                    return SupplierResult.NotChanged;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return SupplierResult.ChangedByOtherUser;
+                }
+                return SupplierResult.DatabaseError;
+            }
+            catch (Exception)
+            {
+                return SupplierResult.DatabaseError;
             }
             
         }
