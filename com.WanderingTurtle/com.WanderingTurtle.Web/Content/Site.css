@@ -110,10 +110,6 @@ h5, h6 {
         padding-top: 30px;
     }
 
-    .featured + .main-content {
-        background: url("../Images/heroAccent.png") no-repeat;
-    }
-
 header .content-wrapper {
     padding-top: 20px; 
 }
@@ -121,6 +117,7 @@ header .content-wrapper {
 footer {
     clear: both;
     background-color: #e2e2e2;
+    color: rgb(0,106,160);
     font-size: .8em;
     height: 100px;
 }
@@ -149,12 +146,13 @@ footer {
 #login {
     display: block;
     font-size: .85em;
-    margin: 0 0 10px;
+    margin: 0px 20px 10px;
     text-align: right;
+
 }
 
     #login a {
-        background-color: #d3dce0;
+        color:white;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
@@ -180,17 +178,21 @@ footer {
 /* menu
 ----------------------------------------------------------*/
 ul#menu {
-    font-size: 1.3em;
-    font-weight: 600;
+    background-color: rgb(51,161,51);
+    border: 2px solid rgb(51,161,51);
+    border-radius: 5px;
+    padding: 30px;
+    font-size: 2em;
+    font-weight: 300;
     margin: 0 0 5px;
     padding: 0;
-    text-align: right;
+    text-align: center;
 }
 
     ul#menu li {
         display: inline;
         list-style: none;
-        padding-left: 15px;
+        padding: 5px 10px;
     }
 
         ul#menu li a {
@@ -600,14 +602,18 @@ input[type="radio"]{
 /**USER MENU STYLES*/
 
 #user_menu{
-
     color: #fff;
-    padding: 10px;
+    float:right;
 }
 #Menu1 a.static {
     padding-left: 0.85em;
     padding-right: 0.15em;
 }
+
+#Menu1 a.static.highlighted {
+    border-radius:5px;
+}
+
 
 
 
