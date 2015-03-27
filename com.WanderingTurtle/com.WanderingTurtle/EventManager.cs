@@ -417,5 +417,30 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             
         }
+
+        public List<Event> EventSearch(String inSearch)
+        {
+            //List<Event> myTempList = new List<Event>();
+            if (!inSearch.Equals("") && !inSearch.Equals(null))
+            {
+                
+                //Lambda Version
+                //return myTempList.AddRange(DataCache._currentEventList.Where(s => s.EventItemName.ToUpper().Contains(inSearch.ToUpper())).Select(s => s));
+                //LINQ version
+                    List<Event> myTempList = new List<Event>();
+                    myTempList.AddRange(
+                      from inEvent in DataCache._currentEventList
+                      where inEvent.EventItemName.ToUpper().Contains(inSearch.ToUpper())
+                      select inEvent);
+                    return myTempList;
+                
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+            }
+            else
+            {
+                return DataCache._currentEventList;
+            }
+            
+        }
     }
 }

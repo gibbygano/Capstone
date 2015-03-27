@@ -179,27 +179,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            //List<Event> myTempList = new List<Event>();
-            if (!txtSearchInput.Text.Equals("") && !txtSearchInput.Text.Equals("*"))
-            {
-                List<Event> myTempList = new List<Event>();
-                //Lambda Version
-                myTempList.AddRange(myEventList.Where(s => s.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper()))
-                    .Select(s => s));
-                //LINQ version
-                //myTempList.AddRange(
-                //        from inEvent in myEventList
-                //        where inEvent.EventItemName.ToUpper().Contains(txtSearchInput.Text.ToUpper())
-                //        select inEvent);
-
-                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
-                lvEvents.ItemsSource = myTempList;
-            }
-            else if (txtSearchInput.Text.Equals(""))
-            {
-                lvEvents.ItemsSource = myEventList;
-            }
+            List<Event> myTempList = myMan.EventSearch(txtSearchInput.Text);
+            lvEvents.ItemsSource = myTempList;
             txtSearchInput.Text = "";
+            
         }
 
         private void lvEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -259,6 +242,18 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception)
             {
                 DialogBox.ShowMessageDialog(this, "There must be data in the list before you can sort it");
+            }
+        }
+
+        private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(txtSearchInput.Text.Length == 0)
+            {
+                btnSearch.Content = "Refresh List";
+            }
+            else
+            {
+                btnSearch.Content = "Search";
             }
         }
     }
