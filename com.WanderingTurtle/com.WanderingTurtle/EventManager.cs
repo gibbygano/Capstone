@@ -8,8 +8,7 @@ namespace com.WanderingTurtle.BusinessLogic
 {
     public class EventManager
     {
-
-        
+     
         public enum EventResult
         {
             //item could not be found
