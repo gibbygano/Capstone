@@ -72,13 +72,12 @@ namespace com.WanderingTurtle.FormPresentation
             Exception _ex = null;
             try
             {
-                int numRows;
                 MessageDialogResult result = await DialogBox.ShowMessageDialog(this, "Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
                 switch (result)
                 {
                     case MessageDialogResult.Affirmative:
-                        numRows = prodMan.ArchiveItemListing(ListingToDelete);
-                        if (numRows == 1)
+                        var numRows = prodMan.ArchiveItemListing(ListingToDelete);
+                        if (numRows == ProductManager.listResult.Success)
                         {
                             await DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
                         }
