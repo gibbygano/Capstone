@@ -109,8 +109,8 @@ namespace com.WanderingTurtle.FormPresentation
                     DialogBox.ShowMessageDialog(this, "Please enter an event name.");
                     return;
                 }
-
-                if (myMan.AddNewEvent(eventToSubmit) == 1)
+                EventManager.EventResult result = myMan.AddNewEvent(eventToSubmit);
+                if  (result == EventManager.EventResult.Success)
                 {
                     DialogBox.ShowMessageDialog(this, "Successfully Added Event");
                     this.Close();

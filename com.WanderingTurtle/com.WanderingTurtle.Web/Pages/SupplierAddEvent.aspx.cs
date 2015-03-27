@@ -163,8 +163,8 @@ namespace com.WanderingTurtle.Web.Pages
                     currentEvent.MaxNumGuests = 15;
                      * */
                     /******************************************************************/
-                    int rows = _myEventManager.AddNewEvent(currentEvent);
-                    if (rows == 1)
+                    EventManager.EventResult result = _myEventManager.AddNewEvent(currentEvent);
+                    if (result == EventManager.EventResult.Success)
                     {
                         Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Event Added Successfully!\")</SCRIPT>");
                     }

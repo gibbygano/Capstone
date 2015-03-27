@@ -2,11 +2,37 @@
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
 using System;
+using System.Linq;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
     public class EventManager
     {
+
+        
+        public enum EventResult
+        {
+            //item could not be found
+            NotFound = 0,
+
+            //new event could not be added
+            NotAdded,
+
+            NotChanged,
+
+            //worked
+            Success,
+
+            //Can change record
+            OkToEdit,
+
+            //concurrency error
+            ChangedByOtherUser,
+
+            DatabaseError,
+
+
+        }
         public EventManager()
         {
             //default constructor
@@ -16,13 +42,42 @@ namespace com.WanderingTurtle.BusinessLogic
         //Created by Matt Lapka 1/31/15
         public Event RetrieveEvent (string eventItemID)
         {
+            var now = DateTime.Now;
+            double cacheExpirationTime = 5;
+
             try
             {
-                return EventAccessor.GetEvent(eventItemID); 
+                if (DataCache._currentEventList == null)
+                {
+                    return EventAccessor.GetEvent(eventItemID);
+                }
+                else
+                {
+                    //check time. If less than 5 min, return event from cache
+                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get event from DB
+                        var currentEvent = EventAccessor.GetEvent(eventItemID);
+                        return currentEvent;
+                    }
+                    else
+                    {
+                        //get event from cached list
+                        var list = DataCache._currentEventList;
+                        Event currentEvent = list.Where(e => e.EventItemID.ToString() == eventItemID).FirstOrDefault();
+                        if (currentEvent != null)
+                        {
+                            return currentEvent;
+                        }
+                        else
+                        {
+                            throw new ApplicationException("Event not found.");
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                
                 throw ex;
             }
 			
@@ -32,9 +87,37 @@ namespace com.WanderingTurtle.BusinessLogic
         //Created by Matt Lapka 1/31/15
         public List<Event> RetrieveEventList()
         {
+            double cacheExpirationTime = 5; //how long the cache should live (minutes)
+            var now = DateTime.Now;
             try
             {
-                return EventAccessor.GetEventList();
+                if (DataCache._currentEventList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    var list = EventAccessor.GetEventList();
+                    DataCache._currentEventList = list;
+                    DataCache._EventListTime = now;
+                    return list;
+                }
+                else
+                {
+                    //check time. If less than 5 min, return cache
+                    
+                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        var list = EventAccessor.GetEventList();
+                        //set cache to new list and update time
+                        DataCache._currentEventList = list;
+                        DataCache._EventListTime = now;
+
+                        return list;
+                    }
+                    else
+                    {
+                        return DataCache._currentEventList;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -46,48 +129,100 @@ namespace com.WanderingTurtle.BusinessLogic
 
         //Add a single Event object
         //Created by Matt Lapka 1/31/15
-        public int AddNewEvent(Event newEvent)
+        public EventResult AddNewEvent(Event newEvent)
         {
             try
             {
-                return EventAccessor.AddEvent(newEvent);
+                if (EventAccessor.AddEvent(newEvent)== 1)
+                {
+                    //refresh cache
+                    DataCache._currentEventList = EventAccessor.GetEventList();
+                    DataCache._EventListTime = DateTime.Now;
+                    return EventResult.Success;
+                }
+                else
+                {
+                    return EventResult.NotAdded;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return EventResult.ChangedByOtherUser;
+                }
+                return EventResult.DatabaseError;
+            }               
+            catch (Exception)
+            {
+                return EventResult.DatabaseError;
             }
             
         }
 
         //Edit an Event object
         //Created by Matt Lapka 1/31/15
-        public int EditEvent(Event oldEvent, Event newEvent)
+        public EventResult EditEvent(Event oldEvent, Event newEvent)
         {
             try
             {
-                return EventAccessor.UpdateEvent(oldEvent, newEvent);
+                if (EventAccessor.UpdateEvent(oldEvent, newEvent)==1)
+                {
+                    //update cache
+                    DataCache._currentEventList = EventAccessor.GetEventList();
+                    DataCache._EventListTime = DateTime.Now;
+                    return EventResult.Success;
+                }
+                else
+                {
+                    return EventResult.NotChanged;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
+            {
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return EventResult.ChangedByOtherUser;
+                }
+                return EventResult.DatabaseError;
+            } 
+            catch (Exception)
             {
                 
-                throw ex;
+                return EventResult.DatabaseError;
             }
             
         }
 
         //"Delete" a single Event object (make inactive)
         //Created by Matt Lapka 1/31/15
-        public int ArchiveAnEvent(Event eventToDelete)
+        public EventResult ArchiveAnEvent(Event eventToDelete)
         {
             try
             {
-                return EventAccessor.DeleteEventItem(eventToDelete);
+                if (EventAccessor.DeleteEventItem(eventToDelete) == 1)
+                {
+                    //update cache
+                    DataCache._currentEventList = EventAccessor.GetEventList();
+                    DataCache._EventListTime = DateTime.Now;
+                    return EventResult.Success;
+                }
+                else
+                {
+                    return EventResult.NotChanged;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return EventResult.ChangedByOtherUser;
+                }
+                return EventResult.DatabaseError;
+            } 
+            catch (Exception)
+            {
+                return EventResult.DatabaseError;
             }
             
         }
@@ -99,13 +234,42 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         public EventType RetrieveEventType(string eventTypeID)
         {
+            var now = DateTime.Now;
+            double cacheExpirationTime = 10;
+
             try
             {
-                return EventTypeAccessor.GetEventType(eventTypeID);
+                if (DataCache._currentEventTypeList == null)
+                {
+                    return EventTypeAccessor.GetEventType(eventTypeID);
+                }
+                else
+                {
+                    //check time. If less than 10 min, return event from cache
+                    if (now > DataCache._EventTypeListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get event from DB
+                        var currentEventType = EventTypeAccessor.GetEventType(eventTypeID);
+                        return currentEventType;
+                    }
+                    else
+                    {
+                        //get event from cached list
+                        var list = DataCache._currentEventTypeList;
+                        EventType currentEventType = list.Where(e => e.EventTypeID.ToString() == eventTypeID).FirstOrDefault();
+                        if (currentEventType != null)
+                        {
+                            return currentEventType;
+                        }
+                        else
+                        {
+                            throw new ApplicationException("Event not found.");
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                
                 throw ex;
             }
 			
@@ -115,13 +279,41 @@ namespace com.WanderingTurtle.BusinessLogic
         ///Created by Matt Lapka 2/8/15
         public List<EventType> RetrieveEventTypeList()
         {
+            double cacheExpirationTime = 10; //how long the cache should live (minutes)
+            var now = DateTime.Now;
             try
             {
-                return EventTypeAccessor.GetEventTypeList();
+                if (DataCache._currentEventTypeList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    var list = EventTypeAccessor.GetEventTypeList();
+                    DataCache._currentEventTypeList = list;
+                    DataCache._EventTypeListTime = now;
+                    return list;
+                }
+                else
+                {
+                    //check time. If less than 5 min, return cache
+
+                    if (now > DataCache._EventTypeListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        var list = EventTypeAccessor.GetEventTypeList();
+                        //set cache to new list and update time
+                        DataCache._currentEventTypeList = list;
+                        DataCache._EventTypeListTime = now;
+
+                        return list;
+                    }
+                    else
+                    {
+                        return DataCache._currentEventTypeList;
+                    }
+                }
             }
             catch (Exception ex)
             {
-                
+
                 throw ex;
             }
             
@@ -129,47 +321,100 @@ namespace com.WanderingTurtle.BusinessLogic
 
         ///Add a single EventType object
         ///Created by Matt Lapka 2/8/15
-        public int AddNewEventType(EventType newEventType)
+        public EventResult AddNewEventType(EventType newEventType)
         {
             try
             {
-                return EventTypeAccessor.AddEventType(newEventType);
+                if (EventTypeAccessor.AddEventType(newEventType) == 1)
+                {
+                    //refresh cache
+                    DataCache._currentEventTypeList = EventTypeAccessor.GetEventTypeList();
+                    DataCache._EventTypeListTime = DateTime.Now;
+                    return EventResult.Success;
+                }
+                else
+                {
+                    return EventResult.NotAdded;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return EventResult.ChangedByOtherUser;
+                }
+                return EventResult.DatabaseError;
+            }
+            catch (Exception)
+            {
+                return EventResult.DatabaseError;
             }
             
         }
 
         //Edit an EventType object
         //Created by Matt Lapka 2/8/15
-        public int EditEventType(EventType oldEventType, EventType newEventType)
+        public EventResult EditEventType(EventType oldEventType, EventType newEventType)
         {
             try
             {
-                return EventTypeAccessor.UpdateEventType(oldEventType, newEventType);
+                if (EventTypeAccessor.UpdateEventType(oldEventType, newEventType) == 1)
+                {
+                    //update cache
+                    DataCache._currentEventTypeList = EventTypeAccessor.GetEventTypeList();
+                    DataCache._EventTypeListTime = DateTime.Now;
+                    return EventResult.Success;
+                }
+                else
+                {
+                    return EventResult.NotChanged;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return EventResult.ChangedByOtherUser;
+                }
+                return EventResult.DatabaseError;
+            }
+            catch (Exception)
+            {
+
+                return EventResult.DatabaseError;
             }
             
         }
 
         //"Delete" a single EventType object (make inactive)
         //Created by Matt Lapka 2/8/15
-        public int ArchiveAnEventType(EventType eventTypeToDelete)
+        public EventResult ArchiveAnEventType(EventType eventTypeToDelete)
         {
             try
             {
-                return EventTypeAccessor.DeleteEventType(eventTypeToDelete);
+                if (EventTypeAccessor.DeleteEventType(eventTypeToDelete) == 1)
+                {
+                    //update cache
+                    DataCache._currentEventTypeList = EventTypeAccessor.GetEventTypeList();
+                    DataCache._EventTypeListTime = DateTime.Now;
+                    return EventResult.Success;
+                }
+                else
+                {
+                    return EventResult.NotChanged;
+                }
             }
-            catch (Exception ex)
+            catch (ApplicationException ex)
             {
-                throw ex;
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return EventResult.ChangedByOtherUser;
+                }
+                return EventResult.DatabaseError;
+            }
+            catch (Exception)
+            {
+                return EventResult.DatabaseError;
             }
             
         }

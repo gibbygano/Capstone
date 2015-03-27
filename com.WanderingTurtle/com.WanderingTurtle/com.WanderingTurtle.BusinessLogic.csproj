@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CityStateManager.cs" />
     <Compile Include="ConnectionManager.cs" />
+    <Compile Include="DataCache.cs" />
     <Compile Include="EmployeeManager.cs" />
     <Compile Include="HotelGuestManager.cs" />
     <Compile Include="InvoiceManager.cs" />

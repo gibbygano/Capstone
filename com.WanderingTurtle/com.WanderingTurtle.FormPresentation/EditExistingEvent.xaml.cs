@@ -164,7 +164,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 //DialogBox.ShowMessageDialog(Unrevised.EventItemID + Unrevised.EventItemName + Unrevised.EventTypeID + Unrevised.EventTypeName + Unrevised.Description + Unrevised.OnSite + Unrevised.Transportation + "\n" + eventToSubmit.EventItemID + eventToSubmit.EventItemName + eventToSubmit.EventTypeID + eventToSubmit.EventTypeName + eventToSubmit.Description + eventToSubmit.OnSite + eventToSubmit.Transportation);
                 // Submit the events
-                if (myMan.EditEvent(Unrevised, eventToSubmit)==1)
+                if (myMan.EditEvent(Unrevised, eventToSubmit)== EventManager.EventResult.Success)
                 {
                     DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
                     this.Close();

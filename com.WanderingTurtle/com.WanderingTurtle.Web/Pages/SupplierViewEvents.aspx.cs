@@ -113,7 +113,7 @@ namespace com.WanderingTurtle.Web.Pages
 
                
                     lblError.Text = "";
-                    int result = 0;
+                    EventManager.EventResult result;
                     if (myEvent != null)
                     {
                         result = _myManager.EditEvent(myEvent, newEvent);
@@ -147,7 +147,7 @@ namespace com.WanderingTurtle.Web.Pages
                 Event myEvent = _listedEvents
                 .Where(e => e.EventItemID == eventItemID).FirstOrDefault();
 
-                int result = _myManager.ArchiveAnEvent(myEvent);
+                EventManager.EventResult result = _myManager.ArchiveAnEvent(myEvent);
             }
             catch (Exception)
             {
