@@ -29,5 +29,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /******* SUPPLIER ********/
         public static List<Supplier> _currentSupplierList { get; set; }
         public static DateTime _SupplierListTime { get; set; }
+
+        /******* BOOKING DETAILS ********/
+        public static List<BookingDetails> _currentBookingDetailsList { get; set; }
+        public static DateTime _BookingDetailsListTime { get; set; }
+
+        /******* ItemListingDETAILS ********/
+        public static List<ItemListingDetails> _currentItemListingDetailsList { get; set; }
+        public static DateTime _ItemListingDetailsListTime { get; set; }
+
     }
 }

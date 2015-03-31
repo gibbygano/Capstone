@@ -72,16 +72,20 @@ namespace com.WanderingTurtle.Web
             {
                 var stuff1 = new MenuItem();
                 var stuff2 = new MenuItem();
+                var stuff3 = new MenuItem();
 
                 stuff1.NavigateUrl = "/events";
                 stuff1.Text = "View Events";
                 stuff2.NavigateUrl = "/events/add";
                 stuff2.Text = "Add an Event";
+                stuff3.NavigateUrl = "/listings";
+                stuff3.Text = "View Listings";
 
                 var stuffList = new List<MenuItem>();
 
                 stuffList.Add(stuff1);
                 stuffList.Add(stuff2);
+                stuffList.Add(stuff3);
 
                 for (int i = 0; i < stuffList.Count; i++)
                 {

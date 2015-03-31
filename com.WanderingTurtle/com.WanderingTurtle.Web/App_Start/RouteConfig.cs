@@ -15,8 +15,7 @@ namespace com.WanderingTurtle.Web
             routes.EnableFriendlyUrls(settings);
             routes.MapPageRoute(null, "events", "~/Pages/SupplierViewEvents.aspx");
             routes.MapPageRoute(null, "events/add", "~/Pages/SupplierAddEvent.aspx");
-            
-        
+            routes.MapPageRoute(null, "listings", "~/Pages/GuestViewListings.aspx");
         }
     }
 }

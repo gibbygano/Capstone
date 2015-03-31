@@ -2,6 +2,8 @@
 using com.WanderingTurtle.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -12,20 +14,37 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// RetrieveListItemList- a method used to retrieve a list of ItemListingDetails (a subclass of Booking) through the data access layer, from the database
 		/// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
 		/// </summary>
+        /// <remarks>
+        /// Updated by Pat Banks 2015/03/30
+        /// Add DataCache 
+        /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
 		public List<ItemListingDetails> RetrieveActiveItemListings()
 		{
+            double cacheExpirationTime = 5; //how long the cache should live (minutes)
+            var now = DateTime.Now;
+            
 			try
 			{
-				List<ItemListingDetails> activeEventListings = BookingAccessor.getListItems();
-
-                //calculating the quantity of available tickets for each listing
-                foreach (ItemListingDetails lIO in activeEventListings)
+                if (DataCache._currentItemListingDetailsList == null)
                 {
-                    lIO.QuantityOffered = availableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
+                    RefreshItemDetailsListCacheData();
+                    return DataCache._currentItemListingDetailsList;
                 }
+                else
+                {
+                    //check time. If less than 5 min, return cache
 
-                return activeEventListings;
+                    if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        RefreshItemDetailsListCacheData();
+                        return DataCache._currentItemListingDetailsList;
+                    }
+                    else
+                    {
+                        return DataCache._currentItemListingDetailsList;
+                    }
+                }
             }
 			catch (Exception)
 			{
@@ -33,6 +52,27 @@ namespace com.WanderingTurtle.BusinessLogic
 				throw ax;
 			}
 		}
+
+        /// <summary>
+        /// Created by Pat Banks
+        /// 2015/03/30
+        /// 
+        /// Refreshes the data cache 
+        /// </summary>
+        private void RefreshItemDetailsListCacheData()
+        {
+            //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+            var activeEventListings = BookingAccessor.getListItems();
+
+            //calculating the quantity of available tickets for each listing
+            foreach (ItemListingDetails lIO in activeEventListings)
+            {
+                lIO.QuantityOffered = availableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
+            }
+
+            DataCache._currentItemListingDetailsList = activeEventListings;
+            DataCache._ItemListingDetailsListTime = DateTime.Now;
+        }
 
         /// <summary>
         /// Created by Pat Banks 2015/03/11
@@ -44,7 +84,45 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>an ItemListingDetails containing the item listing information</returns>
 		public ItemListingDetails RetrieveEventListing(int itemListID)
 		{
-			return BookingAccessor.getEventListing(itemListID);
+            var now = DateTime.Now;
+            double cacheExpirationTime = 5;
+
+            try
+            {
+                if (DataCache._currentEventList == null)
+                {
+                    return BookingAccessor.getEventListing(itemListID);
+                }
+                else
+                {
+                    //check time. If less than 5 min, return event from cache
+                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get event from DB
+                        var requestedEvent = BookingAccessor.getEventListing(itemListID);
+                        return requestedEvent;
+                    }
+                    else
+                    {
+                        //get event from cached list
+                        var list = DataCache._currentItemListingDetailsList;
+                        ItemListingDetails requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
+                        if (requestedEvent != null)
+                        {
+                            return requestedEvent;
+                        }
+                        else
+                        {
+                            throw new ApplicationException("Event not found.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+			
 		}
 
         /// <summary>
@@ -79,6 +157,9 @@ namespace com.WanderingTurtle.BusinessLogic
 
                        if (result2 == 1)
                        {
+                           //update cache
+                           RefreshItemDetailsListCacheData();
+
                            return ResultsEdit.Success;
                        }
                        else
@@ -257,6 +338,10 @@ namespace com.WanderingTurtle.BusinessLogic
         public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
 		{
             var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
+
+            //refresh Data Cache
+            RefreshItemDetailsListCacheData();
+
 			return numRows;
 		}
 
@@ -314,6 +399,9 @@ namespace com.WanderingTurtle.BusinessLogic
 
                     if (result == 1)
                     {
+                        //refresh Data Cache
+                        RefreshItemDetailsListCacheData();
+
                         return ResultsEdit.Success;
                     }
                     else
@@ -338,6 +426,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// 
         /// gives the results of editing a booking to the presentation layer
         /// </summary>
+        /// <remarks>
+        /// Updated 2015/03/30 
+        /// Pat Banks
+        /// Updated to include data cache refresh
+        /// </remarks>
         /// <param name="originalQty"></param>
         /// <param name="editedBooking"></param>
         /// <returns></returns>
@@ -381,7 +474,10 @@ namespace com.WanderingTurtle.BusinessLogic
                     int newNumGuests = originalItem.CurrentNumGuests + numGuestsDifference;
 
                     int result1 = updateNumberOfGuests(editedBooking.ItemListID, originalItem.CurrentNumGuests, newNumGuests);
-                    
+
+                    //refresh Data Cache
+                    RefreshItemDetailsListCacheData();
+
                     return ResultsEdit.Success;
                 }
                 else
@@ -394,5 +490,43 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
         }
-	}
+	
+        public ResultsEdit checkValidPIN(int inPIN)
+        {
+            try
+            {
+                //retrieve recent guest list
+                bool result = true;
+                //see if pin is in it
+                if (result)
+                {
+                    return ResultsEdit.OkToEdit;
+                }
+                else
+                {
+                    return ResultsEdit.NotFound;
+                }
+
+            }
+            catch (SqlException ex)
+            {
+                return ResultsEdit.NotFound;
+                throw;
+            }
+        }
+
+        public int FindGuest(int inPin)
+        {
+            try
+            {
+                return 5;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+
+        }
+    }
 }

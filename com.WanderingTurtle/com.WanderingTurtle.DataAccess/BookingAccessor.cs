@@ -117,7 +117,7 @@ namespace com.WanderingTurtle.DataAccess
                 }
                 else
                 {
-                    var ax = new ApplicationException("Booking data not found!");
+                    var ax = new ApplicationException("Event data not found!");
                     throw ax;
                 }
             }
