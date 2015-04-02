@@ -136,7 +136,7 @@
     </Compile>
     <Compile Include="Models\DialogBox.cs" />
     <Compile Include="Views\SplashScreen.xaml.cs">
-      <DependentUpon>SplashScreen.xaml</DependentUpon>
+      <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TabContainer.xaml.cs">
       <DependentUpon>TabContainer.xaml</DependentUpon>
@@ -206,7 +206,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SplashScreen.xaml">
+    <Page Include="Views\StartupScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

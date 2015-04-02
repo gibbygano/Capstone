@@ -30,13 +30,14 @@ namespace com.WanderingTurtle.FormPresentation
             this.MainContent.Content = new StartupScreen();
         }
 
-        private async void _DBConnectError(Exception ex)
+        private void _DBConnectError(Exception ex)
         {
-            switch (await DialogBox.ShowMessageDialog(this, string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError Message:\r{0}", ex.Message),
-                "Could not connect to the database", MessageDialogStyle.AffirmativeAndNegative))
+            switch (MessageBox.Show(string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError Message:\r{0}", ex.Message),
+                "Could not connect to the database", MessageBoxButton.OKCancel))
             {
-                case MessageDialogResult.Affirmative:
-                    Environment.Exit(0);
+                case MessageBoxResult.Yes:
+                case MessageBoxResult.OK:
+                    Application.Current.Shutdown();
                     break;
             }
         }
