@@ -18,7 +18,8 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks></remarks>
         /// <param name="userPassword">The password for the supplier.</param>
         /// <param name="userName">The user name for the supplier.</param>
-        /// <exception cref="SqlException">If the database cannot be accessed or the username is already taken.</exception>
+        /// <exception cref="SqlException">If the database cannot be accessed.</exception>
+        /// <exception cref="ApplicationException">If the login information is not found.</exception>
         /// <returns>A SupplierLogin object that contains the information about the supplier.</returns>
         public SupplierLogin retrieveSupplierLogin(string userPassword, string userName)
         {
@@ -36,7 +37,7 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Open();
                 var reader = cmd.ExecuteReader();
 
-                if(reader.HasRows == true)
+                if (reader.HasRows == true)
                 {
                     reader.Read();
 
@@ -45,6 +46,8 @@ namespace com.WanderingTurtle.DataAccess
                     getSupplierInfo.UserName = reader.GetValue(2).ToString();
                     getSupplierInfo.Active = reader.GetBoolean(3);
                 }
+                else
+                    throw new ApplicationException("Incorrect login information. Try again.");
 
                 return getSupplierInfo;
             }

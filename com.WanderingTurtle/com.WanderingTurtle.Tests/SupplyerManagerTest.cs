@@ -119,8 +119,10 @@ namespace com.WanderingTurtle.Tests
         /// test the Add supplier method
         /// Will Fritz 2015/3/31
         /// </summary>
+        /// <remarks>
+        /// Edited by Rose Steffensmeier 2015/04/03
+        /// </remarks>
         [TestMethod]
-        [ExpectedException(typeof(SqlException))]
         public void AddSupplierTest()
         {
             //test 1 empty Supplier
@@ -144,8 +146,10 @@ namespace com.WanderingTurtle.Tests
         /// test the Archive supplier method
         /// Will Fritz 2015/3/31
         /// </summary>
+        /// <remarks>
+        /// Edited by Rose Steffensmeier 2015/04/03
+        /// </remarks>
         [TestMethod]
-        [ExpectedException(typeof(SqlException))]
         public void ArchiveSupplierTest()
         {
             //test 1 empty Supplier
@@ -170,7 +174,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(SqlException))]
         public void EditSupplierTest()
         {
             //test 1 empty Suppliers

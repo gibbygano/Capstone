@@ -124,6 +124,10 @@ namespace com.WanderingTurtle.DataAccess
         /// Created: 2015/02/08
         /// Retrieves a list of all Supplier Application Records from the Database
         /// </summary>
+        /// <remarks>
+        /// Edited by Rose Steffensmeier 2015/04/03
+        /// added param to input so that stored procedure will work, param does not affect the actual 
+        /// </remarks>
         /// <returns>List of SupplierApplication objects</returns>
         public static List<SupplierApplication> GetSupplierApplicationList()
         {
@@ -132,6 +136,7 @@ namespace com.WanderingTurtle.DataAccess
             var cmdText = "spSelectAllSupplierApplication";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ApplicationID", 1);
             
             try
             {

@@ -133,6 +133,7 @@
     <Build Include="dbo\Stored Procedures\spSupplierLoginAdd.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGet.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginArchive.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectAllSupplierApplication_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
