@@ -39,6 +39,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -54,6 +55,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplyerManagerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
+      <Project>{b27ea16a-c7d9-4664-a33e-50f4c7c1e166}</Project>
+      <Name>com.WanderingTurtle.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj">
+      <Project>{825ba7b8-c006-4ef9-b596-700b863a2296}</Project>
+      <Name>com.WanderingTurtle.BusinessLogic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
