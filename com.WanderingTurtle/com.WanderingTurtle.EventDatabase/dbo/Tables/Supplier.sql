@@ -11,6 +11,7 @@
     [ApplicationID] INT           NOT NULL,
     [UserID]        INT           NOT NULL,
     [Active]        INT           NOT NULL,
+	[SupplyCost]	DECIMAL(3,2)		  NOT NULL DEFAULT(.70), 
     CONSTRAINT [PK_Supplier] PRIMARY KEY CLUSTERED ([SupplierID] ASC) ON [PRIMARY]
 ) ON [PRIMARY];
 GO
