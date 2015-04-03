@@ -20,5 +20,13 @@ namespace com.WanderingTurtle.Common
             this.UserPassword = UserPassword;
             this.UserName = UserName;
         }
+
+        public SupplierLogin(int UserID, string UserPassword, string UserName, bool Active)
+        {
+            this.UserID = UserID;
+            this.UserPassword = UserPassword;
+            this.UserName = UserName;
+            this.Active = Active;
+        }
     }
 }

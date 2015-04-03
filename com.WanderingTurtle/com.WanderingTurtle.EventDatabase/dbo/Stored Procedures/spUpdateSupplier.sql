@@ -10,7 +10,8 @@
 	@EmailAddress 			varchar(100), 
 	@ApplicationID 			int, 
 	@UserID 				int, 
-	@SupplierID 			int, 
+	@SupplierID 			int,
+	@SupplyCost				decimal, 
 	@originalCompanyName 	varchar(255),
 	@originalFirstName 		varchar(50), 
 	@originalLastName 		varchar(50), 
@@ -20,7 +21,8 @@
 	@originalPhoneNumber 	varchar(15), 
 	@originalEmailAddress 	varchar(100), 
 	@originalApplicationID 	int, 
-	@originalUserID 		int
+	@originalUserID 		int,
+	@originalSupplyCost		decimal
 	)
 AS
 	UPDATE Supplier SET
@@ -33,7 +35,8 @@ AS
 		PhoneNumber = @PhoneNumber, 
 		EmailAddress = @EmailAddress, 
 		ApplicationID = @ApplicationID, 
-		UserID = @UserID
+		UserID = @UserID,
+		SupplyCost = @SupplyCost
 	WHERE 
 		SupplierID = @SupplierID
 		AND CompanyName = @originalCompanyName
@@ -46,5 +49,6 @@ AS
 		AND EmailAddress = @originalEmailAddress
 		AND ApplicationID = @originalApplicationID
 		AND UserID = @originalUserID
+		AND SupplyCost = @originalSupplyCost
 		AND Active = 1
 	RETURN @@ROWCOUNT
