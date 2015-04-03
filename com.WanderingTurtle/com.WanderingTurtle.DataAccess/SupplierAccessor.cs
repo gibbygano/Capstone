@@ -340,5 +340,32 @@ namespace com.WanderingTurtle.DataAccess
 
             return rowsAffected;
         }
+
+        public static int DeleteTestSupplier(Supplier supplierToDelete)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spDeleteSupplier_1";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SupplierID", supplierToDelete.SupplierID);
+
+            int rowsAffected;
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
     }
 }
