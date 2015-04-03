@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.Common
 
     /// <summary>
     /// Pat Banks
-    /// created on:  2015/02/25
+    /// Created: 2015/02/25
     /// 
     /// Invoice Details inherits from Invoice to hold additional information for better readability.
     /// </summary>

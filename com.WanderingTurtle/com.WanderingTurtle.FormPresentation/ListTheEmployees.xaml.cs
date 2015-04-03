@@ -27,7 +27,9 @@ namespace com.WanderingTurtle.FormPresentation
         private EmployeeManager _employeeManager = new EmployeeManager();
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/19
+        /// Pat Banks 
+        /// Created: 2015/02/19
+        /// 
         /// Displays and refreshes the list of active employees
         /// </summary>
         /// <remarks>
@@ -40,7 +42,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/19
+        /// Pat Banks 
+        /// Created: 2015/02/19
+        /// 
         /// Displays add Employee window for user to add additional employees to the system
         /// </summary>
         /// <param name="sender"></param>
@@ -56,7 +60,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/19
+        /// Pat Banks 
+        /// Created: 2015/02/19
+        /// 
         /// Retrieves a list of employees from the database to display
         /// </summary>
         /// <remarks>
@@ -78,7 +84,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Miguel Santana 2015/03/01
+        /// Miguel Santana 
+        /// Created: 2015/03/01
+        /// 
         /// Opens the update employee UI with the selected employee
         /// </summary>
         /// <param name="sender"></param>
@@ -105,8 +113,10 @@ namespace com.WanderingTurtle.FormPresentation
         private GridViewColumnHeader _sortColumn;
 
         /// <summary>
+        /// Will Fritz
+        /// Created: 2015/02/27
+        /// 
         /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

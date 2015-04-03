@@ -10,8 +10,10 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class BookingAccessor
     {
-        /// Created by: Tony Noel 15/2/13
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/02/13
+        /// 
         /// Creates a list of options, has an ItemListID, Quantity, and some event info
         /// to help populate drop downs/ lists for Add Bookings
         /// </summary>
@@ -133,8 +135,10 @@ namespace com.WanderingTurtle.DataAccess
         }
 
 
-        ///Created By: Tony Noel - 15/2/3
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/02/03
+        /// 
         /// AddBooking- a method used to insert a booking into the database
         /// </summary>
         /// <remarks>
@@ -187,10 +191,16 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        ///Created By: Tony Noel - 15/2/3, Updated: Tony Noel 15/3/3
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/02/03
+        /// 
         /// getBooking- a method used to select a specified booking record from the database
         /// </summary>
+        /// <remarks>
+        /// Tony Noel
+        /// Updated: 2015/03/03
+        /// </remarks>
         /// <param name="BookingID">Takes an input of an int- the BookingID number to locate the requested record.</param>
         /// <returns>Output is a booking object to hold the booking record.</returns>
         public static Booking getBooking(int BookingID)
@@ -245,11 +255,17 @@ namespace com.WanderingTurtle.DataAccess
             return BookingToGet;
         }
 
-        ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/02/03
+        /// 
         /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
         /// Quantity, Refund, Cancel, and Active
         /// </summary>
+        /// <remarks>
+        /// Tony Noel
+        /// Updated: 2015/03/02
+        /// </remarks>
         /// <param name="oldOne">The original Booking object/values</param>
         /// <param name="toUpdate">The new booking object values to replace the old</param>
         /// <returns>Output is the rows affected by the update</returns>
@@ -301,7 +317,8 @@ namespace com.WanderingTurtle.DataAccess
 
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Created: 2015/03/11
         /// 
         /// Updates the number of attendees that will be coming to an event
         /// </summary>

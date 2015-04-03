@@ -25,7 +25,9 @@ namespace com.WanderingTurtle.FormPresentation
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/17
+        /// Pat Banks 
+        /// Created: 2015/02/17
+        /// 
         /// Initializes the UI that displays a list of active hotel guests
         /// </summary>
         public ListHotelGuests()
@@ -35,12 +37,15 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Daniel Collingwood  2015-02-18
+        /// Daniel Collingwood  
+        /// Created: 2015-02-18
+        /// 
         /// Repopulates the list of hotel guests to display
         /// </summary>
         /// <remarks>
         /// Pat Banks
-        /// Updated 2015/03/03
+        /// Updated" 2015/03/03
+        /// 
         /// Changed display items for list of guests retrieved from the invoice manager
         /// </remarks>
         private void RefreshGuestList()
@@ -61,7 +66,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Pat Banks 
+        /// Created: 2015/03/03
         ///
         /// Opens UI to create a new guest
         /// </summary>
@@ -79,7 +85,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/27
+        /// Pat Banks 
+        /// Created: 2015/02/27
         ///
         /// Populates AddEditInvoice UI based on selected guest
         /// </summary>
