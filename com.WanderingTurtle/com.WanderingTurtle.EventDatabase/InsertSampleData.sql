@@ -56,6 +56,14 @@ VALUES
 ('Peter', 'Capaldi', '52641', '2232 Benton Ave', ' ', '(319) 217-4455', 'doctorwho@kirkwood.edu', 204),
 ('Clara', 'Oswald', '52641', '1455 Benton Ave', ' ', '(319) 931-9983', ' ', 205)
 GO
+
+INSERT INTO [dbo].[SupplierLogin] (UserName)
+VALUES
+('Frank0$'),
+('Chr0m!'),
+('Ch@rmb1')
+GO
+
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active)
 VALUES
 ('Francisco''s Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 101, 1),

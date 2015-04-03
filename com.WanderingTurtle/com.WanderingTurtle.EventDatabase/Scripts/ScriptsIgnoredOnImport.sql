@@ -1,0 +1,12 @@
+﻿
+
+CONSTRAINT [FK_UserID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[SupplierLogin]([UserID]) ON UPDATE NO ACTION ON DELETE NO ACTION,
+GO
+
+--Syntax Error: Incorrect syntax near CONSTRAINT.
+--
+--CONSTRAINT [FK_UserID] FOREIGN KEY ([UserID]) REFERENCES [dbo].[SupplierLogin]([UserID]) ON UPDATE NO ACTION ON DELETE NO ACTION,
+
+
+
+GO
