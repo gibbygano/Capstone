@@ -328,18 +328,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
         }
-        public List<SupplierApplication> RetrieveSupplierApplicationList()
-        {
-            try
-            {
-                return SupplierApplicationAccessor.GetSupplierApplicationList();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
 
         public int deleteTestSupplier(Supplier testSupplier)
         {

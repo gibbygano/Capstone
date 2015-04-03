@@ -128,19 +128,15 @@
     <Build Include="dbo\Stored Procedures\spUpdateCurrentNumGuests.sql" />
     <Build Include="dbo\Stored Procedures\spSelectOneListingFull.sql" />
     <Build Include="dbo\Stored Procedures\spSelectInvoiceByGuest.sql" />
-<<<<<<< HEAD
     <Build Include="dbo\Tables\SupplierLogin.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginAdd.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGet.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginArchive.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectAllSupplierApplication_1.sql" />
-=======
     <Build Include="dbo\Stored Procedures\spInsertSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSelectSupplierApplication.sql" />
->>>>>>> dev
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
