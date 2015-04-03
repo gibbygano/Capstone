@@ -47,6 +47,7 @@ namespace com.WanderingTurtle.DataAccess
                     supplierToRetrieve.PhoneNumber = reader.GetString(7);
                     supplierToRetrieve.EmailAddress = reader.GetString(8);
                     supplierToRetrieve.ApplicationID = reader.GetInt32(9);
+                    supplierToRetrieve.SupplyCost = reader.GetDecimal(11);
                     supplierToRetrieve.UserID = reader.GetInt32(10);
                 }
                 else
@@ -172,6 +173,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentSupplier.EmailAddress = reader.GetString(8);
                         currentSupplier.ApplicationID = reader.GetInt32(9);
                         currentSupplier.UserID = reader.GetInt32(10);
+                        currentSupplier.SupplyCost = reader.GetDecimal(11);
 
                         supplierList.Add(currentSupplier);
                     }
@@ -217,6 +219,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", supplierToAdd.UserID);
+            //cmd.Parameters.AddWithValue("@SupplyCost", supplierToAdd.SupplyCost);
 
             int rowsAffected;
             try
@@ -263,6 +266,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EmailAddress", newSupplierInfo.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", newSupplierInfo.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", newSupplierInfo.UserID);
+            cmd.Parameters.AddWithValue("@SupplyCost", newSupplierInfo.SupplyCost);
 
 
             //Old Supplier Info
@@ -277,6 +281,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@originalEmailAddress", oldSupplierInfo.EmailAddress);
             cmd.Parameters.AddWithValue("@originalApplicationID", oldSupplierInfo.ApplicationID);
             cmd.Parameters.AddWithValue("@originalUserID", oldSupplierInfo.UserID);
+            cmd.Parameters.AddWithValue("@originalSupplyCost", oldSupplierInfo.SupplyCost);
 
             int rowsAffected;
 

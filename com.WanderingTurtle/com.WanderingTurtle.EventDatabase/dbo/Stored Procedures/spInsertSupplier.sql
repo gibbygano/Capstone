@@ -11,10 +11,11 @@ CREATE PROCEDURE spInsertSupplier
 	@PhoneNumber 	varchar(15), 
 	@EmailAddress 	varchar(100), 
 	@ApplicationID 	int, 
-	@UserID 		int
+	@UserID 		int,
+	@SupplyCost		decimal
 	)
 AS
 INSERT INTO Supplier
-	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active) 
-VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationID, @UserID, 1)
+	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, SupplyCost, Active) 
+VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationID, @UserID, @SupplyCost, 1)
 RETURN @@ROWCOUNT
