@@ -5,12 +5,22 @@ using System.Text;
 
 namespace com.WanderingTurtle.Common
 {
-    ///Created By: Tony Noel - 15/2/3, Updated - Tony Noel 15/3/2, Updated with new fields for prices Tony Noel 15/3/6
     /// <summary>
+    /// Tony Noel
+    /// Created: 2015/02/03
+    /// 
     /// Booking- a class used to create a booking object. Has a default constructor, one that takes 5 arguments (which will be used in adds)
     /// and another that takes all 9 arguments
     /// the fields- BookingID, Cancel, Refund, and Active all have defaults in the database upon creation
     /// </summary>
+    /// <remarks>
+    /// Tony Noel
+    /// Updated: 2015/03/02
+    /// Tony Noel
+    /// Updated: 2015/03/06
+    /// 
+    /// Updated with new fields for prices
+    /// </remarks>
     public class Booking
     {
         public int BookingID { get; set; }
@@ -31,8 +41,15 @@ namespace com.WanderingTurtle.Common
         }
 
         /// <summary>
+        /// Ryan Blake
+        /// Created: 2015/02/06
+        /// 
         /// Constructor for a booking object- 8 arguments
         /// </summary>
+        /// <remarks>
+        /// Ryan Blake
+        /// Updated: 2015/03/09
+        /// </remarks>
         /// <param name="guestID"></param>
         /// <param name="empID"></param>
         /// <param name="itemID"></param>
@@ -52,8 +69,10 @@ namespace com.WanderingTurtle.Common
             TotalCharge = total;
         }
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/06
+        /// 
         /// Full constructor to take all arguments for Booking
-        /// Tony Noel- 15/3/6
         /// </summary>
         /// <param name="bookingID"></param>
         /// <param name="guestID"></param>
@@ -83,12 +102,13 @@ namespace com.WanderingTurtle.Common
     }
     /// <summary>
     /// Pat Banks
-    /// created on:  2015/02/25
+    /// Created on: 2015/02/25
     /// 
     /// Booking Details inherits from a Booking. Object holds additional information for a booking to show on an invoice.
     /// </summary>
     /// <remarks>
-    /// Updated by Pat Banks 2015/03/07
+    /// Pat Banks 
+    /// Updated: 2015/03/07
     /// Deleted Price and total price that are no longer needed
     /// </remarks>
     public class BookingDetails : Booking

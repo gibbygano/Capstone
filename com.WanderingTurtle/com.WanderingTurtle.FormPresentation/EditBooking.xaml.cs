@@ -18,6 +18,9 @@ using System.Data.SqlClient;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
+    /// Ryan Blake
+    /// Created: 2015/03/06
+    /// 
     /// Interaction logic for EditBooking.xaml
     /// </summary>
     public partial class EditBooking
@@ -29,7 +32,9 @@ namespace com.WanderingTurtle.FormPresentation
         BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
-        /// Created by Ryan Blake 2015/03/06
+        /// Ryan Blake 
+        /// Created: 2015/03/06
+        /// 
         /// Allows user to edit a booking
         /// </summary>
         /// <param name="inInvoice">Invoice info from the view invoice UI</param>
@@ -46,9 +51,10 @@ namespace com.WanderingTurtle.FormPresentation
 
 
         /// <summary>
-        /// created by Pat Banks 2015-03-19
+        /// Pat Banks 
+        /// Created: 2015-03-19
         /// 
-        /// populates text fields with object data
+        /// Populates text fields with object data
         /// </summary>
         /// <param name="inInvoice"></param>
         /// <param name="inBookingDetails"></param>
@@ -75,14 +81,24 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Ryan Blake 2015/03/06
+        /// Ryan Blake 
+        /// Created: 2015/03/06
         ///
         /// </summary>
         /// <remarks>
-        /// Updated- Tony Noel, 2015/03/10 to check if the quantity is going up and see if the booking is already full
-        ///and if the booking has occured already, it cannot be changed.
-        /// Updated by Pat Banks 2015/03/11 updated for use of up/down controls for quantity and discount
-        /// UPdated by Pat Banks 2015/03/19 moved decision logic to booking manager 
+        /// Tony Noel 
+        /// Updated: 2015/03/10 
+        /// 
+        /// To check if the quantity is going up and see if the booking is already full
+        /// and if the booking has occured already, it cannot be changed.
+        /// Pat Banks 
+        /// Updated: 2015/03/11 
+        /// 
+        /// Updated for use of up/down controls for quantity and discount
+        /// Pat Banks 
+        /// Updated: 2015/03/19 
+        /// 
+        /// Moved decision logic to booking manager 
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -129,7 +145,9 @@ namespace com.WanderingTurtle.FormPresentation
 
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Created: 2015/03/19
+        /// 
         /// Gathers form data to submit to database for changes
         /// </summary>
         /// <returns>booking of the new information</returns>
@@ -152,6 +170,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Pat Banks
+        /// Created: 2015/03/23
+        /// 
         /// Handles Click event for cancel button
         /// </summary>
         /// <param name="sender"></param>
@@ -162,7 +183,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Created: 2015/03/19
+        /// 
         /// Calculates the adjusted ticket price based on new data
         /// </summary>
         /// <param name="sender"></param>

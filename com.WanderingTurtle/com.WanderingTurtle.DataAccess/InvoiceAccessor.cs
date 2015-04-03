@@ -11,7 +11,9 @@ namespace com.WanderingTurtle.DataAccess
     public class InvoiceAccessor
     {
         /// <summary>
-        /// Created by Pat Banks 2015/02/25
+        /// Pat Banks 
+        /// Created: 2015/02/25
+        /// 
         /// Creates a connection with database and 
         /// calls the stored procedure spSelectInvoiceBookings 
         /// that querys the database
@@ -69,13 +71,17 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Pat Banks 
+        /// Created: 2015/03/03
+        /// 
         /// Creates a connection with database and 
         /// calls the stored procedure spSelectAllInvoices
         /// that querys the database for a list of all active invoices
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Updated: 2015/03/19
+        /// 
         /// Made a generic accessor by moving if active test to InvoiceManager
         /// </remarks>
         /// <returns>List of InvoiceDetails</returns>
@@ -131,7 +137,9 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/25
+        /// Pat Banks 
+        /// Created: 2015/02/25
+        /// 
         /// Creates a connection with database and 
         /// calls the stored procedure spSelectInvoiceByGuest 
         /// that querys the database for a guest's invoice information
@@ -189,7 +197,9 @@ namespace com.WanderingTurtle.DataAccess
 
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Pat Banks 
+        /// Created: 2015/03/03
+        /// 
         /// Creates a connection with database and 
         /// calls the stored procedure spArchiveInvoice
         /// that updates database with information to archive an invoice

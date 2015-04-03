@@ -13,7 +13,9 @@ namespace com.WanderingTurtle.BusinessLogic
         HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
 		/// <summary>
-		/// Created by Pat Banks 2015/02/25
+		/// Pat Banks 
+        /// Created: 2015/02/25
+        /// 
 		/// Calls the InvoiceAccessor method that
 		/// retrieves a list of bookings for a hotel guest
 		/// </summary>
@@ -32,7 +34,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		}
 
 		/// <summary>
-		/// Created by Pat Banks 2015/03/03
+        /// Pat Banks 
+        /// Created: 2015/03/03
+        /// 
 		/// Calls the InvoiceAccessor method that
 		/// retrieves a list of invoices that are active
 		/// </summary>
@@ -60,10 +64,16 @@ namespace com.WanderingTurtle.BusinessLogic
 		}
 
 		/// <summary>
-		/// Created by Pat Banks 2015/02/2015
+		/// Pat Banks 
+        /// Created: 2015/02/2015
+        /// 
 		/// Calls the InvoiceAccessor method that
 		/// retrieves Invoice information for a selected hotel guest
 		/// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated: 2015/02/27
+        /// </remarks>
 		/// <param name="hotelGuestId">Hotel Guest ID</param>
 		/// <returns>Invoice information for a hotel guest</returns>
 		public InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
@@ -79,7 +89,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		}
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Pat Banks 
+        /// Created: 2015/03/03
+        /// 
         /// Calculates the amount due for a customer's bookings
         /// </summary>
         /// <param name="guestBookings">List of bookings for a guest</param>
@@ -90,12 +102,15 @@ namespace com.WanderingTurtle.BusinessLogic
             return guestBookings.Sum(b => b.TotalCharge);
         }
 
-        /// Created by Pat Banks 2015/03/09
+        /// Pat Banks 
+        /// Created: 2015/03/09
         ///
         /// Checks if a booking is in the future and has tickets booked
         /// If fails, then guest cannot checkout
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Updated: 2015/03/19
+        /// 
         /// Moved logic to Business Logic Layer
         /// </remarks>
         public ResultsArchive CheckToArchiveInvoice(InvoiceDetails invoiceToArchive, List<BookingDetails> bookingsToArchive)
@@ -111,7 +126,9 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
 		/// <summary>
-		/// Created by Pat Banks 2015/03/03
+		/// Pat Banks 
+        /// Created: 2015/03/03
+        /// 
 		/// Calls the InvoiceAccessor method that
 		/// archives invoice information for a selected hotel guest
 		/// </summary>

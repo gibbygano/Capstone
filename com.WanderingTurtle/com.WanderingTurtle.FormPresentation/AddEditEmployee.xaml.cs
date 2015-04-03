@@ -15,7 +15,8 @@ namespace com.WanderingTurtle.FormPresentation
         private EmployeeManager _employeeManager = new EmployeeManager();
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/02
+        /// Pat Banks 
+        /// Created: 2015/02/02
         ///
         /// Constructs the add employee form and fills the combo box.
         /// </summary>
@@ -63,7 +64,9 @@ namespace com.WanderingTurtle.FormPresentation
         private List<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
 
         /// <summary>
-        /// Created by Miguel Santana 2015/03/05
+        /// Miguel Santana 
+        /// Created: 2015/03/05
+        /// 
         /// Closes the window
         /// </summary>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -72,7 +75,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Miguel Santana 2015/03/05
+        /// Miguel Santana 
+        /// Created: 2015/03/05
+        /// 
         /// Resets the fields
         /// </summary>
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -81,12 +86,15 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/15
+        /// Pat Banks 
+        /// Created: 2015/02/15
+        /// 
         /// Calls method to open AddEditEmployee UI
         /// </summary>
         /// <remarks>
         /// Miguel Santana
-        /// Updated:  2015/02/22
+        /// Updated: 2015/02/22
+        /// 
         /// Added method to update employee
         /// </remarks>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -95,7 +103,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/15
+        /// Pat Banks 
+        /// Created: 2015/02/15
         ///
         /// Method takes values for a new employee from the form and passes values
         ///     into the AddNewEmployee method of the EmployeeManager class
@@ -179,6 +188,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/22
+        /// 
         /// Reloads the combobox with values from database
         /// </summary>
         private void ReloadComboBox()
@@ -188,7 +200,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Miguel Santana 2015/03/05
+        /// Miguel Santana 
+        /// Created: 2015/03/05
+        /// 
         /// Resets the values of the fields
         /// </summary>
         private void SetFields()
@@ -214,28 +228,30 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/03/13
+        /// 
         /// Show Message Dialog
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <param name="style"></param>
         /// <returns>awaitable Task of MEssageDialogResult</returns>
-        /// Miguel Santana 2015/02/18
-        /// Updated 2015/03/13
         private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return DialogBox.ShowMessageDialog(this, message, title, style);
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/20
+        /// Pat Banks 
+        /// Created: 2015/02/20
         ///
         /// Validates the text fields in the form
         /// </summary>
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/20
-        ///
+        /// 
         /// Extracted method
         /// </remarks>
         private bool Validate()

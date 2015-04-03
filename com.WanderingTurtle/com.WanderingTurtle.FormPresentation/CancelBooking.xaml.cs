@@ -18,6 +18,9 @@ using com.WanderingTurtle.FormPresentation.Models;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
+    /// Tony Noel
+    /// Created: 2015/03/04
+    /// 
     /// Interaction logic for CancelBooking.xaml
     /// </summary>
     public partial class CancelBooking
@@ -28,7 +31,9 @@ namespace com.WanderingTurtle.FormPresentation
         private BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
-        ///Created By: Tony Noel, 2015/03/04
+        /// Tony Noel 
+        /// Created: 2015/03/04
+        /// 
         /// A form used to cancel a booking. Displays the information about the booking.
         /// </summary>
         /// <param name="booking">Requires an input of a BookingDetails object 
@@ -44,12 +49,16 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Tony Noel, 2015/03/04
+        /// Tony Noel
+        /// Created: 2015/03/04
+        /// 
         /// Attempts to populate the UI and the Guest labels with text pertaining to the guest booking
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/08
-        /// updated with new fields and formatting;  moved fee calculation to BLL
+        /// Pat Banks 
+        /// Updated: 2015/03/08
+        /// 
+        /// Updated with new fields and formatting;  Moved fee calculation to BLL
         /// </remarks>
         public void populateText()
         {
@@ -67,16 +76,22 @@ namespace com.WanderingTurtle.FormPresentation
             lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
         }
 
-        ///Created By: Tony Noel, 2015/03/04
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/04
+        /// 
         /// A method to cancel a booking.
         /// The object is then sent to the OrderManager-EditBooking method to be processed.
         /// </summary>
         /// <remarks>
-        /// updated by Pat Banks 2015/03/08
-        /// updated fields to reflect cancellation of booking
-        /// updated by Pat Banks 2015/03/19
-        /// moved logic to BookingManager - CancelBookingResults
+        /// Pat Banks 
+        /// Updated: 2015/03/08
+        /// 
+        /// Updated fields to reflect cancellation of booking
+        /// Pat Banks 
+        /// Updated: 2015/03/19
+        /// 
+        /// Moved logic to BookingManager - CancelBookingResults
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>

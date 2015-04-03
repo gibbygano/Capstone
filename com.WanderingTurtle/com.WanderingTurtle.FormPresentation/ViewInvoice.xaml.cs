@@ -30,7 +30,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/02/2015
+        /// Created: 2015/02/2015
+        /// 
         /// Displays information for the selected guest's invoice
         /// </summary>
         /// <param name="selectedHotelGuestID">Selected guest's id to retrieve</param>
@@ -47,7 +48,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/03/03
+        /// Created: 2015/03/03
+        /// 
         /// Calls the InvoiceManager method that retrieves the guest's invoice information
         /// and stores the information in invoiceToView
         /// </summary>
@@ -71,12 +73,13 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/03/03
+        /// Created: 2015/03/03
         ///
         /// Calls the InvoiceManager method that retrieves a list of booking details for a selected guest
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/08
+        /// Pat Banks 
+        /// Updated: 2015/03/08
         /// Added info to show the user how many bookings the guest has signed up for.
         /// </remarks>
         private void refreshBookingList()
@@ -98,7 +101,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/03/03
+        /// Created: 2015/03/03
         ///
         /// Opens the AddBooking UI as dialog box
         /// </summary>
@@ -117,7 +120,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/03/03
+        /// Created: 2015/03/03
         ///
         /// Opens the EditGuest UI as dialog box
         /// </summary>
@@ -152,12 +155,14 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/03/03
+        /// Created: 2015/03/03
         ///
         /// Opens the EditBooking UI as dialog box
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/19/
+        /// Pat Banks 
+        /// Updated: 2015/03/19
+        /// 
         /// Moved logic checks to Business Logic Layer - CheckToEditBooking
         /// </remarks>
         /// <param name="sender"></param>
@@ -195,14 +200,18 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// Created By: Tony Noel, 2015/03/04
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/04
+        /// 
         /// Cancel booking button to open cancel form.
         /// First attempts to create a BookingDetails object from the lvCustomerBookings,
         /// then passes this to the CancelBooking form if the object creation was successful.
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Updated: 2015/03/19
+        /// 
         /// Moved logic checks to booking manager CheckToEditBooking
         /// </remarks>
         /// <param name="sender"></param>
@@ -241,13 +250,15 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// 2015/03/03
+        /// Created: 2015/03/03
         ///
         /// Opens the ArchiveInvoice UI as dialog box
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/19
-        /// moved logic checks to invoice manager - checkToArchiveInvoice
+        /// Pat Banks
+        /// Updated: 2015/03/19
+        /// 
+        /// Moved logic checks to invoice manager - checkToArchiveInvoice
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
