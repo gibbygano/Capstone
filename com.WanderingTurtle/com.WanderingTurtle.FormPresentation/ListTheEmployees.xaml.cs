@@ -4,17 +4,10 @@ using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -23,13 +16,17 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheEmployees : UserControl
     {
-        private List<Employee> employeeList;
         private EmployeeManager _employeeManager = new EmployeeManager();
+        private GridViewColumnHeader _sortColumn;
 
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+
+        private List<Employee> employeeList;
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/19
-        /// 
+        ///
         /// Displays and refreshes the list of active employees
         /// </summary>
         /// <remarks>
@@ -42,9 +39,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/19
-        /// 
+        ///
         /// Displays add Employee window for user to add additional employees to the system
         /// </summary>
         /// <param name="sender"></param>
@@ -60,33 +57,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
-        /// Created: 2015/02/19
-        /// 
-        /// Retrieves a list of employees from the database to display
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        private void RefreshEmployeeList()
-        {
-            lvEmployeesList.ItemsPanel.LoadContent();
-
-            try
-            {
-                employeeList = _employeeManager.FetchListEmployees();
-                lvEmployeesList.ItemsSource = employeeList;
-                lvEmployeesList.Items.Refresh();
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve employee list from the database.");
-            }
-        }
-
-        /// <summary>
-        /// Miguel Santana 
+        /// Miguel Santana
         /// Created: 2015/03/01
-        /// 
+        ///
         /// Opens the update employee UI with the selected employee
         /// </summary>
         /// <param name="sender"></param>
@@ -99,23 +72,13 @@ namespace com.WanderingTurtle.FormPresentation
                 DialogBox.ShowMessageDialog(this, "Please select a row to edit");
                 return;
             }
-            AddEmployee newAddWindow = new AddEmployee((Employee)selectedItem);
-
-            if (newAddWindow.ShowDialog() == false)
-            {
-                RefreshEmployeeList();
-            }
+            UpdateEmployee(selectedItem as Employee);
         }
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private GridViewColumnHeader _sortColumn;
 
         /// <summary>
         /// Will Fritz
         /// Created: 2015/02/27
-        /// 
+        ///
         /// This method will sort the listview column in both asending and desending order
         /// </summary>
         /// <param name="sender"></param>
@@ -158,6 +121,56 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
+            }
+        }
+
+        private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
+            {
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        UpdateEmployee(grid.SelectedItem as Employee);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/02/19
+        ///
+        /// Retrieves a list of employees from the database to display
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        private void RefreshEmployeeList()
+        {
+            lvEmployeesList.ItemsPanel.LoadContent();
+
+            try
+            {
+                employeeList = _employeeManager.FetchListEmployees();
+                lvEmployeesList.ItemsSource = employeeList;
+                lvEmployeesList.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve employee list from the database.");
+            }
+        }
+
+        private void UpdateEmployee(Employee selectedEmployee)
+        {
+            AddEmployee newAddWindow = new AddEmployee(selectedEmployee);
+
+            if (newAddWindow.ShowDialog() == false)
+            {
+                RefreshEmployeeList();
             }
         }
     }

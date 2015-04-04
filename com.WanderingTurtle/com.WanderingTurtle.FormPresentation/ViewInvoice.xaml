@@ -43,7 +43,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListView Grid.Row="1" x:Name="lvGuestBookings">
+            <ListView Grid.Row="1" x:Name="lvGuestBookings" MouseDoubleClick="lvGuestBookings_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width ="40" Header="ID" DisplayMemberBinding="{Binding ItemListID}" />

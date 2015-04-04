@@ -29,6 +29,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         private List<SupplierApplication> GetPendingSuppliers { get { return new SupplierManager().RetrieveSupplierApplicationList(); } }
 
+        private static void UpdatePendingSupplier(SupplierApplication selectedItem)
+        {
+            new AddEditPendingSupplier(selectedItem).ShowDialog();
+        }
+
         private void btnAddPendingSupplier_Click(object sender, RoutedEventArgs e)
         {
             new AddEditPendingSupplier().ShowDialog();
@@ -42,7 +47,23 @@ namespace com.WanderingTurtle.FormPresentation
                 DialogBox.ShowMessageDialog(this, "Please select a row to edit");
                 return;
             }
-            new AddEditPendingSupplier((SupplierApplication)selectedItem).ShowDialog();
+            UpdatePendingSupplier(selectedItem as SupplierApplication);
+        }
+
+        private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
+            {
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        UpdatePendingSupplier(grid.SelectedItem as SupplierApplication);
+                    }
+                }
+            }
         }
     }
 }

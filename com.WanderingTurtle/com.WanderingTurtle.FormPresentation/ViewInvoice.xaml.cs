@@ -22,16 +22,16 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ViewInvoice
     {
-        private List<BookingDetails> myBookingList;
-        private InvoiceDetails invoiceToView;
-        private InvoiceManager _invoiceManager = new InvoiceManager();
-        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
         private BookingManager _bookingManager = new BookingManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private InvoiceManager _invoiceManager = new InvoiceManager();
+        private InvoiceDetails invoiceToView;
+        private List<BookingDetails> myBookingList;
 
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/2015
-        /// 
+        ///
         /// Displays information for the selected guest's invoice
         /// </summary>
         /// <param name="selectedHotelGuestID">Selected guest's id to retrieve</param>
@@ -44,59 +44,6 @@ namespace com.WanderingTurtle.FormPresentation
 
             //fills the list view
             refreshBookingList();
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/03
-        /// 
-        /// Calls the InvoiceManager method that retrieves the guest's invoice information
-        /// and stores the information in invoiceToView
-        /// </summary>
-        /// <param name="selectedHotelGuestID">selected guest's id</param>
-        private void refreshGuestInformation(int selectedHotelGuestID)
-        {
-            try
-            {
-                //object to store guest's information
-                invoiceToView = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-
-                lblGuestNameLookup.Content = invoiceToView.GetFullName;
-                lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
-                lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve guest information from the database.");
-            }
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/03
-        ///
-        /// Calls the InvoiceManager method that retrieves a list of booking details for a selected guest
-        /// </summary>
-        /// <remarks>
-        /// Pat Banks 
-        /// Updated: 2015/03/08
-        /// Added info to show the user how many bookings the guest has signed up for.
-        /// </remarks>
-        private void refreshBookingList()
-        {
-            lvGuestBookings.ItemsPanel.LoadContent();
-            try
-            {
-                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(invoiceToView.HotelGuestID);
-
-                lvGuestBookings.ItemsSource = myBookingList;
-                lvGuestBookings.Items.Refresh();
-                lblBookingsMessage.Content = "Guest has " + myBookingList.Count + " booking(s).";
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve booking list from the database.");
-            }
         }
 
         /// <summary>
@@ -116,6 +63,128 @@ namespace com.WanderingTurtle.FormPresentation
                 //fill the booking list after the AddBooking UI closes
                 refreshBookingList();
             }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/03/03
+        ///
+        /// Opens the ArchiveInvoice UI as dialog box
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated: 2015/03/19
+        ///
+        /// Moved logic checks to invoice manager - checkToArchiveInvoice
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            //check if invoice can be closed
+            ResultsArchive result = _invoiceManager.CheckToArchiveInvoice(invoiceToView, myBookingList);
+
+            switch (result)
+            {
+                case (ResultsArchive.CannotArchive):
+                    DialogBox.ShowMessageDialog(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
+                    break;
+
+                case (ResultsArchive.OkToArchive):
+                    //opens UI with guest information
+                    ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
+
+                    bool? res = myGuest.ShowDialog();
+
+                    //closes window after successful guest archival
+                    if (res.HasValue && res.Value)
+                    {
+                        Close();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/04
+        ///
+        /// Cancel booking button to open cancel form.
+        /// First attempts to create a BookingDetails object from the lvCustomerBookings,
+        /// then passes this to the CancelBooking form if the object creation was successful.
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated: 2015/03/19
+        ///
+        /// Moved logic checks to booking manager CheckToEditBooking
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancelBooking_Click(object sender, RoutedEventArgs e)
+        {
+            //check if something was selected
+            if (lvGuestBookings.SelectedItem == null)
+            {
+                DialogBox.ShowMessageDialog(this, "Please select a booking to cancel.");
+                return;
+            }
+
+            //check if selected item can be cancelled
+            ResultsEdit result = _bookingManager.CheckToEditBooking((BookingDetails)lvGuestBookings.SelectedItem);
+
+            switch (result)
+            {
+                case (ResultsEdit.CannotEditTooOld):
+                    DialogBox.ShowMessageDialog(this, "Bookings in the past cannot be cancelled.", "Warning");
+                    break;
+
+                case (ResultsEdit.Cancelled):
+                    DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.", "Warning");
+                    break;
+
+                case (ResultsEdit.OkToEdit):
+                    //opens the ui and passes the booking details object in
+                    CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, invoiceToView);
+
+                    if (cancel.ShowDialog() == false)
+                    {
+                        refreshBookingList();
+                    }
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/03/03
+        ///
+        /// Opens the EditBooking UI as dialog box
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated: 2015/03/19
+        ///
+        /// Moved logic checks to Business Logic Layer - CheckToEditBooking
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEditBooking_Click(object sender, RoutedEventArgs e)
+        {
+            BookingDetails bookingToEdit = (BookingDetails)lvGuestBookings.SelectedItem;
+
+            //check form input error
+            if (lvGuestBookings.SelectedItem == null)
+            {
+                DialogBox.ShowMessageDialog(this, "Please select a booking to edit.");
+                return;
+            }
+
+            EditBooking(bookingToEdit);
         }
 
         /// <summary>
@@ -153,44 +222,23 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/03
-        ///
-        /// Opens the EditBooking UI as dialog box
-        /// </summary>
-        /// <remarks>
-        /// Pat Banks 
-        /// Updated: 2015/03/19
-        /// 
-        /// Moved logic checks to Business Logic Layer - CheckToEditBooking
-        /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnEditBooking_Click(object sender, RoutedEventArgs e)
+        private void EditBooking(BookingDetails bookingToEdit)
         {
-            BookingDetails bookingToEdit = (BookingDetails)lvGuestBookings.SelectedItem;
-
-            //check form input error
-            if (lvGuestBookings.SelectedItem == null)
-            {
-                DialogBox.ShowMessageDialog(this, "Please select a booking to edit.");
-                return;
-            }
-
             //check if selected item can be edited
             ResultsEdit result = _bookingManager.CheckToEditBooking(bookingToEdit);
-            
+
             switch (result)
             {
                 case (ResultsEdit.CannotEditTooOld):
                     DialogBox.ShowMessageDialog(this, "Bookings in the past cannot be edited.");
                     break;
+
                 case (ResultsEdit.Cancelled):
                     DialogBox.ShowMessageDialog(this, "This booking has been cancelled and cannot be edited.");
                     break;
+
                 case (ResultsEdit.OkToEdit):
-                    EditBooking editForm =  new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem);
+                    EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem);
 
                     if (editForm.ShowDialog() == false)
                     {
@@ -200,51 +248,19 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// Tony Noel
-        /// Created: 2015/03/04
-        /// 
-        /// Cancel booking button to open cancel form.
-        /// First attempts to create a BookingDetails object from the lvCustomerBookings,
-        /// then passes this to the CancelBooking form if the object creation was successful.
-        /// </summary>
-        /// <remarks>
-        /// Pat Banks 
-        /// Updated: 2015/03/19
-        /// 
-        /// Moved logic checks to booking manager CheckToEditBooking
-        /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnCancelBooking_Click(object sender, RoutedEventArgs e)
+        private void lvGuestBookings_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //check if something was selected
-            if (lvGuestBookings.SelectedItem == null)
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a booking to cancel.");
-                return;
-            }
-
-            //check if selected item can be cancelled
-            ResultsEdit result = _bookingManager.CheckToEditBooking((BookingDetails)lvGuestBookings.SelectedItem);
-
-            switch (result)
-            {
-                case (ResultsEdit.CannotEditTooOld):
-                    DialogBox.ShowMessageDialog(this, "Bookings in the past cannot be cancelled.", "Warning");
-                    break;
-                case (ResultsEdit.Cancelled):
-                    DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.", "Warning");
-                    break;
-                case (ResultsEdit.OkToEdit):
-                    //opens the ui and passes the booking details object in
-                    CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, invoiceToView);
-
-                    if (cancel.ShowDialog() == false)
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
                     {
-                        refreshBookingList();
+                        EditBooking(grid.SelectedItem as BookingDetails);
                     }
-                    break;
+                }
             }
         }
 
@@ -252,42 +268,52 @@ namespace com.WanderingTurtle.FormPresentation
         /// Pat Banks
         /// Created: 2015/03/03
         ///
-        /// Opens the ArchiveInvoice UI as dialog box
+        /// Calls the InvoiceManager method that retrieves a list of booking details for a selected guest
         /// </summary>
         /// <remarks>
         /// Pat Banks
-        /// Updated: 2015/03/19
-        /// 
-        /// Moved logic checks to invoice manager - checkToArchiveInvoice
+        /// Updated: 2015/03/08
+        /// Added info to show the user how many bookings the guest has signed up for.
         /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
+        private void refreshBookingList()
         {
-            //check if invoice can be closed
-            ResultsArchive result = _invoiceManager.CheckToArchiveInvoice(invoiceToView, myBookingList);
-
-            switch (result)
+            lvGuestBookings.ItemsPanel.LoadContent();
+            try
             {
-                case (ResultsArchive.CannotArchive):
-                    DialogBox.ShowMessageDialog(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
-                    break;
-                case (ResultsArchive.OkToArchive):
-                    //opens UI with guest information
-                    ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
+                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(invoiceToView.HotelGuestID);
 
-                    bool? res = myGuest.ShowDialog();
+                lvGuestBookings.ItemsSource = myBookingList;
+                lvGuestBookings.Items.Refresh();
+                lblBookingsMessage.Content = "Guest has " + myBookingList.Count + " booking(s).";
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve booking list from the database.");
+            }
+        }
 
-                    //closes window after successful guest archival
-                    if (res.HasValue && res.Value)
-                    {
-                        Close();
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    break;
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/03/03
+        ///
+        /// Calls the InvoiceManager method that retrieves the guest's invoice information
+        /// and stores the information in invoiceToView
+        /// </summary>
+        /// <param name="selectedHotelGuestID">selected guest's id</param>
+        private void refreshGuestInformation(int selectedHotelGuestID)
+        {
+            try
+            {
+                //object to store guest's information
+                invoiceToView = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+
+                lblGuestNameLookup.Content = invoiceToView.GetFullName;
+                lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
+                lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve guest information from the database.");
             }
         }
     }

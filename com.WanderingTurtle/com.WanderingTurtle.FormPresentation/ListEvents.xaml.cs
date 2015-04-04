@@ -24,8 +24,13 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListEvents : UserControl
     {
-        private EventManager myMan = new EventManager();
+        private GridViewColumnHeader _sortColumn;
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+
         private List<Event> myEventList;
+        private EventManager myMan = new EventManager();
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
@@ -37,45 +42,9 @@ namespace com.WanderingTurtle.FormPresentation
             Refresh();
         }
 
-        /// <summary>
-        /// Hunter Lind || 2015/2/23
-        /// Refreshes our Listview, a handy method instead of having to re-type code.
-        /// </summary>
-        private void Refresh()
+        private static void ViewEventDetails(Event eventToView)
         {
-            try
-            {
-                
-                myEventList = myMan.RetrieveEventList();
-                foreach (Event x in myEventList)
-                {
-                    x.setFields();
-                }
-                lvEvents.ItemsSource = myEventList;
-            }
-            catch (Exception ex)
-            {
-                lvEvents.ItemsSource = "";
-                DialogBox.ShowMessageDialog(this, "Create an event or contact your Systems Administrator", "No data to display from the database.");
-            }
-        }
-
-        /// <summary>
-        /// Hunter Lind || 2015/2/23
-        /// Unimplemented delete button code.
-        /// Will be implemented by: 2015/2/27
-        /// </summary>
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Event EventToDelete = (Event)lvEvents.SelectedItems[0];
-                myMan.ArchiveAnEvent(EventToDelete);
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
+            new ViewEventDetails(eventToView).ShowDialog();
         }
 
         /// <summary>
@@ -90,20 +59,6 @@ namespace com.WanderingTurtle.FormPresentation
             if (AddEvent.ShowDialog() == false)
             {
                 Refresh();
-            }
-        }
-
-        private void btnViewEventDetails(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Event eventToView = (Event)lvEvents.SelectedItem;
-                ViewEventDetails temp = new ViewEventDetails(eventToView);
-                temp.ShowDialog();
-            }
-            catch (Exception)
-            {
-                DialogBox.ShowMessageDialog(this, "No Event selected, please select an Event and try again");
             }
         }
 
@@ -149,6 +104,24 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Unimplemented delete button code.
+        /// Will be implemented by: 2015/2/27
+        /// </summary>
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Event EventToDelete = (Event)lvEvents.SelectedItems[0];
+                myMan.ArchiveAnEvent(EventToDelete);
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
+        }
+
         private void btnEditEvent_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -184,10 +157,17 @@ namespace com.WanderingTurtle.FormPresentation
             txtSearchInput.Text = "";
         }
 
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private GridViewColumnHeader _sortColumn;
+        private void btnViewEventDetails(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ViewEventDetails(lvEvents.SelectedItem as Event);
+            }
+            catch (Exception)
+            {
+                DialogBox.ShowMessageDialog(this, "No Event selected, please select an Event and try again");
+            }
+        }
 
         /// <summary>
         /// This method will sort the listview column in both asending and desending order
@@ -236,9 +216,47 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
+            {
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        ViewEventDetails(grid.SelectedItem as Event);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Refreshes our Listview, a handy method instead of having to re-type code.
+        /// </summary>
+        private void Refresh()
+        {
+            try
+            {
+                myEventList = myMan.RetrieveEventList();
+                foreach (Event x in myEventList)
+                {
+                    x.setFields();
+                }
+                lvEvents.ItemsSource = myEventList;
+            }
+            catch (Exception ex)
+            {
+                lvEvents.ItemsSource = "";
+                DialogBox.ShowMessageDialog(this, "Create an event or contact your Systems Administrator", "No data to display from the database.");
+            }
+        }
+
         private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(txtSearchInput.Text.Length == 0)
+            if (txtSearchInput.Text.Length == 0)
             {
                 btnSearch.Content = "Refresh List";
             }

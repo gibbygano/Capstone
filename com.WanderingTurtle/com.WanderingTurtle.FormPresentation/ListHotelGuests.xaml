@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList">
+        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList" MouseDoubleClick="lvHotelGuestList_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto" Header="ID"           Binding="{Binding HotelGuestID}" />
                 <DataGridTextColumn Width="Auto" Header="Room #"       Binding="{Binding GuestRoomNum}" />

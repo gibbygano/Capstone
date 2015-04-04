@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvSuppliersList">
+        <DataGrid Grid.Row="0" x:Name="lvSuppliersList" MouseDoubleClick="lvSuppliersList_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width ="*"    Header="Company Name"  Binding="{Binding CompanyName}" />
                 <DataGridTextColumn Width ="*"    Header="First Name"    Binding="{Binding FirstName}" />

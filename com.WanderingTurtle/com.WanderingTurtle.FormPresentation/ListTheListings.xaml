@@ -6,17 +6,17 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvListing">
+        <DataGrid Grid.Row="0" x:Name="lvListing" MouseDoubleClick="lvListing_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto"  Header="ID"              Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width="*" Header="Supplier"            Binding="{Binding SupplierName}" />
                 <DataGridTextColumn Width="*" Header="Event"               Binding="{Binding EventName}" />
                 <DataGridTextColumn Width="Auto" Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
                 <DataGridTextColumn Width="Auto" Header="Start Time" Binding="{Binding StartDate, StringFormat='{}{0:t}'}" />
-                <DataGridTextColumn Width="Auto" Header="End Date"   Binding="{Binding EndDate, StringFormat='{}{0:ddd, MMM d}'}"/>
+                <DataGridTextColumn Width="Auto" Header="End Date"   Binding="{Binding EndDate, StringFormat='{}{0:ddd, MMM d}'}" />
                 <DataGridTextColumn Width="Auto" Header="End Time" Binding="{Binding EndDate, StringFormat='{}{0:t}'}" />
                 <DataGridTextColumn Width="Auto" Header="Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" />
-                <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}"  />
+                <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}" />
                 <DataGridTextColumn Width="Auto"  Header="Attendees"       Binding="{Binding CurrentNumGuests}" />
             </DataGrid.Columns>
         </DataGrid>

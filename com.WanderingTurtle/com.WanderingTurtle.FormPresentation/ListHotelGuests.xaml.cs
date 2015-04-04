@@ -21,13 +21,13 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ListHotelGuests : UserControl
     {
-        private InvoiceManager _invoiceManager = new InvoiceManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private InvoiceManager _invoiceManager = new InvoiceManager();
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/17
-        /// 
+        ///
         /// Initializes the UI that displays a list of active hotel guests
         /// </summary>
         public ListHotelGuests()
@@ -37,15 +37,71 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Daniel Collingwood  
+        /// Pat Banks
+        /// Created: 2015/03/03
+        ///
+        /// Opens UI to create a new guest
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
+
+            //When the UI closes, the Hotel Guest list will refresh
+            if (addEditHotelGuest.ShowDialog() == false)
+            {
+                RefreshGuestList();
+            }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/02/27
+        ///
+        /// Populates AddEditInvoice UI based on selected guest
+        /// </summary>
+        /// <param name="sender">default event arguments</param>
+        /// <param name="e">default event arguments</param>
+        private void btnViewGuest_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedGuest = this.lvHotelGuestList.SelectedItem;
+
+            if (selectedGuest == null)
+            {
+                DialogBox.ShowMessageDialog(this, "Please select a guest to view.");
+                return;
+            }
+
+            ViewHotelGuest(selectedGuest as InvoiceDetails);
+        }
+
+        private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
+            {
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        ViewHotelGuest(grid.SelectedItem as InvoiceDetails);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Daniel Collingwood
         /// Created: 2015-02-18
-        /// 
+        ///
         /// Repopulates the list of hotel guests to display
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated" 2015/03/03
-        /// 
+        ///
         /// Changed display items for list of guests retrieved from the invoice manager
         /// </remarks>
         private void RefreshGuestList()
@@ -65,44 +121,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// Pat Banks 
-        /// Created: 2015/03/03
-        ///
-        /// Opens UI to create a new guest
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
+        private void ViewHotelGuest(InvoiceDetails selectedGuest)
         {
-            AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
-
-            //When the UI closes, the Hotel Guest list will refresh
-            if (addEditHotelGuest.ShowDialog() == false)
-            {
-                RefreshGuestList();
-            }
-        }
-
-        /// <summary>
-        /// Pat Banks 
-        /// Created: 2015/02/27
-        ///
-        /// Populates AddEditInvoice UI based on selected guest
-        /// </summary>
-        /// <param name="sender">default event arguments</param>
-        /// <param name="e">default event arguments</param>
-        private void btnViewGuest_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedGuest = this.lvHotelGuestList.SelectedItem;
-
-            if (selectedGuest == null)
-            {
-                DialogBox.ShowMessageDialog(this, "Please select a guest to view.");
-                return;
-            }
-
-            ViewInvoice custInvoice = new ViewInvoice((InvoiceDetails)selectedGuest);
+            ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
 
             if (custInvoice.ShowDialog() == false)
             {

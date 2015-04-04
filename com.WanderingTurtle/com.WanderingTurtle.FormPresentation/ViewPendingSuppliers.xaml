@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Column="0" Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}">
+        <DataGrid Grid.Column="0" Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}" MouseDoubleClick="lvPendingSuppliers_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto" Header="ID"                  Binding="{Binding ApplicationID}" />
                 <DataGridTextColumn Width="*"    Header="Company Name"        Binding="{Binding CompanyName}" />

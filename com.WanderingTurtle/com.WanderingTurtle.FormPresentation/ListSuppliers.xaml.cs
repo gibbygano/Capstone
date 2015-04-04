@@ -24,9 +24,14 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListSuppliers : UserControl
     {
-        private SupplierManager _manager = new SupplierManager();
-        private List<Supplier> _suppliers;
         public static ListSuppliers Instance;
+        private SupplierManager _manager = new SupplierManager();
+        private GridViewColumnHeader _sortColumn;
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+
+        private List<Supplier> _suppliers;
 
         /// <summary>
         /// This will fill the list of suppliers and set this object to the "Instance variable"
@@ -37,6 +42,34 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             FillList();
             Instance = this;
+        }
+
+        /// <summary>
+        /// Fills the list view with the suppliers with a fresh list of suppliers
+        /// created by Will Fritz 15/2/6
+        /// </summary>
+        /// <remarks>
+        /// edited by will fritz 15/2/19
+        /// </remarks>
+        public void FillList()
+        {
+            try
+            {
+                lvSuppliersList.ItemsSource = null;
+                _suppliers = _manager.RetrieveSupplierList();
+                lvSuppliersList.Items.Clear();
+                lvSuppliersList.ItemsSource = _suppliers;
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message, "There was an error accessing the database");
+            }
+        }
+
+        private static void UpdateSupplier(Supplier supplierToUpdate)
+        {
+            new AddSupplier(supplierToUpdate).ShowDialog();
+            //addSupplier.FillUpdateList(supplierToUpdate);
         }
 
         /// <summary>
@@ -99,45 +132,13 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                Supplier supplierToUpdate = (Supplier)lvSuppliersList.SelectedItems[0];
-
-                AddSupplier addSupplier;
-                addSupplier = new AddSupplier(supplierToUpdate);
-                addSupplier.ShowDialog();
-                //addSupplier.FillUpdateList(supplierToUpdate);
+                UpdateSupplier(lvSuppliersList.SelectedItems[0] as Supplier);
             }
             catch (Exception ex)
             {
                 DialogBox.ShowMessageDialog(this, ex.Message, "You Must Select A Supplier Before You Can Update");
             }
         }
-
-        /// <summary>
-        /// Fills the list view with the suppliers with a fresh list of suppliers
-        /// created by Will Fritz 15/2/6
-        /// </summary>
-        /// <remarks>
-        /// edited by will fritz 15/2/19
-        /// </remarks>
-        public void FillList()
-        {
-            try
-            {
-                lvSuppliersList.ItemsSource = null;
-                _suppliers = _manager.RetrieveSupplierList();
-                lvSuppliersList.Items.Clear();
-                lvSuppliersList.ItemsSource = _suppliers;
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message, "There was an error accessing the database");
-            }
-        }
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private GridViewColumnHeader _sortColumn;
 
         /// <summary>
         /// This method will sort the listview column in both asending and desending order
@@ -182,6 +183,22 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
+            }
+        }
+
+        private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
+            {
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        UpdateSupplier(grid.SelectedItem as Supplier);
+                    }
+                }
             }
         }
     }

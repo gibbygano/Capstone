@@ -24,30 +24,18 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheListings : UserControl
     {
-        private ProductManager prodMan = new ProductManager();
+        private GridViewColumnHeader _sortColumn;
+
+        //Class level variables needed for sorting method
+        private ListSortDirection _sortDirection;
+
         private List<ItemListing> myListingList;
+        private ProductManager prodMan = new ProductManager();
 
         public ListTheListings()
         {
             InitializeComponent();
             refreshData();
-        }
-
-        private void refreshData()
-        {
-            try
-            {
-                myListingList = prodMan.RetrieveItemListingList();
-                foreach (ItemListing item in myListingList)
-                {
-                    item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
-                }
-                lvListing.ItemsSource = myListingList;
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message, "No database able to be accessed for Listings");
-            }
         }
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
@@ -94,7 +82,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnEditListing_click(object sender, RoutedEventArgs e)
         {
-            ItemListing ListingEdit = (ItemListing)lvListing.SelectedItem;
+            EditListing(lvListing.SelectedItem as ItemListing);
+        }
+
+        private void EditListing(ItemListing ListingEdit)
+        {
             if (ListingEdit == null)
             {
                 DialogBox.ShowMessageDialog(this, "Please select a row to edit");
@@ -111,10 +103,21 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private GridViewColumnHeader _sortColumn;
+        private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IInputElement element = e.MouseDevice.DirectlyOver;
+            if (element != null && element is FrameworkElement)
+            {
+                if (((FrameworkElement)element).Parent is DataGridCell)
+                {
+                    var grid = sender as DataGrid;
+                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
+                    {
+                        EditListing(grid.SelectedItem as ItemListing);
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// This method will sort the listview column in both asending and desending order
@@ -160,6 +163,23 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
+            }
+        }
+
+        private void refreshData()
+        {
+            try
+            {
+                myListingList = prodMan.RetrieveItemListingList();
+                foreach (ItemListing item in myListingList)
+                {
+                    item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
+                }
+                lvListing.ItemsSource = myListingList;
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message, "No database able to be accessed for Listings");
             }
         }
     }
