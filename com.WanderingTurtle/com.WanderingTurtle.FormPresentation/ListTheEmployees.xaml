@@ -18,7 +18,7 @@
 
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddEmployee"    Content="Add Employee"    Click="btnAddEmployee_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdateEmployee" Content="Update Employee" Click="btnUpdateEmployee_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdateEmployee" Content="Update Employee" Click="btnUpdateEmployee_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEmployeesList}" />
         </WrapPanel>
     </Grid>
 </UserControl>

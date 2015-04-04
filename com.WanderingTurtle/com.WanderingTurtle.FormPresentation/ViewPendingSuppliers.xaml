@@ -30,7 +30,7 @@
 
         <WrapPanel Grid.Row="1">
             <Button Content="Add Pending Supplier"    Margin="{DynamicResource Button Spacing}" Click="btnAddPendingSupplier_Click" />
-            <Button Content="Update Pending Supplier" Margin="{DynamicResource Button Spacing}" Click="btnUpdatePendingSupplier_Click" />
+            <Button Content="Update Pending Supplier" Margin="{DynamicResource Button Spacing}" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvPendingSuppliers}" />
         </WrapPanel>
     </Grid>
 </Metro:MetroWindow>

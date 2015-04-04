@@ -182,15 +182,6 @@ namespace com.WanderingTurtle.FormPresentation
             List<Event> myTempList = myMan.EventSearch(txtSearchInput.Text);
             lvEvents.ItemsSource = myTempList;
             txtSearchInput.Text = "";
-            
-        }
-
-        private void lvEvents_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            btnAddEvent.IsEnabled = true;
-            btnArchiveEvent.IsEnabled = true;
-            btnEditEvent.IsEnabled = true;
-            btnViewDetails.IsEnabled = true;
         }
 
         //Class level variables needed for sorting method

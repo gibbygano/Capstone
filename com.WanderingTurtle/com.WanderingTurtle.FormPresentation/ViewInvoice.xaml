@@ -61,8 +61,8 @@
         </Grid>
         <WrapPanel Grid.Row="3">
             <Button Content="Add Booking"    Margin="{DynamicResource Button Spacing}" Click="btnAddBooking_Click" />
-            <Button Content="Edit Booking"   Margin="{DynamicResource Button Spacing}" Click="btnEditBooking_Click" />
-            <Button Content="Cancel Booking" Margin="{DynamicResource Button Spacing}" Click="btnCancelBooking_Click" />
+            <Button Content="Edit Booking"   Margin="{DynamicResource Button Spacing}" Click="btnEditBooking_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
+            <Button Content="Cancel Booking" Margin="{DynamicResource Button Spacing}" Click="btnCancelBooking_Click"  IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
             <Button Content="Guest Checkout" Margin="{DynamicResource Button Spacing}" Click="btnArchiveInvoice_Click" />
         </WrapPanel>
     </Grid>

@@ -77,6 +77,7 @@
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button}" />
             <Thickness x:Key="Grid Margin">5</Thickness>
             <Thickness x:Key="Button Spacing">0,5,5,0</Thickness>
+            <Thickness x:Key="Button Spacing Inline">0,0,5,0</Thickness>
 
             <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
                 <Setter Property="IsReadOnly" Value="True" />
