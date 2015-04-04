@@ -64,6 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+            Exception _ex = null;
             try
             {
                 Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
@@ -75,9 +76,13 @@ namespace com.WanderingTurtle.FormPresentation
                 FillList();
             }
             catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message, "You Must Select A Supplier Before You Can Delete");
-            }
+            { _ex = ex; }
+            if (_ex != null) { await DialogBox.ShowMessageDialog(this, _ex.Message, "You Must Select A Supplier Before You Can Delete"); _ex = null; }
+        }
+
+        private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
+        {
+            new ViewPendingSuppliers().ShowDialog();
         }
 
         /// <summary>
