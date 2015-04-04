@@ -8,6 +8,7 @@
     [PhoneNumber]  VARCHAR (15)  NULL,
     [EmailAddress] VARCHAR (100) NULL,
 	[Room]		   int			 NULL,
+    [GuestPIN]		INT			NULL, 
     [Active]       BIT           NOT NULL,
     CONSTRAINT [pk_HotelGuest] PRIMARY KEY CLUSTERED ([HotelGuestID] ASC)
 ) ON [PRIMARY];

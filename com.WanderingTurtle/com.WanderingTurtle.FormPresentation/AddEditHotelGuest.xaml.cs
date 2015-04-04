@@ -33,6 +33,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Title = "Add New Hotel Guest";
             TxtRoomNumber.MaxLength = 4;
+            TxtGuestPIN.MaxLength = 4;
             InitializeEverything();
         }
 
@@ -142,6 +143,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = null;
                 TxtEmailAddress.Text = null;
                 TxtRoomNumber.Text = null;
+                TxtGuestPIN.Text = null;
             }
             else
             {
@@ -153,6 +155,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
                 TxtRoomNumber.Text = CurrentHotelGuest.Room.ToString();
+                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN.ToString();
             }
             TxtFirstName.Focus();
         }
@@ -219,7 +222,8 @@ namespace com.WanderingTurtle.FormPresentation
                             (CityState)CboZip.SelectedItem,
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
-                            int.Parse(TxtRoomNumber.Text.Trim())
+                            int.Parse(TxtRoomNumber.Text.Trim()),
+                            int.Parse(TxtGuestPIN.Text)
                         )
                     );
                 }
@@ -235,18 +239,19 @@ namespace com.WanderingTurtle.FormPresentation
                                 (CityState)CboZip.SelectedItem,
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
-                                int.Parse(TxtRoomNumber.Text.Trim())
+                                int.Parse(TxtRoomNumber.Text.Trim()),
+                                int.Parse(TxtGuestPIN.Text)
                             )
                         );
                 }
 
                 if (Result)
                 {
-                    ShowMessage("Your Request was Processed Successfully", "Success");
+                    await ShowMessage("Your Request was Processed Successfully", "Success");
                     Close();
                 }
                 else
-                { ShowMessage("Error Processing Request", "Error"); }
+                { await ShowMessage("Error Processing Request", "Error"); }
             }
             catch (ApplicationException ex)
             { _ex = ex; }
@@ -254,7 +259,7 @@ namespace com.WanderingTurtle.FormPresentation
             { _ex = ex; }
             catch (Exception ex)
             { _ex = ex; }
-            if (_ex != null) { ShowMessage(_ex.Message); _ex = null; }
+            if (_ex != null) { await ShowMessage(_ex.Message); _ex = null; }
         }
 
         /// <summary>
@@ -350,6 +355,21 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtRoomNumber.SelectAll();
                 return false;
             }
+            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
+            {
+                ShowMessage("Please enter a valid PIN Number with 4 characters.");
+                TxtRoomNumber.Focus();
+                TxtRoomNumber.SelectAll();
+                return false;
+            }
+            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(),4))
+            {
+                ShowMessage("Please enter a valid PIN Number with 4 characters.");
+                TxtRoomNumber.Focus();
+                TxtRoomNumber.SelectAll();
+                return false;
+            }
+
             return true;
         }
 
@@ -369,7 +389,8 @@ namespace com.WanderingTurtle.FormPresentation
                     && CurrentHotelGuest.CityState.Zip.Equals(((CityState)CboZip.SelectedItem).Zip)
                     && CurrentHotelGuest.PhoneNumber.Equals(TxtPhoneNumber.Text.Trim())
                     && CurrentHotelGuest.EmailAddress.Equals(TxtEmailAddress.Text.Trim())
-                    && CurrentHotelGuest.Room.Equals(TxtRoomNumber.Text.Trim());
+                    && CurrentHotelGuest.Room.Equals(TxtRoomNumber.Text.Trim())
+                    && CurrentHotelGuest.GuestPIN.Equals(TxtGuestPIN.Text.Trim());
         }
     }
 }

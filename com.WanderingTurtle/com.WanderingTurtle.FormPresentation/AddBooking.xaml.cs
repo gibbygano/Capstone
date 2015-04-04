@@ -111,7 +111,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                     case (ResultsEdit.Success):
                         DialogBox.ShowMessageDialog(this, "The booking has been successfully added."); 
-                        this.Close();
                         break;
                 }
             }

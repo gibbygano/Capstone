@@ -7,16 +7,16 @@ using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-	public class HotelGuestManager
-	{
-		/// <summary>
+    public class HotelGuestManager
+    {
+        /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
         /// 
-		/// Creates a new Hotel Guest in the database
-		/// </summary>
-		/// <param name="newHotelGuest">Object containing new hotel guest information</param>
-		/// <returns>Number of rows effected</returns>
+        /// Creates a new Hotel Guest in the database
+        /// </summary>
+        /// <param name="newHotelGuest">Object containing new hotel guest information</param>
+        /// <returns>Number of rows effected</returns>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/10
@@ -25,8 +25,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// 
         /// Updated try/catch blocks 
         /// </remarks>
-		public bool AddHotelGuest(HotelGuest newHotelGuest)
-		{
+        public bool AddHotelGuest(HotelGuest newHotelGuest)
+        {
             try
             {
                 return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
@@ -39,24 +39,24 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
-		}
+        }
 
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
         /// 
-		/// Gets a hotel guest by id
-		/// </summary>
+        /// Gets a hotel guest by id
+        /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
         /// 
         /// Updated try/catch blocks 
         /// </remarks>
-		/// <param name="hotelGuestId">the id of a hotel guest to retrieve</param>
-		/// <returns>HotelGuest object retrieved from database</returns>
-		public HotelGuest GetHotelGuest(int hotelGuestId)
-		{
+        /// <param name="hotelGuestId">the id of a hotel guest to retrieve</param>
+        /// <returns>HotelGuest object retrieved from database</returns>
+        public HotelGuest GetHotelGuest(int hotelGuestId)
+        {
             try
             {
                 List<HotelGuest> list = HotelGuestAccessor.HotelGuestGet(hotelGuestId);
@@ -74,14 +74,14 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
-		}
+        }
 
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
         /// 
-		/// Gets a list of all Hotel Guests
-		/// </summary>
+        /// Gets a list of all Hotel Guests
+        /// </summary>
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/18
@@ -90,9 +90,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// 
         /// Updated try/catch blocks 
         /// </remarks>
-		/// <returns>List of HotelGuest Objects</returns>
-		public List<HotelGuest> GetHotelGuestList()
-		{
+        /// <returns>List of HotelGuest Objects</returns>
+        public List<HotelGuest> GetHotelGuestList()
+        {
             try
             {
                 return HotelGuestAccessor.HotelGuestGet();
@@ -109,25 +109,25 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
-		}
+        }
 
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
         /// 
-		/// Updates a hotel guest with new information
-		/// </summary>
+        /// Updates a hotel guest with new information
+        /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
         /// 
         /// Updated try/catch blocks 
         /// </remarks>
-		/// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
-		/// <param name="newHotelGuest">Object containing new hotel guest information</param>
-		/// <returns>Number of rows effected</returns>
-		public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
-		{
+        /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
+        /// <param name="newHotelGuest">Object containing new hotel guest information</param>
+        /// <returns>Number of rows effected</returns>
+        public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
+        {
             try
             {
                 return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
@@ -144,26 +144,26 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
-		}
+        }
 
-		/// <summary>
+        /// <summary>
         /// Rose Steffensmeier
         /// Created: 2013/02/26
         /// 
-		/// Archives a hotel guest
-		/// </summary>
+        /// Archives a hotel guest
+        /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
         /// 
         /// Updated try/catch blocks 
         /// </remarks>
-		/// <param name="oldGuest"></param>
-		/// <param name="newActive"></param>
-		/// <exception cref="Exception">an exception was hit in the HotelGuestAccessor or HotelGuestAccessor can't be found</exception>
-		/// <returns>true if rows were affected, false if not</returns>
-		public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
-		{
+        /// <param name="oldGuest"></param>
+        /// <param name="newActive"></param>
+        /// <exception cref="Exception">an exception was hit in the HotelGuestAccessor or HotelGuestAccessor can't be found</exception>
+        /// <returns>true if rows were affected, false if not</returns>
+        public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
+        {
             try
             {
                 return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
@@ -180,6 +180,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
-		}
-	}
+        }
+    }
 }

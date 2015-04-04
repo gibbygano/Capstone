@@ -9,12 +9,13 @@ CREATE PROCEDURE [dbo].[spHotelGuestAdd]
 	@address2 varchar(255),
 	@phoneNumber varchar(15),
 	@email varchar(100),
-	@room int
+	@room int,
+	@guestPIN int
 AS
 BEGIN
 	DECLARE @guestID int, @rowCount int
-	INSERT INTO [HotelGuest] ([FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[EmailAddress], [Room]) 
-	VALUES (@firstName, @lastName, @zip, @address1, @address2, @phoneNumber, @email, @room)
+	INSERT INTO [HotelGuest] ([FirstName],[LastName],[Zip],[Address1],[Address2],[PhoneNumber],[EmailAddress], [Room], [GuestPIN]) 
+	VALUES (@firstName, @lastName, @zip, @address1, @address2, @phoneNumber, @email, @room, @guestPIN)
 
 	SET @guestID = @@IDENTITY
 	SET @rowCount = @@ROWCOUNT
