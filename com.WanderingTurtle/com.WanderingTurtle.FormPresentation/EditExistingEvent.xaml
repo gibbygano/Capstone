@@ -23,7 +23,7 @@
         <Label Content="Event Type:"   Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" />
         <Label Content="Description:"  Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" />
         <TextBox x:Name="txtEventName" Grid.Row="0" Grid.Column="1" MaxLength="255" />
-        <TextBox x:Name="txtDescrip"   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="255" Style="{DynamicResource TextArea}" />
+        <TextBox x:Name="txtDescrip"   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="255" Style="{DynamicResource TextArea}" Height="Auto" />
 
         <Grid Grid.Row="2" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>

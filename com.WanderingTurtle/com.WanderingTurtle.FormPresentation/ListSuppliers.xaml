@@ -8,19 +8,20 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" x:Name="lvSuppliersList">
             <DataGrid.Columns>
-                <DataGridTextColumn Width ="*" Header="Company Name"  Binding="{Binding CompanyName}" />
-                <DataGridTextColumn Width ="*" Header="First Name"    Binding="{Binding FirstName}" />
-                <DataGridTextColumn Width ="*" Header="Last Name"     Binding="{Binding LastName}" />
-                <DataGridTextColumn Width ="*" Header="Address"       Binding="{Binding Address1}" />
-                <DataGridTextColumn Width ="*" Header="Email Address" Binding="{Binding EmailAddress}" />
-                <DataGridTextColumn Width ="Auto"  Header="Phone Number" Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn Width ="*" Header="Supply Cost"   Binding="{Binding SupplyCost, StringFormat='{}{0:P0}'}" />
+                <DataGridTextColumn Width ="*"    Header="Company Name"  Binding="{Binding CompanyName}" />
+                <DataGridTextColumn Width ="*"    Header="First Name"    Binding="{Binding FirstName}" />
+                <DataGridTextColumn Width ="*"    Header="Last Name"     Binding="{Binding LastName}" />
+                <DataGridTextColumn Width ="*"    Header="Address"       Binding="{Binding Address1}" />
+                <DataGridTextColumn Width ="*"    Header="Email Address" Binding="{Binding EmailAddress}" />
+                <DataGridTextColumn Width ="Auto" Header="Phone Number"  Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Width ="*"    Header="Supply Cost"   Binding="{Binding SupplyCost, StringFormat='{}{0:P0}'}" />
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddSupplier" Content="Add Supplier" Click="btnAddSupplier_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnDelete" Content="Delete Supplier"   Click="btnDelete_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdate" Content="Update Supplier"   Click="btnUpdate_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddSupplier"      Content="Add Supplier"      Click="btnAddSupplier_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnDelete"           Content="Delete Supplier"   Click="btnDelete_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdate"           Content="Update Supplier"   Click="btnUpdate_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnPendingSuppliers" Content="Pending Suppliers" Click="btnPendingSuppliers_Click" />
         </WrapPanel>
     </Grid>
 </UserControl>
