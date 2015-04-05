@@ -105,19 +105,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            IInputElement element = e.MouseDevice.DirectlyOver;
-            if (element != null && element is FrameworkElement)
-            {
-                if (((FrameworkElement)element).Parent is DataGridCell)
-                {
-                    var grid = sender as DataGrid;
-                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
-                    {
-                        EditListing(grid.SelectedItem as ItemListing);
-                    }
-                }
-            }
-        }
+            EditListing(DataGridHelper.DataGridRow_Click<ItemListing>(sender, e));
+         }
 
         /// <summary>
         /// This method will sort the listview column in both asending and desending order

@@ -218,18 +218,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            IInputElement element = e.MouseDevice.DirectlyOver;
-            if (element != null && element is FrameworkElement)
-            {
-                if (((FrameworkElement)element).Parent is DataGridCell)
-                {
-                    var grid = sender as DataGrid;
-                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
-                    {
-                        ViewEventDetails(grid.SelectedItem as Event);
-                    }
-                }
-            }
+            ViewEventDetails(DataGridHelper.DataGridRow_Click<Event>(sender, e));
         }
 
         /// <summary>

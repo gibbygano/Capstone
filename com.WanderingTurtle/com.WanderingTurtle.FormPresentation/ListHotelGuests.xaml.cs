@@ -78,18 +78,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            IInputElement element = e.MouseDevice.DirectlyOver;
-            if (element != null && element is FrameworkElement)
-            {
-                if (((FrameworkElement)element).Parent is DataGridCell)
-                {
-                    var grid = sender as DataGrid;
-                    if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
-                    {
-                        ViewHotelGuest(grid.SelectedItem as InvoiceDetails);
-                    }
-                }
-            }
+            ViewHotelGuest(DataGridHelper.DataGridRow_Click<InvoiceDetails>(sender, e));
         }
 
         /// <summary>
