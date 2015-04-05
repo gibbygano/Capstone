@@ -52,7 +52,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="SubmitBtn" Content="Submit" Grid.Column="1" Click="SubmitBtn_Click" TabIndex="15" Margin="{DynamicResource Grid Margin}" />
+            <Button x:Name="SubmitBtn" Content="Submit" Grid.Column="1" Click="SubmitBtn_Click" TabIndex="15" Margin="{DynamicResource Button Spacing Top}" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>

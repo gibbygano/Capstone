@@ -68,7 +68,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="3" Margin="{DynamicResource Button Spacing Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

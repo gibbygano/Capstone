@@ -37,7 +37,7 @@
             <ComboBox    Grid.Row="4" Grid.Column="1" TabIndex="5" Grid.ColumnSpan="1" x:Name="CboUserLevel"      VerticalContentAlignment="Center" ItemsSource="{Binding Path=GetUserLevelList}" />
         </Grid>
 
-        <Grid Grid.Row="1" Margin="0,5,0,0">
+        <Grid Grid.Row="1" Margin="{DynamicResource Button Spacing Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

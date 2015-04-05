@@ -7,7 +7,7 @@
         Style="{DynamicResource WindowStyle}"
         Title="Edit Item Listing" Height="300" Width="500"
 		WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -47,7 +47,7 @@
         <Label Grid.Row="5" Grid.Column="2" Content="Seats Available:" HorizontalContentAlignment="Right" />
         <xctk:IntegerUpDown Grid.Row="5" Grid.Column="3" x:Name="udSeats" Value="10" Increment="5" Minimum="1" />
 
-        <Grid Grid.Row="6" Grid.ColumnSpan="4" Margin="{DynamicResource Grid Margin}">
+        <Grid Grid.Row="6" Grid.ColumnSpan="4" Margin="{DynamicResource Button Spacing Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

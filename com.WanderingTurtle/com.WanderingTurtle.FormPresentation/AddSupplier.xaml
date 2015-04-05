@@ -44,13 +44,15 @@
         <TextBox            x:Name="txtEmail"       TabIndex="8" Grid.Row="2" Grid.Column="3" />
         <TextBox            x:Name="txtUserID"      TabIndex="9" Grid.Row="3" Grid.Column="3" />
 
-        <Grid Grid.Row="5" Grid.ColumnSpan="2">
+        <Grid Grid.Row="5" Grid.ColumnSpan="2" Margin="{DynamicResource Button Spacing Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSubmit" Grid.Column="0" Content="Add Supplier" Click="btnSubmit_Click" Margin="{DynamicResource Grid Margin}" />
-            <Button x:Name="btnEdit"   Grid.Column="1" Content="Edit"         Click="btnEdit_Click"   Margin="{DynamicResource Grid Margin}" />
+            <Button x:Name="btnSubmit" Grid.Column="0" Content="Add Supplier" Click="btnSubmit_Click" />
+            <Separator Width="0"       Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}"/>
+            <Button x:Name="btnEdit"   Grid.Column="2" Content="Edit"         Click="btnEdit_Click" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>

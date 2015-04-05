@@ -6,7 +6,7 @@
         Style="{DynamicResource WindowStyle}"
         Title="View Guest" Height="400" Width="830"
         WindowStartupLocation="CenterScreen">
-    <Grid Margin="5">
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
