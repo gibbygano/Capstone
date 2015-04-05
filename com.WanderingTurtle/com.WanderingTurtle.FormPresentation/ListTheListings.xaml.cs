@@ -40,7 +40,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
-            Window AddItemListings = new AddItemListing();
+            Window AddItemListings = new AddEditListing();
             //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
             //AddItemListings.Show();
             if (AddItemListings.ShowDialog() == false)
@@ -93,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            Window EditListings = new EditListing(ListingEdit);
+            Window EditListings = new AddEditListing(ListingEdit);
 
             //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
             //AddItemListings.Show();
@@ -106,7 +106,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EditListing(DataGridHelper.DataGridRow_Click<ItemListing>(sender, e));
-         }
+        }
 
         /// <summary>
         /// This method will sort the listview column in both asending and desending order

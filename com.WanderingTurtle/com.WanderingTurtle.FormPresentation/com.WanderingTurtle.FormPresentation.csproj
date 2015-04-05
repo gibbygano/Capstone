@@ -131,6 +131,9 @@
     <Compile Include="AddEditPendingSupplier.xaml.cs">
       <DependentUpon>AddEditPendingSupplier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditListing.xaml.cs">
+      <DependentUpon>AddEditListing.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ArchiveInvoice.xaml.cs">
       <DependentUpon>ArchiveInvoice.xaml</DependentUpon>
     </Compile>
@@ -151,9 +154,6 @@
     <Compile Include="EditBooking.xaml.cs">
       <DependentUpon>EditBooking.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditListing.xaml.cs">
-      <DependentUpon>EditListing.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\WindowHelper.cs" />
     <Compile Include="UserLogin.xaml.cs">
@@ -161,9 +161,6 @@
     </Compile>
     <Compile Include="ViewInvoice.xaml.cs">
       <DependentUpon>ViewInvoice.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddItemListings.xaml.cs">
-      <DependentUpon>AddItemListings.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddSupplier.xaml.cs">
       <DependentUpon>AddSupplier.xaml</DependentUpon>
@@ -205,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="AddEditListing.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ArchiveInvoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,10 +226,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditListing.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\TabContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,10 +239,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewInvoice.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddItemListings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
