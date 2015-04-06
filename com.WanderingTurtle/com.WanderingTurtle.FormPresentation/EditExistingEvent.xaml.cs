@@ -64,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
 
             txtEventName.Text = EventToEdit.EventItemName;
@@ -173,7 +173,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 

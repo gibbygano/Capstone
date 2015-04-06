@@ -98,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation
                 catch (Exception ex)
                 {
                     // Better Error handling can be added in the future, this is just here for dev purposes. //
-                    DialogBox.ShowMessageDialog(this, ex.ToString());
+                    DialogBox.ShowMessageDialog(this, ex.Message);
                 }
 
             }

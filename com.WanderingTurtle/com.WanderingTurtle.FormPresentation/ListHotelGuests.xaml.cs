@@ -106,7 +106,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve Hotel Guest listing from the database.");
             }
         }
 
