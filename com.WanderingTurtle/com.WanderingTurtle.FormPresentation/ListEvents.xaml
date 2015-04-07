@@ -27,10 +27,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddEvent"     Content="Add"                Click="btnAddEvent_Click" />
-            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnArchiveEvent" Content="Delete"             Click="btnArchiveEvent_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
-            <Button  Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnEditEvent"    Content="Edit"               Click="btnEditEvent_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
-            <Button  Grid.Column="3" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnViewDetails"  Content="View Event Details" Click="btnViewEventDetails"   IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddEvent"     Content="Add"    Click="btnAddEvent_Click" />
+            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnEditEvent"    Content="Edit"   Click="btnEditEvent_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <Button  Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnArchiveEvent" Content="Delete" Click="btnArchiveEvent_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
             <TextBox Grid.Column="4" Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchInput" TextChanged="txtSearchInput_TextChanged" />
             <Button  Grid.Column="5" x:Name ="btnSearch" Content="Refresh List" Click="btnSearch_Click" />
         </Grid>

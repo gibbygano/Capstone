@@ -137,6 +137,9 @@
     <Compile Include="CancelBooking.xaml.cs">
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditEvent.xaml.cs">
+      <DependentUpon>AddEditEvent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\DataGridHelper.cs" />
     <Compile Include="Models\DialogBox.cs" />
     <Compile Include="ViewPendingSuppliers.xaml.cs">
@@ -213,6 +216,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddEditEvent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -249,14 +256,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddNewEvent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EditExistingEvent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ListEvents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,15 +280,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddNewEvent.xaml.cs">
-      <DependentUpon>AddNewEvent.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="EditExistingEvent.xaml.cs">
-      <DependentUpon>EditExistingEvent.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

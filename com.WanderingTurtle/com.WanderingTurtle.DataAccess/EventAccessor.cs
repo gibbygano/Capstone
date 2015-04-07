@@ -66,13 +66,13 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
 
 
-            cmd.Parameters.AddWithValue("@EventItemID", newEvent.EventItemID);
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
             cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
-            cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);      
+            cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
 
+            cmd.Parameters.AddWithValue("@originalEventItemID", oldEvent.EventItemID);
             cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);            
             cmd.Parameters.AddWithValue("@originalEventTypeID", oldEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);

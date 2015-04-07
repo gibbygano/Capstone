@@ -5,8 +5,8 @@
 	@EventOnsite 					bit, 
 	@Transportation 				bit, 
 	@EventDescription 				varchar(255),
-	@EventItemID					int,
-
+	
+	@originalEventItemID			int,
 	@originalEventItemName 			varchar(255), 
 	@originalEventTypeID 			int,
 	@originalEventOnsite 			bit, 
@@ -22,7 +22,7 @@ AS
 		EventDescription = @EventDescription
 	WHERE
 		Active = 1
-		AND EventItemID = @EventItemID
+		AND EventItemID = @originalEventItemID
 		AND EventItemName = @originalEventItemName
 		AND EventTypeID = @originalEventTypeID
 		AND EventOnsite = @originalEventOnsite
