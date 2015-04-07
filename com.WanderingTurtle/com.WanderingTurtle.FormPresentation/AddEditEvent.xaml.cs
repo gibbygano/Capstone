@@ -32,7 +32,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="EventToEdit">The Event we are going to edit</param>
         public AddEditEvent(Event EventToEdit, bool ReadOnly = false)
         {
-            this.CurrentEvent = EventToEdit;
+            this.OriginalEvent = EventToEdit;
+
+            eventToSubmit.Active = EventToEdit.Active;
+            eventToSubmit.Description = EventToEdit.Description;
+            eventToSubmit.EventTypeID = EventToEdit.EventTypeID;
+            eventToSubmit.OnSite = EventToEdit.OnSite;
+            eventToSubmit.Transportation = EventToEdit.Transportation;
+            eventToSubmit.EventItemName = EventToEdit.EventItemName;
+            eventToSubmit.EventItemID = EventToEdit.EventItemID;
+
             Setup();
             if (ReadOnly)
             {
@@ -41,7 +50,8 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        public Event CurrentEvent { get; private set; }
+        public Event OriginalEvent { get; private set; }
+        private Event eventToSubmit = new Event();
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
@@ -126,7 +136,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (CurrentEvent == null) { AddNewEvent(); }
+            if (OriginalEvent == null) { AddNewEvent(); }
             else { EditExistingEvent(); }
         }
 
@@ -138,22 +148,21 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void EditExistingEvent()
         {
-            var NewEvent = new Event();
-            NewEvent.EventItemName = txtEventName.Text;
+            eventToSubmit.EventItemName = txtEventName.Text;
 
             //Checks and instantiates the minimum and maximum guest controlsToKeepEnabled
-            NewEvent.EventItemName = txtEventName.Text;
+            eventToSubmit.EventItemName = txtEventName.Text;
 
             try
             {
                 // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
-                    NewEvent.OnSite = true;
+                    eventToSubmit.OnSite = true;
                 }
                 else if (radOnSiteNo.IsChecked == true)
                 {
-                    NewEvent.OnSite = false;
+                    eventToSubmit.OnSite = false;
                 }
                 else
                 {
@@ -164,11 +173,11 @@ namespace com.WanderingTurtle.FormPresentation
                 // Provided transport //
                 if (radTranspNo.IsChecked == true)
                 {
-                    NewEvent.Transportation = false;
+                    eventToSubmit.Transportation = false;
                 }
                 else if (radTranspYes.IsChecked == true)
                 {
-                    NewEvent.Transportation = true;
+                    eventToSubmit.Transportation = true;
                 }
                 else
                 {
@@ -176,11 +185,11 @@ namespace com.WanderingTurtle.FormPresentation
                     return;
                 }
 
-                NewEvent.Description = txtDescrip.Text;
+                eventToSubmit.Description = txtDescrip.Text;
 
                 if (cboxType.SelectedItem != null)
                 {
-                    NewEvent.EventTypeID = (cboxType.SelectedItem as EventType).EventTypeID;
+                    eventToSubmit.EventTypeID = (cboxType.SelectedItem as EventType).EventTypeID;
                 }
                 else
                 {
@@ -196,7 +205,7 @@ namespace com.WanderingTurtle.FormPresentation
                 //DialogBox.ShowMessageDialog(Unrevised.EventItemID + Unrevised.EventItemName + Unrevised.EventTypeID + Unrevised.EventTypeName + Unrevised.Description + Unrevised.OnSite + Unrevised.Transportation + "\n" + NewEvent.EventItemID + NewEvent.EventItemName + NewEvent.EventTypeID + NewEvent.EventTypeName + NewEvent.Description + NewEvent.OnSite + NewEvent.Transportation);
 
                 // Submit the events
-                var EventManagerResult = _eventManager.EditEvent(CurrentEvent, NewEvent);
+                var EventManagerResult = _eventManager.EditEvent(OriginalEvent, eventToSubmit);
                 if (EventManagerResult.Equals(EventManager.EventResult.Success))
                 {
                     DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
@@ -212,7 +221,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void SetFields()
         {
-            if (CurrentEvent == null)
+            if (OriginalEvent == null)
             {
                 txtEventName.Text = null;
                 cboxType.SelectedItem = null;
@@ -224,21 +233,21 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                txtEventName.Text = CurrentEvent.EventItemName;
-                txtDescrip.Text = CurrentEvent.Description;
+                txtEventName.Text = OriginalEvent.EventItemName;
+                txtDescrip.Text = OriginalEvent.Description;
 
                 foreach (EventType item in cboxType.Items)
                 {
-                    if (CurrentEvent.EventTypeID.Equals(item.EventTypeID))
+                    if (OriginalEvent.EventTypeID.Equals(item.EventTypeID))
                     { cboxType.SelectedItem = item; }
                 }
 
-                if (CurrentEvent.Transportation == true)
+                if (OriginalEvent.Transportation == true)
                 { radTranspYes.IsChecked = true; }
                 else
                 { radTranspNo.IsChecked = true; }
 
-                if (CurrentEvent.OnSite == true)
+                if (OriginalEvent.OnSite == true)
                 { radOnSiteYes.IsChecked = true; }
                 else
                 { radOnSiteNo.IsChecked = true; }
