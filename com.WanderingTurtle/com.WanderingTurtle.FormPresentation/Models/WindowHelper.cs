@@ -63,13 +63,18 @@ namespace com.WanderingTurtle.FormPresentation.Models
             {
                 foreach (FrameworkElement child in content.Children)
                 {
+                    // Return if this child control is set in controlsToKeepEnabled
                     if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child))
                     { return; }
 
+                    // If child component is a container, then call the recursive method to get inner child components
                     if (child is Panel)
                     { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
                     else
                     {
+                        // Breaks out of this iteration of the loop if the child component is not focusable, such as a Label
+                        if (!child.Focusable) continue;
+
                         if (child is TextBoxBase) { (child as TextBoxBase).IsReadOnly = true; }
                         else { child.IsEnabled = false; }
 
