@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvEvents" ItemsSource="{Binding }" SelectionChanged="lvEvents_SelectionChanged">
+        <DataGrid Grid.Row="0" x:Name="lvEvents" MouseDoubleClick="lvEvents_MouseDoubleClick">
             <DataGrid.Columns>
                 <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL
@@ -27,12 +27,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing}" x:Name="btnAddEvent"     Content="Add"                Click="btnAddEvent_Click" />
-            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveEvent" Content="Delete"             Click="btnArchiveEvent_Click" IsEnabled="False" />
-            <Button  Grid.Column="2" Margin="{DynamicResource Button Spacing}" x:Name="btnEditEvent"    Content="Edit"               Click="btnEditEvent_Click"    IsEnabled="False" />
-            <Button  Grid.Column="3" Margin="{DynamicResource Button Spacing}" x:Name="btnViewDetails"  Content="View Event Details" Click="btnViewEventDetails"   IsEnabled="False" />
-            <TextBox Grid.Column="4" Margin="{DynamicResource Button Spacing}" x:Name="txtSearchInput" TextChanged="txtSearchInput_TextChanged" />
-            <Button  Grid.Column="5" x:Name ="btnSearch" Content="Refresh List" Click="btnSearch_Click" Width="84"/>
+            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddEvent"     Content="Add"                Click="btnAddEvent_Click" />
+            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnArchiveEvent" Content="Delete"             Click="btnArchiveEvent_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <Button  Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnEditEvent"    Content="Edit"               Click="btnEditEvent_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <Button  Grid.Column="3" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnViewDetails"  Content="View Event Details" Click="btnViewEventDetails"   IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <TextBox Grid.Column="4" Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchInput" TextChanged="txtSearchInput_TextChanged" />
+            <Button  Grid.Column="5" x:Name ="btnSearch" Content="Refresh List" Click="btnSearch_Click" />
         </Grid>
     </Grid>
 </UserControl>

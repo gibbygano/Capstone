@@ -9,13 +9,17 @@ namespace com.WanderingTurtle.BusinessLogic
 {
 	public class BookingManager
 	{
-		///Created By: Tony Noel - 15/2/13
-		/// <summary>
+        /// <summary>
+        /// Tony Noel
+        /// Created: 15/2/13
+        /// 
 		/// RetrieveListItemList- a method used to retrieve a list of ItemListingDetails (a subclass of Booking) through the data access layer, from the database
 		/// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
 		/// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/30
+        /// Pat Banks 
+        /// Updated: 2015/03/30
+        /// 
         /// Add DataCache 
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
@@ -54,8 +58,8 @@ namespace com.WanderingTurtle.BusinessLogic
 		}
 
         /// <summary>
-        /// Created by Pat Banks
-        /// 2015/03/30
+        /// Pat Banks
+        /// Created: 2015/03/30
         /// 
         /// Refreshes the data cache 
         /// </summary>
@@ -75,7 +79,8 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Created: 2015/03/11
         /// 
         /// Retrieves Event Listing information for the one selected item listing
         /// Information is human readable with data from joined tables
@@ -126,7 +131,9 @@ namespace com.WanderingTurtle.BusinessLogic
 		}
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Created: 2015/03/19
+        /// 
         /// Takes data from the presentation layer and determines the results of attempting to add a booking
         /// </summary>
         /// <param name="bookingToAdd">Booking information from presentation Layer form</param>
@@ -178,9 +185,11 @@ namespace com.WanderingTurtle.BusinessLogic
                }
            }
         }
-        
-		/// Created By: Tony Noel - 2/5/15
-		/// <summary>
+
+        /// <summary>
+        /// Tony Noel
+        /// Created: 2015/02/05
+        /// 
 		/// EditBooking- a method used to update a booking through the data access layer to be added to the database
 		/// As the BookingID number will not change or be updated in the database the method uses the same booking ID number to search
 		/// the database through the Retrieve Booking method. This will pull the originally record into an object "oldOne". Then the
@@ -195,8 +204,10 @@ namespace com.WanderingTurtle.BusinessLogic
 			return numRows;
 		}
 
-		/// Created By: Tony Noel - 15/2/5
-		/// <summary>
+        /// <summary>
+        /// Tony Noel
+        /// Created: 2015/02/05
+        /// 
 		/// RetrieveBooking- a method used to request a booking from the data access layer and database
 		/// </summary>
 		/// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
@@ -214,12 +225,14 @@ namespace com.WanderingTurtle.BusinessLogic
 			}
 		}
 
-        ///Updated by: Tony Noel 2015/03/10
-       /// <summary>
-       /// Method to calculate the cancellation fee using the CalculateTime method * TotalCharge
-       /// </summary>
-       /// <param name="bookingToCancel"></param>
-       /// <returns>the actual fee in $ that will be charged for cancelling a booking</returns>
+        /// <summary>
+        /// Tony Noel 
+        /// Updated: 2015/03/10
+        /// 
+        /// Method to calculate the cancellation fee using the CalculateTime method * TotalCharge
+        /// </summary>
+        /// <param name="bookingToCancel"></param>
+        /// <returns>the actual fee in $ that will be charged for cancelling a booking</returns>
         public decimal CalculateCancellationFee(BookingDetails bookingToCancel)
         {
             decimal feePercent = CalculateTime(bookingToCancel);
@@ -227,15 +240,20 @@ namespace com.WanderingTurtle.BusinessLogic
             return feePercent * bookingToCancel.TotalCharge;
         }
 
-        ///Created By: Tony Noel, 2015/03/04
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/04
+        /// 
         /// A method to compare two different dates and determine a cancellation fee amount.
         /// Stores today's date, then subtracts todays date from the start date of the event
         /// Uses a TimeSpan object which represents an interval of time and is able to perform calculations on time.
         /// The difference of days is stored on an double and used to test conditions.
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/07, Updated Tony Noel 2015/03/10
+        /// Pat Banks 
+        /// Updated: 2015/03/07
+        /// Tony Noel 
+        /// Updated: 2015/03/10
         /// </remarks>
         /// <returns>decimal containing the total cancellation fee % amount</returns>
         public decimal CalculateTime(BookingDetails bookingStartTime)
@@ -270,7 +288,8 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created by Tony Noel 2015/03/10 
+        /// Tony Noel 
+        /// Created: 2015/03/10 
         /// 
         /// Calculates the extended price of for the order of quantity of tickets multiplied by the unit price
         /// </summary>
@@ -283,7 +302,8 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created by: Tony Noel 2015/03/10, moved to Order manager
+        /// Tony Noel 
+        /// Created: 2015/03/10 - Moved to Order Manager
         /// 
         /// Calculates the total charge of discount * Extended price
         /// </summary>
@@ -298,7 +318,8 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Updated by: Tony Noel, 2015/03/10, moved to ordermanager as it does a calculation.
+        /// Tony Noel
+        /// Created: 2015/03/10 - Moved to Order Manager, as it does a calculation.
         /// </summary>
         /// <param name="maxQuantity"></param>
         /// <param name="currentQuantity"></param>
@@ -310,8 +331,10 @@ namespace com.WanderingTurtle.BusinessLogic
 
             return availableQuantity;
         }
-        ///Created By: Tony Noel- 2015/03/10
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/10
+        /// 
         /// A helper method to calculate the quantity of guests being added onto a booking compared to the original
         /// amount reserved for the booking. Returns the difference between the two.
         /// </summary>
@@ -326,7 +349,8 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Created: 2015/03/11
         /// 
         /// Calls the Booking Accessor to update the number of guests attending an event
         /// Needed after a booking is added, edited or cancelled
@@ -346,7 +370,8 @@ namespace com.WanderingTurtle.BusinessLogic
 		}
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Created: 2015/03/19
         /// 
         /// Checks if a booking can be edited by performing logical checks if booking is too old or cancelled
         /// </summary>
@@ -369,9 +394,10 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Created: 2015/03/19
         /// 
-        /// gives the results of cancelling a booking to the preseantation layer
+        /// Gives the results of cancelling a booking to the preseantation layer
         /// </summary>
         /// <param name="bookingToCancel"></param>
         /// <returns></returns>
@@ -422,13 +448,15 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Created: 2015/03/19
         /// 
-        /// gives the results of editing a booking to the presentation layer
+        /// Gives the results of editing a booking to the presentation layer
         /// </summary>
         /// <remarks>
-        /// Updated 2015/03/30 
         /// Pat Banks
+        /// Updated: 2015/03/30 
+        /// 
         /// Updated to include data cache refresh
         /// </remarks>
         /// <param name="originalQty"></param>
@@ -490,7 +518,13 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
         }
-	
+	    
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/03/30
+        /// </summary>
+        /// <param name="inPIN"></param>
+        /// <returns></returns>
         public ResultsEdit checkValidPIN(int inPIN)
         {
             try
@@ -515,6 +549,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/03/30
+        /// </summary>
+        /// <param name="inPin"></param>
+        /// <returns></returns>
         public int FindGuest(int inPin)
         {
             try

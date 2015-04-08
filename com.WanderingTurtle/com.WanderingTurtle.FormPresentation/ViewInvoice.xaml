@@ -6,7 +6,7 @@
         Style="{DynamicResource WindowStyle}"
         Title="View Guest" Height="400" Width="830"
         WindowStartupLocation="CenterScreen">
-    <Grid Margin="5">
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -43,7 +43,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <ListView Grid.Row="1" x:Name="lvGuestBookings">
+            <ListView Grid.Row="1" x:Name="lvGuestBookings" MouseDoubleClick="lvGuestBookings_MouseDoubleClick">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width ="40" Header="ID" DisplayMemberBinding="{Binding ItemListID}" />
@@ -61,8 +61,8 @@
         </Grid>
         <WrapPanel Grid.Row="3">
             <Button Content="Add Booking"    Margin="{DynamicResource Button Spacing}" Click="btnAddBooking_Click" />
-            <Button Content="Edit Booking"   Margin="{DynamicResource Button Spacing}" Click="btnEditBooking_Click" />
-            <Button Content="Cancel Booking" Margin="{DynamicResource Button Spacing}" Click="btnCancelBooking_Click" />
+            <Button Content="Edit Booking"   Margin="{DynamicResource Button Spacing}" Click="btnEditBooking_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
+            <Button Content="Cancel Booking" Margin="{DynamicResource Button Spacing}" Click="btnCancelBooking_Click"  IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
             <Button Content="Guest Checkout" Margin="{DynamicResource Button Spacing}" Click="btnArchiveInvoice_Click" />
         </WrapPanel>
     </Grid>

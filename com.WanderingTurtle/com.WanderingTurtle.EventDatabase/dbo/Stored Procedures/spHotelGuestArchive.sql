@@ -10,7 +10,8 @@
 	@original_phoneNumber varchar(15),
 	@original_emailAddress varchar(100),
 	@original_room int,
-	@original_active bit)
+	@original_active bit,
+	@original_guestpin int)
 AS
 BEGIN
 	UPDATE HotelGuest
@@ -25,5 +26,6 @@ BEGIN
 		AND EmailAddress = @original_emailAddress
 		AND Room = @original_room
 		AND Active = @original_active
+		AND GuestPIN = @original_guestpin
 END
 RETURN @@ROWCOUNT

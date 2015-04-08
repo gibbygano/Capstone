@@ -6,19 +6,19 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvEmployeesList">
+        <DataGrid Grid.Row="0" x:Name="lvEmployeesList" MouseDoubleClick="lvEmployeesList_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width ="*" Header="Employee ID" Binding="{Binding EmployeeID}" />
                 <DataGridTextColumn Width ="*" Header="First Name"  Binding="{Binding FirstName}" />
                 <DataGridTextColumn Width ="*" Header="Last Name"   Binding="{Binding LastName}" />
-                <DataGridTextColumn Width ="*"  Header="Level"       Binding="{Binding Level}" />
-                <DataGridTextColumn Width ="*"  Header="Active"       Binding="{Binding Active}" />
+                <DataGridTextColumn Width ="*" Header="Level"       Binding="{Binding Level}" />
+                <DataGridTextColumn Width ="*" Header="Active"      Binding="{Binding Active}" />
             </DataGrid.Columns>
         </DataGrid>
 
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddEmployee"    Content="Add Employee"    Click="btnAddEmployee_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdateEmployee" Content="Update Employee" Click="btnUpdateEmployee_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdateEmployee" Content="Update Employee" Click="btnUpdateEmployee_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEmployeesList}" />
         </WrapPanel>
     </Grid>
 </UserControl>

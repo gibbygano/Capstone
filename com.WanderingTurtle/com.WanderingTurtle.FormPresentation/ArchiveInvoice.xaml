@@ -6,7 +6,7 @@
         Style="{DynamicResource WindowStyle}"
 		Title="Guest Final Invoice" Height="400" Width="500"
 		WindowStartupLocation="CenterScreen">
-    <Grid Margin="5">
+    <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -51,7 +51,7 @@
             <Label Grid.Row="1" Grid.Column="3" x:Name="lblRoomNum" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" />
         </Grid>
 
-        <Grid Grid.Row="3" Margin="0,5,0,0">
+        <Grid Grid.Row="3" Margin="{DynamicResource Button Spacing Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

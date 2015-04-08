@@ -6,25 +6,24 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvListing">
+        <DataGrid Grid.Row="0" x:Name="lvListing" MouseDoubleClick="lvListing_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto"  Header="ID"              Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width="*" Header="Supplier"            Binding="{Binding SupplierName}" />
                 <DataGridTextColumn Width="*" Header="Event"               Binding="{Binding EventName}" />
                 <DataGridTextColumn Width="Auto" Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
                 <DataGridTextColumn Width="Auto" Header="Start Time" Binding="{Binding StartDate, StringFormat='{}{0:t}'}" />
-                <DataGridTextColumn Width="Auto" Header="End Date"   Binding="{Binding EndDate, StringFormat='{}{0:ddd, MMM d}'}"/>
+                <DataGridTextColumn Width="Auto" Header="End Date"   Binding="{Binding EndDate, StringFormat='{}{0:ddd, MMM d}'}" />
                 <DataGridTextColumn Width="Auto" Header="End Time" Binding="{Binding EndDate, StringFormat='{}{0:t}'}" />
                 <DataGridTextColumn Width="Auto" Header="Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" />
-                <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}"  />
+                <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}" />
                 <DataGridTextColumn Width="Auto"  Header="Attendees"       Binding="{Binding CurrentNumGuests}" />
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddListing"     Content="Add"    Click="btnAddListing_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnEditListing"    Content="Edit"   Click="btnEditListing_click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewListing"    Content="View"   Click="btnAddListing_Click" IsEnabled="False" Visibility="Hidden" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnEditListing"    Content="Edit"   Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
         </WrapPanel>
     </Grid>
 </UserControl>

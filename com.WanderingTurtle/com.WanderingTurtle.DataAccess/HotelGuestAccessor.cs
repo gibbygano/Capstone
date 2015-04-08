@@ -11,15 +11,24 @@ namespace com.WanderingTurtle.DataAccess
     public class HotelGuestAccessor
     {
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/12
+        /// 
         /// Creates a new Hotel Guest in the database
-        /// Created By Miguel Santana
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
         /// <remarks>
-        /// Updated by Pat Banks 2/27/2015
+        /// Pat Banks 
+        /// Updated: 2015/02/27
+        /// 
         /// Stored Procedure updated to create an invoice record automatically when adding a hotel guest
         /// Updated Rose Steffensmeier 2015/03/12
+        /// Updated by Pat Banks 2015/04/03
+        /// Added GuestPIN field
+        /// Rose Steffensmeier 
+        /// Updated: 2015/03/12
+
         /// </remarks>
         public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
@@ -37,6 +46,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@phoneNumber", newHotelGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
             cmd.Parameters.AddWithValue("@room", newHotelGuest.Room);
+            cmd.Parameters.AddWithValue("@guestPIN", newHotelGuest.GuestPIN);
 
             try
             {
@@ -60,13 +70,16 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/12
+        /// 
         /// Get a list of all HotelGuest Objects
-        /// Created by Miguel Santana
         /// </summary>
         ///<remarks>
-        /// Updated by Rose Steffensmeier 2015/03/12
+        /// Rose Steffensmeier 
+        /// Updated: 2015/03/12
         /// </remarks>
-        /// <param name="hotelGuestID">Optional Parameter to specify a hotel gust to look up</param>
+        /// <param name="hotelGuestID">Optional Parameter to specify a hotel guest to look up</param>
         /// <returns></returns>
         public static List<HotelGuest> HotelGuestGet(int? hotelGuestID = null)
         {
@@ -102,7 +115,8 @@ namespace com.WanderingTurtle.DataAccess
                                 !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
                                 !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
                                 (int?)reader.GetValue(10), //Room
-                                reader.GetBoolean(11) //Active
+                                reader.GetInt32(11), // PIN
+                                reader.GetBoolean(12) //Active
                             )
                         );
                     }
@@ -128,11 +142,14 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/12
+        /// 
         /// Updates a hotel guest with new information
-        /// Created by Miguel Santana
         /// </summary>
-        ///<remarks>
-        /// Updated by Rose Steffensmeier 02/23/2015
+        /// <remarks>
+        /// Rose Steffensmeier 
+        /// Updated: 02/23/2015
         /// </remarks>
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
@@ -154,6 +171,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@email", newHotelGuest.EmailAddress);
             cmd.Parameters.AddWithValue("@room", newHotelGuest.Room);
             cmd.Parameters.AddWithValue("@active", newHotelGuest.Active);
+            cmd.Parameters.AddWithValue("@guestpin", newHotelGuest.GuestPIN);
 
             cmd.Parameters.AddWithValue("@original_hotelGuestID", oldHotelGuest.HotelGuestID);
             cmd.Parameters.AddWithValue("@original_firstName", oldHotelGuest.FirstName);
@@ -165,6 +183,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_email", oldHotelGuest.EmailAddress);
             cmd.Parameters.AddWithValue("@original_room", oldHotelGuest.Room);
             cmd.Parameters.AddWithValue("@original_active", oldHotelGuest.Active);
+            cmd.Parameters.AddWithValue("@original_guestpin", oldHotelGuest.GuestPIN);
 
             try
             {
@@ -193,11 +212,14 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Rose Steffensmeier
+        /// Created: 2015/02/26
+        /// 
         /// Archives a hotel guest
-        /// Created by Rose Steffensmeier 2015/02/26
         /// </summary>
         /// <remarks>
-        /// Last Updated Rose Steffensmeier 2015/03/12
+        /// Rose Steffensmeier 
+        /// Updated: 2015/03/12
         /// </remarks>
         /// <param name="oldHotelGuestID"></param>
         /// <param name="newHotelGuestID"></param>
@@ -227,6 +249,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_emailAddress", oldGuest.EmailAddress);
             cmd.Parameters.AddWithValue("@original_room", oldGuest.Room);
             cmd.Parameters.AddWithValue("@original_active", oldGuest.Active);
+            cmd.Parameters.AddWithValue("@original_guestpin", oldGuest.GuestPIN);
 
             try
             {
@@ -250,7 +273,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-
             return rowsAffected;
         }
     }

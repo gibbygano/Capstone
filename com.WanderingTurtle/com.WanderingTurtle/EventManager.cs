@@ -439,5 +439,18 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             
         }
+
+        public int deleteTestEvent(Event testEvent)
+        {
+            try
+            {
+                return EventAccessor.DeleteEventTestItem(testEvent);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }

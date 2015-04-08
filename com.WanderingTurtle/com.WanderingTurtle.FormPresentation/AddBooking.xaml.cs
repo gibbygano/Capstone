@@ -34,7 +34,8 @@ namespace com.WanderingTurtle.FormPresentation
         public ItemListing originalItem;
 
         /// <summary>
-        /// Created by Tony Noel 2015/02/13
+        /// Tony Noel 
+        /// Created: 2015/02/13
         /// 
         /// UI for adding a booking
         /// Access from the View Invoice screen
@@ -50,7 +51,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Created: 2015/03/11
+        /// 
         /// Extracted method to refresh the list view as needed
         /// </summary>
         private void RefreshListItems()
@@ -71,11 +74,15 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Tony Noel 2015/02/13
+        /// Tony Noel 
+        /// Created: 2015/02/13
+        /// 
         /// Handles the add Booking click event
         /// </summary>
         /// <remarks>
-        /// updated by Pat Banks 2015/03/19
+        /// Pat Banks 
+        /// Updated: 2015/03/19
+        /// 
         /// Moved decision logic to Booking Manager
         /// </remarks>
         /// <param name="sender"></param>
@@ -104,7 +111,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                     case (ResultsEdit.Success):
                         DialogBox.ShowMessageDialog(this, "The booking has been successfully added."); 
-                        this.Close();
                         break;
                 }
             }
@@ -123,13 +129,17 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by TOny Noel- 2/11/15
+        /// Tony Noel 
+        /// Created: 2/11/15
+        /// 
         /// a method to collect all information from the form
         /// Then after taking each variable and testing them in their specific validation method, parses them 
         /// into the correct variable needed to be stored as a ItemListingDetails
         /// </summary>
         /// <remarks>
-        /// Updated by:  Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Updated: 2015/03/11
+        /// 
         /// Added up/down controls to allow for easier user data entry
         /// </remarks>
         private Booking gatherFormInformation()
@@ -152,10 +162,12 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Tony Noel 2/18/15
-        /// method to create ItemListingDetails from listView
+        /// Tony Noel 
+        /// Created: 2015/02/18
+        /// 
+        /// Method to create ItemListingDetails from listView
         /// </summary>
-        /// <returns>returns the selected item.</returns>
+        /// <returns>Returns the selected item.</returns>
         private ItemListingDetails getSelectedItem()
         {
             ItemListingDetails selected = (ItemListingDetails)lvEventListItems.SelectedItem;
@@ -168,9 +180,10 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Created: 2015/03/11
         /// 
-        /// updates the total cost with discount
+        /// Updates the total cost with discount
         /// </summary>
         /// <param name="myItemObject"></param>
         private void refreshCostsToDisplay(ItemListingDetails myItemObject)
@@ -185,9 +198,10 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
+        /// Pat Banks 
+        /// Created: 2015/03/11
         /// 
-        /// updates the total cost with discount
+        /// Updates the total cost with discount
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -198,7 +212,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/09
+        /// Pat Banks 
+        /// Created: 2015/03/09
         /// 
         /// Adds the event description to the UI when the listView Item changes
         /// Changes up/down quantity value if booking is full
@@ -224,8 +239,10 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created By Pat Banks 2015/03/19
-        /// validates user input for quantity and discount %
+        /// Pat Banks 
+        /// Created: 2015/03/19
+        /// 
+        /// Validates user input for quantity and discount %
         /// </summary>
         /// <returns>True or false if valid</returns>
         private bool Validate()

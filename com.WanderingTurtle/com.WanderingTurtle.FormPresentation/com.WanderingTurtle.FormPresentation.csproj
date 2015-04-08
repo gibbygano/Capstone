@@ -128,13 +128,20 @@
     <Compile Include="AddEditHotelGuest.xaml.cs">
       <DependentUpon>AddEditHotelGuest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddEditPendingSupplier.xaml.cs">
+      <DependentUpon>AddEditPendingSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ArchiveInvoice.xaml.cs">
       <DependentUpon>ArchiveInvoice.xaml</DependentUpon>
     </Compile>
     <Compile Include="CancelBooking.xaml.cs">
       <DependentUpon>CancelBooking.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataGridHelper.cs" />
     <Compile Include="Models\DialogBox.cs" />
+    <Compile Include="ViewPendingSuppliers.xaml.cs">
+      <DependentUpon>ViewPendingSuppliers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
@@ -194,6 +201,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddEditPendingSupplier.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ArchiveInvoice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +214,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewPendingSuppliers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

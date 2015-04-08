@@ -32,6 +32,9 @@ namespace com.WanderingTurtle.Common
         public bool Active { get; private set; }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// 
         /// Use for creating an employee object with an ID
         /// </summary>
         /// <param name="EmployeeID">Employee ID</param>
@@ -45,6 +48,9 @@ namespace com.WanderingTurtle.Common
         }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// 
         /// Use for creating a new employee.
         /// </summary>
         /// <remarks>Does not have an Employee ID</remarks>
@@ -58,6 +64,16 @@ namespace com.WanderingTurtle.Common
             SetValues(null, FirstName, LastName, Password, Level, Active);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// </summary>
+        /// <param name="EmployeeID"></param>
+        /// <param name="FirstName"></param>
+        /// <param name="LastName"></param>
+        /// <param name="Password"></param>
+        /// <param name="Level"></param>
+        /// <param name="Active"></param>
         private void SetValues(int? EmployeeID, string FirstName, string LastName, string Password, int Level, bool Active)
         {
             this.EmployeeID = EmployeeID;
@@ -68,6 +84,10 @@ namespace com.WanderingTurtle.Common
             this.Active = Active;
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// </summary>
         public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }
 }

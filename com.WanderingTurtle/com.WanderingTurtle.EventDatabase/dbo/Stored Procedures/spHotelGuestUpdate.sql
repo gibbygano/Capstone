@@ -8,6 +8,7 @@
 	@email varchar(100),
 	@room int,
 	@active bit,
+	@guestpin int,
 	
 	@original_hotelGuestID int,
 	@original_firstName varchar(50),
@@ -18,7 +19,8 @@
 	@original_phoneNumber varchar(15),
 	@original_email varchar(100),
 	@original_room int,
-	@original_active bit
+	@original_active bit,
+	@original_guestpin int
 AS
 BEGIN
 	UPDATE [HotelGuest]
@@ -30,7 +32,8 @@ BEGIN
 			[PhoneNumber] = @phoneNumber,
 			[EmailAddress] = @email,
 			[Room] = @room,
-			[Active] = @active
+			[Active] = @active,
+			[GuestPIN] = @guestpin
 	WHERE HotelGuestID = @original_hotelGuestID
 		AND [FirstName] = @original_firstName
 		AND [LastName] = @original_lastName
@@ -41,6 +44,7 @@ BEGIN
 		AND	[EmailAddress] = @original_email
 		AND [Room] = @original_room
 		AND [Active] = @original_active
+		AND [GuestPIN] = @original_guestpin
 
 	RETURN @@ROWCOUNT
 

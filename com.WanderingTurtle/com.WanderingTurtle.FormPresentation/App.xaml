@@ -22,10 +22,6 @@
                 <Setter Property="BorderThickness" Value="1" />
             </Style>
 
-            <Style x:Key="TextArea" TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}">
-                <Setter Property="AcceptsReturn" Value="True" />
-                <Setter Property="TextWrapping" Value="Wrap" />
-            </Style>
             <system:Double x:Key="TextBoxHeight">30</system:Double>
             <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>
@@ -39,6 +35,12 @@
                 <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="{StaticResource TextBoxClearTextButton}" />
             </Style>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}" />
+            <Style x:Key="TextArea" TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBoxStyle}">
+                <Setter Property="AcceptsReturn" Value="True" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="Height" Value="68" />
+                <Setter Property="VerticalContentAlignment" Value="Top" />
+            </Style>
             <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource TextBoxStyle}" />
             <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MetroPasswordBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
@@ -74,7 +76,9 @@
             </Style>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource Button}" />
             <Thickness x:Key="Grid Margin">5</Thickness>
-            <Thickness x:Key="Button Spacing">0,0,5,0</Thickness>
+            <Thickness x:Key="Button Spacing">0,5,5,0</Thickness>
+            <Thickness x:Key="Button Spacing Inline">0,0,5,0</Thickness>
+            <Thickness x:Key="Button Spacing Top">0,5,0,0</Thickness>
 
             <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
                 <Setter Property="IsReadOnly" Value="True" />

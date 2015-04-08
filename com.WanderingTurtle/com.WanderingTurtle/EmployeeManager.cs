@@ -11,6 +11,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
+        /// 
         /// Method takes in newEmployee and passes it as a parameter into the AddEmployee method of the EmployeeAccessor class
         /// </summary>
         /// <param name="newEmployee"></param>
@@ -31,6 +32,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
+        /// 
         /// Method takes in new and old employee parameters and then submits them to the Data Access Layer method to update the employee record for oldEmploy
         /// </summary>
         /// <remarks>
@@ -57,6 +59,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
+        /// 
         /// Method takes in two parameters that will hold the employee's
         ///     first and last name. This information is passed to the access layer
         ///     where it is used to find the employee in question and return that
@@ -81,6 +84,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
+        /// 
         /// Method takes in new and old employee parameters and then submits them to the
         ///     Data Access Layer method to update the employee record for oldEmployee
         ///     with the the information held in newEmployee
@@ -103,6 +107,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
+        /// 
         /// Method makes a call to getEmployeeList method from the EmployeeAccessor to retrieve a list of all active employees
         /// </summary>
         /// <exception cref="Exception">Exception is thrown from Accessor that states that employee could not be found in the database</exception>
@@ -121,7 +126,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Arik Chadima
-        /// 2015/03/03
+        /// Created: 2015/03/03
         /// 
         /// Attempts to fetch an employee with the given credentials from the access layer.
         /// Failure: ApplicationException if the login was bad, and SqlException of some kind if it's a connection issue.

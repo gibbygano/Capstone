@@ -46,7 +46,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             List<Supplier> mySupplierList = mySupMan.RetrieveSupplierList();
             try
@@ -56,7 +56,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch(Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
 
             CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);

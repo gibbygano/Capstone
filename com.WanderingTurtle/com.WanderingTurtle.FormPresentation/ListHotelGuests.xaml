@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList">
+        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList" MouseDoubleClick="lvHotelGuestList_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto" Header="ID"           Binding="{Binding HotelGuestID}" />
                 <DataGridTextColumn Width="Auto" Header="Room #"       Binding="{Binding GuestRoomNum}" />
@@ -17,7 +17,7 @@
         </DataGrid>
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnRegisterGuest" Content="Register Guest" Click="btnRegisterGuest_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewGuest"     Content="View Guest"     Click="btnViewGuest_Click" />
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewGuest"     Content="View Guest"     Click="btnViewGuest_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvHotelGuestList}" />
         </WrapPanel>
     </Grid>
 </UserControl>

@@ -327,7 +327,20 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-            
+        }
+
+        public int deleteTestSupplier(Supplier testSupplier)
+        {
+            try
+            {
+                return SupplierAccessor.DeleteTestSupplier(testSupplier);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
     }
 }

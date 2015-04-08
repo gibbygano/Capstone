@@ -98,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch(Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
         

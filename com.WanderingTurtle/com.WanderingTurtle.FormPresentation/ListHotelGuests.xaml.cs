@@ -21,11 +21,13 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ListHotelGuests : UserControl
     {
-        private InvoiceManager _invoiceManager = new InvoiceManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private InvoiceManager _invoiceManager = new InvoiceManager();
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/17
+        /// Pat Banks
+        /// Created: 2015/02/17
+        ///
         /// Initializes the UI that displays a list of active hotel guests
         /// </summary>
         public ListHotelGuests()
@@ -35,33 +37,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Daniel Collingwood  2015-02-18
-        /// Repopulates the list of hotel guests to display
-        /// </summary>
-        /// <remarks>
         /// Pat Banks
-        /// Updated 2015/03/03
-        /// Changed display items for list of guests retrieved from the invoice manager
-        /// </remarks>
-        private void RefreshGuestList()
-        {
-            lvHotelGuestList.ItemsPanel.LoadContent();
-
-            try
-            {
-                var hotelGuestList = _invoiceManager.RetrieveActiveInvoiceDetails();
-
-                lvHotelGuestList.ItemsSource = hotelGuestList;
-                lvHotelGuestList.Items.Refresh();
-            }
-            catch (Exception ex)
-            {
-                DialogBox.ShowMessageDialog(this, "Unable to retrieve Hotel Guest listing from the database. \n" + ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Created: 2015/03/03
         ///
         /// Opens UI to create a new guest
         /// </summary>
@@ -79,7 +56,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/02/27
+        /// Pat Banks
+        /// Created: 2015/02/27
         ///
         /// Populates AddEditInvoice UI based on selected guest
         /// </summary>
@@ -95,7 +73,46 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            ViewInvoice custInvoice = new ViewInvoice((InvoiceDetails)selectedGuest);
+            ViewHotelGuest(selectedGuest as InvoiceDetails);
+        }
+
+        private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ViewHotelGuest(DataGridHelper.DataGridRow_Click<InvoiceDetails>(sender, e));
+        }
+
+        /// <summary>
+        /// Daniel Collingwood
+        /// Created: 2015-02-18
+        ///
+        /// Repopulates the list of hotel guests to display
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated" 2015/03/03
+        ///
+        /// Changed display items for list of guests retrieved from the invoice manager
+        /// </remarks>
+        private void RefreshGuestList()
+        {
+            lvHotelGuestList.ItemsPanel.LoadContent();
+
+            try
+            {
+                var hotelGuestList = _invoiceManager.RetrieveActiveInvoiceDetails();
+
+                lvHotelGuestList.ItemsSource = hotelGuestList;
+                lvHotelGuestList.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve Hotel Guest listing from the database.");
+            }
+        }
+
+        private void ViewHotelGuest(InvoiceDetails selectedGuest)
+        {
+            ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
 
             if (custInvoice.ShowDialog() == false)
             {
