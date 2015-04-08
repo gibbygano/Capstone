@@ -48,5 +48,21 @@ namespace com.WanderingTurtle.Common
 
         }
 
+        public SupplierApplication(string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate )
+        {
+            ApplicationDate = applicationDate;
+            CompanyName = companyName;
+            CompanyDescription = companyDescription;
+            FirstName = firstName;
+            LastName = lastName;
+            Address1 = address1;
+            Address2 = address2;
+            Zip = zip;
+            PhoneNumber = phoneNumber;
+            EmailAddress = emailAddress;
+            Approved = false;
+
+        }
+
     }
 }
