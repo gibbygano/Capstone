@@ -56,6 +56,7 @@
     <Compile Include="SupplierApplicationAccessor.cs" />
     <Compile Include="SupplierFeedbackRecordAccessor.cs" />
     <Compile Include="SupplierLoginAccessor.cs" />
+    <Compile Include="TestCleanupAccessor.cs" />
     <Compile Include="UserLoginAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
