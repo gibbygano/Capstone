@@ -14,8 +14,12 @@
         -->
     <h1>Listed Events</h1>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
-    <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
-        DeleteMethod="DeleteEvent" EnableViewState="false" runat="server" OnPagePropertiesChanging="lvEvents_PagePropertiesChanging">
+    <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" 
+        SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
+        DeleteMethod="DeleteEvent" EnableViewState="false" runat="server" 
+        OnPagePropertiesChanging="lvEvents_PagePropertiesChanging">
+
+
         <ItemTemplate>
             <tr>
                 <!--show a tooltip with full event name, but only display up to 25 characters-->
@@ -75,8 +79,8 @@
                 </td>
 
                 <td>
-                    <textarea name="description" title="<%= descError %>"class="editInput" maxlength="255"><%# Item.Description %></textarea>
-                    
+                    <textarea name="description" title="<%= descError %>" class="editInput" maxlength="255"><%# Item.Description %></textarea>
+
                 </td>
                 <td>
                     <asp:HiddenField ID="HiddenField2" Value="<%# transport = Item.TransportString %>" runat="server" />
