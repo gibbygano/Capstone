@@ -59,6 +59,8 @@
     <Compile Include="SupplyerManagerTest.cs" />
     <Compile Include="EmployeeTests.cs" />
     <Compile Include="BookingLogicTests.cs" />
+    <Compile Include="EmployeeAccessorTests.cs" />
+    <Compile Include="BookingAccessorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
