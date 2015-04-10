@@ -26,6 +26,7 @@ namespace com.WanderingTurtle.DataAccess
             string storedProcedure = "spSelectSupplier";
             SqlCommand cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@SupplierID", supplierID);
 
             try
             {
