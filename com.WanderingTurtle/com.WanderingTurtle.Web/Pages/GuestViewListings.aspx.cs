@@ -18,24 +18,32 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            GetCurrentListings();
+            if (!IsPostBack)
+            {
 
-            gvListings.DataSource = _currentItemListings;
-            gvListings.DataBind();
-
+            }
         }
 
-        public void GetCurrentListings()
+        private void bindData()
+        {
+            gvListings.DataSource = _currentItemListings;
+            gvListings.DataBind();
+            
+        }
+
+
+        public IEnumerable<ItemListingDetails> GetCurrentListings()
         {
             try
             {
                 _currentItemListings = _myManager.RetrieveActiveItemListings();
+                return _currentItemListings;
 
             }
             catch (Exception)
             {
-
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving List\")</SCRIPT>");
+                return null;
             }
         }
 
@@ -47,6 +55,8 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            //if something isn't selected - throw error
+
             gatherFormInformation();
 
         }
@@ -140,13 +150,14 @@ namespace com.WanderingTurtle.Web.Pages
             switch (addResult)
             {
                 case ResultsEdit.Success:
-                    Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Booking Added Successfully!\")</SCRIPT>");
+                    lblError.Text = "You have successfully signed up for the event.";
                     clearFields();
 
-                    //Need to refresh list - this doesn't work   GetCurrentListings();   gvListings.DataBind();
-                    
-
+          //Need to refresh list - this doesn't work   
+          //gvListings.DataSource = _currentItemListings;
+                    gvListings.DataBind();
                     break;
+
                 case ResultsEdit.ListingFull:
                     lblError.Text = "full";
                     break;
@@ -169,6 +180,11 @@ namespace com.WanderingTurtle.Web.Pages
             ItemListingDetails selected = _myManager.RetrieveEventListing(itemID);
 
             return selected;
+        }
+
+        protected void lvListings_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            bindData();
         }
 
     }

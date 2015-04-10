@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>com.WanderingTurtle.DataAccess</RootNamespace>
-    <AssemblyName>com.WanderingTurtle.DataAccess</AssemblyName>
+    <AssemblyName>WanderingTurtle.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -56,6 +56,7 @@
     <Compile Include="SupplierApplicationAccessor.cs" />
     <Compile Include="SupplierFeedbackRecordAccessor.cs" />
     <Compile Include="SupplierLoginAccessor.cs" />
+    <Compile Include="TestCleanupAccessor.cs" />
     <Compile Include="UserLoginAccessor.cs" />
   </ItemGroup>
   <ItemGroup>

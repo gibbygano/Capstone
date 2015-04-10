@@ -47,7 +47,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        public int archiveSupplier(SupplierLogin oldSupplier, bool archive)
+        public int archiveSupplierLogin(SupplierLogin oldSupplier, bool archive)
         {
             try
             {

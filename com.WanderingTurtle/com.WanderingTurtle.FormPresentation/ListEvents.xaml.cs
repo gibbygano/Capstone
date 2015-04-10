@@ -42,9 +42,16 @@ namespace com.WanderingTurtle.FormPresentation
             Refresh();
         }
 
-        private static void ViewEventDetails(Event eventToView)
+        private void ViewEventDetails(Event eventToView)
         {
-            new ViewEventDetails(eventToView).ShowDialog();
+            try
+            {
+                new AddEditEvent(eventToView, true).ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                DialogBox.ShowMessageDialog(this, ex.Message);
+            }
         }
 
         /// <summary>
@@ -54,7 +61,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
-            Window AddEvent = new AddNewEvent();
+            Window AddEvent = new AddEditEvent();
 
             if (AddEvent.ShowDialog() == false)
             {
@@ -127,7 +134,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Event EventToEdit = (Event)lvEvents.SelectedItem;
-                EditExistingEvent editWindow = new EditExistingEvent(EventToEdit);
+                var editWindow = new AddEditEvent(EventToEdit);
                 if (editWindow.ShowDialog() == false)
                 {
                     Refresh();
@@ -155,18 +162,6 @@ namespace com.WanderingTurtle.FormPresentation
             List<Event> myTempList = myMan.EventSearch(txtSearchInput.Text);
             lvEvents.ItemsSource = myTempList;
             txtSearchInput.Text = "";
-        }
-
-        private void btnViewEventDetails(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                ViewEventDetails(lvEvents.SelectedItem as Event);
-            }
-            catch (Exception)
-            {
-                DialogBox.ShowMessageDialog(this, "No Event selected, please select an Event and try again");
-            }
         }
 
         /// <summary>

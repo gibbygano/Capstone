@@ -4,9 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.ComponentModel;
+using System.Data;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
+    //markup for data object to bind
+    [DataObject (true)]
 	public class BookingManager
 	{
         /// <summary>
@@ -23,6 +27,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Add DataCache 
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
+       [DataObjectMethod(DataObjectMethodType.Select)]
 		public List<ItemListingDetails> RetrieveActiveItemListings()
 		{
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
@@ -63,6 +68,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// 
         /// Refreshes the data cache 
         /// </summary>
+        
         private void RefreshItemDetailsListCacheData()
         {
             //data hasn't been retrieved yet. get data, set it to the cache and return the result.
@@ -212,6 +218,8 @@ namespace com.WanderingTurtle.BusinessLogic
 		/// </summary>
 		/// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
 		/// <returns>Output is a booking object to hold the booking record.</returns>
+
+        [DataObjectMethod(DataObjectMethodType.Select)]
 		public Booking RetrieveBooking(int bookingId)
 		{
 			try
