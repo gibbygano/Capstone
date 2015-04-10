@@ -16,9 +16,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <remarks>
         /// Miguel Santana 2015/03/10
         /// </remarks>
-        /// <param name="control"></param>
-        /// <returns>Base Parent <typeparamref name="MetroWindow"/></returns>
-        internal static MainWindow GetMainWindow(Control control)
+        /// <param name="control">The control that you wish to find main window of. In most cases you will use <typeparamref name="this"/></param>
+        /// <returns>Base Parent <typeparamref name="MainWindow"/></returns>
+        internal static MainWindow GetMainWindow(DependencyObject control)
         {
             var parent = VisualTreeHelper.GetParent(control) ?? control;
             while (!(parent is MainWindow))
@@ -34,9 +34,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <remarks>
         /// Miguel Santana 2015/03/10
         /// </remarks>
-        /// <param name="control">The control that you wish to find the parent of</param>
+        /// <param name="control">The control that you wish to find the parent of. In most cases you will use <typeparamref name="this"/></param>
         /// <returns>Parent <typeparamref name="MetroWindow"/></returns>
-        internal static MetroWindow GetWindow(Control control)
+        internal static MetroWindow GetWindow(DependencyObject control)
         {
             var parent = VisualTreeHelper.GetParent(control);
             if (parent == null)
@@ -57,8 +57,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
-        internal static void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
+        internal static async void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
         {
+            Exception _ex = null;
             try
             {
                 foreach (FrameworkElement child in content.Children)
@@ -70,19 +71,29 @@ namespace com.WanderingTurtle.FormPresentation.Models
                     // If child component is a container, then call the recursive method to get inner child components
                     if (child is Panel)
                     { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
-                    else
+                    else if (child is Control)
                     {
-                        // Breaks out of this iteration of the loop if the child component is not focusable, such as a Label
-                        if (!child.Focusable) continue;
+                        var childControl = child as Control;
 
-                        if (child is TextBoxBase) { (child as TextBoxBase).IsReadOnly = true; }
-                        else { child.IsEnabled = false; }
+                        if (childControl is TextBoxBase) { (childControl as TextBoxBase).IsReadOnly = true; }
+                        else if (childControl is NumericUpDown)
+                        {
+                            (childControl as NumericUpDown).HideUpDownButtons = true;
+                            (childControl as NumericUpDown).IsReadOnly = true;
+                        }
+                        else { childControl.IsEnabled = false; }
 
-                        SetStyle(child, new Setter(TextBoxHelper.ClearTextButtonProperty, false));
+                        ComboBoxHelper.SetEnableVirtualizationWithGrouping(childControl, false);
+                        ControlsHelper.SetMouseOverBorderBrush(childControl, childControl.BorderBrush);
+                        ControlsHelper.SetFocusBorderBrush(childControl, childControl.BorderBrush);
+                        TextBoxHelper.SetClearTextButton(childControl, false);
+                        //SetStyle(childControl, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
+                    else { throw new Exception("Unknown Component"); }
                 }
             }
-            catch (Exception ex) { throw new Exception("Error Setting Fields to ReadOnly for" + Environment.NewLine + content, ex); }
+            catch (Exception ex) { _ex = new Exception("Error Setting Fields to ReadOnly for" + Environment.NewLine + content, ex); }
+            if (_ex != null) { await DialogBox.ShowMessageDialog(content, _ex.InnerException.Message, _ex.Message); _ex = null; }
         }
 
         /// <summary>
@@ -94,29 +105,37 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <param name="control">The control to set the style of</param>
         /// <param name="setterValue">The Setter that you want to set the <paramref name="control"/> to</param>
         /// <param name="replace">Setting this will only set <paramref name="setterValue"/> if the property already exists on the <paramref name="control"/></param>
-        internal static void SetStyle(FrameworkElement control, Setter setterValue, bool replace = false)
+        /// TODO Anonymous Types
+        internal static void SetStyle(FrameworkElement control, Setter[] setterValueArray, bool replace = false)
         {
             try
             {
                 Style newStyle = new Style(control.GetType(), GetStyle(control.Style));
-                if (!replace)
-                { newStyle.Setters.Add(setterValue); }
-                else
+                foreach (var setterValue in setterValueArray)
                 {
-                    SetterBaseCollection setterList = new SetterBaseCollection();
-                    Style tmpStyle = control.Style;
-                    do
+                    try
                     {
-                        foreach (var setter in tmpStyle.Setters.Cast<Setter>().Where(setter => !setterList.Contains(setter)))
-                        { setterList.Add(setter); }
-                        tmpStyle = tmpStyle.BasedOn;
-                    } while (tmpStyle != null);
-                    foreach (var setter in setterList.Cast<Setter>().Where(setter => setter.Property.Name.Equals(setterValue.Property.Name)))
-                    { newStyle.Setters.Add(setterValue); }
+                        if (!replace)
+                        { newStyle.Setters.Add(setterValue); }
+                        else
+                        {
+                            SetterBaseCollection setterList = new SetterBaseCollection();
+                            Style tmpStyle = control.Style;
+                            do
+                            {
+                                foreach (var setter in tmpStyle.Setters.Cast<Setter>().Where(setter => !setterList.Contains(setter)))
+                                { setterList.Add(setter); }
+                                tmpStyle = tmpStyle.BasedOn;
+                            } while (tmpStyle != null);
+                            foreach (var setter in setterList.Cast<Setter>().Where(setter => setter.Property.Name.Equals(setterValue.Property.Name)))
+                            { newStyle.Setters.Add(setterValue); }
+                        }
+                        control.Style = newStyle;
+                    }
+                    catch (Exception ex) { throw new Exception(string.Format("Error Setting Style{0} - Control: {1}{0} - Style: {2}", Environment.NewLine, control, setterValue.Property + " = " + setterValue.Value), ex); }
                 }
-                control.Style = newStyle;
             }
-            catch (Exception ex) { throw new Exception(string.Format("Error Setting Style{0} - Control: {1}{0} - Style: {2}", Environment.NewLine, control, setterValue.Property + " = " + setterValue.Value), ex); }
+            catch (Exception ex) { throw ex; }
         }
 
         /// <summary>

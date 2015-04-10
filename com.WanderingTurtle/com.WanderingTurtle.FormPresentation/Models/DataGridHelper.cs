@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -8,18 +9,26 @@ namespace com.WanderingTurtle.FormPresentation.Models
     {
         public static T DataGridRow_Click<T>(object sender, MouseButtonEventArgs e)
         {
-            var result = default(T);
-            IInputElement element = e.MouseDevice.DirectlyOver;
-            if (element != null && element is FrameworkElement)
+            try
             {
-                if (((FrameworkElement)element).Parent is DataGridCell)
+                IInputElement element = e.MouseDevice.DirectlyOver;
+                if (element != null && element is FrameworkElement)
                 {
-                    var dataGrid = sender as DataGrid;
-                    if (dataGrid != null && dataGrid.SelectedItems != null && dataGrid.SelectedItems.Count == 1)
-                    { result = (T)dataGrid.SelectedItem; }
+                    if (((FrameworkElement)element).Parent is DataGridCell)
+                    {
+                        var dataGrid = sender as DataGrid;
+                        if (dataGrid != null && dataGrid.SelectedItems != null && dataGrid.SelectedItems.Count == 1)
+                        { return (T)dataGrid.SelectedItem; }
+                    }
                 }
+                throw new Exception("Error Getting Selected DataGrid Row.");
             }
-            return result;
+            catch (Exception ex)
+            {
+                if (sender is DependencyObject) { DialogBox.ShowMessageDialog(sender as DependencyObject, ex.Message); }
+                else { MessageBox.Show(ex.Message); }
+                return default(T);
+            }
         }
     }
 }

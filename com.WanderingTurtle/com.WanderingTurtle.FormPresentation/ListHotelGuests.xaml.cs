@@ -119,5 +119,25 @@ namespace com.WanderingTurtle.FormPresentation
                 RefreshGuestList();
             }
         }
+
+        private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtSearchBox.Text.Length == 0)
+            {
+                this.btnGuestSearch.Content = "Refresh List";
+            }
+            else
+            {
+                this.btnGuestSearch.Content = "Search";
+            }
+        }
+
+
+        private void btnGuestSearch_Click(object sender, RoutedEventArgs e)
+        {
+            var myTempList = _invoiceManager.InvoiceDetailsSearch(txtSearchBox.Text);
+            lvHotelGuestList.ItemsSource = myTempList;
+            txtSearchBox.Text = "";
+        }
     }
 }

@@ -5,14 +5,17 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.Web
 {
+
     public partial class SiteMaster : MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+        
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -63,6 +66,8 @@ namespace com.WanderingTurtle.Web
                     throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
                 }
             }
+
+        
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -73,19 +78,23 @@ namespace com.WanderingTurtle.Web
                 var stuff1 = new MenuItem();
                 var stuff2 = new MenuItem();
                 var stuff3 = new MenuItem();
+                var stuff4 = new MenuItem();
 
                 stuff1.NavigateUrl = "/events";
-                stuff1.Text = "View Events";
+                stuff1.Text = "View/Edit Events";
                 stuff2.NavigateUrl = "/events/add";
                 stuff2.Text = "Add an Event";
                 stuff3.NavigateUrl = "/listings";
                 stuff3.Text = "View Listings";
+                stuff4.NavigateUrl = "/supplierlistings";
+                stuff4.Text = "View/Edit Listings";
 
                 var stuffList = new List<MenuItem>();
 
                 stuffList.Add(stuff1);
                 stuffList.Add(stuff2);
-                stuffList.Add(stuff3);
+                //stuffList.Add(stuff3);
+                stuffList.Add(stuff4);
 
                 for (int i = 0; i < stuffList.Count; i++)
                 {

@@ -19,9 +19,9 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// This Window allows the administrator to directly add a suplier
     /// </summary>
-    public partial class AddSupplier 
+    public partial class AddEditSupplier 
     {
-        public static AddSupplier Instance;
+        public static AddEditSupplier Instance;
         private int _userID;
         private SupplierManager _manager = new SupplierManager();
         private Supplier _UpdatableSupplier;
@@ -32,20 +32,22 @@ namespace com.WanderingTurtle.FormPresentation
         /// Constructs the object and will fill the list of suppliers
         /// created by Will Fritz 2/6/15
         /// </summary>
-        public AddSupplier()
+        public AddEditSupplier()
         {
             InitializeComponent();
             btnEdit.IsEnabled = false;
             fillComboBox();  
             Instance = this;
         }
-        public AddSupplier(Supplier supplierToEdit)
+        public AddEditSupplier(Supplier supplierToEdit, bool ReadOnly = false)
         {
             InitializeComponent();
             Instance = this;
             this.Title = "Edit Supplier";
-            fillComboBox();  
+            fillComboBox();
             FillUpdateList(supplierToEdit);
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] {  }); }
         }
 
         //////////////////////Windows Events//////////////////////////////
@@ -84,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 EditSupplier();
                 ListSuppliers.Instance.FillList();
-                this.Close();
+               // this.Close();
             }
         }
 
@@ -107,7 +109,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 AddTheSupplier();
                 ListSuppliers.Instance.FillList();
-                this.Close();
+                //this.Close();
             }
         }
 
@@ -202,14 +204,20 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text.Trim();
                 tempSupplier.UserID = _userID;
+                tempSupplier.SupplyCost = (decimal)0.70;
 
-                _manager.AddANewSupplier(tempSupplier);
-
-                DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
+                if (_manager.AddANewSupplier(tempSupplier) == SupplierResult.Success)
+                {
+                    DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
+                }
+                else
+                {
+                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There was a problem adding the supplier to the database");
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
         }
 
@@ -272,12 +280,19 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text;
                 tempSupplier.UserID = _userID;
+                tempSupplier.SupplyCost = (decimal)0.70;
 
                 tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
-                
-                _manager.EditSupplier(_UpdatableSupplier, tempSupplier);
 
-                DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
+                
+                if(_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
+                {
+                    DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
+                }
+                else
+                {
+                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                }
             }
             catch (Exception ex)
             {
