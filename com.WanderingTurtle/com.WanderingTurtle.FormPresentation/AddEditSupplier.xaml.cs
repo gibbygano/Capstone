@@ -86,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 EditSupplier();
                 ListSuppliers.Instance.FillList();
-                this.Close();
+               // this.Close();
             }
         }
 
@@ -109,7 +109,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 AddTheSupplier();
                 ListSuppliers.Instance.FillList();
-                this.Close();
+                //this.Close();
             }
         }
 
@@ -204,14 +204,20 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text.Trim();
                 tempSupplier.UserID = _userID;
+                tempSupplier.SupplyCost = (decimal)0.70;
 
-                _manager.AddANewSupplier(tempSupplier);
-
-                DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
+                if (_manager.AddANewSupplier(tempSupplier) == SupplierResult.Success)
+                {
+                    DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
+                }
+                else
+                {
+                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There was a problem adding the supplier to the database");
+                DialogBox.ShowMessageDialog(this, ex.ToString());
             }
         }
 
@@ -274,12 +280,19 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text;
                 tempSupplier.UserID = _userID;
+                tempSupplier.SupplyCost = (decimal)0.70;
 
                 tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
-                
-                _manager.EditSupplier(_UpdatableSupplier, tempSupplier);
 
-                DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
+                
+                if(_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
+                {
+                    DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
+                }
+                else
+                {
+                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                }
             }
             catch (Exception ex)
             {
