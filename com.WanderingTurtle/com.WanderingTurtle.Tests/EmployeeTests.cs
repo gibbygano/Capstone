@@ -6,9 +6,10 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.DataAccess;
 namespace EmployeeLogicTests
-{   ///Created by: Tony Noel, 2015/3/27
+{   ///Created by: Tony Noel, 2015/3/27, Updated 2015/4/10
     /// <summary>
-    /// Summary description for EmployeeTests
+    /// A complete testing of all employee logic methods in the Employee Manager.
+    ///The test creates a dummy employee record and performs the various methods in the manager using this record.
     /// </summary>
     [TestClass]
     public class EmployeeTests

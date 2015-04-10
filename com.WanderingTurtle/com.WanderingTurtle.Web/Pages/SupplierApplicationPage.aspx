@@ -9,6 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <section>
     <h1>Supplier Application</h1>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:Label ID="lblFinish" runat="server" ForeColor="Black"></asp:Label>
@@ -72,4 +73,12 @@
     <br />
     <br />
     <asp:Button ID="btnSubmitApplication" runat="server" OnClick="btnSubmitApplication_Click" Text="Submit Application" Width="182px" />
+    </section>
+    <aside>
+        <h3>Hunter is being a dBag</h3>
+        <p>        
+            needs to be information of why hes being a dbag.
+        </p>
+ 
+    </aside>
 </asp:Content>
