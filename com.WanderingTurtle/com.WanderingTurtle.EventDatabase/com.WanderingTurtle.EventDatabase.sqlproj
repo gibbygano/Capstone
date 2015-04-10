@@ -147,7 +147,4 @@
   <ItemGroup>
     <None Include="CreateDatabase.publish.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="com.WanderingTurtle.EventDatabase.refactorlog" />
-  </ItemGroup>
 </Project>

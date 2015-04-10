@@ -55,7 +55,7 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp.EmailAddress = "blabla@gmail.com";
             testSupplierApp.Address2 = "";
             testSupplierApp.Approved = true;
-            testSupplierApp.FinalStatusDate = new DateTime(2005, 2, 3);
+            testSupplierApp.ApprovalDate = new DateTime(2005, 2, 3);
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp2.EmailAddress = "blabla@gmail.com";
             testSupplierApp2.Address2 = "";
             testSupplierApp2.Approved = true;
-            testSupplierApp2.FinalStatusDate = new DateTime(2005, 8, 3);
+            testSupplierApp2.ApprovalDate = new DateTime(2005, 8, 3);
 
             SupplierMang.EditSupplierApplication(testSupplierApp, testSupplierApp2);
             testSupplierApp = testSupplierApp2;

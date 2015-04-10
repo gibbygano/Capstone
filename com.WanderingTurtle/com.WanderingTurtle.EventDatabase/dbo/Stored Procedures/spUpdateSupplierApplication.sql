@@ -9,8 +9,8 @@
 	@PhoneNumber 			varchar(15), 
 	@EmailAddress 			varchar(100), 
 	@ApplicationDate		[date],
-	@ApplicationStatus		varchar(25),
-	@FinalStatusDate		[date],
+	@Approved				bit,
+	@ApprovalDate			[date],
 
 	@originalCompanyName 	varchar(255),
 	@originalFirstName 		varchar(50), 
@@ -21,8 +21,8 @@
 	@originalPhoneNumber 	varchar(15), 
 	@originalEmailAddress 	varchar(100), 
 	@originalApplicationDate [date],
-	@originalApplicationStatus	varchar(25),
-	@originalFinalStatusDate	[date],
+	@originalApproved		bit,
+	@originalApprovalDate	[date],
 	@originalApplicationID 	int	
 	
 	)
@@ -37,8 +37,8 @@ AS
 		PhoneNumber = @PhoneNumber, 
 		EmailAddress = @EmailAddress, 
 		ApplicationDate = @ApplicationDate,
-		ApplicationStatus = @ApplicationStatus,
-		FinalStatusDate = @FinalStatusDate
+		Approved = @Approved,
+		ApprovalDate = @ApprovalDate
 	WHERE 
 		 CompanyName = @originalCompanyName
 		AND FirstName = @originalFirstName
@@ -49,7 +49,7 @@ AS
 		AND PhoneNumber = @originalPhoneNumber
 		AND EmailAddress = @originalEmailAddress
 		AND ApplicationDate = @originalApplicationDate
-		AND ApplicationStatus = @originalApplicationStatus
-		AND FinalStatusDate = @originalFinalStatusDate
+		AND Approved = @originalApproved
+		AND ApprovalDate = @originalApprovalDate
 		AND ApplicationID = @originalApplicationID
 	RETURN @@ROWCOUNT
