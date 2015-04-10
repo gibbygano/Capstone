@@ -23,14 +23,16 @@ namespace com.WanderingTurtle.Common
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public DateTime ApplicationDate { get; set; }
-        public bool Approved { get; set; }
-        public DateTime? ApprovalDate { get; set; }
+        public string ApplicationStatus { get; set; }
+        public DateTime? FinalStatusDate { get; set; }
+        public String? Remarks { get; set; }
 
         public SupplierApplication()
         {
             //default
         }
-        public SupplierApplication(int applicationID, string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate, bool approved, DateTime approvalDate)
+
+        public SupplierApplication(int applicationID, string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate, string applicationStatus, DateTime finalStatusDate, String remarks)
         {
             ApplicationID = applicationID;
             ApplicationDate = applicationDate;
@@ -43,9 +45,9 @@ namespace com.WanderingTurtle.Common
             Zip = zip;
             PhoneNumber = phoneNumber;
             EmailAddress = emailAddress;
-            Approved = approved;
-            ApprovalDate = approvalDate;
-
+            ApplicationStatus = applicationStatus;
+            FinalStatusDate = finalStatusDate;
+            Remarks = remarks;
         }
 
         public SupplierApplication(string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate )
@@ -60,9 +62,9 @@ namespace com.WanderingTurtle.Common
             Zip = zip;
             PhoneNumber = phoneNumber;
             EmailAddress = emailAddress;
-            Approved = false;
-
+            ApplicationStatus = "Pending";
+            FinalStatusDate = null;
+            Remarks = null;
         }
-
     }
 }

@@ -38,8 +38,8 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@PhoneNumber", supplierApplicationToAdd.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", supplierApplicationToAdd.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationDate", supplierApplicationToAdd.ApplicationDate);
-            cmd.Parameters.AddWithValue("@Approved", supplierApplicationToAdd.Approved);
-            cmd.Parameters.AddWithValue("@ApprovalDate", supplierApplicationToAdd.ApprovalDate);
+            cmd.Parameters.AddWithValue("@ApplicationStatus", supplierApplicationToAdd.ApplicationStatus);
+cmd.Parameters.AddWithValue("@FinalStatusDate", supplierApplicationToAdd.FinalStatusDate);
 
             //var rowsAffected = 0;
           
@@ -86,8 +86,8 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@PhoneNumber", newApplication.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", newApplication.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationDate", newApplication.ApplicationDate);
-            cmd.Parameters.AddWithValue("@Approved", newApplication.Approved);
-            cmd.Parameters.AddWithValue("@ApprovalDate", newApplication.ApprovalDate);
+            cmd.Parameters.AddWithValue("@ApplicationStatus", newApplication.ApplicationStatus);
+            cmd.Parameters.AddWithValue("@FinalStatusDate", newApplication.FinalStatusDate);
 
             cmd.Parameters.AddWithValue("@originalApplicationID", oldApplication.ApplicationID);
             cmd.Parameters.AddWithValue("@originalCompanyName", oldApplication.CompanyName);
@@ -100,8 +100,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@originalPhoneNumber", oldApplication.PhoneNumber);
             cmd.Parameters.AddWithValue("@originalEmailAddress", oldApplication.EmailAddress);
             cmd.Parameters.AddWithValue("@originalApplicationDate", oldApplication.ApplicationDate);
-            cmd.Parameters.AddWithValue("@originalApproved", oldApplication.Approved);
-            cmd.Parameters.AddWithValue("@originalApprovalDate", oldApplication.ApprovalDate);
+            cmd.Parameters.AddWithValue("@originalApplicationStatus", oldApplication.ApplicationStatus);
+            cmd.Parameters.AddWithValue("@originalFinalStatusDate", oldApplication.FinalStatusDate);
+
             try
             {
                 conn.Open();
@@ -160,7 +161,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentSupplierApplication.PhoneNumber = reader.GetValue(8).ToString();
                         currentSupplierApplication.EmailAddress = reader.GetValue(9).ToString();
                         currentSupplierApplication.ApplicationDate = (DateTime)reader.GetValue(10);
-                        currentSupplierApplication.Approved = reader.GetBoolean(11);
+                        currentSupplierApplication.ApplicationStatus = reader.GetValue(11).ToString();
                         //currentSupplierApplication.ApprovalDate = reader.IsDBNull(12) ? currentSupplierApplication.ApprovalDate = reader.GetDateTime(12) : null;
 
                         ApplicationList.Add(currentSupplierApplication);
@@ -215,8 +216,8 @@ namespace com.WanderingTurtle.DataAccess
                     currentSupplierApplication.PhoneNumber = reader.GetValue(8).ToString();
                     currentSupplierApplication.EmailAddress = reader.GetValue(9).ToString();
                     currentSupplierApplication.ApplicationDate = reader.GetDateTime(10);
-                    currentSupplierApplication.Approved = reader.GetBoolean(11);
-                    currentSupplierApplication.ApprovalDate = reader.IsDBNull(12) ? currentSupplierApplication.ApprovalDate = reader.GetDateTime(12) : null;
+                    currentSupplierApplication.ApplicationStatus = reader.GetValue(11).ToString();
+                    currentSupplierApplication.FinalStatusDate = reader.IsDBNull(12) ? currentSupplierApplication.FinalStatusDate = reader.GetDateTime(12) : null;
                 }
                 else
                 {

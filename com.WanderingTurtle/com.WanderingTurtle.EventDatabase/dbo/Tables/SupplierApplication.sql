@@ -10,8 +10,9 @@
     [PhoneNumber]        VARCHAR (15)  NOT NULL,
     [EmailAddress]       VARCHAR (100) NOT NULL,
     [ApplicationDate]    DATE          NOT NULL,
-    [Approved]           BIT           NOT NULL,
-    [ApprovalDate]       DATE          NULL,
+    [ApplicationStatus]           VARCHAR(25)           NULL,
+    [FinalStatusDate]       DATE          NULL,
+    [Remarks] VARCHAR(255) NULL, 
     CONSTRAINT [PK_SupplierApplication] PRIMARY KEY CLUSTERED ([ApplicationID] ASC) ON [PRIMARY]
 ) ON [PRIMARY];
 GO
@@ -21,5 +22,3 @@ GO
 CREATE NONCLUSTERED INDEX [SupplierApplicationNameIndex]
     ON [dbo].[SupplierApplication]([CompanyName] ASC);
 GO
-ALTER TABLE [dbo].[SupplierApplication]
-    ADD DEFAULT 0 FOR [Approved];

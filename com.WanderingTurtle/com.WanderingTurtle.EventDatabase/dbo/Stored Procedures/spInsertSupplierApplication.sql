@@ -10,12 +10,12 @@
 	@PhoneNumber 	varchar(15), 
 	@EmailAddress 	varchar(100), 
 	@ApplicationDate date, 
-	@Approved		bit,
-	@ApprovalDate	date = NULL
+	@ApplicationStatus	varchar(25),
+	@FinalStatusDate	date = NULL,
+	@remarks		varchar(255) = null
 	)
 AS
 INSERT INTO SupplierApplication
 	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate, CompanyDescription) 
 VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationDate, @Approved, @ApprovalDate, @CompanyDescription);
-SELECT CAST(scope_identity() AS int)
-
+RETURN @@RowCount
