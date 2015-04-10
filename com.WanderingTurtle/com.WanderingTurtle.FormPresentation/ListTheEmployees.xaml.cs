@@ -126,7 +126,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateEmployee(DataGridHelper.DataGridRow_Click<Employee>(sender, e));
+            UpdateEmployee(DataGridHelper.DataGridRow_Click<Employee>(sender, e), true);
         }
 
         /// <summary>
@@ -153,9 +153,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void UpdateEmployee(Employee selectedEmployee)
+        private void UpdateEmployee(Employee selectedEmployee, bool ReadOnly = false)
         {
-            AddEmployee newAddWindow = new AddEmployee(selectedEmployee);
+            AddEmployee newAddWindow = new AddEmployee(selectedEmployee, ReadOnly);
 
             if (newAddWindow.ShowDialog() == false)
             {

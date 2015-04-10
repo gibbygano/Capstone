@@ -21,17 +21,20 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ViewPendingSuppliers
     {
+        private List<SupplierApplication> GetPendingSuppliers = new List<SupplierApplication>();
+        private SupplierManager supplierManager = new SupplierManager();
+
         public ViewPendingSuppliers()
         {
             InitializeComponent();
-            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
+            loadPendingSuppliers();
+
         }
+        
 
-        private List<SupplierApplication> GetPendingSuppliers { get { return new SupplierManager().RetrieveSupplierApplicationList(); } }
-
-        private static void UpdatePendingSupplier(SupplierApplication selectedItem)
+        private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
-            new AddEditPendingSupplier(selectedItem).ShowDialog();
+            new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog();
         }
 
         private void btnAddPendingSupplier_Click(object sender, RoutedEventArgs e)
@@ -52,7 +55,25 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e));
+            UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e), true);
+        }
+
+        private void loadPendingSuppliers()
+        {
+            try
+            {
+
+                GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
+
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+
+            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
+
         }
     }
 }

@@ -11,7 +11,6 @@
 	@ApplicationDate		[date],
 	@Approved				bit,
 	@ApprovalDate			[date],
-	@ApplicationID 			int, 
 
 	@originalCompanyName 	varchar(255),
 	@originalFirstName 		varchar(50), 
@@ -41,8 +40,7 @@ AS
 		Approved = @Approved,
 		ApprovalDate = @ApprovalDate
 	WHERE 
-		ApplicationID = @ApplicationID
-		AND CompanyName = @originalCompanyName
+		 CompanyName = @originalCompanyName
 		AND FirstName = @originalFirstName
 		AND LastName = @originalLastName
 		AND Address1 = @originalAddress1
