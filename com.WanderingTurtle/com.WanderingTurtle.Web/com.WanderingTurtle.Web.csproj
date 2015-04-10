@@ -202,6 +202,7 @@
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Pages\GuestViewListings.aspx" />
+    <Content Include="Pages\LoginBar.ascx" />
     <Content Include="Pages\SupplierApplicationPage.aspx" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -292,6 +293,13 @@
     </Compile>
     <Compile Include="Pages\GuestViewListings.aspx.designer.cs">
       <DependentUpon>GuestViewListings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginBar.ascx.cs">
+      <DependentUpon>LoginBar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\LoginBar.ascx.designer.cs">
+      <DependentUpon>LoginBar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Pages\SupplierApplicationPage.aspx.cs">
       <DependentUpon>SupplierApplicationPage.aspx</DependentUpon>
