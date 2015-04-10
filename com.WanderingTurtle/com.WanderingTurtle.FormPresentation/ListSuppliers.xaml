@@ -18,10 +18,10 @@
             </DataGrid.Columns>
         </DataGrid>
         <WrapPanel Grid.Row="1">
+            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnPendingSuppliers" Content="View Pending Suppliers" Click="btnPendingSuppliers_Click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddSupplier"      Content="Add Supplier"      Click="btnAddSupplier_Click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdate"           Content="Update Supplier"   Click="btnUpdate_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnDelete"           Content="Delete Supplier"   Click="btnDelete_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnPendingSuppliers" Content="Pending Suppliers" Click="btnPendingSuppliers_Click" />
         </WrapPanel>
     </Grid>
 </UserControl>

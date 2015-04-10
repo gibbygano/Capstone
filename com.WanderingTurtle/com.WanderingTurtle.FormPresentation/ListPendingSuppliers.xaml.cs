@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for ViewPendingSuppliers.xaml
+    /// Interaction logic for ListPendingSuppliers.xaml
     /// </summary>
-    public partial class ViewPendingSuppliers
+    public partial class ListPendingSuppliers
     {
         private List<SupplierApplication> GetPendingSuppliers = new List<SupplierApplication>();
         private SupplierManager supplierManager = new SupplierManager();
 
-        public ViewPendingSuppliers()
+        public ListPendingSuppliers()
         {
             InitializeComponent();
             loadPendingSuppliers();
@@ -35,11 +35,6 @@ namespace com.WanderingTurtle.FormPresentation
         private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
             new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog();
-        }
-
-        private void btnAddPendingSupplier_Click(object sender, RoutedEventArgs e)
-        {
-            new AddEditPendingSupplier().ShowDialog();
         }
 
         private void btnUpdatePendingSupplier_Click(object sender, RoutedEventArgs e)
@@ -53,9 +48,9 @@ namespace com.WanderingTurtle.FormPresentation
             UpdatePendingSupplier(selectedItem as SupplierApplication);
         }
 
-        private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e), true);
+            (this.Parent as TabItem).Content = new ListSuppliers();
         }
 
         private void loadPendingSuppliers()
@@ -74,6 +69,11 @@ namespace com.WanderingTurtle.FormPresentation
 
             lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
 
+        }
+
+        private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e), true);
         }
     }
 }
