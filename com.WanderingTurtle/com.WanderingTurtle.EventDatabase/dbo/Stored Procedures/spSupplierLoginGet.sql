@@ -4,7 +4,7 @@
 	)
 AS
 BEGIN
-	SELECT [UserID], [UserPassword], [UserName], [Active]
+	SELECT [UserID], [UserPassword], [UserName], [SupplierID], [Active]
 	FROM [SupplierLogin]
 	WHERE [Active] = 1
 		AND [UserPassword] = @userPassword
