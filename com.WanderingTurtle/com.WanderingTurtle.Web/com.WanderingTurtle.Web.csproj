@@ -203,6 +203,7 @@
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Pages\GuestViewListings.aspx" />
     <Content Include="Pages\SupplierApplicationPage.aspx" />
+    <Content Include="Pages\ViewItemListing.aspx" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
@@ -299,6 +300,13 @@
     </Compile>
     <Compile Include="Pages\SupplierApplicationPage.aspx.designer.cs">
       <DependentUpon>SupplierApplicationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ViewItemListing.aspx.cs">
+      <DependentUpon>ViewItemListing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\ViewItemListing.aspx.designer.cs">
+      <DependentUpon>ViewItemListing.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
