@@ -18,6 +18,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="supplierID">Requires a SupplierID to SELECT the correct Supplier record.</param>
         /// <returns>Supplier object</returns>
+        /// <update>Edited by William Firtz</update>
         public static Supplier GetSupplier(string supplierID)
         {
             Supplier supplierToRetrieve = new Supplier();

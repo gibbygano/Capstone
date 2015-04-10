@@ -146,8 +146,8 @@
     </Compile>
     <Compile Include="Models\DataGridHelper.cs" />
     <Compile Include="Models\DialogBox.cs" />
-    <Compile Include="ViewPendingSuppliers.xaml.cs">
-      <DependentUpon>ViewPendingSuppliers.xaml</DependentUpon>
+    <Compile Include="ListPendingSuppliers.xaml.cs">
+      <DependentUpon>ListPendingSuppliers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
@@ -220,7 +220,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ViewPendingSuppliers.xaml">
+    <Page Include="ListPendingSuppliers.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

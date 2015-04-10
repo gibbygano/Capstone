@@ -17,5 +17,5 @@ AS
 INSERT INTO SupplierApplication
 	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate, CompanyDescription) 
 VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationDate, @Approved, @ApprovalDate, @CompanyDescription);
-SELECT CAST(scope_identity() AS int)
+return @@ROWCOUNT
 
