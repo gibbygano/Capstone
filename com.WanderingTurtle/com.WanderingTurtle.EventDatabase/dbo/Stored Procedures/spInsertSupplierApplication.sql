@@ -12,7 +12,10 @@
 	@ApplicationDate date, 
 	@Approved		bit,
 	@ApprovalDate	date = NULL
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/master
 	)
 AS
 INSERT INTO SupplierApplication

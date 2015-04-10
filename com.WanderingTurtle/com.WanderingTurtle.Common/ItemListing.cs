@@ -28,6 +28,20 @@ namespace com.WanderingTurtle.Common
             //default constructor
         }
 
+        //new constructor, leaving old one intact just in case there's someone else using it for who knows why - Kelsey B
+        public ItemListing(int itemListID, int eventID, int supplierID, DateTime startDate, DateTime endDate, decimal price, int maxNumGuests, int minNumGuests, int currentNumGuests) 
+        {
+            ItemListID = itemListID;
+            EventID = eventID;
+            SupplierID = supplierID;
+            StartDate = startDate;
+            EndDate = endDate;
+            Price = price;
+            MaxNumGuests = maxNumGuests;
+            MinNumGuests = minNumGuests;
+            CurrentNumGuests = currentNumGuests;
+        }
+
         public ItemListing(int itemListID, int eventID, DateTime startDate, DateTime endDate, decimal price, int quantityOffered, string productSize, int maxNumGuests, int minNumGuests, int currentNumGuests)
         {
             ItemListID = itemListID;
