@@ -165,8 +165,8 @@
     <Compile Include="ViewInvoice.xaml.cs">
       <DependentUpon>ViewInvoice.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddSupplier.xaml.cs">
-      <DependentUpon>AddSupplier.xaml</DependentUpon>
+    <Compile Include="AddEditSupplier.xaml.cs">
+      <DependentUpon>AddEditSupplier.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListEvents.xaml.cs">
       <DependentUpon>ListEvents.xaml</DependentUpon>
@@ -275,7 +275,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AddSupplier.xaml">
+    <Page Include="AddEditSupplier.xaml">
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
