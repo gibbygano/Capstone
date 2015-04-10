@@ -82,9 +82,9 @@ namespace com.WanderingTurtle.BusinessLogic
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Supplier not found");
             }
 
         }
@@ -129,10 +129,9 @@ namespace com.WanderingTurtle.BusinessLogic
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-
-                throw ex;
+                throw new Exception("No suppliers in database");
             }
 
         }
@@ -212,7 +211,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 return SupplierResult.DatabaseError;
             }
-            
+
         }
         public SupplierResult ArchiveSupplier(Supplier supplierToDelete)
         {
@@ -242,7 +241,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierResult.DatabaseError;
             }
-            
+
         }
         /// <summary>
         /// Matt Lapka
@@ -258,12 +257,12 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierApplicationAccessor.GetSupplierApplication(applicationID);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
-                throw ex;
+
+                throw new Exception("Application does not exist");
             }
-            
+
         }
 
         /// <summary>
@@ -279,12 +278,12 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierApplicationAccessor.GetSupplierApplicationList();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                
-                throw ex;
+
+                throw new Exception("No applications");
             }
-            
+
         }
 
         /// <summary>
@@ -301,11 +300,11 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Couldn't add the supplier");
             }
-            
+
         }
 
         /// <summary>
@@ -323,10 +322,11 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, newSupplierApp);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw new Exception("Unable to edit application. Please try again later.");
             }
+
         }
 
         public int deleteTestSupplier(Supplier testSupplier)

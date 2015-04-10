@@ -115,7 +115,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            new ViewPendingSuppliers().ShowDialog();
+            (this.Parent as TabItem).Content = new ListPendingSuppliers();
         }
 
         /// <summary>

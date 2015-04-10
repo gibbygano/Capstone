@@ -6,6 +6,21 @@
 <%@ Import Namespace="com.WanderingTurtle.BusinessLogic" %>
 <%@ Import Namespace="com.WanderingTurtle" %>
 
+<asp:Content ContentPlaceHolderID="HeadContent" runat="server" ID="head">
+     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("jquery is ready.");
+            $("#txtGuestTickets").spinner();
+        });
+
+    </script>
+
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
     <!--Created 2015/03/27
         Pat Banks
@@ -18,7 +33,7 @@
 
     <asp:UpdatePanel runat="server" ID="gvListingsUpdate">
         <ContentTemplate>
-       <asp:GridView ID="gvListings" runat="server" AutoGenerateColumns="False" AllowSorting="True" AutoGenerateSelectButton="True" BackColor="White" BorderColor="#999999" BorderWidth="1px" CellPadding="3" GridLines="Vertical" DataSourceID="ObjectDataSource1" DataKeyNames="ItemListID" BorderStyle="None">
+            <asp:GridView ID="gvListings" runat="server" AutoGenerateColumns="False" AllowSorting="True" AutoGenerateSelectButton="True" BackColor="White" BorderColor="#999999" BorderWidth="1px" CellPadding="3" GridLines="Vertical" DataSourceID="ObjectDataSource1" DataKeyNames="ItemListID" BorderStyle="None">
                 <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
                 <HeaderStyle BackColor="#000084" BorderStyle="Solid" Font-Bold="True" BorderColor="Black" ForeColor="White" HorizontalAlign="Center" VerticalAlign="Middle" />
                 <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
@@ -28,7 +43,7 @@
                 <Columns>
                     <asp:BoundField DataField="StartDate" HeaderText="Start Date" DataFormatString="{0:ddd, MMM d}, {0:t}" SortExpression="StartDate">
                         <ControlStyle Width="100px" />
-                    <HeaderStyle BorderWidth="1px" />
+                        <HeaderStyle BorderWidth="1px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName">
                         <ItemStyle Width="150px" />
@@ -42,20 +57,20 @@
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#000065" />
             </asp:GridView>
-            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="RetrieveActiveItemListings" 
+            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="RetrieveActiveItemListings"
                 TypeName="com.WanderingTurtle.BusinessLogic.BookingManager"></asp:ObjectDataSource>
             <br />
 
 
 
 
-     
+
             <table>
                 <tr>
                     <td>
                         <asp:Label ID="lblTickets" Text="# Tickets To Add:" runat="server" Height="35px" Font-Bold="True"></asp:Label></td>
                     <td>
-                        <asp:TextBox ID="txtGuestTickets" runat="server" TabIndex="0"></asp:TextBox></td>
+                        <asp:TextBox ID="txtGuestTickets" runat="server" ClientIDMode="Static" TabIndex="0"></asp:TextBox></td>
                 </tr>
                 <tr>
                     <td>

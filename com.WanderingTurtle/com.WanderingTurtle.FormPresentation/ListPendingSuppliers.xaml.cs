@@ -17,26 +17,24 @@ using System.Windows.Shapes;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for ViewPendingSuppliers.xaml
+    /// Interaction logic for ListPendingSuppliers.xaml
     /// </summary>
-    public partial class ViewPendingSuppliers
+    public partial class ListPendingSuppliers
     {
-        public ViewPendingSuppliers()
+        private List<SupplierApplication> GetPendingSuppliers = new List<SupplierApplication>();
+        private SupplierManager supplierManager = new SupplierManager();
+
+        public ListPendingSuppliers()
         {
             InitializeComponent();
-            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
-        }
+            loadPendingSuppliers();
 
-        private List<SupplierApplication> GetPendingSuppliers { get { return new SupplierManager().RetrieveSupplierApplicationList(); } }
+        }
+        
 
         private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
             new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog();
-        }
-
-        private void btnAddPendingSupplier_Click(object sender, RoutedEventArgs e)
-        {
-            new AddEditPendingSupplier().ShowDialog();
         }
 
         private void btnUpdatePendingSupplier_Click(object sender, RoutedEventArgs e)
@@ -48,6 +46,29 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
             UpdatePendingSupplier(selectedItem as SupplierApplication);
+        }
+
+        private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
+        {
+            (this.Parent as TabItem).Content = new ListSuppliers();
+        }
+
+        private void loadPendingSuppliers()
+        {
+            try
+            {
+
+                GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
+
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+
+            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
+
         }
 
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
