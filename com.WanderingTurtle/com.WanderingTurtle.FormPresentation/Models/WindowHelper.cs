@@ -71,16 +71,25 @@ namespace com.WanderingTurtle.FormPresentation.Models
                     // If child component is a container, then call the recursive method to get inner child components
                     if (child is Panel)
                     { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
-                    else
+                    else if (child is Control)
                     {
-                        // Breaks out of this iteration of the loop if the child component is not focusable, such as a Label
-                        if (!child.Focusable) continue;
+                        var childControl = child as Control;
 
-                        if (child is TextBoxBase) { (child as TextBoxBase).IsReadOnly = true; }
-                        else { child.IsEnabled = false; }
+                        if (childControl is TextBoxBase) { (childControl as TextBoxBase).IsReadOnly = true; }
+                        else if (childControl is NumericUpDown)
+                        {
+                            (childControl as NumericUpDown).HideUpDownButtons = true;
+                            (childControl as NumericUpDown).IsReadOnly = true;
+                        }
+                        else { childControl.IsEnabled = false; }
 
-                        SetStyle(child, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
+                        ComboBoxHelper.SetEnableVirtualizationWithGrouping(childControl, false);
+                        ControlsHelper.SetMouseOverBorderBrush(childControl, childControl.BorderBrush);
+                        ControlsHelper.SetFocusBorderBrush(childControl, childControl.BorderBrush);
+                        TextBoxHelper.SetClearTextButton(childControl, false);
+                        //SetStyle(childControl, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
+                    else { throw new Exception("Unknown Component"); }
                 }
             }
             catch (Exception ex) { _ex = new Exception("Error Setting Fields to ReadOnly for" + Environment.NewLine + content, ex); }
