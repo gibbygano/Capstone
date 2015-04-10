@@ -73,7 +73,7 @@ GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate)
 VALUES
-('Francisco'' Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', '2014-12-22', 1, '2015-01-01'),
+('Francisco''s Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', '2014-12-22', 1, '2015-01-01'),
 ('Harry''s Boat Rides', 'Harry', 'Bertleson', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', '2014-02-06', 1, '2014-06-12'),
 ('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', '2015-01-22', 1, '2015-02-12')
 GO
@@ -95,11 +95,11 @@ GO
 
 INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, Active, SupplierID, CurrentNumberOfGuests, MaxNumberOfGuests)
 VALUES
-('20150329 11:30:00 AM', '20150329 05:30:00 PM', 100, 15.00, 1, 100, 30, 50),
+('20150419 11:30:00 AM', '20150419 05:30:00 PM', 100, 15.00, 1, 100, 30, 50),
 ('20150414 01:30:00 PM', '20150414 07:00:00 PM', 101, 25.00, 1, 101, 10, 15),
-('20150405 10:34:00 AM', '20150405 10:00:00 PM', 102, 5.00, 1, 102, 80, 90),
-('20150406 10:00:00 AM', '20150406 10:15:00 PM', 101, 20.00, 1, 100, 2, 5),
-('20150328 08:30:00 AM', '20150328 10:30:00 AM', 102, 10.00, 1, 102, 10,11),
+('20150411 10:34:00 AM', '20150411 10:00:00 PM', 102, 5.00, 1, 102, 80, 90),
+('20150406 10:00:00 AM', '20150406 10:15:00 PM', 101, 20.00, 1, 100, 2, 15),
+('20150415 08:30:00 AM', '20150415 10:30:00 AM', 102, 10.00, 1, 102, 5,11),
 ('20150409 09:30:00 AM', '20150409 11:45:00 AM', 102, 10.00, 1, 102, 2,11),
 ('20150404 08:30:00 AM', '20150404 09:30:00 AM', 100, 30.00, 1, 100, 30, 50),
 ('20150408 10:30:00 AM', '20150408 12:30:00 PM', 101, 35.00, 1, 101, 10, 15),
@@ -115,24 +115,24 @@ GO
 
 INSERT INTO [dbo].[Booking] (GuestID, EmployeeID, ItemListID, Quantity, DateBooked, Discount, Active, TicketPrice, ExtendedPrice, TotalCharge)
 VALUES
-(1, 103, 100, 6, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 15.00, 90.00, 90.00),
+(1, 103, 100, 6, '2015-04-01', DEFAULT, DEFAULT, 15.00, 90.00, 90.00),
 (2, 101, 101, 2, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 25.00, 50.00, 50.00) ,
 (3, 102, 102, 5, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 5.00, 25.00, 25.00 ),
-(4, 104, 102, 1,'2015-03-04', DEFAULT, DEFAULT, 5.00, 5.00, 5.00),
-(4, 104, 101, 4, CURRENT_TIMESTAMP, DEFAULT, DEFAULT, 25.00, 100.00, 100.00),
-(6, 104, 103, 4, '2015-03-04', DEFAULT, DEFAULT, 20.00, 80.00, 80.00),
-(7, 104, 104, 10, '2015-03-04', .10, DEFAULT, 9.00, 90.00, 90.00)
+(4, 104, 102, 1,'2015-04-04', .2, DEFAULT, 5.00, 5.00, 5.00),
+(4, 104, 101, 4, '2015-04-05', .2, DEFAULT, 25.00, 100.00, 100.00),
+(6, 104, 103, 4, '2015-04-04', DEFAULT, DEFAULT, 20.00, 80.00, 80.00),
+(7, 104, 104, 10, '2015-04-04', .10, DEFAULT, 9.00, 90.00, 90.00)
 GO
 INSERT INTO [dbo].[Invoice] (HotelGuestID, Active, DateOpened)
 VALUES
-(0, DEFAULT, CURRENT_TIMESTAMP),
-(1, DEFAULT, CURRENT_TIMESTAMP),
-(2, DEFAULT, CURRENT_TIMESTAMP),
-(3, DEFAULT, CURRENT_TIMESTAMP),
-(4, DEFAULT, CURRENT_TIMESTAMP),
-(5, DEFAULT, CURRENT_TIMESTAMP),
-(6, DEFAULT, CURRENT_TIMESTAMP),
-(7, DEFAULT, CURRENT_TIMESTAMP),
-(8, DEFAULT, CURRENT_TIMESTAMP),
-(9, DEFAULT, CURRENT_TIMESTAMP)
+(0, DEFAULT, '20150401 07:00:00 PM'),
+(1, DEFAULT, '20150406 05:00:00 PM'),
+(2, DEFAULT, '20150405 04:20:00 PM'),
+(3, DEFAULT, '20150403 02:00:00 PM'),
+(4, DEFAULT, '20150402 04:00:00 PM'),
+(5, DEFAULT, '20150401 10:00:00 PM'),
+(6, DEFAULT, '20150407 06:00:00 PM'),
+(7, DEFAULT, '20150402 01:00:00 AM'),
+(8, DEFAULT, '20150403 09:00:00 PM'),
+(9, DEFAULT, '20150405 04:00:00 AM')
 GO

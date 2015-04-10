@@ -32,9 +32,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
         
 
-        private static void UpdatePendingSupplier(SupplierApplication selectedItem)
+        private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
-            new AddEditPendingSupplier(selectedItem).ShowDialog();
+            new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog();
         }
 
         private void btnAddPendingSupplier_Click(object sender, RoutedEventArgs e)
@@ -55,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e));
+            UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e), true);
         }
 
         private void loadPendingSuppliers()

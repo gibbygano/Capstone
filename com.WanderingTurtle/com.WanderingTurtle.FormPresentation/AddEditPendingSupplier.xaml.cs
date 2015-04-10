@@ -1,4 +1,5 @@
 ﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,13 @@ namespace com.WanderingTurtle.FormPresentation
             SetFields();
         }
 
-        public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication)
+        public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
             this.CurrentSupplierApplication = CurrentSupplierApplication;
             SetFields();
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();

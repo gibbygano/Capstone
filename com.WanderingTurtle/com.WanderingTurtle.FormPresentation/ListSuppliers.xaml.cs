@@ -66,14 +66,14 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private static void UpdateSupplier(Supplier supplierToUpdate)
+        private static void UpdateSupplier(Supplier supplierToUpdate, bool ReadOnly = false)
         {
-            new AddSupplier(supplierToUpdate).ShowDialog();
+            new AddEditSupplier(supplierToUpdate, ReadOnly).ShowDialog();
             //addSupplier.FillUpdateList(supplierToUpdate);
         }
 
         /// <summary>
-        /// opens the AddSupplier window
+        /// opens the AddEditSupplier window
         /// ceated by Pat 15/2/6
         /// </summary>
         /// <remarks>
@@ -84,8 +84,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
         {
-            AddSupplier addSupplier;
-            addSupplier = new AddSupplier();
+            AddEditSupplier addSupplier;
+            addSupplier = new AddEditSupplier();
             addSupplier.ShowDialog();
         }
 
@@ -188,7 +188,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateSupplier(DataGridHelper.DataGridRow_Click<Supplier>(sender, e));
+            UpdateSupplier(DataGridHelper.DataGridRow_Click<Supplier>(sender, e), true);
         }
     }
 }

@@ -19,9 +19,9 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// This Window allows the administrator to directly add a suplier
     /// </summary>
-    public partial class AddSupplier 
+    public partial class AddEditSupplier 
     {
-        public static AddSupplier Instance;
+        public static AddEditSupplier Instance;
         private int _userID;
         private SupplierManager _manager = new SupplierManager();
         private Supplier _UpdatableSupplier;
@@ -32,20 +32,22 @@ namespace com.WanderingTurtle.FormPresentation
         /// Constructs the object and will fill the list of suppliers
         /// created by Will Fritz 2/6/15
         /// </summary>
-        public AddSupplier()
+        public AddEditSupplier()
         {
             InitializeComponent();
             btnEdit.IsEnabled = false;
             fillComboBox();  
             Instance = this;
         }
-        public AddSupplier(Supplier supplierToEdit)
+        public AddEditSupplier(Supplier supplierToEdit, bool ReadOnly = false)
         {
             InitializeComponent();
             Instance = this;
             this.Title = "Edit Supplier";
-            fillComboBox();  
+            fillComboBox();
             FillUpdateList(supplierToEdit);
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] {  }); }
         }
 
         //////////////////////Windows Events//////////////////////////////
