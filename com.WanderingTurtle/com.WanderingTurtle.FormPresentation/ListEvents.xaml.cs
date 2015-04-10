@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.InnerException.Message, ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message);
             }
         }
 

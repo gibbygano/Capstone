@@ -79,7 +79,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         if (child is TextBoxBase) { (child as TextBoxBase).IsReadOnly = true; }
                         else { child.IsEnabled = false; }
 
-                        SetStyle(child, new Setter(TextBoxHelper.ClearTextButtonProperty, false));
+                        SetStyle(child, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
                 }
             }
@@ -104,25 +104,29 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 Style newStyle = new Style(control.GetType(), GetStyle(control.Style));
                 foreach (var setterValue in setterValueArray)
                 {
-                    if (!replace)
-                    { newStyle.Setters.Add(setterValue); }
-                    else
+                    try
                     {
-                        SetterBaseCollection setterList = new SetterBaseCollection();
-                        Style tmpStyle = control.Style;
-                        do
-                        {
-                            foreach (var setter in tmpStyle.Setters.Cast<Setter>().Where(setter => !setterList.Contains(setter)))
-                            { setterList.Add(setter); }
-                            tmpStyle = tmpStyle.BasedOn;
-                        } while (tmpStyle != null);
-                        foreach (var setter in setterList.Cast<Setter>().Where(setter => setter.Property.Name.Equals(setterValue.Property.Name)))
+                        if (!replace)
                         { newStyle.Setters.Add(setterValue); }
+                        else
+                        {
+                            SetterBaseCollection setterList = new SetterBaseCollection();
+                            Style tmpStyle = control.Style;
+                            do
+                            {
+                                foreach (var setter in tmpStyle.Setters.Cast<Setter>().Where(setter => !setterList.Contains(setter)))
+                                { setterList.Add(setter); }
+                                tmpStyle = tmpStyle.BasedOn;
+                            } while (tmpStyle != null);
+                            foreach (var setter in setterList.Cast<Setter>().Where(setter => setter.Property.Name.Equals(setterValue.Property.Name)))
+                            { newStyle.Setters.Add(setterValue); }
+                        }
+                        control.Style = newStyle;
                     }
+                    catch (Exception ex) { throw new Exception(string.Format("Error Setting Style{0} - Control: {1}{0} - Style: {2}", Environment.NewLine, control, setterValue.Property + " = " + setterValue.Value), ex); }
                 }
-                control.Style = newStyle;
             }
-            catch (Exception ex) { throw new Exception(string.Format("Error Setting Style{0} - Control: {1}{0} - Style: {2}", Environment.NewLine, control, setterValue.Property + " = " + setterValue.Value), ex); }
+            catch (Exception ex) { throw ex; }
         }
 
         /// <summary>
