@@ -13,9 +13,9 @@
  */
 
 CREATE PROCEDURE [dbo].[spCityStateCreate] 
-	(@Zip	varchar(10), 
+	(@Zip	char(5), 
 	 @City	varchar(50), 
-	 @State	varchar(50))
+	 @State	char(2))
 AS
 	IF NOT EXISTS (SELECT Zip FROM CityState WHERE Zip = @Zip) 
 	INSERT INTO [dbo].[CityState] (Zip, City, State) 

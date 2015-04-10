@@ -6,7 +6,7 @@
 	@CompanyDescription varchar(255), 
 	@Address1 		varchar(255), 
 	@Address2 		varchar(255)=NULL, 
-	@Zip 			varchar(10), 
+	@Zip 			char(5), 
 	@PhoneNumber 	varchar(15), 
 	@EmailAddress 	varchar(100), 
 	@ApplicationDate date, 

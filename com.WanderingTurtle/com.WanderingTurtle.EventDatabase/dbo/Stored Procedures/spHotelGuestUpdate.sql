@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spHotelGuestUpdate]
 	@firstName varchar(50),
 	@lastName varchar(50),
-	@zip varchar(10),
+	@zip char(5),
 	@address1 varchar(255),
 	@address2 varchar(255),
 	@phoneNumber varchar(15),
@@ -13,7 +13,7 @@
 	@original_hotelGuestID int,
 	@original_firstName varchar(50),
 	@original_lastName varchar(50),
-	@original_zip varchar(10),
+	@original_zip char(5),
 	@original_address1 varchar(255),
 	@original_address2 varchar(255),
 	@original_phoneNumber varchar(15),

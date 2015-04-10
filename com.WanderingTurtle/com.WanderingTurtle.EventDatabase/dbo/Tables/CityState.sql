@@ -12,9 +12,12 @@
  */
  
 CREATE TABLE [dbo].[CityState] (
-    [Zip]   VARCHAR (10) NOT NULL,
-    [City]  VARCHAR (50) NOT NULL,
-    [State] VARCHAR (50) NOT NULL,
+    [Zip]       CHAR(5)     NOT NULL,
+    [City]      VARCHAR(50) NOT NULL,
+    [State]     CHAR(2)     NOT NULL,
+    [Latitude]  REAL        NOT NULL, 
+    [Longitude] REAL        NOT NULL, 
+    [County]    VARCHAR(50) NOT NULL, 
     CONSTRAINT [pk_Zip] PRIMARY KEY CLUSTERED ([Zip] ASC) ON [PRIMARY]
 ) ON [PRIMARY];
 GO
