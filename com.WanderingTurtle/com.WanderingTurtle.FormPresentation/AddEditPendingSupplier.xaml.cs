@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using com.WanderingTurtle.FormPresentation.Models;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -19,6 +21,8 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditPendingSupplier
     {
+        public SupplierApplication CurrentSupplierApplication = null;
+
         public AddEditPendingSupplier()
         {
             InitializeComponent();
@@ -32,7 +36,10 @@ namespace com.WanderingTurtle.FormPresentation
             SetFields();
         }
 
-        public SupplierApplication CurrentSupplierApplication { get; private set; }
+        public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
+        public SupplierApplication NewSupplierApplication = new SupplierApplication();
+        public Supplier NewSupplier = new Supplier();
+        public SupplierManager MySupplierManager = new SupplierManager();
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -46,10 +53,145 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+
+            if (!Validator.ValidateCompanyName(txtCompanyName.Text))
+            {
+                DialogBox.ShowMessageDialog(this, "Enter a company name.");
+                return;
+            }
+            if (!Validator.ValidateAddress(txtAddress.Text))
+            {
+                DialogBox.ShowMessageDialog(this, "Enter an address.");
+                return;
+            }
+            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+	        {
+		        DialogBox.ShowMessageDialog(this, "Enter a phone number.");
+                return;
+	        }
+            if (!Validator.ValidateEmail(txtEmailAddress.Text))
+            {
+                DialogBox.ShowMessageDialog(this, "Enter an email address.");
+                return;
+            }
+            if (!Validator.ValidateString(txtFirstame.Text))
+            {
+                DialogBox.ShowMessageDialog(this, "Enter a first name.");
+            }
+            if (!Validator.ValidateString(txtLastName.Text))
+            {
+                DialogBox.ShowMessageDialog(this, "Enter a last name.");
+            }
+
+
+            if (CurrentSupplierApplication != null)
+            {
+                UpdatedSupplierApplication.CompanyName = this.txtCompanyName.Text;
+                UpdatedSupplierApplication.CompanyDescription = this.txtCompanyDescription.Text;
+                UpdatedSupplierApplication.FirstName = this.txtFirstame.Text;
+                UpdatedSupplierApplication.LastName = this.txtLastName.Text;
+                UpdatedSupplierApplication.Address1 = this.txtAddress.Text;
+                UpdatedSupplierApplication.Address2 = this.txtAddress2.Text;
+                UpdatedSupplierApplication.Zip = this.txtZip.Text;
+                UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
+                UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
+                UpdatedSupplierApplication.ApplicationDate = this.dateApplicationDate.DisplayDate;
+                UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
+
+                //MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
+
+                DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+
+                SetFields();
+                disableApprovedFields();
+
+                //having issues with the updateVendorApplication stored precedure here and below. Will uncomment when resolved
+                /*if (cbApproved.IsChecked == true)
+                {
+                    NewSupplier.CompanyName = UpdatedSupplierApplication.CompanyName;
+                    NewSupplier.FirstName = UpdatedSupplierApplication.FirstName;
+                    NewSupplier.LastName = UpdatedSupplierApplication.LastName;
+                    NewSupplier.Address1 = UpdatedSupplierApplication.Address1;
+                    NewSupplier.Address2 = UpdatedSupplierApplication.Address2;
+                    NewSupplier.Zip = UpdatedSupplierApplication.Zip;
+                    NewSupplier.PhoneNumber = UpdatedSupplierApplication.Zip;
+                    NewSupplier.EmailAddress = UpdatedSupplierApplication.EmailAddress;
+                    NewSupplier.ApplicationID = UpdatedSupplierApplication.ApplicationID;
+                    NewSupplier.SupplyCost = (decimal)this.numSupplyCost.Value;
+                    
+
+                    UpdatedSupplierApplication.Approved = true;
+                    UpdatedSupplierApplication.ApprovalDate = dateApprovalDate.DisplayDate.Date;
+
+                    MySupplierManager.AddANewSupplier(NewSupplier);
+                    MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
+
+                    DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                }*/
+            }else if(CurrentSupplierApplication == null){
+
+                NewSupplierApplication.CompanyName = txtCompanyName.Text;
+                NewSupplierApplication.CompanyDescription = txtCompanyDescription.Text;
+                NewSupplierApplication.FirstName = txtFirstame.Text;
+                NewSupplierApplication.LastName = txtLastName.Text;
+                NewSupplierApplication.Address1 = txtAddress.Text;
+                NewSupplierApplication.Address2 = txtAddress2.Text;
+                NewSupplierApplication.Zip = txtZip.Text;
+                NewSupplierApplication.PhoneNumber = txtPhoneNumber.Text;
+                NewSupplierApplication.EmailAddress = txtEmailAddress.Text;
+                NewSupplierApplication.ApplicationDate = dateApplicationDate.DisplayDate;
+                NewSupplierApplication.Approved = false;
+
+                NewSupplierApplication.ApplicationID = MySupplierManager.AddASupplierApplication(NewSupplierApplication);
+
+                DialogBox.ShowMessageDialog(this, "Supplier application submitted.");
+
+                SetFields();
+                disableApprovedFields();
+
+                /*if (cbApproved.IsChecked == true)
+                {
+                    NewSupplier.CompanyName = NewSupplierApplication.CompanyName;
+                    NewSupplier.FirstName = NewSupplierApplication.FirstName;
+                    NewSupplier.LastName = NewSupplierApplication.LastName;
+                    NewSupplier.Address1 = NewSupplierApplication.Address1;
+                    NewSupplier.Address2 = NewSupplierApplication.Address2;
+                    NewSupplier.Zip = NewSupplierApplication.Zip;
+                    NewSupplier.PhoneNumber = NewSupplierApplication.Zip;
+                    NewSupplier.EmailAddress = NewSupplierApplication.EmailAddress;
+                    NewSupplier.ApplicationID = NewSupplierApplication.ApplicationID;
+                    NewSupplier.SupplyCost = (decimal)this.numSupplyCost.Value;
+
+                    UpdatedSupplierApplication.CompanyName = NewSupplierApplication.CompanyName;
+                    UpdatedSupplierApplication.CompanyDescription = NewSupplierApplication.CompanyDescription;
+                    UpdatedSupplierApplication.FirstName = NewSupplierApplication.FirstName;
+                    UpdatedSupplierApplication.LastName = NewSupplierApplication.LastName;
+                    UpdatedSupplierApplication.Address1 = NewSupplierApplication.Address1;
+                    UpdatedSupplierApplication.Address2 = NewSupplierApplication.Address2;
+                    UpdatedSupplierApplication.Zip = NewSupplierApplication.Zip;
+                    UpdatedSupplierApplication.PhoneNumber = NewSupplierApplication.PhoneNumber;
+                    UpdatedSupplierApplication.EmailAddress = NewSupplierApplication.EmailAddress;
+                    UpdatedSupplierApplication.ApplicationID = NewSupplierApplication.ApplicationID;
+                    UpdatedSupplierApplication.ApplicationDate = NewSupplierApplication.ApplicationDate;
+
+                    UpdatedSupplierApplication.Approved = true;
+                    UpdatedSupplierApplication.ApprovalDate = dateApprovalDate.DisplayDate.Date;
+
+                    MySupplierManager.AddANewSupplier(NewSupplier);
+                    MySupplierManager.EditSupplierApplication(NewSupplierApplication, UpdatedSupplierApplication);
+
+                    DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                    
+                }*/
+
+
+            }
         }
 
         private void SetFields()
         {
+            disableApprovedFields();
+
             if (CurrentSupplierApplication == null)
             {
                 this.txtCompanyName.Text = null;
@@ -65,6 +207,8 @@ namespace com.WanderingTurtle.FormPresentation
                 this.cbApproved.IsChecked = false;
                 this.dateApprovalDate.SelectedDate = DateTime.Now.Date;
                 this.numSupplyCost.Value = 70;
+                this.pwPassword.Clear();
+                this.txtUserId.Clear();
             }
             else
             {
@@ -80,8 +224,28 @@ namespace com.WanderingTurtle.FormPresentation
                 this.dateApplicationDate.SelectedDate = CurrentSupplierApplication.ApplicationDate;
                 this.cbApproved.IsChecked = CurrentSupplierApplication.Approved;
                 this.dateApprovalDate.SelectedDate = CurrentSupplierApplication.ApprovalDate;
-                //this.numSupplyCost.Value = CurrentSupplierApplication;
             }
+        }
+
+        private void cbApproved_Checked(object sender, RoutedEventArgs e)
+        {
+            txtUserId.IsEnabled = true;
+            pwPassword.IsEnabled = true;
+            numSupplyCost.IsEnabled = true;
+            dateApprovalDate.IsEnabled = true;
+        }
+
+        private void cbApproved_Unchecked(object sender, RoutedEventArgs e)
+        {
+            disableApprovedFields();
+        }
+
+        private void disableApprovedFields()
+        {
+            txtUserId.IsEnabled = false;
+            pwPassword.IsEnabled = false;
+            numSupplyCost.IsEnabled = false;
+            dateApprovalDate.IsEnabled = false;
         }
     }
 }

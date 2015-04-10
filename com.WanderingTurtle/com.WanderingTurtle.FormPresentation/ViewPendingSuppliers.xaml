@@ -6,11 +6,15 @@
         Style="{DynamicResource WindowStyle}"
         Title="ViewPendingSuppliers" Height="500" Width="900">
     <Grid Margin="{DynamicResource Grid Margin}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="433*"/>
+            <ColumnDefinition Width="447*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Column="0" Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}" MouseDoubleClick="lvPendingSuppliers_MouseDoubleClick">
+        <DataGrid Grid.Column="0" Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}" MouseDoubleClick="lvPendingSuppliers_MouseDoubleClick" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto" Header="ID"                  Binding="{Binding ApplicationID}" />
                 <DataGridTextColumn Width="*"    Header="Company Name"        Binding="{Binding CompanyName}" />
@@ -28,7 +32,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <WrapPanel Grid.Row="1">
+        <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
             <Button Content="Add Pending Supplier"    Margin="{DynamicResource Button Spacing}" Click="btnAddPendingSupplier_Click" />
             <Button Content="Update Pending Supplier" Margin="{DynamicResource Button Spacing}" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvPendingSuppliers}" />
         </WrapPanel>

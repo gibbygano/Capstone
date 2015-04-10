@@ -21,13 +21,16 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ViewPendingSuppliers
     {
+        private List<SupplierApplication> GetPendingSuppliers = new List<SupplierApplication>();
+        private SupplierManager supplierManager = new SupplierManager();
+
         public ViewPendingSuppliers()
         {
             InitializeComponent();
-            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
-        }
+            loadPendingSuppliers();
 
-        private List<SupplierApplication> GetPendingSuppliers { get { return new SupplierManager().RetrieveSupplierApplicationList(); } }
+        }
+        
 
         private static void UpdatePendingSupplier(SupplierApplication selectedItem)
         {
@@ -53,6 +56,24 @@ namespace com.WanderingTurtle.FormPresentation
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e));
+        }
+
+        private void loadPendingSuppliers()
+        {
+            try
+            {
+
+                GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
+
+            }
+            catch (Exception)
+            {
+
+                return;
+            }
+
+            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
+
         }
     }
 }

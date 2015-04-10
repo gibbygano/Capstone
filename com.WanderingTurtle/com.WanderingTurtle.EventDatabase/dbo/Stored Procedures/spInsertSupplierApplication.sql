@@ -10,10 +10,11 @@
 	@EmailAddress 	varchar(100), 
 	@ApplicationDate date, 
 	@Approved		bit,
-	@ApprovalDate	date
+	@ApprovalDate	date = NULL,
+	@CompanyDescription varchar(255)=NULL
 	)
 AS
 INSERT INTO SupplierApplication
-	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate) 
-VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationDate, @Approved, @ApprovalDate)
-RETURN @@ROWCOUNT
+	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate, CompanyDescription) 
+VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationDate, @Approved, @ApprovalDate, @CompanyDescription);
+SELECT CAST(scope_identity() AS int)
