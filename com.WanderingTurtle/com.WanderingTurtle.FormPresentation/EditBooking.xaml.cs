@@ -39,7 +39,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="inInvoice">Invoice info from the view invoice UI</param>
         /// <param name="inBookingDetails">Booking info from the view invoice UI</param>
-        public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails)
+        public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails, bool ReadOnly = false)
         {
             this.inInvoice = inInvoice;
             originalBookingRecord = inBookingDetails;
@@ -47,6 +47,8 @@ namespace com.WanderingTurtle.FormPresentation
 
             populateTextFields();
             eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
 

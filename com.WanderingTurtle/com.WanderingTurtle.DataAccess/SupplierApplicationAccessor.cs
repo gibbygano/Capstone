@@ -22,7 +22,8 @@ namespace com.WanderingTurtle.DataAccess
         public static int AddSupplierApplication(SupplierApplication supplierApplicationToAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            
+
+            int newApplicationID;
             string cmdtext = "spInsertSupplierApplication";
             var cmd = new SqlCommand(cmdtext, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -40,11 +41,12 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Approved", supplierApplicationToAdd.Approved);
             cmd.Parameters.AddWithValue("@ApprovalDate", supplierApplicationToAdd.ApprovalDate);
 
-            var rowsAffected = 0;
+            //var rowsAffected = 0;
+          
             try
             {
                 conn.Open();
-                rowsAffected = cmd.ExecuteNonQuery();
+                newApplicationID = (int)cmd.ExecuteScalar();
             }
             catch (Exception)
             {
@@ -54,7 +56,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return rowsAffected;
+            return newApplicationID;
         }
 
         /// <summary>
@@ -136,7 +138,6 @@ namespace com.WanderingTurtle.DataAccess
             var cmdText = "spSelectAllSupplierApplication";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@ApplicationID", 1);
             
             try
             {
@@ -150,7 +151,7 @@ namespace com.WanderingTurtle.DataAccess
 
                         currentSupplierApplication.ApplicationID = (int)reader.GetValue(0);
                         currentSupplierApplication.CompanyName = reader.GetValue(1).ToString();
-                        currentSupplierApplication.CompanyDescription = reader.GetValue(2).ToString();
+                        currentSupplierApplication.CompanyDescription = reader.IsDBNull(2) ? currentSupplierApplication.CompanyDescription = reader.GetValue(2).ToString() : null;
                         currentSupplierApplication.FirstName = reader.GetValue(3).ToString();
                         currentSupplierApplication.LastName= reader.GetValue(4).ToString();
                         currentSupplierApplication.Address1 = reader.GetValue(5).ToString();
@@ -160,7 +161,8 @@ namespace com.WanderingTurtle.DataAccess
                         currentSupplierApplication.EmailAddress = reader.GetValue(9).ToString();
                         currentSupplierApplication.ApplicationDate = (DateTime)reader.GetValue(10);
                         currentSupplierApplication.Approved = reader.GetBoolean(11);
-                        currentSupplierApplication.ApprovalDate = (DateTime)reader.GetValue(12);
+                        //currentSupplierApplication.ApprovalDate = reader.IsDBNull(12) ? currentSupplierApplication.ApprovalDate = reader.GetDateTime(12) : null;
+
                         ApplicationList.Add(currentSupplierApplication);
                     }
                 }
@@ -202,9 +204,9 @@ namespace com.WanderingTurtle.DataAccess
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    currentSupplierApplication.ApplicationID = (int)reader.GetValue(0);
+                    currentSupplierApplication.ApplicationID = reader.GetInt32(0);
                     currentSupplierApplication.CompanyName = reader.GetValue(1).ToString();
-                    currentSupplierApplication.CompanyDescription = reader.GetValue(2).ToString();
+                    currentSupplierApplication.CompanyDescription = reader.IsDBNull(2) ? currentSupplierApplication.CompanyDescription = reader.GetString(2): null;
                     currentSupplierApplication.FirstName = reader.GetValue(3).ToString();
                     currentSupplierApplication.LastName = reader.GetValue(4).ToString();
                     currentSupplierApplication.Address1 = reader.GetValue(5).ToString();
@@ -212,9 +214,9 @@ namespace com.WanderingTurtle.DataAccess
                     currentSupplierApplication.Zip = reader.GetValue(7).ToString();
                     currentSupplierApplication.PhoneNumber = reader.GetValue(8).ToString();
                     currentSupplierApplication.EmailAddress = reader.GetValue(9).ToString();
-                    currentSupplierApplication.ApplicationDate = (DateTime)reader.GetValue(10);
+                    currentSupplierApplication.ApplicationDate = reader.GetDateTime(10);
                     currentSupplierApplication.Approved = reader.GetBoolean(11);
-                    currentSupplierApplication.ApprovalDate = (DateTime)reader.GetValue(12);
+                    currentSupplierApplication.ApprovalDate = reader.IsDBNull(12) ? currentSupplierApplication.ApprovalDate = reader.GetDateTime(12) : null;
                 }
                 else
                 {

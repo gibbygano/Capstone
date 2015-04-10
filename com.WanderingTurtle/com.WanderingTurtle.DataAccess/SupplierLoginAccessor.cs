@@ -44,7 +44,8 @@ namespace com.WanderingTurtle.DataAccess
                     getSupplierInfo.UserID = (int)reader.GetValue(0);
                     getSupplierInfo.UserPassword = reader.GetValue(1).ToString();
                     getSupplierInfo.UserName = reader.GetValue(2).ToString();
-                    getSupplierInfo.Active = reader.GetBoolean(3);
+                    getSupplierInfo.SupplierID = reader.GetValue(3).ToString();
+                    getSupplierInfo.Active = reader.GetBoolean(4);
                 }
                 else
                     throw new ApplicationException("Incorrect login information. Try again.");

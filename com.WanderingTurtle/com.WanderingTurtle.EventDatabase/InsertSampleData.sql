@@ -57,11 +57,11 @@ VALUES
 ('Clara', 'Oswald', '52641', '1455 Benton Ave', ' ', '(319) 931-9983', ' ', 205, 1234)
 GO
 
-INSERT INTO [dbo].[SupplierLogin] (UserName)
+INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)
 VALUES
-('FJones'),
-('HSmith'),
-('GAllen')
+('FJones', 100),
+('HSmith', 101),
+('GAllen', 102)
 GO
 
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active)

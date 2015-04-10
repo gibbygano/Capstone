@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -37,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// </remarks>
         /// <param name="employee">Employee to update</param>
-        public AddEmployee(Employee employee)
+        public AddEmployee(Employee employee, bool ReadOnly = false)
         {
             InitializeComponent();
             CurrentEmployee = employee;
@@ -45,6 +46,8 @@ namespace com.WanderingTurtle.FormPresentation
             ReloadComboBox();
 
             SetFields();
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         public Employee CurrentEmployee { get; private set; }

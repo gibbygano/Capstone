@@ -14,6 +14,12 @@ namespace com.WanderingTurtle.Tests
         private SupplierLoginAccessor access = new SupplierLoginAccessor();
         private SupplierLogin retrieveSupplier;
         
+        [TestInitialize]
+        public void initialize()
+        {
+            access.addSupplierLogin("F@k3logg3r");
+        }
+        
         /// <summary>
         /// Created by Rose Steffensmeier 2015/04/03
         /// Tests to input a new SupplierLogin into the database.
@@ -21,20 +27,8 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginAdd()
         {
-            int numberAdded = access.addSupplierLogin("f@k3Loger");
-            Assert.AreEqual(1, numberAdded);
-        }
-        
-        /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
-        /// Tests to see if the login fails.
-        /// </summary>
-        [TestMethod]
-        [ExpectedException(typeof(SqlException))]
-        public void TestSupplierLoginAddFail()
-        {
-            TestSupplierLoginAdd();
-            int numberAdded = access.addSupplierLogin("f@k3Loger");
+            int numberAdded = access.addSupplierLogin("TryM3!");
+            Assert.AreEqual("TryM3!", access.retrieveSupplierLogin("Password#1", "TryM3!").UserName);
         }
 
         /// <summary>
@@ -44,9 +38,8 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginGet()
         {
-            TestSupplierLoginAdd();
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "f@k3Loger");
-            Assert.AreEqual("f@k3Loger", retrieveSupplier.UserName, "There is no such supplier.");
+            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
+            Assert.AreEqual("F@k3logg3r", retrieveSupplier.UserName, "There is no such supplier.");
         }
         
         /// <summary>
@@ -60,41 +53,48 @@ namespace com.WanderingTurtle.Tests
             retrieveSupplier = access.retrieveSupplierLogin("Password#1", "f@k3Loger");
         }
 
+        /// <summary>
+        /// Created by Rose Steffensmeier 2015/04/09
+        /// Tests if a piece of data will fail to add to database if F@k3logg3r already exists as a username.
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(SqlException))]
+        public void TestSupplierLoginAddFail()
+        {
+            int numberAdded = access.addSupplierLogin("F@k3logg3r");
+        }
+
+        /// <summary>
+        /// Created by Rose Steffensmeier 2015/04/09
+        /// Takes a piece of data and archives it.
+        /// </summary>
         [TestMethod]
         public void TestSupplierLoginArchive()
         {
-            TestSupplierLoginGet();
-            int num = access.archiveSupplierLogin(retrieveSupplier, false);
-            Assert.AreEqual(1, num, "Data was not changed.");
-        }
-
-        [TestMethod]
-        public void TestSupplierLoginArchiveFail()
-        {
-            TestSupplierLoginGet();
-            retrieveSupplier.UserName = "faker";
-            int num = access.archiveSupplierLogin(retrieveSupplier, false);
-            Assert.AreEqual(0, num, "The data was changed.");
-
+            SupplierLogin change = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
+            int num = access.archiveSupplierLogin(change, false);
+            Assert.AreEqual(1, num);
         }
 
         [TestCleanup]
         public void cleanUp()
         {
-            var conn = new SqlConnection(@"Data Source=localhost;Initial Catalog=com.WanderingTurtle.EventDatabase;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False");
-            string commandLine = "DELETE FROM [SupplierLogin] WHERE [UserName] = @userName";
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string commandText = @"DELETE FROM SupplierLogin WHERE UserName = 'F@k3logg3r'";
+            string commandText2 = @"DELETE FROM SupplierLogin WHERE UserName='TryM3!'";
 
-            var cmd = new SqlCommand(commandLine, conn);
-            cmd.Parameters.AddWithValue("@userName", "f@k3Loger");
+            var cmd = new SqlCommand(commandText, conn);
 
             try
             {
                 conn.Open();
                 cmd.ExecuteNonQuery();
+                cmd = new SqlCommand(commandText2, conn);
+                cmd.ExecuteNonQuery();
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
-                Console.WriteLine("Not working");
+                Console.WriteLine("Fail!");
             }
             finally
             {
