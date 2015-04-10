@@ -54,6 +54,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="HotelGuestManagerTest.cs" />
+    <Compile Include="HotelManagerAccessorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupplierLoginAccessorTest.cs" />
     <Compile Include="SupplierLoginManagerTest.cs" />
