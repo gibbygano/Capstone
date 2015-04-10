@@ -183,9 +183,6 @@
     <Compile Include="ViewEventDetails.xaml.cs">
       <DependentUpon>ViewEventDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewListing.xaml.cs">
-      <DependentUpon>ViewListing.xaml</DependentUpon>
-    </Compile>
     <Page Include="AddBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -291,10 +288,6 @@
     <Page Include="AddSupplier.xaml">
     </Page>
     <Page Include="ViewEventDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewListing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -49,7 +49,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog("Unable to retrieve invoice list from the database. \n" + ex.Message);
+                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve invoice list from the database.");
                 
             }
         }

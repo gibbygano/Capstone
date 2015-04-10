@@ -100,7 +100,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
-                if(DialogBox.ShowMessageDialog("Do you want to delete this item?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if(DialogBox.ShowMessageDialog(this, "Do you want to delete this item?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     try
                     {
