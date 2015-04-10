@@ -222,7 +222,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void EditBooking(BookingDetails bookingToEdit)
+        private void EditBooking(BookingDetails bookingToEdit, bool ReadOnly = false)
         {
             //check if selected item can be edited
             ResultsEdit result = _bookingManager.CheckToEditBooking(bookingToEdit);
@@ -238,7 +238,7 @@ namespace com.WanderingTurtle.FormPresentation
                     break;
 
                 case (ResultsEdit.OkToEdit):
-                    EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem);
+                    EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem, ReadOnly);
 
                     if (editForm.ShowDialog() == false)
                     {
@@ -250,7 +250,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvGuestBookings_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EditBooking(DataGridHelper.DataGridRow_Click<BookingDetails>(sender, e));
+            EditBooking(DataGridHelper.DataGridRow_Click<BookingDetails>(sender, e), true);
         }
 
         /// <summary>

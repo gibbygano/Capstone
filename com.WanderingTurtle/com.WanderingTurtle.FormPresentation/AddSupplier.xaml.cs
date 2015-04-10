@@ -39,13 +39,15 @@ namespace com.WanderingTurtle.FormPresentation
             fillComboBox();  
             Instance = this;
         }
-        public AddSupplier(Supplier supplierToEdit)
+        public AddSupplier(Supplier supplierToEdit, bool ReadOnly = false)
         {
             InitializeComponent();
             Instance = this;
             this.Title = "Edit Supplier";
-            fillComboBox();  
+            fillComboBox();
             FillUpdateList(supplierToEdit);
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] {  }); }
         }
 
         //////////////////////Windows Events//////////////////////////////

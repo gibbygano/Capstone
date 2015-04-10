@@ -42,11 +42,11 @@ namespace com.WanderingTurtle.FormPresentation
             Refresh();
         }
 
-        private void ViewEventDetails(Event eventToView)
+        private void ViewEventDetails(Event eventToView, bool ReadOnly = false)
         {
             try
             {
-                new AddEditEvent(eventToView, true).ShowDialog();
+                new AddEditEvent(eventToView, ReadOnly).ShowDialog();
             }
             catch (Exception ex)
             {
@@ -213,7 +213,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ViewEventDetails(DataGridHelper.DataGridRow_Click<Event>(sender, e));
+            ViewEventDetails(DataGridHelper.DataGridRow_Click<Event>(sender, e), true);
         }
 
         /// <summary>

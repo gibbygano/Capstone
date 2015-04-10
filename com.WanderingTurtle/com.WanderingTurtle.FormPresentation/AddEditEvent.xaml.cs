@@ -43,11 +43,8 @@ namespace com.WanderingTurtle.FormPresentation
             eventToSubmit.EventItemID = EventToEdit.EventItemID;
 
             Setup();
-            if (ReadOnly)
-            {
-                FrameworkElement[] controlsToKeepEnabled = { BtnCancel };
-                WindowHelper.MakeReadOnly(this.Content as Panel, controlsToKeepEnabled);
-            }
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         public Event OriginalEvent { get; private set; }

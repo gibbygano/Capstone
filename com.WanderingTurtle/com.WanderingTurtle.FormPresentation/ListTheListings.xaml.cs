@@ -85,7 +85,7 @@ namespace com.WanderingTurtle.FormPresentation
             EditListing(lvListing.SelectedItem as ItemListing);
         }
 
-        private void EditListing(ItemListing ListingEdit)
+        private void EditListing(ItemListing ListingEdit, bool ReadOnly = false)
         {
             if (ListingEdit == null)
             {
@@ -93,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
                 return;
             }
 
-            Window EditListings = new AddEditListing(ListingEdit);
+            Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
 
             //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
             //AddItemListings.Show();
@@ -105,7 +105,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EditListing(DataGridHelper.DataGridRow_Click<ItemListing>(sender, e));
+            EditListing(DataGridHelper.DataGridRow_Click<ItemListing>(sender, e), true);
         }
 
         /// <summary>

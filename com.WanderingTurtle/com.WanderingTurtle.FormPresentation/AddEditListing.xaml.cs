@@ -29,10 +29,12 @@ namespace com.WanderingTurtle.FormPresentation
             Setup();
         }
 
-        public AddEditListing(ItemListing CurrentItemListing)
+        public AddEditListing(ItemListing CurrentItemListing, bool ReadOnly = false)
         {
             this.CurrentItemListing = CurrentItemListing;
             Setup();
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         public ItemListing CurrentItemListing { get; private set; }
