@@ -11,8 +11,7 @@
 	@EmailAddress 	varchar(100), 
 	@ApplicationDate date, 
 	@Approved		bit,
-	@ApprovalDate	date = NULL,
-	@CompanyDescription varchar(255)=NULL
+	@ApprovalDate	date = NULL
 	)
 AS
 INSERT INTO SupplierApplication
