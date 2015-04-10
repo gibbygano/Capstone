@@ -18,7 +18,15 @@ namespace com.WanderingTurtle.Web.Pages
         {
             try
             {
-                //loggedIn = (bool)Session["loggedin"];
+                try
+                {
+                    loggedIn = (bool)Session["loggedin"];
+                }
+                catch(Exception)
+                {
+                    Session["loggedIn"] = false;
+                }
+                
                 if (loggedIn)
                 {
                     _currentSupplier = (Supplier)Session["user"];

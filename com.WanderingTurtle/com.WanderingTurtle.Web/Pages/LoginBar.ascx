@@ -8,4 +8,4 @@
        supplierName = _currentSupplier.FirstName + " " + _currentSupplier.LastName;
    } %>
 <div id="userLoggedIn" runat="server" style="display: none;">Welcome <%= supplierName %></div>
-<div id="userLoggedOut" runat="server" style="display: none;"><a href="#">Login</a> <a href="~/Pages/SupplierApplicationPage.aspx">Submit an Application</a></div>
+<div id="userLoggedOut" runat="server" style="display: none;"><a href="../login">Login</a> <a href="application">Submit an Application</a></div>

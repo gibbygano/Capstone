@@ -24,6 +24,7 @@ namespace com.WanderingTurtle.Web
                 var user = _myMan.retrieveSupplierLogin(txtPassword.Text, txtUserName.Text);
                 var supplier = _mySuppMan.RetrieveSupplier(user.SupplierID);
                 Session["user"] = supplier;
+                Session["loggedIn"] = true;
                 lblError.Text = "";
             }
             catch
