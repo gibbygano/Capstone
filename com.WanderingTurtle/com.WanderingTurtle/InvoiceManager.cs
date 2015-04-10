@@ -196,5 +196,30 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
 		}
+        public List<InvoiceDetails> InvoiceDetailsSearch(String inSearch)
+        {
+            //List<Event> myTempList = new List<Event>();
+            if (!inSearch.Equals("") && !inSearch.Equals(null))
+            {
+
+                //Lambda Version
+                //return myTempList.AddRange(DataCache._currentEventList.Where(s => s.EventItemName.ToUpper().Contains(inSearch.ToUpper())).Select(s => s));
+                //LINQ version
+                List<InvoiceDetails> SearchList = RetrieveActiveInvoiceDetails();
+                List<InvoiceDetails> myTempList = new List<InvoiceDetails>();
+                myTempList.AddRange(
+                  from inGuest in SearchList
+                  where inGuest.GuestFirstName.Contains(inSearch) || inGuest.GuestLastName.Contains(inSearch)
+                  select inGuest);
+                return myTempList;
+
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+            }
+            else
+            {
+                return RetrieveActiveInvoiceDetails();
+            }
+
+        }
 	}
 }

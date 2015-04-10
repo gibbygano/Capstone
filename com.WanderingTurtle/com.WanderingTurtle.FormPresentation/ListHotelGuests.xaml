@@ -18,6 +18,9 @@
         <WrapPanel Grid.Row="1">
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnRegisterGuest" Content="Register Guest" Click="btnRegisterGuest_Click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnViewGuest"     Content="View Guest"     Click="btnViewGuest_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvHotelGuestList}" />
+            <TextBox x:Name="txtSearchBox" Height="23"  Margin="{DynamicResource Button Spacing Inline}" TextWrapping="Wrap"  TextChanged="txtSearchBox_TextChanged" Width="Auto"/>
+            <Button x:Name="btnGuestSearch" Content="RefreshList" Width="89"/>
+
         </WrapPanel>
     </Grid>
 </UserControl>
