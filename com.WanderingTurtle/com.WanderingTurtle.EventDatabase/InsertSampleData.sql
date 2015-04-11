@@ -71,11 +71,13 @@ VALUES
 ('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 103, 1)
 GO
 
-INSERT INTO [dbo].[SupplierApplication]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate)
+INSERT INTO [dbo].[SupplierApplication]  (CompanyName, CompanyDescription, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, Remarks)
 VALUES
-('Francisco''s Tours', 'Francisco', 'McHurdley', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', '2014-12-22', 1, '2015-01-01'),
-('Harry''s Boat Rides', 'Harry', 'Bertleson', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', '2014-02-06', 1, '2014-06-12'),
-('They''re Grape Tours, LLC', 'Gregory', 'Allensworth', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', '2015-01-22', 1, '2015-02-12')
+('Skywalker Tours', ' ', 'Luke', 'Skywalker', '1 Skywalker Ranch', ' ', '73102', '499-222-1124', 'Luke@Tattoine.net', '2015-03-29', 'Pending', CURRENT_TIMESTAMP, ' '),
+('Vader''s Van Service', ' ', 'Darth','Vader', '2 Death Star Way', ' ', '12235', '666-444-5999', 'Vader@SithLords.com', '2015-04-02', 'Pending', CURRENT_TIMESTAMP, ' '),
+('Falcon Enterprises', ' ', 'Han', 'Solo', '3000 Millenium Dr', ' ', '58214', '555-344-1987', 'Han@falconEnterprises.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' '),
+('Cantina Bands', ' ', 'Alien', 'Dude', '1 Desert Dr', ' ', '58214', '222-844-1978', 'Alien@CantinaBands.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, ' '),
+('BobaFett''s FunHouse', ' ', 'Boba', 'Fett', '79 Clone Dr', ' ', '58214', '555-244-8087', 'Boba@FettFunhouse.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' ')
 GO
 
 INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transportation, EventDescription, Active)

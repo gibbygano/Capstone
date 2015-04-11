@@ -9,13 +9,14 @@
 	@Zip 			varchar(10), 
 	@PhoneNumber 	varchar(15), 
 	@EmailAddress 	varchar(100), 
-	@ApplicationDate date, 
-	@Approved		bit,
-	@ApprovalDate	date = NULL
+	@ApplicationDate dateTime,
+	@ApplicationStatus	varchar(25),
+	@LastStatusDate	datetime,
+	@Remarks		varchar(255) = null
 	)
 AS
 INSERT INTO SupplierApplication
-	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, Approved, ApprovalDate, CompanyDescription) 
-VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationDate, @Approved, @ApprovalDate, @CompanyDescription);
+	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, CompanyDescription, Remarks) 
+VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @ApplicationDate, @ApplicationStatus, @LastStatusDate, @CompanyDescription, @Remarks);
 return @@ROWCOUNT
 

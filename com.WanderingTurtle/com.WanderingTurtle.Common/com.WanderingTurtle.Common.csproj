@@ -43,6 +43,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationStatus.cs" />
     <Compile Include="ResultsArchive.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="ResultsEdit.cs" />

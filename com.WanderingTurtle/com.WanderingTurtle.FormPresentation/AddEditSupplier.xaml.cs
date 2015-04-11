@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class AddEditSupplier 
     {
         public static AddEditSupplier Instance;
-        private int _userID;
+        private int _userID = 9870;
         private SupplierManager _manager = new SupplierManager();
         private Supplier _UpdatableSupplier;
         private List<CityState> _zips;
@@ -132,11 +132,6 @@ namespace com.WanderingTurtle.FormPresentation
                 DialogBox.ShowMessageDialog(this, "Company Name field must be filled out and not contain special characters");
                 return false;
             }
-            else if (!Validator.ValidateInt(txtUserID.Text))
-            {
-                DialogBox.ShowMessageDialog(this, "User ID field must filled out and be a numeric value and must be 10 digits or less");
-                return false;
-            }
             else if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
             {
                 DialogBox.ShowMessageDialog(this, "Not a valid e-mail address");
@@ -166,16 +161,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 DialogBox.ShowMessageDialog(this, "The last name field must be filled out and not contain special characters (No Spaces)");
                 return false;
-            }
-
-
-            try
-            {
-                _userID = Int32.Parse(txtUserID.Text);
-            }
-            catch (Exception)
-            {
-                DialogBox.ShowMessageDialog(this, "User ID must be numeric");
             }
 
             return true;
@@ -249,8 +234,6 @@ namespace com.WanderingTurtle.FormPresentation
                 }
             }
             //cboZip.SelectedValue = supplierUpdate.Zip;
-            txtUserID.Text = supplierUpdate.UserID.ToString();
-
             _UpdatableSupplier = supplierUpdate;
 
             btnSubmit.IsEnabled = false;
