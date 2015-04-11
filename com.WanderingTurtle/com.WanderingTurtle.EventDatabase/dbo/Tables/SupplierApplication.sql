@@ -9,11 +9,11 @@
     [Zip]                CHAR    (5)   NOT NULL,
     [PhoneNumber]        VARCHAR (15)  NOT NULL,
     [EmailAddress]       VARCHAR (100) NOT NULL,
-    [ApplicationDate]    DATE          NOT NULL,
-    [Approved]           BIT           NOT NULL,
-    [ApprovalDate]       DATE          NULL,
-    CONSTRAINT [PK_SupplierApplication] PRIMARY KEY CLUSTERED ([ApplicationID] ASC) ON [PRIMARY], 
-    CONSTRAINT [FK_SupplierApplication_CityState] FOREIGN KEY ([Zip]) REFERENCES [CityState]([Zip])
+    [ApplicationDate]    DATETIME          NOT NULL,
+	[ApplicationStatus]  VARCHAR(25)   DEFAULT ('Pending'),
+    [LastStatusDate]       DATETIME     NOT NULL,
+    [Remarks]				VARCHAR(255) NULL, 
+    CONSTRAINT [PK_SupplierApplication] PRIMARY KEY CLUSTERED ([ApplicationID] ASC) ON [PRIMARY]
 ) ON [PRIMARY];
 GO
 CREATE NONCLUSTERED INDEX [SupplierApplicationIndex]
@@ -22,5 +22,3 @@ GO
 CREATE NONCLUSTERED INDEX [SupplierApplicationNameIndex]
     ON [dbo].[SupplierApplication]([CompanyName] ASC);
 GO
-ALTER TABLE [dbo].[SupplierApplication]
-    ADD DEFAULT 0 FOR [Approved];

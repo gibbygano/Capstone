@@ -582,7 +582,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>a boolean value if the string contains only the allow characters</returns>
         public static bool ValidatePhone(string inputToValidate)
         {
-            return Regex.IsMatch(inputToValidate, @"(\([2-9]\d\d\)|[2-9]\d\d) ?[-.,]? ?[2-9]\d\d ?[-.,]? ?\d{4}");
+            
+            bool result =  Regex.IsMatch(inputToValidate, @"(\([2-9]\d\d\)|[2-9]\d\d) ?[-.,]? ?[2-9]\d\d ?[-.,]? ?\d{4}");
+            return result;
         }
 
         //Not sure what needs to be here for an address

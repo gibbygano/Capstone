@@ -24,7 +24,7 @@
 
 		public int ApplicationID { get; set; }
 
-		public int UserID { get; set; }
+		public int? UserID { get; set; }
 
         public decimal? SupplyCost { get; set; }
 
@@ -50,10 +50,9 @@
 		{
 		}
 
-        public Supplier(int supplierID, string companyName, string firstName, string lastName, string address1,
+        public Supplier(string companyName, string firstName, string lastName, string address1,
         string address2, string zip, string phoneNumber, string emailAddress, int applicationID, int userID, decimal supplyCost, bool active)
         {
-            SupplierID = supplierID;
             CompanyName = companyName;
             FirstName = firstName;
             LastName = lastName;
@@ -66,7 +65,5 @@
             SupplyCost = supplyCost;
             Active = active;
         }
-
-
 	}
 }

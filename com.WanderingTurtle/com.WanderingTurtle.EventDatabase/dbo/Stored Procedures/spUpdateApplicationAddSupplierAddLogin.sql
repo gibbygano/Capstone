@@ -1,5 +1,8 @@
-﻿CREATE PROCEDURE spUpdateSupplierApplication
-	(
+﻿CREATE PROCEDURE [dbo].[spUpdateApplicationAddSupplierAddLogin]
+(
+	@UserName				varchar(50),
+	@SupplyCost				decimal(3,2),
+
 	@CompanyName 			varchar(255),
 	@CompanyDescription		varchar(255),
 	@FirstName 				varchar(50), 
@@ -15,6 +18,7 @@
 	@Remarks				varchar(255),
 
 	@originalApplicationID 	int, 
+
 	@originalCompanyName 	varchar(255),
 	@originalCompanyDescription varchar(255),
 	@originalFirstName 		varchar(50), 
@@ -24,18 +28,15 @@
 	@originalZip 			varchar(10), 
 	@originalPhoneNumber 	varchar(15), 
 	@originalEmailAddress 	varchar(100), 
-	@originalApplicationDate datetime,	
+	@originalApplicationDate datetime,
+	
 	@originalApplicationStatus	varchar(25),
 	@originalLastStatusDate	datetime,
 	@originalRemarks		varchar(255)	
 	)
 AS
-
-	UPDATE SupplierApplication 
-	
-	SET
+	UPDATE SupplierApplication SET
 		CompanyName = @CompanyName, 
-		CompanyDescription = @CompanyDescription,
 		FirstName = @FirstName, 
 		LastName = @LastName, 
 		Address1 = @Address1, 
@@ -48,9 +49,7 @@ AS
 		LastStatusDate = @LastStatusDate,
 		Remarks = @Remarks
 	WHERE 
-		ApplicationID = @originalApplicationID
-		AND CompanyName = @originalCompanyName
-		AND CompanyDescription = @originalCompanyDescription
+		 CompanyName = @originalCompanyName
 		AND FirstName = @originalFirstName
 		AND LastName = @originalLastName
 		AND Address1 = @originalAddress1
@@ -60,8 +59,25 @@ AS
 		AND EmailAddress = @originalEmailAddress
 		AND ApplicationDate = @originalApplicationDate
 		AND ApplicationStatus = @originalApplicationStatus
-		AND LastStatusDate = @originalLastStatusDate 
+		AND LastStatusDate = @originalLastStatusDate
 		AND Remarks = @originalRemarks
+		AND ApplicationID = @originalApplicationID
+	BEGIN
 
+	DECLARE @rowCount int, @rowCount2 int, @supplierID int
+	SET @rowCount = @@ROWCOUNT
+
+	IF @rowCount = 1
+	INSERT INTO [Supplier]
+	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, SupplyCost, Active) 
+	VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @originalApplicationID, 7777, @SupplyCost, 1)
+	
+	SET @supplierID = @@IDENTITY
+	SET @rowCount2 = @@ROWCOUNT
+	
+	IF @rowCount2 = 1
+			INSERT INTO [SupplierLogin] (UserName, SupplierID)
+			VALUES (@UserName, @SupplierID)
 	RETURN @@ROWCOUNT
-	GO
+
+END
