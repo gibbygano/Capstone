@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace com.WanderingTurtle.Web
 {
-    public partial class Contact : System.Web.UI.Page
+    public partial class SiteGuest : System.Web.UI.MasterPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -57,9 +57,15 @@ namespace com.WanderingTurtle.Web.Pages
 
                 try
                 {
-                    //create new Event
-                    SupplierApplication application = new SupplierApplication(txtCompanyName.Text, txtDescription.Text, txtFirstName.Text, txtLastName.Text, txtAddress.Text, txtAddress2.Text, txtZip.Text, txtPhoneNumber.Text, txtEmail.Text, DateTime.Today);
-                    ApplicationManager.AddASupplierApplication(application);
+                    //create new Event                                                                            
+                    SupplierApplication application = new SupplierApplication(txtCompanyName.Text, txtDescription.Text, txtFirstName.Text, txtLastName.Text, txtAddress.Text, txtAddress2.Text, txtZip.Text, txtPhoneNumber.Text, txtEmail.Text, DateTime.Now);
+                    SupplierResult result = ApplicationManager.AddASupplierApplication(application);
+
+                    if (result==SupplierResult.Success)
+                    {
+                        showError("Record added");
+                    }
+
                 }
                 catch (Exception ex)
                 {

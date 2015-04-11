@@ -10,7 +10,7 @@
     [PhoneNumber]        VARCHAR (15)  NOT NULL,
     [EmailAddress]       VARCHAR (100) NOT NULL,
     [ApplicationDate]    DATETIME          NOT NULL,
-	[ApplicationStatus]  VARCHAR(25)   DEFAULT ('Pending'),
+	[ApplicationStatus]  VARCHAR(25)   NOT NULL,
     [LastStatusDate]       DATETIME     NOT NULL,
     [Remarks]				VARCHAR(255) NULL, 
     CONSTRAINT [PK_SupplierApplication] PRIMARY KEY CLUSTERED ([ApplicationID] ASC) ON [PRIMARY]

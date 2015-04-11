@@ -30,7 +30,6 @@ namespace com.WanderingTurtle.BusinessLogic
 
             DatabaseError,
 
-
         }
     public class SupplierManager
     {
@@ -260,7 +259,6 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-
                 throw new Exception("Application does not exist");
             }
         }
@@ -280,10 +278,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-
                 throw new Exception("No applications");
             }
-
         }
 
         /// <summary>
@@ -292,6 +288,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Add a single Supplier Application Record to the database
         /// Throws any exceptions caught by the DAL
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/11
+        /// Added logic for returning the result of the operations to the presentation layer
+        /// </remarks>
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
         /// <returns>int # of rows affected</returns>
         public SupplierResult AddASupplierApplication(SupplierApplication newSupplierApp)
@@ -327,6 +328,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updates a Supplier Application Record
         /// Throws any exceptions caught by the DAL
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/11
+        /// Added logic for returning the result of the operations to the presentation layer
+        /// </remarks>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
         /// <returns>int # of rows affected</returns>
@@ -383,13 +389,23 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/11
+        /// 
+        /// Returns the result of approving a supplier application and adds records to the Supplier Table and SupplierLogin tables
+        /// </summary>
+        /// <param name="oldSupplierApp">the original application</param>
+        /// <param name="updatedSupplierApp">the updated application</param>
+        /// <param name="userName">the requested username</param>
+        /// <param name="supplyCost">The supplier's portion of ticket proceeds</param>
+        /// <returns></returns>
         public SupplierResult ApproveSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication updatedSupplierApp, string userName, decimal supplyCost)
         {
             try
             {
                 //Approving       
-                //update db with approval
+                //update db with approval, add supplier record, add supplier login
                 int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp, userName, supplyCost);
 
                 if (numRows == 3)
@@ -408,6 +424,14 @@ namespace com.WanderingTurtle.BusinessLogic
 
         }
 
+        /// <summary>
+        /// Tony Noel
+        /// Created on 2015/04/2015
+        /// 
+        /// Used for testing only
+        /// </summary>
+        /// <param name="testSupplier"></param>
+        /// <returns></returns>
         public int deleteTestSupplier(Supplier testSupplier)
         {
             try
@@ -416,10 +440,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
     }
 }

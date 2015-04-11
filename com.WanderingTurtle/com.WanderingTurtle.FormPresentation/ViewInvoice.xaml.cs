@@ -79,7 +79,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
+        private async void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
         {
             //check if invoice can be closed
             ResultsArchive result = _invoiceManager.CheckToArchiveInvoice(invoiceToView, myBookingList);
@@ -87,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
             switch (result)
             {
                 case (ResultsArchive.CannotArchive):
-                    DialogBox.ShowMessageDialog(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
+                    await DialogBox.ShowMessageDialog(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
                     break;
 
                 case (ResultsArchive.OkToArchive):
@@ -99,7 +99,7 @@ namespace com.WanderingTurtle.FormPresentation
                     //closes window after successful guest archival
                     if (res.HasValue && res.Value)
                     {
-                        Close();
+                        this.Close();
                     }
                     else
                     {

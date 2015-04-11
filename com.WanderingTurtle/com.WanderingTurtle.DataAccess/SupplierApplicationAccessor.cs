@@ -38,6 +38,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@PhoneNumber", supplierApplicationToAdd.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", supplierApplicationToAdd.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationDate", supplierApplicationToAdd.ApplicationDate);
+            cmd.Parameters.AddWithValue("@ApplicationStatus", supplierApplicationToAdd.ApplicationStatus);
             cmd.Parameters.AddWithValue("@LastStatusDate", supplierApplicationToAdd.LastStatusDate);
             cmd.Parameters.AddWithValue("@Remarks", supplierApplicationToAdd.Remarks);
 
@@ -46,7 +47,7 @@ namespace com.WanderingTurtle.DataAccess
             try
             {
                 conn.Open();
-                newApplicationID = (int)cmd.ExecuteScalar();
+                rowsAffected = (int)cmd.ExecuteNonQuery();
             }
             catch (Exception)
             {
@@ -110,8 +111,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Open();
                 rowsAffected = cmd.ExecuteNonQuery();
-                
-                
+                               
                 if (rowsAffected == 0)
                 {
                     throw new ApplicationException("Concurrency Violation");

@@ -4,7 +4,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
-        Title="AddEditPendingSupplier" Height="400" Width="600">
+        Title="Update Pending Supplier" Height="400" Width="600"
+    	WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

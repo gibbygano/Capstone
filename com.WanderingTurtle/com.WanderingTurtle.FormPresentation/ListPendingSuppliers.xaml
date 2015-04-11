@@ -16,7 +16,7 @@
                 <DataGridTextColumn Width="*"    Header="Company Name"        Binding="{Binding CompanyName}" />
                 <DataGridTextColumn Width="*"    Header="First Name"          Binding="{Binding FirstName}" />
                 <DataGridTextColumn Width="*"    Header="Last Name"           Binding="{Binding LastName}" />
-                <DataGridTextColumn Width="Auto" Header="Phone #"             Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Width="*"   Header="Phone #"             Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Width="Auto" Header="Application Date"    Binding="{Binding ApplicationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
                 <DataGridTextColumn Width="Auto" Header="ApplicationStatus"   Binding="{Binding ApplicationStatus}" />
             </DataGrid.Columns>

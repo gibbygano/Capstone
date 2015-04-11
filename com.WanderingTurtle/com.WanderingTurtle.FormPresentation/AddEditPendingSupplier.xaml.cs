@@ -75,36 +75,36 @@ namespace com.WanderingTurtle.FormPresentation
             SetFields();
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        private async void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
 
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter a company name.");
+                await DialogBox.ShowMessageDialog(this, "Enter a company name.");
                 return;
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter an address.");
+                await DialogBox.ShowMessageDialog(this, "Enter an address.");
                 return;
             }
             if (!Validator.ValidatePhone(txtPhoneNumber.Text))
 	        {
-		        DialogBox.ShowMessageDialog(this, "Enter a phone number.");
+                await DialogBox.ShowMessageDialog(this, "Enter a phone number.");
                 return;
 	        }
             if (!Validator.ValidateEmail(txtEmailAddress.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter an email address.");
+                await DialogBox.ShowMessageDialog(this, "Enter an email address.");
                 return;
             }
             if (!Validator.ValidateString(txtFirstName.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter a first name.");
+                await DialogBox.ShowMessageDialog(this, "Enter a first name.");
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter a last name.");
+                await DialogBox.ShowMessageDialog(this, "Enter a last name.");
             }
 
             //get data from form
@@ -131,12 +131,12 @@ namespace com.WanderingTurtle.FormPresentation
                 //send info to BLL
                 if (!Validator.ValidateString(txtUserName.Text))
                 {
-                    DialogBox.ShowMessageDialog(this, "Enter a user name.");
+                    await DialogBox.ShowMessageDialog(this, "Enter a user name.");
                     return;
                 }
                 if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
                 {
-                    DialogBox.ShowMessageDialog(this, "Enter a valid supply cost.");
+                    await DialogBox.ShowMessageDialog(this, "Enter a valid supply cost.");
                     return;
                 }
                 
@@ -148,11 +148,12 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result == SupplierResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                    await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                    this.Close();
                 }
                 else
                 {
-                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                    await DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
                 }
             }
             else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
@@ -161,16 +162,17 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result == SupplierResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+                    await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+                    this.Close();
                 }
                 else
                 {
-                    DialogBox.ShowMessageDialog(this, "DB Error");
+                    await DialogBox.ShowMessageDialog(this, "DB Error");
                 }
             }
             else
             {
-                DialogBox.ShowMessageDialog(this, "DB Error.");
+                await DialogBox.ShowMessageDialog(this, "DB Error.");
             }   
         }
 
@@ -188,7 +190,6 @@ namespace com.WanderingTurtle.FormPresentation
             this.dateApplicationDate.SelectedDate = CurrentSupplierApplication.ApplicationDate;
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
             this.txtRemarks.Text = CurrentSupplierApplication.Remarks;            
-
         }
     }
 }

@@ -142,6 +142,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PagesGuest\About.aspx" />
+    <Content Include="PagesGuest\Contacts.aspx" />
     <Content Include="Pages\Login.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -202,7 +204,7 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Pages\GuestViewListings.aspx" />
+    <Content Include="PagesGuest\Default.aspx" />
     <Content Include="Pages\LoginBar.ascx" />
     <Content Include="Pages\SupplierApplicationPage.aspx" />
     <Content Include="Pages\ViewItemListing.aspx" />
@@ -220,6 +222,7 @@
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="PagesGuest\SiteGuest.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,6 +231,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PagesGuest\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagesGuest\Contacts.aspx.cs">
+      <DependentUpon>Contacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\Contacts.aspx.designer.cs">
+      <DependentUpon>Contacts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,12 +313,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GuestViewListings.aspx.cs">
-      <DependentUpon>GuestViewListings.aspx</DependentUpon>
+    <Compile Include="PagesGuest\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\GuestViewListings.aspx.designer.cs">
-      <DependentUpon>GuestViewListings.aspx</DependentUpon>
+    <Compile Include="PagesGuest\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginBar.ascx.cs">
       <DependentUpon>LoginBar.ascx</DependentUpon>
@@ -352,6 +369,13 @@
     </Compile>
     <Compile Include="Pages\SupplierViewEvents.aspx.designer.cs">
       <DependentUpon>SupplierViewEvents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagesGuest\SiteGuest.Master.cs">
+      <DependentUpon>SiteGuest.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\SiteGuest.Master.designer.cs">
+      <DependentUpon>SiteGuest.Master</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>

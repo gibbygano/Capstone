@@ -94,7 +94,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnFinalizeInvoice_Click(object sender, RoutedEventArgs e)
+        private async void btnFinalizeInvoice_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -103,25 +103,25 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsArchive.ChangedByOtherUser):
-                        DialogBox.ShowMessageDialog(this, "Record already changed by another user.");
-                        break;
+                        await DialogBox.ShowMessageDialog(this, "Record already changed by another user.");
+                        return;
 
                     case (ResultsArchive.Success):
-                        DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
-                        break;
+                        await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        return;
                 }
             }
             catch (ApplicationException ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw ex;
             }
             catch (SqlException ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw ex;
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw ex;
             }
         }
 

@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.Web.Pages
     {
         BookingManager _myManager = new BookingManager();
         List<ItemListingDetails> _currentItemListings;
-        private string _errorMessage = "";
+        private string _userMessage = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,21 +24,33 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/08
+        /// 
+        /// Binds data for the grid view to the current list of event offerings
+        /// </summary>
         private void bindData()
         {
             gvListings.DataSource = _currentItemListings;
-            gvListings.DataBind();
-            
+            gvListings.DataBind();            
         }
 
-
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/08
+        /// 
+        /// retrieves the list of event offerings for the grid view
+        /// </summary>
+        /// <returns>
+        /// List of ItemListingDetails
+        /// </returns>
         public IEnumerable<ItemListingDetails> GetCurrentListings()
         {
             try
             {
                 _currentItemListings = _myManager.RetrieveActiveItemListings();
                 return _currentItemListings;
-
             }
             catch (Exception)
             {
@@ -47,94 +59,92 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
-        private void showError(string message)
+
+        private void showMessage(string message)
         {
-            _errorMessage = message;
-            lblError.Text = _errorMessage;
+            _userMessage = message;
+            lblMessage.Text = _userMessage;
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //if something isn't selected - throw error
-
-            gatherFormInformation();
-
+            if (gvListings.SelectedValue != null)
+            {
+                lblMessage.Text = "Please select an event";
+                return;
+            }
+            else
+            {
+                gatherFormInformation();
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void gatherFormInformation()
         {
-            bool stop = false;
-            int errorCount = 0;
-
             decimal extendedPrice, totalPrice, discount;
             ItemListingDetails selectedItemListing = getSelectedItem();
 
             //gets quantity from the quantity field
             if(!Validator.ValidateInt(txtGuestTickets.Text,1))
             {
-                txtGuestTickets.ToolTip = "You must enter a valid number of tickets.";
+                lblMessage.Text = "You must enter a valid number of tickets.";
                 txtGuestTickets.BorderColor = Color.Red;
-                stop = true;
-                errorCount++;
+                return;
             }
 
             if (!Validator.ValidateInt(txtGuestPin.Text, 1))
             {
-                txtGuestPin.ToolTip = "You must enter a valid pin.";
+                lblMessage.Text = "You must enter a valid pin.";
                 txtGuestTickets.BorderColor = Color.Red;
-                stop = true;
-                errorCount++;
-            }
-
-            if (stop)
-            {
-                showError("You have " + errorCount + " errors that need to be fixed.");
                 return;
             }
-            else
+
+            txtGuestTickets.BorderColor = Color.Black;
+            txtGuestTickets.BorderColor = Color.Black;
+
+            try
             {
-                txtGuestTickets.BorderColor = Color.Black;
-                txtGuestTickets.BorderColor = Color.Black;
+                int inPin = Int32.Parse(txtGuestPin.Text);
 
-                try
-                {
-                    int inPin = Int32.Parse(txtGuestPin.Text);
-
-                    //see if it is a valid pin
-                    ResultsEdit answer = _myManager.checkValidPIN(inPin);
+                //see if it is a valid pin
+                ResultsEdit answer = _myManager.checkValidPIN(inPin);
                     
-                    int qty = Int32.Parse(txtGuestTickets.Text);
+                int qty = Int32.Parse(txtGuestTickets.Text);
 
-                    //get discount from form - web form is 0
-                    discount = 0;
+                //get discount from form - web form is 0
+                discount = 0;
 
-                    //calculate values for the tickets
-                    extendedPrice = _myManager.calcExtendedPrice(selectedItemListing.Price, qty);
-                    totalPrice = _myManager.calcTotalCharge(discount, extendedPrice);
+                //calculate values for the tickets
+                extendedPrice = _myManager.calcExtendedPrice(selectedItemListing.Price, qty);
+                totalPrice = _myManager.calcTotalCharge(discount, extendedPrice);
 
-                    switch (answer)
-                    {
-                        case ResultsEdit.NotFound:
-                            lblError.Text = "PIN not found.";
-                            break;
-
-                        case ResultsEdit.OkToEdit:
-
-                            Booking webBookingToAdd = new Booking(999, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
-                            addWebBooking(inPin, webBookingToAdd);
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                }
-                catch (Exception)
+                switch (answer)
                 {
+                    case ResultsEdit.NotFound:
+                        lblMessage.Text = "PIN not found.";
+                        break;
+
+                    case ResultsEdit.OkToEdit:
+
+                        Booking webBookingToAdd = new Booking(999, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+                        addWebBooking(inPin, webBookingToAdd);
+                        break;
+
+                    default:
+                        break;
+                }
+
+            }
+            catch (Exception)
+            {
                     
                     throw;
-                }
             }
+            
         }
 
         private void addWebBooking(int inPin, Booking webBookingToAdd)
@@ -150,19 +160,16 @@ namespace com.WanderingTurtle.Web.Pages
             switch (addResult)
             {
                 case ResultsEdit.Success:
-                    lblError.Text = "You have successfully signed up for the event.";
+                    lblMessage.Text = "You have successfully signed up for the event.";
                     clearFields();
-
-          //Need to refresh list - this doesn't work   
-          //gvListings.DataSource = _currentItemListings;
                     gvListings.DataBind();
                     break;
 
                 case ResultsEdit.ListingFull:
-                    lblError.Text = "full";
+                    lblMessage.Text = "full";
                     break;
                 case ResultsEdit.DatabaseError:
-                    lblError.Text = "db error";
+                    lblMessage.Text = "db error";
                     break;
             }
         }
