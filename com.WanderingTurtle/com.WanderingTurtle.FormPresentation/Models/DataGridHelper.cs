@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
             }
             catch (Exception ex)
             {
-                if (sender is DependencyObject) { DialogBox.ShowMessageDialog(sender as DependencyObject, ex.Message); }
+                if (sender is FrameworkElement) { DialogBox.ShowMessageDialog(sender as FrameworkElement, ex.Message); }
                 else { MessageBox.Show(ex.Message); }
                 return default(T);
             }

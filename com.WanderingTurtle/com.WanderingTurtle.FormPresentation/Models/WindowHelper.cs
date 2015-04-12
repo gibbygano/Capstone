@@ -18,14 +18,18 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="control">The control that you wish to find main window of. In most cases you will use <typeparamref name="this"/></param>
         /// <returns>Base Parent <typeparamref name="MainWindow"/></returns>
-        internal static MainWindow GetMainWindow(DependencyObject control)
+        internal static MainWindow GetMainWindow(FrameworkElement control)
         {
-            var parent = VisualTreeHelper.GetParent(control) ?? control;
-            while (!(parent is MainWindow))
+            try
             {
-                parent = VisualTreeHelper.GetParent(parent);
+                var parent = VisualTreeHelper.GetParent(control) ?? control;
+                while (!(parent is MainWindow))
+                {
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+                return (parent as MainWindow);
             }
-            return (parent as MainWindow);
+            catch (Exception ex) { throw new WanderingTurtleException(control, "Error Getting Main Window", ex); }
         }
 
         /// <summary>
@@ -36,17 +40,21 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="control">The control that you wish to find the parent of. In most cases you will use <typeparamref name="this"/></param>
         /// <returns>Parent <typeparamref name="MetroWindow"/></returns>
-        internal static MetroWindow GetWindow(DependencyObject control)
+        internal static MetroWindow GetWindow(FrameworkElement control)
         {
-            var parent = VisualTreeHelper.GetParent(control);
-            if (parent == null)
-            { parent = control; }
-            else
+            try
             {
-                while (!(parent is MetroWindow))
-                { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
+                var parent = VisualTreeHelper.GetParent(control);
+                if (parent == null)
+                { parent = control; }
+                else
+                {
+                    while (!(parent is MetroWindow))
+                    { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
+                }
+                return (parent as MetroWindow);
             }
-            return (parent as MetroWindow);
+            catch (Exception ex) { throw new WanderingTurtleException(control, "Error Getting Parent Window", ex); }
         }
 
         /// <summary>

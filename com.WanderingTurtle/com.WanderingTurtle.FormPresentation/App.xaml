@@ -5,6 +5,7 @@
 	xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     x:Class="com.WanderingTurtle.FormPresentation.App"
+    DispatcherUnhandledException="DispatcherUnhandledExceptionEventHandler"
 	StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

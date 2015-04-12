@@ -149,6 +149,7 @@
     <Compile Include="ListPendingSuppliers.xaml.cs">
       <DependentUpon>ListPendingSuppliers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Exceptions.cs" />
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
