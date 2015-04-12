@@ -73,12 +73,13 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 foreach (FrameworkElement child in content.Children)
                 {
                     // Return if this child control is set in controlsToKeepEnabled
-                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child))
-                    { return; }
+                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child)) { return; }
 
                     // If child component is a container, then call the recursive method to get inner child components
-                    if (child is Panel)
-                    { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
+                    if (child is Panel) { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
+                    // Does not bother marking Labels as ReadOnly
+                    else if (child is Label) { continue; }
+                    // If the child is a valid control
                     else if (child is Control)
                     {
                         var childControl = child as Control;
@@ -97,6 +98,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         TextBoxHelper.SetClearTextButton(childControl, false);
                         //SetStyle(childControl, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
+                    // Don't know why this would throw, but it's here just in case
                     else { throw new Exception("Unknown Component"); }
                 }
             }
