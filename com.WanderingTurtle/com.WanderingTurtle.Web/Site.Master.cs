@@ -115,6 +115,7 @@ namespace com.WanderingTurtle.Web
                     {
                         Menu1.Items.Add(stuffList[i]);
                     }
+                    Menu1.SkipLinkText = "";
                 }
             }
         }
