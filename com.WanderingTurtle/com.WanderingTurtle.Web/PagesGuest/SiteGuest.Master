@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="SiteGuest.master.cs" Inherits="com.WanderingTurtle.Web.SiteGuest" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %> - Wandering Turtle Resort</title>
+    <link href="~/Content/Site.css" rel="stylesheet" /> 
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <asp:PlaceHolder runat="server">        
+        <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
+    </asp:PlaceHolder>
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <form runat="server">
+    <asp:ScriptManager runat="server">
+        <Scripts>
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="jquery.ui.combined" />
+        </Scripts>
+    </asp:ScriptManager>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title"><a runat="server" href="~/"><img src="<%: ResolveUrl("~/Images/Logo_White.png") %>" width="150" /></a></p>
+            </div>
+            <div class="float-right">
+                <nav>
+                    <ul id="menu">
+                        <li><a runat="server" href="~/PagesGuest/Default">Home</a></li>
+                        <li><a runat="server" href="~/PagesGuest/About">About</a></li>
+                        <li><a runat="server" href="~/PagesGuest/Contacts">Contact</a></li>
+                    </ul>
+                </nav>
+                <div id="user_menu">
+                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" ForeColor="White" DynamicMenuStyle-HorizontalPadding="50" StaticMenuItemStyle-HorizontalPadding="15"></asp:Menu>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+        <section class="content-wrapper main-content clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; <%: DateTime.Now.Year %> - Wandering Turtle Resort</p>
+            </div>
+        </div>
+    </footer>
+    </form>
+</body>
+</html>

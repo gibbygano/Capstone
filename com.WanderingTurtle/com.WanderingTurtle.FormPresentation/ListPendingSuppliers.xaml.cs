@@ -28,9 +28,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             loadPendingSuppliers();
-
         }
-        
 
         private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {

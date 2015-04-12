@@ -137,6 +137,7 @@
     <Build Include="dbo\Stored Procedures\spUpdateSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSelectSupplierApplication.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateApplicationAddSupplierAddLogin.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

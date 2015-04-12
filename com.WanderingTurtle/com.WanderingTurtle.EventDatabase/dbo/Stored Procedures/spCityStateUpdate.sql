@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[spCityStateUpdate] 
-	(@Zip	varchar(10),
+	(@Zip	char(5),
 	 @City	varchar(50),
-	 @State	varchar(50),
+	 @State	char(2),
 	 @original_City		varchar(50),
-	 @original_State	varchar(50))
+	 @original_State	char(2))
 AS
 	UPDATE 	CityState
 	   SET 	City 	= @City, 

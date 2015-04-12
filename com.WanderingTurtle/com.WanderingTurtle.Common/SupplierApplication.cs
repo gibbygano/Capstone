@@ -23,14 +23,15 @@ namespace com.WanderingTurtle.Common
         public string PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public DateTime ApplicationDate { get; set; }
-        public bool Approved { get; set; }
-        public DateTime? ApprovalDate { get; set; }
+        public string ApplicationStatus { get; set; }
+        public DateTime LastStatusDate { get; set; }
+        public string Remarks { get; set; }
 
         public SupplierApplication()
         {
             //default
         }
-        public SupplierApplication(int applicationID, string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate, bool approved, DateTime approvalDate)
+        public SupplierApplication(int applicationID, string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate, string applicationStatus, DateTime lastStatusDate, String remarks)
         {
             ApplicationID = applicationID;
             ApplicationDate = applicationDate;
@@ -43,11 +44,12 @@ namespace com.WanderingTurtle.Common
             Zip = zip;
             PhoneNumber = phoneNumber;
             EmailAddress = emailAddress;
-            Approved = approved;
-            ApprovalDate = approvalDate;
-
+            ApplicationStatus = applicationStatus;
+            LastStatusDate = lastStatusDate;
+            Remarks = remarks;
         }
 
+        //constructor for use with web application submittal
         public SupplierApplication(string companyName, string companyDescription, string firstName, string lastName, string address1, string address2, string zip, string phoneNumber, string emailAddress, DateTime applicationDate )
         {
             ApplicationDate = applicationDate;
@@ -60,8 +62,9 @@ namespace com.WanderingTurtle.Common
             Zip = zip;
             PhoneNumber = phoneNumber;
             EmailAddress = emailAddress;
-            Approved = false;
-
+            ApplicationStatus = "Pending";
+            LastStatusDate = DateTime.Now;
+            Remarks = "";
         }
 
     }

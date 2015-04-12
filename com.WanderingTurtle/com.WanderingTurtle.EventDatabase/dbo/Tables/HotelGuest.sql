@@ -2,13 +2,13 @@
     [HotelGuestID] INT           IDENTITY (0, 1) NOT NULL,
     [FirstName]    VARCHAR (50)  NOT NULL,
     [LastName]     VARCHAR (50)  NOT NULL,
-    [Zip]          VARCHAR (10)  NOT NULL,
+    [Zip]          CHAR    (5)   NOT NULL,
     [Address1]     VARCHAR (255) NOT NULL,
     [Address2]     VARCHAR (255) NULL,
     [PhoneNumber]  VARCHAR (15)  NULL,
     [EmailAddress] VARCHAR (100) NULL,
-	[Room]		   int			 NULL,
-    [GuestPIN]		INT			NULL, 
+	[Room]		   INT			 NULL,
+    [GuestPIN]	   INT			 NULL, 
     [Active]       BIT           NOT NULL,
     CONSTRAINT [pk_HotelGuest] PRIMARY KEY CLUSTERED ([HotelGuestID] ASC)
 ) ON [PRIMARY];

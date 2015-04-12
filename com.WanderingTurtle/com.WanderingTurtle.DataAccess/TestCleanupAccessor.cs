@@ -127,6 +127,27 @@ namespace com.WanderingTurtle.DataAccess
 
             return result;
         }
+        public static int resetItemListing100()
+        {
+            int rowsAffected;
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "UPDATE ItemListing SET CurrentNumberOfGuests = 30 WHERE ItemListID = 100";
+            var cmd = new SqlCommand(cmdText, conn);
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return rowsAffected;
+        }
 
     }
 }

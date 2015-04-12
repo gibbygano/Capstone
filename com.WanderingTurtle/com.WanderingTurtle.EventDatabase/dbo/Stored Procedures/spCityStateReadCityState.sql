@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spCityStateReadCityState] 
 	(@City	varchar(50), 
-	 @State varchar(50))
+	 @State char(2))
 AS
 	SELECT Zip, City, State 
 	FROM CityState 

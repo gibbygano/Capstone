@@ -5,7 +5,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
-        Title="AddBooking" Height="400" Width="800"
+        Title="Add Booking" Height="400" Width="800"
 		WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>

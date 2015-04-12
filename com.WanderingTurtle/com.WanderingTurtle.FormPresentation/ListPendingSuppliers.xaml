@@ -13,19 +13,12 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Column="0" Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}" MouseDoubleClick="lvPendingSuppliers_MouseDoubleClick" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="Auto" Header="ID"                  Binding="{Binding ApplicationID}" />
                 <DataGridTextColumn Width="*"    Header="Company Name"        Binding="{Binding CompanyName}" />
-                <DataGridTextColumn Width="*"    Header="Company Description" Binding="{Binding CompanyDescription}" />
                 <DataGridTextColumn Width="*"    Header="First Name"          Binding="{Binding FirstName}" />
                 <DataGridTextColumn Width="*"    Header="Last Name"           Binding="{Binding LastName}" />
-                <DataGridTextColumn Width="*"    Header="Address"             Binding="{Binding Address1}" />
-                <DataGridTextColumn Width="Auto" Header="Address 2"           Binding="{Binding Address2}" />
-                <DataGridTextColumn Width="Auto" Header="ZIP"                 Binding="{Binding Zip}" />
-                <DataGridTextColumn Width="Auto" Header="Phone #"             Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn Width="Auto" Header="Email"               Binding="{Binding EmailAddress}" />
+                <DataGridTextColumn Width="*"   Header="Phone #"             Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Width="Auto" Header="Application Date"    Binding="{Binding ApplicationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                <DataGridTextColumn Width="Auto" Header="Approved"            Binding="{Binding Approved}" />
-                <DataGridTextColumn Width="Auto" Header="Approval Date"       Binding="{Binding ApprovalDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                <DataGridTextColumn Width="Auto" Header="ApplicationStatus"   Binding="{Binding ApplicationStatus}" />
             </DataGrid.Columns>
         </DataGrid>
 

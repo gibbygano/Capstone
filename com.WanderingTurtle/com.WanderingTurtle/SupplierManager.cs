@@ -30,7 +30,6 @@ namespace com.WanderingTurtle.BusinessLogic
 
             DatabaseError,
 
-
         }
     public class SupplierManager
     {
@@ -243,6 +242,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
 
         }
+        
         /// <summary>
         /// Matt Lapka
         /// 2015/02/08
@@ -259,16 +259,14 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-
                 throw new Exception("Application does not exist");
             }
-
         }
 
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/08
-        /// Gets a list of Supplier Application Records from the Data Access layer
+        /// Gets a list of Pending Supplier Application Records from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
         /// <returns>List of SupplierApplication objects</returns>
@@ -280,10 +278,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-
                 throw new Exception("No applications");
             }
-
         }
 
         /// <summary>
@@ -292,19 +288,38 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Add a single Supplier Application Record to the database
         /// Throws any exceptions caught by the DAL
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/11
+        /// Added logic for returning the result of the operations to the presentation layer
+        /// </remarks>
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
         /// <returns>int # of rows affected</returns>
-        public int AddASupplierApplication(SupplierApplication newSupplierApp)
+        public SupplierResult AddASupplierApplication(SupplierApplication newSupplierApp)
         {
             try
             {
-                return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp);
+                if (SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp) == 1)
+                {
+                    return SupplierResult.Success;
+                }
+                else
+                {
+                    return SupplierResult.NotAdded;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return SupplierResult.ChangedByOtherUser;
+                }
+                return SupplierResult.DatabaseError;
             }
             catch (Exception)
             {
-                throw new Exception("Couldn't add the supplier");
+                return SupplierResult.DatabaseError;
             }
-
         }
 
         /// <summary>
@@ -313,22 +328,110 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updates a Supplier Application Record
         /// Throws any exceptions caught by the DAL
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/11
+        /// Added logic for returning the result of the operations to the presentation layer
+        /// </remarks>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
         /// <returns>int # of rows affected</returns>
-        public int EditSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication newSupplierApp)
+        public SupplierResult EditSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication updatedSupplierApp)
         {
             try
             {
-                return SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, newSupplierApp);
+                if (updatedSupplierApp.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
+                {
+                    //just editing application - still Pending
+                    //update db with new info not related to approval
+                    int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp);
+
+                    if (numRows == 1)
+                    {
+                        return SupplierResult.Success;
+                    }
+                    else
+                    {
+                        return SupplierResult.ChangedByOtherUser;
+                    }
+                }
+                //Rejecting the application
+                else if (updatedSupplierApp.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()))
+                {
+                    //update db with rejection
+                    int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp);
+
+                    if (numRows == 1)
+                    {
+                        return SupplierResult.Success;
+                    }
+                    else
+                    {
+                        return SupplierResult.ChangedByOtherUser;
+                    }
+                }
+                else
+                {
+                    return SupplierResult.NotChanged;
+                }
+            }
+            catch (ApplicationException ex)
+            {
+                if (ex.Message == "Concurrency Violation")
+                {
+                    return SupplierResult.ChangedByOtherUser;
+                }
+                return SupplierResult.DatabaseError;
             }
             catch (Exception)
             {
-                throw new Exception("Unable to edit application. Please try again later.");
+                return SupplierResult.DatabaseError;
+            }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/11
+        /// 
+        /// Returns the result of approving a supplier application and adds records to the Supplier Table and SupplierLogin tables
+        /// </summary>
+        /// <param name="oldSupplierApp">the original application</param>
+        /// <param name="updatedSupplierApp">the updated application</param>
+        /// <param name="userName">the requested username</param>
+        /// <param name="supplyCost">The supplier's portion of ticket proceeds</param>
+        /// <returns></returns>
+        public SupplierResult ApproveSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication updatedSupplierApp, string userName, decimal supplyCost)
+        {
+            try
+            {
+                //Approving       
+                //update db with approval, add supplier record, add supplier login
+                int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp, userName, supplyCost);
+
+                if (numRows == 3)
+                {
+                    return SupplierResult.Success;
+                }
+                else
+                {
+                    return SupplierResult.ChangedByOtherUser;
+                }                   
+            }
+            catch (Exception)
+            {
+                return SupplierResult.DatabaseError;
             }
 
         }
 
+        /// <summary>
+        /// Tony Noel
+        /// Created on 2015/04/2015
+        /// 
+        /// Used for testing only
+        /// </summary>
+        /// <param name="testSupplier"></param>
+        /// <returns></returns>
         public int deleteTestSupplier(Supplier testSupplier)
         {
             try
@@ -337,10 +440,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
     }
 }

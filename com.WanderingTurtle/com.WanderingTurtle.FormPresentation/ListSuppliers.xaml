@@ -11,7 +11,6 @@
                 <DataGridTextColumn Width ="*"    Header="Company Name"  Binding="{Binding CompanyName}" />
                 <DataGridTextColumn Width ="*"    Header="First Name"    Binding="{Binding FirstName}" />
                 <DataGridTextColumn Width ="*"    Header="Last Name"     Binding="{Binding LastName}" />
-                <DataGridTextColumn Width ="*"    Header="Address"       Binding="{Binding Address1}" />
                 <DataGridTextColumn Width ="*"    Header="Email Address" Binding="{Binding EmailAddress}" />
                 <DataGridTextColumn Width ="Auto" Header="Phone Number"  Binding="{Binding PhoneNumber}" />
                 <DataGridTextColumn Width ="*"    Header="Supply Cost"   Binding="{Binding SupplyCost, StringFormat='{}{0:P0}'}" />

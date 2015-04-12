@@ -4,7 +4,7 @@
 CREATE PROCEDURE [dbo].[spHotelGuestAdd]
 	@firstName varchar(50),
 	@lastName varchar(50),
-	@zip varchar(10),
+	@zip char(5),
 	@address1 varchar(255),
 	@address2 varchar(255),
 	@phoneNumber varchar(15),
