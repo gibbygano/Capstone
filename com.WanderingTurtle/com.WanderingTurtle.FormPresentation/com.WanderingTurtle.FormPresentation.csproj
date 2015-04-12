@@ -160,9 +160,6 @@
     </Compile>
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\WindowHelper.cs" />
-    <Compile Include="UserLogin.xaml.cs">
-      <DependentUpon>UserLogin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewInvoice.xaml.cs">
       <DependentUpon>ViewInvoice.xaml</DependentUpon>
     </Compile>
@@ -235,10 +232,6 @@
     <Page Include="EditBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserLogin.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="ViewInvoice.xaml">
       <SubType>Designer</SubType>
