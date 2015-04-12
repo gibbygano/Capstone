@@ -30,6 +30,7 @@ namespace com.WanderingTurtle.Web
             catch
             {
                 lblError.Text = "Authentication Error. Please try again.";
+                return;
             }
 
             Response.Redirect("~/Pages/SupplierViewEvents.aspx");

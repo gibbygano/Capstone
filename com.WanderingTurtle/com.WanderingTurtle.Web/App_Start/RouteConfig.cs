@@ -14,6 +14,7 @@ namespace com.WanderingTurtle.Web
             settings.AutoRedirectMode = RedirectMode.Permanent;
             routes.EnableFriendlyUrls(settings);
             routes.MapPageRoute(null, "login", "~/Pages/Login.aspx");
+            routes.MapPageRoute(null, "logout", "~/Pages/Logout.aspx");
             routes.MapPageRoute(null, "application", "~/Pages/SupplierApplicationPage.aspx");
             routes.MapPageRoute(null, "events", "~/Pages/SupplierViewEvents.aspx");
             routes.MapPageRoute(null, "events/add", "~/Pages/SupplierAddEvent.aspx");
