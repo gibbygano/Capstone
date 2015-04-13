@@ -208,6 +208,7 @@
     <Content Include="Pages\LoginBar.ascx" />
     <Content Include="Pages\Logout.aspx" />
     <Content Include="Pages\SupplierApplicationPage.aspx" />
+    <Content Include="Pages\SupplierPortal.aspx" />
     <Content Include="Pages\ViewItemListing.aspx" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="Pages\SupplierApplicationPage.aspx.designer.cs">
       <DependentUpon>SupplierApplicationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SupplierPortal.aspx.cs">
+      <DependentUpon>SupplierPortal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SupplierPortal.aspx.designer.cs">
+      <DependentUpon>SupplierPortal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ViewItemListing.aspx.cs">
       <DependentUpon>ViewItemListing.aspx</DependentUpon>

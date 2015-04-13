@@ -41,7 +41,7 @@ namespace com.WanderingTurtle.Web
                 return;
             }
             //if validated send to supplier landing page (yet to be built)
-            Response.Redirect("~/Pages/SupplierViewEvents.aspx");
+            Response.Redirect("~/portal");
         }
     }
 }
