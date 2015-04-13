@@ -182,7 +182,8 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text.Trim();
                 tempSupplier.UserID = _userID;
-                tempSupplier.SupplyCost = (decimal)0.70;
+                double temp = (double)numSupplyCost.Value;
+                tempSupplier.SupplyCost = (decimal)((temp) / 100);
 
                 if (_manager.AddANewSupplier(tempSupplier) == SupplierResult.Success)
                 {
@@ -226,6 +227,7 @@ namespace com.WanderingTurtle.FormPresentation
                     cboZip.SelectedValue = _zips[i].Zip;
                 }
             }
+            numSupplyCost.Value = ((int)(supplierUpdate.SupplyCost * 100));
             //cboZip.SelectedValue = supplierUpdate.Zip;
             _UpdatableSupplier = supplierUpdate;
 
@@ -256,8 +258,9 @@ namespace com.WanderingTurtle.FormPresentation
                 tempSupplier.Zip = cboZip.SelectedValue.ToString();
                 tempSupplier.EmailAddress = txtEmail.Text;
                 tempSupplier.UserID = _userID;
-                tempSupplier.SupplyCost = (decimal)0.70;
-
+                double temp = (double)numSupplyCost.Value;
+                tempSupplier.SupplyCost = (decimal)((temp) / 100);
+               
                 tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
 
                 
