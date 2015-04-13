@@ -54,12 +54,12 @@
                 <asp:ContentPlaceHolder runat="server" ID="MainContent" />
             </section>
         </div>
-        <div id="errorMessage" runat="server">
+        <div id="errorMessage" runat="server" visible="false">
             <div class="errorMsg">
                 <asp:Label ID="lblErrorMessage" runat="server" Text="This is a longer and more important error message that you need to read." ForeColor="#CC0000"></asp:Label>
                 <br />
                 <div id="errorButton">
-                    <asp:Button ID="btnErrorOK" runat="server" Text="OK" BackColor="#33A133" CssClass="errorButtonStyle" ForeColor="White" />
+                    <asp:Button ID="btnErrorOK" runat="server" Text="OK" BackColor="#33A133" CssClass="errorButtonStyle" ForeColor="White" OnClick="errorButton_Click" CausesValidation="False" />
 
                 </div>
             </div>

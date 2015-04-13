@@ -119,5 +119,9 @@ namespace com.WanderingTurtle.Web
                 }
             }
         }
+        protected void errorButton_Click(object sender, EventArgs e)
+        {
+            errorMessage.Visible = false;
+        }
     }
 }

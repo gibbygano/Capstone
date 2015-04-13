@@ -37,10 +37,14 @@ namespace com.WanderingTurtle.Web
             }
             catch
             {
-                lblError.Text = "Authentication Error. Please try again.";
+                Label errorLabel = (Label)Master.FindControl("lblErrorMessage");
+                errorLabel.Text= "Authentication Error. Please try again.";
+                Control c = Master.FindControl("ErrorMessage");
+                c.Visible = true;
+
                 return;
             }
-            //if validated send to supplier landing page (yet to be built)
+            //if validated send to supplier portal page
             Response.Redirect("~/portal");
         }
     }
