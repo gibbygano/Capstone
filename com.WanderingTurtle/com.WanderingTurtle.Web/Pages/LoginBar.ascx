@@ -7,5 +7,5 @@
    {
        supplierName = _currentSupplier.FirstName + " " + _currentSupplier.LastName;
    } %>
-<div id="userLoggedIn" runat="server" style="display: none;"><div id="supplierName">Welcome <%= supplierName %>! </div><div id="logout"><a href="logout">Logout</a></div></div>
-<div id="userLoggedOut" runat="server" style="display: none;"><a href="../login">Login</a> <a href="application">Submit an Application</a></div>
+<div id="userLoggedIn" runat="server" style="display: none;"><div id="supplierName">Welcome <%= supplierName %>! </div><div id="logout"><a href="../logout">Logout</a></div></div>
+<div id="userLoggedOut" runat="server" style="display: none;"><a href="../login">Login</a> <a href="../application">Submit an Application</a></div>
