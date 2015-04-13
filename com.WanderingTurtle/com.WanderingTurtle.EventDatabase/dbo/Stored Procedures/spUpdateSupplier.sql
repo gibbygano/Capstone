@@ -11,7 +11,7 @@
 	@ApplicationID 			int, 
 	@UserID 				int, 
 	@SupplierID 			int,
-	@SupplyCost				decimal, 
+	@SupplyCost				decimal(3,2), 
 	@originalCompanyName 	varchar(255),
 	@originalFirstName 		varchar(50), 
 	@originalLastName 		varchar(50), 
@@ -22,7 +22,7 @@
 	@originalEmailAddress 	varchar(100), 
 	@originalApplicationID 	int, 
 	@originalUserID 		int,
-	@originalSupplyCost		decimal
+	@originalSupplyCost		decimal(3,2)
 	)
 AS
 	UPDATE Supplier SET

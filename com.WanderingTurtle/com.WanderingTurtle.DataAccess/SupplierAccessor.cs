@@ -221,7 +221,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
             cmd.Parameters.AddWithValue("@UserID", supplierToAdd.UserID);
-            cmd.Parameters.AddWithValue("@SupplyCost", supplierToAdd.SupplyCost);
+            cmd.Parameters.AddWithValue("@SupplyCost", (float)supplierToAdd.SupplyCost);
 
             int rowsAffected;
             try
