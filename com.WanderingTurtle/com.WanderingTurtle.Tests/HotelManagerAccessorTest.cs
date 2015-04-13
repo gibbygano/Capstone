@@ -12,6 +12,7 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class HotelManagerAccessorTest
     {
+        /*
         [TestInitialize]
         public void initialize()
         {
@@ -31,6 +32,7 @@ namespace com.WanderingTurtle.Tests
         {
             HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, true));
         }
+         * */
 
         [TestMethod]
         public void HotelAccessorGet()
