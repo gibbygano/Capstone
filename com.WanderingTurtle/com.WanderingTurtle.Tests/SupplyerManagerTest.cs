@@ -54,8 +54,10 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp.ApplicationID = 100;
             testSupplierApp.EmailAddress = "blabla@gmail.com";
             testSupplierApp.Address2 = "";
-            testSupplierApp.Approved = true;
-            testSupplierApp.ApprovalDate = new DateTime(2005, 2, 3);
+            testSupplierApp.ApplicationDate = new DateTime(2005, 2, 2);
+            testSupplierApp.ApplicationStatus = "pending";
+            testSupplierApp.LastStatusDate = new DateTime(2005, 2, 1);
+            testSupplierApp.Remarks = "";
         }
 
         /// <summary>
