@@ -810,7 +810,7 @@ input[type="radio"]{
 }
 
 #errorMessage{
-    display: block;
+    display: none;
     width: 50%;
     height: auto;
     margin: auto;
@@ -819,10 +819,21 @@ input[type="radio"]{
     left:25%;
     top: 25%;
     background-color: #fff;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 1.2%;
+    padding-bottom: 1%;
 }
 
 .errorMsg{
-    margin: auto;
+    margin-left: auto;
+    margin-right:auto;
+    overflow-wrap: normal;
+    padding-left: 5%;
+}
+
+#errorButton{
+    float:right;
+}
+.errorButtonStyle{
+    padding-left: 1%;
+    padding-right: 1%;
 }

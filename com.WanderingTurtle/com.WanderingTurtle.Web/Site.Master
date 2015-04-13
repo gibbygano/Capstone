@@ -8,9 +8,9 @@
 <head runat="server">
     <meta charset="utf-8" />
     <title><%: Page.Title %> - Wandering Turtle Resort</title>
-    <link href="~/Content/Site.css" rel="stylesheet" /> 
+    <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <asp:PlaceHolder runat="server">        
+    <asp:PlaceHolder runat="server">
         <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
     </asp:PlaceHolder>
     <meta name="viewport" content="width=device-width" />
@@ -18,49 +18,59 @@
 </head>
 <body>
     <form runat="server">
-    <asp:ScriptManager runat="server">
-        <Scripts>
-            <asp:ScriptReference Name="jquery" />
-            <asp:ScriptReference Name="jquery.ui.combined" />
-        </Scripts>
-    </asp:ScriptManager>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title"><a runat="server" href="~/"><img src="<%: ResolveUrl("~/Images/Logo_White.png") %>" width="150" /></a></p>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+            </Scripts>
+        </asp:ScriptManager>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">
+                        <a runat="server" href="~/">
+                            <img src="<%: ResolveUrl("~/Images/Logo_White.png") %>" width="150" /></a>
+                    </p>
+                </div>
+                <div class="float-right">
+                    <uc1:LoginBar runat="server" ID="LoginBar" style="padding-bottom: 5px;" />
+                    <nav>
+                        <ul id="menu">
+                            <li><a runat="server" href="~/">Home</a></li>
+                            <li><a runat="server" href="~/About">About</a></li>
+                            <li><a runat="server" href="~/Contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                    <div id="user_menu">
+                        <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" ForeColor="White" DynamicMenuStyle-HorizontalPadding="50" StaticMenuItemStyle-HorizontalPadding="15"></asp:Menu>
+
+                    </div>
+                </div>
             </div>
-            <div class="float-right">
-                <uc1:LoginBar runat="server" ID="LoginBar" style="padding-bottom: 5px;"/>
-                <nav>
-                    <ul id="menu">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
-                    </ul>
-                </nav>
-                <div id="user_menu">
-                    <asp:Menu ID="Menu1" runat="server" Orientation="Horizontal" ForeColor="White" DynamicMenuStyle-HorizontalPadding="50" StaticMenuItemStyle-HorizontalPadding="15"></asp:Menu>
+        </header>
+        <div id="body">
+            <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+            <section class="content-wrapper main-content clear-fix">
+                <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+            </section>
+        </div>
+        <div id="errorMessage" runat="server">
+            <div class="errorMsg">
+                <asp:Label ID="lblErrorMessage" runat="server" Text="This is a longer and more important error message that you need to read." ForeColor="#CC0000"></asp:Label>
+                <br />
+                <div id="errorButton">
+                    <asp:Button ID="btnErrorOK" runat="server" Text="OK" BackColor="#33A133" CssClass="errorButtonStyle" ForeColor="White" />
 
                 </div>
             </div>
         </div>
-    </header>
-    <div id="body">
-        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
-        <section class="content-wrapper main-content clear-fix">
-            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
-        </section>
-    </div>
-        <div id="errorMessage" runat="server">
-            <asp:Label ID="lblErrorMessage" runat="server" Text="ERROR" ForeColor="#CC0000"></asp:Label>
-        </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>&copy; <%: DateTime.Now.Year %> - Wandering Turtle Resort</p>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; <%: DateTime.Now.Year %> - Wandering Turtle Resort</p>
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
     </form>
 </body>
 </html>
