@@ -104,9 +104,9 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        public void RetrieveSupplierWorkingTest() // ☐
+        public void RetrieveSupplierWorkingTest() // ☑
         {
-            supplierID = "100";
+            supplierID = "101";
             testSupplierRetrieve = SupplierMang.RetrieveSupplier(supplierID);
             Assert.IsNotNull(testSupplierRetrieve);
         }
@@ -168,7 +168,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void RetrieveSupplierListTest() // ☐
+        public void RetrieveSupplierListTest() // ☑
         {
             List<Supplier> suppliers = SupplierMang.RetrieveSupplierList();
             Assert.IsNotNull(suppliers);
@@ -179,7 +179,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void RetrieveSupplierApplicationListTest() // ☐
+        public void RetrieveSupplierApplicationListTest() // ☑
         {
             List<SupplierApplication> suppliersApps = SupplierMang.RetrieveSupplierApplicationList();
             Assert.IsNotNull(suppliersApps);
@@ -190,7 +190,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void AddSupplierApplicationEmptyTest() // ☐
         {
             SupplierApplication SupplierAppEmpty = new SupplierApplication();
@@ -202,7 +201,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void AddSupplierApplicationNullTest() // ☐
         {
             SupplierApplication SupplierAppNull = null;
@@ -214,7 +212,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void AddSupplierApplicationPartialTest() // ☐
         {
             SupplierApplication testSupplierApp2 = new SupplierApplication();
@@ -245,7 +242,7 @@ namespace com.WanderingTurtle.Tests
         /// Edited by Rose Steffensmeier 2015/04/03
         /// </remarks>
         [TestMethod]
-        public void AddSupplierEmptyTest() // ☐
+        public void AddSupplierEmptyTest() // ☑
         {
             //test 1 empty Supplier
             Supplier testSupplierEmpty = new Supplier();
@@ -260,7 +257,7 @@ namespace com.WanderingTurtle.Tests
         /// Edited by Rose Steffensmeier 2015/04/03
         /// </remarks>
         [TestMethod]
-        public void AddSupplierNullTest()
+        public void AddSupplierNullTest() // ☑
         {
             Supplier testSupplierNull = null;
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull), SupplierResult.DatabaseError);
@@ -361,7 +358,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void EditSupplierApplicationEmptyTest() // ☐
         {
             SupplierApplication testSupplierAppEmpty = new SupplierApplication();
@@ -373,7 +369,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void EditSupplierApplicationNullTest() // ☐
         {
             SupplierApplication testSupplierAppNull = null;
@@ -385,7 +380,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void EditSupplierApplicationPartialTest() // ☐
         {
             SupplierApplication testSupplierAppPartial = new SupplierApplication();
@@ -401,7 +395,6 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
         public void EditSupplierApplicationPartialTest2() // ☐
         {
             SupplierApplication testSupplierApp2 = null;
