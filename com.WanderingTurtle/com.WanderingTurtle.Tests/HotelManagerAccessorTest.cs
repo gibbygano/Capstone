@@ -48,6 +48,7 @@ namespace com.WanderingTurtle.Tests
             List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet(-1);
         }
 
+        /*
         [TestMethod]
         public void HotelAccessorUpdate()
         {
@@ -56,6 +57,7 @@ namespace com.WanderingTurtle.Tests
             int changed = HotelGuestAccessor.HotelGuestUpdate(guest[guest.Count - 2], guest[guest.Count - 1]);
             Assert.AreEqual(1, changed);
         }
+         * */
 
         [TestMethod]
         public void HotelAccessorArchive()

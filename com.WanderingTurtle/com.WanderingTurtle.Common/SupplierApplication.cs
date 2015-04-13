@@ -26,6 +26,8 @@ namespace com.WanderingTurtle.Common
         public string ApplicationStatus { get; set; }
         public DateTime LastStatusDate { get; set; }
         public string Remarks { get; set; }
+        public bool Approved { get; set; }
+        public DateTime ApprovalDate { get; set; }
 
         public SupplierApplication()
         {
