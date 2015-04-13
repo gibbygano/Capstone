@@ -51,6 +51,9 @@
             <asp:ContentPlaceHolder runat="server" ID="MainContent" />
         </section>
     </div>
+        <div id="errorMessage" runat="server">
+            <asp:Label ID="lblErrorMessage" runat="server" Text="ERROR" ForeColor="#CC0000"></asp:Label>
+        </div>
     <footer>
         <div class="content-wrapper">
             <div class="float-left">

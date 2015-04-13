@@ -808,3 +808,21 @@ input[type="radio"]{
 #loginlink{
     float: right;
 }
+
+#errorMessage{
+    display: block;
+    width: 50%;
+    height: auto;
+    margin: auto;
+    z-index: 1;
+    position: fixed;
+    left:25%;
+    top: 25%;
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.errorMsg{
+    margin: auto;
+}
