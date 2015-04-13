@@ -129,38 +129,31 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
             {
-                DialogBox.ShowMessageDialog(this, "Company Name field must be filled out and not contain special characters");
-                return false;
+                throw new WanderingTurtleException(this, "Company Name field must be filled out and not contain special characters");
             }
             else if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
             {
-                DialogBox.ShowMessageDialog(this, "Not a valid e-mail address");
-                return false;
+                throw new WanderingTurtleException(this, "Not a valid e-mail address");
             }
             else if (!Validator.ValidatePhone(txtPhoneNumber.Text))
             {
-                DialogBox.ShowMessageDialog(this, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
-                return false;
+                throw new WanderingTurtleException(this, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
             }
             else if (cboZip.SelectedItem == null)
             {
-                DialogBox.ShowMessageDialog(this, "You must select an zip from the drop down");
-                return false;
+                throw new WanderingTurtleException(this, "You must select an zip from the drop down");
             }
             else if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
             {
-                DialogBox.ShowMessageDialog(this, "The address must be filled out and not contain special characters (spaces allowed)");
-                return false;
+                throw new WanderingTurtleException(this, "The address must be filled out and not contain special characters (spaces allowed)");
             }
             else if (!Validator.ValidateString(txtFirstName.Text.Trim()))
             {
-                DialogBox.ShowMessageDialog(this, "The fist name field filled out and must not contain special characters (No Spaces)");
-                return false;
+                throw new WanderingTurtleException(this, "The fist name field filled out and must not contain special characters (No Spaces)");
             }
             else if (!Validator.ValidateString(txtLastName.Text.Trim()))
             {
-                DialogBox.ShowMessageDialog(this, "The last name field must be filled out and not contain special characters (No Spaces)");
-                return false;
+                throw new WanderingTurtleException(this, "The last name field must be filled out and not contain special characters (No Spaces)");
             }
 
             return true;
@@ -174,7 +167,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// edited by will fritz 2/15/15
         /// Added a conformation message box
         /// </remarks>
-        private void AddTheSupplier()
+        private async void AddTheSupplier()
         {
             try
             {
@@ -193,16 +186,16 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (_manager.AddANewSupplier(tempSupplier) == SupplierResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
+                    await DialogBox.ShowMessageDialog(this, "Supplier was added to the database");
                 }
                 else
                 {
-                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                    throw new WanderingTurtleException(this, "Supplier wasnt added to the database");
                 }
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -223,7 +216,7 @@ namespace com.WanderingTurtle.FormPresentation
             txtAddress1.Text = supplierUpdate.Address1.Trim();
             txtAddress2.Text = supplierUpdate.Address2.Trim();
             txtEmail.Text = supplierUpdate.EmailAddress.Trim();
-            //DialogBox.ShowMessageDialog(supplierUpdate.PhoneNumber);
+            //throw new WanderingTurtleException(supplierUpdate.PhoneNumber);
             string phone = supplierUpdate.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
             txtPhoneNumber.Text = phone;
             for (int i = 0; i < _zips.Count; i++)
@@ -248,7 +241,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// edited by will fritz 2/15/15
         /// added conformation message box
         /// </remarks>
-        private void EditSupplier()
+        private async void EditSupplier()
         {
             try
             {
@@ -270,16 +263,16 @@ namespace com.WanderingTurtle.FormPresentation
                 
                 if(_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
+                    await DialogBox.ShowMessageDialog(this, "The Supplier was succefully edited");
                 }
                 else
                 {
-                    DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                    throw new WanderingTurtleException(this, "Supplier wasnt added to the database");
                 }
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -296,9 +289,9 @@ namespace com.WanderingTurtle.FormPresentation
                 cboZip.DisplayMemberPath = "GetZipStateCity";
                 cboZip.SelectedValuePath = "Zip";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There was a problem retriving the list of zip codes");
+                throw new WanderingTurtleException(this, ex, "Error Retriving the list of zip codes");
             }
 
 

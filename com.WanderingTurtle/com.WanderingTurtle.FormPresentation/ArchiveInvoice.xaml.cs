@@ -49,17 +49,9 @@ namespace com.WanderingTurtle.FormPresentation
                 myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(invoiceToArchive.HotelGuestID);
                 FillFormFields(selectedHotelGuestID);
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -103,25 +95,16 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsArchive.ChangedByOtherUser):
-                        await DialogBox.ShowMessageDialog(this, "Record already changed by another user.");
-                        return;
+                        throw new Exception("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
                         await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
                         return;
                 }
             }
-            catch (ApplicationException ex)
-            {
-                throw ex;
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
             catch (Exception ex)
             {
-                throw ex;
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

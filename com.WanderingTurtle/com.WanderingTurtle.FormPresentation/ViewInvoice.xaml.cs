@@ -79,7 +79,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
+        private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
         {
             //check if invoice can be closed
             ResultsArchive result = _invoiceManager.CheckToArchiveInvoice(invoiceToView, myBookingList);
@@ -87,8 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
             switch (result)
             {
                 case (ResultsArchive.CannotArchive):
-                    await DialogBox.ShowMessageDialog(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
-                    break;
+                    throw new WanderingTurtleException(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
 
                 case (ResultsArchive.OkToArchive):
                     //opens UI with guest information
@@ -130,8 +129,7 @@ namespace com.WanderingTurtle.FormPresentation
             //check if something was selected
             if (lvGuestBookings.SelectedItem == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a booking to cancel.");
-                return;
+                throw new WanderingTurtleException(this, "Please select a booking to cancel.");
             }
 
             //check if selected item can be cancelled
@@ -140,12 +138,10 @@ namespace com.WanderingTurtle.FormPresentation
             switch (result)
             {
                 case (ResultsEdit.CannotEditTooOld):
-                    DialogBox.ShowMessageDialog(this, "Bookings in the past cannot be cancelled.", "Warning");
-                    break;
+                    throw new WanderingTurtleException(this, "Bookings in the past cannot be cancelled.", "Warning");
 
                 case (ResultsEdit.Cancelled):
-                    DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.", "Warning");
-                    break;
+                    throw new WanderingTurtleException(this, "This booking has already been cancelled.", "Warning");
 
                 case (ResultsEdit.OkToEdit):
                     //opens the ui and passes the booking details object in
@@ -180,8 +176,7 @@ namespace com.WanderingTurtle.FormPresentation
             //check form input error
             if (lvGuestBookings.SelectedItem == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a booking to edit.");
-                return;
+                throw new WanderingTurtleException(this, "Please select a booking to edit.");
             }
 
             EditBooking(bookingToEdit);
@@ -208,17 +203,9 @@ namespace com.WanderingTurtle.FormPresentation
                     refreshGuestInformation(invoiceToView.HotelGuestID);
                 }
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -230,12 +217,9 @@ namespace com.WanderingTurtle.FormPresentation
             switch (result)
             {
                 case (ResultsEdit.CannotEditTooOld):
-                    DialogBox.ShowMessageDialog(this, "Bookings in the past cannot be edited.");
-                    break;
-
+                    throw new WanderingTurtleException(this, "Bookings in the past cannot be edited.");
                 case (ResultsEdit.Cancelled):
-                    DialogBox.ShowMessageDialog(this, "This booking has been cancelled and cannot be edited.");
-                    break;
+                    throw new WanderingTurtleException(this, "This booking has been cancelled and cannot be edited.");
 
                 case (ResultsEdit.OkToEdit):
                     EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem, ReadOnly);
@@ -277,7 +261,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve booking list from the database.");
+                throw new WanderingTurtleException(this, ex, "Unable to retrieve booking list from the database.");
             }
         }
 
@@ -302,7 +286,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve guest information from the database.");
+                throw new WanderingTurtleException(this, ex, "Unable to retrieve guest information from the database.");
             }
         }
     }

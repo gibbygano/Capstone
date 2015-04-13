@@ -18,10 +18,10 @@ namespace com.WanderingTurtle.FormPresentation
         private async void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // Process unhandled exception
-            StringBuilder exceptionMessage = new StringBuilder("An exceptions occoured: " + Environment.NewLine + " - " + e.Exception.Message);
+            StringBuilder exceptionMessage = new StringBuilder("An error occoured: " + Environment.NewLine + " - " + e.Exception.Message);
             Exception innerEx = e.Exception.InnerException;
             if (innerEx != null)
-            { exceptionMessage.AppendLine(Environment.NewLine + Environment.NewLine + "Additional exception information: "); }
+            { exceptionMessage.AppendLine(Environment.NewLine + Environment.NewLine + "Additional error information: "); }
             while (innerEx != null)
             {
                 exceptionMessage.AppendLine(" - " + innerEx.Message);
@@ -33,6 +33,7 @@ namespace com.WanderingTurtle.FormPresentation
                 // Prevent default unhandled exception processing
                 e.Handled = true;
                 var exception = e.Exception as WanderingTurtleException;
+                exceptionMessage.AppendLine(Environment.NewLine + "Error Occured in: " + exception.CurrentControl.Name);
                 if (exception.CurrentControl != null && exception.CurrentControl.IsLoaded)
                 {
                     await DialogBox.ShowMessageDialog(exception.CurrentControl, exceptionMessage.ToString(), exception.Title);
@@ -41,6 +42,10 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     MessageBox.Show(exceptionMessage.ToString(), exception.Title);
                 }
+            }
+            else
+            {
+                MessageBox.Show(exceptionMessage.ToString(), "WanderingTurtle Error");
             }
         }
     }

@@ -108,8 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.ChangedByOtherUser):
-                        DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.");
-                        break;
+                        throw new Exception("This booking has already been cancelled.");
 
                     case (ResultsEdit.Success):
                         DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");
@@ -117,17 +116,9 @@ namespace com.WanderingTurtle.FormPresentation
                         break;
                 }
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
     }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation.Models
@@ -21,16 +18,10 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         public WanderingTurtleException(FrameworkElement control, Exception exception, string title)
-            : base(null, exception)
+            : base(exception.Message, exception.InnerException)
         {
             CurrentControl = control;
             Title = title;
-        }
-
-        public WanderingTurtleException(FrameworkElement control, string message, Exception innerException)
-            : base(message, innerException)
-        {
-            CurrentControl = control;
         }
 
         public WanderingTurtleException(FrameworkElement control, string message, string title)

@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -86,7 +86,6 @@ namespace com.WanderingTurtle.FormPresentation
             switch (result)
             {
                 case MessageDialogResult.Affirmative:
-                    Exception _ex = null;
                     try
                     {
                         Event EventToDelete = (Event)lvEvents.SelectedItems[0];
@@ -95,12 +94,7 @@ namespace com.WanderingTurtle.FormPresentation
                     }
                     catch (Exception ex)
                     {
-                        _ex = ex;
-                    }
-                    if (_ex != null)
-                    {
-                        await DialogBox.ShowMessageDialog(this, _ex.Message);
-                        _ex = null;
+                        throw new WanderingTurtleException(this, ex);
                     }
                     break;
 
@@ -125,7 +119,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -140,9 +134,9 @@ namespace com.WanderingTurtle.FormPresentation
                     Refresh();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "Please select an event to edit");
+                throw new WanderingTurtleException(this, ex, "Please select an event to edit");
             }
         }
 
@@ -205,9 +199,9 @@ namespace com.WanderingTurtle.FormPresentation
                 resultDataView.SortDescriptions.Clear();
                 resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There must be data in the list before you can sort it");
+                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
             }
         }
 
@@ -234,7 +228,7 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 lvEvents.ItemsSource = "";
-                DialogBox.ShowMessageDialog(this, "Create an event or contact your Systems Administrator", "No data to display from the database.");
+                throw new WanderingTurtleException(this, "Create an event or contact your Systems Administrator", "No data to display from the database.", ex);
             }
         }
 

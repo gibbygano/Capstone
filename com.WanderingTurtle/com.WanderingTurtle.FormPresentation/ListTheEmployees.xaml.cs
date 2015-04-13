@@ -69,8 +69,7 @@ namespace com.WanderingTurtle.FormPresentation
             var selectedItem = this.lvEmployeesList.SelectedItem;
             if (selectedItem == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a row to edit");
-                return;
+                throw new WanderingTurtleException(this, "Please select a row to edit");
             }
             UpdateEmployee(selectedItem as Employee);
         }
@@ -120,7 +119,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
+                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
             }
         }
 
@@ -149,7 +148,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve employee list from the database.");
+                throw new WanderingTurtleException(this, ex, "Unable to retrieve employee list from the database.");
             }
         }
 

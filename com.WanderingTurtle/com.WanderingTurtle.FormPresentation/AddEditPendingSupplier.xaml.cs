@@ -80,31 +80,27 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
-                await DialogBox.ShowMessageDialog(this, "Enter a company name.");
-                return;
+                throw new WanderingTurtleException(this, "Enter a company name.");
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
             {
-                await DialogBox.ShowMessageDialog(this, "Enter an address.");
-                return;
+                throw new WanderingTurtleException(this, "Enter an address.");
             }
             if (!Validator.ValidatePhone(txtPhoneNumber.Text))
 	        {
-                await DialogBox.ShowMessageDialog(this, "Enter a phone number.");
-                return;
+                throw new WanderingTurtleException(this, "Enter a phone number.");
 	        }
             if (!Validator.ValidateEmail(txtEmailAddress.Text))
             {
-                await DialogBox.ShowMessageDialog(this, "Enter an email address.");
-                return;
+                throw new WanderingTurtleException(this, "Enter an email address.");
             }
             if (!Validator.ValidateString(txtFirstName.Text))
             {
-                await DialogBox.ShowMessageDialog(this, "Enter a first name.");
+                throw new WanderingTurtleException(this, "Enter a first name.");
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
-                await DialogBox.ShowMessageDialog(this, "Enter a last name.");
+                throw new WanderingTurtleException(this, "Enter a last name.");
             }
 
             //get data from form
@@ -131,13 +127,11 @@ namespace com.WanderingTurtle.FormPresentation
                 //send info to BLL
                 if (!Validator.ValidateString(txtUserName.Text))
                 {
-                    await DialogBox.ShowMessageDialog(this, "Enter a user name.");
-                    return;
+                    throw new WanderingTurtleException(this, "Enter a user name.");
                 }
                 if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
                 {
-                    await DialogBox.ShowMessageDialog(this, "Enter a valid supply cost.");
-                    return;
+                    throw new WanderingTurtleException(this, "Enter a valid supply cost.");
                 }
                 
                 string userNameToAdd = txtUserName.Text;
@@ -153,7 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    await DialogBox.ShowMessageDialog(this, "Supplier wasnt added to the database");
+                    throw new WanderingTurtleException(this, "Supplier wasnt added to the database");
                 }
             }
             else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
@@ -167,12 +161,12 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    await DialogBox.ShowMessageDialog(this, "DB Error");
+                    throw new WanderingTurtleException(this, "DB Error");
                 }
             }
             else
             {
-                await DialogBox.ShowMessageDialog(this, "DB Error.");
+                throw new WanderingTurtleException(this, "DB Error.");
             }   
         }
 

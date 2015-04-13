@@ -122,7 +122,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Cast Level to RoleData
         /// </remarks>
-        private void EmployeeAdd()
+        private async void EmployeeAdd()
         {
             if (!Validate()) { return; }
 
@@ -141,14 +141,14 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result == 1)
                 {
-                    ShowMessage("Employee added successfully");
+                    await ShowMessage("Employee added successfully");
                     //closes window after successful add
                     Close();
                 }
             }
             catch (Exception ax)
             {
-                ShowMessage(ax.Message);
+                ShowErrorMessage(ax);
             }
         }
 
@@ -160,7 +160,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <remarks>
         /// </remarks>
-        private void EmployeeUpdate()
+        private async void EmployeeUpdate()
         {
             if (!Validate()) { return; }
 
@@ -179,14 +179,14 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (result == 1)
                 {
-                    ShowMessage("Employee updated successfully");
+                    await ShowMessage("Employee updated successfully");
                     //closes window after successful add
                     Close();
                 }
             }
             catch (Exception ax)
             {
-                ShowMessage(ax.Message);
+                ShowErrorMessage(ax);
             }
         }
 
@@ -238,11 +238,20 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
-        /// <param name="style"></param>
         /// <returns>awaitable Task of MEssageDialogResult</returns>
         private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return DialogBox.ShowMessageDialog(this, message, title, style);
+        }
+
+        private void ShowErrorMessage(string message, string title = null)
+        {
+            throw new WanderingTurtleException(this, message, title);
+        }
+
+        private void ShowErrorMessage(Exception exception, string title = null)
+        {
+            throw new WanderingTurtleException(this, exception, title);
         }
 
         /// <summary>
@@ -261,14 +270,14 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text))
             {
-                ShowMessage("Please fill out the first name field with a valid name.");
+                ShowErrorMessage("Please fill out the first name field with a valid name.");
                 TxtFirstName.Focus();
                 TxtFirstName.SelectAll();
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text))
             {
-                ShowMessage("Please fill out the last name field with a valid name.");
+                ShowErrorMessage("Please fill out the last name field with a valid name.");
                 TxtLastName.Focus();
                 TxtLastName.SelectAll();
                 return false;
@@ -276,7 +285,7 @@ namespace com.WanderingTurtle.FormPresentation
             bool validatePass = !(CurrentEmployee != null && TxtPassword.Password == "");
             if (validatePass && !Validator.ValidatePassword(TxtPassword.Password))
             {
-                ShowMessage("Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
+                ShowErrorMessage("Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
                                 " \n lowercase letter\n UPPERCASE LETTER \n Number \nSpecial Character (not space)");
                 TxtPassword.Focus();
                 TxtPassword.SelectAll();
@@ -284,14 +293,14 @@ namespace com.WanderingTurtle.FormPresentation
             }
             if (validatePass && !TxtPassword2.Password.Equals(TxtPassword.Password))
             {
-                ShowMessage("Your password must match!");
+                ShowErrorMessage("Your password must match!");
                 TxtPassword2.Focus();
                 TxtPassword2.SelectAll();
                 return false;
             }
             if (string.IsNullOrEmpty(CboUserLevel.Text) || CboUserLevel.Text == null)
             {
-                ShowMessage("Please select a user level.");
+                ShowErrorMessage("Please select a user level.");
                 CboUserLevel.Focus();
                 CboUserLevel.IsDropDownOpen = true;
                 return false;

@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 }
                 return (parent as MainWindow);
             }
-            catch (Exception ex) { throw new WanderingTurtleException(control, "Error Getting Main Window", ex); }
+            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Main Window"); }
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 }
                 return (parent as MetroWindow);
             }
-            catch (Exception ex) { throw new WanderingTurtleException(control, "Error Getting Parent Window", ex); }
+            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Parent Window"); }
         }
 
         /// <summary>
@@ -65,9 +65,8 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
-        internal static async void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
+        internal static void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
         {
-            Exception _ex = null;
             try
             {
                 foreach (FrameworkElement child in content.Children)
@@ -102,8 +101,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                     else { throw new Exception("Unknown Component"); }
                 }
             }
-            catch (Exception ex) { _ex = new Exception("Error Setting Fields to ReadOnly for" + Environment.NewLine + content, ex); }
-            if (_ex != null) { await DialogBox.ShowMessageDialog(content, _ex.InnerException.Message, _ex.Message); _ex = null; }
+            catch (Exception ex) { throw new WanderingTurtleException(content, ex, "Error Setting Fields to ReadOnly for" + Environment.NewLine + content); }
         }
 
         /// <summary>
@@ -145,7 +143,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                     catch (Exception ex) { throw new Exception(string.Format("Error Setting Style{0} - Control: {1}{0} - Style: {2}", Environment.NewLine, control, setterValue.Property + " = " + setterValue.Value), ex); }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { throw new WanderingTurtleException(control, ex); }
         }
 
         /// <summary>

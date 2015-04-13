@@ -69,8 +69,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (selectedGuest == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a guest to view.");
-                return;
+                throw new WanderingTurtleException(this, "Please select a guest to view.");
             }
 
             ViewHotelGuest(selectedGuest as InvoiceDetails);
@@ -106,7 +105,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve Hotel Guest listing from the database.");
+                throw new WanderingTurtleException(this, ex, "Unable to retrieve Hotel Guest listing from the database.");
             }
         }
 

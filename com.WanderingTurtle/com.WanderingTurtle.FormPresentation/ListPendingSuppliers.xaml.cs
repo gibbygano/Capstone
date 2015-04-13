@@ -40,8 +40,7 @@ namespace com.WanderingTurtle.FormPresentation
             var selectedItem = this.lvPendingSuppliers.SelectedItem;
             if (selectedItem == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a row to edit");
-                return;
+                throw new WanderingTurtleException(this, "Please select a row to edit");
             }
             UpdatePendingSupplier(selectedItem as SupplierApplication);
         }
@@ -59,10 +58,10 @@ namespace com.WanderingTurtle.FormPresentation
                 GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return;
+                throw new WanderingTurtleException(this, ex);
             }
 
             lvPendingSuppliers.ItemsSource = GetPendingSuppliers;

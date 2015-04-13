@@ -174,10 +174,20 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <param name="style"></param>
-        /// <returns>awaitable Task of MEssageDialogResult</returns>
+        /// <returns>awaitable Task of MessageDialogResult</returns>
         private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return DialogBox.ShowMessageDialog(this, message, title, style);
+        }
+
+        private void ShowErrorMessage(string message, string title = null)
+        {
+            throw new WanderingTurtleException(this, message, title);
+        }
+
+        private void ShowErrorMessage(Exception exception, string title = null)
+        {
+            throw new WanderingTurtleException(this, exception, title);
         }
 
         /// <summary>
@@ -207,7 +217,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
             if (!Validate()) { return; }
-            Exception _ex = null;
             try
             {
                 //FormatException found in if loop
@@ -251,15 +260,10 @@ namespace com.WanderingTurtle.FormPresentation
                     Close();
                 }
                 else
-                { await ShowMessage("Error Processing Request", "Error"); }
+                { ShowErrorMessage("Error Processing Request", "Error"); }
             }
-            catch (ApplicationException ex)
-            { _ex = ex; }
-            catch (SqlException ex)
-            { _ex = ex; }
             catch (Exception ex)
-            { _ex = ex; }
-            if (_ex != null) { await ShowMessage(_ex.Message); _ex = null; }
+            { ShowErrorMessage(ex); }
         }
 
         /// <summary>
@@ -302,69 +306,69 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
             {
-                ShowMessage("Please enter a First Name");
+                ShowErrorMessage("Please enter a First Name");
                 TxtFirstName.Focus();
                 TxtFirstName.SelectAll();
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
             {
-                ShowMessage("Please enter a Last Name");
+                ShowErrorMessage("Please enter a Last Name");
                 TxtLastName.Focus();
                 TxtLastName.SelectAll();
                 return false;
             }
             if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
             {
-                ShowMessage("Please enter an Address");
+                ShowErrorMessage("Please enter an Address");
                 TxtAddress1.Focus();
                 TxtAddress1.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
             {
-                ShowMessage("Error adding Address2");
+                ShowErrorMessage("Error adding Address2");
                 TxtAddress2.Focus();
                 TxtAddress2.SelectAll();
                 return false;
             }
             if (CboZip.SelectedItem == null)
             {
-                ShowMessage("Please select a Zip Code");
+                ShowErrorMessage("Please select a Zip Code");
                 CboZip.Focus();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
             {
-                ShowMessage("Please enter a valid Phone Number");
+                ShowErrorMessage("Please enter a valid Phone Number");
                 TxtPhoneNumber.Focus();
                 TxtPhoneNumber.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
             {
-                ShowMessage("Please enter a valid Email Address");
+                ShowErrorMessage("Please enter a valid Email Address");
                 TxtEmailAddress.Focus();
                 TxtEmailAddress.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
             {
-                ShowMessage("Please enter a valid Room Number");
+                ShowErrorMessage("Please enter a valid Room Number");
                 TxtRoomNumber.Focus();
                 TxtRoomNumber.SelectAll();
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
             {
-                ShowMessage("Please enter a valid PIN Number with 4 characters.");
+                ShowErrorMessage("Please enter a valid PIN Number with 4 characters.");
                 TxtRoomNumber.Focus();
                 TxtRoomNumber.SelectAll();
                 return false;
             }
             if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(),4))
             {
-                ShowMessage("Please enter a valid PIN Number with 4 characters.");
+                ShowErrorMessage("Please enter a valid PIN Number with 4 characters.");
                 TxtRoomNumber.Focus();
                 TxtRoomNumber.SelectAll();
                 return false;
