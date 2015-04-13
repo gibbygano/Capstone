@@ -148,7 +148,9 @@ VALUES
 ('Vader''s Van Service', ' ', 'Darth','Vader', '2 Death Star Way', ' ', '12235', '666-444-5999', 'Vader@SithLords.com', '2015-04-02', 'Pending', CURRENT_TIMESTAMP, ' '),
 ('Falcon Enterprises', ' ', 'Han', 'Solo', '3000 Millenium Dr', ' ', '58214', '555-344-1987', 'Han@falconEnterprises.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' '),
 ('Cantina Bands', ' ', 'Alien', 'Dude', '1 Desert Dr', ' ', '58214', '222-844-1978', 'Alien@CantinaBands.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, ' '),
-('BobaFett''s FunHouse', ' ', 'Boba', 'Fett', '79 Clone Dr', ' ', '58214', '555-244-8087', 'Boba@FettFunhouse.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' ')
+('BobaFett''s FunHouse', ' ', 'Boba', 'Fett', '79 Clone Dr', ' ', '58214', '555-244-8087', 'Boba@FettFunhouse.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' '),
+('Gringott''s', ' ', 'Griphook', 'Goblin', '14 Diagon Alley', ' ', '51537', '555-344-1987', 'Griphook@Gringotts.com', '2015-04-13', 'Pending', CURRENT_TIMESTAMP, ' '),
+('Weasley''s Wizarding Wonders', ' ', 'George', 'Weasley', '33 Diagon Alley', ' ', '58214', '222-844-1978', 'Twins@weasleys.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, ' ')
 GO
 
 INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transportation, EventDescription, Active)

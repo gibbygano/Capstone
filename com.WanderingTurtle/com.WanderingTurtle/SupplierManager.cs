@@ -348,6 +348,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                     if (numRows == 1)
                     {
+                        RetrieveSupplierApplicationList();
                         return SupplierResult.Success;
                     }
                     else
@@ -410,6 +411,9 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 if (numRows == 3)
                 {
+                    //refresh cache
+                    DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();
+                    DataCache._SupplierListTime = DateTime.Now;
                     return SupplierResult.Success;
                 }
                 else
@@ -421,7 +425,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierResult.DatabaseError;
             }
-
         }
 
         /// <summary>

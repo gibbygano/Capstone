@@ -24,6 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         public SupplierApplication CurrentSupplierApplication;
         public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
         public SupplierManager MySupplierManager = new SupplierManager();
+        public SupplierLoginManager myLoginManager = new SupplierLoginManager();
 
         /// <summary>
         /// Created:  2015/04/04
@@ -36,28 +37,6 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             SetFields();
             ReloadComboBox();
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/04/10
-        ///
-        /// Defines application status for the combo box
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
-        private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/04/11
-        /// 
-        /// Reloads the combobox with values
-        /// </summary>
-        private void ReloadComboBox()
-        {
-            //creating a list for the dropdown userLevel
-            cboAppStatus.ItemsSource = GetStatusList;
         }
 
         /// <summary>
@@ -105,8 +84,91 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private async void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            //validates data from form
+            if (!Validate()) { return; }
+
+            try
+            {
+                //get data from form
+                GetFormData();
+
+                if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Approved.ToString()))
+                {
+                    ValidateApprovalFields();
+
+                    string userNameToAdd = txtUserName.Text;
+
+                    ResultsEdit userNameCheck = myLoginManager.CheckSupplierUserName(userNameToAdd);
+
+                    //if the name wasn't found - that's good
+                    if (userNameCheck == ResultsEdit.NotFound)
+                    {
+                        decimal supplyCost = (decimal)(numSupplyCost.Value / 100);
+
+                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, userNameToAdd, supplyCost);
+
+                        if (result == SupplierResult.Success)
+                        {
+                            await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+
+                            this.Close();
+                        }
+                        else
+                        {
+                            throw new WanderingTurtleException(this, "Supplier wasn't added to the database");
+                        }
+                    }
+                    else
+                    {
+                        throw new WanderingTurtleException(this, "UserName already in use.");
+                    }
+                }
+                else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
+                {
+                    SupplierResult result = MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
+
+                    if (result == SupplierResult.Success)
+                    {
+                        await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+
+                        this.Close();
+                    }
+                    else
+                    {
+                        throw new WanderingTurtleException(this, "DB Error");
+                    }
+                }
+                else
+                {
+                    throw new WanderingTurtleException(this, "DB Error.");
+                }
+
+
+            }catch{
+            }
+        } 
+      
+
+        private bool ValidateApprovalFields()
+        {
+            //fields for approved supplier
+            //send info to BLL
+            if (!Validator.ValidateString(txtUserName.Text))
+            {
+                throw new WanderingTurtleException(this, "Enter a user name.");
+
+            }
+            if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
+            {
+                throw new WanderingTurtleException(this, "Enter a valid supply cost.");
+            }
+            return true;
+        }
+        private bool Validate()
+        {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
+                txtCompanyName.Focus();
                 throw new WanderingTurtleException(this, "Enter a company name.");
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
@@ -114,9 +176,9 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, "Enter an address.");
             }
             if (!Validator.ValidatePhone(txtPhoneNumber.Text))
-	        {
+            {
                 throw new WanderingTurtleException(this, "Enter a phone number.");
-	        }
+            }
             if (!Validator.ValidateEmail(txtEmailAddress.Text))
             {
                 throw new WanderingTurtleException(this, "Enter an email address.");
@@ -130,7 +192,11 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, "Enter a last name.");
             }
 
-            //get data from form
+            return true;
+        }
+
+        private void GetFormData()
+        {
             UpdatedSupplierApplication.CompanyName = this.txtCompanyName.Text;
             UpdatedSupplierApplication.CompanyDescription = this.txtCompanyDescription.Text;
             UpdatedSupplierApplication.FirstName = this.txtFirstName.Text;
@@ -148,53 +214,6 @@ namespace com.WanderingTurtle.FormPresentation
             UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
             UpdatedSupplierApplication.LastStatusDate = DateTime.Now;
 
-            if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Approved.ToString()))
-            {
-                //fields for approved supplier
-                //send info to BLL
-                if (!Validator.ValidateString(txtUserName.Text))
-                {
-                    throw new WanderingTurtleException(this, "Enter a user name.");
-                }
-                if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
-                {
-                    throw new WanderingTurtleException(this, "Enter a valid supply cost.");
-                }
-                
-                string userNameToAdd = txtUserName.Text;
-                decimal supplyCost = (decimal)(numSupplyCost.Value/100);
-
-                SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, userNameToAdd, supplyCost );
-
-                if (result == SupplierResult.Success)
-                {
-                    await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
-
-                    this.Close();
-                }
-                else
-                {
-                    throw new WanderingTurtleException(this, "Supplier wasn't added to the database");
-                }
-            }
-            else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
-            {
-                SupplierResult result = MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
-
-                if (result == SupplierResult.Success)
-                {
-                    await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
-                    this.Close();
-                }
-                else
-                {
-                    throw new WanderingTurtleException(this, "DB Error");
-                }
-            }
-            else
-            {
-                throw new WanderingTurtleException(this, "DB Error.");
-            }   
         }
 
         /// <summary>
@@ -214,6 +233,27 @@ namespace com.WanderingTurtle.FormPresentation
             this.dateApplicationDate.SelectedDate = CurrentSupplierApplication.ApplicationDate;
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
             this.txtRemarks.Text = CurrentSupplierApplication.Remarks;            
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/04/10
+        ///
+        /// Defines application status for the combo box
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
+                /// <summary>
+        /// Pat Banks
+        /// Created: 2015/04/11
+        /// 
+        /// Reloads the combobox with values
+        /// </summary>
+        private void ReloadComboBox()
+        {
+            //creating a list for the dropdown userLevel
+            cboAppStatus.ItemsSource = GetStatusList;
         }
     }
 }
