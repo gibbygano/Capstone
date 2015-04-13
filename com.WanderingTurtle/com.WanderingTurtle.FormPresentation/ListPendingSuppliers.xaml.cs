@@ -30,9 +30,12 @@ namespace com.WanderingTurtle.FormPresentation
             loadPendingSuppliers();
         }
 
-        private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
+        private void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
-            new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog();
+            if (new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog() == true)
+            {
+                loadPendingSuppliers();
+            }
         }
 
         private void btnUpdatePendingSupplier_Click(object sender, RoutedEventArgs e)
@@ -54,9 +57,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-
                 GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
-
             }
             catch (Exception ex)
             {

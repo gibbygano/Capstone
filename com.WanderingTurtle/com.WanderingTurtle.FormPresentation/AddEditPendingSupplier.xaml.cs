@@ -25,6 +25,12 @@ namespace com.WanderingTurtle.FormPresentation
         public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
         public SupplierManager MySupplierManager = new SupplierManager();
 
+        /// <summary>
+        /// Created:  2015/04/04
+        /// Miguel Santana
+        /// 
+        /// Interaction logic for AddEditPendingSupplier.xaml
+        /// </summary>
         public AddEditPendingSupplier()
         {
             InitializeComponent();
@@ -43,8 +49,8 @@ namespace com.WanderingTurtle.FormPresentation
         private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
 
         /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/04/10
+        /// Pat Banks
+        /// Created: 2015/04/11
         /// 
         /// Reloads the combobox with values
         /// </summary>
@@ -54,6 +60,14 @@ namespace com.WanderingTurtle.FormPresentation
             cboAppStatus.ItemsSource = GetStatusList;
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/09
+        /// 
+        /// Handles loading of the screen with data from the list.
+        /// </summary>
+        /// <param name="CurrentSupplierApplication"></param>
+        /// <param name="ReadOnly"></param>
         public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -64,20 +78,33 @@ namespace com.WanderingTurtle.FormPresentation
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             SetFields();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
                 throw new WanderingTurtleException(this, "Enter a company name.");
@@ -137,17 +164,17 @@ namespace com.WanderingTurtle.FormPresentation
                 string userNameToAdd = txtUserName.Text;
                 decimal supplyCost = (decimal)numSupplyCost.Value;
 
-
                 SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, userNameToAdd, supplyCost );
 
                 if (result == SupplierResult.Success)
                 {
                     await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+
                     this.Close();
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Supplier wasnt added to the database");
+                    throw new WanderingTurtleException(this, "Supplier wasn't added to the database");
                 }
             }
             else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
@@ -170,6 +197,9 @@ namespace com.WanderingTurtle.FormPresentation
             }   
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void SetFields()
         {
             this.txtCompanyName.Text = CurrentSupplierApplication.CompanyName;

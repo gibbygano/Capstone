@@ -60,6 +60,8 @@
             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="RetrieveActiveItemListings"
                 TypeName="com.WanderingTurtle.BusinessLogic.BookingManager"></asp:ObjectDataSource>
             <br />
+            </ContentTemplate>
+        </asp:UpdatePanel>
             <table>
                 <tr>
                     <td>
@@ -75,7 +77,7 @@
                         <asp:TextBox ID="txtGuestPin" runat="server" TabIndex="1" ViewStateMode="Enabled"></asp:TextBox></td>
                 </tr>
             </table>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+
+
     <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
 </asp:Content>

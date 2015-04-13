@@ -219,6 +219,7 @@ namespace com.WanderingTurtle.FormPresentation
             //throw new WanderingTurtleException(supplierUpdate.PhoneNumber);
             string phone = supplierUpdate.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
             txtPhoneNumber.Text = phone;
+
             for (int i = 0; i < _zips.Count; i++)
             {
                 if (_zips[i].Zip == supplierUpdate.Zip)
