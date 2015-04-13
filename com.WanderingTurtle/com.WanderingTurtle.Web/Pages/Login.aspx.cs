@@ -22,6 +22,14 @@ namespace com.WanderingTurtle.Web
             try
             {
                 var user = _myMan.retrieveSupplierLogin(txtPassword.Text, txtUserName.Text);
+                if (user.UserPassword != txtPassword.Text)
+                {
+                    //sql doesn't care about case, so it may return a positive user
+                    //if the password entered mathces the letters, but not the case
+                    //usernames are not case senstive but passwords are so we must check for
+                    //this and throw an exception if they don't match
+                    throw new ApplicationException();
+                }
                 var supplier = _mySuppMan.RetrieveSupplier(user.SupplierID);
                 Session["user"] = supplier;
                 Session["loggedIn"] = true;
@@ -32,8 +40,8 @@ namespace com.WanderingTurtle.Web
                 lblError.Text = "Authentication Error. Please try again.";
                 return;
             }
-
-            Response.Redirect("~/Pages/SupplierViewEvents.aspx");
+            //if validated send to supplier landing page (yet to be built)
+            Response.Redirect("~/portal");
         }
     }
 }

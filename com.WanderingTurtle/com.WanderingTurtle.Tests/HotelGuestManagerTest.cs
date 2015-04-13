@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.Tests
         HotelManagerAccessorTest setup = new HotelManagerAccessorTest();
         HotelGuestManager access = new HotelGuestManager();
 
-
+        /*
         [TestInitialize]
         public void initialize()
         {
@@ -39,7 +39,7 @@ namespace com.WanderingTurtle.Tests
         {
             access.AddHotelGuest(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, true));
         }
-
+        */
         [TestMethod]
         public void HotelManagerGetList()
         {
@@ -60,7 +60,7 @@ namespace com.WanderingTurtle.Tests
         {
             HotelGuest guest = access.GetHotelGuest(-1);
         }
-
+        /*
         [TestMethod]
         public void HotelManagerUpdate()
         {
@@ -69,7 +69,7 @@ namespace com.WanderingTurtle.Tests
             bool changed = access.UpdateHotelGuest(guest[guest.Count - 2], guest[guest.Count - 1]);
             Assert.IsTrue(changed);
         }
-
+        */
         [TestMethod]
         public void HotelManagerArchive()
         {

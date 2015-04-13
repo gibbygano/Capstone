@@ -785,3 +785,26 @@ input[type="radio"]{
         }
 }
 /* END: Mobile Styles */
+
+.clear {
+    clear: both;
+}
+
+#loginBar{
+    color: #fff;
+    padding-bottom: 7px;
+}
+
+#loginBar a{
+    color: #fff;
+    text-decoration: none;
+    
+}
+
+#logout{
+    float: right;
+    padding-left: 10px;
+}
+#loginlink{
+    float: right;
+}

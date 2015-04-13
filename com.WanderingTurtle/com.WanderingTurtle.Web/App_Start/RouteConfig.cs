@@ -19,8 +19,8 @@ namespace com.WanderingTurtle.Web
             routes.MapPageRoute(null, "events", "~/Pages/SupplierViewEvents.aspx");
             routes.MapPageRoute(null, "events/add", "~/Pages/SupplierAddEvent.aspx");
             routes.MapPageRoute(null, "supplierlistings", "~/Pages/ViewItemListing.aspx");
-
-            routes.MapPageRoute(null, "listings", "~/PagesGuest/GuestViewListings.aspx");
+            routes.MapPageRoute(null, "portal", "~/Pages/SupplierPortal.aspx");
+            routes.MapPageRoute(null, "listings", "~/PagesGuest/Default.aspx");
         }
     }
 }

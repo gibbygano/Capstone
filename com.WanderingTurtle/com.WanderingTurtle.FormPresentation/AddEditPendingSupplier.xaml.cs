@@ -162,7 +162,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 
                 string userNameToAdd = txtUserName.Text;
-                decimal supplyCost = (decimal)numSupplyCost.Value;
+                decimal supplyCost = (decimal)(numSupplyCost.Value/100);
 
                 SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, userNameToAdd, supplyCost );
 

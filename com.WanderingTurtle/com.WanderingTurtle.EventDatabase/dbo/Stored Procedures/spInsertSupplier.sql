@@ -12,7 +12,7 @@ CREATE PROCEDURE spInsertSupplier
 	@EmailAddress 	varchar(100), 
 	@ApplicationID 	int, 
 	@UserID 		int,
-	@SupplyCost		decimal
+	@SupplyCost		decimal(3,2)
 	)
 AS
 INSERT INTO Supplier
