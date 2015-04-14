@@ -63,9 +63,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana
         /// Created: 2015/02/16
         /// 
+        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// 
         /// Parameter marks whether a database command was successful
         /// </summary>
-        public bool Result { get; private set; }
+        public ResultsEdit Result { get; private set; }
 
         /// <summary>
         /// Miguel Santana
@@ -259,7 +261,7 @@ namespace com.WanderingTurtle.FormPresentation
                         );
                 }
 
-                if (Result)
+                if (Result == ResultsEdit.Success)
                 {
                     await ShowMessage("Your Request was Processed Successfully", "Success");
                     Close();

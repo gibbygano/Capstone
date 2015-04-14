@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.BusinessLogic", "com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj", "{825BA7B8-C006-4EF9-B596-700B863A2296}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.DataAccess", "com.WanderingTurtle.DataAccess\com.WanderingTurtle.DataAccess.csproj", "{49D534C8-8BF7-4624-873C-4809D555BC99}"
@@ -42,11 +40,19 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelpfulStuff", "HelpfulStuff", "{46309D78-9A21-4137-8FA4-1F08E5A508E9}"
 	ProjectSection(SolutionItems) = preProject
 		ErrorLogicTips.txt = ErrorLogicTips.txt
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 		StandardizedComments.txt = StandardizedComments.txt
 		WhatIsDone.txt = WhatIsDone.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.WanderingTurtle.Tests", "com.WanderingTurtle.Tests\com.WanderingTurtle.Tests.csproj", "{439EFA86-1679-4625-8508-0158763E47AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8C3B7ADF-8710-4EE9-8C58-D9092BEEEBCD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

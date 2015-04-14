@@ -7,31 +7,41 @@ namespace com.WanderingTurtle.BusinessLogic
 {
     public class EmployeeManager
     {
-        // Success: An int value is returned to the method to show rows affected
+        // Success: A ResultsEdit.Success value is returned
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
         /// 
+        /// <remarks>
+        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// </remarks>
         /// Method takes in newEmployee and passes it as a parameter into the AddEmployee method of the EmployeeAccessor class
         /// </summary>
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">Exception is thrown if database is not available or new employee cannot be created in the database for any reason</exception>
         /// <returns>An int value is returned to the method to show rows affected</returns>
-        public int AddNewEmployee(Employee newEmployee)
+        public ResultsEdit AddNewEmployee(Employee newEmployee)
         {
             try
             {
-                return EmployeeAccessor.AddEmployee(newEmployee);
+                int worked = EmployeeAccessor.AddEmployee(newEmployee);
+                if (worked == 1)
+                {
+                    return ResultsEdit.Success;
+                }
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return ResultsEdit.DatabaseError;
         }
 
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
+        /// 
         /// 
         /// Method takes in new and old employee parameters and then submits them to the Data Access Layer method to update the employee record for oldEmploy
         /// </summary>
@@ -40,20 +50,30 @@ namespace com.WanderingTurtle.BusinessLogic
         ///     The user will simply mark the employee inactive which will change the
         ///     bit value in the table to a 0 to represent false
         /// </remarks>
+        /// 
+        /// <remarks>
+        ///  Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// </remarks>
         /// <param name="oldEmployee"></param>
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">EmployeeAccessor method will throw exception to Manager saying that the employee could not be found to edit</exception>
         /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
-        public int EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
+        public ResultsEdit EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
         {
             try
             {
-                return EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
+                int result = EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
+                if (result == 1)
+                {
+                    return ResultsEdit.Success;
+                }
+
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            return ResultsEdit.DatabaseError;
         }
 
         /// <summary>

@@ -59,8 +59,8 @@ namespace EmployeeLogicTests
         {
             //Adds fake employee to Data base
             bool worked = false;
-            int rows = myManager.AddNewEmployee(testEmp);
-            if (rows == 1)
+            ResultsEdit result = myManager.AddNewEmployee(testEmp);
+            if (result == ResultsEdit.Success)
             {
                 worked = true;
             }
@@ -111,8 +111,8 @@ namespace EmployeeLogicTests
             Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
             Employee testEmp2 = new Employee(testEmp1.FirstName, LastName, "pass123", (int)testEmp1.Level, testEmp1.Active);
             bool worked = false;
-            int rows = myManager.EditCurrentEmployee(testEmp1, testEmp2);
-            if (rows == 1)
+            ResultsEdit result = myManager.EditCurrentEmployee(testEmp1, testEmp2);
+            if (result == ResultsEdit.Success)
             {
                 worked = true;
             }

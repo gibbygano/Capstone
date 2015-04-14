@@ -121,6 +121,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated: 2015/02/22
         ///
         /// Cast Level to RoleData
+        /// 
+        /// Updated 2015/04/13 by Tony Noel
+        ///Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         private async void EmployeeAdd()
         {
@@ -129,7 +132,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Debug.Assert(ChkActiveEmployee.IsChecked != null, "ChkActiveEmployee.IsChecked != null");
-                int result = _employeeManager.AddNewEmployee(
+               ResultsEdit result = _employeeManager.AddNewEmployee(
                     new Employee(
                         TxtFirstName.Text,
                         TxtLastName.Text,
@@ -139,7 +142,7 @@ namespace com.WanderingTurtle.FormPresentation
                         )
                     );
 
-                if (result == 1)
+                if (result == ResultsEdit.Success)
                 {
                     await ShowMessage("Employee added successfully");
                     //closes window after successful add
@@ -157,6 +160,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created: 2015/02/20
         ///
         /// Validates and Updates Employee user
+        /// 
+        /// Updated 2015/04/13 by Tony Noel
+        ///Updated to comply with the ResultsEdit class of error codes.
         /// </summary>
         /// <remarks>
         /// </remarks>
@@ -166,7 +172,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                int result = _employeeManager.EditCurrentEmployee(
+                ResultsEdit result = _employeeManager.EditCurrentEmployee(
                     CurrentEmployee,
                     new Employee(
                         TxtFirstName.Text,
@@ -177,7 +183,7 @@ namespace com.WanderingTurtle.FormPresentation
                         )
                     );
 
-                if (result == 1)
+                if (result == ResultsEdit.Success)
                 {
                     await ShowMessage("Employee updated successfully");
                     //closes window after successful add
