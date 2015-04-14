@@ -74,7 +74,7 @@
                         <asp:Label ID="lblGuestPin" Text="Guest Pin:" runat="server" Font-Bold="True" Height="35px"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtGuestPin" runat="server" TabIndex="1" ViewStateMode="Enabled"></asp:TextBox></td>
+                        <asp:TextBox TextMode="Password"  ID ="txtGuestPin" runat="server" TabIndex="1" ViewStateMode="Enabled"></asp:TextBox></td>
                 </tr>
             </table>
 

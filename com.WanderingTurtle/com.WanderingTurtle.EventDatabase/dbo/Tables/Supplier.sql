@@ -18,3 +18,7 @@
 GO
 CREATE NONCLUSTERED INDEX [SupplierIndex]
     ON [dbo].[Supplier]([SupplierID] ASC);
+GO
+ALTER TABLE [dbo].[Supplier]
+ADD CONSTRAINT [UniqueUserName]UNIQUE ([UserID])
+GO

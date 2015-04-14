@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.BusinessLogic;
+using System.Data.SqlClient;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -98,30 +100,23 @@ namespace com.WanderingTurtle.FormPresentation
                 if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Approved.ToString()))
                 {
                     ValidateApprovalFields();
+                    
+                    string validUserName = "";
 
-                    ResultsEdit userNameCheck = myLoginManager.CheckSupplierUserName(txtUserName.Text);
+                    validUserName = myLoginManager.CheckSupplierUserName(txtUserName.Text);
 
-                    //if the name wasn't found - that's good
-                    if (userNameCheck == ResultsEdit.NotFound)
+                    decimal supplyCost = (decimal)(numSupplyCost.Value);
+
+                    SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, validUserName, supplyCost);
+
+                    if (result == SupplierResult.Success)
                     {
-                        decimal supplyCost = (decimal)(numSupplyCost.Value);
-
-                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, txtUserName.Text, supplyCost);
-
-                        if (result == SupplierResult.Success)
-                        {
-                            await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
-
-                            this.Close();
-                        }
-                        else
-                        {
-                            throw new WanderingTurtleException(this, "Supplier wasn't added to the database");
-                        }
+                        await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                        this.Close();
                     }
                     else
                     {
-                        throw new WanderingTurtleException(this, "UserName already in use.");
+                        throw new WanderingTurtleException(this, "DB Error");
                     }
                 }
                 else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
@@ -131,7 +126,6 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result == SupplierResult.Success)
                     {
                         await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
-
                         this.Close();
                     }
                     else
@@ -143,6 +137,12 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new WanderingTurtleException(this, "DB Error.");
                 }
+            }
+            catch (SqlException)
+            {
+               // ShowErrorMessage("UserName already used.  Please choose another one.");
+                txtUserName.Text = "";
+                throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
             }
             catch (Exception ex)
             {
@@ -158,7 +158,6 @@ namespace com.WanderingTurtle.FormPresentation
             if (!Validator.ValidateString(txtUserName.Text))
             {
                 throw new InputValidationException(txtUserName, "Enter a user name.");
-
             }
             if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
             {

@@ -116,16 +116,16 @@ GO
 
 INSERT INTO [dbo].[HotelGuest] (FirstName, LastName, Zip, Address1, Address2, PhoneNumber, EmailAddress, Room, GuestPIN)
 VALUES
-('David', 'Tennant', '52404', '234 33rd Ave SW', ' ', '(319) 258-4566', 'comewithme@yahoo.com', 101, 7754),
-('Edward', 'Elric', '52641', '2234 Benton Ave', ' ', ' ', ' ', 102, 8643),
-('Alphonse', 'Elric', '10001', '123 Wall St', 'Apt 114', ' ', 'fullmetal@gmail.com', 103, 0864),
-('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', ' ', '(223) 145-9908',' ', 104, 2222),
-('Rose', 'Tyler', '73078', '6453 Benton Ave', ' ','(223) 456-1234', ' ', 105, 7786),
-('Martha', 'Jones', '73078', '6453 Benton Ave', ' ', ' ', ' ', 201, 6434),
-('Susan', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', ' ', ' ', 202, 7533),
-('Barbara', 'Wright', '73102', '5634 Main St',' ', '(456) 223-1234', ' ', 203, 5432),
-('Peter', 'Capaldi', '52641', '2232 Benton Ave', ' ', '(319) 217-4455', 'doctorwho@kirkwood.edu', 204, 5165),
-('Clara', 'Oswald', '52641', '1455 Benton Ave', ' ', '(319) 931-9983', ' ', 205, 1234)
+('David', 'Tennant', '52404', '234 33rd Ave SW', ' ', '(319) 258-4566', 'comewithme@yahoo.com', 101, '7754'),
+('Edward', 'Elric', '52641', '2234 Benton Ave', ' ', ' ', ' ', 102, '8643'),
+('Alphonse', 'Elric', '10001', '123 Wall St', 'Apt 114', ' ', 'fullmetal@gmail.com', 103, '0864'),
+('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', ' ', '(223) 145-9908',' ', 104, '2222'),
+('Rose', 'Tyler', '73078', '6453 Benton Ave', ' ','(223) 456-1234', ' ', 105, '7786'),
+('Martha', 'Jones', '73078', '6453 Benton Ave', ' ', ' ', ' ', 201, '6434'),
+('Susan', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', ' ', ' ', 202, '7533'),
+('Barbara', 'Wright', '73102', '5634 Main St',' ', '(456) 223-1234', ' ', 203, '5432'),
+('Peter', 'Capaldi', '52641', '2232 Benton Ave', ' ', '(319) 217-4455', 'doctorwho@kirkwood.edu', 204, '5165'),
+('Clara', 'Oswald', '52641', '1455 Benton Ave', ' ', '(319) 931-9983', ' ', 205, '1234')
 GO
 
 INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)

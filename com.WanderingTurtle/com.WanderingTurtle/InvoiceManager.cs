@@ -159,6 +159,8 @@ namespace com.WanderingTurtle.BusinessLogic
                 HotelGuest guestToArchive = _hotelGuestManager.GetHotelGuest(invoiceToTry.HotelGuestID);
                 bool guestArchive = _hotelGuestManager.ArchiveHotelGuest(guestToArchive, !guestToArchive.Active);
 
+                //TBD NEED TO CLEAR PIN AND ROOM # BEFORE ARCHIVE
+
                 if(guestArchive == false)
                 {
                     return ResultsArchive.ChangedByOtherUser;

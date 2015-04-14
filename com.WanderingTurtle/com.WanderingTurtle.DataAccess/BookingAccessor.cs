@@ -150,7 +150,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int addBooking(Booking toAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spAddBooking";
+            var cmdText = "spInsertBooking";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
 
@@ -358,5 +358,67 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+
+            public static HotelGuest verifyGuestPin(string inPIN)
+        {
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+
+            var cmdText = "spSelectHotelGuestPinGet";
+            SqlCommand cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@guestPIN", inPIN);
+
+            HotelGuest foundGuest = null;
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        foundGuest = new HotelGuest(
+                                reader.GetInt32(0), //HotelGuestID
+                                reader.GetString(1), //FirstName
+                                reader.GetString(2), //LastName
+                                reader.GetString(3), //Address1
+                                !reader.IsDBNull(4) ? reader.GetString(4) : null, //Address2
+                                new CityState(
+                                    reader.GetString(5), //Zip
+                                    reader.GetString(6), //City
+                                    reader.GetString(7) //State
+                                ),
+                                !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
+                                !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
+                                (int?)reader.GetValue(10), //Room
+                                reader.GetString(11), // PIN
+                                reader.GetBoolean(12) //Active
+                        );
+                    } // end while
+                }
+                else
+                {
+                    var ax = new ApplicationException("PIN not found");
+                    throw ax;
+                }
+            }
+            catch (SqlException)
+            {
+                var ax = new ApplicationException("PIN not found");
+                throw ax;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return foundGuest;
+        }
     }
+
 }

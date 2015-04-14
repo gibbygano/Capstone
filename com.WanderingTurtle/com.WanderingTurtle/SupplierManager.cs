@@ -3,6 +3,7 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
 using System;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -419,11 +420,15 @@ namespace com.WanderingTurtle.BusinessLogic
                 else
                 {
                     return SupplierResult.ChangedByOtherUser;
-                }                   
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
-                return SupplierResult.DatabaseError;
+                throw;
             }
         }
 

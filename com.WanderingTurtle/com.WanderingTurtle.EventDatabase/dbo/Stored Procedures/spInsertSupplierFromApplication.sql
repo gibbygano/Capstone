@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spUpdateApplicationAddSupplierAddLogin]
+﻿CREATE PROCEDURE [dbo].[spInsertSupplierFromApplication]
 (
 	@UserName				varchar(50),
 	@SupplyCost				decimal(3,2),

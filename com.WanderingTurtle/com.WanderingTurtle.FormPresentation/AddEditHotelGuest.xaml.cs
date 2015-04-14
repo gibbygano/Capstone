@@ -239,7 +239,7 @@ namespace com.WanderingTurtle.FormPresentation
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
                             int.Parse(TxtRoomNumber.Text.Trim()),
-                            int.Parse(TxtGuestPIN.Text)
+                            TxtGuestPIN.Text
                         )
                     );
                 }
@@ -256,7 +256,7 @@ namespace com.WanderingTurtle.FormPresentation
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
                                 int.Parse(TxtRoomNumber.Text.Trim()),
-                                int.Parse(TxtGuestPIN.Text)
+                                TxtGuestPIN.Text
                             )
                         );
                 }
@@ -269,8 +269,14 @@ namespace com.WanderingTurtle.FormPresentation
                 else
                 { ShowErrorMessage("Error Processing Request", "Error"); }
             }
+            catch (SqlException)
+            {
+                ShowErrorMessage("PIN Already Assigned.  Please choose a different PIN.", "Error"); 
+            }
             catch (Exception ex)
-            { ShowErrorMessage(ex); }
+            { 
+                ShowErrorMessage(ex); 
+            }
         }
 
         /// <summary>

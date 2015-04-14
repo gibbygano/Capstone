@@ -8,7 +8,7 @@
     [PhoneNumber]  VARCHAR (15)  NULL,
     [EmailAddress] VARCHAR (100) NULL,
 	[Room]		   INT			 NULL,
-    [GuestPIN]	   INT			 NULL, 
+    [GuestPIN]	   CHAR(4)			 NULL, 
     [Active]       BIT           NOT NULL,
     CONSTRAINT [pk_HotelGuest] PRIMARY KEY CLUSTERED ([HotelGuestID] ASC)
 ) ON [PRIMARY];
@@ -20,6 +20,10 @@ GO
 ALTER TABLE [dbo].[HotelGuest]
     ADD DEFAULT 1 FOR [Active];
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [unique_room_index]
-	ON [HotelGuest]([Room])
-	WHERE [Active] = 1;
+ALTER TABLE [dbo].[HotelGuest]
+ADD CONSTRAINT [UniqueRoom]UNIQUE ([Room])
+GO
+
+ALTER TABLE [dbo].[HotelGuest]
+ADD CONSTRAINT [UniquePIN]UNIQUE ([GuestPIN])
+GO

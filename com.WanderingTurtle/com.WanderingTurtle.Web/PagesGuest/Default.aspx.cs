@@ -69,7 +69,7 @@ namespace com.WanderingTurtle.Web.Pages
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //if something isn't selected - throw error
-            if (gvListings.SelectedValue != null)
+            if (gvListings.SelectedValue == null)
             {
                 lblMessage.Text = "Please select an event";
                 return;
@@ -108,10 +108,10 @@ namespace com.WanderingTurtle.Web.Pages
 
             try
             {
-                int inPin = Int32.Parse(txtGuestPin.Text);
+                string inPin = txtGuestPin.Text;
 
-                //see if it is a valid pin
-                ResultsEdit answer = _myManager.checkValidPIN(inPin);
+                //see if it is a valid pin = if not there will be an exception
+                HotelGuest foundGuest = _myManager.checkValidPIN(inPin);
                     
                 int qty = Int32.Parse(txtGuestTickets.Text);
 
@@ -121,56 +121,32 @@ namespace com.WanderingTurtle.Web.Pages
                 //calculate values for the tickets
                 extendedPrice = _myManager.calcExtendedPrice(selectedItemListing.Price, qty);
                 totalPrice = _myManager.calcTotalCharge(discount, extendedPrice);
+              
+                int guestID = (int)foundGuest.HotelGuestID;
 
-                switch (answer)
+                Booking webBookingToAdd = new Booking(guestID, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+
+                ResultsEdit addResult = _myManager.AddBookingResult(webBookingToAdd);
+
+                switch (addResult)
                 {
-                    case ResultsEdit.NotFound:
-                        lblMessage.Text = "PIN not found.";
+                    case ResultsEdit.Success:
+                        lblMessage.Text = ("Thank You, " + foundGuest.GetFullName + ". You have successfully signed up for " + selectedItemListing.EventName + ".");
+                        clearFields();
+                        gvListings.DataBind();
                         break;
 
-                    case ResultsEdit.OkToEdit:
-
-                        Booking webBookingToAdd = new Booking(999, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
-                        addWebBooking(inPin, webBookingToAdd);
+                    case ResultsEdit.ListingFull:
+                        lblMessage.Text = "full";
                         break;
-
-                    default:
+                    case ResultsEdit.DatabaseError:
+                        lblMessage.Text = "db error";
                         break;
                 }
-
-            }
-            catch (Exception)
+            } catch (Exception)
+            
             {
-                    
-                    throw;
-            }
-            
-        }
-
-        private void addWebBooking(int inPin, Booking webBookingToAdd)
-        {
-            //add the booking & return result
-            int guestID = _myManager.FindGuest(inPin);
-            
-            //update the id from the pin
-            webBookingToAdd.GuestID = guestID;
-            
-            ResultsEdit addResult = _myManager.AddBookingResult(webBookingToAdd);
-
-            switch (addResult)
-            {
-                case ResultsEdit.Success:
-                    lblMessage.Text = "You have successfully signed up for the event.";
-                    clearFields();
-                    gvListings.DataBind();
-                    break;
-
-                case ResultsEdit.ListingFull:
-                    lblMessage.Text = "full";
-                    break;
-                case ResultsEdit.DatabaseError:
-                    lblMessage.Text = "db error";
-                    break;
+                throw;
             }
         }
 
@@ -178,6 +154,7 @@ namespace com.WanderingTurtle.Web.Pages
         {
             txtGuestTickets.Text = "";
             txtGuestPin.Text = "";
+            gvListings.SelectedIndex = -1; 
         }
     
         private ItemListingDetails getSelectedItem()

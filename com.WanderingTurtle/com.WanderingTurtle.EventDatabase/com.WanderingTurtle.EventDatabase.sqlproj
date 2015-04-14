@@ -66,7 +66,7 @@
   <ItemGroup>
     <Build Include="dbo\Tables\EventItem.sql" />
     <Build Include="dbo\Tables\Supplier.sql" />
-    <Build Include="dbo\Stored Procedures\spAddBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertBooking.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteEventItem.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteSupplier.sql" />
     <Build Include="dbo\Stored Procedures\spInsertEventItem.sql" />
@@ -87,7 +87,7 @@
     <Build Include="dbo\Stored Procedures\spSelectListingFull.sql" />
     <Build Include="dbo\Tables\SupplierApplication.sql" />
     <Build Include="dbo\Tables\Employee.sql" />
-    <Build Include="dbo\Stored Procedures\spEmployeeAdd.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertEmployee.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeSelectName.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeUpdate.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestUpdate.sql" />
@@ -137,8 +137,9 @@
     <Build Include="dbo\Stored Procedures\spUpdateSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSelectSupplierApplication.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateApplicationAddSupplierAddLogin.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertSupplierFromApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetUserName.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectHotelGuestPinGet.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
