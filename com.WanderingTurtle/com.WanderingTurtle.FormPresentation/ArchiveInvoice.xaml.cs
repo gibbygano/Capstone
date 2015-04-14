@@ -90,7 +90,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                
                 ResultsArchive result = _invoiceManager.ArchiveCurrentGuestInvoice(invoiceToArchive);
 
                 switch (result)

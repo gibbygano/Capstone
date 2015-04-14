@@ -20,11 +20,6 @@ GO
 ALTER TABLE [dbo].[HotelGuest]
     ADD DEFAULT 1 FOR [Active];
 GO
-
-ALTER TABLE [dbo].[HotelGuest]
-ADD CONSTRAINT [UniqueRoom]UNIQUE ([Room])
-GO
-
-ALTER TABLE [dbo].[HotelGuest]
-ADD CONSTRAINT [UniquePIN]UNIQUE ([GuestPIN])
-GO
+CREATE UNIQUE NONCLUSTERED INDEX [unique_room_index]
+	ON [HotelGuest]([Room])
+	WHERE [Active] = 1;

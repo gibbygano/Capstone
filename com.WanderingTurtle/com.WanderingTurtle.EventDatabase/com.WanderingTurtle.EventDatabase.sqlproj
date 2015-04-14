@@ -139,7 +139,6 @@
     <Build Include="dbo\Stored Procedures\spSelectSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateApplicationAddSupplierAddLogin.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetUserName.sql" />
-    <Build Include="dbo\Stored Procedures\spHotelGuestGetPin.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

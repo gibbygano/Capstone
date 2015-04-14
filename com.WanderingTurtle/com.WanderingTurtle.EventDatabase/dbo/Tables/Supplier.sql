@@ -11,14 +11,10 @@
     [ApplicationID] INT           NOT NULL,
     [UserID]        INT           NULL,
     [Active]        INT           NOT NULL,
-	[SupplyCost]	DECIMAL(3,2)  NOT NULL DEFAULT(.70), 
+	[SupplyCost]	DECIMAL(3,2)		  NOT NULL DEFAULT(.70), 
     CONSTRAINT [PK_Supplier] PRIMARY KEY CLUSTERED ([SupplierID] ASC) ON [PRIMARY], 
     CONSTRAINT [FK_Supplier_CityState] FOREIGN KEY ([Zip]) REFERENCES [CityState]([Zip])
 ) ON [PRIMARY];
 GO
 CREATE NONCLUSTERED INDEX [SupplierIndex]
     ON [dbo].[Supplier]([SupplierID] ASC);
-GO
-ALTER TABLE [dbo].[Supplier]
-ADD CONSTRAINT [UniqueUserName]UNIQUE ([UserID])
-GO
