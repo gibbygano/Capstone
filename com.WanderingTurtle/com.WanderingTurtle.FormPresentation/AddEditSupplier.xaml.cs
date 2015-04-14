@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class AddEditSupplier 
     {
         public static AddEditSupplier Instance;
-        private int _userID = 9870;
+        private int _userID = 9870;  // THIS WILL BE DELETED TBD
         private SupplierManager _manager = new SupplierManager();
         private Supplier _UpdatableSupplier;
         private List<CityState> _zips;
@@ -64,7 +64,6 @@ namespace com.WanderingTurtle.FormPresentation
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //btnEdit.IsEnabled = false;
-                      
         }
 
         /// <summary>
@@ -149,7 +148,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else if (!Validator.ValidateString(txtFirstName.Text.Trim()))
             {
-                throw new InputValidationException(txtFirstName, "The fist name field filled out and must not contain special characters (No Spaces)");
+                throw new InputValidationException(txtFirstName, "The first name field filled out and must not contain special characters (No Spaces)");
             }
             else if (!Validator.ValidateString(txtLastName.Text.Trim()))
             {
@@ -295,7 +294,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                throw new WanderingTurtleException(this, ex, "Error Retriving the list of zip codes");
+                throw new WanderingTurtleException(this, ex, "Error Retrieving the list of zip codes");
             }
 
 

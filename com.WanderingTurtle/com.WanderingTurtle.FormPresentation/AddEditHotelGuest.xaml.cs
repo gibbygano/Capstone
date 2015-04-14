@@ -349,14 +349,9 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
+            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateInt(TxtGuestPIN.Text.Trim(), 1000, 9999))
             {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number with 4 characters.");
-                return false;
-            }
-            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(), 4))
-            {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number with 4 characters.");
+                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
                 return false;
             }
 

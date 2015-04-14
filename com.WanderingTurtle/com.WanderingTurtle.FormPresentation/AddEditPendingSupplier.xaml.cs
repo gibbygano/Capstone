@@ -25,6 +25,8 @@ namespace com.WanderingTurtle.FormPresentation
         public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
         public SupplierManager MySupplierManager = new SupplierManager();
         public SupplierLoginManager myLoginManager = new SupplierLoginManager();
+        private List<CityState> _zips;
+        private CityStateManager _cityStateManager = new CityStateManager();
 
         /// <summary>
         /// Created:  2015/04/04
@@ -52,6 +54,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             this.CurrentSupplierApplication = CurrentSupplierApplication;
             ReloadComboBox();
+            fillComboBox();
             SetFields();
             
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
@@ -96,16 +99,14 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     ValidateApprovalFields();
 
-                    string userNameToAdd = txtUserName.Text;
-
-                    ResultsEdit userNameCheck = myLoginManager.CheckSupplierUserName(userNameToAdd);
+                    ResultsEdit userNameCheck = myLoginManager.CheckSupplierUserName(txtUserName.Text);
 
                     //if the name wasn't found - that's good
                     if (userNameCheck == ResultsEdit.NotFound)
                     {
-                        decimal supplyCost = (decimal)(numSupplyCost.Value / 100);
+                        decimal supplyCost = (decimal)(numSupplyCost.Value);
 
-                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, userNameToAdd, supplyCost);
+                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, txtUserName.Text, supplyCost);
 
                         if (result == SupplierResult.Success)
                         {
@@ -142,9 +143,10 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new WanderingTurtleException(this, "DB Error.");
                 }
-
-
-            }catch{
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         } 
       
@@ -164,11 +166,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
             return true;
         }
+
+
         private bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
-                txtCompanyName.Focus();
                 throw new WanderingTurtleException(this, "Enter a company name.");
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
@@ -191,7 +194,10 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, "Enter a last name.");
             }
-
+            if (cboZip.SelectedItem == null)
+            {
+                throw new InputValidationException(cboZip, "You must select an zip from the drop down");
+            }
             return true;
         }
 
@@ -203,7 +209,8 @@ namespace com.WanderingTurtle.FormPresentation
             UpdatedSupplierApplication.LastName = this.txtLastName.Text;
             UpdatedSupplierApplication.Address1 = this.txtAddress.Text;
             UpdatedSupplierApplication.Address2 = this.txtAddress2.Text;
-            UpdatedSupplierApplication.Zip = this.txtZip.Text;
+            UpdatedSupplierApplication.Zip = cboZip.SelectedValue.ToString();
+
             UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
             UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
             UpdatedSupplierApplication.ApplicationDate = CurrentSupplierApplication.ApplicationDate;
@@ -227,12 +234,38 @@ namespace com.WanderingTurtle.FormPresentation
             this.txtLastName.Text = CurrentSupplierApplication.LastName;
             this.txtAddress.Text = CurrentSupplierApplication.Address1;
             this.txtAddress2.Text = CurrentSupplierApplication.Address2;
-            this.txtZip.Text = CurrentSupplierApplication.Zip;
             this.txtPhoneNumber.Text = CurrentSupplierApplication.PhoneNumber;
             this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
-            this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString();
+            this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
-            this.txtRemarks.Text = CurrentSupplierApplication.Remarks;            
+            this.txtRemarks.Text = CurrentSupplierApplication.Remarks;
+
+            for (int i = 0; i < _zips.Count; i++)
+            {
+                if (_zips[i].Zip == CurrentSupplierApplication.Zip)
+                {
+                    cboZip.SelectedValue = _zips[i].Zip;
+                }
+            }
+        }
+
+        /// <summary>
+        /// fills the zip code combo box
+        /// created by will fritz 2/19/2015
+        /// </summary>
+        private void fillComboBox()
+        {
+            try
+            {
+                _zips = _cityStateManager.GetCityStateList();
+                cboZip.ItemsSource = _zips;
+                cboZip.DisplayMemberPath = "GetZipStateCity";
+                cboZip.SelectedValuePath = "Zip";
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex, "Error Retrieving the list of zip codes");
+            }
         }
 
         /// <summary>
@@ -244,7 +277,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// </remarks>
         private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
-                /// <summary>
+
+        /// <summary>
         /// Pat Banks
         /// Created: 2015/04/11
         /// 
@@ -256,6 +290,7 @@ namespace com.WanderingTurtle.FormPresentation
             cboAppStatus.ItemsSource = GetStatusList;
         }
 
+
         private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cboAppStatus.SelectedIndex.Equals(1))
@@ -265,6 +300,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
             else
             {
+                numSupplyCost.Value = .70;
+                txtUserName.Text = "";
+
                 numSupplyCost.IsEnabled = false;
                 txtUserName.IsEnabled = false;
             }

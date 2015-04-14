@@ -90,19 +90,13 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
 
                 case (ResultsArchive.OkToArchive):
+                    
                     //opens UI with guest information
                     ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
-                    bool? res = myGuest.ShowDialog();
-
-                    //closes window after successful guest archival
-                    if (res.HasValue && res.Value)
+                    if (myGuest.ShowDialog() == false)
                     {
                         this.Close();
-                    }
-                    else
-                    {
-                        return;
                     }
                     break;
             }
