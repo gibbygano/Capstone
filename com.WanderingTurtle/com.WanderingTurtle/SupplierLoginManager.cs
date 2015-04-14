@@ -31,11 +31,11 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        public int addSupplierLogin(string userName)
+        public int addSupplierLogin(string userName, int supplierID)
         {
             try
             {
-                return access.addSupplierLogin(userName);
+                return access.addSupplierLogin(userName, supplierID);
             }
             catch (SqlException)
             {

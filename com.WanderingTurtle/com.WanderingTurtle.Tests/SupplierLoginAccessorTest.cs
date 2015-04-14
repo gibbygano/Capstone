@@ -12,12 +12,14 @@ namespace com.WanderingTurtle.Tests
     public class SupplierLoginAccessorTest
     {
         private SupplierLoginAccessor access = new SupplierLoginAccessor();
+        private SupplierAccessor access2 = new SupplierAccessor();
         private SupplierLogin retrieveSupplier;
+        private Supplier fakeSupplier;
         
         [TestInitialize]
         public void initialize()
         {
-            access.addSupplierLogin("F@k3logg3r");
+            access.addSupplierLogin("F@k3logg3r", 101);
         }
         
         /// <summary>
@@ -27,7 +29,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginAdd()
         {
-            int numberAdded = access.addSupplierLogin("TryM3!");
+            int numberAdded = access.addSupplierLogin("TryM3!", 102);
             Assert.AreEqual("TryM3!", access.retrieveSupplierLogin("Password#1", "TryM3!").UserName);
         }
 
@@ -61,7 +63,7 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void TestSupplierLoginAddFail()
         {
-            int numberAdded = access.addSupplierLogin("F@k3logg3r");
+            int numberAdded = access.addSupplierLogin("F@k3logg3r", 101);
         }
 
         /// <summary>
