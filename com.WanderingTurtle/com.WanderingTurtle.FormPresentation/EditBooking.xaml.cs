@@ -104,7 +104,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnEditBooking_Click(object sender, RoutedEventArgs e)
+        private async void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -117,31 +117,20 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.QuantityZero):
-                        DialogBox.ShowMessageDialog(this, "Please use cancel instead of setting quantity 0.");
-                        break;
+                        throw new Exception("Please use cancel instead of setting quantity 0.");
                     case (ResultsEdit.Success):
-                        DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
                         this.Close();
                         break;
                     case(ResultsEdit.ListingFull):
-                        DialogBox.ShowMessageDialog(this,"This event is already full. You cannot add more guests to it.");
-                        break;
+                        throw new Exception("This event is already full. You cannot add more guests to it.");
                     case(ResultsEdit.ChangedByOtherUser):
-                        DialogBox.ShowMessageDialog(this, "Changed by another user");
-                        break;
+                        throw new Exception("Changed by another user");
                 }
-            }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

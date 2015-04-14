@@ -20,6 +20,8 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>ff964516</NuGetPackageImportStamp>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -142,6 +144,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PagesGuest\About.aspx" />
+    <Content Include="PagesGuest\Contacts.aspx" />
     <Content Include="Pages\Login.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -202,9 +206,11 @@
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Pages\GuestViewListings.aspx" />
+    <Content Include="PagesGuest\Default.aspx" />
     <Content Include="Pages\LoginBar.ascx" />
+    <Content Include="Pages\Logout.aspx" />
     <Content Include="Pages\SupplierApplicationPage.aspx" />
+    <Content Include="Pages\SupplierPortal.aspx" />
     <Content Include="Pages\ViewItemListing.aspx" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -220,6 +226,7 @@
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Site.Mobile.Master" />
+    <Content Include="PagesGuest\SiteGuest.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,6 +235,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PagesGuest\About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagesGuest\Contacts.aspx.cs">
+      <DependentUpon>Contacts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\Contacts.aspx.designer.cs">
+      <DependentUpon>Contacts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,12 +317,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GuestViewListings.aspx.cs">
-      <DependentUpon>GuestViewListings.aspx</DependentUpon>
+    <Compile Include="PagesGuest\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\GuestViewListings.aspx.designer.cs">
-      <DependentUpon>GuestViewListings.aspx</DependentUpon>
+    <Compile Include="PagesGuest\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginBar.ascx.cs">
       <DependentUpon>LoginBar.ascx</DependentUpon>
@@ -310,12 +331,26 @@
     <Compile Include="Pages\LoginBar.ascx.designer.cs">
       <DependentUpon>LoginBar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SupplierApplicationPage.aspx.cs">
       <DependentUpon>SupplierApplicationPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Pages\SupplierApplicationPage.aspx.designer.cs">
       <DependentUpon>SupplierApplicationPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SupplierPortal.aspx.cs">
+      <DependentUpon>SupplierPortal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\SupplierPortal.aspx.designer.cs">
+      <DependentUpon>SupplierPortal.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\ViewItemListing.aspx.cs">
       <DependentUpon>ViewItemListing.aspx</DependentUpon>
@@ -352,6 +387,13 @@
     </Compile>
     <Compile Include="Pages\SupplierViewEvents.aspx.designer.cs">
       <DependentUpon>SupplierViewEvents.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagesGuest\SiteGuest.Master.cs">
+      <DependentUpon>SiteGuest.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\SiteGuest.Master.designer.cs">
+      <DependentUpon>SiteGuest.Master</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
@@ -410,6 +452,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

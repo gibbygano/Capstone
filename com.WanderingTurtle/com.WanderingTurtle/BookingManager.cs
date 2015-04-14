@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Pat Banks 
         /// Updated: 2015/03/30
         /// 
-        /// Add DataCache 
+        /// Added DataCache 
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
        [DataObjectMethod(DataObjectMethodType.Select)]
@@ -43,7 +43,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 else
                 {
                     //check time. If less than 5 min, return cache
-
                     if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
                     {
                         RefreshItemDetailsListCacheData();
@@ -67,8 +66,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created: 2015/03/30
         /// 
         /// Refreshes the data cache 
-        /// </summary>
-        
+        /// </summary>       
         private void RefreshItemDetailsListCacheData()
         {
             //data hasn't been retrieved yet. get data, set it to the cache and return the result.
@@ -100,14 +98,14 @@ namespace com.WanderingTurtle.BusinessLogic
 
             try
             {
-                if (DataCache._currentEventList == null)
+                if (DataCache._currentItemListingDetailsList == null)
                 {
                     return BookingAccessor.getEventListing(itemListID);
                 }
                 else
                 {
                     //check time. If less than 5 min, return event from cache
-                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                    if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
                     {
                         //get event from DB
                         var requestedEvent = BookingAccessor.getEventListing(itemListID);

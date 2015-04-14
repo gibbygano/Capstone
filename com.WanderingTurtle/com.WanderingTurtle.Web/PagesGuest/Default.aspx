@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GuestViewListings.aspx.cs" Inherits="com.WanderingTurtle.Web.Pages.GuestViewListings" MasterPageFile="../Site.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="com.WanderingTurtle.Web.Pages.GuestViewListings" MasterPageFile="SiteGuest.Master" %>
 
 <%@ Import Namespace="com.WanderingTurtle.Common" %>
 <%@ Import Namespace="com.WanderingTurtle.Web" %>
@@ -29,7 +29,7 @@
     <h2>Upcoming Event Listings</h2>
     <h3>Please select an event to book your tickets:</h3>
 
-    <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
+    <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
 
     <asp:UpdatePanel runat="server" ID="gvListingsUpdate">
         <ContentTemplate>
@@ -60,11 +60,8 @@
             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="RetrieveActiveItemListings"
                 TypeName="com.WanderingTurtle.BusinessLogic.BookingManager"></asp:ObjectDataSource>
             <br />
-
-
-
-
-
+            </ContentTemplate>
+        </asp:UpdatePanel>
             <table>
                 <tr>
                     <td>
@@ -80,7 +77,7 @@
                         <asp:TextBox ID="txtGuestPin" runat="server" TabIndex="1" ViewStateMode="Enabled"></asp:TextBox></td>
                 </tr>
             </table>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+
+
     <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
 </asp:Content>

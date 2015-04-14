@@ -785,3 +785,55 @@ input[type="radio"]{
         }
 }
 /* END: Mobile Styles */
+
+.clear {
+    clear: both;
+}
+
+#loginBar{
+    color: #fff;
+    padding-bottom: 7px;
+}
+
+#loginBar a{
+    color: #fff;
+    text-decoration: none;
+    
+}
+
+#logout{
+    float: right;
+    padding-left: 10px;
+}
+#loginlink{
+    float: right;
+}
+
+#errorMessage{
+    display: block;
+    width: 50%;
+    height: auto;
+    margin: auto;
+    z-index: 1;
+    position: fixed;
+    left:25%;
+    top: 25%;
+    background-color: #fff;
+    padding-top: 1.2%;
+    padding-bottom: 1%;
+}
+
+.errorMsg{
+    margin-left: auto;
+    margin-right:auto;
+    overflow-wrap: normal;
+    padding-left: 5%;
+}
+
+#errorButton{
+    float:right;
+}
+.errorButtonStyle{
+    padding-left: 1%;
+    padding-right: 1%;
+}

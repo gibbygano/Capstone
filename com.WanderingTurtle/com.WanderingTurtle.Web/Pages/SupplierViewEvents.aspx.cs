@@ -18,11 +18,32 @@ namespace com.WanderingTurtle.Web.Pages
         public string onsite;
         public string nameError = "";
         public string descError = "";
+        private bool loggedIn = false;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
+            try
+            {
+                //attempt to get session value if they are logged in
+                loggedIn = (bool)Session["loggedin"];
+            }
+            catch (Exception)
+            {
+                //if it fails, the user must not have logged in on this
+                //session yet, so set it to false
+                Session["loggedIn"] = false;
+                //send them to the login page
+                Response.Redirect("~/login");
+            }
+            if (!loggedIn)
+            {
+                //if not logged in, send them to login page
+                Response.Redirect("~/login");
+            }
+
             if (Page.IsPostBack)
             {
+                //retrieve event types for update panel
                 try
                 {
                     _eventTypes = _myManager.RetrieveEventTypeList();
@@ -68,7 +89,7 @@ namespace com.WanderingTurtle.Web.Pages
         }
         public void FormValidate(int eventItemID)
         {
-           
+
         }
         public void UpdateEvent(int eventItemID)
         {
@@ -92,7 +113,7 @@ namespace com.WanderingTurtle.Web.Pages
                     stop = true;
                     showError("You must enter a valid Event Name!");
                     return;
-                    
+
 
                 }
                 //created programatically so don't need to be validated
@@ -111,15 +132,15 @@ namespace com.WanderingTurtle.Web.Pages
                     return;
                 }
 
-               
-                    lblError.Text = "";
-                    EventManager.EventResult result;
-                    if (myEvent != null)
-                    {
-                        result = _myManager.EditEvent(myEvent, newEvent);
-                        return;
-                    }
-                
+
+                lblError.Text = "";
+                EventManager.EventResult result;
+                if (myEvent != null)
+                {
+                    result = _myManager.EditEvent(myEvent, newEvent);
+                    return;
+                }
+
 
 
             }
@@ -155,25 +176,21 @@ namespace com.WanderingTurtle.Web.Pages
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Deleting Event\")</SCRIPT>");
             }
         }
-        public void InsertEvent()
-        {
-
-        }
 
         protected void lvEvents_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             //this.dpEvents.SetPageProperties(e.StartRowIndex, e.MaximumRows, false);
             bindData();
         }
-        
+
         protected void lvEvents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
         {
-                if (!Validator.ValidateAlphaNumeric(e.NewValues["EventItemName"].ToString(), 1, 255))
-                {
-                    Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"You must ender a valid name!\")</SCRIPT>");
-                    e.Cancel = true;
-                }
-            
+            if (!Validator.ValidateAlphaNumeric(e.NewValues["EventItemName"].ToString(), 1, 255))
+            {
+                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"You must ender a valid name!\")</SCRIPT>");
+                e.Cancel = true;
+            }
+
         }
     }
 

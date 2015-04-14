@@ -28,13 +28,14 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             loadPendingSuppliers();
-
         }
-        
 
-        private static void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
+        private void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
-            new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog();
+            if (new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog() == false)
+            {
+                loadPendingSuppliers();
+            }
         }
 
         private void btnUpdatePendingSupplier_Click(object sender, RoutedEventArgs e)
@@ -42,11 +43,11 @@ namespace com.WanderingTurtle.FormPresentation
             var selectedItem = this.lvPendingSuppliers.SelectedItem;
             if (selectedItem == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a row to edit");
-                return;
+                throw new WanderingTurtleException(this, "Please select a row to edit");
             }
+
             UpdatePendingSupplier(selectedItem as SupplierApplication);
-        }
+       }
 
         private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
         {
@@ -55,19 +56,21 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void loadPendingSuppliers()
         {
+            lvPendingSuppliers.ItemsPanel.LoadContent();
+
             try
             {
-
                 GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
-
+                lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
+                lvPendingSuppliers.Items.Refresh();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                return;
+                throw new WanderingTurtleException(this, ex);
             }
 
-            lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
+            
 
         }
 
@@ -75,5 +78,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e), true);
         }
+
     }
 }

@@ -24,11 +24,31 @@ namespace com.WanderingTurtle.Web.Pages
         public int currentNumberofGuests;
         public int maxNumberofGuests;
         public int minNumberofGuests;
+        private bool loggedIn = false;
+        public Supplier _currentSupplier = null;
 
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-
+            try
+            {
+                //attempt to get session value if they are logged in
+                loggedIn = (bool)Session["loggedin"];
+                _currentSupplier = (Supplier)Session["user"];
+            }
+            catch (Exception)
+            {
+                //if it fails, the user must not have logged in on this
+                //session yet, so set it to false
+                Session["loggedIn"] = false;
+                //send them to the login page
+                Response.Redirect("~/login");
+            }
+            if (!loggedIn)
+            {
+                //if not logged in, send them to login page
+                Response.Redirect("~/login");
+            }
             if (!Page.IsPostBack)
             {
                 _suppliers = _supplierManager.RetrieveSupplierList();

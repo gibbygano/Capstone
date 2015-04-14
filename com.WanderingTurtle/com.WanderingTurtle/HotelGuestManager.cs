@@ -23,13 +23,20 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
         /// 
+        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// 
         /// Updated try/catch blocks 
         /// </remarks>
-        public bool AddHotelGuest(HotelGuest newHotelGuest)
+        public ResultsEdit AddHotelGuest(HotelGuest newHotelGuest)
         {
             try
             {
-                return HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+                bool worked = HotelGuestAccessor.HotelGuestAdd(newHotelGuest) > 0;
+                if (worked == true)
+                {
+                    return ResultsEdit.Success;
+                }
+
             }
             catch (SqlException)
             {
@@ -39,6 +46,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
+            return ResultsEdit.DatabaseError;
         }
 
         /// <summary>
@@ -121,16 +129,23 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
         /// 
+        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// 
         /// Updated try/catch blocks 
         /// </remarks>
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
         /// <returns>Number of rows effected</returns>
-        public bool UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
+        public ResultsEdit UpdateHotelGuest(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
         {
             try
             {
-                return HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+                bool worked = HotelGuestAccessor.HotelGuestUpdate(oldHotelGuest, newHotelGuest) > 0;
+                if (worked == true)
+                {
+                    return ResultsEdit.Success;
+                }
+
             }
             catch (ApplicationException)
             {
@@ -144,8 +159,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
+            return ResultsEdit.DatabaseError;
         }
-
         /// <summary>
         /// Rose Steffensmeier
         /// Created: 2013/02/26

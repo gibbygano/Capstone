@@ -62,9 +62,9 @@ namespace com.WanderingTurtle.FormPresentation
                 _NewListing.Price = (decimal)(udPrice.Value);
                 _NewListing.MaxNumGuests = (int)(udSeats.Value);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new WanderingTurtleException(this, ex);
             }
 
             try
@@ -75,7 +75,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There was an error adding the Item Listing.", ex.Message);
+                throw new WanderingTurtleException(this, ex, "Error adding the Item Listing.");
             }
         }
 
@@ -151,7 +151,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.ToString());
+                throw new WanderingTurtleException(this, ex);
             }
 
             CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
@@ -188,7 +188,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, "There was an error updating the Item Listing.", ex.Message);
+                throw new WanderingTurtleException(this, ex, "There was an error updating the Item Listing.");
             }
         }
 
@@ -196,38 +196,32 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (eventCbox.SelectedIndex.Equals(-1))
             {
-                DialogBox.ShowMessageDialog(this, "Please select an Event to List!");
-                return false;
+                throw new InputValidationException(eventCbox, "Please select an Event to List!");
             }
 
             if (supplierCbox.SelectedIndex.Equals(-1))
             {
-                DialogBox.ShowMessageDialog(this, "Please select a supplier!");
-                return false;
+                throw new InputValidationException(supplierCbox, "Please select a supplier!");
             }
 
             if (dateStart.Text == null || dateEnd.Text == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a date");
-                return false;
+                throw new InputValidationException((dateStart.Text == null) ? dateStart : dateEnd, "Please select a date");
             }
 
             if (tpStartTime.Value == null || tpEndTime.Value == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a time");
-                return false;
+                throw new InputValidationException((tpStartTime.Value == null) ? tpStartTime : tpEndTime, "Please select a time");
             }
 
             if (udPrice.Value == 0)
             {
-                DialogBox.ShowMessageDialog(this, "Please indicate a price for tickets");
-                return false;
+                throw new InputValidationException(udPrice, "Please indicate a price for tickets");
             }
 
             if (udSeats.Value == 0)
             {
-                DialogBox.ShowMessageDialog(this, "Please indicate number of seats for the event");
-                return false;
+                throw new InputValidationException(udSeats, "Please indicate number of seats for the event");
             }
             return true;
         }

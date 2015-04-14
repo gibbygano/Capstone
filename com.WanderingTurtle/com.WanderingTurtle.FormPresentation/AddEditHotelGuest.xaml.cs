@@ -63,9 +63,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana
         /// Created: 2015/02/16
         /// 
+        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// 
         /// Parameter marks whether a database command was successful
         /// </summary>
-        public bool Result { get; private set; }
+        public ResultsEdit Result { get; private set; }
 
         /// <summary>
         /// Miguel Santana
@@ -110,7 +112,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void cboZip_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            ((ComboBox)sender).IsDropDownOpen = true;
+            // ((ComboBox)sender).IsDropDownOpen = true;
         }
 
         /// <summary>
@@ -174,10 +176,25 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <param name="style"></param>
-        /// <returns>awaitable Task of MEssageDialogResult</returns>
+        /// <returns>awaitable Task of MessageDialogResult</returns>
         private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return DialogBox.ShowMessageDialog(this, message, title, style);
+        }
+
+        private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
+        {
+            throw new InputValidationException(component, message, title);
+        }
+
+        private void ShowErrorMessage(string message, string title = null)
+        {
+            throw new WanderingTurtleException(this, message, title);
+        }
+
+        private void ShowErrorMessage(Exception exception, string title = null)
+        {
+            throw new WanderingTurtleException(this, exception, title);
         }
 
         /// <summary>
@@ -207,7 +224,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
 
             if (!Validate()) { return; }
-            Exception _ex = null;
             try
             {
                 //FormatException found in if loop
@@ -245,21 +261,16 @@ namespace com.WanderingTurtle.FormPresentation
                         );
                 }
 
-                if (Result)
+                if (Result == ResultsEdit.Success)
                 {
                     await ShowMessage("Your Request was Processed Successfully", "Success");
                     Close();
                 }
                 else
-                { await ShowMessage("Error Processing Request", "Error"); }
+                { ShowErrorMessage("Error Processing Request", "Error"); }
             }
-            catch (ApplicationException ex)
-            { _ex = ex; }
-            catch (SqlException ex)
-            { _ex = ex; }
             catch (Exception ex)
-            { _ex = ex; }
-            if (_ex != null) { await ShowMessage(_ex.Message); _ex = null; }
+            { ShowErrorMessage(ex); }
         }
 
         /// <summary>
@@ -302,71 +313,47 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
             {
-                ShowMessage("Please enter a First Name");
-                TxtFirstName.Focus();
-                TxtFirstName.SelectAll();
+                ShowInputErrorMessage(TxtFirstName, "Please enter a First Name");
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
             {
-                ShowMessage("Please enter a Last Name");
-                TxtLastName.Focus();
-                TxtLastName.SelectAll();
+                ShowInputErrorMessage(TxtLastName, "Please enter a Last Name");
                 return false;
             }
             if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
             {
-                ShowMessage("Please enter an Address");
-                TxtAddress1.Focus();
-                TxtAddress1.SelectAll();
+                ShowInputErrorMessage(TxtAddress1, "Please enter an Address");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
             {
-                ShowMessage("Error adding Address2");
-                TxtAddress2.Focus();
-                TxtAddress2.SelectAll();
+                ShowInputErrorMessage(TxtAddress2, "Error adding Address2");
                 return false;
             }
             if (CboZip.SelectedItem == null)
             {
-                ShowMessage("Please select a Zip Code");
-                CboZip.Focus();
+                ShowInputErrorMessage(CboZip, "Please select a Zip Code");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
             {
-                ShowMessage("Please enter a valid Phone Number");
-                TxtPhoneNumber.Focus();
-                TxtPhoneNumber.SelectAll();
+                ShowInputErrorMessage(TxtPhoneNumber, "Please enter a valid Phone Number");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
             {
-                ShowMessage("Please enter a valid Email Address");
-                TxtEmailAddress.Focus();
-                TxtEmailAddress.SelectAll();
+                ShowInputErrorMessage(TxtEmailAddress, "Please enter a valid Email Address");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
             {
-                ShowMessage("Please enter a valid Room Number");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
+                ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
+            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateInt(TxtGuestPIN.Text.Trim(), 1000, 9999))
             {
-                ShowMessage("Please enter a valid PIN Number with 4 characters.");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
-                return false;
-            }
-            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(),4))
-            {
-                ShowMessage("Please enter a valid PIN Number with 4 characters.");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
+                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
                 return false;
             }
 

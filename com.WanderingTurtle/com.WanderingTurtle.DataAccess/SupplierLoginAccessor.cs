@@ -151,5 +151,33 @@ namespace com.WanderingTurtle.DataAccess
                 throw;
             }
         }
+
+        public string checkUserName(string userName)
+        {
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSupplierLoginGetUserName";
+            string retrievedUserName = "";
+
+            var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@userName", userName);
+
+            conn.Open();
+            var reader = cmd.ExecuteReader();
+
+            if (reader.HasRows == true)
+            {
+                reader.Read();
+
+                retrievedUserName = reader.GetValue(0).ToString();
+            }
+            else
+            {
+                retrievedUserName = "";
+            }
+                
+            return retrievedUserName;
+        }
     }
 }

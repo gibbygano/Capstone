@@ -95,7 +95,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnConfirmCancel_Click(object sender, RoutedEventArgs e)
+        private async void btnConfirmCancel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -108,26 +108,17 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.ChangedByOtherUser):
-                        DialogBox.ShowMessageDialog(this, "This booking has already been cancelled.");
-                        break;
+                        throw new Exception("This booking has already been cancelled.");
 
                     case (ResultsEdit.Success):
-                        DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");
+                        await DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");
                         this.Close();
                         break;
                 }
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
     }

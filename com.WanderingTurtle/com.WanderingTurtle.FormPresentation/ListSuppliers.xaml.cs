@@ -62,7 +62,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "There was an error accessing the database");
+                throw new WanderingTurtleException(this, ex, "There was an error accessing the database");
             }
         }
 
@@ -97,7 +97,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Exception _ex = null;
             try
             {
                 Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
@@ -109,8 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
                 FillList();
             }
             catch (Exception ex)
-            { _ex = ex; }
-            if (_ex != null) { await DialogBox.ShowMessageDialog(this, _ex.Message, "You Must Select A Supplier Before You Can Delete"); _ex = null; }
+            { throw new WanderingTurtleException(this, ex, "You Must Select A Supplier Before You Can Delete"); }
         }
 
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
@@ -136,7 +134,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "You Must Select A Supplier Before You Can Update");
+                throw new WanderingTurtleException(this, ex, "You Must Select A Supplier Before You Can Update");
             }
         }
 
@@ -182,13 +180,32 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
+                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
             }
         }
 
         private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdateSupplier(DataGridHelper.DataGridRow_Click<Supplier>(sender, e), true);
+        }
+
+        private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var myList = _manager.searchSupplier(txtSearchSupplier.Text);
+            lvSuppliersList.ItemsSource = myList;
+            lvSuppliersList.Items.Refresh();
+        }
+
+        private void txtSearchSupplier_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(txtSearchSupplier.Text.Length == 0)
+            {
+                btnSearchSupplier.Content = "Refresh List";
+            }
+            else
+            {
+                btnSearchSupplier.Content = "Search";
+            }
         }
     }
 }

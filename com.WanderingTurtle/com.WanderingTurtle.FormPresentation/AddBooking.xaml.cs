@@ -68,7 +68,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "Unable to retrieve Hotel Guest listing from the database.");
+                throw new WanderingTurtleException(this, ex, "Unable to retrieve Hotel Guest listing from the database.");
             }
 
         }
@@ -87,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
+        private async void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
             //validates data from form
             if (!Validate()) { return; }
@@ -102,29 +102,21 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.QuantityZero):
-                        DialogBox.ShowMessageDialog(this, "Quantity of tickets must be more than zero.");
-                        break;
+                        throw new WanderingTurtleException(this, "Quantity of tickets must be more than zero.");
 
                     case(ResultsEdit.DatabaseError):
-                        DialogBox.ShowMessageDialog(this, "Booking could not be added due to database malfunction.");
-                        break;
+                        throw new WanderingTurtleException(this, "Booking could not be added due to database malfunction.");
 
                     case (ResultsEdit.Success):
-                        DialogBox.ShowMessageDialog(this, "The booking has been successfully added."); 
+                        btnAddBookingAdd.IsEnabled = false;
+                        await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        this.Close();
                         break;
                 }
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -174,7 +166,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (selected== null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select an event.");
+                throw new WanderingTurtleException(this, "Please select an event.");
             }
             return selected;
         }
@@ -249,15 +241,11 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateInt(udAddBookingQuantity.Value.ToString()))
             {
-                DialogBox.ShowMessageDialog(this, "Value is not an integer.  Please re-enter.");
-                udAddBookingQuantity.Focus();
-                return false;
+                throw new InputValidationException(udAddBookingQuantity, "Value is not an integer.  Please re-enter.");
             }
             if (!Validator.ValidateDecimal(udDiscount.Value.ToString()))
             {
-                DialogBox.ShowMessageDialog(this, "Value is not a percentage.  Please re-enter.");
-                udDiscount.Focus();
-                return false;
+                throw new InputValidationException(udDiscount, "Value is not a percentage.  Please re-enter.");
             }
             return true;
         }

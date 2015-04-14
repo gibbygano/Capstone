@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using com.WanderingTurtle.FormPresentation.Models;
 using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
@@ -22,233 +21,291 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditPendingSupplier
     {
-        public SupplierApplication CurrentSupplierApplication = null;
+        public SupplierApplication CurrentSupplierApplication;
+        public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
+        public SupplierManager MySupplierManager = new SupplierManager();
+        public SupplierLoginManager myLoginManager = new SupplierLoginManager();
+        private List<CityState> _zips;
+        private CityStateManager _cityStateManager = new CityStateManager();
 
+        /// <summary>
+        /// Created:  2015/04/04
+        /// Miguel Santana
+        /// 
+        /// Interaction logic for AddEditPendingSupplier.xaml
+        /// </summary>
         public AddEditPendingSupplier()
         {
             InitializeComponent();
             SetFields();
+            ReloadComboBox();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/09
+        /// 
+        /// Handles loading of the screen with data from the list.
+        /// </summary>
+        /// <param name="CurrentSupplierApplication"></param>
+        /// <param name="ReadOnly"></param>
         public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
             this.CurrentSupplierApplication = CurrentSupplierApplication;
+            ReloadComboBox();
+            fillComboBox();
             SetFields();
-
+            
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
-        public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
-        public SupplierApplication NewSupplierApplication = new SupplierApplication();
-        public Supplier NewSupplier = new Supplier();
-        public SupplierManager MySupplierManager = new SupplierManager();
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             SetFields();
         }
 
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            //validates data from form
+            if (!Validate()) { return; }
 
+            try
+            {
+                //get data from form
+                GetFormData();
+
+                if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Approved.ToString()))
+                {
+                    ValidateApprovalFields();
+
+                    ResultsEdit userNameCheck = myLoginManager.CheckSupplierUserName(txtUserName.Text);
+
+                    //if the name wasn't found - that's good
+                    if (userNameCheck == ResultsEdit.NotFound)
+                    {
+                        decimal supplyCost = (decimal)(numSupplyCost.Value);
+
+                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, txtUserName.Text, supplyCost);
+
+                        if (result == SupplierResult.Success)
+                        {
+                            await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+
+                            this.Close();
+                        }
+                        else
+                        {
+                            throw new WanderingTurtleException(this, "Supplier wasn't added to the database");
+                        }
+                    }
+                    else
+                    {
+                        throw new WanderingTurtleException(this, "UserName already in use.");
+                    }
+                }
+                else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
+                {
+                    SupplierResult result = MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
+
+                    if (result == SupplierResult.Success)
+                    {
+                        await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+
+                        this.Close();
+                    }
+                    else
+                    {
+                        throw new WanderingTurtleException(this, "DB Error");
+                    }
+                }
+                else
+                {
+                    throw new WanderingTurtleException(this, "DB Error.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
+        } 
+      
+
+        private bool ValidateApprovalFields()
+        {
+            //fields for approved supplier
+            //send info to BLL
+            if (!Validator.ValidateString(txtUserName.Text))
+            {
+                throw new InputValidationException(txtUserName, "Enter a user name.");
+
+            }
+            if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
+            {
+                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
+            }
+            return true;
+        }
+
+
+        private bool Validate()
+        {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter a company name.");
-                return;
+                throw new InputValidationException(txtCompanyName, "Enter a company name.");
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter an address.");
-                return;
+                throw new InputValidationException(txtAddress, "Enter an address.");
             }
             if (!Validator.ValidatePhone(txtPhoneNumber.Text))
-	        {
-		        DialogBox.ShowMessageDialog(this, "Enter a phone number.");
-                return;
-	        }
+            {
+                throw new InputValidationException(txtPhoneNumber, "Enter a phone number.");
+            }
             if (!Validator.ValidateEmail(txtEmailAddress.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter an email address.");
-                return;
+                throw new InputValidationException(txtEmailAddress, "Enter an email address.");
             }
-            if (!Validator.ValidateString(txtFirstame.Text))
+            if (!Validator.ValidateString(txtFirstName.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter a first name.");
+                throw new InputValidationException(txtFirstName, "Enter a first name.");
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
-                DialogBox.ShowMessageDialog(this, "Enter a last name.");
+                throw new InputValidationException(txtLastName, "Enter a last name.");
             }
-
-
-            if (CurrentSupplierApplication != null)
+            if (cboZip.SelectedItem == null)
             {
-                UpdatedSupplierApplication.CompanyName = this.txtCompanyName.Text;
-                UpdatedSupplierApplication.CompanyDescription = this.txtCompanyDescription.Text;
-                UpdatedSupplierApplication.FirstName = this.txtFirstame.Text;
-                UpdatedSupplierApplication.LastName = this.txtLastName.Text;
-                UpdatedSupplierApplication.Address1 = this.txtAddress.Text;
-                UpdatedSupplierApplication.Address2 = this.txtAddress2.Text;
-                UpdatedSupplierApplication.Zip = this.txtZip.Text;
-                UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
-                UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
-                UpdatedSupplierApplication.ApplicationDate = this.dateApplicationDate.DisplayDate;
-                UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
+                throw new InputValidationException(cboZip, "You must select an zip from the drop down");
+            }
+            return true;
+        }
 
-                //MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
+        private void GetFormData()
+        {
+            UpdatedSupplierApplication.CompanyName = this.txtCompanyName.Text;
+            UpdatedSupplierApplication.CompanyDescription = this.txtCompanyDescription.Text;
+            UpdatedSupplierApplication.FirstName = this.txtFirstName.Text;
+            UpdatedSupplierApplication.LastName = this.txtLastName.Text;
+            UpdatedSupplierApplication.Address1 = this.txtAddress.Text;
+            UpdatedSupplierApplication.Address2 = this.txtAddress2.Text;
+            UpdatedSupplierApplication.Zip = cboZip.SelectedValue.ToString();
 
-                DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+            UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
+            UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
+            UpdatedSupplierApplication.ApplicationDate = CurrentSupplierApplication.ApplicationDate;
+            UpdatedSupplierApplication.ApplicationStatus = this.cboAppStatus.SelectedValue.ToString();
+            UpdatedSupplierApplication.Remarks = this.txtRemarks.Text;
 
-                SetFields();
-                disableApprovedFields();
+            //application id from record in memory
+            UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
+            UpdatedSupplierApplication.LastStatusDate = DateTime.Now;
 
-                //having issues with the updateVendorApplication stored precedure here and below. Will uncomment when resolved
-                /*if (cbApproved.IsChecked == true)
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SetFields()
+        {
+            this.txtCompanyName.Text = CurrentSupplierApplication.CompanyName;
+            this.txtCompanyDescription.Text = CurrentSupplierApplication.CompanyDescription;
+            this.txtFirstName.Text = CurrentSupplierApplication.FirstName;
+            this.txtLastName.Text = CurrentSupplierApplication.LastName;
+            this.txtAddress.Text = CurrentSupplierApplication.Address1;
+            this.txtAddress2.Text = CurrentSupplierApplication.Address2;
+            this.txtPhoneNumber.Text = CurrentSupplierApplication.PhoneNumber;
+            this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
+            this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
+            this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
+            this.txtRemarks.Text = CurrentSupplierApplication.Remarks;
+
+            for (int i = 0; i < _zips.Count; i++)
+            {
+                if (_zips[i].Zip == CurrentSupplierApplication.Zip)
                 {
-                    NewSupplier.CompanyName = UpdatedSupplierApplication.CompanyName;
-                    NewSupplier.FirstName = UpdatedSupplierApplication.FirstName;
-                    NewSupplier.LastName = UpdatedSupplierApplication.LastName;
-                    NewSupplier.Address1 = UpdatedSupplierApplication.Address1;
-                    NewSupplier.Address2 = UpdatedSupplierApplication.Address2;
-                    NewSupplier.Zip = UpdatedSupplierApplication.Zip;
-                    NewSupplier.PhoneNumber = UpdatedSupplierApplication.Zip;
-                    NewSupplier.EmailAddress = UpdatedSupplierApplication.EmailAddress;
-                    NewSupplier.ApplicationID = UpdatedSupplierApplication.ApplicationID;
-                    NewSupplier.SupplyCost = (decimal)this.numSupplyCost.Value;
-                    
-
-                    UpdatedSupplierApplication.Approved = true;
-                    UpdatedSupplierApplication.ApprovalDate = dateApprovalDate.DisplayDate.Date;
-
-                    MySupplierManager.AddANewSupplier(NewSupplier);
-                    MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
-
-                    DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
-                }*/
-            }else if(CurrentSupplierApplication == null){
-
-                NewSupplierApplication.CompanyName = txtCompanyName.Text;
-                NewSupplierApplication.CompanyDescription = txtCompanyDescription.Text;
-                NewSupplierApplication.FirstName = txtFirstame.Text;
-                NewSupplierApplication.LastName = txtLastName.Text;
-                NewSupplierApplication.Address1 = txtAddress.Text;
-                NewSupplierApplication.Address2 = txtAddress2.Text;
-                NewSupplierApplication.Zip = txtZip.Text;
-                NewSupplierApplication.PhoneNumber = txtPhoneNumber.Text;
-                NewSupplierApplication.EmailAddress = txtEmailAddress.Text;
-                NewSupplierApplication.ApplicationDate = dateApplicationDate.DisplayDate;
-                NewSupplierApplication.Approved = false;
-
-                NewSupplierApplication.ApplicationID = MySupplierManager.AddASupplierApplication(NewSupplierApplication);
-
-                DialogBox.ShowMessageDialog(this, "Supplier application submitted.");
-
-                SetFields();
-                disableApprovedFields();
-
-                /*if (cbApproved.IsChecked == true)
-                {
-                    NewSupplier.CompanyName = NewSupplierApplication.CompanyName;
-                    NewSupplier.FirstName = NewSupplierApplication.FirstName;
-                    NewSupplier.LastName = NewSupplierApplication.LastName;
-                    NewSupplier.Address1 = NewSupplierApplication.Address1;
-                    NewSupplier.Address2 = NewSupplierApplication.Address2;
-                    NewSupplier.Zip = NewSupplierApplication.Zip;
-                    NewSupplier.PhoneNumber = NewSupplierApplication.Zip;
-                    NewSupplier.EmailAddress = NewSupplierApplication.EmailAddress;
-                    NewSupplier.ApplicationID = NewSupplierApplication.ApplicationID;
-                    NewSupplier.SupplyCost = (decimal)this.numSupplyCost.Value;
-
-                    UpdatedSupplierApplication.CompanyName = NewSupplierApplication.CompanyName;
-                    UpdatedSupplierApplication.CompanyDescription = NewSupplierApplication.CompanyDescription;
-                    UpdatedSupplierApplication.FirstName = NewSupplierApplication.FirstName;
-                    UpdatedSupplierApplication.LastName = NewSupplierApplication.LastName;
-                    UpdatedSupplierApplication.Address1 = NewSupplierApplication.Address1;
-                    UpdatedSupplierApplication.Address2 = NewSupplierApplication.Address2;
-                    UpdatedSupplierApplication.Zip = NewSupplierApplication.Zip;
-                    UpdatedSupplierApplication.PhoneNumber = NewSupplierApplication.PhoneNumber;
-                    UpdatedSupplierApplication.EmailAddress = NewSupplierApplication.EmailAddress;
-                    UpdatedSupplierApplication.ApplicationID = NewSupplierApplication.ApplicationID;
-                    UpdatedSupplierApplication.ApplicationDate = NewSupplierApplication.ApplicationDate;
-
-                    UpdatedSupplierApplication.Approved = true;
-                    UpdatedSupplierApplication.ApprovalDate = dateApprovalDate.DisplayDate.Date;
-
-                    MySupplierManager.AddANewSupplier(NewSupplier);
-                    MySupplierManager.EditSupplierApplication(NewSupplierApplication, UpdatedSupplierApplication);
-
-                    DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
-                    
-                }*/
-
-
+                    cboZip.SelectedValue = _zips[i].Zip;
+                }
             }
         }
 
-        private void SetFields()
+        /// <summary>
+        /// fills the zip code combo box
+        /// created by will fritz 2/19/2015
+        /// </summary>
+        private void fillComboBox()
         {
-            disableApprovedFields();
-
-            if (CurrentSupplierApplication == null)
+            try
             {
-                this.txtCompanyName.Text = null;
-                this.txtCompanyDescription.Text = null;
-                this.txtFirstame.Text = null;
-                this.txtLastName.Text = null;
-                this.txtAddress.Text = null;
-                this.txtAddress2.Text = null;
-                this.txtZip.Text = null;
-                this.txtPhoneNumber.Text = null;
-                this.txtEmailAddress.Text = null;
-                this.dateApplicationDate.SelectedDate = DateTime.Now.Date;
-                this.cbApproved.IsChecked = false;
-                this.dateApprovalDate.SelectedDate = DateTime.Now.Date;
-                this.numSupplyCost.Value = 70;
-                this.pwPassword.Clear();
-                this.txtUserId.Clear();
+                _zips = _cityStateManager.GetCityStateList();
+                cboZip.ItemsSource = _zips;
+                cboZip.DisplayMemberPath = "GetZipStateCity";
+                cboZip.SelectedValuePath = "Zip";
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex, "Error Retrieving the list of zip codes");
+            }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/04/10
+        ///
+        /// Defines application status for the combo box
+        /// </summary>
+        /// <remarks>
+        /// </remarks>
+        private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/04/11
+        /// 
+        /// Reloads the combobox with values
+        /// </summary>
+        private void ReloadComboBox()
+        {
+            //creating a list for the dropdown userLevel
+            cboAppStatus.ItemsSource = GetStatusList;
+        }
+
+
+        private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboAppStatus.SelectedIndex.Equals(1))
+            {
+                numSupplyCost.IsEnabled = true;
+                txtUserName.IsEnabled = true;
             }
             else
             {
-                this.txtCompanyName.Text = CurrentSupplierApplication.CompanyName;
-                this.txtCompanyDescription.Text = CurrentSupplierApplication.CompanyDescription;
-                this.txtFirstame.Text = CurrentSupplierApplication.FirstName;
-                this.txtLastName.Text = CurrentSupplierApplication.LastName;
-                this.txtAddress.Text = CurrentSupplierApplication.Address1;
-                this.txtAddress2.Text = CurrentSupplierApplication.Address2;
-                this.txtZip.Text = CurrentSupplierApplication.Zip;
-                this.txtPhoneNumber.Text = CurrentSupplierApplication.PhoneNumber;
-                this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
-                this.dateApplicationDate.SelectedDate = CurrentSupplierApplication.ApplicationDate;
-                this.cbApproved.IsChecked = CurrentSupplierApplication.Approved;
-                this.dateApprovalDate.SelectedDate = CurrentSupplierApplication.ApprovalDate;
+                numSupplyCost.Value = .70;
+                txtUserName.Text = "";
+
+                numSupplyCost.IsEnabled = false;
+                txtUserName.IsEnabled = false;
             }
-        }
-
-        private void cbApproved_Checked(object sender, RoutedEventArgs e)
-        {
-            txtUserId.IsEnabled = true;
-            pwPassword.IsEnabled = true;
-            numSupplyCost.IsEnabled = true;
-            dateApprovalDate.IsEnabled = true;
-        }
-
-        private void cbApproved_Unchecked(object sender, RoutedEventArgs e)
-        {
-            disableApprovedFields();
-        }
-
-        private void disableApprovedFields()
-        {
-            txtUserId.IsEnabled = false;
-            pwPassword.IsEnabled = false;
-            numSupplyCost.IsEnabled = false;
-            dateApprovalDate.IsEnabled = false;
         }
     }
 }

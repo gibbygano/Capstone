@@ -15,6 +15,7 @@ namespace com.WanderingTurtle.Web
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+        private bool loggedIn = false;
         
 
         protected void Page_Init(object sender, EventArgs e)
@@ -75,28 +76,52 @@ namespace com.WanderingTurtle.Web
             //create menu based on login -- need to create this logic
             if (!Page.IsPostBack)
             {
-                var stuff1 = new MenuItem();
-                var stuff2 = new MenuItem();
-                var stuff3 = new MenuItem();
-
-                stuff1.NavigateUrl = "/events";
-                stuff1.Text = "View Events";
-                stuff2.NavigateUrl = "/events/add";
-                stuff2.Text = "Add an Event";
-                stuff3.NavigateUrl = "/listings";
-                stuff3.Text = "View Listings";
-
-                var stuffList = new List<MenuItem>();
-
-                stuffList.Add(stuff1);
-                stuffList.Add(stuff2);
-                stuffList.Add(stuff3);
-
-                for (int i = 0; i < stuffList.Count; i++)
+                try
                 {
-                    Menu1.Items.Add(stuffList[i]);
+                    //attempt to get session value if they are logged in
+                    loggedIn = (bool)Session["loggedin"];
+                }
+                catch (Exception)
+                {
+                    //if it fails, the user must not have logged in on this
+                    //session yet, so set it to false
+                    Session["loggedIn"] = false;
+                }
+
+                if (loggedIn)
+                {
+                    var stuff1 = new MenuItem();
+                    var stuff2 = new MenuItem();
+                    var stuff3 = new MenuItem();
+                    var stuff4 = new MenuItem();
+
+                    stuff1.NavigateUrl = "/events";
+                    stuff1.Text = "View/Edit Events";
+                    stuff2.NavigateUrl = "/events/add";
+                    stuff2.Text = "Add an Event";
+                    stuff3.NavigateUrl = "/listings";
+                    stuff3.Text = "View Listings";
+                    stuff4.NavigateUrl = "/supplierlistings";
+                    stuff4.Text = "View/Edit Listings";
+
+                    var stuffList = new List<MenuItem>();
+
+                    stuffList.Add(stuff1);
+                    stuffList.Add(stuff2);
+                    //stuffList.Add(stuff3);
+                    stuffList.Add(stuff4);
+
+                    for (int i = 0; i < stuffList.Count; i++)
+                    {
+                        Menu1.Items.Add(stuffList[i]);
+                    }
+                    Menu1.SkipLinkText = "";
                 }
             }
+        }
+        protected void errorButton_Click(object sender, EventArgs e)
+        {
+            errorMessage.Visible = false;
         }
     }
 }

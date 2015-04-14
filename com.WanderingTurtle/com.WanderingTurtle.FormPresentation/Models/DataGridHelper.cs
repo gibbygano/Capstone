@@ -21,14 +21,10 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         { return (T)dataGrid.SelectedItem; }
                     }
                 }
-                throw new Exception("Error Getting Selected DataGrid Row.");
+                throw new ApplicationException("Error Getting Selected DataGrid Row.");
             }
             catch (Exception ex)
-            {
-                if (sender is DependencyObject) { DialogBox.ShowMessageDialog(sender as DependencyObject, ex.Message); }
-                else { MessageBox.Show(ex.Message); }
-                return default(T);
-            }
+            { throw new WanderingTurtleException(sender is FrameworkElement ? sender as FrameworkElement : null, ex); }
         }
     }
 }

@@ -54,10 +54,8 @@ namespace com.WanderingTurtle.FormPresentation
             ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItem;
             if (ListingToDelete == null)
             {
-                await DialogBox.ShowMessageDialog(this, "Please select a row to delete.");
-                return;
+                throw new WanderingTurtleException(this, "Please select a row to delete.");
             }
-            Exception _ex = null;
             try
             {
                 MessageDialogResult result = await DialogBox.ShowMessageDialog(this, "Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
@@ -75,9 +73,8 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                _ex = ex;
+                throw new WanderingTurtleException(this, ex);
             }
-            if (_ex != null) { await DialogBox.ShowMessageDialog(this, _ex.Message); _ex = null; }
         }
 
         private void btnEditListing_click(object sender, RoutedEventArgs e)
@@ -89,8 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (ListingEdit == null)
             {
-                DialogBox.ShowMessageDialog(this, "Please select a row to edit");
-                return;
+                throw new WanderingTurtleException(this, "Please select a row to edit");
             }
 
             Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
@@ -151,7 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "There must be data in the list before you can sort it");
+                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
             }
         }
 
@@ -168,8 +164,31 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message, "No database able to be accessed for Listings");
+                throw new WanderingTurtleException(this, ex, "No database able to be accessed for Listings");
             }
+        }
+
+        private void txtSearchListing_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(txtSearchListing.Text.Length == 0)
+            {
+                btnSearchListing.Content = "Refresh List";
+            }
+            else
+            {
+                btnSearchListing.Content = "Search";
+            }
+        }
+
+        private void btnSearchListing_Click(object sender, RoutedEventArgs e)
+        {
+            var myList = prodMan.SearchItemLists(txtSearchListing.Text);
+            foreach (ItemListing item in myList)
+            {
+                item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
+            }
+            lvListing.ItemsSource = myList;
+            lvListing.Items.Refresh();
         }
     }
 }

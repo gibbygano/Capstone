@@ -49,17 +49,9 @@ namespace com.WanderingTurtle.FormPresentation
                 myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(invoiceToArchive.HotelGuestID);
                 FillFormFields(selectedHotelGuestID);
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -94,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnFinalizeInvoice_Click(object sender, RoutedEventArgs e)
+        private async void btnFinalizeInvoice_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -103,25 +95,17 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsArchive.ChangedByOtherUser):
-                        DialogBox.ShowMessageDialog(this, "Record already changed by another user.");
-                        break;
+                        throw new Exception("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
-                        DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        this.Close();
                         break;
                 }
             }
-            catch (ApplicationException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
-            catch (SqlException ex)
-            {
-                DialogBox.ShowMessageDialog(this, ex.Message);
-            }
             catch (Exception ex)
             {
-                DialogBox.ShowMessageDialog(this, ex.Message);
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

@@ -47,6 +47,33 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+
+        public ResultsEdit CheckSupplierUserName(string userName)
+        {
+            try
+            {
+                if (access.checkUserName(userName) == "")
+                {
+                    return ResultsEdit.NotFound;
+                }
+                else
+                {
+                    return ResultsEdit.DatabaseError;
+                }
+
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
         public int archiveSupplierLogin(SupplierLogin oldSupplier, bool archive)
         {
             try

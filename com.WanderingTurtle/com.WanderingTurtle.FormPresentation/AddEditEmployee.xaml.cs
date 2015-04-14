@@ -121,15 +121,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated: 2015/02/22
         ///
         /// Cast Level to RoleData
+        /// 
+        /// Updated 2015/04/13 by Tony Noel
+        ///Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
-        private void EmployeeAdd()
+        private async void EmployeeAdd()
         {
             if (!Validate()) { return; }
 
             try
             {
                 Debug.Assert(ChkActiveEmployee.IsChecked != null, "ChkActiveEmployee.IsChecked != null");
-                int result = _employeeManager.AddNewEmployee(
+               ResultsEdit result = _employeeManager.AddNewEmployee(
                     new Employee(
                         TxtFirstName.Text,
                         TxtLastName.Text,
@@ -139,16 +142,16 @@ namespace com.WanderingTurtle.FormPresentation
                         )
                     );
 
-                if (result == 1)
+                if (result == ResultsEdit.Success)
                 {
-                    ShowMessage("Employee added successfully");
+                    await ShowMessage("Employee added successfully");
                     //closes window after successful add
                     Close();
                 }
             }
             catch (Exception ax)
             {
-                ShowMessage(ax.Message);
+                ShowErrorMessage(ax);
             }
         }
 
@@ -157,16 +160,19 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created: 2015/02/20
         ///
         /// Validates and Updates Employee user
+        /// 
+        /// Updated 2015/04/13 by Tony Noel
+        ///Updated to comply with the ResultsEdit class of error codes.
         /// </summary>
         /// <remarks>
         /// </remarks>
-        private void EmployeeUpdate()
+        private async void EmployeeUpdate()
         {
             if (!Validate()) { return; }
 
             try
             {
-                int result = _employeeManager.EditCurrentEmployee(
+                ResultsEdit result = _employeeManager.EditCurrentEmployee(
                     CurrentEmployee,
                     new Employee(
                         TxtFirstName.Text,
@@ -177,16 +183,16 @@ namespace com.WanderingTurtle.FormPresentation
                         )
                     );
 
-                if (result == 1)
+                if (result == ResultsEdit.Success)
                 {
-                    ShowMessage("Employee updated successfully");
+                    await ShowMessage("Employee updated successfully");
                     //closes window after successful add
                     Close();
                 }
             }
             catch (Exception ax)
             {
-                ShowMessage(ax.Message);
+                ShowErrorMessage(ax);
             }
         }
 
@@ -238,11 +244,25 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
-        /// <param name="style"></param>
         /// <returns>awaitable Task of MEssageDialogResult</returns>
         private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return DialogBox.ShowMessageDialog(this, message, title, style);
+        }
+
+        private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
+        {
+            throw new InputValidationException(component, message, title);
+        }
+
+        private void ShowErrorMessage(string message, string title = null)
+        {
+            throw new WanderingTurtleException(this, message, title);
+        }
+
+        private void ShowErrorMessage(Exception exception, string title = null)
+        {
+            throw new WanderingTurtleException(this, exception, title);
         }
 
         /// <summary>
@@ -261,39 +281,29 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text))
             {
-                ShowMessage("Please fill out the first name field with a valid name.");
-                TxtFirstName.Focus();
-                TxtFirstName.SelectAll();
+                ShowInputErrorMessage(TxtFirstName, "Please fill out the first name field with a valid name.");
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text))
             {
-                ShowMessage("Please fill out the last name field with a valid name.");
-                TxtLastName.Focus();
-                TxtLastName.SelectAll();
+                ShowInputErrorMessage(TxtLastName, "Please fill out the last name field with a valid name.");
                 return false;
             }
             bool validatePass = !(CurrentEmployee != null && TxtPassword.Password == "");
             if (validatePass && !Validator.ValidatePassword(TxtPassword.Password))
             {
-                ShowMessage("Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
+                ShowInputErrorMessage(TxtPassword, "Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
                                 " \n lowercase letter\n UPPERCASE LETTER \n Number \nSpecial Character (not space)");
-                TxtPassword.Focus();
-                TxtPassword.SelectAll();
                 return false;
             }
             if (validatePass && !TxtPassword2.Password.Equals(TxtPassword.Password))
             {
-                ShowMessage("Your password must match!");
-                TxtPassword2.Focus();
-                TxtPassword2.SelectAll();
+                ShowInputErrorMessage(TxtPassword2, "Your password must match!");
                 return false;
             }
             if (string.IsNullOrEmpty(CboUserLevel.Text) || CboUserLevel.Text == null)
             {
-                ShowMessage("Please select a user level.");
-                CboUserLevel.Focus();
-                CboUserLevel.IsDropDownOpen = true;
+                ShowInputErrorMessage(CboUserLevel, "Please select a user level.");
                 return false;
             }
             return true;

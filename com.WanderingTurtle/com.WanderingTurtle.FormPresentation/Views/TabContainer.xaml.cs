@@ -40,7 +40,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                         break;
                 }
             }
-            else { DialogBox.ShowMessageDialog(this, "Could not find logged in user", "Login Error"); }
+            else { throw new WanderingTurtleException(this, "Could not find logged in user", "Login Error"); }
         }
 
         private void AddTab(string tabName, object tabContent)

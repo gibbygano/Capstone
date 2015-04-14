@@ -47,7 +47,7 @@
             <TextBox  Grid.Column="1" Grid.Row="7" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtRoomNumber" MaxLength="4" />
             <TextBox  Grid.Column="1" Grid.Row="8" TabIndex="8" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtGuestPIN" MaxLength="4" />
         </Grid>
-        <Grid Grid.Row="1" Margin="{DynamicResource Button Spacing Top}">
+        <Grid Grid.Row="1" Margin="{DynamicResource Spacing Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

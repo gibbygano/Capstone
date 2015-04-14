@@ -6,9 +6,10 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.DataAccess;
 namespace EmployeeLogicTests
-{   ///Created by: Tony Noel, 2015/3/27
+{   ///Created by: Tony Noel, 2015/3/27, Updated 2015/4/10
     /// <summary>
-    /// Summary description for EmployeeTests
+    /// A complete testing of all employee logic methods in the Employee Manager.
+    ///The test creates a dummy employee record and performs the various methods in the manager using this record.
     /// </summary>
     [TestClass]
     public class EmployeeTests
@@ -58,8 +59,8 @@ namespace EmployeeLogicTests
         {
             //Adds fake employee to Data base
             bool worked = false;
-            int rows = myManager.AddNewEmployee(testEmp);
-            if (rows == 1)
+            ResultsEdit result = myManager.AddNewEmployee(testEmp);
+            if (result == ResultsEdit.Success)
             {
                 worked = true;
             }
@@ -110,8 +111,8 @@ namespace EmployeeLogicTests
             Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
             Employee testEmp2 = new Employee(testEmp1.FirstName, LastName, "pass123", (int)testEmp1.Level, testEmp1.Active);
             bool worked = false;
-            int rows = myManager.EditCurrentEmployee(testEmp1, testEmp2);
-            if (rows == 1)
+            ResultsEdit result = myManager.EditCurrentEmployee(testEmp1, testEmp2);
+            if (result == ResultsEdit.Success)
             {
                 worked = true;
             }

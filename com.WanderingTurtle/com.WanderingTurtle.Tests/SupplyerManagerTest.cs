@@ -54,8 +54,10 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp.ApplicationID = 100;
             testSupplierApp.EmailAddress = "blabla@gmail.com";
             testSupplierApp.Address2 = "";
-            testSupplierApp.Approved = true;
-            testSupplierApp.ApprovalDate = new DateTime(2005, 2, 3);
+            testSupplierApp.ApplicationDate = new DateTime(2005, 2, 2);
+            testSupplierApp.ApplicationStatus = "pending";
+            testSupplierApp.LastStatusDate = new DateTime(2005, 2, 1);
+            testSupplierApp.Remarks = "";
         }
 
         /// <summary>
@@ -64,7 +66,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierBadIDTest()
+        public void RetrieveSupplierBadIDTest() // ☑
         {
             string supplierID = "badID";
             testSupplierRetrieve = SupplierMang.RetrieveSupplier(supplierID);
@@ -77,7 +79,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierEmptyIDTest()
+        public void RetrieveSupplierEmptyIDTest() // ☑
         {
             supplierID = "";
             testSupplierRetrieve = SupplierMang.RetrieveSupplier(supplierID);
@@ -90,7 +92,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierNullTest()
+        public void RetrieveSupplierNullTest() //  ☑
         {
             supplierID = null;
             testSupplierRetrieve = SupplierMang.RetrieveSupplier(supplierID);
@@ -102,9 +104,9 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        public void RetrieveSupplierWorkingTest()
+        public void RetrieveSupplierWorkingTest() // ☑
         {
-            supplierID = "100";
+            supplierID = "101";
             testSupplierRetrieve = SupplierMang.RetrieveSupplier(supplierID);
             Assert.IsNotNull(testSupplierRetrieve);
         }
@@ -115,7 +117,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierApplicationBadIDTest()
+        public void RetrieveSupplierApplicationBadIDTest() // ☑
         {
             supplierAppID = "badID";
             SupplierApplication testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
@@ -128,7 +130,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierApplicationEmptyIDTest()
+        public void RetrieveSupplierApplicationEmptyIDTest() // ☑
         {
             supplierAppID = "";
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
@@ -141,7 +143,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierApplicationNullIDTest()
+        public void RetrieveSupplierApplicationNullIDTest() // ☑
         {
             supplierAppID = null;
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
@@ -154,7 +156,7 @@ namespace com.WanderingTurtle.Tests
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(Exception))]
-        public void RetrieveSupplierApplicationWorkingTest()
+        public void RetrieveSupplierApplicationWorkingTest() // ☑
         {
             supplierAppID = "100";
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
@@ -166,7 +168,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void RetrieveSupplierListTest()
+        public void RetrieveSupplierListTest() // ☑
         {
             List<Supplier> suppliers = SupplierMang.RetrieveSupplierList();
             Assert.IsNotNull(suppliers);
@@ -177,7 +179,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void RetrieveSupplierApplicationListTest()
+        public void RetrieveSupplierApplicationListTest() // ☑
         {
             List<SupplierApplication> suppliersApps = SupplierMang.RetrieveSupplierApplicationList();
             Assert.IsNotNull(suppliersApps);
@@ -188,8 +190,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void AddSupplierApplicationEmptyTest()
+        public void AddSupplierApplicationEmptyTest() // ☐
         {
             SupplierApplication SupplierAppEmpty = new SupplierApplication();
             SupplierMang.AddASupplierApplication(SupplierAppEmpty);
@@ -200,8 +201,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void AddSupplierApplicationNullTest()
+        public void AddSupplierApplicationNullTest() // ☐
         {
             SupplierApplication SupplierAppNull = null;
             SupplierMang.AddASupplierApplication(SupplierAppNull);
@@ -212,8 +212,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void AddSupplierApplicationPartialTest()
+        public void AddSupplierApplicationPartialTest() // ☐
         {
             SupplierApplication testSupplierApp2 = new SupplierApplication();
             testSupplierApp2.ApplicationDate = new DateTime();
@@ -229,7 +228,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        public void AddSupplierApplicationWorkingTest()
+        public void AddSupplierApplicationWorkingTest() // ☑
         {
             Setup();
             SupplierMang.AddASupplierApplication(testSupplierApp);
@@ -243,7 +242,7 @@ namespace com.WanderingTurtle.Tests
         /// Edited by Rose Steffensmeier 2015/04/03
         /// </remarks>
         [TestMethod]
-        public void AddSupplierEmptyTest()
+        public void AddSupplierEmptyTest() // ☑
         {
             //test 1 empty Supplier
             Supplier testSupplierEmpty = new Supplier();
@@ -258,7 +257,7 @@ namespace com.WanderingTurtle.Tests
         /// Edited by Rose Steffensmeier 2015/04/03
         /// </remarks>
         [TestMethod]
-        public void AddSupplierNullTest()
+        public void AddSupplierNullTest() // ☑
         {
             Supplier testSupplierNull = null;
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull), SupplierResult.DatabaseError);
@@ -269,7 +268,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void AddSupplierPartialTest()
+        public void AddSupplierPartialTest() //☑
         {
             Supplier testSupplierPartial = new Supplier();
             testSupplierPartial.CompanyName = "test";
@@ -284,7 +283,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void AddSupplierWorkingTest()
+        public void AddSupplierWorkingTest() // ☐
         {
             Setup();
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier), SupplierResult.Success);
@@ -295,7 +294,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void EditSupplierEmptyTest()
+        public void EditSupplierEmptyTest() // ☑
         {
             Supplier testSupplierEmpty = new Supplier();
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplierEmpty, testSupplierEmpty), SupplierResult.DatabaseError);
@@ -317,7 +316,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void EditSupplierPartialTest()
+        public void EditSupplierPartialTest() // ☑
         {
             Supplier testSupplierPartial = new Supplier();
             testSupplierPartial.CompanyName = "test";
@@ -332,7 +331,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void EditSupplierPartialTest2()
+        public void EditSupplierPartialTest2() // ☑
         {
             Supplier testSupplier2 = null;
 
@@ -344,7 +343,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void EditSupplierworkingTest()
+        public void EditSupplierworkingTest() // ☐
         {
             Setup();
             Supplier testSupplier2 = testSupplier;
@@ -359,8 +358,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void EditSupplierApplicationEmptyTest()
+        public void EditSupplierApplicationEmptyTest() // ☐
         {
             SupplierApplication testSupplierAppEmpty = new SupplierApplication();
             SupplierMang.EditSupplierApplication(testSupplierAppEmpty, testSupplierAppEmpty);
@@ -371,8 +369,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void EditSupplierApplicationNullTest()
+        public void EditSupplierApplicationNullTest() // ☐
         {
             SupplierApplication testSupplierAppNull = null;
             SupplierMang.EditSupplierApplication(testSupplierAppNull, testSupplierAppNull);
@@ -383,8 +380,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void EditSupplierApplicationPartialTest()
+        public void EditSupplierApplicationPartialTest() // ☐
         {
             SupplierApplication testSupplierAppPartial = new SupplierApplication();
             testSupplierAppPartial.CompanyName = "test";
@@ -399,8 +395,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
-        public void EditSupplierApplicationPartialTest2()
+        public void EditSupplierApplicationPartialTest2() // ☐
         {
             SupplierApplication testSupplierApp2 = null;
 
@@ -412,7 +407,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void EditSupplierApplicationWorkingTest()
+        public void EditSupplierApplicationWorkingTest() // ☑
         {
             Setup();
             SupplierApplication testSupplierApp2 = testSupplierApp;
@@ -422,8 +417,10 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp2.Zip = "50229";
             testSupplierApp2.EmailAddress = "blabla@gmail.com";
             testSupplierApp2.Address2 = "";
-            testSupplierApp2.Approved = true;
-            testSupplierApp2.ApprovalDate = new DateTime(2005, 8, 3);
+            testSupplierApp.ApplicationDate = new DateTime(2005, 2, 2);
+            testSupplierApp.ApplicationStatus = "pending";
+            testSupplierApp.LastStatusDate = new DateTime(2005, 2, 1);
+            testSupplierApp.Remarks = "";
 
             SupplierMang.EditSupplierApplication(testSupplierApp, testSupplierApp2);
             testSupplierApp = testSupplierApp2;
@@ -434,7 +431,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void ArchiveSupplierEmptyTest()
+        public void ArchiveSupplierEmptyTest() // ☑
         {
             Supplier testSupplierEmpty = new Supplier();
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplierEmpty), SupplierResult.DatabaseError);
@@ -445,7 +442,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void ArchiveSupplierNullTest()
+        public void ArchiveSupplierNullTest() // ☑
         {
             Supplier testSupplierNull = null;
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplierNull), SupplierResult.DatabaseError);
@@ -456,7 +453,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void ArchiveSupplierPartialTest()
+        public void ArchiveSupplierPartialTest() // ☑
         {
             Supplier testSupplierParital = new Supplier();
             testSupplierParital.CompanyName = "test";
@@ -471,7 +468,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void ArchiveSupplierWorkingTest()
+        public void ArchiveSupplierWorkingTest() // ☐
         {
             Setup();
             testSupplier.CompanyName = "Awsomest Tours";

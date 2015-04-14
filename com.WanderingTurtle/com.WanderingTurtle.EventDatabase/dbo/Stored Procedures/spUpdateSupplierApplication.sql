@@ -1,34 +1,41 @@
 ﻿CREATE PROCEDURE spUpdateSupplierApplication
 	(
 	@CompanyName 			varchar(255),
+	@CompanyDescription		varchar(255),
 	@FirstName 				varchar(50), 
 	@LastName 				varchar(50), 
 	@Address1 				varchar(255),
-	@Address2 				varchar(255)=NULL, 
+	@Address2 				varchar(255), 
 	@Zip 					varchar(10), 
 	@PhoneNumber 			varchar(15), 
 	@EmailAddress 			varchar(100), 
-	@ApplicationDate		[date],
-	@Approved				bit,
-	@ApprovalDate			[date],
+	@ApplicationDate		datetime,
+	@ApplicationStatus		varchar(25),
+	@LastStatusDate			datetime,
+	@Remarks				varchar(255),
 
+	@originalApplicationID 	int, 
 	@originalCompanyName 	varchar(255),
+	@originalCompanyDescription varchar(255),
 	@originalFirstName 		varchar(50), 
 	@originalLastName 		varchar(50), 
 	@originalAddress1 		varchar(255), 
-	@originalAddress2 		varchar(255)=NULL, 
+	@originalAddress2 		varchar(255), 
 	@originalZip 			varchar(10), 
 	@originalPhoneNumber 	varchar(15), 
 	@originalEmailAddress 	varchar(100), 
-	@originalApplicationDate [date],
-	@originalApproved		bit,
-	@originalApprovalDate	[date],
-	@originalApplicationID 	int	
-	
+	@originalApplicationDate datetime,	
+	@originalApplicationStatus	varchar(25),
+	@originalLastStatusDate	datetime,
+	@originalRemarks		varchar(255)	
 	)
 AS
-	UPDATE SupplierApplication SET
+
+	UPDATE SupplierApplication 
+	
+	SET
 		CompanyName = @CompanyName, 
+		CompanyDescription = @CompanyDescription,
 		FirstName = @FirstName, 
 		LastName = @LastName, 
 		Address1 = @Address1, 
@@ -37,10 +44,13 @@ AS
 		PhoneNumber = @PhoneNumber, 
 		EmailAddress = @EmailAddress, 
 		ApplicationDate = @ApplicationDate,
-		Approved = @Approved,
-		ApprovalDate = @ApprovalDate
+		ApplicationStatus = @ApplicationStatus,
+		LastStatusDate = @LastStatusDate,
+		Remarks = @Remarks
 	WHERE 
-		 CompanyName = @originalCompanyName
+		ApplicationID = @originalApplicationID
+		AND CompanyName = @originalCompanyName
+		AND CompanyDescription = @originalCompanyDescription
 		AND FirstName = @originalFirstName
 		AND LastName = @originalLastName
 		AND Address1 = @originalAddress1
@@ -49,7 +59,9 @@ AS
 		AND PhoneNumber = @originalPhoneNumber
 		AND EmailAddress = @originalEmailAddress
 		AND ApplicationDate = @originalApplicationDate
-		AND Approved = @originalApproved
-		AND ApprovalDate = @originalApprovalDate
-		AND ApplicationID = @originalApplicationID
+		AND ApplicationStatus = @originalApplicationStatus
+		AND LastStatusDate = @originalLastStatusDate 
+		AND Remarks = @originalRemarks
+
 	RETURN @@ROWCOUNT
+	GO

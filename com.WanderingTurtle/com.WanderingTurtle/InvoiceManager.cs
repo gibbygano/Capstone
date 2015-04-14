@@ -196,12 +196,21 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
 		}
+
+
+        /// <summary>
+        /// Created on 2015/04/10
+        /// Justin Pennington
+        /// 
+        /// Searches the 
+        /// </summary>
+        /// <param name="inSearch"></param>
+        /// <returns></returns>
         public List<InvoiceDetails> InvoiceDetailsSearch(String inSearch)
         {
             //List<Event> myTempList = new List<Event>();
             if (!inSearch.Equals("") && !inSearch.Equals(null))
             {
-
                 //Lambda Version
                 //return myTempList.AddRange(DataCache._currentEventList.Where(s => s.EventItemName.ToUpper().Contains(inSearch.ToUpper())).Select(s => s));
                 //LINQ version
@@ -209,7 +218,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 List<InvoiceDetails> myTempList = new List<InvoiceDetails>();
                 myTempList.AddRange(
                   from inGuest in SearchList
-                  where inGuest.GuestFirstName.Contains(inSearch) || inGuest.GuestLastName.Contains(inSearch)
+                  where inGuest.GuestFirstName.ToUpper().Contains(inSearch.ToUpper()) || inGuest.GuestLastName.ToUpper().Contains(inSearch.ToUpper())
                   select inGuest);
                 return myTempList;
 

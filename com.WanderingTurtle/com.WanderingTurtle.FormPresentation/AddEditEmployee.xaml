@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
-        Title="AddEmployee" Height="300" Width="300"
+        Title="Employee Updates" Height="300" Width="300"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>

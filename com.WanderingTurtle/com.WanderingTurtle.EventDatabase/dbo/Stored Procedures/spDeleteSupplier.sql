@@ -5,7 +5,7 @@
 	@LastName 				varchar(50), 
 	@Address1 				varchar(255),
 	@Address2 				varchar(255) , 
-	@Zip 					varchar(10), 
+	@Zip 					char(5), 
 	@PhoneNumber 			varchar(15), 
 	@EmailAddress 			varchar(100), 
 	@ApplicationID 			int, 

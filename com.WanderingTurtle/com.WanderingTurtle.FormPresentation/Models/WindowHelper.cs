@@ -18,14 +18,18 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="control">The control that you wish to find main window of. In most cases you will use <typeparamref name="this"/></param>
         /// <returns>Base Parent <typeparamref name="MainWindow"/></returns>
-        internal static MainWindow GetMainWindow(DependencyObject control)
+        internal static MainWindow GetMainWindow(FrameworkElement control)
         {
-            var parent = VisualTreeHelper.GetParent(control) ?? control;
-            while (!(parent is MainWindow))
+            try
             {
-                parent = VisualTreeHelper.GetParent(parent);
+                var parent = VisualTreeHelper.GetParent(control) ?? control;
+                while (!(parent is MainWindow))
+                {
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+                return (parent as MainWindow);
             }
-            return (parent as MainWindow);
+            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Main Window"); }
         }
 
         /// <summary>
@@ -36,17 +40,21 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="control">The control that you wish to find the parent of. In most cases you will use <typeparamref name="this"/></param>
         /// <returns>Parent <typeparamref name="MetroWindow"/></returns>
-        internal static MetroWindow GetWindow(DependencyObject control)
+        internal static MetroWindow GetWindow(FrameworkElement control)
         {
-            var parent = VisualTreeHelper.GetParent(control);
-            if (parent == null)
-            { parent = control; }
-            else
+            try
             {
-                while (!(parent is MetroWindow))
-                { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
+                var parent = VisualTreeHelper.GetParent(control);
+                if (parent == null)
+                { parent = control; }
+                else
+                {
+                    while (!(parent is MetroWindow))
+                    { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
+                }
+                return (parent as MetroWindow);
             }
-            return (parent as MetroWindow);
+            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Parent Window"); }
         }
 
         /// <summary>
@@ -57,20 +65,20 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
-        internal static async void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
+        internal static void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
         {
-            Exception _ex = null;
             try
             {
                 foreach (FrameworkElement child in content.Children)
                 {
                     // Return if this child control is set in controlsToKeepEnabled
-                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child))
-                    { return; }
+                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child)) { return; }
 
                     // If child component is a container, then call the recursive method to get inner child components
-                    if (child is Panel)
-                    { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
+                    if (child is Panel) { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
+                    // Does not bother marking Labels as ReadOnly
+                    else if (child is Label) { continue; }
+                    // If the child is a valid control
                     else if (child is Control)
                     {
                         var childControl = child as Control;
@@ -89,11 +97,11 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         TextBoxHelper.SetClearTextButton(childControl, false);
                         //SetStyle(childControl, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
+                    // Don't know why this would throw, but it's here just in case
                     else { throw new Exception("Unknown Component"); }
                 }
             }
-            catch (Exception ex) { _ex = new Exception("Error Setting Fields to ReadOnly for" + Environment.NewLine + content, ex); }
-            if (_ex != null) { await DialogBox.ShowMessageDialog(content, _ex.InnerException.Message, _ex.Message); _ex = null; }
+            catch (Exception ex) { throw new WanderingTurtleException(content, ex, "Error Setting Fields to ReadOnly for" + Environment.NewLine + content); }
         }
 
         /// <summary>
@@ -135,7 +143,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                     catch (Exception ex) { throw new Exception(string.Format("Error Setting Style{0} - Control: {1}{0} - Style: {2}", Environment.NewLine, control, setterValue.Property + " = " + setterValue.Value), ex); }
                 }
             }
-            catch (Exception ex) { throw ex; }
+            catch (Exception ex) { throw new WanderingTurtleException(control, ex); }
         }
 
         /// <summary>
