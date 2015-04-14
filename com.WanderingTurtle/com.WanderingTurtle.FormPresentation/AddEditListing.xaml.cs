@@ -196,32 +196,32 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (eventCbox.SelectedIndex.Equals(-1))
             {
-                throw new WanderingTurtleException(this, "Please select an Event to List!");
+                throw new InputValidationException(eventCbox, "Please select an Event to List!");
             }
 
             if (supplierCbox.SelectedIndex.Equals(-1))
             {
-                throw new WanderingTurtleException(this, "Please select a supplier!");
+                throw new InputValidationException(supplierCbox, "Please select a supplier!");
             }
 
             if (dateStart.Text == null || dateEnd.Text == null)
             {
-                throw new WanderingTurtleException(this, "Please select a date");
+                throw new InputValidationException((dateStart.Text == null) ? dateStart : dateEnd, "Please select a date");
             }
 
             if (tpStartTime.Value == null || tpEndTime.Value == null)
             {
-                throw new WanderingTurtleException(this, "Please select a time");
+                throw new InputValidationException((tpStartTime.Value == null) ? tpStartTime : tpEndTime, "Please select a time");
             }
 
             if (udPrice.Value == 0)
             {
-                throw new WanderingTurtleException(this, "Please indicate a price for tickets");
+                throw new InputValidationException(udPrice, "Please indicate a price for tickets");
             }
 
             if (udSeats.Value == 0)
             {
-                throw new WanderingTurtleException(this, "Please indicate number of seats for the event");
+                throw new InputValidationException(udSeats, "Please indicate number of seats for the event");
             }
             return true;
         }

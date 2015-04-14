@@ -129,31 +129,31 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
             {
-                throw new WanderingTurtleException(this, "Company Name field must be filled out and not contain special characters");
+                throw new InputValidationException(txtCompanyName, "Company Name field must be filled out and not contain special characters");
             }
             else if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
             {
-                throw new WanderingTurtleException(this, "Not a valid e-mail address");
+                throw new InputValidationException(txtEmail, "Not a valid e-mail address");
             }
             else if (!Validator.ValidatePhone(txtPhoneNumber.Text))
             {
-                throw new WanderingTurtleException(this, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
+                throw new InputValidationException(txtPhoneNumber, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
             }
             else if (cboZip.SelectedItem == null)
             {
-                throw new WanderingTurtleException(this, "You must select an zip from the drop down");
+                throw new InputValidationException(cboZip, "You must select an zip from the drop down");
             }
             else if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
             {
-                throw new WanderingTurtleException(this, "The address must be filled out and not contain special characters (spaces allowed)");
+                throw new InputValidationException(txtAddress1, "The address must be filled out and not contain special characters (spaces allowed)");
             }
             else if (!Validator.ValidateString(txtFirstName.Text.Trim()))
             {
-                throw new WanderingTurtleException(this, "The fist name field filled out and must not contain special characters (No Spaces)");
+                throw new InputValidationException(txtFirstName, "The fist name field filled out and must not contain special characters (No Spaces)");
             }
             else if (!Validator.ValidateString(txtLastName.Text.Trim()))
             {
-                throw new WanderingTurtleException(this, "The last name field must be filled out and not contain special characters (No Spaces)");
+                throw new InputValidationException(txtLastName, "The last name field must be filled out and not contain special characters (No Spaces)");
             }
 
             return true;

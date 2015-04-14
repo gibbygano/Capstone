@@ -73,7 +73,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Please fill in the on site field");
+                    throw new InputValidationException(radOnSite, "Please fill in the on site field");
                 }
 
                 // Provided transport //
@@ -87,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Please fill out the Transportation field");
+                    throw new InputValidationException(radTransp, "Please fill out the Transportation field");
                 }
 
                 NewEvent.Description = txtDescrip.Text;
@@ -98,11 +98,11 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Please select an event type!");
+                    throw new InputValidationException(cboxType, "Please select an event type!");
                 }
                 if (String.IsNullOrEmpty(txtEventName.Text))
                 {
-                    throw new WanderingTurtleException(this, "Please enter an event name.");
+                    throw new InputValidationException(txtEventName, "Please enter an event name.");
                 }
                 EventManager.EventResult result = _eventManager.AddNewEvent(NewEvent);
                 if (result == EventManager.EventResult.Success)
@@ -113,6 +113,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
+                if (ex is InputValidationException) { throw ex; }
                 throw new WanderingTurtleException(this, ex, "Error adding new event");
             }
         }
@@ -159,7 +160,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Please fill in the on site field");
+                    throw new InputValidationException(radOnSite, "Please fill in the on site field");
                 }
 
                 // Provided transport //
@@ -173,7 +174,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Please fill out the Transportation field");
+                    throw new InputValidationException(radTransp, "Please fill out the Transportation field");
                 }
 
                 eventToSubmit.Description = txtDescrip.Text;
@@ -184,11 +185,11 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    throw new WanderingTurtleException(this, "Please select an event type!");
+                    throw new InputValidationException(cboxType, "Please select an event type!");
                 }
                 if (String.IsNullOrEmpty(txtEventName.Text))
                 {
-                    throw new WanderingTurtleException(this, "Please enter an event name.");
+                    throw new InputValidationException(txtEventName, "Please enter an event name.");
                 }
 
                 //DialogBox.ShowMessageDialog(Unrevised.EventItemID + Unrevised.EventItemName + Unrevised.EventTypeID + Unrevised.EventTypeName + Unrevised.Description + Unrevised.OnSite + Unrevised.Transportation + "\n" + NewEvent.EventItemID + NewEvent.EventItemName + NewEvent.EventTypeID + NewEvent.EventTypeName + NewEvent.Description + NewEvent.OnSite + NewEvent.Transportation);

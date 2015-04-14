@@ -110,7 +110,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void cboZip_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            ((ComboBox)sender).IsDropDownOpen = true;
+            // ((ComboBox)sender).IsDropDownOpen = true;
         }
 
         /// <summary>
@@ -178,6 +178,11 @@ namespace com.WanderingTurtle.FormPresentation
         private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return DialogBox.ShowMessageDialog(this, message, title, style);
+        }
+
+        private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
+        {
+            throw new InputValidationException(component, message, title);
         }
 
         private void ShowErrorMessage(string message, string title = null)
@@ -306,71 +311,52 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
             {
-                ShowErrorMessage("Please enter a First Name");
-                TxtFirstName.Focus();
-                TxtFirstName.SelectAll();
+                ShowInputErrorMessage(TxtFirstName, "Please enter a First Name");
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
             {
-                ShowErrorMessage("Please enter a Last Name");
-                TxtLastName.Focus();
-                TxtLastName.SelectAll();
+                ShowInputErrorMessage(TxtLastName, "Please enter a Last Name");
                 return false;
             }
             if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
             {
-                ShowErrorMessage("Please enter an Address");
-                TxtAddress1.Focus();
-                TxtAddress1.SelectAll();
+                ShowInputErrorMessage(TxtAddress1, "Please enter an Address");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
             {
-                ShowErrorMessage("Error adding Address2");
-                TxtAddress2.Focus();
-                TxtAddress2.SelectAll();
+                ShowInputErrorMessage(TxtAddress2, "Error adding Address2");
                 return false;
             }
             if (CboZip.SelectedItem == null)
             {
-                ShowErrorMessage("Please select a Zip Code");
-                CboZip.Focus();
+                ShowInputErrorMessage(CboZip, "Please select a Zip Code");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
             {
-                ShowErrorMessage("Please enter a valid Phone Number");
-                TxtPhoneNumber.Focus();
-                TxtPhoneNumber.SelectAll();
+                ShowInputErrorMessage(TxtPhoneNumber, "Please enter a valid Phone Number");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
             {
-                ShowErrorMessage("Please enter a valid Email Address");
-                TxtEmailAddress.Focus();
-                TxtEmailAddress.SelectAll();
+                ShowInputErrorMessage(TxtEmailAddress, "Please enter a valid Email Address");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
             {
-                ShowErrorMessage("Please enter a valid Room Number");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
+                ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
             if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
             {
-                ShowErrorMessage("Please enter a valid PIN Number with 4 characters.");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
+                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number with 4 characters.");
                 return false;
             }
-            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(),4))
+            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(), 4))
             {
-                ShowErrorMessage("Please enter a valid PIN Number with 4 characters.");
-                TxtRoomNumber.Focus();
-                TxtRoomNumber.SelectAll();
+                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number with 4 characters.");
                 return false;
             }
 

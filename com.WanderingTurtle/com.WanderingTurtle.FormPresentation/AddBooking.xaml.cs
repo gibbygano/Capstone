@@ -87,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
+        private async void btnAddBookingAdd_Click(object sender, RoutedEventArgs e)
         {
             //validates data from form
             if (!Validate()) { return; }
@@ -108,7 +108,8 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new WanderingTurtleException(this, "Booking could not be added due to database malfunction.");
 
                     case (ResultsEdit.Success):
-                        throw new WanderingTurtleException(this, "The booking has been successfully added."); 
+                        await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        break;
                 }
             }
             catch (Exception ex)
@@ -238,13 +239,11 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateInt(udAddBookingQuantity.Value.ToString()))
             {
-                udAddBookingQuantity.Focus();
-                throw new WanderingTurtleException(this, "Value is not an integer.  Please re-enter.");
+                throw new InputValidationException(udAddBookingQuantity, "Value is not an integer.  Please re-enter.");
             }
             if (!Validator.ValidateDecimal(udDiscount.Value.ToString()))
             {
-                udDiscount.Focus();
-                throw new WanderingTurtleException(this, "Value is not a percentage.  Please re-enter.");
+                throw new InputValidationException(udDiscount, "Value is not a percentage.  Please re-enter.");
             }
             return true;
         }
