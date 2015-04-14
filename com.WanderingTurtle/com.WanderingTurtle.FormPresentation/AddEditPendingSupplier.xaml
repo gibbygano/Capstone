@@ -41,7 +41,7 @@
             <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtFirstName" />
             <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtLastName" />
             <TextBox Grid.Column="1" Grid.Row="3" x:Name="txtAddress" />
-            <TextBox Grid.Column="1" Grid.Row="8" x:Name="txtUserName" />
+            <TextBox Grid.Column="1" Grid.Row="8" x:Name="txtUserName" IsEnabled="False" />
             <Label Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" Content="Address 2:" />
             
             <Separator Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4" />
@@ -52,7 +52,7 @@
             <Label Grid.Column="2" Grid.Row="4" HorizontalContentAlignment="Right" Content="Application Date:" />
             <Label Grid.Row="7" HorizontalContentAlignment="Right" Content="Appl. Status:" />
 
-            <ComboBox Grid.Column="1" Grid.Row="7" x:Name="cboAppStatus" ItemsSource="{Binding Path=GetStatusList}" />         
+            <ComboBox Grid.Column="1" Grid.Row="7" x:Name="cboAppStatus" ItemsSource="{Binding Path=GetStatusList}" SelectionChanged="cboAppStatus_SelectionChanged"/>         
             
             <Label Grid.Row="9" HorizontalContentAlignment="Right" Content="Remarks:" />
 
@@ -63,8 +63,8 @@
             <TextBox    Grid.Column="1" Grid.Row="5" x:Name="txtZip" />
             <TextBox    Grid.Column="3" Grid.Row="2" x:Name="txtPhoneNumber" />
             <TextBox    Grid.Column="3" Grid.Row="3" x:Name="txtEmailAddress" />
-            <DatePicker Grid.Column="3" Grid.Row="4" x:Name="dateApplicationDate" />
-            <Metro:NumericUpDown Grid.Column="3" Grid.Row="8" x:Name="numSupplyCost" />
+            <Label Grid.Column="3" Grid.Row="4" x:Name="dateApplicationDate" />
+            <Metro:NumericUpDown Grid.Column="3" Grid.Row="8" Minimum="0" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" IsEnabled="False"/>
         </Grid>
         <Grid Grid.Row="1" Margin="{DynamicResource Button Spacing Top}">
             <Grid.ColumnDefinitions>

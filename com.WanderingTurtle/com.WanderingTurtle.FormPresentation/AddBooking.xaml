@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width=".5*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -38,13 +38,14 @@
             <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingDiscount" Content="Discount:" HorizontalContentAlignment="Right" />
 
-            <xctk:IntegerUpDown Grid.Row="1" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+            <Metro:NumericUpDown Grid.Column="1" Grid.Row="1" Minimum="0" x:Name="udAddBookingQuantity" Value="0"  Maximum="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
             <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingDiscount" TabIndex="2" UndoLimit="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-            <xctk:DecimalUpDown FormatString="P0" Grid.Row="2" Grid.Column="1" Value="0"  IsEnabled="{Binding ElementName=lvEventListItems}" Minimum="0" Maximum =".20" Name="udDiscount" Increment=".01" VerticalAlignment="Center" />
+            <Metro:NumericUpDown Grid.Column="1" Grid.Row="2" Minimum="0" StringFormat="P0" x:Name="udDiscount" Value="0"  IsEnabled="{Binding ElementName=lvEventListItems}" Maximum="{Binding}" Interval=".01" />
 
-            <Label Grid.Row="1" Grid.Column="2" Content="Total Discounted Price" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <Label Grid.Row="2" Grid.Column="2" x:Name="lblTotalWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
+
+            <Label Grid.Row="0" Grid.Column="3" Content="Total Discounted Price" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="3" x:Name="lblTotalWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center" HorizontalContentAlignment="Center" />
             <Button Grid.Row="2" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Calculate Cost" Click="btnCalculateTicketPrice_Click" />
         </Grid>
         <Grid Grid.Row="2" Margin="0,0,0,5">

@@ -206,7 +206,7 @@ namespace com.WanderingTurtle.FormPresentation
             UpdatedSupplierApplication.Zip = this.txtZip.Text;
             UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
             UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
-            UpdatedSupplierApplication.ApplicationDate = this.dateApplicationDate.DisplayDate;
+            UpdatedSupplierApplication.ApplicationDate = CurrentSupplierApplication.ApplicationDate;
             UpdatedSupplierApplication.ApplicationStatus = this.cboAppStatus.SelectedValue.ToString();
             UpdatedSupplierApplication.Remarks = this.txtRemarks.Text;
 
@@ -230,7 +230,7 @@ namespace com.WanderingTurtle.FormPresentation
             this.txtZip.Text = CurrentSupplierApplication.Zip;
             this.txtPhoneNumber.Text = CurrentSupplierApplication.PhoneNumber;
             this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
-            this.dateApplicationDate.SelectedDate = CurrentSupplierApplication.ApplicationDate;
+            this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString();
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
             this.txtRemarks.Text = CurrentSupplierApplication.Remarks;            
         }
@@ -254,6 +254,20 @@ namespace com.WanderingTurtle.FormPresentation
         {
             //creating a list for the dropdown userLevel
             cboAppStatus.ItemsSource = GetStatusList;
+        }
+
+        private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboAppStatus.SelectedIndex.Equals(1))
+            {
+                numSupplyCost.IsEnabled = true;
+                txtUserName.IsEnabled = true;
+            }
+            else
+            {
+                numSupplyCost.IsEnabled = false;
+                txtUserName.IsEnabled = false;
+            }
         }
     }
 }
