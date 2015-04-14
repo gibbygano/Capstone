@@ -233,13 +233,13 @@ namespace com.WanderingTurtle.DataAccess
         public static int DeleteEventTestItem(Event TestEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spDeleteEvent_1";
+            var cmdText = "spDeleteTestEvent";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@EventItemID", TestEvent.EventItemID);
+            cmd.Parameters.AddWithValue("@EventItemName", TestEvent.EventItemName);
 
             try
             {

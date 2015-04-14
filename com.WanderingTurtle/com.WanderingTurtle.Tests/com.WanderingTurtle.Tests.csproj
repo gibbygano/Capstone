@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="EventManagerTest.cs" />
     <Compile Include="HotelGuestManagerTest.cs" />
     <Compile Include="HotelManagerAccessorTest.cs" />
     <Compile Include="BookingManagerTest.cs" />
