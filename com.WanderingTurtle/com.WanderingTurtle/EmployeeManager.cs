@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using System.Linq;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -163,6 +164,36 @@ namespace com.WanderingTurtle.BusinessLogic
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        ///<summary>
+        ///Justin Pennington
+        ///Created: 2015/04/14
+        ///
+        ///Attempts to retrieve an employee based on First, Last, or job title
+        ///Failure: If nothing is found, it will return an empty list
+        ///</summary>
+        ///<param name = "inSearch">String search is based on</param>
+        ///<returns>List of Employee objects.</returns>
+        public List<Employee> SearchEmployee(string inSearch)
+        {
+            if (!inSearch.Equals("") && !inSearch.Equals(null))
+            {
+
+                List<Employee> SearchList = FetchListEmployees();
+                List<Employee> myTempList = new List<Employee>();
+                myTempList.AddRange(
+                  from inEmployee in SearchList
+                  where inEmployee.FirstName.ToUpper().Contains(inSearch.ToUpper()) || inEmployee.LastName.ToUpper().Contains(inSearch.ToUpper()) || inEmployee.Level.ToString().ToUpper().Contains(inSearch.ToUpper())
+                  select inEmployee);
+                return myTempList;
+
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+            }
+            else
+            {
+                return FetchListEmployees();
             }
         }
     }

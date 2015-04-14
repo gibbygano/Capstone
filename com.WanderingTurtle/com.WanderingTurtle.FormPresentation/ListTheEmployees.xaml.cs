@@ -161,5 +161,30 @@ namespace com.WanderingTurtle.FormPresentation
                 RefreshEmployeeList();
             }
         }
+
+        private void txtEmployeeSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //Yes for some reason this is required
+            if (btnSearchEmployee == null)
+            {
+                btnSearchEmployee = new Button();
+            }
+            if(txtEmployeeSearch.Text.Length == 0)
+            {
+                btnSearchEmployee.Content = "Refresh List";
+            }
+            else
+            {
+                btnSearchEmployee.Content = "Search";
+            }
+        }
+
+        private void btnSearchEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var myList = _employeeManager.SearchEmployee(txtEmployeeSearch.Text);
+            lvEmployeesList.ItemsSource = myList;
+            lvEmployeesList.Items.Refresh();
+        }
+
     }
 }

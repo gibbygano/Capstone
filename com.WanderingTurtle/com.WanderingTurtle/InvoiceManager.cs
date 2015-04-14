@@ -218,7 +218,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 List<InvoiceDetails> myTempList = new List<InvoiceDetails>();
                 myTempList.AddRange(
                   from inGuest in SearchList
-                  where inGuest.GuestFirstName.Contains(inSearch) || inGuest.GuestLastName.Contains(inSearch)
+                  where inGuest.GuestFirstName.ToUpper().Contains(inSearch.ToUpper()) || inGuest.GuestLastName.ToUpper().Contains(inSearch.ToUpper())
                   select inGuest);
                 return myTempList;
 

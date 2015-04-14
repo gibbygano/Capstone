@@ -21,6 +21,8 @@
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddSupplier"      Content="Add Supplier"      Click="btnAddSupplier_Click" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnUpdate"           Content="Update Supplier"   Click="btnUpdate_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
             <Button Margin="{DynamicResource Button Spacing}" x:Name="btnDelete"           Content="Delete Supplier"   Click="btnDelete_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
+            <TextBox x:Name="txtSearchSupplier" Height="23" TextWrapping="NoWrap"  Width="145" TextChanged="txtSearchSupplier_TextChanged"/>
+            <Button x:Name="btnSearchSupplier" Content="Refresh List" Width="87" Click="btnSearchSupplier_Click"/>
         </WrapPanel>
     </Grid>
 </UserControl>
