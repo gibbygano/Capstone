@@ -244,6 +244,11 @@ namespace com.WanderingTurtle.FormPresentation
             return DialogBox.ShowMessageDialog(this, message, title, style);
         }
 
+        private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
+        {
+            throw new InputValidationException(component, message, title);
+        }
+
         private void ShowErrorMessage(string message, string title = null)
         {
             throw new WanderingTurtleException(this, message, title);
@@ -270,39 +275,29 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateString(TxtFirstName.Text))
             {
-                ShowErrorMessage("Please fill out the first name field with a valid name.");
-                TxtFirstName.Focus();
-                TxtFirstName.SelectAll();
+                ShowInputErrorMessage(TxtFirstName, "Please fill out the first name field with a valid name.");
                 return false;
             }
             if (!Validator.ValidateString(TxtLastName.Text))
             {
-                ShowErrorMessage("Please fill out the last name field with a valid name.");
-                TxtLastName.Focus();
-                TxtLastName.SelectAll();
+                ShowInputErrorMessage(TxtLastName, "Please fill out the last name field with a valid name.");
                 return false;
             }
             bool validatePass = !(CurrentEmployee != null && TxtPassword.Password == "");
             if (validatePass && !Validator.ValidatePassword(TxtPassword.Password))
             {
-                ShowErrorMessage("Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
+                ShowInputErrorMessage(TxtPassword, "Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
                                 " \n lowercase letter\n UPPERCASE LETTER \n Number \nSpecial Character (not space)");
-                TxtPassword.Focus();
-                TxtPassword.SelectAll();
                 return false;
             }
             if (validatePass && !TxtPassword2.Password.Equals(TxtPassword.Password))
             {
-                ShowErrorMessage("Your password must match!");
-                TxtPassword2.Focus();
-                TxtPassword2.SelectAll();
+                ShowInputErrorMessage(TxtPassword2, "Your password must match!");
                 return false;
             }
             if (string.IsNullOrEmpty(CboUserLevel.Text) || CboUserLevel.Text == null)
             {
-                ShowErrorMessage("Please select a user level.");
-                CboUserLevel.Focus();
-                CboUserLevel.IsDropDownOpen = true;
+                ShowInputErrorMessage(CboUserLevel, "Please select a user level.");
                 return false;
             }
             return true;

@@ -157,12 +157,12 @@ namespace com.WanderingTurtle.FormPresentation
             //send info to BLL
             if (!Validator.ValidateString(txtUserName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a user name.");
+                throw new InputValidationException(txtUserName, "Enter a user name.");
 
             }
             if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
             {
-                throw new WanderingTurtleException(this, "Enter a valid supply cost.");
+                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
             }
             return true;
         }
@@ -172,27 +172,27 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a company name.");
+                throw new InputValidationException(txtCompanyName, "Enter a company name.");
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
             {
-                throw new WanderingTurtleException(this, "Enter an address.");
+                throw new InputValidationException(txtAddress, "Enter an address.");
             }
             if (!Validator.ValidatePhone(txtPhoneNumber.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a phone number.");
+                throw new InputValidationException(txtPhoneNumber, "Enter a phone number.");
             }
             if (!Validator.ValidateEmail(txtEmailAddress.Text))
             {
-                throw new WanderingTurtleException(this, "Enter an email address.");
+                throw new InputValidationException(txtEmailAddress, "Enter an email address.");
             }
             if (!Validator.ValidateString(txtFirstName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a first name.");
+                throw new InputValidationException(txtFirstName, "Enter a first name.");
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a last name.");
+                throw new InputValidationException(txtLastName, "Enter a last name.");
             }
             if (cboZip.SelectedItem == null)
             {
