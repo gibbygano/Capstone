@@ -12,6 +12,7 @@
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <asp:PlaceHolder runat="server">
         <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
+        
     </asp:PlaceHolder>
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
@@ -24,6 +25,7 @@
                 <asp:ScriptReference Name="jquery.ui.combined" />
             </Scripts>
         </asp:ScriptManager>
+        <script src="<%: ResolveUrl("~/Scripts/scripts.js") %>"></script>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
@@ -54,12 +56,12 @@
                 <asp:ContentPlaceHolder runat="server" ID="MainContent" />
             </section>
         </div>
-        <div id="errorMessage" runat="server" visible="false">
+        <div id="errorMess" runat="server" title="There was a problem..." visible="false">
             <div class="errorMsg">
-                <asp:Label ID="lblErrorMessage" runat="server" Text="This is a longer and more important error message that you need to read." ForeColor="#CC0000"></asp:Label>
+                <asp:Label ID="lblErrorMessage" runat="server" Text="This is a longer and more important error message that you need to read." ForeColor="#FFFFFF"></asp:Label>
                 <br />
                 <div id="errorButton">
-                    <asp:Button ID="btnErrorOK" runat="server" Text="OK" BackColor="#33A133" CssClass="errorButtonStyle" ForeColor="White" OnClick="errorButton_Click" CausesValidation="False" />
+                   
 
                 </div>
             </div>

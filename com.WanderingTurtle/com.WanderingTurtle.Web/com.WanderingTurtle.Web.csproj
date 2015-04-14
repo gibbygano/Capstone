@@ -217,6 +217,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Pages\SupplierAddEvent.aspx" />
     <Content Include="Pages\SupplierViewEvents.aspx" />
+    <Content Include="Scripts\scripts.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -58,13 +58,13 @@ namespace com.WanderingTurtle.Web {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
         
         /// <summary>
-        /// errorMessage control.
+        /// errorMess control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMessage;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl errorMess;
         
         /// <summary>
         /// lblErrorMessage control.
@@ -74,14 +74,5 @@ namespace com.WanderingTurtle.Web {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorMessage;
-        
-        /// <summary>
-        /// btnErrorOK control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnErrorOK;
     }
 }
