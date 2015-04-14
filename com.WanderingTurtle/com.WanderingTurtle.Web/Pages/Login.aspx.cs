@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.Web
             catch
             {
                 Label errorLabel = (Label)Master.FindControl("lblErrorMessage");
-                errorLabel.Text = "Authentication Error. Please try again. Authentication Error. Please try again. Authentication Error. Please try again. ";
+                errorLabel.Text = "Authentication Error. Please try again.";
                 Control c = Master.FindControl("ErrorMess");
                 c.Visible = true;
 
