@@ -536,7 +536,9 @@ namespace com.WanderingTurtle.BusinessLogic
             try
             {
                 //retrieve recent guest list
-                bool result = true;
+
+                bool result = BookingAccessor.verifyGuestPin(inPIN);
+
                 //see if pin is in it
                 if (result)
                 {

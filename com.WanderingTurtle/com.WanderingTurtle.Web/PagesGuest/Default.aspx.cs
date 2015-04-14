@@ -13,6 +13,7 @@ namespace com.WanderingTurtle.Web.Pages
     public partial class GuestViewListings : System.Web.UI.Page
     {
         BookingManager _myManager = new BookingManager();
+
         List<ItemListingDetails> _currentItemListings;
         private string _userMessage = "";
 
