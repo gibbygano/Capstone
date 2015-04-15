@@ -581,8 +581,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Not cached since it will differ each time
         /// </summary>
         /// <param name="itemListID">id of event listing</param>
-        /// <returns>name of hotel guest, room #, and quantity of tickets</returns>
-        public BookingNumbers RetrieveBookingNumbers(int itemListID)
+        /// <returns>names of hotel guests, room #s, and quantities of tickets for each booking related to that item listing</returns>
+        public List<BookingNumbers> RetrieveBookingNumbers(int itemListID)
         {
             
             try
