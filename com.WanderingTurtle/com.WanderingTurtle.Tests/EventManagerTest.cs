@@ -46,75 +46,59 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void RetrieveEventList_Test()
         {
-            //arrange
-
-            EventManager myManager = new EventManager();
-            ApplicationException expected = new ApplicationException("Event not found.");
-
-            // act
-            List<Event> actual = myManager.RetrieveEventList();
-
-            //assert
+            List<Event> actual = myMan.RetrieveEventList();
             Assert.IsNotNull(actual);
-
         }
 
-
+        /*
         [TestMethod]
         public void EventSearch_Test()
         {
             //arrange
+            setup();
             String inSearch = "12345Test";
-            EventManager myManager = new EventManager();
-            Event myEvent = new Event { EventItemID = 112, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
+            //myMan.AddNewEvent(toTest);
             List<Event> expected = new List<Event>();
-            expected.Add(myEvent);
+            expected.Add(toTest);
 
             //update cache
             DataCache._currentEventList = EventAccessor.GetEventList();
             DataCache._EventListTime = DateTime.Now;
             // act
             List<Event> myTempList = new List<Event>();
-            myTempList = myManager.EventSearch(inSearch);
+            myTempList = myMan.EventSearch(inSearch);
             Event[] myArray = myTempList.ToArray();
-
-
-
-            //currentEvent.EventItemID = reader.GetInt32(0);
-            //currentEvent.EventItemName = reader.GetString(1);
-            //currentEvent.EventTypeID = reader.GetInt32(2);
-            //currentEvent.OnSite = reader.GetBoolean(3);
-            //currentEvent.Transportation = reader.GetBoolean(4);
-            //currentEvent.Description = reader.GetString(5);
-            //currentEvent.Active = reader.GetBoolean(6);
-            //currentEvent.EventTypeName = reader.GetString(7);
-            //EventList.Add(currentEvent);
-
-
+            
             //assert
-            Assert.AreEqual(myEvent.Active, myArray[0].Active, "Active do not match");
-            Assert.AreEqual(myEvent.Description, myArray[0].Description, "Description do not match");
-
-            Assert.AreEqual(myEvent.EventItemName, myArray[0].EventItemName, "Event ItemName do not match");
-            Assert.AreEqual(myEvent.EventTypeID, myArray[0].EventTypeID, "EventTypeID do not match");
-            Assert.AreEqual(myEvent.EventTypeName, myArray[0].EventTypeName, "EventTypeName do not match");
-            Assert.AreEqual(myEvent.OnSite, myArray[0].OnSite, "OnSite do not match");
-            Assert.AreEqual(myEvent.OnSiteString, myArray[0].OnSiteString, "OnSiteString do not match");
-            Assert.AreEqual(myEvent.ProductID, myArray[0].ProductID, "ProductID do not match");
-            Assert.AreEqual(myEvent.Transportation, myArray[0].Transportation, "Transportation does not match");
-            Assert.AreEqual(myEvent.TransportString, myArray[0].TransportString, "TransportationString does not match");
-            Assert.AreEqual(myEvent.EventItemID, myArray[0].EventItemID, "EventItemID do not match");           //can fail until we can force an EventItemID
+            Assert.AreEqual(toTest.Active, myArray[0].Active, "Active do not match");
+            Assert.AreEqual(toTest.Description, myArray[0].Description, "Description do not match");
+            Assert.AreEqual(toTest.EventItemName, myArray[0].EventItemName, "Event ItemName do not match");
+            Assert.AreEqual(toTest.EventTypeID, myArray[0].EventTypeID, "EventTypeID do not match");
+            Assert.AreEqual(toTest.EventTypeName, myArray[0].EventTypeName, "EventTypeName do not match");
+            Assert.AreEqual(toTest.OnSite, myArray[0].OnSite, "OnSite do not match");
+            Assert.AreEqual(toTest.OnSiteString, myArray[0].OnSiteString, "OnSiteString do not match");
+            Assert.AreEqual(toTest.ProductID, myArray[0].ProductID, "ProductID do not match");
+            Assert.AreEqual(toTest.Transportation, myArray[0].Transportation, "Transportation does not match");
+            Assert.AreEqual(toTest.TransportString, myArray[0].TransportString, "TransportationString does not match");
+            Assert.AreEqual(toTest.EventItemID, myArray[0].EventItemID, "EventItemID do not match");           //can fail until we can force an EventItemID
         }
+         * */
         [TestMethod]
         public void EventRetrieve_Test()
         {
-            //arrange
-            String EventID = "101";
-            EventManager myManager = new EventManager();
+            setup();
+            myMan.AddNewEvent(toTest);
+            var myList = myMan.RetrieveEventList();
+            foreach(var item in myList)
+            {
+                if(item.Description == "This is a test descrip")
+                {
+                    toTest = item;
+                }
+            }
 
-            Event expected = new Event { EventItemID = 112, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-
-            var result = myManager.RetrieveEvent(EventID);
+            var expected = toTest;
+            var result = myMan.RetrieveEvent(toTest.EventItemID.ToString());
 
             Assert.AreEqual(expected, result, "objects do not match");
         }
