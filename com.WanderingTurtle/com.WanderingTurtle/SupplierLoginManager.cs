@@ -31,6 +31,24 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        public string retrieveSupplierUserName(int supplierID)
+        {
+            try
+            {
+                return access.retrieveSupplierUserNameByID(supplierID);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
         public int addSupplierLogin(string userName, int supplierID)
         {
             try
@@ -48,7 +66,7 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
 
-        public string CheckSupplierUserName(string userName)
+        public bool CheckSupplierUserName(string userName)
         {
             try
             {

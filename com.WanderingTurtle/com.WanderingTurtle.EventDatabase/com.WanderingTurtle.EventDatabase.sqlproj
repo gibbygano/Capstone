@@ -141,6 +141,7 @@
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetUserName.sql" />
     <Build Include="dbo\Stored Procedures\spSelectHotelGuestPinGet.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestEvent.sql" />
+    <Build Include="dbo\Stored Procedures\spSupplierLoginGetByID.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

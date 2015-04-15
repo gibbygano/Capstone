@@ -41,7 +41,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             FillList();
-            Instance = this;
+            //Instance = this;
         }
 
         /// <summary>
@@ -128,13 +128,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var selectedItem = this.lvSuppliersList.SelectedItem;
+
+            if(selectedItem == null)
             {
-                UpdateSupplier(lvSuppliersList.SelectedItems[0] as Supplier);
+                 throw new WanderingTurtleException(this, "You Must Select A Supplier Before You Can Update");
             }
-            catch (Exception ex)
+            else
             {
-                throw new WanderingTurtleException(this, ex, "You Must Select A Supplier Before You Can Update");
+                UpdateSupplier(selectedItem as Supplier);
             }
         }
 

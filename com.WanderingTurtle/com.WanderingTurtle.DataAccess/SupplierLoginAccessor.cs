@@ -152,32 +152,79 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        public string checkUserName(string userName)
+        public bool checkUserName(string userName)
         {
 
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSupplierLoginGetUserName";
-            string retrievedUserName = "";
+            bool validName = false;
 
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userName", userName);
 
-            conn.Open();
-            var reader = cmd.ExecuteReader();
-
-            if (reader.HasRows == true)
+            try
             {
-                reader.Read();
+                conn.Open();
+                var reader = cmd.ExecuteReader();
 
-                retrievedUserName = reader.GetValue(0).ToString();
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+                    validName = false;
+                }
+                else
+                {
+                    validName = true;
+                }
+
+            return validName;
             }
-            else
+            catch (SqlException)
             {
-                retrievedUserName = "";
+                throw;
             }
-                
-            return retrievedUserName;
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string retrieveSupplierUserNameByID(int supplierID)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSupplierLoginGetByID";
+            string userNameFound;
+
+            var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@supplierID", supplierID);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userNameFound = reader.GetString(0);
+                }
+                else
+                {
+                    throw new ApplicationException("SupplierID not found.");
+                }
+                    
+                return userNameFound;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

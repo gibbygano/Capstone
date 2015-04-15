@@ -49,8 +49,7 @@ namespace com.WanderingTurtle.DataAccess
                     supplierToRetrieve.PhoneNumber = reader.GetString(7);
                     supplierToRetrieve.EmailAddress = reader.GetString(8);
                     supplierToRetrieve.ApplicationID = reader.GetInt32(9);
-                    supplierToRetrieve.SupplyCost = reader.GetDecimal(11);
-                    supplierToRetrieve.UserID = reader.GetInt32(10);
+                    supplierToRetrieve.SupplyCost = reader.GetDecimal(10);
                 }
                 else
                 {
@@ -174,8 +173,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentSupplier.PhoneNumber = reader.GetString(7);
                         currentSupplier.EmailAddress = reader.GetString(8);
                         currentSupplier.ApplicationID = reader.GetInt32(9);
-                        currentSupplier.UserID = reader.GetInt32(10);
-                        currentSupplier.SupplyCost = reader.GetDecimal(11);
+                        currentSupplier.SupplyCost = reader.GetDecimal(10);
 
                         supplierList.Add(currentSupplier);
                     }
@@ -204,13 +202,14 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="supplierToAdd">Requires a Supplier object to INSERT</param>
         /// <returns>Returns the number of rows affected.</returns>
-        public static int AddSupplier(Supplier supplierToAdd)
+        public static int AddSupplier(Supplier supplierToAdd, string userName)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spInsertSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
+            cmd.Parameters.AddWithValue("@UserName", userName);
             cmd.Parameters.AddWithValue("@CompanyName", supplierToAdd.CompanyName);
             cmd.Parameters.AddWithValue("@FirstName", supplierToAdd.FirstName);
             cmd.Parameters.AddWithValue("@LastName", supplierToAdd.LastName);
@@ -220,7 +219,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@PhoneNumber", supplierToAdd.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
-            cmd.Parameters.AddWithValue("@UserID", supplierToAdd.UserID);
             cmd.Parameters.AddWithValue("@SupplyCost", (float)supplierToAdd.SupplyCost);
 
             int rowsAffected;
@@ -267,7 +265,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@PhoneNumber", newSupplierInfo.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", newSupplierInfo.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", newSupplierInfo.ApplicationID);
-            cmd.Parameters.AddWithValue("@UserID", newSupplierInfo.UserID);
             cmd.Parameters.AddWithValue("@SupplyCost", newSupplierInfo.SupplyCost);
 
 
@@ -282,7 +279,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@originalPhoneNumber", oldSupplierInfo.PhoneNumber);
             cmd.Parameters.AddWithValue("@originalEmailAddress", oldSupplierInfo.EmailAddress);
             cmd.Parameters.AddWithValue("@originalApplicationID", oldSupplierInfo.ApplicationID);
-            cmd.Parameters.AddWithValue("@originalUserID", oldSupplierInfo.UserID);
             cmd.Parameters.AddWithValue("@originalSupplyCost", oldSupplierInfo.SupplyCost);
 
             int rowsAffected;
@@ -327,7 +323,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@PhoneNumber", supplierToDelete.PhoneNumber);
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToDelete.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToDelete.ApplicationID);
-            cmd.Parameters.AddWithValue("@UserID", supplierToDelete.UserID);
             cmd.Parameters.AddWithValue("@SupplierID", supplierToDelete.SupplierID);
 
             int rowsAffected;

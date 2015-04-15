@@ -84,7 +84,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-                throw new Exception("Supplier not found");
+                throw new Exception("Supplier not found.");
             }
 
         }
@@ -131,7 +131,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-                throw new Exception("No suppliers in database");
+                throw new Exception("No suppliers in database.");
             }
 
         }
@@ -143,11 +143,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
         /// <returns>Supplier object</returns>
         /// Created by Reece Maas 2/18/15
-        public SupplierResult AddANewSupplier(Supplier supplierToAdd)
+        public SupplierResult AddANewSupplier(Supplier supplierToAdd, string userName)
         {
             try
             {
-                if (SupplierAccessor.AddSupplier(supplierToAdd) == 1)
+                if (SupplierAccessor.AddSupplier(supplierToAdd, userName) == 2)
                 {
                     //refresh cache
                     DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();
@@ -260,7 +260,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-                throw new Exception("Application does not exist");
+                throw new Exception("Application does not exist.");
             }
         }
 
@@ -279,7 +279,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-                throw new Exception("No applications");
+                throw new Exception("No applications.");
             }
         }
 
@@ -379,7 +379,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
+                if (ex.Message == "Concurrency Violation.")
                 {
                     return SupplierResult.ChangedByOtherUser;
                 }

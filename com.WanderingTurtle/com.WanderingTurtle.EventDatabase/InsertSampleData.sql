@@ -135,11 +135,11 @@ VALUES
 ('GAllen', 102)
 GO
 
-INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, Active)
+INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, Active)
 VALUES
-('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 101, 1),
-('Harry''s Boat Rides', 'Harry', 'Smith', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', 101, 102, 1),
-('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 103, 1)
+('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 1),
+('Harry''s Boat Rides', 'Harry', 'Smith', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', 101, 1),
+('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 1)
 GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, CompanyDescription, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, Remarks)

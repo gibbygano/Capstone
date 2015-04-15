@@ -94,33 +94,42 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                //get data from form
-                GetFormData();
+                if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()))
+                {                   
+                    bool validUserName = false;
 
-                if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Approved.ToString()))
-                {
-                    ValidateApprovalFields();
-                    
-                    string validUserName = "";
+                    validUserName= myLoginManager.CheckSupplierUserName(txtUserName.Text);
 
-                    validUserName = myLoginManager.CheckSupplierUserName(txtUserName.Text);
-
-                    decimal supplyCost = (decimal)(numSupplyCost.Value);
-
-                    SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, validUserName, supplyCost);
-
-                    if (result == SupplierResult.Success)
+                    if (validUserName)
                     {
-                        await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
-                        this.Close();
+                        //get data from form
+                        GetFormData();
+
+                        decimal supplyCost = (decimal)(numSupplyCost.Value);
+
+                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, txtUserName.Text, supplyCost);
+
+                        if (result == SupplierResult.Success)
+                        {
+                            await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                            this.Close();
+                        }
+                        else
+                        {
+                            throw new WanderingTurtleException(this, "DB Error");
+                        }
                     }
                     else
                     {
-                        throw new WanderingTurtleException(this, "DB Error");
+                        txtUserName.Text = "";                        
+                        throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
                     }
                 }
-                else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
+                else if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Rejected.ToString()) || cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Pending.ToString()))
                 {
+                    //get data from form
+                    GetFormData();
+
                     SupplierResult result = MySupplierManager.EditSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication);
 
                     if (result == SupplierResult.Success)
@@ -141,7 +150,7 @@ namespace com.WanderingTurtle.FormPresentation
             catch (SqlException)
             {
                // ShowErrorMessage("UserName already used.  Please choose another one.");
-                txtUserName.Text = "";
+
                 throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
             }
             catch (Exception ex)
@@ -150,23 +159,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         } 
       
-
-        private bool ValidateApprovalFields()
-        {
-            //fields for approved supplier
-            //send info to BLL
-            if (!Validator.ValidateString(txtUserName.Text))
-            {
-                throw new InputValidationException(txtUserName, "Enter a user name.");
-            }
-            if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
-            {
-                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
-            }
-            return true;
-        }
-
-
         private bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
@@ -196,6 +188,14 @@ namespace com.WanderingTurtle.FormPresentation
             if (cboZip.SelectedItem == null)
             {
                 throw new InputValidationException(cboZip, "You must select an zip from the drop down");
+            }
+            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && (!Validator.ValidateString(txtUserName.Text)))
+            {
+                throw new InputValidationException(txtUserName, "Enter a user name.");
+            }
+            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && !Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
+            {
+                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
             }
             return true;
         }
@@ -288,7 +288,6 @@ namespace com.WanderingTurtle.FormPresentation
             //creating a list for the dropdown userLevel
             cboAppStatus.ItemsSource = GetStatusList;
         }
-
 
         private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

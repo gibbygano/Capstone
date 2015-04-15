@@ -6,55 +6,63 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         Style="{DynamicResource WindowStyle}"
-        Title="Add Supplier" Height="300" Width="700"
-		Loaded="Window_Loaded" Closed="Window_Closed"
+        Title="Add Supplier" Height="300" Width="600"
 		WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Label Content="First Name"      Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" />
-        <Label Content="Last Name"       Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" />
-        <Label Content="Address 1"       Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" />
-        <Label Content="Address 2"       Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" />
-        <Label Content="City, State Zip" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" />
-        <TextBox x:Name="txtFirstName" Grid.Row="0" Grid.Column="1" TabIndex="1" />
-        <TextBox x:Name="txtLastName"  Grid.Row="1" Grid.Column="1" TabIndex="2" />
-        <TextBox x:Name="txtAddress1"  Grid.Row="2" Grid.Column="1" TabIndex="3" />
-        <TextBox x:Name="txtAddress2"  Grid.Row="3" Grid.Column="1" TabIndex="4" />
-        <ComboBox x:Name="cboZip"      Grid.Row="4" Grid.Column="1" TabIndex="5" DisplayMemberPath="GetZipStateCity" />
-
-        <Label Content="Company Name"  Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" />
-        <Label Content="Phone Number"  Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Right" />
-        <Label Content="Email Address" Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" />
-        <TextBox            x:Name="txtCompanyName" TabIndex="6" Grid.Row="0" Grid.Column="3" />
-        <xctk:MaskedTextBox x:Name="txtPhoneNumber" TabIndex="7" Grid.Row="1" Grid.Column="3" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />
-        <TextBox            x:Name="txtEmail"       TabIndex="8" Grid.Row="2" Grid.Column="3" />
-
-        <Label Content="Supply Cost" Grid.Row="3" Grid.Column="1" HorizontalContentAlignment="Right" Margin="249.8,6.4,1.4,6.8" Grid.ColumnSpan="2" />
-        <Metro:NumericUpDown Grid.Column="2" Grid.Row="3" x:Name="numSupplyCost" Margin="95.6,6.4,164.6,6.8" Maximum="99" Minimum="0" Grid.ColumnSpan="2" />
-        <Label Content="%" Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Right" Margin="86.6,6.4,144.6,6.8" />
-
-        <Grid Grid.Row="5" Grid.ColumnSpan="2" Margin="{DynamicResource Button Spacing Top}">
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSubmit" Grid.Column="0" Content="Add Supplier" Click="btnSubmit_Click" />
-            <Separator Width="0"       Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}"/>
-            <Button x:Name="btnEdit"   Grid.Column="2" Content="Edit"         Click="btnEdit_Click" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label Content="First Name"      Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Last Name"       Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Address 1"       Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Address 2"       Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="City, State Zip" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <TextBox x:Name="txtFirstName" Grid.Row="0" Grid.Column="1" TabIndex="1" />
+            <TextBox x:Name="txtLastName"  Grid.Row="1" Grid.Column="1" TabIndex="2" />
+            <TextBox x:Name="txtAddress1"  Grid.Row="2" Grid.Column="1" TabIndex="3" />
+            <TextBox x:Name="txtAddress2"  Grid.Row="3" Grid.Column="1" TabIndex="4" />
+            <ComboBox x:Name="cboZip"      Grid.Row="4" Grid.Column="1" TabIndex="5" DisplayMemberPath="GetZipStateCity" />
+
+            <Label Content="Company Name"  Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Phone Number"  Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Label Content="Email Address" Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <TextBox            x:Name="txtCompanyName" TabIndex="6" Grid.Row="0" Grid.Column="3" />
+            <xctk:MaskedTextBox x:Name="txtPhoneNumber" TabIndex="7" Grid.Row="1" Grid.Column="3" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />
+            <TextBox            x:Name="txtEmail"       TabIndex="8" Grid.Row="2" Grid.Column="3" />
+
+            <Label Content="Supply Cost" Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <Metro:NumericUpDown Grid.Column="3" Grid.Row="3" TabIndex="9" Minimum="0" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" />
+
+            <Label Grid.Row="4" Grid.Column="2" Content="User Name"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+            <TextBox  Grid.Row="4" Grid.Column="3" x:Name="txtUserName"  TabIndex="10"  />
+        </Grid>
+        <Grid Grid.Row="1" Margin="{DynamicResource Button Spacing Top}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
+            <Button Grid.Column="1" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click"  Margin="2.5,0" />
+            <Button Grid.Column="2" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
+
+
         </Grid>
 
     </Grid>
