@@ -139,6 +139,7 @@
     <Build Include="dbo\Stored Procedures\spSelectSupplierApplication.sql" />
     <Build Include="dbo\Stored Procedures\spInsertSupplierFromApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetUserName.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectBookingNumbers.sql" />
     <Build Include="dbo\Stored Procedures\spSelectHotelGuestPinGet.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestEvent.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetByID.sql" />

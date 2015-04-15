@@ -545,5 +545,26 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ax;
             }
         }
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/14
+        /// Retrieves numbers from a specific event listing
+        /// Not cached since it will differ each time
+        /// </summary>
+        /// <param name="itemListID">id of event listing</param>
+        /// <returns>names of hotel guests, room #s, and quantities of tickets for each booking related to that item listing</returns>
+        public List<BookingNumbers> RetrieveBookingNumbers(int itemListID)
+        {
+            
+            try
+            {
+                return BookingAccessor.GetBookingNumbers(itemListID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }

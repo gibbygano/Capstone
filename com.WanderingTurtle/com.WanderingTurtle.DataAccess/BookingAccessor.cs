@@ -359,7 +359,59 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-            public static HotelGuest verifyGuestPin(string inPIN)
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/14
+        /// Gets Booking numbers from database for specific event listing
+        /// </summary>
+        /// <param name="itemListID"></param>
+        /// <returns></returns>
+        public static List<BookingNumbers> GetBookingNumbers(int itemListID)
+        {
+            var bookingNumber = new List<BookingNumbers>();
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSelectBookingNumbers";
+
+            var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemListID", itemListID);
+			try
+            {
+                conn.Open();			 
+				var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    while (reader.Read())
+                    {
+                        var myBookingNumber = new BookingNumbers();
+                        myBookingNumber.FirstName = reader.GetValue(0).ToString();
+                        myBookingNumber.LastName = reader.GetValue(1).ToString();
+                        myBookingNumber.Room = (int)reader.GetValue(2);
+                        myBookingNumber.Quantity= (int)reader.GetValue(3);
+                        bookingNumber.Add(myBookingNumber);
+                    }
+                }
+                else
+                {
+                    var ax = new ApplicationException("Booking data not found!");
+                    throw ax;
+                }
+            }
+			catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return bookingNumber;
+		}
+			
+
+        public static HotelGuest verifyGuestPin(string inPIN)
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
@@ -369,6 +421,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@guestPIN", inPIN);
 
             HotelGuest foundGuest = null;
+
 
             try
             {

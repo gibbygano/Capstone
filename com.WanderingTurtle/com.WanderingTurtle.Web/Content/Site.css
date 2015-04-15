@@ -837,3 +837,60 @@ input[type="radio"]{
     padding-left: 1%;
     padding-right: 1%;
 }
+
+.ui-dialog-titlebar-close{
+    float: right;
+    height: auto;
+    background-color: rgb(51,161,51);
+    color: #fff;
+    padding: 2px;
+}
+
+.ui-button-text-only{
+    float: right;
+    background-color: rgb(51,161,51);
+    color: #fff;
+}
+
+.ui-dialog{
+    background-color:#006AA1;
+    border-color: #fff;
+    border-width: 2px;
+    border-style: solid;
+    padding: 7px;
+    padding-bottom: 42px;
+}
+
+.ui-dialog-title{
+    color: #fff;
+    font-size: 1.4em;
+    padding-bottom: 10px;
+}
+
+#lblErrorMessage{
+    font-size: 1.1em;
+    padding-top:10px;
+    padding-bottom: 10px;
+}
+
+#leftcontainer{
+    width: 33%;
+    float: left;
+}
+#rightcontainer{
+    width: 65%;
+    float:left;
+}
+
+.events{
+    color: #fff;
+    display: none;
+}
+
+.ui-dialog{
+    display: none;
+}
+
+#MainContent_eventdetails{
+    display: none;
+}
