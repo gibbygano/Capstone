@@ -872,3 +872,12 @@ input[type="radio"]{
     padding-top:10px;
     padding-bottom: 10px;
 }
+
+#leftcontainer{
+    width: 33%;
+    float: left;
+}
+#rightcontainer{
+    width: 65%;
+    float:left;
+}

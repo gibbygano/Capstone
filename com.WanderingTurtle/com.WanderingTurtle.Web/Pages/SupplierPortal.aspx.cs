@@ -70,5 +70,10 @@ namespace com.WanderingTurtle.Web.Pages
 
 
         }
+
+        public IEnumerable<ItemListing> GetItemLists()
+        {
+            return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+        }
     }
 }
