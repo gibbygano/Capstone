@@ -881,3 +881,7 @@ input[type="radio"]{
     width: 65%;
     float:left;
 }
+
+.events{
+    color: #fff;
+}

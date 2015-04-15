@@ -12,11 +12,13 @@ namespace com.WanderingTurtle.Web.Pages
     public partial class SupplierPortal : System.Web.UI.Page
     {
         private bool loggedIn = false;
-        public Supplier _currentSupplier = null;
+        public Supplier _currentSupplier;
         private ProductManager _myManager = new ProductManager();
+        private BookingManager _myBookingManager = new BookingManager();
         private List<ItemListing> _currentItemListings;
         public int currentListingCount = 0;
         public int currentGuestsCount = 0;
+        public int current = 0;
 
 
         protected void Page_PreLoad(object sender, EventArgs e)
@@ -43,8 +45,7 @@ namespace com.WanderingTurtle.Web.Pages
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
+
                 //get # of listings for supplier
                 try
                 {
@@ -64,7 +65,7 @@ namespace com.WanderingTurtle.Web.Pages
 
                     throw;
                 }
-            }
+ 
 
             
 
@@ -73,7 +74,31 @@ namespace com.WanderingTurtle.Web.Pages
 
         public IEnumerable<ItemListing> GetItemLists()
         {
-            return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+
+                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+
+        }
+
+        public void GetNumbers(int itemListID)
+        {
+            try
+            {
+                var list = _myBookingManager.RetrieveBookingNumbers(itemListID);
+                lvDetails.DataSource = list;
+                lvDetails.DataBind();
+            }
+            catch(Exception ex)
+            {
+                Label errorLabel = (Label)Master.FindControl("lblErrorMessage");
+                errorLabel.Text = "Error: " + ex.Message;
+                Control c = Master.FindControl("ErrorMess");
+                c.Visible = true;
+            }
+        }
+
+        public void btnDetails_Click(object sender, EventArgs e)
+        {
+           GetNumbers(102);
         }
     }
 }

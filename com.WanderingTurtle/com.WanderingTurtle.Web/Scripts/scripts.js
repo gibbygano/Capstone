@@ -13,4 +13,28 @@ $(document).ready(function () {
     }
         
         );
+
+    $("#MainContent_eventdetails").dialog({
+        modal: true,
+        buttons: {
+            Ok: function () {
+                $(this).dialog("close");
+            }
+        },
+        closeOnEscape: true,
+        closeText: "X",
+        dialogClass: "events",
+        autoOpen: false
+    }
+
+       );
+
+    
+
 });
+
+function showDetails() {
+
+ 
+    $('#MainContent_eventdetails').dialog("open");
+    }
