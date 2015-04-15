@@ -65,5 +65,10 @@
             SupplyCost = supplyCost;
             Active = active;
         }
+
+        public Supplier ShallowCopy()
+        {
+            return (Supplier)this.MemberwiseClone();
+        }
 	}
 }

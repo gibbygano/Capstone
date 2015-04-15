@@ -167,9 +167,11 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
                 return SupplierResult.DatabaseError;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return SupplierResult.DatabaseError;
+                throw ex;
+
+                //return SupplierResult.DatabaseError;
             }
 
         }

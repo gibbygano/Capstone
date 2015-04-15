@@ -351,11 +351,11 @@ namespace com.WanderingTurtle.DataAccess
         public static int DeleteTestSupplier(Supplier supplierToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string storedProcedure = "spDeleteSupplier_1";
+            string storedProcedure = "spDeleteTestSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@SupplierID", supplierToDelete.SupplierID);
+            cmd.Parameters.AddWithValue("@UserID", supplierToDelete.UserID);
 
             int rowsAffected;
             try

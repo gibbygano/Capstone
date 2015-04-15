@@ -29,17 +29,33 @@ namespace com.WanderingTurtle.Tests
         {
             //set up supplier
             testSupplier = new Supplier();
-            testSupplier.CompanyName = "Awsome Tours";
-            testSupplier.UserID = 101;
-            testSupplier.PhoneNumber = "575-542-8796";
-            testSupplier.FirstName = "Blab";
-            testSupplier.Active = true;
-            testSupplier.Address1 = "255 East West St";
-            testSupplier.LastName = "blabla";
-            testSupplier.Zip = "50229";
-            testSupplier.ApplicationID = 100;
-            testSupplier.EmailAddress = "blabla@gmail.com";
-            testSupplier.Address2 = "";
+            testSupplier.CompanyName    = "Awsome Tours";
+            testSupplier.FirstName      = "FirstBlab";
+            testSupplier.LastName       = "LastBlab";
+            testSupplier.Address1       = "255 East West St";
+            testSupplier.Address2       = "APT 1";
+            testSupplier.Zip            = "50229";
+            testSupplier.PhoneNumber    = "575-542-8796";
+            testSupplier.EmailAddress   = "blabla@gmail.com";
+            testSupplier.ApplicationID  = 100;
+            testSupplier.UserID         = 999;
+            testSupplier.SupplyCost     = (decimal)((60) / 100);
+            testSupplier.Active         = true;
+
+
+            /*
+            cmd.Parameters.AddWithValue("@CompanyName", supplierToAdd.CompanyName);
+            cmd.Parameters.AddWithValue("@FirstName", supplierToAdd.FirstName);
+            cmd.Parameters.AddWithValue("@LastName", supplierToAdd.LastName);
+            cmd.Parameters.AddWithValue("@Address1", supplierToAdd.Address1);
+            cmd.Parameters.AddWithValue("@Address2", supplierToAdd.Address2);
+            cmd.Parameters.AddWithValue("@Zip", supplierToAdd.Zip);
+            cmd.Parameters.AddWithValue("@PhoneNumber", supplierToAdd.PhoneNumber);
+            cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
+            cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
+            cmd.Parameters.AddWithValue("@UserID", supplierToAdd.UserID);
+            cmd.Parameters.AddWithValue("@SupplyCost", (float)supplierToAdd.SupplyCost);
+             * */
 
             //setup Supplier application
             testSupplierApp = new SupplierApplication();
@@ -58,6 +74,26 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp.ApplicationStatus = "pending";
             testSupplierApp.LastStatusDate = new DateTime(2005, 2, 1);
             testSupplierApp.Remarks = "";
+        }
+
+        private Supplier test2()
+        {
+            Supplier toTest = new Supplier();
+            toTest.CompanyName = "Lame-Name tours";
+            toTest.FirstName = "FirstBlab";
+            toTest.LastName = "LastBlab";
+            toTest.Address1 = "255 East West St";
+            toTest.Address2 = "APT 1";
+            toTest.Zip = "50229";
+            toTest.PhoneNumber = "575-542-8796";
+            toTest.EmailAddress = "blabla@gmail.com";
+            toTest.ApplicationID = 100;
+            toTest.UserID = 999;
+            toTest.SupplyCost = (decimal)((60) / 100);
+            toTest.Active = true;
+
+            return toTest;
+
         }
 
         /// <summary>
@@ -190,7 +226,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        public void AddSupplierApplicationEmptyTest() // ☐
+        public void AddSupplierApplicationEmptyTest() // ☑
         {
             SupplierApplication SupplierAppEmpty = new SupplierApplication();
             SupplierMang.AddASupplierApplication(SupplierAppEmpty);
@@ -201,7 +237,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/27
         /// </summary>
         [TestMethod]
-        public void AddSupplierApplicationNullTest() // ☐
+        public void AddSupplierApplicationNullTest() // ☑
         {
             SupplierApplication SupplierAppNull = null;
             SupplierMang.AddASupplierApplication(SupplierAppNull);
@@ -287,6 +323,7 @@ namespace com.WanderingTurtle.Tests
         {
             Setup();
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier), SupplierResult.Success);
+            SupplierMang.deleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -334,7 +371,6 @@ namespace com.WanderingTurtle.Tests
         public void EditSupplierPartialTest2() // ☑
         {
             Supplier testSupplier2 = null;
-
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.DatabaseError);
         }
 
@@ -346,11 +382,23 @@ namespace com.WanderingTurtle.Tests
         public void EditSupplierworkingTest() // ☐
         {
             Setup();
-            Supplier testSupplier2 = testSupplier;
-            testSupplier2.CompanyName = "Awsomest Tours";
-            testSupplier2.SupplierID = 103;
 
+            SupplierMang.AddANewSupplier(testSupplier);
+            var listToSearch = SupplierMang.RetrieveSupplierList();
+
+            
+
+            foreach(var item in listToSearch)
+            {
+                if(item.UserID == 999)
+                {
+                    testSupplier = item;
+                }
+            }
+
+            Supplier testSupplier2 = test2();
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
+            SupplierMang.deleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -424,6 +472,7 @@ namespace com.WanderingTurtle.Tests
 
             SupplierMang.EditSupplierApplication(testSupplierApp, testSupplierApp2);
             testSupplierApp = testSupplierApp2;
+            
         }
 
         /// <summary>
@@ -472,7 +521,6 @@ namespace com.WanderingTurtle.Tests
         {
             Setup();
             testSupplier.CompanyName = "Awsomest Tours";
-
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplier), SupplierResult.Success);
             SupplierMang.deleteTestSupplier(testSupplier);
         }
