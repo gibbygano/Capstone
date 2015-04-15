@@ -31,6 +31,7 @@
                 <td><%# Item.OnSiteString %></td>
                 <td>
                     <asp:Button CommandName="Edit" Text="Edit" runat="server" />
+                    <asp:Button ID="btnList" runat="server" Text="List This Event" CommandArgument ="<%=Item.EventItemID %>" OnClick="btn_Click"/>
                     <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
                 </td>
             </tr>
@@ -135,4 +136,9 @@
                 NextPageText="-->" ButtonType="Link" />
         </Fields>
     </asp:DataPager>--%>
+
+    <div id="addListing">
+        <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label>
+
+    </div>
 </asp:Content>

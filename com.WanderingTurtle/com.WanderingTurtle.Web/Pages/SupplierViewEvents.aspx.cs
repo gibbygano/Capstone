@@ -192,6 +192,13 @@ namespace com.WanderingTurtle.Web.Pages
             }
 
         }
+
+        protected void btn_Click(object sender, EventArgs e)
+        {
+            var b = (Button)Page.FindControl("btnList");
+            int itemID = int.Parse(b.CommandArgument);
+            Session["Event"] = _listedEvents.Where(l => l.EventItemID == itemID).FirstOrDefault();
+        }
     }
 
 }
