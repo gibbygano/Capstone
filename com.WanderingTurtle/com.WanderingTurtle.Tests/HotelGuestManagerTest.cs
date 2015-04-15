@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void HotelManagerAdd()
         {
-            bool changed = access.AddHotelGuest(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 234234234, true));
+            bool changed = access.AddHotelGuest(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 234234, 3453, true));
             Assert.IsTrue(changed);
         }
 
@@ -37,7 +37,7 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void HotelManagerAddFail()
         {
-            access.AddHotelGuest(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, true));
+            access.AddHotelGuest(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, 2342, true));
         }
         */
         [TestMethod]
@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.Tests
         public void HotelManagerUpdate()
         {
             List<HotelGuest> guest = access.GetHotelGuestList();
-            guest.Add(new HotelGuest((int)guest[guest.Count - 1].HotelGuestID, guest[guest.Count - 1].FirstName, guest[guest.Count - 1].LastName, guest[guest.Count - 1].Address1, guest[guest.Count - 1].Address2, guest[guest.Count - 1].CityState, guest[guest.Count - 1].PhoneNumber, guest[guest.Count - 1].EmailAddress, guest[guest.Count - 1].Room, false));
+            guest.Add(new HotelGuest((int)guest[guest.Count - 1].HotelGuestID, guest[guest.Count - 1].FirstName, guest[guest.Count - 1].LastName, guest[guest.Count - 1].Address1, guest[guest.Count - 1].Address2, guest[guest.Count - 1].CityState, guest[guest.Count - 1].PhoneNumber, guest[guest.Count - 1].EmailAddress, guest[guest.Count - 1].Room, guest[guest.Count - 1].GuestPIN, false));
             bool changed = access.UpdateHotelGuest(guest[guest.Count - 2], guest[guest.Count - 1]);
             Assert.IsTrue(changed);
         }

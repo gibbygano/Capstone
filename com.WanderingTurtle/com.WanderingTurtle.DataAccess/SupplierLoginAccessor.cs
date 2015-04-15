@@ -15,7 +15,10 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Created by Rose Steffensmeier 2015/04/03
         /// </summary>
-        /// <remarks></remarks>
+        /// <remarks>
+        /// Updated by Rose Steffensmeier 2015/04/13
+        /// Added new parameter for input, uncommented Exception catch.
+        /// </remarks>
         /// <param name="userPassword">The password for the supplier.</param>
         /// <param name="userName">The user name for the supplier.</param>
         /// <exception cref="SqlException">If the database cannot be accessed.</exception>
@@ -56,10 +59,10 @@ namespace com.WanderingTurtle.DataAccess
             {
                 throw;
             }
-            /*catch (Exception)
+            catch (Exception)
             {
                 throw;
-            }*/
+            }
             finally
             {
                 conn.Close();
@@ -69,11 +72,14 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Created by Rose Steffensmeier 2015/04/03
         /// </summary>
-        /// <remarks></remarks>
+        /// <remarks>
+        /// Updated by Rose Steffensmeier 2015/04/13
+        /// Added new paramenter
+        /// </remarks>
         /// <param name="userName">The username the supplier wants.</param>
         /// <exception cref="SqlException">Goes off if unable to connect to the database or the username is already taken.</exception>
         /// <returns>The number of rows that were affected. Should never be greater than one.</returns>
-        public int addSupplierLogin(String userName)
+        public int addSupplierLogin(String userName, int supplierID)
         {
             int rowsAdded = 0;
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -82,6 +88,7 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userName", userName);
+            cmd.Parameters.AddWithValue("@supplierID", supplierID);
 
             try
             {
@@ -107,6 +114,10 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Created by Rose Steffensmeier 2015/04/03
         /// </summary>
+        /// <remarks>
+        /// Updated by Rose Steffensmeier 2015/04/13
+        /// added new paramenter, added Exception catch block
+        /// </remarks>
         /// <param name="oldSupplierLogin"></param>
         /// <param name="archive"></param>
         /// <returns></returns>
@@ -122,6 +133,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_userID", oldSupplierLogin.UserID);
             cmd.Parameters.AddWithValue("@original_userPassword", "Password#1");
             cmd.Parameters.AddWithValue("@original_userName", oldSupplierLogin.UserName);
+            cmd.Parameters.AddWithValue("@original_supplierID", oldSupplierLogin.SupplierID);
 
             try
             {
@@ -131,6 +143,10 @@ namespace com.WanderingTurtle.DataAccess
                 return rowsAffected;
             }
             catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
             {
                 throw;
             }

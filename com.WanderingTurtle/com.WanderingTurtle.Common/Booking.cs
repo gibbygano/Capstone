@@ -57,7 +57,6 @@ namespace com.WanderingTurtle.Common
         /// <param name="dateBooked"></param>
         public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal ticket, decimal extended, decimal discount, decimal total)
         {
-
             GuestID = guestID;
             EmployeeID = empID;
             ItemListID = itemID;

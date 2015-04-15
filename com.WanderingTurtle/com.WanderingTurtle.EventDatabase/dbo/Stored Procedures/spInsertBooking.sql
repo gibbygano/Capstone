@@ -1,5 +1,5 @@
 ﻿/* -------------------------Booking Stored Procedures ---------------------------created by: Tony Noel*/
-CREATE PROCEDURE [dbo].[spAddBooking]
+CREATE PROCEDURE [dbo].[spInsertBooking]
 	@GuestID		int,
 	@EmployeeID		int,
 	@ItemListID		int,

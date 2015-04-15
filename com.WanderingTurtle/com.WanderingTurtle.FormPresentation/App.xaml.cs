@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.FormPresentation.Models;
 using System;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -15,7 +16,7 @@ namespace com.WanderingTurtle.FormPresentation
         private async void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // Prevent default unhandled exception processing
-            e.Handled = e.Exception is WanderingTurtleException ? (e.Exception as WanderingTurtleException).DoHandle : true;
+            e.Handled = e.Exception is WanderingTurtleException ? ((WanderingTurtleException)e.Exception).DoHandle : true;
 
             if (e.Exception is InputValidationException)
             {
@@ -25,14 +26,15 @@ namespace com.WanderingTurtle.FormPresentation
                 { await DialogBox.ShowMessageDialog(exception.CurrentControl, exception.Message, exception.Title); }
                 else
                 { MessageBox.Show(exception.Message, exception.Title); }
+                Debug.Assert(exception.CurrentControl != null, "exception.CurrentControl != null");
                 exception.CurrentControl.Focus();
-                if (exception.CurrentControl is TextBoxBase) { (exception.CurrentControl as TextBoxBase).SelectAll(); }
+                if (exception.CurrentControl is TextBoxBase) { ((TextBoxBase)exception.CurrentControl).SelectAll(); }
                 return;
             }
 
             // Process unhandled exception
-            StringBuilder exceptionMessage = new StringBuilder(e.Exception.Message);
-            Exception innerEx = e.Exception.InnerException;
+            var exceptionMessage = new StringBuilder(e.Exception.Message);
+            var innerEx = e.Exception.InnerException;
             if (innerEx != null)
             { exceptionMessage.AppendLine(Environment.NewLine + Environment.NewLine + "Additional error information: "); }
             while (innerEx != null)
@@ -43,10 +45,8 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (e.Exception is WanderingTurtleException)
             {
-                var exception = e.Exception as WanderingTurtleException;
+                var exception = (WanderingTurtleException)e.Exception;
                 if (exception.Title == null) { exception.Title = "An Error Occurred"; }
-                if (exception.CurrentControl != null)
-                { exceptionMessage.AppendLine(Environment.NewLine + Environment.NewLine + "Error Occurred in: " + exception.CurrentControl.Name ?? exception.CurrentControl.ToString()); }
 
                 if (exception.CurrentControl != null && exception.CurrentControl.IsLoaded)
                 { await DialogBox.ShowMessageDialog(exception.CurrentControl, exceptionMessage.ToString(), exception.Title); }

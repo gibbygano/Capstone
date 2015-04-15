@@ -115,7 +115,7 @@ namespace com.WanderingTurtle.DataAccess
                                 !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
                                 !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
                                 (int?)reader.GetValue(10), //Room
-                                reader.GetInt32(11), // PIN
+                                reader.GetString(11), // PIN
                                 reader.GetBoolean(12) //Active
                             )
                         );

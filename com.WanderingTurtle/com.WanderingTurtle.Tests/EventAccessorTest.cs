@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.Tests
         bool OnSite = true;
         int ProductID = 100;
         string Description = "dsa";
-        bool Active = false;
+        bool Active = true;
         Event testEvent;
 
         int newEventItemID = 0;
@@ -37,13 +37,16 @@ namespace com.WanderingTurtle.Tests
         string newDescription = "asd";
         bool newActive = true;
 
+
         [TestMethod]
         public void AddEvent_ValidEvent()
         {
-            testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
             int expected = 1;
+            testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
 
             int actual = EventAccessor.AddEvent(testEvent);
+
+            EventAccessor.DeleteEventTestItem(testEvent);
 
             Assert.AreEqual(expected, actual);
         }
@@ -66,6 +69,8 @@ namespace com.WanderingTurtle.Tests
         public void UpdateEvent_ValidEvent()
         {
             int expected = 1;
+            Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
+            EventAccessor.AddEvent(testEvent);
 
             var conn = DatabaseConnection.GetDatabaseConnection();
             string cmdText = "SELECT EventItemID FROM EventItem WHERE EventItemName = '" + EventItemName + "'";
@@ -75,10 +80,11 @@ namespace com.WanderingTurtle.Tests
             newEventItemID = (int)cmd.ExecuteScalar();
             conn.Close();
 
-            Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
             Event newtestEvent = new Event(newEventItemID, newEventItemName, newTransportation, newEventTypeID, newOnSite, newProductID, newDescription, newActive);
 
             int actual = EventAccessor.UpdateEvent(testEvent, newtestEvent);
+
+            EventAccessor.DeleteEventTestItem(newtestEvent);
 
             Assert.AreEqual(expected, actual);
         }
@@ -94,7 +100,7 @@ namespace com.WanderingTurtle.Tests
             bool oldOnSite = true;
             int oldProductID = 100;
             string oldDescription = "dsa";
-            bool oldActive = false;
+            bool oldActive = true;
 
             Event testEvent = new Event(oldEventItemID, oldEventItemName, oldTransportation, oldEventTypeID, oldOnSite, oldProductID, oldDescription, oldActive);
             Event newtestEvent = new Event(newEventItemID, newEventItemName, newTransportation, newEventTypeID, newOnSite, newProductID, newDescription, newActive);
@@ -106,18 +112,20 @@ namespace com.WanderingTurtle.Tests
         public void DeleteEvent_ValidEvent()
         {
             int expected = 1;
+            Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
+            EventAccessor.AddEvent(testEvent);
 
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string cmdText = "SELECT EventItemID FROM EventItem WHERE EventItemName = '" + newEventItemName + "'";
+            string cmdText = "SELECT EventItemID FROM EventItem WHERE EventItemName = '" + EventItemName + "'";
             var cmd = new SqlCommand(cmdText, conn);
 
             conn.Open();
             newEventItemID = (int)cmd.ExecuteScalar();
             conn.Close();
 
-            Event testEvent = new Event(newEventItemID, newEventItemName, newTransportation, newEventTypeID, newOnSite, newProductID, newDescription, newActive);
+            Event newTestEvent = new Event(newEventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
 
-            int actual = EventAccessor.DeleteEventItem(testEvent);
+            int actual = EventAccessor.DeleteEventItem(newTestEvent);
 
             EventAccessor.DeleteEventTestItem(testEvent);
 
@@ -137,11 +145,11 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        [ExpectedException(typeof (ApplicationException))]
-        public void GetEventList_DBMissing()
-        {
-            EventAccessor.GetEventList();
-        }
+        //[TestMethod]
+        //[ExpectedException(typeof (ApplicationException))]
+        //public void GetEventList_DBMissing()
+        //{
+        //    EventAccessor.GetEventList();
+        //}
     }
 }

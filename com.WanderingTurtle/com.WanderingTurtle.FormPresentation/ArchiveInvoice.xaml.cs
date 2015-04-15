@@ -99,7 +99,8 @@ namespace com.WanderingTurtle.FormPresentation
 
                     case (ResultsArchive.Success):
                         await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
-                        return;
+                        this.Close();
+                        break;
                 }
             }
             catch (Exception ex)

@@ -24,7 +24,7 @@
     <header>
         <div class="content-wrapper">
             <div class="float-left">
-                <p class="site-title"><a runat="server" href="~/"><img src="<%: ResolveUrl("~/Images/Logo_White.png") %>" width="150" /></a></p>
+                <p class="site-title"><a runat="server" href="~/PagesGuest/Default"><img src="<%: ResolveUrl("~/Images/Logo_White.png") %>" width="150" /></a></p>
             </div>
             <div class="float-right">
                 <nav>

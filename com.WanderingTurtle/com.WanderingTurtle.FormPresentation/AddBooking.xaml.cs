@@ -108,7 +108,9 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new WanderingTurtleException(this, "Booking could not be added due to database malfunction.");
 
                     case (ResultsEdit.Success):
+                        btnAddBookingAdd.IsEnabled = false;
                         await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        this.Close();
                         break;
                 }
             }

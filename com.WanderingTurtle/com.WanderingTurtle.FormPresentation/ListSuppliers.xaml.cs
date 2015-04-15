@@ -188,5 +188,24 @@ namespace com.WanderingTurtle.FormPresentation
         {
             UpdateSupplier(DataGridHelper.DataGridRow_Click<Supplier>(sender, e), true);
         }
+
+        private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)
+        {
+            var myList = _manager.searchSupplier(txtSearchSupplier.Text);
+            lvSuppliersList.ItemsSource = myList;
+            lvSuppliersList.Items.Refresh();
+        }
+
+        private void txtSearchSupplier_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(txtSearchSupplier.Text.Length == 0)
+            {
+                btnSearchSupplier.Content = "Refresh List";
+            }
+            else
+            {
+                btnSearchSupplier.Content = "Search";
+            }
+        }
     }
 }

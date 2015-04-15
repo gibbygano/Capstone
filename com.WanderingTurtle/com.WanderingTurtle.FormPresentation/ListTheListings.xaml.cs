@@ -167,5 +167,28 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, ex, "No database able to be accessed for Listings");
             }
         }
+
+        private void txtSearchListing_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(txtSearchListing.Text.Length == 0)
+            {
+                btnSearchListing.Content = "Refresh List";
+            }
+            else
+            {
+                btnSearchListing.Content = "Search";
+            }
+        }
+
+        private void btnSearchListing_Click(object sender, RoutedEventArgs e)
+        {
+            var myList = prodMan.SearchItemLists(txtSearchListing.Text);
+            foreach (ItemListing item in myList)
+            {
+                item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
+            }
+            lvListing.ItemsSource = myList;
+            lvListing.Items.Refresh();
+        }
     }
 }

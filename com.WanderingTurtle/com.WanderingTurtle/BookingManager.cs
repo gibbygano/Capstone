@@ -531,48 +531,19 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="inPIN"></param>
         /// <returns></returns>
-        public ResultsEdit checkValidPIN(int inPIN)
+        public HotelGuest checkValidPIN(string inPIN)
         {
             try
             {
-                //retrieve recent guest list
-                bool result = true;
-                //see if pin is in it
-                if (result)
-                {
-                    return ResultsEdit.OkToEdit;
-                }
-                else
-                {
-                    return ResultsEdit.NotFound;
-                }
+                //retrieve guest
+                return BookingAccessor.verifyGuestPin(inPIN);
 
-            }
-            catch (SqlException ex)
-            {
-                return ResultsEdit.NotFound;
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/30
-        /// </summary>
-        /// <param name="inPin"></param>
-        /// <returns></returns>
-        public int FindGuest(int inPin)
-        {
-            try
-            {
-                return 5;
             }
             catch (Exception)
             {
-                
-                throw;
+                var ax = new ApplicationException("PIN does not exist.");
+                throw ax;
             }
-
         }
         /// <summary>
         /// Matt Lapka

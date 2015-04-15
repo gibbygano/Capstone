@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using com.WanderingTurtle.BusinessLogic;
+using System.Data.SqlClient;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -25,6 +27,8 @@ namespace com.WanderingTurtle.FormPresentation
         public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
         public SupplierManager MySupplierManager = new SupplierManager();
         public SupplierLoginManager myLoginManager = new SupplierLoginManager();
+        private List<CityState> _zips;
+        private CityStateManager _cityStateManager = new CityStateManager();
 
         /// <summary>
         /// Created:  2015/04/04
@@ -52,6 +56,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             this.CurrentSupplierApplication = CurrentSupplierApplication;
             ReloadComboBox();
+            fillComboBox();
             SetFields();
             
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
@@ -95,32 +100,23 @@ namespace com.WanderingTurtle.FormPresentation
                 if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Approved.ToString()))
                 {
                     ValidateApprovalFields();
+                    
+                    string validUserName = "";
 
-                    string userNameToAdd = txtUserName.Text;
+                    validUserName = myLoginManager.CheckSupplierUserName(txtUserName.Text);
 
-                    ResultsEdit userNameCheck = myLoginManager.CheckSupplierUserName(userNameToAdd);
+                    decimal supplyCost = (decimal)(numSupplyCost.Value);
 
-                    //if the name wasn't found - that's good
-                    if (userNameCheck == ResultsEdit.NotFound)
+                    SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, validUserName, supplyCost);
+
+                    if (result == SupplierResult.Success)
                     {
-                        decimal supplyCost = (decimal)(numSupplyCost.Value / 100);
-
-                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, userNameToAdd, supplyCost);
-
-                        if (result == SupplierResult.Success)
-                        {
-                            await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
-
-                            this.Close();
-                        }
-                        else
-                        {
-                            throw new WanderingTurtleException(this, "Supplier wasn't added to the database");
-                        }
+                        await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                        this.Close();
                     }
                     else
                     {
-                        throw new WanderingTurtleException(this, "UserName already in use.");
+                        throw new WanderingTurtleException(this, "DB Error");
                     }
                 }
                 else if (UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()) || UpdatedSupplierApplication.ApplicationStatus.Equals(ApplicationStatus.Pending.ToString()))
@@ -130,7 +126,6 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result == SupplierResult.Success)
                     {
                         await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
-
                         this.Close();
                     }
                     else
@@ -142,9 +137,16 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new WanderingTurtleException(this, "DB Error.");
                 }
-
-
-            }catch{
+            }
+            catch (SqlException)
+            {
+               // ShowErrorMessage("UserName already used.  Please choose another one.");
+                txtUserName.Text = "";
+                throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         } 
       
@@ -155,43 +157,46 @@ namespace com.WanderingTurtle.FormPresentation
             //send info to BLL
             if (!Validator.ValidateString(txtUserName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a user name.");
-
+                throw new InputValidationException(txtUserName, "Enter a user name.");
             }
             if(!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
             {
-                throw new WanderingTurtleException(this, "Enter a valid supply cost.");
+                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
             }
             return true;
         }
+
+
         private bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
-                txtCompanyName.Focus();
-                throw new WanderingTurtleException(this, "Enter a company name.");
+                throw new InputValidationException(txtCompanyName, "Enter a company name.");
             }
             if (!Validator.ValidateAddress(txtAddress.Text))
             {
-                throw new WanderingTurtleException(this, "Enter an address.");
+                throw new InputValidationException(txtAddress, "Enter an address.");
             }
             if (!Validator.ValidatePhone(txtPhoneNumber.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a phone number.");
+                throw new InputValidationException(txtPhoneNumber, "Enter a phone number.");
             }
             if (!Validator.ValidateEmail(txtEmailAddress.Text))
             {
-                throw new WanderingTurtleException(this, "Enter an email address.");
+                throw new InputValidationException(txtEmailAddress, "Enter an email address.");
             }
             if (!Validator.ValidateString(txtFirstName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a first name.");
+                throw new InputValidationException(txtFirstName, "Enter a first name.");
             }
             if (!Validator.ValidateString(txtLastName.Text))
             {
-                throw new WanderingTurtleException(this, "Enter a last name.");
+                throw new InputValidationException(txtLastName, "Enter a last name.");
             }
-
+            if (cboZip.SelectedItem == null)
+            {
+                throw new InputValidationException(cboZip, "You must select an zip from the drop down");
+            }
             return true;
         }
 
@@ -203,10 +208,11 @@ namespace com.WanderingTurtle.FormPresentation
             UpdatedSupplierApplication.LastName = this.txtLastName.Text;
             UpdatedSupplierApplication.Address1 = this.txtAddress.Text;
             UpdatedSupplierApplication.Address2 = this.txtAddress2.Text;
-            UpdatedSupplierApplication.Zip = this.txtZip.Text;
+            UpdatedSupplierApplication.Zip = cboZip.SelectedValue.ToString();
+
             UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
             UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
-            UpdatedSupplierApplication.ApplicationDate = this.dateApplicationDate.DisplayDate;
+            UpdatedSupplierApplication.ApplicationDate = CurrentSupplierApplication.ApplicationDate;
             UpdatedSupplierApplication.ApplicationStatus = this.cboAppStatus.SelectedValue.ToString();
             UpdatedSupplierApplication.Remarks = this.txtRemarks.Text;
 
@@ -227,12 +233,38 @@ namespace com.WanderingTurtle.FormPresentation
             this.txtLastName.Text = CurrentSupplierApplication.LastName;
             this.txtAddress.Text = CurrentSupplierApplication.Address1;
             this.txtAddress2.Text = CurrentSupplierApplication.Address2;
-            this.txtZip.Text = CurrentSupplierApplication.Zip;
             this.txtPhoneNumber.Text = CurrentSupplierApplication.PhoneNumber;
             this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
-            this.dateApplicationDate.SelectedDate = CurrentSupplierApplication.ApplicationDate;
+            this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
-            this.txtRemarks.Text = CurrentSupplierApplication.Remarks;            
+            this.txtRemarks.Text = CurrentSupplierApplication.Remarks;
+
+            for (int i = 0; i < _zips.Count; i++)
+            {
+                if (_zips[i].Zip == CurrentSupplierApplication.Zip)
+                {
+                    cboZip.SelectedValue = _zips[i].Zip;
+                }
+            }
+        }
+
+        /// <summary>
+        /// fills the zip code combo box
+        /// created by will fritz 2/19/2015
+        /// </summary>
+        private void fillComboBox()
+        {
+            try
+            {
+                _zips = _cityStateManager.GetCityStateList();
+                cboZip.ItemsSource = _zips;
+                cboZip.DisplayMemberPath = "GetZipStateCity";
+                cboZip.SelectedValuePath = "Zip";
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex, "Error Retrieving the list of zip codes");
+            }
         }
 
         /// <summary>
@@ -244,7 +276,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// </remarks>
         private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
-                /// <summary>
+
+        /// <summary>
         /// Pat Banks
         /// Created: 2015/04/11
         /// 
@@ -254,6 +287,24 @@ namespace com.WanderingTurtle.FormPresentation
         {
             //creating a list for the dropdown userLevel
             cboAppStatus.ItemsSource = GetStatusList;
+        }
+
+
+        private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboAppStatus.SelectedIndex.Equals(1))
+            {
+                numSupplyCost.IsEnabled = true;
+                txtUserName.IsEnabled = true;
+            }
+            else
+            {
+                numSupplyCost.Value = .70;
+                txtUserName.Text = "";
+
+                numSupplyCost.IsEnabled = false;
+                txtUserName.IsEnabled = false;
+            }
         }
     }
 }

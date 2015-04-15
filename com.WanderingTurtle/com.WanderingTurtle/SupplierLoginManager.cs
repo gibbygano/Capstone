@@ -31,11 +31,11 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        public int addSupplierLogin(string userName)
+        public int addSupplierLogin(string userName, int supplierID)
         {
             try
             {
-                return access.addSupplierLogin(userName);
+                return access.addSupplierLogin(userName, supplierID);
             }
             catch (SqlException)
             {
@@ -48,19 +48,11 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
 
-        public ResultsEdit CheckSupplierUserName(string userName)
+        public string CheckSupplierUserName(string userName)
         {
             try
             {
-                if (access.checkUserName(userName) == "")
-                {
-                    return ResultsEdit.NotFound;
-                }
-                else
-                {
-                    return ResultsEdit.DatabaseError;
-                }
-
+                return access.checkUserName(userName);
             }
             catch (SqlException)
             {
@@ -71,8 +63,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw;
             }
         }
-
-
 
         public int archiveSupplierLogin(SupplierLogin oldSupplier, bool archive)
         {

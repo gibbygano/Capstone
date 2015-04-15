@@ -3,6 +3,7 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
 using System;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -419,11 +420,15 @@ namespace com.WanderingTurtle.BusinessLogic
                 else
                 {
                     return SupplierResult.ChangedByOtherUser;
-                }                   
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
             }
             catch (Exception)
             {
-                return SupplierResult.DatabaseError;
+                throw;
             }
         }
 
@@ -444,6 +449,32 @@ namespace com.WanderingTurtle.BusinessLogic
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        /// <summary>
+        /// Justin Pennington
+        /// Created on 2015/04/14
+        /// </summary>
+        /// <param name="inSearch"></param>
+        /// <returns></returns>
+        public List<Supplier> searchSupplier(string inSearch)
+        {
+            if (!inSearch.Equals("") && !inSearch.Equals(null))
+            {
+
+                List<Supplier> SearchList = RetrieveSupplierList();
+                List<Supplier> myTempList = new List<Supplier>();
+                myTempList.AddRange(
+                  from inSupplier in SearchList
+                  where inSupplier.FirstName.ToUpper().Contains(inSearch.ToUpper()) || inSupplier.LastName.ToUpper().Contains(inSearch.ToUpper()) || inSupplier.CompanyName.ToUpper().Contains(inSearch.ToUpper())
+                  select inSupplier);
+                return myTempList;
+
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+            }
+            else
+            {
+                return RetrieveSupplierList();
             }
         }
     }

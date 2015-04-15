@@ -23,7 +23,6 @@ namespace com.WanderingTurtle.DataAccess
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
 
-            int newApplicationID;
             string cmdtext = "spInsertSupplierApplication";
             var cmd = new SqlCommand(cmdtext, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -246,7 +245,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication, string userName, decimal supplyCost)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spUpdateApplicationAddSupplierAddLogin";
+            var cmdText = "spInsertSupplierFromApplication";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
 
@@ -290,11 +289,14 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Open();
                 rowsAffected = cmd.ExecuteNonQuery();
 
-
                 if (rowsAffected == 0)
                 {
                     throw new ApplicationException("Concurrency Violation");
                 }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {

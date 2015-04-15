@@ -63,9 +63,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana
         /// Created: 2015/02/16
         /// 
+        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// 
         /// Parameter marks whether a database command was successful
         /// </summary>
-        public bool Result { get; private set; }
+        public ResultsEdit Result { get; private set; }
 
         /// <summary>
         /// Miguel Santana
@@ -237,7 +239,7 @@ namespace com.WanderingTurtle.FormPresentation
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
                             int.Parse(TxtRoomNumber.Text.Trim()),
-                            int.Parse(TxtGuestPIN.Text)
+                            TxtGuestPIN.Text
                         )
                     );
                 }
@@ -254,12 +256,12 @@ namespace com.WanderingTurtle.FormPresentation
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
                                 int.Parse(TxtRoomNumber.Text.Trim()),
-                                int.Parse(TxtGuestPIN.Text)
+                                TxtGuestPIN.Text
                             )
                         );
                 }
 
-                if (Result)
+                if (Result == ResultsEdit.Success)
                 {
                     await ShowMessage("Your Request was Processed Successfully", "Success");
                     Close();
@@ -267,8 +269,14 @@ namespace com.WanderingTurtle.FormPresentation
                 else
                 { ShowErrorMessage("Error Processing Request", "Error"); }
             }
+            catch (SqlException)
+            {
+                ShowErrorMessage("PIN Already Assigned.  Please choose a different PIN.", "Error"); 
+            }
             catch (Exception ex)
-            { ShowErrorMessage(ex); }
+            { 
+                ShowErrorMessage(ex); 
+            }
         }
 
         /// <summary>
@@ -349,14 +357,9 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
+            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateInt(TxtGuestPIN.Text.Trim(), 1000, 9999))
             {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number with 4 characters.");
-                return false;
-            }
-            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim(), 4))
-            {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number with 4 characters.");
+                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
                 return false;
             }
 

@@ -5,7 +5,9 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:views="clr-namespace:com.WanderingTurtle.FormPresentation.Views"
         Style="{DynamicResource WindowStyle}"
-        Title="MainWindow" Height="525" Width="950" MinHeight="125"
+        Title="Wandering Turtle Resort"
+        Height="525" Width="950" MinHeight="125"
+        Icon="Resources/Icon.ico"
         WindowStartupLocation="CenterScreen">
     <Metro:TransitioningContentControl x:Name="MainContent" Transition="Default">
         <views:StartupScreen />
