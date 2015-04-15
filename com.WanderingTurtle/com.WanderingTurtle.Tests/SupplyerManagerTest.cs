@@ -379,15 +379,11 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
-        public void EditSupplierworkingTest() // ☐
+        public void EditSupplierworkingTest() // ☑
         {
             Setup();
-
             SupplierMang.AddANewSupplier(testSupplier);
             var listToSearch = SupplierMang.RetrieveSupplierList();
-
-            
-
             foreach(var item in listToSearch)
             {
                 if(item.UserID == 999)
@@ -395,7 +391,6 @@ namespace com.WanderingTurtle.Tests
                     testSupplier = item;
                 }
             }
-
             Supplier testSupplier2 = test2();
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
             SupplierMang.deleteTestSupplier(testSupplier);
@@ -520,7 +515,15 @@ namespace com.WanderingTurtle.Tests
         public void ArchiveSupplierWorkingTest() // ☐
         {
             Setup();
-            testSupplier.CompanyName = "Awsomest Tours";
+            SupplierMang.AddANewSupplier(testSupplier);
+            var listToSearch = SupplierMang.RetrieveSupplierList();
+            foreach (var item in listToSearch)
+            {
+                if (item.UserID == 999)
+                {
+                    testSupplier = item;
+                }
+            }
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplier), SupplierResult.Success);
             SupplierMang.deleteTestSupplier(testSupplier);
         }
