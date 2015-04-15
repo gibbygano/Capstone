@@ -9,6 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <div id="mainpage">
     <div id="leftcontainer">
         <div id="supplierdetails">
             <h2><%= _currentSupplier.CompanyName %></h2>
@@ -36,7 +37,7 @@
                         <td><%# Item.EndDate %></td>
                         <td><%# Item.CurrentNumGuests %></td>
                         <td>
-                            <asp:Button ID="btnDetails" runat="server" Text="View Details" OnClick="btnDetails_Click" OnClientClick="showDetails(); return false;" />
+                            <asp:Button ID="btnDetails" runat="server" CommandArgument="<%#Item.ItemListID %>" Text="View Details" OnClick="btnDetails_Click"  OnClientClick="showDetails();" UseSubmitBehavior="False"  />
                         </td>
                     </tr>
                 </ItemTemplate>
@@ -56,7 +57,8 @@
             </asp:ListView>
 
         </div>
-        <div id="eventdetails" runat="server">
+        <div class="hide">
+        <div id="eventdetails" runat="server" style="display: none;">
             <asp:ListView ID="lvDetails" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
                 <ItemTemplate>
                     <tr>
@@ -76,6 +78,8 @@
                 </LayoutTemplate>
             </asp:ListView>
         </div>
-    </div>
 
+        </div>
+    </div>
+</div>
 </asp:Content>

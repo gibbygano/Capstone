@@ -15,7 +15,7 @@ $(document).ready(function () {
         );
 
     $("#MainContent_eventdetails").dialog({
-        modal: true,
+        modal: false,
         buttons: {
             Ok: function () {
                 $(this).dialog("close");
@@ -24,17 +24,22 @@ $(document).ready(function () {
         closeOnEscape: true,
         closeText: "X",
         dialogClass: "events",
-        autoOpen: false
+        autoOpen: true
     }
 
        );
 
+    var inside = document.getElementById('MainContent_eventdetails');
+    if ((inside.innerText.replace(" ", "") =="")) {
+        $('#MainContent_eventdetails').dialog('close');
+    }
     
 
 });
 
 function showDetails() {
 
- 
-    $('#MainContent_eventdetails').dialog("open");
+    $('#MainContent_eventdetails').dialog('open');
+
+
     }

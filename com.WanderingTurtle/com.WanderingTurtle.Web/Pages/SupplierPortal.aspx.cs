@@ -81,24 +81,33 @@ namespace com.WanderingTurtle.Web.Pages
 
         public void GetNumbers(int itemListID)
         {
-            try
+            if (Page.IsPostBack)
             {
-                var list = _myBookingManager.RetrieveBookingNumbers(itemListID);
-                lvDetails.DataSource = list;
-                lvDetails.DataBind();
-            }
-            catch(Exception ex)
-            {
-                Label errorLabel = (Label)Master.FindControl("lblErrorMessage");
-                errorLabel.Text = "Error: " + ex.Message;
-                Control c = Master.FindControl("ErrorMess");
-                c.Visible = true;
+                try
+                {
+                    var list = _myBookingManager.RetrieveBookingNumbers(itemListID);
+                    lvDetails.DataSource = list;
+                    lvDetails.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    Label errorLabel = (Label)Master.FindControl("lblErrorMessage");
+                    errorLabel.Text = "Error: " + ex.Message;
+                    Control c = Master.FindControl("ErrorMess");
+                    c.Visible = true;
+                    return;
+                }
+                Control cc = Master.FindControl("ErrorMess");
+                cc.Visible = false;
             }
         }
 
         public void btnDetails_Click(object sender, EventArgs e)
         {
-           GetNumbers(102);
+            var b = (Button)sender;
+            int i = int.Parse(b.CommandArgument);
+           GetNumbers(i);
+           
         }
     }
 }

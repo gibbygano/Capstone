@@ -884,4 +884,13 @@ input[type="radio"]{
 
 .events{
     color: #fff;
+    display: none;
+}
+
+.ui-dialog{
+    display: none;
+}
+
+#MainContent_eventdetails{
+    display: none;
 }
