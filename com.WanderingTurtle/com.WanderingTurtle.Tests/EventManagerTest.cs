@@ -20,6 +20,7 @@ namespace com.WanderingTurtle.Tests
         private Event toTest = new Event();
         private Event toTest2 = new Event();
         private EventManager myMan = new EventManager();
+        private EventType typeToTest = new EventType();
 
         private void setup()
         {
@@ -134,12 +135,10 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void AddNewEventType_Test()
         {
-            EventType myEventType = new EventType { EventName = "boo boo", EventTypeID = 102 };
-            EventManager myManager = new EventManager();
-            var result = myManager.AddNewEventType(myEventType);
+            typeToTest.EventName = "boo boo";
+            typeToTest.EventTypeID = 107;
 
-
-            Assert.AreEqual(EventManager.EventResult.Success, result, "method failed");
+            Assert.AreEqual(EventManager.EventResult.Success, myMan.AddNewEventType(typeToTest), "method failed");
         }
 
         [TestMethod]
