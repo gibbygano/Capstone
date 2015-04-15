@@ -132,6 +132,7 @@ namespace com.WanderingTurtle.Tests
             myMan.deleteTestEvent(toTest);
         }
 
+        /*
         [TestMethod]
         public void AddNewEventType_Test()
         {
@@ -160,13 +161,11 @@ namespace com.WanderingTurtle.Tests
 
             Assert.AreEqual(EventManager.EventResult.Success, result, "failed");
         }
+         * */
         [TestMethod]
         public void RetrieveEventTypeList_Test()
         {
-            EventManager myManager = new EventManager();
-            var result = myManager.RetrieveEventTypeList();
-
-            Assert.IsNotNull(result, "result is null");
+            Assert.IsNotNull(myMan.RetrieveEventTypeList(), "result is null");
         }
         [TestMethod]
         public void RetrieveEventType_Test()
