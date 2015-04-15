@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-/*
+
 namespace com.WanderingTurtle.Tests
 {
     ///Justin Pennington 4/9/15
@@ -16,65 +16,31 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class EventManagerTest
     {
-        public EventManagerTest()
+
+        private Event toTest = new Event();
+        private Event toTest2 = new Event();
+        private EventManager myMan = new EventManager();
+
+        private void setup()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            toTest.EventItemID = 999;
+            toTest.EventItemName = "A Test Event";
+            toTest.EventTypeName = "Boat Ride";
+            toTest.EventTypeID = 100;
+            toTest.OnSite = false;
+            toTest.Active = true;
+            toTest.Description = "This is a test descrip";
+            toTest.Transportation = false;
         }
-
-        private TestContext testContextInstance;
-
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        /// Tests adding correct event
+        /// </summary>
         [TestMethod]
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-        public void AddEvent_Test()
+        public void AddEventWorking_Test()
         {
-            //arrange
-            Event myEvent = new Event { EventItemID = 999, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-
-            EventManager myManager = new EventManager();
-
-
-            // act
-            var result = myManager.AddNewEvent(myEvent);
-
-            //assert
-            Assert.AreEqual(EventManager.EventResult.Success, result);
+            setup();
+            Assert.AreEqual(myMan.AddNewEvent(toTest), EventManager.EventResult.Success);
+            myMan.deleteTestEvent(toTest);
         }
 
         [TestMethod]
@@ -219,4 +185,4 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(expected.EventTypeID, result.EventTypeID, "EventTypeID does not match");
         }
     }
-}*/
+}

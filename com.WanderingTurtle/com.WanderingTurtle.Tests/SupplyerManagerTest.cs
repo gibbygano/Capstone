@@ -43,20 +43,6 @@ namespace com.WanderingTurtle.Tests
             testSupplier.Active         = true;
 
 
-            /*
-            cmd.Parameters.AddWithValue("@CompanyName", supplierToAdd.CompanyName);
-            cmd.Parameters.AddWithValue("@FirstName", supplierToAdd.FirstName);
-            cmd.Parameters.AddWithValue("@LastName", supplierToAdd.LastName);
-            cmd.Parameters.AddWithValue("@Address1", supplierToAdd.Address1);
-            cmd.Parameters.AddWithValue("@Address2", supplierToAdd.Address2);
-            cmd.Parameters.AddWithValue("@Zip", supplierToAdd.Zip);
-            cmd.Parameters.AddWithValue("@PhoneNumber", supplierToAdd.PhoneNumber);
-            cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
-            cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
-            cmd.Parameters.AddWithValue("@UserID", supplierToAdd.UserID);
-            cmd.Parameters.AddWithValue("@SupplyCost", (float)supplierToAdd.SupplyCost);
-             * */
-
             //setup Supplier application
             testSupplierApp = new SupplierApplication();
             testSupplierApp.ApplicationDate = new DateTime(2005, 2, 3);
