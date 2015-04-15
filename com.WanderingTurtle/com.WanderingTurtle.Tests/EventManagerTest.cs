@@ -31,7 +31,30 @@ namespace com.WanderingTurtle.Tests
             toTest.Active = true;
             toTest.Description = "This is a test descrip";
             toTest.Transportation = false;
+
+            toTest2.EventItemID = 999;
+            toTest2.EventItemName = "A Test Event";
+            toTest2.EventTypeName = "Boat Ride";
+            toTest2.EventTypeID = 100;
+            toTest2.OnSite = false;
+            toTest2.Active = true;
+            toTest2.Description = "This is a test descrip";
+            toTest2.Transportation = true;
         }
+
+        private void toTestUpdate()
+        {
+            var myList = myMan.RetrieveEventList();
+            foreach (var item in myList)
+            {
+                if (item.Description == "This is a test descrip")
+                {
+                    toTest = item;
+                }
+            }
+        }
+
+
         /// <summary>
         /// Tests adding correct event
         /// </summary>
@@ -88,34 +111,24 @@ namespace com.WanderingTurtle.Tests
         {
             setup();
             myMan.AddNewEvent(toTest);
-            var myList = myMan.RetrieveEventList();
-            foreach(var item in myList)
-            {
-                if(item.Description == "This is a test descrip")
-                {
-                    toTest = item;
-                }
-            }
+            toTestUpdate();
 
             var expected = toTest;
             var result = myMan.RetrieveEvent(toTest.EventItemID.ToString());
 
             Assert.AreEqual(expected, result, "objects do not match");
+            myMan.deleteTestEvent(toTest);
         }
+
 
         [TestMethod]
         public void EditEvent_Test()
         {
-
-            EventManager myManager = new EventManager();
-            Event preChange = new Event { EventItemID = 112, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-            Event expected = new Event { EventItemID = 112, EventItemName = "12345TestWasChanged", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-
-
-            var result = myManager.EditEvent(preChange, expected);
-
-
-            Assert.AreEqual(EventManager.EventResult.Success, result, "method failed");
+            setup();
+            myMan.AddNewEvent(toTest);
+            toTestUpdate();
+            Assert.AreEqual(EventManager.EventResult.Success, myMan.EditEvent(toTest, toTest2), "method failed");
+            myMan.deleteTestEvent(toTest);
         }
 
         [TestMethod]
