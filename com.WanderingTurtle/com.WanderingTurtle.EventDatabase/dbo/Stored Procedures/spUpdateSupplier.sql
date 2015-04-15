@@ -11,6 +11,7 @@
 	@ApplicationID 			int, 
 	@SupplierID 			int,
 	@SupplyCost				decimal(3,2), 
+
 	@originalCompanyName 	varchar(255),
 	@originalFirstName 		varchar(50), 
 	@originalLastName 		varchar(50), 

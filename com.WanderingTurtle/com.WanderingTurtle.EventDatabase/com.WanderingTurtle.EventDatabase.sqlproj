@@ -143,6 +143,8 @@
     <Build Include="dbo\Stored Procedures\spSelectHotelGuestPinGet.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestEvent.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetByID.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteTestSupplier.sql" />
+
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

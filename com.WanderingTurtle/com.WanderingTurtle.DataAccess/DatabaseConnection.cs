@@ -11,7 +11,7 @@ namespace com.WanderingTurtle.DataAccess
     /// </summary>
     public static class DatabaseConnection
     {
-        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=com.WanderingTurtle.EventDatabase;Integrated Security=True";
+        private const string ConnectionString = @"Data Source=localhost;Initial Catalog=com.WanderingTurtle.EventDatabase;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
 
         public static SqlConnection GetDatabaseConnection()
         {

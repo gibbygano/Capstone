@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-/*
+
 namespace com.WanderingTurtle.Tests
 {
     ///Justin Pennington 4/9/15
@@ -16,167 +16,130 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class EventManagerTest
     {
-        public EventManagerTest()
+
+        private Event toTest = new Event();
+        private Event toTest2 = new Event();
+        private EventManager myMan = new EventManager();
+        private EventType typeToTest = new EventType();
+
+        private void setup()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            toTest.EventItemID = 999;
+            toTest.EventItemName = "A Test Event";
+            toTest.EventTypeName = "Boat Ride";
+            toTest.EventTypeID = 100;
+            toTest.OnSite = false;
+            toTest.Active = true;
+            toTest.Description = "This is a test descrip";
+            toTest.Transportation = false;
+
+            toTest2.EventItemID = 999;
+            toTest2.EventItemName = "A Test Event";
+            toTest2.EventTypeName = "Boat Ride";
+            toTest2.EventTypeID = 100;
+            toTest2.OnSite = false;
+            toTest2.Active = true;
+            toTest2.Description = "This is a test descrip";
+            toTest2.Transportation = true;
         }
 
-        private TestContext testContextInstance;
+        private void toTestUpdate()
+        {
+            var myList = myMan.RetrieveEventList();
+            foreach (var item in myList)
+            {
+                if (item.Description == "This is a test descrip")
+                {
+                    toTest = item;
+                }
+            }
+        }
+
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+        /// Tests adding correct event
+        /// </summary>
         [TestMethod]
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-        public void AddEvent_Test()
+        public void AddEventWorking_Test()
         {
-            //arrange
-            Event myEvent = new Event { EventItemID = 999, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-
-            EventManager myManager = new EventManager();
-
-
-            // act
-            var result = myManager.AddNewEvent(myEvent);
-
-            //assert
-            Assert.AreEqual(EventManager.EventResult.Success, result);
+            setup();
+            Assert.AreEqual(myMan.AddNewEvent(toTest), EventManager.EventResult.Success);
+            myMan.deleteTestEvent(toTest);
         }
 
         [TestMethod]
         public void RetrieveEventList_Test()
         {
-            //arrange
-
-            EventManager myManager = new EventManager();
-            ApplicationException expected = new ApplicationException("Event not found.");
-
-            // act
-            List<Event> actual = myManager.RetrieveEventList();
-
-            //assert
+            List<Event> actual = myMan.RetrieveEventList();
             Assert.IsNotNull(actual);
-
         }
 
-
+        /*
         [TestMethod]
         public void EventSearch_Test()
         {
             //arrange
+            setup();
             String inSearch = "12345Test";
-            EventManager myManager = new EventManager();
-            Event myEvent = new Event { EventItemID = 112, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
+            //myMan.AddNewEvent(toTest);
             List<Event> expected = new List<Event>();
-            expected.Add(myEvent);
+            expected.Add(toTest);
 
             //update cache
             DataCache._currentEventList = EventAccessor.GetEventList();
             DataCache._EventListTime = DateTime.Now;
             // act
             List<Event> myTempList = new List<Event>();
-            myTempList = myManager.EventSearch(inSearch);
+            myTempList = myMan.EventSearch(inSearch);
             Event[] myArray = myTempList.ToArray();
-
-
-
-            //currentEvent.EventItemID = reader.GetInt32(0);
-            //currentEvent.EventItemName = reader.GetString(1);
-            //currentEvent.EventTypeID = reader.GetInt32(2);
-            //currentEvent.OnSite = reader.GetBoolean(3);
-            //currentEvent.Transportation = reader.GetBoolean(4);
-            //currentEvent.Description = reader.GetString(5);
-            //currentEvent.Active = reader.GetBoolean(6);
-            //currentEvent.EventTypeName = reader.GetString(7);
-            //EventList.Add(currentEvent);
-
-
+            
             //assert
-            Assert.AreEqual(myEvent.Active, myArray[0].Active, "Active do not match");
-            Assert.AreEqual(myEvent.Description, myArray[0].Description, "Description do not match");
-
-            Assert.AreEqual(myEvent.EventItemName, myArray[0].EventItemName, "Event ItemName do not match");
-            Assert.AreEqual(myEvent.EventTypeID, myArray[0].EventTypeID, "EventTypeID do not match");
-            Assert.AreEqual(myEvent.EventTypeName, myArray[0].EventTypeName, "EventTypeName do not match");
-            Assert.AreEqual(myEvent.OnSite, myArray[0].OnSite, "OnSite do not match");
-            Assert.AreEqual(myEvent.OnSiteString, myArray[0].OnSiteString, "OnSiteString do not match");
-            Assert.AreEqual(myEvent.ProductID, myArray[0].ProductID, "ProductID do not match");
-            Assert.AreEqual(myEvent.Transportation, myArray[0].Transportation, "Transportation does not match");
-            Assert.AreEqual(myEvent.TransportString, myArray[0].TransportString, "TransportationString does not match");
-            Assert.AreEqual(myEvent.EventItemID, myArray[0].EventItemID, "EventItemID do not match");           //can fail until we can force an EventItemID
+            Assert.AreEqual(toTest.Active, myArray[0].Active, "Active do not match");
+            Assert.AreEqual(toTest.Description, myArray[0].Description, "Description do not match");
+            Assert.AreEqual(toTest.EventItemName, myArray[0].EventItemName, "Event ItemName do not match");
+            Assert.AreEqual(toTest.EventTypeID, myArray[0].EventTypeID, "EventTypeID do not match");
+            Assert.AreEqual(toTest.EventTypeName, myArray[0].EventTypeName, "EventTypeName do not match");
+            Assert.AreEqual(toTest.OnSite, myArray[0].OnSite, "OnSite do not match");
+            Assert.AreEqual(toTest.OnSiteString, myArray[0].OnSiteString, "OnSiteString do not match");
+            Assert.AreEqual(toTest.ProductID, myArray[0].ProductID, "ProductID do not match");
+            Assert.AreEqual(toTest.Transportation, myArray[0].Transportation, "Transportation does not match");
+            Assert.AreEqual(toTest.TransportString, myArray[0].TransportString, "TransportationString does not match");
+            Assert.AreEqual(toTest.EventItemID, myArray[0].EventItemID, "EventItemID do not match");           //can fail until we can force an EventItemID
         }
+         * */
         [TestMethod]
         public void EventRetrieve_Test()
         {
-            //arrange
-            String EventID = "101";
-            EventManager myManager = new EventManager();
+            setup();
+            myMan.AddNewEvent(toTest);
+            toTestUpdate();
 
-            Event expected = new Event { EventItemID = 112, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-
-            var result = myManager.RetrieveEvent(EventID);
+            var expected = toTest;
+            var result = myMan.RetrieveEvent(toTest.EventItemID.ToString());
 
             Assert.AreEqual(expected, result, "objects do not match");
+            myMan.deleteTestEvent(toTest);
         }
+
 
         [TestMethod]
         public void EditEvent_Test()
         {
-
-            EventManager myManager = new EventManager();
-            Event preChange = new Event { EventItemID = 112, EventItemName = "12345Test", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-            Event expected = new Event { EventItemID = 112, EventItemName = "12345TestWasChanged", EventTypeName = "Boat Ride", EventTypeID = 100, OnSite = false, Active = true, Description = "A really creepy midnight boat ride down the river.", Transportation = false };
-
-
-            var result = myManager.EditEvent(preChange, expected);
-
-
-            Assert.AreEqual(EventManager.EventResult.Success, result, "method failed");
+            setup();
+            myMan.AddNewEvent(toTest);
+            toTestUpdate();
+            Assert.AreEqual(EventManager.EventResult.Success, myMan.EditEvent(toTest, toTest2), "method failed");
+            myMan.deleteTestEvent(toTest);
         }
 
+        /*
         [TestMethod]
         public void AddNewEventType_Test()
         {
-            EventType myEventType = new EventType { EventName = "boo boo", EventTypeID = 102 };
-            EventManager myManager = new EventManager();
-            var result = myManager.AddNewEventType(myEventType);
+            typeToTest.EventName = "boo boo";
+            typeToTest.EventTypeID = 107;
 
-
-            Assert.AreEqual(EventManager.EventResult.Success, result, "method failed");
+            Assert.AreEqual(EventManager.EventResult.Success, myMan.AddNewEventType(typeToTest), "method failed");
         }
 
         [TestMethod]
@@ -198,13 +161,11 @@ namespace com.WanderingTurtle.Tests
 
             Assert.AreEqual(EventManager.EventResult.Success, result, "failed");
         }
+         * */
         [TestMethod]
         public void RetrieveEventTypeList_Test()
         {
-            EventManager myManager = new EventManager();
-            var result = myManager.RetrieveEventTypeList();
-
-            Assert.IsNotNull(result, "result is null");
+            Assert.IsNotNull(myMan.RetrieveEventTypeList(), "result is null");
         }
         [TestMethod]
         public void RetrieveEventType_Test()
@@ -219,4 +180,4 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(expected.EventTypeID, result.EventTypeID, "EventTypeID does not match");
         }
     }
-}*/
+}
