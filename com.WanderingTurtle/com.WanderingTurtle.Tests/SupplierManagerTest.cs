@@ -7,6 +7,7 @@ using com.WanderingTurtle.Common;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -141,6 +142,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = "badID";
             SupplierApplication testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -154,6 +156,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = "";
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -167,6 +170,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = null;
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -180,6 +184,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = "100";
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNotNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -202,6 +207,7 @@ namespace com.WanderingTurtle.Tests
         {
             List<SupplierApplication> suppliersApps = SupplierMang.RetrieveSupplierApplicationList();
             Assert.IsNotNull(suppliersApps);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -213,6 +219,7 @@ namespace com.WanderingTurtle.Tests
         {
             SupplierApplication SupplierAppEmpty = new SupplierApplication();
             SupplierMang.AddASupplierApplication(SupplierAppEmpty);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -224,6 +231,7 @@ namespace com.WanderingTurtle.Tests
         {
             SupplierApplication SupplierAppNull = null;
             SupplierMang.AddASupplierApplication(SupplierAppNull);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -240,6 +248,7 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp2.PhoneNumber = "234-234-2341";
             testSupplierApp2.FirstName = "test";
             SupplierMang.AddASupplierApplication(testSupplierApp2);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -252,6 +261,8 @@ namespace com.WanderingTurtle.Tests
             Setup("AddAppWorkingTest");
             SupplierMang.AddASupplierApplication(testSupplierApp);
             SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.deleteTestApplication();
+
 
         }
 
