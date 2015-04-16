@@ -10,9 +10,7 @@ $(document).ready(function () {
         },
         closeOnEscape: true,
         closeText: "X"
-    }
-
-        );
+    });
 
     $("#MainContent_eventdetails").dialog({
         modal: false,
@@ -25,11 +23,19 @@ $(document).ready(function () {
         closeText: "X",
         dialogClass: "events",
         autoOpen: true
-    }
+    });
 
-       );
     $('#listStartTime').timePicker();
     $('#listEndTime').timePicker();
+
+
+    $("#listEndTime").click(function () {
+        $('div.timePicker').css({
+
+            top: $("#listEndTime").offset()
+
+        });
+    });
 
     $("#listPrice").spinner({
         min: 0,
@@ -45,6 +51,21 @@ $(document).ready(function () {
         step: 1,
         start: 0
     });
+
+    $("#listStartDate").click(function () {
+        $(this).datepicker({
+            minDate: 0,
+            maxDate: '+1y',
+        });
+    });
+
+    $("#listEndDate").click(function () {
+        $(this).datepicker({
+            minDate: 0,
+            maxDate: '+1y'
+        });
+    });
+
 
 
 

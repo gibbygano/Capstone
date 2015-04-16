@@ -12,6 +12,7 @@
         Hunter Lind
         View List of Events and Options to Edit or Delete
         -->
+    <div id="theLists" runat="server">
     <h1>Listed Events</h1>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" 
@@ -31,7 +32,7 @@
                 <td><%# Item.OnSiteString %></td>
                 <td>
                     <asp:Button CommandName="Edit" Text="Edit" runat="server" />
-                    <asp:Button ID="btnList" runat="server" Text="List This Event" CommandArgument ="<%=Item.EventItemID %>" OnClick="btn_Click"/>
+                    <asp:Button ID="btnList" runat="server" Text="List This Event" CommandArgument ="<%# Item.EventItemID %>" OnClick="btn_Click"/>
                     <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
                 </td>
             </tr>
@@ -136,14 +137,16 @@
                 NextPageText="-->" ButtonType="Link" />
         </Fields>
     </asp:DataPager>--%>
-
-    <div id="addListing">
+</div>
+    <div id="addListing" runat="server" style="display: none;">
         <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label>
-        <div id="listStartDate"></div>
-        <div id="listEndDate"></div>
+        <input type="text" id="listStartDate" class="mydate" />
+        <input type="text" id="listEndDate" class="mydate" />
         <input type="text" id="listStartTime" class="mytime" />
         <input type="text" id="listEndTime" class="mytime" />
-        <input id="listPrice" value="0.00" class="myspinner">
-        <input id="listTickets" value="0" class="myspinner">
+        <input id="listPrice" name="price" value="0.00" class="myspinner">
+        <input id="listTickets" name="tickets" value="0" class="myspinner">
+        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click"/>
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
     </div>
 </asp:Content>

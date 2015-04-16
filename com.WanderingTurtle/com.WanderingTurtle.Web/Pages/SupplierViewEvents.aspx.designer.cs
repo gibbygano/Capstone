@@ -13,6 +13,15 @@ namespace com.WanderingTurtle.Web.Pages {
     public partial class SupplierViewEvents {
         
         /// <summary>
+        /// theLists control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl theLists;
+        
+        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,15 @@ namespace com.WanderingTurtle.Web.Pages {
         protected global::System.Web.UI.WebControls.ListView lvEvents;
         
         /// <summary>
+        /// addListing control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl addListing;
+        
+        /// <summary>
         /// lblEventName control.
         /// </summary>
         /// <remarks>
@@ -38,5 +56,23 @@ namespace com.WanderingTurtle.Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEventName;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
     }
 }
