@@ -139,6 +139,8 @@
 
     <div id="addListing">
         <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label>
-
+        <div id="listStartDate"></div>
+        <div id="listEndDate"></div>
+        <input type="text" id="listStartTime" />
     </div>
 </asp:Content>

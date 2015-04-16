@@ -34,6 +34,7 @@ $(document).ready(function () {
         $('#MainContent_eventdetails').dialog('close');
     }
     
+    $('#listStartTime').timepicker();
 
 });
 
