@@ -846,7 +846,7 @@ input[type="radio"]{
     padding: 2px;
 }
 
-.ui-button-text-only{
+button.ui-button-text-only{
     float: right;
     background-color: rgb(51,161,51);
     color: #fff;
@@ -894,3 +894,47 @@ input[type="radio"]{
 #MainContent_eventdetails{
     display: none;
 }
+
+.timePicker {
+        border: 1px solid gray;
+        overflow-y: scroll;
+        height: 120px;
+        width: 180px;
+        position: absolute;
+        background-color: #fff;
+    }
+
+    .timePicker ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .timePicker ul li p {
+        padding: 3px;
+        margin: 0;
+    }
+
+    .timePicker ul li:hover, .timePicker-selected {
+        background-color: gray;
+        color: #fff;
+    }
+
+    .ui-spinner span.ui-icon{
+        clear: both;
+        text-decoration: none;
+    }
+
+    .ui-spinner-button{
+        clear: both;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .myspinner{
+        width: 30px;
+    }
+
+    .mytime{
+        width: 75px;
+    }

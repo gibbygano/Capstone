@@ -141,6 +141,9 @@
         <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label>
         <div id="listStartDate"></div>
         <div id="listEndDate"></div>
-        <input type="text" id="listStartTime" />
+        <input type="text" id="listStartTime" class="mytime" />
+        <input type="text" id="listEndTime" class="mytime" />
+        <input id="listPrice" value="0.00" class="myspinner">
+        <input id="listTickets" value="0" class="myspinner">
     </div>
 </asp:Content>

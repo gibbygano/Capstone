@@ -11,7 +11,7 @@ $(document).ready(function () {
         closeOnEscape: true,
         closeText: "X"
     }
-        
+
         );
 
     $("#MainContent_eventdetails").dialog({
@@ -28,13 +28,34 @@ $(document).ready(function () {
     }
 
        );
+    $('#listStartTime').timePicker();
+    $('#listEndTime').timePicker();
 
+    $("#listPrice").spinner({
+        min: 0,
+        max: 999,
+        step: 1,
+        start: 0.00,
+        numberFormat: "C"
+    });
+
+    $("#listTickets").spinner({
+        min: 0,
+        max: 999,
+        step: 1,
+        start: 0
+    });
+
+
+
+
+    /* last function because it will break on most pages */
     var inside = document.getElementById('MainContent_eventdetails');
-    if ((inside.innerText.replace(" ", "") =="")) {
+    if ((inside.innerText.replace(" ", "") == "")) {
         $('#MainContent_eventdetails').dialog('close');
     }
-    
-    $('#listStartTime').timepicker();
+
+
 
 });
 
@@ -43,4 +64,4 @@ function showDetails() {
     $('#MainContent_eventdetails').dialog('open');
 
 
-    }
+}
