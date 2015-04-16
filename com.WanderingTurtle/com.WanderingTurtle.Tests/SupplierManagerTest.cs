@@ -27,11 +27,11 @@ namespace com.WanderingTurtle.Tests
         Supplier testSupplier           = new Supplier();
         Supplier testSupplierRetrieve   = new Supplier();
 
-        private void Setup()
+        private void Setup(string CompName)
         {
             //set up supplier
             testSupplier                = new Supplier();
-            testSupplier.CompanyName    = "Awsome Tours";
+            testSupplier.CompanyName    = CompName;
             testSupplier.FirstName      = "FirstBlab";
             testSupplier.LastName       = "LastBlab";
             testSupplier.Address1       = "255 East West St";
@@ -249,8 +249,10 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void AddSupplierApplicationWorkingTest() // ☑
         {
-            Setup();
+            Setup("AddAppWorkingTest");
             SupplierMang.AddASupplierApplication(testSupplierApp);
+            SupplierMang.deleteTestSupplier(testSupplier);
+
         }
 
         /// <summary>
@@ -267,6 +269,9 @@ namespace com.WanderingTurtle.Tests
             //test 1 empty Supplier
             Supplier testSupplierEmpty = new Supplier();
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierEmpty, "FJones"), SupplierResult.DatabaseError);
+            SupplierMang.deleteTestSupplier(testSupplierEmpty);
+
+
         }
 
         /// <summary>
@@ -283,6 +288,8 @@ namespace com.WanderingTurtle.Tests
             Supplier testSupplierNull = new Supplier();
             testSupplierNull = null;
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull, "FJones"), SupplierResult.DatabaseError);
+            SupplierMang.deleteTestSupplier(testSupplierNull);
+
         }
 
         /// <summary>
@@ -293,10 +300,12 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void AddSupplierPartialTest() //☑
         {
-            Setup();
+            Setup("Partial Test");
             testSupplier.Zip = null;
             testSupplier.LastName = null;
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.DatabaseError);
+            SupplierMang.deleteTestSupplier(testSupplier);
+
         }
 
         /// <summary>
@@ -306,8 +315,9 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void AddSupplierWorkingTest() // ☑
         {
-            Setup();
+            Setup("AddWorkingTest");
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.Success);
+            findTestItemDetails();
             SupplierMang.deleteTestSupplier(testSupplier);
         }
 
@@ -366,19 +376,25 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void EditSupplierworkingTest() // ☑
         {
-            Setup();
+            Setup("EditSupWorking");
             SupplierMang.AddANewSupplier(testSupplier, "FJones");
+            findTestItemDetails();
+            Supplier testSupplier2 = test2();
+            Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
+            SupplierMang.deleteTestSupplier(testSupplier);
+        }
+
+        private void findTestItemDetails()
+        {
             var listToSearch = SupplierMang.RetrieveSupplierList();
-            foreach(var item in listToSearch)
+
+            foreach (var item in listToSearch)
             {
-                if(item.ApplicationID == 999)
+                if (item.ApplicationID == 999)
                 {
                     testSupplier = item;
                 }
             }
-            Supplier testSupplier2 = test2();
-            Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
-            SupplierMang.deleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -437,7 +453,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void EditSupplierApplicationWorkingTest() // ☑
         {
-            Setup();
+            Setup("EditSupAppWorking");
             SupplierApplication testSupplierApp2 = testSupplierApp;
             testSupplierApp2.CompanyName = "Awsomest Tours";
             testSupplierApp2.CompanyDescription = "tours of epicness";
@@ -452,6 +468,8 @@ namespace com.WanderingTurtle.Tests
 
             SupplierMang.EditSupplierApplication(testSupplierApp, testSupplierApp2);
             testSupplierApp = testSupplierApp2;
+            SupplierMang.deleteTestSupplier(testSupplier);
+
             
         }
 
@@ -499,7 +517,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void ArchiveSupplierWorkingTest() // ☑
         {
-            Setup();
+            Setup("ArchiveSuppWorking");
             SupplierMang.AddANewSupplier(testSupplier, "FJones");
             var listToSearch = SupplierMang.RetrieveSupplierList();
             foreach (var item in listToSearch)
