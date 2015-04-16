@@ -14,19 +14,11 @@ namespace com.WanderingTurtle.Web.Pages
         EventManager _eventManager = new EventManager();
         SupplierManager _supplierManager = new SupplierManager();
         List<ItemListing> _listedLists;
+        public bool loggedIn = false;
         public List<Supplier> _suppliers;
         public List<Event> _events;
-        public DateTime startTime;
-        public DateTime endTime;
-        public int eventItemID;
-        public double price;
-        public int supplierID;
-        public int currentNumberofGuests;
-        public int maxNumberofGuests;
-        public int minNumberofGuests;
-        private bool loggedIn = false;
         public Supplier _currentSupplier = null;
-
+        private decimal minPrice = 0;
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
@@ -79,10 +71,15 @@ namespace com.WanderingTurtle.Web.Pages
         {
            
         }
+
+        private String addError(String list, String text)
+        {
+            return list.Length > 0 ? list + ", " + text : text;
+        }
         public void UpdateList(int ItemListID)
         {
-            bool stop = false;
-            int errorCount = 0;
+            string errorText = "";
+            lblError.Text = "";
 
             try
             {
@@ -96,13 +93,37 @@ namespace com.WanderingTurtle.Web.Pages
                 newList.MaxNumGuests = int.Parse(Request.Form["max"]);
                 newList.MinNumGuests = int.Parse(Request.Form["min"]);
 
-                //TODO: eventID, SupplierID
-                lblError.Text = "";
                 listResult result;
-                if (myList != null)
+
+                if (!Validator.ValidateDecimal(newList.Price.ToString("G"), minPrice) )
+                {
+                    errorText = addError(errorText, "Please add a valid, positive price");                      
+                }
+                if(!Validator.ValidateDateTime(newList.StartDate.ToString()))
+                {
+                    errorText = addError(errorText, "Please add a valid start date");
+                }
+                if (!Validator.ValidateDateTime(newList.EndDate.ToString(), newList.StartDate)) 
+                {
+                    errorText = addError(errorText, "Please add a valid end date after your start date");
+                }
+                if (!Validator.ValidateInt(newList.MaxNumGuests.ToString(), newList.MinNumGuests)) 
+                {
+                    errorText = addError(errorText, "Please add a valid max number of guests higher than your minimum");
+                }
+                if (!Validator.ValidateInt(newList.MinNumGuests.ToString(), 0, newList.MaxNumGuests)) 
+                {
+                    errorText = addError(errorText, "Please add a valid min number of guests lower than your maximum, higher than zero");
+                }
+
+                if (myList != null && errorText.Length == 0)
                 {
                     result = _myManager.EditItemListing(newList, myList);
                     return;
+                }
+                else 
+                {
+                    lblError.Text = errorText;
                 }
             }
             catch (Exception ex) 

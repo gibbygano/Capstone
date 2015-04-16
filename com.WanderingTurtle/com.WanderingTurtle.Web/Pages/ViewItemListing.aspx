@@ -52,14 +52,14 @@
         <EditItemTemplate>
             <tr>
                     <input type="hidden" name="ListID" value="<%# Item.ItemListID %>" />
-                    <td><input name="eventName" value="<%# Item.EventName %>" maxlength="255" class="editInput" /></td>
-                    <td><input name="suppleNname" value="<%# Item.SupplierName %>" maxlength="255" class="editInput" /></td>
-                    <td><input name="start" value="<%# Item.StartDate %>" maxlength="255" class="editInput" /></td>
-                    <td><input name="end" value="<%# Item.EndDate %>" maxlength="255" class="editInput" /></td>
-                    <td><input name="price" value="<%# Item.Price %>" maxlength="255" class="editInput" /></td>
+                    <td><%# Item.EventName.Truncate(25) %></td>
+                    <td title="<%# Item.SupplierName %>"><%# Item.SupplierName.Truncate(25) %></td>
+                    <td><input name="start" id="eventStart" value="<%# Item.StartDate %>" maxlength="255"  /></td>
+                    <td><input name="end" id="eventEnd" value="<%# Item.EndDate %>" maxlength="255"  /></td>
+                    <td><input name="price" value="<%# Item.Price %>" maxlength="255" /></td>
                     <td><%# Item.CurrentNumGuests %></td>
-                    <td><input name="max" value="<%# Item.MaxNumGuests %>" maxlength="255" class="editInput" /></td>
-                    <td><input name="min" value="<%# Item.MinNumGuests %>" maxlength="255" class="editInput" /></td>
+                    <td><input size="3" name="max" value="<%# Item.MaxNumGuests %>" maxlength="4" /></td>
+                    <td><input size="3" name="min" value="<%# Item.MinNumGuests %>" maxlength="4" /></td>
                     <td><asp:Button CommandName="Update" Text="Update" CausesValidation="true" runat="server" ID="btnUpdate" />
                     <asp:Button CommandName="Cancel" Text="Cancel" runat="server" /></td>
             </tr>

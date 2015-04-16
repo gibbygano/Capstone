@@ -68,7 +68,18 @@ $(document).ready(function () {
 
 
 
-
+    $("#eventStart").datetimepicker(
+        {
+            controlType: 'select',
+            oneLine: true,
+            timeFormat: 'hh:mm:ss tt'
+        });
+    $("#eventEnd").datetimepicker(
+        {
+            controlType: 'select',
+            oneLine: true,
+            timeFormat: 'hh:mm:ss tt'
+        });
 
     /* last function because it will break on most pages */
     var inside = document.getElementById('MainContent_eventdetails');

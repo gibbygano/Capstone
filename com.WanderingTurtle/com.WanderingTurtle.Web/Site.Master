@@ -9,6 +9,7 @@
     <meta charset="utf-8" />
     <title><%: Page.Title %> - Wandering Turtle Resort</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/themes/jquery-datetimepicker.css" rel="stylesheet" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <asp:PlaceHolder runat="server">
         <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
@@ -26,6 +27,9 @@
             </Scripts>
         </asp:ScriptManager>
         <script src="<%: ResolveUrl("~/Scripts/jquery-TimePicker-1.0.0.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker-deets.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-slider.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/scripts.js") %>"></script>
         <header>
             <div class="content-wrapper">
