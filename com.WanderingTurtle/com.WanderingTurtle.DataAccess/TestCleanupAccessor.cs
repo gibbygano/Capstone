@@ -148,6 +148,44 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+        public static void deleteTestApplication()
+        {
+            //establish connection
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            //write some query text 
+            string query = "DELETE FROM SupplierApplication WHERE CompanyName = 'Awsome Tours'";
+            //create a Sql Command
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            try
+            {
+                //this part must be in the try as it is attempting to establish connection.
+                //open connection
+                conn.Open();
+                //execute the command and capture the results to a SqlDataReader
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+                }
+                /*else
+                {
+                    var up = new ApplicationException("Your record could not be made.");
+                    throw up;
+                   
+                }*/
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
     }
 }

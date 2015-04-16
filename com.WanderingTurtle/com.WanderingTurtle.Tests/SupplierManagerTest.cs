@@ -7,6 +7,7 @@ using com.WanderingTurtle.Common;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -15,7 +16,7 @@ namespace com.WanderingTurtle.Tests
     /// Will Fritz 2015/3/27
     /// </summary>
     [TestClass]
-    public class SupplyerManagerTest
+    public class SupplierManagerTest
     {
         SupplierManager SupplierMang                    = new SupplierManager();
         SupplierApplication testSupplierApp             = new SupplierApplication();
@@ -27,11 +28,11 @@ namespace com.WanderingTurtle.Tests
         Supplier testSupplier           = new Supplier();
         Supplier testSupplierRetrieve   = new Supplier();
 
-        private void Setup()
+        private void Setup(string CompName)
         {
             //set up supplier
             testSupplier                = new Supplier();
-            testSupplier.CompanyName    = "Awsome Tours";
+            testSupplier.CompanyName    = CompName;
             testSupplier.FirstName      = "FirstBlab";
             testSupplier.LastName       = "LastBlab";
             testSupplier.Address1       = "255 East West St";
@@ -39,8 +40,7 @@ namespace com.WanderingTurtle.Tests
             testSupplier.Zip            = "50229";
             testSupplier.PhoneNumber    = "575-542-8796";
             testSupplier.EmailAddress   = "blabla@gmail.com";
-            testSupplier.ApplicationID  = 100;
-            testSupplier.UserID         = 999;
+            testSupplier.ApplicationID  = 999;
             testSupplier.SupplyCost     = (decimal)((60) / 100);
             testSupplier.Active         = true;
 
@@ -54,7 +54,7 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp.Address1            = "255 East West St";
             testSupplierApp.LastName            = "blabla";
             testSupplierApp.Zip                 = "50229";
-            testSupplierApp.ApplicationID       = 100;
+            testSupplierApp.ApplicationID       = 999;
             testSupplierApp.EmailAddress        = "blabla@gmail.com";
             testSupplierApp.Address2            = "";
             testSupplierApp.ApplicationDate     = new DateTime(2005, 2, 2);
@@ -75,7 +75,6 @@ namespace com.WanderingTurtle.Tests
             toTest.PhoneNumber      = "575-542-8796";
             toTest.EmailAddress     = "blabla@gmail.com";
             toTest.ApplicationID    = 100;
-            toTest.UserID           = 999;
             toTest.SupplyCost       = (decimal)((60) / 100);
             toTest.Active           = true;
             return toTest;
@@ -143,6 +142,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = "badID";
             SupplierApplication testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -156,6 +156,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = "";
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -169,6 +170,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = null;
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -182,6 +184,7 @@ namespace com.WanderingTurtle.Tests
             supplierAppID = "100";
             testSupplierAppRetrieval = SupplierMang.RetrieveSupplierApplication(supplierAppID);
             Assert.IsNotNull(testSupplierAppRetrieval);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -204,6 +207,7 @@ namespace com.WanderingTurtle.Tests
         {
             List<SupplierApplication> suppliersApps = SupplierMang.RetrieveSupplierApplicationList();
             Assert.IsNotNull(suppliersApps);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -215,6 +219,7 @@ namespace com.WanderingTurtle.Tests
         {
             SupplierApplication SupplierAppEmpty = new SupplierApplication();
             SupplierMang.AddASupplierApplication(SupplierAppEmpty);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -226,6 +231,7 @@ namespace com.WanderingTurtle.Tests
         {
             SupplierApplication SupplierAppNull = null;
             SupplierMang.AddASupplierApplication(SupplierAppNull);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -242,6 +248,7 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp2.PhoneNumber = "234-234-2341";
             testSupplierApp2.FirstName = "test";
             SupplierMang.AddASupplierApplication(testSupplierApp2);
+            TestCleanupAccessor.deleteTestApplication();
         }
 
         /// <summary>
@@ -251,8 +258,12 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void AddSupplierApplicationWorkingTest() // ☑
         {
-            Setup();
+            Setup("AddAppWorkingTest");
             SupplierMang.AddASupplierApplication(testSupplierApp);
+            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.deleteTestApplication();
+
+
         }
 
         /// <summary>
@@ -268,7 +279,10 @@ namespace com.WanderingTurtle.Tests
         {
             //test 1 empty Supplier
             Supplier testSupplierEmpty = new Supplier();
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierEmpty), SupplierResult.DatabaseError);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierEmpty, "FJones"), SupplierResult.DatabaseError);
+            SupplierMang.deleteTestSupplier(testSupplierEmpty);
+
+
         }
 
         /// <summary>
@@ -284,7 +298,9 @@ namespace com.WanderingTurtle.Tests
         {
             Supplier testSupplierNull = new Supplier();
             testSupplierNull = null;
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull), SupplierResult.DatabaseError);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull, "FJones"), SupplierResult.DatabaseError);
+            SupplierMang.deleteTestSupplier(testSupplierNull);
+
         }
 
         /// <summary>
@@ -295,10 +311,12 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void AddSupplierPartialTest() //☑
         {
-            Setup();
+            Setup("Partial Test");
             testSupplier.Zip = null;
             testSupplier.LastName = null;
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier), SupplierResult.DatabaseError);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.DatabaseError);
+            SupplierMang.deleteTestSupplier(testSupplier);
+
         }
 
         /// <summary>
@@ -308,8 +326,9 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void AddSupplierWorkingTest() // ☑
         {
-            Setup();
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier), SupplierResult.Success);
+            Setup("AddWorkingTest");
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.Success);
+            findTestItemDetails();
             SupplierMang.deleteTestSupplier(testSupplier);
         }
 
@@ -344,7 +363,7 @@ namespace com.WanderingTurtle.Tests
         {
             Supplier testSupplierPartial = new Supplier();
             testSupplierPartial.CompanyName = "test";
-            testSupplierPartial.UserID = 100;
+            testSupplierPartial.SupplierID = 100;
             testSupplierPartial.PhoneNumber = "234-234-2341";
             testSupplierPartial.FirstName = "test";
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplierPartial, testSupplierPartial), SupplierResult.DatabaseError);
@@ -368,19 +387,25 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void EditSupplierworkingTest() // ☑
         {
-            Setup();
-            SupplierMang.AddANewSupplier(testSupplier);
+            Setup("EditSupWorking");
+            SupplierMang.AddANewSupplier(testSupplier, "FJones");
+            findTestItemDetails();
+            Supplier testSupplier2 = test2();
+            Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
+            SupplierMang.deleteTestSupplier(testSupplier);
+        }
+
+        private void findTestItemDetails()
+        {
             var listToSearch = SupplierMang.RetrieveSupplierList();
-            foreach(var item in listToSearch)
+
+            foreach (var item in listToSearch)
             {
-                if(item.UserID == 999)
+                if (item.ApplicationID == 999)
                 {
                     testSupplier = item;
                 }
             }
-            Supplier testSupplier2 = test2();
-            Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
-            SupplierMang.deleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -439,7 +464,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void EditSupplierApplicationWorkingTest() // ☑
         {
-            Setup();
+            Setup("EditSupAppWorking");
             SupplierApplication testSupplierApp2 = testSupplierApp;
             testSupplierApp2.CompanyName = "Awsomest Tours";
             testSupplierApp2.CompanyDescription = "tours of epicness";
@@ -454,6 +479,8 @@ namespace com.WanderingTurtle.Tests
 
             SupplierMang.EditSupplierApplication(testSupplierApp, testSupplierApp2);
             testSupplierApp = testSupplierApp2;
+            SupplierMang.deleteTestSupplier(testSupplier);
+
             
         }
 
@@ -488,7 +515,7 @@ namespace com.WanderingTurtle.Tests
         {
             Supplier testSupplierParital = new Supplier();
             testSupplierParital.CompanyName = "test";
-            testSupplierParital.UserID = 100;
+            testSupplierParital.SupplierID = 100;
             testSupplierParital.PhoneNumber = "234-234-2341";
             testSupplierParital.FirstName = "test";
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplierParital), SupplierResult.DatabaseError);
@@ -501,12 +528,12 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void ArchiveSupplierWorkingTest() // ☑
         {
-            Setup();
-            SupplierMang.AddANewSupplier(testSupplier);
+            Setup("ArchiveSuppWorking");
+            SupplierMang.AddANewSupplier(testSupplier, "FJones");
             var listToSearch = SupplierMang.RetrieveSupplierList();
             foreach (var item in listToSearch)
             {
-                if (item.UserID == 999)
+                if (item.ApplicationID == 999)
                 {
                     testSupplier = item;
                 }
