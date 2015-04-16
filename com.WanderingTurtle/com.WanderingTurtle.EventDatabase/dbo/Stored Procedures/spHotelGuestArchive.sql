@@ -15,7 +15,9 @@
 AS
 BEGIN
 	UPDATE HotelGuest
-		SET Active = @active
+		SET Active = @active,
+			Room = null,
+			GuestPIN = null
 		WHERE HotelGuestID = @original_hotelGuestID
 		AND FirstName = @original_firstName
 		AND LastName = @original_lastName

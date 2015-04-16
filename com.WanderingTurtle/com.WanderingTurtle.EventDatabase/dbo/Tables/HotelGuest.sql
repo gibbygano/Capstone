@@ -20,10 +20,11 @@ GO
 ALTER TABLE [dbo].[HotelGuest]
     ADD DEFAULT 1 FOR [Active];
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [unique_pin_index]
-	ON [HotelGuest]([GuestPIN]);
+CREATE UNIQUE NONCLUSTERED INDEX [UniquePINExceptNulls]
+ON [HotelGuest] ([GuestPIN])
+WHERE [GuestPIN] IS NOT NULL
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [unique_room_index]
-	ON [HotelGuest]([Room])
-	WHERE [Active] = 1;
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueRoomExceptNulls]
+ON [HotelGuest] ([Room])
+WHERE [Room] IS NOT NULL
 GO

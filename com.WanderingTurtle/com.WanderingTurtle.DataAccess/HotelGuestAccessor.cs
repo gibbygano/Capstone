@@ -232,8 +232,6 @@ namespace com.WanderingTurtle.DataAccess
         public static int HotelGuestArchive(HotelGuest oldGuest, bool newActive)
         {
             int rowsAffected = 0;
-            string clearPIN = "";
-            string clearRoom = "";
 
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spHotelGuestArchive";
@@ -249,9 +247,9 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_address2", oldGuest.Address2);
             cmd.Parameters.AddWithValue("@original_phoneNumber", oldGuest.PhoneNumber);
             cmd.Parameters.AddWithValue("@original_emailAddress", oldGuest.EmailAddress);
-            cmd.Parameters.AddWithValue("@original_room", clearRoom);
+            cmd.Parameters.AddWithValue("@original_room", oldGuest.Room);
             cmd.Parameters.AddWithValue("@original_active", oldGuest.Active);
-            cmd.Parameters.AddWithValue("@original_guestpin", clearPIN);
+            cmd.Parameters.AddWithValue("@original_guestpin", oldGuest.GuestPIN);
 
             try
             {

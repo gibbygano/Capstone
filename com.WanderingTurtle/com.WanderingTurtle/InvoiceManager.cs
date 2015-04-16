@@ -139,7 +139,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		{
             try
             {
-                //get latest bookings from the guest
+                ////get latest bookings from the guest
                 List<BookingDetails> bookingsToArchive = RetrieveGuestBookingDetailsList(invoiceToTry.HotelGuestID);
 
                 //archive guest's bookings by changing active field to false
@@ -148,7 +148,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     b.Active = false;
 
                     int numrows = _bookingManager.EditBooking(b);
-                    
+
                     if (numrows != 1)
                     {
                         return ResultsArchive.ChangedByOtherUser;
@@ -158,8 +158,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 //Get the latest hotel guest info
                 HotelGuest guestToArchive = _hotelGuestManager.GetHotelGuest(invoiceToTry.HotelGuestID);
                 bool guestArchive = _hotelGuestManager.ArchiveHotelGuest(guestToArchive, !guestToArchive.Active);
-
-                //TBD NEED TO CLEAR PIN AND ROOM # BEFORE ARCHIVE
 
                 if(guestArchive == false)
                 {
