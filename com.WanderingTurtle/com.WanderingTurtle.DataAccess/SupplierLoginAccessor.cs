@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using com.WanderingTurtle.Common;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -152,6 +153,40 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
+
+        public int UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
+        {
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spSupplierLoginUpdate";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Updated Supplier Info:
+            cmd.Parameters.AddWithValue("@UserName", newUserName);
+
+            //Old Supplier Info
+            cmd.Parameters.AddWithValue("@original_UserName", oldUserName);
+            cmd.Parameters.AddWithValue("@original_SupplierID", oldSupplierID);
+
+            int rowsAffected;
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
         public bool checkUserName(string userName)
         {
 

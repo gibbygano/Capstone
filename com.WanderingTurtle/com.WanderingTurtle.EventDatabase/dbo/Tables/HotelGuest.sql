@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[HotelGuest] (
-    [HotelGuestID] INT           IDENTITY (0, 1) NOT NULL,
+    [HotelGuestID] INT           IDENTITY (100, 1) NOT NULL,
     [FirstName]    VARCHAR (50)  NOT NULL,
     [LastName]     VARCHAR (50)  NOT NULL,
     [Zip]          CHAR    (5)   NOT NULL,
@@ -7,7 +7,7 @@
     [Address2]     VARCHAR (255) NULL,
     [PhoneNumber]  VARCHAR (15)  NULL,
     [EmailAddress] VARCHAR (100) NULL,
-	[Room]		   INT			 NULL,
+	[Room]		   CHAR(4)			 NULL,
     [GuestPIN]	   CHAR(4)			 NULL, 
     [Active]       BIT           NOT NULL,
     CONSTRAINT [pk_HotelGuest] PRIMARY KEY CLUSTERED ([HotelGuestID] ASC)

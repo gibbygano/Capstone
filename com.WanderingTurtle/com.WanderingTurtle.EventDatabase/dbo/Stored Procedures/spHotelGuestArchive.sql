@@ -9,9 +9,9 @@
 	@original_address2 varchar(255),
 	@original_phoneNumber varchar(15),
 	@original_emailAddress varchar(100),
-	@original_room int,
+	@original_room char(4),
 	@original_active bit,
-	@original_guestpin int)
+	@original_guestpin char(4))
 AS
 BEGIN
 	UPDATE HotelGuest

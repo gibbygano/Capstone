@@ -156,8 +156,8 @@ namespace com.WanderingTurtle.FormPresentation
                 foreach (CityState cityState in CboZip.Items) { if (cityState.Zip == CurrentHotelGuest.CityState.Zip) { CboZip.SelectedItem = cityState; } }
                 TxtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
-                TxtRoomNumber.Text = CurrentHotelGuest.Room.ToString();
-                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN.ToString();
+                TxtRoomNumber.Text = CurrentHotelGuest.Room;
+                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN;
             }
             TxtFirstName.Focus();
         }
@@ -238,8 +238,8 @@ namespace com.WanderingTurtle.FormPresentation
                             (CityState)CboZip.SelectedItem,
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
-                            int.Parse(TxtRoomNumber.Text.Trim()),
-                            TxtGuestPIN.Text
+                            TxtRoomNumber.Text.Trim(),
+                            TxtGuestPIN.Text.Trim()
                         )
                     );
                 }
@@ -255,8 +255,8 @@ namespace com.WanderingTurtle.FormPresentation
                                 (CityState)CboZip.SelectedItem,
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
-                                int.Parse(TxtRoomNumber.Text.Trim()),
-                                TxtGuestPIN.Text
+                                TxtRoomNumber.Text.Trim(),
+                                TxtGuestPIN.Text.Trim()
                             )
                         );
                 }
@@ -357,7 +357,7 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateInt(TxtGuestPIN.Text.Trim(), 1000, 9999))
+            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
             {
                 ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
                 return false;

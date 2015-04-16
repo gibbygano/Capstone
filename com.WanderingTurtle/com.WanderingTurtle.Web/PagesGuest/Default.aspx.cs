@@ -7,6 +7,7 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.Web;
 using System.Data;
 using System.Drawing;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.Web.Pages
 {
@@ -143,11 +144,18 @@ namespace com.WanderingTurtle.Web.Pages
                         lblMessage.Text = "db error";
                         break;
                 }
-            } catch (Exception)
-            
+            } 
+            catch (SqlException)
             {
-                throw;
+                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Incorrect PIN\")</SCRIPT>");
+
             }
+            catch (Exception)
+            {
+                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"There was an error\")</SCRIPT>");
+
+            }
+
         }
 
         private void clearFields()

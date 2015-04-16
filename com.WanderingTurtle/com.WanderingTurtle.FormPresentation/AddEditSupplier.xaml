@@ -47,7 +47,7 @@
             <TextBox            x:Name="txtEmail"       TabIndex="8" Grid.Row="2" Grid.Column="3" />
 
             <Label Content="Supply Cost" Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Metro:NumericUpDown Grid.Column="3" Grid.Row="3" TabIndex="9" Minimum="0" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" />
+            <Metro:NumericUpDown Grid.Column="3" Grid.Row="3" TabIndex="9" Minimum=".01" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" />
 
             <Label Grid.Row="4" Grid.Column="2" Content="User Name"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <TextBox  Grid.Row="4" Grid.Column="3" x:Name="txtUserName"  TabIndex="10"  />

@@ -350,7 +350,7 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@UserID", supplierToDelete.UserID);
+            cmd.Parameters.AddWithValue("@SupplierID", supplierToDelete.SupplierID);
 
             int rowsAffected;
             try

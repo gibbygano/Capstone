@@ -20,7 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// This Window allows the administrator to directly add a suplier
     /// </summary>
-    public partial class AddEditSupplier 
+    public partial class AddEditSupplier
     {
         public static AddEditSupplier Instance;
         private SupplierManager _manager = new SupplierManager();
@@ -39,7 +39,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             btnEdit.IsEnabled = false;
-            fillComboBox();  
+            fillComboBox();
             Instance = this;
         }
 
@@ -51,11 +51,11 @@ namespace com.WanderingTurtle.FormPresentation
 
             //retrieve the username
             _supplierUserName = _loginManager.retrieveSupplierUserName(supplierToEdit.SupplierID);
-            
+
             fillComboBox();
             FillUpdateList(supplierToEdit);
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] {  }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { }); }
         }
 
         //////////////////////Windows Events//////////////////////////////
@@ -93,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 EditSupplier();
                 ListSuppliers.Instance.FillList();
-                // this.Close();
+                //this.Close();
             }
         }
 
@@ -161,9 +161,9 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new InputValidationException(txtLastName, "The last name field must be filled out and not contain special characters (No Spaces)");
             }
-            if (!Validator.ValidateString(txtUserName.Text))
+            if (!Validator.ValidateAlphaNumeric(txtUserName.Text.Trim()))
             {
-                throw new InputValidationException(txtUserName, "Enter a user name.");
+                throw new InputValidationException(txtUserName, "Enter a valid user name.");
             }
             if (!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
             {
@@ -185,8 +185,8 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 bool validUserName = false;
-                 
-                validUserName= _loginManager.CheckSupplierUserName(txtUserName.Text);
+
+                validUserName = _loginManager.CheckSupplierUserName(txtUserName.Text);
 
                 if (validUserName)
                 {
@@ -273,51 +273,48 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                bool validUserName = false;
-
                 //check if user name has changed
-                if (_supplierUserName.Equals(txtUserName.Text))
+                if (!_supplierUserName.Equals(txtUserName.Text))
                 {
-                    validUserName = true;
+                    //update user name
+                    ResultsEdit result = _loginManager.UpdateSupplierLogin(txtUserName.Text, _supplierUserName, _UpdatableSupplier.SupplierID);
+                
+                    if (result.Equals(ResultsEdit.Success))
+                    {
+                        await DialogBox.ShowMessageDialog(this, "Supplier was updated.");
+                        this.Close();
+                    }
+                }
+
+                Supplier tempSupplier = new Supplier();
+
+                tempSupplier.CompanyName = txtCompanyName.Text.Trim();
+                tempSupplier.FirstName = txtFirstName.Text.Trim();
+                tempSupplier.LastName = txtLastName.Text.Trim();
+                tempSupplier.Address1 = txtAddress1.Text.Trim();
+                tempSupplier.Address2 = txtAddress2.Text.Trim();
+                tempSupplier.PhoneNumber = txtPhoneNumber.Text;
+                tempSupplier.Zip = cboZip.SelectedValue.ToString();
+                tempSupplier.EmailAddress = txtEmail.Text.Trim();
+                tempSupplier.SupplyCost = (decimal)numSupplyCost.Value;
+
+                tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
+
+                if (_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
+                {
+                    await DialogBox.ShowMessageDialog(this, "The Supplier was successfully edited.");
+                    this.Close();
                 }
                 else
                 {
-                    validUserName = _loginManager.CheckSupplierUserName(txtUserName.Text);
+                    throw new WanderingTurtleException(this, "Supplier wasn't added to the database.");
                 }
 
-                if (validUserName)
-                {
-                    Supplier tempSupplier = new Supplier();
 
-                    tempSupplier.CompanyName = txtCompanyName.Text.Trim();
-                    tempSupplier.FirstName = txtFirstName.Text.Trim();
-                    tempSupplier.LastName = txtLastName.Text.Trim();
-                    tempSupplier.Address1 = txtAddress1.Text.Trim();
-                    tempSupplier.Address2 = txtAddress2.Text.Trim();
-                    tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                    tempSupplier.Zip = cboZip.SelectedValue.ToString();
-                    tempSupplier.EmailAddress = txtEmail.Text.Trim();
-                    tempSupplier.SupplyCost = (decimal)numSupplyCost.Value;
 
-                    tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
 
-                    int numRows = _loginManager.addSupplierLogin(txtUserName.Text, tempSupplier.SupplierID);
-
-                    if (_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
-                    {
-                        await DialogBox.ShowMessageDialog(this, "The Supplier was successfully edited.");
-                    }
-                    else
-                    {
-                        throw new WanderingTurtleException(this, "Supplier wasn't added to the database.");
-                    }
-                }
-                else
-                {
-                    txtUserName.Text = "";
-                    throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
-                }
             }
+
             catch (SqlException)
             {
                 // ShowErrorMessage("UserName already used.  Please choose another one.");
@@ -328,7 +325,8 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex);
             }
-            }
+        }
+
 
         /// <summary>
         /// fills the zip code combo box
@@ -350,7 +348,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// necessay to make the singleton pattern work
+        /// necessary to make the singleton pattern work
         /// Will Fritz 2015/3/6
         /// </summary>
         /// <param name="sender"></param>

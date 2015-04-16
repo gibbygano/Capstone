@@ -65,6 +65,40 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        public ResultsEdit UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
+        {
+            try
+            {
+                bool result1 = CheckSupplierUserName(newUserName);
+
+                if (result1)
+                {
+                    int result = access.UpdateSupplierLogin(newUserName, oldUserName, oldSupplierID);
+
+                    if (result == 1)
+                    {
+                        return ResultsEdit.Success;
+                    }
+                    else
+                    {
+                        return ResultsEdit.ChangedByOtherUser;
+                    }
+                }
+                else
+                {
+                    return ResultsEdit.DatabaseError;
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public bool CheckSupplierUserName(string userName)
         {

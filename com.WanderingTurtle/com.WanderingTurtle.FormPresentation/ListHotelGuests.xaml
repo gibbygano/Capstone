@@ -8,7 +8,6 @@
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0" x:Name="lvHotelGuestList" MouseDoubleClick="lvHotelGuestList_MouseDoubleClick">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="Auto" Header="ID"           Binding="{Binding HotelGuestID}" />
                 <DataGridTextColumn Width="Auto" Header="Room #"       Binding="{Binding GuestRoomNum}" />
                 <DataGridTextColumn Width="*" Header="Date Registered" Binding="{Binding DateOpened, StringFormat='{}{0:D}'}" />
                 <DataGridTextColumn Width="*" Header="Last Name"       Binding="{Binding GuestLastName}" />
