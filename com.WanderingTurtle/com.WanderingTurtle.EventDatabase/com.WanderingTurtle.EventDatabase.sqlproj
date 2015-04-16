@@ -145,6 +145,7 @@
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetByID.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestSupplier.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginUpdate.sql" />
+    <Build Include="dbo\Stored Procedures\spDeleteTestApplication.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
