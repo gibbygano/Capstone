@@ -17,18 +17,20 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class SupplyerManagerTest
     {
-        SupplierManager SupplierMang = new SupplierManager();
-        SupplierApplication testSupplierApp = new SupplierApplication();
-        SupplierApplication testSupplierAppRetrieval = new SupplierApplication();
-        string supplierID = "";
-        string supplierAppID = "";
-        Supplier testSupplier = new Supplier();
-        Supplier testSupplierRetrieve = new Supplier();
+        SupplierManager SupplierMang                    = new SupplierManager();
+        SupplierApplication testSupplierApp             = new SupplierApplication();
+        SupplierApplication testSupplierAppRetrieval    = new SupplierApplication();
+        
+        
+        string supplierID               = "";
+        string supplierAppID            = "";
+        Supplier testSupplier           = new Supplier();
+        Supplier testSupplierRetrieve   = new Supplier();
 
         private void Setup()
         {
             //set up supplier
-            testSupplier = new Supplier();
+            testSupplier                = new Supplier();
             testSupplier.CompanyName    = "Awsome Tours";
             testSupplier.FirstName      = "FirstBlab";
             testSupplier.LastName       = "LastBlab";
@@ -42,44 +44,41 @@ namespace com.WanderingTurtle.Tests
             testSupplier.SupplyCost     = (decimal)((60) / 100);
             testSupplier.Active         = true;
 
-
             //setup Supplier application
-            testSupplierApp = new SupplierApplication();
-            testSupplierApp.ApplicationDate = new DateTime(2005, 2, 3);
-            testSupplierApp.CompanyName = "Awsome Tours";
-            testSupplierApp.CompanyDescription = "tours of awsomeness";
-            testSupplierApp.PhoneNumber = "575-542-8796";
-            testSupplierApp.FirstName = "Blab";
-            testSupplierApp.Address1 = "255 East West St";
-            testSupplierApp.LastName = "blabla";
-            testSupplierApp.Zip = "50229";
-            testSupplierApp.ApplicationID = 100;
-            testSupplierApp.EmailAddress = "blabla@gmail.com";
-            testSupplierApp.Address2 = "";
-            testSupplierApp.ApplicationDate = new DateTime(2005, 2, 2);
-            testSupplierApp.ApplicationStatus = "pending";
-            testSupplierApp.LastStatusDate = new DateTime(2005, 2, 1);
-            testSupplierApp.Remarks = "";
+            testSupplierApp                     = new SupplierApplication();
+            testSupplierApp.ApplicationDate     = new DateTime(2005, 2, 3);
+            testSupplierApp.CompanyName         = "Awsome Tours";
+            testSupplierApp.CompanyDescription  = "tours of awsomeness";
+            testSupplierApp.PhoneNumber         = "575-542-8796";
+            testSupplierApp.FirstName           = "Blab";
+            testSupplierApp.Address1            = "255 East West St";
+            testSupplierApp.LastName            = "blabla";
+            testSupplierApp.Zip                 = "50229";
+            testSupplierApp.ApplicationID       = 100;
+            testSupplierApp.EmailAddress        = "blabla@gmail.com";
+            testSupplierApp.Address2            = "";
+            testSupplierApp.ApplicationDate     = new DateTime(2005, 2, 2);
+            testSupplierApp.ApplicationStatus   = "pending";
+            testSupplierApp.LastStatusDate      = new DateTime(2005, 2, 1);
+            testSupplierApp.Remarks             = "";
         }
 
         private Supplier test2()
         {
-            Supplier toTest = new Supplier();
-            toTest.CompanyName = "Lame-Name tours";
-            toTest.FirstName = "FirstBlab";
-            toTest.LastName = "LastBlab";
-            toTest.Address1 = "255 East West St";
-            toTest.Address2 = "APT 1";
-            toTest.Zip = "50229";
-            toTest.PhoneNumber = "575-542-8796";
-            toTest.EmailAddress = "blabla@gmail.com";
-            toTest.ApplicationID = 100;
-            toTest.UserID = 999;
-            toTest.SupplyCost = (decimal)((60) / 100);
-            toTest.Active = true;
-
+            Supplier toTest         = new Supplier();
+            toTest.CompanyName      = "Lame-Name tours";
+            toTest.FirstName        = "FirstBlab";
+            toTest.LastName         = "LastBlab";
+            toTest.Address1         = "255 East West St";
+            toTest.Address2         = "APT 1";
+            toTest.Zip              = "50229";
+            toTest.PhoneNumber      = "575-542-8796";
+            toTest.EmailAddress     = "blabla@gmail.com";
+            toTest.ApplicationID    = 100;
+            toTest.UserID           = 999;
+            toTest.SupplyCost       = (decimal)((60) / 100);
+            toTest.Active           = true;
             return toTest;
-
         }
 
         /// <summary>
@@ -264,6 +263,7 @@ namespace com.WanderingTurtle.Tests
         /// Edited by Rose Steffensmeier 2015/04/03
         /// </remarks>
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
         public void AddSupplierEmptyTest() // ☑
         {
             //test 1 empty Supplier
@@ -279,7 +279,8 @@ namespace com.WanderingTurtle.Tests
         /// Edited by Rose Steffensmeier 2015/04/03
         /// </remarks>
         [TestMethod]
-        public void AddSupplierNullTest() // 
+        [ExpectedException(typeof(NullReferenceException))]
+        public void AddSupplierNullTest() // ☑ 
         {
             Supplier testSupplierNull = new Supplier();
             testSupplierNull = null;
@@ -291,6 +292,7 @@ namespace com.WanderingTurtle.Tests
         /// Will Fritz 2015/3/31
         /// </summary>
         [TestMethod]
+        [ExpectedException(typeof(SqlException))]
         public void AddSupplierPartialTest() //☑
         {
             Setup();
