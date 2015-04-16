@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.DataAccess
 
             var conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spEmployeeAdd";
+            var cmdText = "spInsertEmployee";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 

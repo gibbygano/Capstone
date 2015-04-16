@@ -128,6 +128,17 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            //var selectedItem = this.lvSuppliersList.SelectedItem;
+
+            //if(selectedItem == null)
+            //{
+            //     throw new WanderingTurtleException(this, "You Must Select A Supplier Before You Can Update");
+            //}
+            //else
+            //{
+            //    UpdateSupplier(selectedItem as Supplier);
+            //}
+
             try
             {
                 UpdateSupplier(lvSuppliersList.SelectedItems[0] as Supplier);

@@ -9,7 +9,6 @@
 	@PhoneNumber 			varchar(15), 
 	@EmailAddress 			varchar(100), 
 	@ApplicationID 			int, 
-	@UserID 				int, 
 	@SupplierID 			int
 	)
 AS
@@ -26,6 +25,5 @@ AS
 		AND PhoneNumber = @PhoneNumber
 		AND EmailAddress = @EmailAddress
 		AND ApplicationID = @ApplicationID
-		AND UserID = @UserID
 		AND Active = 1
 	RETURN @@ROWCOUNT

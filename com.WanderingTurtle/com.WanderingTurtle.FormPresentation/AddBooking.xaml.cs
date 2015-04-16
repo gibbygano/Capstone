@@ -47,6 +47,8 @@ namespace com.WanderingTurtle.FormPresentation
 
             InitializeComponent();
             RefreshListItems();
+            udDiscount.Maximum = .20;
+
             eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
         }
 
@@ -218,6 +220,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             txtEventDescription.Text = myItemObject.EventDescription;
             udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
+
 
             if (myItemObject.QuantityOffered == 0)
             {

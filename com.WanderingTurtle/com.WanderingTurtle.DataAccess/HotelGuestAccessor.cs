@@ -114,8 +114,8 @@ namespace com.WanderingTurtle.DataAccess
                                 ),
                                 !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
                                 !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
-                                (int?)reader.GetValue(10), //Room
-                                reader.GetString(11), // PIN
+                                !reader.IsDBNull(10) ? reader.GetString(10) : null, //Room
+                                !reader.IsDBNull(11) ? reader.GetString(11) : null, // PIN
                                 reader.GetBoolean(12) //Active
                             )
                         );

@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[spDeleteTestSupplier]
 
-        @UserID          INT
+        @SupplierID          INT
 AS
         DELETE FROM Supplier
         WHERE
-        UserID = @UserID
+        SupplierID = @SupplierID
 		RETURN @@ROWCOUNT

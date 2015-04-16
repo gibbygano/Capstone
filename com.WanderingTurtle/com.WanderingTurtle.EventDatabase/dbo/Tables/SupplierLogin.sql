@@ -7,6 +7,7 @@
     CONSTRAINT [PK_SupplierLogin] PRIMARY KEY CLUSTERED ([UserID] ASC)
 )	ON [PRIMARY];
 	GO
-	ALTER TABLE [dbo].[SupplierLogin]
-	ADD CONSTRAINT [UniqueSupplierUserName] UNIQUE ([UserName])
-	GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueUserName]
+	ON [SupplierLogin]([SupplierID]);
+GO

@@ -31,6 +31,24 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        public string retrieveSupplierUserName(int supplierID)
+        {
+            try
+            {
+                return access.retrieveSupplierUserNameByID(supplierID);
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
         public int addSupplierLogin(string userName, int supplierID)
         {
             try
@@ -47,8 +65,42 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        public ResultsEdit UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
+        {
+            try
+            {
+                bool result1 = CheckSupplierUserName(newUserName);
 
-        public string CheckSupplierUserName(string userName)
+                if (result1)
+                {
+                    int result = access.UpdateSupplierLogin(newUserName, oldUserName, oldSupplierID);
+
+                    if (result == 1)
+                    {
+                        return ResultsEdit.Success;
+                    }
+                    else
+                    {
+                        return ResultsEdit.ChangedByOtherUser;
+                    }
+                }
+                else
+                {
+                    return ResultsEdit.DatabaseError;
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public bool CheckSupplierUserName(string userName)
         {
             try
             {

@@ -224,7 +224,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
                 return listResult.NotAdded;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return listResult.DatabaseError;
             }

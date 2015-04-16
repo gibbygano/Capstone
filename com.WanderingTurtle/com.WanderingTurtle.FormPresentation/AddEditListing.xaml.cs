@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void addItemListing()
         {
             ItemListing _NewListing = new ItemListing();
-            if (!Valdiator()) return;
+            if (!Validator()) return;
 
             try
             {
@@ -52,17 +52,23 @@ namespace com.WanderingTurtle.FormPresentation
                 DateTime formStartTime = (DateTime)(tpStartTime.Value);
                 DateTime formEndTime = (DateTime)(tpEndTime.Value);
 
-                _NewListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
-                _NewListing.SupplierID = Int32.Parse(supplierCbox.SelectedValue.ToString());
+
 
                 //date is your existing Date object, time is the nullable DateTime object from your TimePicker
                 _NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
                 _NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
 
+                if (_NewListing.StartDate > _NewListing.EndDate)
+                {
+                    throw new WanderingTurtleException(this, "End Date must be after Start Date");
+
+                }
+                _NewListing.EventID = ((Event)eventCbox.SelectedItem).EventItemID;
+                _NewListing.SupplierID = ((Supplier)supplierCbox.SelectedItem).SupplierID;
                 _NewListing.Price = (decimal)(udPrice.Value);
                 _NewListing.MaxNumGuests = (int)(udSeats.Value);
             }
-            catch (Exception ex)
+                catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex);
             }
@@ -124,7 +130,8 @@ namespace com.WanderingTurtle.FormPresentation
                 foreach (Event item in eventCbox.Items)
                 {
                     if (CurrentItemListing.EventName.Equals(item.EventItemName))
-                    { eventCbox.SelectedItem = item; }
+                    { eventCbox.SelectedItem = item;
+                    }
                 }
                 foreach (Supplier item in supplierCbox.Items)
                 {
@@ -145,9 +152,14 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 eventCbox.Items.Clear();
-                eventCbox.ItemsSource = _eventManager.RetrieveEventList();
+                eventCbox.ItemsSource = DataCache._currentEventList;
+                eventCbox.DisplayMemberPath = "EventItemName";
+                eventCbox.SelectedValue = "EventItemID";
+
+
                 supplierCbox.Items.Clear();
                 supplierCbox.ItemsSource = _supplierManager.RetrieveSupplierList();
+                
             }
             catch (Exception ex)
             {
@@ -170,8 +182,10 @@ namespace com.WanderingTurtle.FormPresentation
                 DateTime formStartTime = (DateTime)(tpStartTime.Value);
                 DateTime formEndTime = (DateTime)(tpEndTime.Value);
                 ItemListing NewListing = new ItemListing();
+
                 NewListing.ItemListID = CurrentItemListing.ItemListID;
                 NewListing.EventID = CurrentItemListing.EventID;
+
                 NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
                 NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
                 NewListing.Price = (decimal)(udPrice.Value);
@@ -192,7 +206,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private bool Valdiator()
+        private bool Validator()
         {
             if (eventCbox.SelectedIndex.Equals(-1))
             {

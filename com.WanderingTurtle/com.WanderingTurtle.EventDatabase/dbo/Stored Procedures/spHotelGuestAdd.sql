@@ -9,8 +9,8 @@ CREATE PROCEDURE [dbo].[spHotelGuestAdd]
 	@address2 varchar(255),
 	@phoneNumber varchar(15),
 	@email varchar(100),
-	@room int,
-	@guestPIN int
+	@room varchar(4),
+	@guestPIN varchar(4)
 AS
 BEGIN
 	DECLARE @guestID int, @rowCount int

@@ -67,7 +67,7 @@
             <xctk:MaskedTextBox x:Name="txtPhoneNumber" TabIndex="7" Grid.Row="2" Grid.Column="3" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />
             <TextBox    Grid.Column="3" Grid.Row="3" x:Name="txtEmailAddress" TabIndex="8" />
             <Label Grid.Column="3" Grid.Row="4" x:Name="dateApplicationDate" TabIndex="9" />
-            <Metro:NumericUpDown Grid.Column="3" Grid.Row="8" Minimum="0" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" IsEnabled="False" TabIndex="12" />
+            <Metro:NumericUpDown Grid.Column="3" Grid.Row="8" Minimum=".01" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" IsEnabled="False" TabIndex="12" />
         </Grid>
         <Grid Grid.Row="1" Margin="{DynamicResource Spacing Top}">
             <Grid.ColumnDefinitions>
