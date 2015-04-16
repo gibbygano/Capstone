@@ -39,8 +39,7 @@ namespace com.WanderingTurtle.Tests
             testSupplier.Zip            = "50229";
             testSupplier.PhoneNumber    = "575-542-8796";
             testSupplier.EmailAddress   = "blabla@gmail.com";
-            testSupplier.ApplicationID  = 100;
-            testSupplier.UserID         = 999;
+            testSupplier.ApplicationID  = 999;
             testSupplier.SupplyCost     = (decimal)((60) / 100);
             testSupplier.Active         = true;
 
@@ -54,7 +53,7 @@ namespace com.WanderingTurtle.Tests
             testSupplierApp.Address1            = "255 East West St";
             testSupplierApp.LastName            = "blabla";
             testSupplierApp.Zip                 = "50229";
-            testSupplierApp.ApplicationID       = 100;
+            testSupplierApp.ApplicationID       = 999;
             testSupplierApp.EmailAddress        = "blabla@gmail.com";
             testSupplierApp.Address2            = "";
             testSupplierApp.ApplicationDate     = new DateTime(2005, 2, 2);
@@ -75,7 +74,6 @@ namespace com.WanderingTurtle.Tests
             toTest.PhoneNumber      = "575-542-8796";
             toTest.EmailAddress     = "blabla@gmail.com";
             toTest.ApplicationID    = 100;
-            toTest.UserID           = 999;
             toTest.SupplyCost       = (decimal)((60) / 100);
             toTest.Active           = true;
             return toTest;
@@ -268,7 +266,7 @@ namespace com.WanderingTurtle.Tests
         {
             //test 1 empty Supplier
             Supplier testSupplierEmpty = new Supplier();
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierEmpty), SupplierResult.DatabaseError);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierEmpty, "FJones"), SupplierResult.DatabaseError);
         }
 
         /// <summary>
@@ -284,7 +282,7 @@ namespace com.WanderingTurtle.Tests
         {
             Supplier testSupplierNull = new Supplier();
             testSupplierNull = null;
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull), SupplierResult.DatabaseError);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull, "FJones"), SupplierResult.DatabaseError);
         }
 
         /// <summary>
@@ -298,7 +296,7 @@ namespace com.WanderingTurtle.Tests
             Setup();
             testSupplier.Zip = null;
             testSupplier.LastName = null;
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier), SupplierResult.DatabaseError);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.DatabaseError);
         }
 
         /// <summary>
@@ -309,7 +307,7 @@ namespace com.WanderingTurtle.Tests
         public void AddSupplierWorkingTest() // ☑
         {
             Setup();
-            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier), SupplierResult.Success);
+            Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.Success);
             SupplierMang.deleteTestSupplier(testSupplier);
         }
 
@@ -344,7 +342,7 @@ namespace com.WanderingTurtle.Tests
         {
             Supplier testSupplierPartial = new Supplier();
             testSupplierPartial.CompanyName = "test";
-            testSupplierPartial.UserID = 100;
+            testSupplierPartial.SupplierID = 100;
             testSupplierPartial.PhoneNumber = "234-234-2341";
             testSupplierPartial.FirstName = "test";
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplierPartial, testSupplierPartial), SupplierResult.DatabaseError);
@@ -369,11 +367,11 @@ namespace com.WanderingTurtle.Tests
         public void EditSupplierworkingTest() // ☑
         {
             Setup();
-            SupplierMang.AddANewSupplier(testSupplier);
+            SupplierMang.AddANewSupplier(testSupplier, "FJones");
             var listToSearch = SupplierMang.RetrieveSupplierList();
             foreach(var item in listToSearch)
             {
-                if(item.UserID == 999)
+                if(item.ApplicationID == 999)
                 {
                     testSupplier = item;
                 }
@@ -488,7 +486,7 @@ namespace com.WanderingTurtle.Tests
         {
             Supplier testSupplierParital = new Supplier();
             testSupplierParital.CompanyName = "test";
-            testSupplierParital.UserID = 100;
+            testSupplierParital.SupplierID = 100;
             testSupplierParital.PhoneNumber = "234-234-2341";
             testSupplierParital.FirstName = "test";
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplierParital), SupplierResult.DatabaseError);
@@ -502,11 +500,11 @@ namespace com.WanderingTurtle.Tests
         public void ArchiveSupplierWorkingTest() // ☑
         {
             Setup();
-            SupplierMang.AddANewSupplier(testSupplier);
+            SupplierMang.AddANewSupplier(testSupplier, "FJones");
             var listToSearch = SupplierMang.RetrieveSupplierList();
             foreach (var item in listToSearch)
             {
-                if (item.UserID == 999)
+                if (item.ApplicationID == 999)
                 {
                     testSupplier = item;
                 }

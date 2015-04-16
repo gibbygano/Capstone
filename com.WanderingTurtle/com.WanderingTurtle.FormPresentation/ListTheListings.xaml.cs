@@ -63,7 +63,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     case MessageDialogResult.Affirmative:
                         var numRows = prodMan.ArchiveItemListing(ListingToDelete);
-                        if (numRows == ProductManager.listResult.Success)
+                        if (numRows == listResult.Success)
                         {
                             await DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
                         }
