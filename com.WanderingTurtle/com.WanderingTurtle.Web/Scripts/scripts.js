@@ -10,9 +10,7 @@ $(document).ready(function () {
         },
         closeOnEscape: true,
         closeText: "X"
-    }
-        
-        );
+    });
 
     $("#MainContent_eventdetails").dialog({
         modal: false,
@@ -25,15 +23,60 @@ $(document).ready(function () {
         closeText: "X",
         dialogClass: "events",
         autoOpen: true
-    }
+    });
 
-       );
+    $('#listStartTime').timePicker();
+    $('#listEndTime').timePicker();
 
+
+    $("#listEndTime").click(function () {
+        $('div.timePicker').css({
+
+            top: $("#listEndTime").offset()
+
+        });
+    });
+
+    $("#listPrice").spinner({
+        min: 0,
+        max: 999,
+        step: 1,
+        start: 0.00,
+        numberFormat: "C"
+    });
+
+    $("#listTickets").spinner({
+        min: 0,
+        max: 999,
+        step: 1,
+        start: 0
+    });
+
+    $("#listStartDate").click(function () {
+        $(this).datepicker({
+            minDate: 0,
+            maxDate: '+1y',
+        });
+    });
+
+    $("#listEndDate").click(function () {
+        $(this).datepicker({
+            minDate: 0,
+            maxDate: '+1y'
+        });
+    });
+
+
+
+
+
+    /* last function because it will break on most pages */
     var inside = document.getElementById('MainContent_eventdetails');
-    if ((inside.innerText.replace(" ", "") =="")) {
+    if ((inside.innerText.replace(" ", "") == "")) {
         $('#MainContent_eventdetails').dialog('close');
     }
-    
+
+
 
 });
 
@@ -42,4 +85,4 @@ function showDetails() {
     $('#MainContent_eventdetails').dialog('open');
 
 
-    }
+}

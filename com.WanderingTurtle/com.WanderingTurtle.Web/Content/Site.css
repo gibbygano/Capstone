@@ -104,16 +104,16 @@ h5, h6 {
     padding-bottom: 35px;
 }
 
-    .main-content {
-        /*background: url("../Images/accent.png") no-repeat; */
-        padding-left: 10px;
-        padding-top: 30px;
-    }
+.main-content {
+    /*background: url("../Images/accent.png") no-repeat; */
+    padding-left: 10px;
+    padding-top: 30px;
+}
 
 header .content-wrapper {
-    padding-top: 20px; 
+    padding-top: 20px;
 }
-    
+
 footer {
     clear: both;
     background-color: #e2e2e2;
@@ -133,12 +133,12 @@ footer {
     background-color: #006AA1;
 }
 
-.site-title a, .site-title a:hover, .site-title a:active {
-    background: none;
-    color: #c8c8c8;
-    outline: none;
-    text-decoration: none;
-}
+    .site-title a, .site-title a:hover, .site-title a:active {
+        background: none;
+        color: #c8c8c8;
+        outline: none;
+        text-decoration: none;
+    }
 
 
 /* login
@@ -148,22 +148,21 @@ footer {
     font-size: .85em;
     margin: 0px 20px 10px;
     text-align: right;
-
 }
 
     #login a {
-        color:white;
+        color: white;
         margin-left: 10px;
         margin-right: 3px;
         padding: 2px 3px;
         text-decoration: none;
     }
 
-    #login a.username {
-        background: none;
-        margin-left: 0px;
-        text-decoration: underline;
-    }
+        #login a.username {
+            background: none;
+            margin-left: 0px;
+            text-decoration: underline;
+        }
 
     #login ul {
         margin: 0;
@@ -201,10 +200,10 @@ ul#menu {
             text-decoration: none;
         }
 
-        ul#menu li a:hover {
-            color: #d3dce0;
-            text-decoration: none;
-        }
+            ul#menu li a:hover {
+                color: #d3dce0;
+                text-decoration: none;
+            }
 
 
 /* page elements
@@ -225,27 +224,27 @@ ul#menu {
         padding: 20px 40px 30px 40px;
     }
 
-        .featured hgroup.title h1, .featured hgroup.title h2 {
-            color: #fff;
-        }
+    .featured hgroup.title h1, .featured hgroup.title h2 {
+        color: #fff;
+    }
 
-        .featured p {
-            font-size: 1.1em;
-        }
+    .featured p {
+        font-size: 1.1em;
+    }
 
 /* page titles */
 hgroup.title {
     margin-bottom: 10px;
 }
 
-hgroup.title h1, hgroup.title h2 {
-    display: inline;
-}
+    hgroup.title h1, hgroup.title h2 {
+        display: inline;
+    }
 
-hgroup.title h2 {
-    font-weight: normal;
-    margin-left: 3px;
-}
+    hgroup.title h2 {
+        font-weight: normal;
+        margin-left: 3px;
+    }
 
 /* features */
 section.feature {
@@ -349,7 +348,7 @@ aside {
 }
 
     #socialLoginForm h2 {
-        margin-bottom:  5px;
+        margin-bottom: 5px;
     }
 
 fieldset.open-auth-providers {
@@ -359,7 +358,7 @@ fieldset.open-auth-providers {
     fieldset.open-auth-providers button {
         margin-bottom: 12px;
     }
-    
+
 /* contact */
 .contact h3 {
     font-size: 1.2em;
@@ -384,7 +383,7 @@ fieldset {
     fieldset legend {
         display: none;
     }
-    
+
     fieldset ol {
         padding: 0;
         list-style: none;
@@ -394,70 +393,69 @@ fieldset {
             padding-bottom: 5px;
         }
 
-    label {
-        display: block;
-        font-size: 1.2em;
-        font-weight: 600;
-    }
+label {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 600;
+}
 
     label.checkbox {
         display: inline;
     }
 
-    input, textarea {
-        border: 1px solid #e2e2e2;
-        background: #fff;
-        color: #333;
-        font-size: 1.2em;
-        margin: 5px 0 6px 0;
-        padding: 5px;
-    }
+input, textarea {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: #333;
+    font-size: 1.2em;
+    margin: 5px 0 6px 0;
+    padding: 5px;
+}
 
     input.editInput {
         width: 150px;
         font-size: .75em;
-
-    }
-    .editInput {
-        width: 150px;
-        font-size: .75em;
-
     }
 
-    textarea {
-        font-family: inherit;
-        width: 500px;
-    }
-    
-        input:focus, textarea:focus {
-            border: 1px solid #7ac0da;
-        }
+.editInput {
+    width: 150px;
+    font-size: .75em;
+}
 
-        input[type="checkbox"] {
-            background: transparent;
-            border: inherit;
-            width: auto;
-        }
-        
-    input[type="submit"],
-    input[type="button"],
-    button {
-        background-color: #d3dce0;
-        border: 1px solid #787878;
-        cursor: pointer;
-        font-size: 1.2em;
-        font-weight: 600;
-        padding: 7px;
-        margin-right: 8px;
-        }
+textarea {
+    font-family: inherit;
+    width: 500px;
+}
 
-    td input[type="submit"],
-    td input[type="button"],
-    td button {
-        font-size: 1em;
-        padding: 4px;
-        margin-right: 4px;
+    input:focus, textarea:focus {
+        border: 1px solid #7ac0da;
     }
+
+input[type="checkbox"] {
+    background: transparent;
+    border: inherit;
+    width: auto;
+}
+
+input[type="submit"],
+input[type="button"],
+button {
+    background-color: #d3dce0;
+    border: 1px solid #787878;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    padding: 7px;
+    margin-right: 8px;
+}
+
+td input[type="submit"],
+td input[type="button"],
+td button {
+    font-size: 1em;
+    padding: 4px;
+    margin-right: 4px;
+}
 
 /* info and errors */
 .message-info {
@@ -523,7 +521,7 @@ table {
 }
 
 th {
-	font-size: 1.2em;
+    font-size: 1.2em;
     text-align: left;
     border: none 0px;
     padding-left: 0;
@@ -532,39 +530,38 @@ th {
     th a {
         display: block;
         position: relative;
-        
     }
 
-	th a:link, th a:visited, th a:active, th a:hover {
-		color: #333;
-		font-weight: 600;
-		text-decoration: none;
-        padding: 0;
-	}
+        th a:link, th a:visited, th a:active, th a:hover {
+            color: #333;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0;
+        }
 
-	th a:hover {
-		color: #000;
-	}
+        th a:hover {
+            color: #000;
+        }
 
     th.asc a, th.desc a {
         margin-right: .75em;
     }
-    
-    th.asc a:after, th.desc a:after {
-		display: block;
-        position: absolute;
-        right: 0em;
-        top: 0;
-        font-size: 0.75em;
-	}
 
-	th.asc a:after {
-		content: '▲';
-	}
+        th.asc a:after, th.desc a:after {
+            display: block;
+            position: absolute;
+            right: 0em;
+            top: 0;
+            font-size: 0.75em;
+        }
 
-	th.desc a:after {
-		content: '▼';
-	}
+        th.asc a:after {
+            content: '▲';
+        }
+
+        th.desc a:after {
+            content: '▼';
+        }
 
 td {
     padding: 0.25em 2em 0.25em 0em;
@@ -575,43 +572,41 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
-.fixed td{
-   white-space:nowrap;
+.fixed td {
+    white-space: nowrap;
 }
 
-#pageErrors{
+#pageErrors {
     color: red;
 }
 
-input[type="radio"]{
+input[type="radio"] {
     width: 20px;
     display: inline;
     vertical-align: middle;
     float: left;
 }
 /**View Events Header**/
-.eventheader{
-
+.eventheader {
     font-weight: bold;
     text-decoration: underline;
-
-
 }
 
 /**USER MENU STYLES*/
 
-#user_menu{
+#user_menu {
     color: #fff;
-    float:right;
+    float: right;
 }
+
 #Menu1 a.static {
     padding-left: 0.85em;
     padding-right: 0.15em;
 }
 
-#Menu1 a.static.highlighted {
-    border-radius:5px;
-}
+    #Menu1 a.static.highlighted {
+        border-radius: 5px;
+    }
 
 
 
@@ -661,9 +656,9 @@ input[type="radio"]{
             padding: 0;
         }
 
-        #login a:hover {
-            color: #333;
-        }
+            #login a:hover {
+                color: #333;
+            }
 
     /* menu */
     nav {
@@ -728,12 +723,12 @@ input[type="radio"]{
                 background: none;
             }
 
-     /* features */
-     section.feature {
+    /* features */
+    section.feature {
         float: none;
         padding: 10px;
         width: auto;
-     }
+    }
 
         section.feature img {
             color: #999;
@@ -747,8 +742,8 @@ input[type="radio"]{
         width: 90%;
     }
 
-    
-    
+
+
     /* login page */
     #loginForm {
         border-right: none;
@@ -790,55 +785,56 @@ input[type="radio"]{
     clear: both;
 }
 
-#loginBar{
+#loginBar {
     color: #fff;
     padding-bottom: 7px;
 }
 
-#loginBar a{
-    color: #fff;
-    text-decoration: none;
-    
-}
+    #loginBar a {
+        color: #fff;
+        text-decoration: none;
+    }
 
-#logout{
+#logout {
     float: right;
     padding-left: 10px;
 }
-#loginlink{
+
+#loginlink {
     float: right;
 }
 
-#errorMessage{
+#errorMessage {
     display: block;
     width: 50%;
     height: auto;
     margin: auto;
     z-index: 1;
     position: fixed;
-    left:25%;
+    left: 25%;
     top: 25%;
     background-color: #fff;
     padding-top: 1.2%;
     padding-bottom: 1%;
 }
 
-.errorMsg{
+.errorMsg {
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
     overflow-wrap: normal;
     padding-left: 5%;
 }
 
-#errorButton{
-    float:right;
+#errorButton {
+    float: right;
 }
-.errorButtonStyle{
+
+.errorButtonStyle {
     padding-left: 1%;
     padding-right: 1%;
 }
 
-.ui-dialog-titlebar-close{
+.ui-dialog-titlebar-close {
     float: right;
     height: auto;
     background-color: rgb(51,161,51);
@@ -846,14 +842,14 @@ input[type="radio"]{
     padding: 2px;
 }
 
-.ui-button-text-only{
+button.ui-button-text-only {
     float: right;
     background-color: rgb(51,161,51);
     color: #fff;
 }
 
-.ui-dialog{
-    background-color:#006AA1;
+.ui-dialog {
+    background-color: #006AA1;
     border-color: #fff;
     border-width: 2px;
     border-style: solid;
@@ -861,36 +857,87 @@ input[type="radio"]{
     padding-bottom: 42px;
 }
 
-.ui-dialog-title{
+.ui-dialog-title {
     color: #fff;
     font-size: 1.4em;
     padding-bottom: 10px;
 }
 
-#lblErrorMessage{
+#lblErrorMessage {
     font-size: 1.1em;
-    padding-top:10px;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#leftcontainer{
+#leftcontainer {
     width: 33%;
     float: left;
 }
-#rightcontainer{
+
+#rightcontainer {
     width: 65%;
-    float:left;
+    float: left;
 }
 
-.events{
+.events {
     color: #fff;
     display: none;
 }
 
-.ui-dialog{
+.ui-dialog {
     display: none;
 }
 
-#MainContent_eventdetails{
+#MainContent_eventdetails {
     display: none;
+}
+
+.timePicker {
+    border: 1px solid gray;
+    overflow-y: scroll;
+    height: 120px;
+    width: 180px;
+    position: absolute;
+    background-color: #fff;
+}
+
+    .timePicker ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .timePicker ul li p {
+            padding: 3px;
+            margin: 0;
+        }
+
+        .timePicker ul li:hover, .timePicker-selected {
+            background-color: gray;
+            color: #fff;
+        }
+
+.ui-spinner span.ui-icon {
+    clear: both;
+    text-decoration: none;
+}
+
+.ui-spinner-button {
+    clear: both;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.myspinner {
+    width: 30px;
+}
+
+.mytime {
+    width: 75px;
+}
+
+#ui-datepicker-div {
+    background-color: rgb(51,161,51);
+    color: #fff;
+    padding: 5px;
 }

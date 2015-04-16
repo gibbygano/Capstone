@@ -7,6 +7,29 @@ using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
+    public enum listResult
+    {
+        //item could not be found
+        NotFound = 0,
+
+        //new event could not be added
+        NotAdded,
+
+        NotChanged,
+
+        //worked
+        Success,
+
+        //Can change record
+        OkToEdit,
+
+        //concurrency error
+        ChangedByOtherUser,
+
+        DatabaseError,
+
+
+    }
     public class ProductManager
     {
         public ProductManager()
@@ -14,29 +37,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         }
 
-        public enum listResult
-        {
-            //item could not be found
-            NotFound = 0,
 
-            //new event could not be added
-            NotAdded,
-
-            NotChanged,
-
-            //worked
-            Success,
-
-            //Can change record
-            OkToEdit,
-
-            //concurrency error
-            ChangedByOtherUser,
-
-            DatabaseError,
-
-
-        }
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
@@ -112,7 +113,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ListsAccessor.UpdateLists(oldLists, newLists)== 1)
+                if (ListsAccessor.UpdateLists(oldLists, newLists) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
@@ -199,7 +200,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
                 return DataCache._currentItemListingList;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw new Exception();
             }
@@ -216,7 +217,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ItemListingAccessor.AddItemListing(newItemListing) ==1)
+                if (ItemListingAccessor.AddItemListing(newItemListing) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
@@ -242,7 +243,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists) == 1)
+                if (ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
@@ -266,7 +267,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ItemListingAccessor.DeleteItemListing(itemListToDelete)==1)
+                if (ItemListingAccessor.DeleteItemListing(itemListToDelete) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;

@@ -23,8 +23,6 @@ namespace com.WanderingTurtle.Web
                  //if it fails, the user must not have logged in on this
                  //session yet, so set it to false
                  Session["loggedIn"] = false;
-                 //send them to the login page
-                 Response.Redirect("~/login");
              }
              if (loggedIn)
              {

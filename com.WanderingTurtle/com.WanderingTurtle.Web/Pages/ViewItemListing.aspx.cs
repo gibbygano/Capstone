@@ -98,7 +98,7 @@ namespace com.WanderingTurtle.Web.Pages
 
                 //TODO: eventID, SupplierID
                 lblError.Text = "";
-                ProductManager.listResult result;
+                listResult result;
                 if (myList != null)
                 {
                     result = _myManager.EditItemListing(newList, myList);
@@ -122,7 +122,7 @@ namespace com.WanderingTurtle.Web.Pages
                 ItemListing myList = _listedLists
                 .Where(e => e.ItemListID == ItemListID).FirstOrDefault();
 
-                ProductManager.listResult result = _myManager.ArchiveItemListing(myList);
+                listResult result = _myManager.ArchiveItemListing(myList);
             }
             catch (Exception)
             {

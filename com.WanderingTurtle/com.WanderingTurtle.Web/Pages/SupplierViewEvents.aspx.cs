@@ -11,6 +11,7 @@ namespace com.WanderingTurtle.Web.Pages
     public partial class SupplierViewEvents : System.Web.UI.Page
     {
         EventManager _myManager = new EventManager();
+        ProductManager _myprodMan = new ProductManager();
         List<Event> _listedEvents;
         public List<EventType> _eventTypes;
         public string current;
@@ -190,6 +191,55 @@ namespace com.WanderingTurtle.Web.Pages
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"You must ender a valid name!\")</SCRIPT>");
                 e.Cancel = true;
             }
+
+        }
+
+        protected void btn_Click(object sender, EventArgs e)
+        {
+            var b = (Button)sender;
+            int itemID = int.Parse(b.CommandArgument);
+            var myEvent = _listedEvents.Where(l => l.EventItemID == itemID).FirstOrDefault();
+            Session["Event"] = myEvent;
+            theLists.Style.Add("display", "none");
+            addListing.Style.Add("display", "block");
+            lblEventName.Text = myEvent.EventItemName;
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            Event myEvent;
+            Supplier mySupplier;
+            try
+            {
+                myEvent = (Event)Session["Event"];
+                mySupplier = (Supplier)Session["user"];
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            //make new Item Listing
+            ItemListing myListing = new ItemListing();
+            myListing.EventID = myEvent.EventItemID;
+            myListing.Price = (decimal)double.Parse(Request.Form["price"]);
+            myListing.MaxNumGuests = int.Parse(Request.Form["tickets"]);
+            myListing.StartDate = DateTime.Now.AddDays(7);
+            myListing.EndDate = DateTime.Now.AddDays(8);
+            myListing.SupplierID = mySupplier.SupplierID;
+
+            if(_myprodMan.AddItemListing(myListing)==listResult.Success)
+            {
+                addListing.Style.Add("display", "none");
+                theLists.Style.Add("display", "block");
+                //success message i guess
+            }
+
+
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
 
         }
     }
