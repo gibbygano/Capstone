@@ -17,30 +17,30 @@ namespace com.WanderingTurtle.Tests
     public class EventManagerTest
     {
 
-        private Event toTest = new Event();
-        private Event toTest2 = new Event();
-        private EventManager myMan = new EventManager();
-        private EventType typeToTest = new EventType();
+        private Event toTest            = new Event();
+        private Event toTest2           = new Event();
+        private EventManager myMan      = new EventManager();
+        private EventType typeToTest    = new EventType();
 
         private void setup()
         {
-            toTest.EventItemID = 999;
-            toTest.EventItemName = "A Test Event";
-            toTest.EventTypeName = "Boat Ride";
-            toTest.EventTypeID = 100;
-            toTest.OnSite = false;
-            toTest.Active = true;
-            toTest.Description = "This is a test descrip";
-            toTest.Transportation = false;
+            toTest.EventItemID      = 999;
+            toTest.EventItemName    = "A Test Event";
+            toTest.EventTypeName    = "Boat Ride";
+            toTest.EventTypeID      = 100;
+            toTest.OnSite           = false;
+            toTest.Active           = true;
+            toTest.Description      = "This is a test descrip";
+            toTest.Transportation   = false;
 
-            toTest2.EventItemID = 999;
-            toTest2.EventItemName = "A Test Event";
-            toTest2.EventTypeName = "Boat Ride";
-            toTest2.EventTypeID = 100;
-            toTest2.OnSite = false;
-            toTest2.Active = true;
-            toTest2.Description = "This is a test descrip";
-            toTest2.Transportation = true;
+            toTest2.EventItemID     = 999;
+            toTest2.EventItemName   = "A Test Event";
+            toTest2.EventTypeName   = "Boat Ride";
+            toTest2.EventTypeID     = 100;
+            toTest2.OnSite          = false;
+            toTest2.Active          = true;
+            toTest2.Description     = "This is a test descrip";
+            toTest2.Transportation  = true;
         }
 
         private void toTestUpdate()
@@ -107,6 +107,11 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(toTest.EventItemID, myArray[0].EventItemID, "EventItemID do not match");           //can fail until we can force an EventItemID
         }
          * */
+
+        /// <summary>
+        /// Tests Retrieving an event from the database
+        /// Written by: Hunter Lind
+        /// </summary>
         [TestMethod]
         public void EventRetrieve_Test()
         {
@@ -121,7 +126,10 @@ namespace com.WanderingTurtle.Tests
             myMan.deleteTestEvent(toTest);
         }
 
-
+        /// <summary>
+        /// Tests editing an event.
+        /// Written by: Hunter Lind
+        /// </summary>
         [TestMethod]
         public void EditEvent_Test()
         {
@@ -162,6 +170,10 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(EventManager.EventResult.Success, result, "failed");
         }
          * */
+        /// <summary>
+        /// Tests retrieving an EventTypeList
+        /// Written by: Hunter Lind
+        /// </summary>
         [TestMethod]
         public void RetrieveEventTypeList_Test()
         {
