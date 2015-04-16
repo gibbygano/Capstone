@@ -233,7 +233,8 @@ namespace com.WanderingTurtle.FormPresentation
             this.txtLastName.Text = CurrentSupplierApplication.LastName;
             this.txtAddress.Text = CurrentSupplierApplication.Address1;
             this.txtAddress2.Text = CurrentSupplierApplication.Address2;
-            this.txtPhoneNumber.Text = CurrentSupplierApplication.PhoneNumber;
+            string phoneNumberMasked = CurrentSupplierApplication.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+            this.txtPhoneNumber.Text = phoneNumberMasked;
             this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
             this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
