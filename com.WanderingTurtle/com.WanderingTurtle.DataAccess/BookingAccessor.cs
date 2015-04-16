@@ -388,7 +388,7 @@ namespace com.WanderingTurtle.DataAccess
                         var myBookingNumber = new BookingNumbers();
                         myBookingNumber.FirstName = reader.GetValue(0).ToString();
                         myBookingNumber.LastName = reader.GetValue(1).ToString();
-                        myBookingNumber.Room = (int)reader.GetValue(2);
+                        myBookingNumber.Room = reader.GetValue(2).ToString();
                         myBookingNumber.Quantity= (int)reader.GetValue(3);
                         bookingNumber.Add(myBookingNumber);
                     }

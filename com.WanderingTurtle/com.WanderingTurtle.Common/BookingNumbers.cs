@@ -10,7 +10,7 @@ namespace com.WanderingTurtle.Common
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Quantity { get; set; }
-        public int Room { get; set; }
+        public string Room { get; set; }
 
         public BookingNumbers()
         {
