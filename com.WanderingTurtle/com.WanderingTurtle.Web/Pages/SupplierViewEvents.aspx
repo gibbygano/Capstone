@@ -13,7 +13,8 @@
         View List of Events and Options to Edit or Delete
         -->
     <div id="theLists" runat="server">
-    <h1>Listed Events</h1>
+    <h1>Listed Events</h1><div id="eventSearch">
+        <asp:TextBox ID="txtEventSearch" runat="server"></asp:TextBox><asp:Button ID="btnEventSearch" OnClick="btnEventSearch_Click" runat="server" Text="Search" /></div><div class="clear"></div>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" 
         SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
@@ -139,13 +140,16 @@
     </asp:DataPager>--%>
 </div>
     <div id="addListing" runat="server" style="display: none;">
-        <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label>
-        <input type="text" id="listStartDate" class="mydate" />
-        <input type="text" id="listEndDate" class="mydate" />
-        <input type="text" id="listStartTime" class="mytime" />
-        <input type="text" id="listEndTime" class="mytime" />
-        <input id="listPrice" name="price" value="0.00" class="myspinner">
-        <input id="listTickets" name="tickets" value="0" class="myspinner">
+        <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label><br />
+        <asp:Label ID="lblAddError" runat="server" Text="" ForeColor="#CC0000"></asp:Label><br />
+        Start Date & Time:
+        <input type="text" id="listStartDate" name="startdate" class="mydate" /> <br />
+        End Date & Time
+        <input type="text" id="listEndDate" name="enddate" class="mydate" /> <br />
+        Ticket Price: $
+        <input id="listPrice" name="price" value="0.00" class="myspinner"> <br />
+        Number of Tickets Available:
+        <input id="listTickets" name="tickets" value="0" class="myspinner"><br />
         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click"/>
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
     </div>

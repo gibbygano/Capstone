@@ -25,17 +25,21 @@ $(document).ready(function () {
         autoOpen: true
     });
 
-    $('#listStartTime').timePicker();
-    $('#listEndTime').timePicker();
+    $("#listStartDate").datetimepicker(
+           {
+               controlType: 'select',
+               oneLine: true,
+               stepMinute: 10,
+               timeFormat: 'hh:mm tt'
+           });
 
-
-    $("#listEndTime").click(function () {
-        $('div.timePicker').css({
-
-            top: $("#listEndTime").offset()
-
-        });
-    });
+    $("#listEndDate").datetimepicker(
+           {
+               controlType: 'select',
+               oneLine: true,
+               stepMinute: 10,
+               timeFormat: 'hh:mm tt'
+           });
 
     $("#listPrice").spinner({
         min: 0,
@@ -52,21 +56,7 @@ $(document).ready(function () {
         start: 0
     });
 
-    $("#listStartDate").click(function () {
-        $(this).datepicker({
-            minDate: 0,
-            maxDate: '+1y',
-        });
-    });
-
-    $("#listEndDate").click(function () {
-        $(this).datepicker({
-            minDate: 0,
-            maxDate: '+1y'
-        });
-    });
-
-
+   
 
     $("#eventStart").datetimepicker(
         {

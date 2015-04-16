@@ -20,6 +20,8 @@ namespace com.WanderingTurtle.Web.Pages
         public string nameError = "";
         public string descError = "";
         private bool loggedIn = false;
+        private bool search = false;
+        private string searchTerm = "";
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
@@ -71,6 +73,7 @@ namespace com.WanderingTurtle.Web.Pages
         }
         public IEnumerable<Event> GetEvents()
         {
+            lblError.Text = "";
             try
             {
                 _listedEvents = _myManager.RetrieveEventList();
@@ -78,6 +81,10 @@ namespace com.WanderingTurtle.Web.Pages
                 {
                     //sets string values for trasportation and onsite properties
                     x.setFields();
+                }
+                if (IsPostBack)
+                {
+                    return _listedEvents.Where(e => e.EventItemName.ToLower().Contains(searchTerm) || e.Description.ToLower().Contains(searchTerm));
                 }
                 return _listedEvents;
             }
@@ -207,6 +214,7 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            lblAddError.Text = "";
             Event myEvent;
             Supplier mySupplier;
             try
@@ -219,13 +227,35 @@ namespace com.WanderingTurtle.Web.Pages
                 return;
             }
 
+            //validate form
+            if (String.IsNullOrEmpty(Request.Form["startdate"]))
+            {
+                lblAddError.Text = "You must enter a valid starting date!";
+                return;
+            }
+            if (String.IsNullOrEmpty(Request.Form["enddate"]))
+            {
+                lblAddError.Text = "You must enter a valid ending date!";
+                return;
+            }
+            if (String.IsNullOrEmpty(Request.Form["price"]) || !Validator.ValidateDouble(Request.Form["price"]))
+            {
+                lblAddError.Text = "You must enter a valid price!";
+                return;
+            }
+            if (String.IsNullOrEmpty(Request.Form["tickets"]) || !Validator.ValidateDouble(Request.Form["tickets"]))
+            {
+                lblAddError.Text = "You must enter a valid number of tickets available";
+                return;
+            }
+
             //make new Item Listing
             ItemListing myListing = new ItemListing();
             myListing.EventID = myEvent.EventItemID;
             myListing.Price = (decimal)double.Parse(Request.Form["price"]);
             myListing.MaxNumGuests = int.Parse(Request.Form["tickets"]);
-            myListing.StartDate = DateTime.Now.AddDays(7);
-            myListing.EndDate = DateTime.Now.AddDays(8);
+            myListing.StartDate = DateTime.Parse(Request.Form["startdate"]);
+            myListing.EndDate = DateTime.Parse(Request.Form["enddate"]);
             myListing.SupplierID = mySupplier.SupplierID;
 
             if(_myprodMan.AddItemListing(myListing)==listResult.Success)
@@ -240,7 +270,21 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            addListing.Style.Add("display", "none");
+            theLists.Style.Add("display", "block");
+        }
 
+        protected void btnEventSearch_Click(object sender, EventArgs e)
+        {
+            lblError.Text="";
+            if(String.IsNullOrEmpty(txtEventSearch.Text))
+            {
+                lblError.Text = "Please enter a search term";
+                return;
+            }
+            search = true;
+            searchTerm = txtEventSearch.Text;
+            //GetEvents();
         }
     }
 
