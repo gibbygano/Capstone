@@ -232,7 +232,8 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 //FormatException found in if loop
                 if (CurrentHotelGuest == null)
-                {
+                {  
+
                     Result = _hotelGuestManager.AddHotelGuest(
                         new HotelGuest(
                             TxtFirstName.Text.Trim(),
@@ -273,14 +274,30 @@ namespace com.WanderingTurtle.FormPresentation
                 else
                 { ShowErrorMessage("Error Processing Request", "Error"); }
             }
-            catch (SqlException)
+            catch (ApplicationException) 
             {
-                ShowErrorMessage("PIN Already Assigned.  Please choose a different PIN.", "Error"); 
+                ShowErrorMessage("Hotel Room Occupied. Please Choose Another Room.");
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Message.Contains("UniqueRoomExceptNulls"))
+                {
+                    ShowErrorMessage("A Pin is Already Associated With This Room.", "Error");
+                }
+                else if (ex.Message.Contains("UniquePINExceptNulls"))
+                {
+                    ShowErrorMessage("A Room is Alredy Associated With This Pin.", "Error");
+                }
+                else
+                {
+                    ShowErrorMessage("There Was An Issue Contacting the Database.", "Error");
+                }
             }
             catch (Exception ex)
             { 
                 ShowErrorMessage(ex); 
             }
+            
         }
 
         /// <summary>
