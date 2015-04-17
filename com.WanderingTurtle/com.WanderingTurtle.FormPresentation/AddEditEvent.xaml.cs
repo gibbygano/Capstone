@@ -113,7 +113,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                if (ex is InputValidationException) { throw ex; }
+                if (ex is InputValidationException) { throw new InputValidationException((InputValidationException) ex); }
                 throw new WanderingTurtleException(this, ex, "Error adding new event");
             }
         }

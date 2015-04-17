@@ -98,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         //SetStyle(childControl, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
                     // Don't know why this would throw, but it's here just in case
-                    else { throw new Exception("Unknown Component"); }
+                    else { throw new ApplicationException("Unknown Component"); }
                 }
             }
             catch (Exception ex) { throw new WanderingTurtleException(content, ex, "Error Setting Fields to ReadOnly for" + Environment.NewLine + content); }

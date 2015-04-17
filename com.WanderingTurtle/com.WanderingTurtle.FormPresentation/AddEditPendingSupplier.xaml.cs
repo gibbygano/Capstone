@@ -140,11 +140,11 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "DB Error.");
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex)
             {
                // ShowErrorMessage("UserName already used.  Please choose another one.");
 
-                throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
+                throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.", ex);
             }
             catch (Exception ex)
             {

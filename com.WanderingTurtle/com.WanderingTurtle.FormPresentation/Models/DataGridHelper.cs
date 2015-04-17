@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 throw new ApplicationException("Error Getting Selected DataGrid Row.");
             }
             catch (Exception ex)
-            { throw new WanderingTurtleException(sender is FrameworkElement ? sender as FrameworkElement : null, ex); }
+            { throw new WanderingTurtleException(sender as FrameworkElement, ex); }
         }
     }
 }

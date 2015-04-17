@@ -85,7 +85,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsArchive.ChangedByOtherUser):
-                        throw new Exception("Record already changed by another user.");
+                        throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
                         await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");

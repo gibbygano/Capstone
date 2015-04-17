@@ -44,11 +44,11 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 try
                 {
                     int UserId;
-                    if (!int.TryParse(result.Username, out UserId)) { throw new Exception(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
+                    if (!int.TryParse(result.Username, out UserId)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
                     _user = UserId.ToString();
-                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new Exception(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
+                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
                     Globals.UserToken = new EmployeeManager().GetEmployeeLogin(UserId, result.Password);
-                    if (Globals.UserToken == null) { throw new Exception("Error setting User Token"); }
+                    if (Globals.UserToken == null) { throw new ApplicationException("Error setting User Token"); }
                     else { _exception = null; }
                 }
                 catch (Exception ex) { _exception = ex; }

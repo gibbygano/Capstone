@@ -97,7 +97,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.ChangedByOtherUser):
-                        throw new Exception("This booking has already been cancelled.");
+                        throw new ApplicationException("This booking has already been cancelled.");
 
                     case (ResultsEdit.Success):
                         await DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");

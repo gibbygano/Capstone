@@ -107,15 +107,15 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.QuantityZero):
-                        throw new Exception("Please use cancel instead of setting quantity 0.");
+                        throw new ApplicationException("Please use cancel instead of setting quantity 0.");
                     case (ResultsEdit.Success):
                         await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
                         this.Close();
                         break;
                     case(ResultsEdit.ListingFull):
-                        throw new Exception("This event is already full. You cannot add more guests to it.");
+                        throw new ApplicationException("This event is already full. You cannot add more guests to it.");
                     case(ResultsEdit.ChangedByOtherUser):
-                        throw new Exception("Changed by another user");
+                        throw new ApplicationException("Changed by another user");
                 }
             }
             catch (Exception ex)
