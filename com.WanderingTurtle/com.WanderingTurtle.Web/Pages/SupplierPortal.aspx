@@ -37,7 +37,7 @@
                         <td><%# Item.EndDate %></td>
                         <td><%# Item.CurrentNumGuests %></td>
                         <td>
-                            <asp:Button ID="btnDetails" runat="server" CommandArgument="<%#Item.ItemListID %>" Text="View Details" OnClick="btnDetails_Click"  OnClientClick="showDetails();" UseSubmitBehavior="False"  />
+                            <asp:Button ID="btnDetails" runat="server" CommandArgument="<%#Item.ItemListID %>" Text="View Details" OnClick="btnDetails_Click"   UseSubmitBehavior="False"  />
                         </td>
                     </tr>
                 </ItemTemplate>
