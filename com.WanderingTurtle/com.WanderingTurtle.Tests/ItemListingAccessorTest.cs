@@ -1,10 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-using com.WanderingTurtle.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -14,17 +11,17 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class ItemListingAccessorTest
     {
-            int itemListID = 104;
-            int eventID = 102;
-            DateTime startDate = new DateTime(2015, 3, 28, 8, 30, 0);
-            DateTime endDate = new DateTime(2015, 3, 28, 10, 30, 0);
-            decimal price = 10.0000M;
-            int quantityOffered = 5;
-            string productSize = "10";
-            int maxNumGuests = 11;
-            int minNumGuests = 0;
-            int currentNumGuests = 10;
-            public int supplierID = 102;
+        private int itemListID = 104;
+        private int eventID = 102;
+        private DateTime startDate = new DateTime(2015, 3, 28, 8, 30, 0);
+        private DateTime endDate = new DateTime(2015, 3, 28, 10, 30, 0);
+        private decimal price = 10.0000M;
+        private int quantityOffered = 5;
+        private string productSize = "10";
+        private int maxNumGuests = 11;
+        private int minNumGuests = 0;
+        private int currentNumGuests = 10;
+        public int supplierID = 102;
 
         [TestMethod]
         public void AddItemListing_ValidItemListing()
@@ -92,9 +89,8 @@ namespace com.WanderingTurtle.Tests
 
             int actual = ItemListingAccessor.UpdateItemListing(testItemListing, newTestItemListing);
 
-            if(actual == 0)
+            if (actual == 0)
             {
-                 
                 throw new ApplicationException("Concurrency Error");
             }
         }
@@ -121,7 +117,6 @@ namespace com.WanderingTurtle.Tests
 
             if (actual == 0)
             {
-
                 throw new ApplicationException("Concurrency Error");
             }
         }

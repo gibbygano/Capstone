@@ -1,8 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -11,7 +11,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Retrieves ItemListing data from the Database using a Stored Procedure.
         /// Creates an ItemListing object.
-        /// 
+        ///
         /// Created by Tyler Collins 02/10/2015
         /// </summary>
         /// <param name="itemListID">Requires the ItemListID to SELECT the correct ItemListing record.</param>
@@ -19,7 +19,6 @@ namespace com.WanderingTurtle.DataAccess
         ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static ItemListing GetItemListing(string itemListID)
         {
-
             ItemListing itemListingToRetrieve = new ItemListing();
 
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
@@ -48,15 +47,12 @@ namespace com.WanderingTurtle.DataAccess
                     itemListingToRetrieve.MaxNumGuests = reader.GetInt32(7);
                     itemListingToRetrieve.MinNumGuests = reader.GetInt32(8);
                     itemListingToRetrieve.CurrentNumGuests = reader.GetInt32(6);
-
-
                 }
                 else
                 {
                     var pokeball = new ApplicationException("Requested ID did not match any records.");
                     throw pokeball;
                 }
-
             }
             catch (Exception)
             {
@@ -74,7 +70,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Retrieves all ItemListing data from the Database using a Stored Procedure.
         /// Creates an ItemListing object from retrieved data.
         /// Adds ItemListing object to List of ItemListing objects.
-        /// 
+        ///
         /// Created by Tyler Collins 02/10/2015
         /// </summary>
         /// <returns>List of ItemListing objects</returns>
@@ -118,7 +114,6 @@ namespace com.WanderingTurtle.DataAccess
                         {
                             itemListingList.Add(currentItemListing);
                         }
-                        
                     }
                 }
                 else
@@ -141,7 +136,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// INSERTs an ItemListing into the Database using a Stored Procedure.
-        /// 
+        ///
         /// Created by Tyler Collins 02/11/2015
         /// </summary>
         /// <param name="itemListingToAdd">Requires an ItemListing object to INSERT</param>
@@ -182,7 +177,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// UPDATEs an ItemListing record in the Database with new data using a Stored Procedure.
-        /// 
+        ///
         /// Created by Tyler Collins 02/11/2015
         /// </summary>
         /// <param name="newItemListing">Requires the ItemListing object containing the new information</param>
@@ -236,7 +231,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// DELETEs (Sets Boolean Active field to false) an ItemListing record in the Database using a Stored Procedure.
-        /// 
+        ///
         /// Created by Tyler Collins 02/11/2015
         /// </summary>
         /// <param name="itemListingToDelete">Requires the ItemListing object which matches the record to be DELETED in the Database.</param>

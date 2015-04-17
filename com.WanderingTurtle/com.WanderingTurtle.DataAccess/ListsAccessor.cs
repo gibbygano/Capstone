@@ -1,16 +1,15 @@
 ﻿//Justin Pennington 2/14/15
 
+using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
     public class ListsAccessor
     {
-
         //Justin Pennington 2/14/15
         /// <summary>
         /// Returns a list of all listings
@@ -40,7 +39,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentList.SupplierID = reader.GetInt32(0);
                         currentList.ItemListID = reader.GetInt32(1);
                         currentList.DateListed = (DateTime)reader.GetValue(3);
-                        
+
                         myLists.Add(currentList);
                     }
                 }
@@ -89,7 +88,7 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     theLists.SupplierID = reader.GetInt32(0);
                     theLists.ItemListID = reader.GetInt32(1);
-                    theLists.DateListed = (DateTime)reader.GetValue(3);                   
+                    theLists.DateListed = (DateTime)reader.GetValue(3);
                 }
                 else
                 {
@@ -128,7 +127,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@SupplierID", newLists.SupplierID);
             cmd.Parameters.AddWithValue("@ItemListID", newLists.ItemListID);
             cmd.Parameters.AddWithValue("@DateListed", newLists.DateListed);
-            
+
             try
             {
                 conn.Open();
@@ -172,12 +171,11 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@SupplierID", newList.SupplierID);
             cmd.Parameters.AddWithValue("@ItemListID", newList.ItemListID);
             cmd.Parameters.AddWithValue("@DateListed", newList.DateListed);
-           
 
             cmd.Parameters.AddWithValue("@original_SupplierID", oldList.SupplierID);
             cmd.Parameters.AddWithValue("@original_ItemListID", oldList.ItemListID);
             cmd.Parameters.AddWithValue("@original_DateListed", oldList.DateListed);
-            
+
             try
             {
                 conn.Open();
@@ -197,7 +195,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;  // needs to be rows affected
         }
-
 
         //Justin Pennington 2/14/15
         /// <summary>
@@ -220,7 +217,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_SupplierID", inLists.SupplierID);
             cmd.Parameters.AddWithValue("@original_ItemListID", inLists.ItemListID);
             cmd.Parameters.AddWithValue("@original_DateListed", inLists.DateListed);
-            
+
             try
             {
                 conn.Open();
@@ -238,7 +235,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return rowsAffected;  // needs to be rows affected           
+            return rowsAffected;  // needs to be rows affected
         }
     }
 }

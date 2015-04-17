@@ -721,7 +721,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!GetFullName.Value</Value>
+                <Value>=First(Fields!GetFullName.Value, "HotelGuestDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -751,7 +751,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Address1.Value</Value>
+                <Value>=First(Fields!Address1.Value, "HotelGuestDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -781,7 +781,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!Address2.ValueFirst(Fields!Address2.Value, "HotelGuestDataset")</Value>
+                <Value>=First(Fields!Address2.Value, "HotelGuestDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -811,7 +811,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!CityState.ValueFirst(Fields!CityState.Value, "HotelGuestDataset")</Value>
+                <Value>=First(Fields!CityState.Value, "HotelGuestDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -841,7 +841,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!PhoneNumber.Value</Value>
+                <Value>=First(Fields!PhoneNumber.Value, "HotelGuestDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -871,7 +871,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!EmailAddress.Value</Value>
+                <Value>=First(Fields!EmailAddress.Value, "HotelGuestDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -931,7 +931,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!InvoiceID.Value</Value>
+                <Value>=First(Fields!InvoiceID.Value, "InvoiceDetailsDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>

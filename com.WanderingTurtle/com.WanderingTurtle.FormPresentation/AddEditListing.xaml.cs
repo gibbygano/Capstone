@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using System;
+using System.Windows;
+using System.Windows.Controls;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 // Worked on by:
@@ -51,8 +51,6 @@ namespace com.WanderingTurtle.FormPresentation
                 DateTime formStartTime = (DateTime)(tpStartTime.Value);
                 DateTime formEndTime = (DateTime)(tpEndTime.Value);
 
-
-
                 //date is your existing Date object, time is the nullable DateTime object from your TimePicker
                 _NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
                 _NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
@@ -60,7 +58,6 @@ namespace com.WanderingTurtle.FormPresentation
                 if (_NewListing.StartDate > _NewListing.EndDate)
                 {
                     throw new WanderingTurtleException(this, "End Date must be after Start Date");
-
                 }
                 _NewListing.EventID = ((Event)eventCbox.SelectedItem).EventItemID;
                 _NewListing.SupplierID = ((Supplier)supplierCbox.SelectedItem).SupplierID;
@@ -154,10 +151,8 @@ namespace com.WanderingTurtle.FormPresentation
                 eventCbox.DisplayMemberPath = "EventItemName";
                 eventCbox.SelectedValue = "EventItemID";
 
-
                 supplierCbox.Items.Clear();
                 supplierCbox.ItemsSource = _supplierManager.RetrieveSupplierList();
-                
             }
             catch (Exception ex)
             {
@@ -185,13 +180,11 @@ namespace com.WanderingTurtle.FormPresentation
                     EventID = CurrentItemListing.EventID,
                     StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString())),
                     EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString())),
-                    Price = (decimal) (udPrice.Value),
-                    MaxNumGuests = (int) (udSeats.Value),
+                    Price = (decimal)(udPrice.Value),
+                    MaxNumGuests = (int)(udSeats.Value),
                     CurrentNumGuests = CurrentItemListing.CurrentNumGuests,
                     SupplierID = CurrentItemListing.SupplierID
                 };
-
-
 
                 var numRows = _productManager.EditItemListing(NewListing, CurrentItemListing);
                 if (numRows == listResult.Success)

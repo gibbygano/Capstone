@@ -1,7 +1,7 @@
-﻿using System;
-using System.Windows;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.FormPresentation.Views;
+using System;
+using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation
 {

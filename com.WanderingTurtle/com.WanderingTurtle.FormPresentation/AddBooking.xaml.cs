@@ -1,28 +1,28 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for AddBooking.xaml
     /// </summary>
-    public partial class AddBooking 
+    public partial class AddBooking
     {
-        List<ItemListingDetails> myEventList = new List<ItemListingDetails>();
-        InvoiceDetails inInvoice;
-        int eID;
-        BookingManager _bookingManager = new BookingManager();
+        private List<ItemListingDetails> myEventList = new List<ItemListingDetails>();
+        private InvoiceDetails inInvoice;
+        private int eID;
+        private BookingManager _bookingManager = new BookingManager();
         public ItemListing originalItem;
 
         /// <summary>
-        /// Tony Noel 
+        /// Tony Noel
         /// Created: 2015/02/13
-        /// 
+        ///
         /// UI for adding a booking
         /// Access from the View Invoice screen
         /// </summary>
@@ -39,9 +39,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/11
-        /// 
+        ///
         /// Extracted method to refresh the list view as needed
         /// </summary>
         private void RefreshListItems()
@@ -58,19 +58,18 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex, "Unable to retrieve Hotel Guest listing from the database.");
             }
-
         }
 
         /// <summary>
-        /// Tony Noel 
+        /// Tony Noel
         /// Created: 2015/02/13
-        /// 
+        ///
         /// Handles the add Booking click event
         /// </summary>
         /// <remarks>
-        /// Pat Banks 
+        /// Pat Banks
         /// Updated: 2015/03/19
-        /// 
+        ///
         /// Moved decision logic to Booking Manager
         /// </remarks>
         /// <param name="sender"></param>
@@ -92,7 +91,7 @@ namespace com.WanderingTurtle.FormPresentation
                     case (ResultsEdit.QuantityZero):
                         throw new WanderingTurtleException(this, "Quantity of tickets must be more than zero.");
 
-                    case(ResultsEdit.DatabaseError):
+                    case (ResultsEdit.DatabaseError):
                         throw new WanderingTurtleException(this, "Booking could not be added due to database malfunction.");
 
                     case (ResultsEdit.Success):
@@ -109,17 +108,17 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Tony Noel 
+        /// Tony Noel
         /// Created: 2/11/15
-        /// 
+        ///
         /// a method to collect all information from the form
-        /// Then after taking each variable and testing them in their specific validation method, parses them 
+        /// Then after taking each variable and testing them in their specific validation method, parses them
         /// into the correct variable needed to be stored as a ItemListingDetails
         /// </summary>
         /// <remarks>
-        /// Pat Banks 
+        /// Pat Banks
         /// Updated: 2015/03/11
-        /// 
+        ///
         /// Added up/down controls to allow for easier user data entry
         /// </remarks>
         private Booking gatherFormInformation()
@@ -141,9 +140,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Tony Noel 
+        /// Tony Noel
         /// Created: 2015/02/18
-        /// 
+        ///
         /// Method to create ItemListingDetails from listView
         /// </summary>
         /// <returns>Returns the selected item.</returns>
@@ -151,7 +150,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             ItemListingDetails selected = (ItemListingDetails)lvEventListItems.SelectedItem;
 
-            if (selected== null)
+            if (selected == null)
             {
                 throw new WanderingTurtleException(this, "Please select an event.");
             }
@@ -159,9 +158,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/11
-        /// 
+        ///
         /// Updates the total cost with discount
         /// </summary>
         /// <param name="myItemObject"></param>
@@ -175,9 +174,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/11
-        /// 
+        ///
         /// Updates the total cost with discount
         /// </summary>
         /// <param name="sender"></param>
@@ -189,9 +188,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/09
-        /// 
+        ///
         /// Adds the event description to the UI when the listView Item changes
         /// Changes up/down quantity value if booking is full
         /// </summary>
@@ -204,15 +203,14 @@ namespace com.WanderingTurtle.FormPresentation
             txtEventDescription.Text = myItemObject.EventDescription;
             udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
 
-
             udAddBookingQuantity.Value = myItemObject.QuantityOffered == 0 ? 0 : 1;
             refreshCostsToDisplay(myItemObject);
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Validates user input for quantity and discount %
         /// </summary>
         /// <returns>True or false if valid</returns>

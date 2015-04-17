@@ -1,9 +1,9 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -11,33 +11,34 @@ namespace com.WanderingTurtle.BusinessLogic
     /// Manages CRUD Operations for data pertaining to Suppliers
     /// </summary>
     public enum SupplierResult
-        {
-            //item could not be found
-            NotFound = 0,
+    {
+        //item could not be found
+        NotFound = 0,
 
-            //new supplier could not be added
-            NotAdded,
+        //new supplier could not be added
+        NotAdded,
 
-            NotChanged,
+        NotChanged,
 
-            //worked
-            Success,
+        //worked
+        Success,
 
-            //Can change record
-            OkToEdit,
+        //Can change record
+        OkToEdit,
 
-            //concurrency error
-            ChangedByOtherUser,
+        //concurrency error
+        ChangedByOtherUser,
 
-            DatabaseError,
+        DatabaseError,
+    }
 
-        }
     public class SupplierManager
     {
         public SupplierManager()
         {
             //default constructor
         }
+
         /// <summary>
         /// Gets a single Supplier  from the Data Access layer
         /// Throws any exceptions caught by the DAL
@@ -86,8 +87,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw new Exception("Supplier not found.");
             }
-
         }
+
         /// <summary>
         /// Gets a list of Suppliers  from the Data Access layer
         /// Throws any exceptions caught by the DAL
@@ -133,8 +134,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw new Exception("No suppliers in database.");
             }
-
         }
+
         /// <summary>
         /// Adds a single Supplier to the database
         /// Throws any exceptions caught by the DAL
@@ -172,10 +173,10 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
                 //return SupplierResult.DatabaseError;
             }
-
         }
+
         /// <summary>
-        /// Updates a Supplier 
+        /// Updates a Supplier
         /// Throws any exceptions caught by the DAL
         /// Edited by Matt Lapka 2015/03/27
         /// </summary>
@@ -209,11 +210,10 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-
                 return SupplierResult.DatabaseError;
             }
-
         }
+
         public SupplierResult ArchiveSupplier(Supplier supplierToDelete)
         {
             try
@@ -242,9 +242,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return SupplierResult.DatabaseError;
             }
-
         }
-        
+
         /// <summary>
         /// Matt Lapka
         /// 2015/02/08
@@ -395,7 +394,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Pat Banks
         /// Created:  2015/04/11
-        /// 
+        ///
         /// Returns the result of approving a supplier application and adds records to the Supplier Table and SupplierLogin tables
         /// </summary>
         /// <param name="oldSupplierApp">the original application</param>
@@ -407,7 +406,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                //Approving       
+                //Approving
                 //update db with approval, add supplier record, add supplier login
                 int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp, userName, supplyCost);
 
@@ -436,7 +435,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Tony Noel
         /// Created on 2015/04/2015
-        /// 
+        ///
         /// Used for testing only
         /// </summary>
         /// <param name="testSupplier"></param>
@@ -452,6 +451,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
         }
+
         /// <summary>
         /// Justin Pennington
         /// Created on 2015/04/14
@@ -462,7 +462,6 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             if (!inSearch.Equals("") && !inSearch.Equals(null))
             {
-
                 List<Supplier> SearchList = RetrieveSupplierList();
                 List<Supplier> myTempList = new List<Supplier>();
                 myTempList.AddRange(
@@ -471,7 +470,7 @@ namespace com.WanderingTurtle.BusinessLogic
                   select inSupplier);
                 return myTempList;
 
-                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
             else
             {

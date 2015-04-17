@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-using com.WanderingTurtle.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
@@ -11,8 +11,8 @@ namespace com.WanderingTurtle.Tests
     {
         private HotelManagerAccessorTest tester = new HotelManagerAccessorTest();
         private InvoiceAccessor access = new InvoiceAccessor();
-        HotelGuestAccessor access2 = new HotelGuestAccessor();
-        List<InvoiceDetails> invoiceList;
+        private HotelGuestAccessor access2 = new HotelGuestAccessor();
+        private List<InvoiceDetails> invoiceList;
 
         [TestInitialize]
         public void initialize()
@@ -26,7 +26,7 @@ namespace com.WanderingTurtle.Tests
         {
             List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
             int id = (int)guest[guest.Count - 1].HotelGuestID;
-            
+
             Invoice invoice = InvoiceAccessor.GetInvoiceByGuest(id);
 
             Assert.AreEqual(id, invoice.HotelGuestID);

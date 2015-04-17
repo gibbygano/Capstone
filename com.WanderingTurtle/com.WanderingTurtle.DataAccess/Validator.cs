@@ -68,8 +68,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
+
         //Validates that the given string is numeric (numbers) & meets minimum & max length requirements
         //Does NOT check if it is an int, double, etc
         //Will return false on negatives and decimals - use other provided methods for those cases
@@ -85,7 +85,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
 
         //Validates that the given string is alphanumeric (only numbers & letters)
@@ -107,8 +106,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
+
         //Validates that the given string is alphanumeric (only numbers & letters) & meets minimum & max length requirements
         //Created by Matt Lapka 2/1/15
         public static bool ValidateAlphaNumeric(string inputToValidate, int minNumOfChars, int maxNumOfChars)
@@ -121,10 +120,9 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
 
-        //Validates that the given string is an int 
+        //Validates that the given string is an int
         //Created by Matt Lapka 2/1/15
         public static bool ValidateInt(string inputToValidate)
         {
@@ -152,8 +150,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
+
         //Validates that the given string is an int & meets minimum & max value requirements
         //Created by Matt Lapka 2/1/15
         public static bool ValidateInt(string inputToValidate, int min, int max)
@@ -174,10 +172,9 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
 
-        //Validates that the given string is a double 
+        //Validates that the given string is a double
         //Created by Matt Lapka 2/1/15
         public static bool ValidateDouble(string inputToValidate)
         {
@@ -205,8 +202,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
+
         //Validates that the given string is a double & meets minimum & max value requirements
         //Created by Matt Lapka 2/1/15
         public static bool ValidateDouble(string inputToValidate, double min, double max)
@@ -227,7 +224,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
 
         //Validates that the given string is a decimal
@@ -258,8 +254,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
+
         //Validates that the given string is a decimal & meets minimum & max value requirements
         //Created by Matt Lapka 2/1/15
         public static bool ValidateDecimal(string inputToValidate, decimal min, decimal max)
@@ -280,7 +276,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
 
         //Validates that the given string is a valid DateTime
@@ -311,8 +306,8 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
+
         //Validates that the given string is a valid DateTime & meets minimum & max value requirements
         //Created by Matt Lapka 2/1/15
         public static bool ValidateDateTime(string inputToValidate, DateTime min, DateTime max)
@@ -333,7 +328,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 return false;
             }
-
         }
 
         //Validates the given password meets password complexity requirements
@@ -424,7 +418,5 @@ namespace com.WanderingTurtle.DataAccess
                 return false;
             }
         }
-
-
     }
 }

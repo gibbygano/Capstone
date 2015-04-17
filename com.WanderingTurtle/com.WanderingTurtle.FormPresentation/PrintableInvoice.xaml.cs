@@ -16,11 +16,19 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for PrintableInvoice.xaml
     /// </summary>
-    public partial class PrintableInvoice : Window
+    public partial class PrintableInvoice
     {
-        public PrintableInvoice()
+        private int _guestID;
+        public PrintableInvoice(int guestID)
         {
             InitializeComponent();
+            _guestID = guestID;
+            BindData();
+        }
+
+        private void BindData()
+        {
+            report.BuildInvoice(_guestID);
         }
     }
 }

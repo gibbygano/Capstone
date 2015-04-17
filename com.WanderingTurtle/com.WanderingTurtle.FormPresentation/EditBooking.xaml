@@ -24,7 +24,7 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Edit Booking" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Height="Auto" Margin="0,4,0,0"/>
+        <Label Grid.Row="0" Grid.Column="0" Content="Edit Booking" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Height="Auto" Margin="0,4,0,0" />
 
         <Label Grid.Row="1" Grid.Column="1" x:Name="lblEditBookingGuestName"  HorizontalContentAlignment="Left" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
         <Label Grid.Row="1"  Grid.Column="0" Content="Guest Name:"  x:Name="lblEditBookingGuestLbl" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
@@ -37,7 +37,7 @@
 
         <Label Grid.Row="4"  Grid.Column="0" Content="Quantity:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3" />
         <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
-        
+
         <Label Grid.Row="4"  Grid.Column="2" Content="Ticket Price:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
         <Label Grid.Row="5" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" HorizontalContentAlignment="Right" />
         <xctk:DecimalUpDown Grid.Row="5" Grid.Column="1" FormatString="P0"  Value="3"  IsEnabled="{Binding ElementName=lvEventListItems}" Minimum="0" Maximum =".20" Name="udDiscount" Increment=".01" />

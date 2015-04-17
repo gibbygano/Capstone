@@ -3,41 +3,19 @@
     /// <summary>
     /// Miguel Santana
     /// Created: 2015/02/18
-    /// 
+    ///
     /// Create a HotelGuest object.
     /// </summary>
     /// <remarks>
     /// Rose Steffensmeier
     /// Updated: 2015/02/27
-    /// 
+    ///
     /// Pat Banks
     /// Updated 2015/04/14
     /// Added Guest Pin
     /// </remarks>
-    public class HotelGuest 
+    public class HotelGuest
     {
-        public int? HotelGuestID { get; private set; }
-
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
-
-        public string Address1 { get; private set; }
-
-        public string Address2 { get; private set; }
-
-        public CityState CityState { get; private set; }
-
-        public string PhoneNumber { get; private set; }
-
-        public string EmailAddress { get; private set; }
-
-        public bool Active { get; private set; }
-
-        public string Room { get; private set; }
-
-        public string GuestPIN { get; private set; }
-
         /// <summary>
         /// Rose Steffensmeier
         /// Created: 2015/02/27
@@ -87,6 +65,30 @@
             SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, GuestPIN, Active);
         }
 
+        public bool Active { get; private set; }
+
+        public string Address1 { get; private set; }
+
+        public string Address2 { get; private set; }
+
+        public CityState CityState { get; private set; }
+
+        public string EmailAddress { get; private set; }
+
+        public string FirstName { get; private set; }
+
+        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+
+        public string GuestPIN { get; private set; }
+
+        public int? HotelGuestID { get; private set; }
+
+        public string LastName { get; private set; }
+
+        public string PhoneNumber { get; private set; }
+
+        public string Room { get; private set; }
+
         /// <summary>
         /// Rose Steffensmeier
         /// Created: 2015/02/27
@@ -117,12 +119,9 @@
             this.CityState = CityState;
             this.PhoneNumber = PhoneNumber;
             this.EmailAddress = EmailAddress;
-            this.Room = Room;
+            this.Room = Room.ToString();
             this.Active = Active;
-            this.GuestPIN = GuestPIN;
+            this.GuestPIN = GuestPIN.ToString();
         }
-
-
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }
 }

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -26,16 +26,13 @@ namespace com.WanderingTurtle.BusinessLogic
         ChangedByOtherUser,
 
         DatabaseError,
-
-
     }
+
     public class ProductManager
     {
         public ProductManager()
         {
-
         }
-
 
         /// <summary>
         /// Matt Lapka
@@ -53,10 +50,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -73,10 +68,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -94,10 +87,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -123,7 +114,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return listResult.DatabaseError;
             }
-
         }
 
         /// <summary>
@@ -142,10 +132,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-
         }
 
         /// <summary>
@@ -163,10 +151,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw;
             }
-
         }
 
         /// <summary>
@@ -223,11 +209,10 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
                 return listResult.NotAdded;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return listResult.DatabaseError;
             }
-
         }
 
         /// <summary>
@@ -277,14 +262,12 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return listResult.DatabaseError;
             }
-
         }
 
         public List<ItemListing> SearchItemLists(string inSearch)
         {
             if (!inSearch.Equals("") && !inSearch.Equals(null))
             {
-
                 //Lambda Version
                 //return myTempList.AddRange(DataCache._currentEventList.Where(s => s.EventItemName.ToUpper().Contains(inSearch.ToUpper())).Select(s => s));
                 //LINQ version
@@ -295,13 +278,14 @@ namespace com.WanderingTurtle.BusinessLogic
                   select inItem);
                 return myTempList;
 
-                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
             else
             {
                 return DataCache._currentItemListingList;
             }
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/04/16

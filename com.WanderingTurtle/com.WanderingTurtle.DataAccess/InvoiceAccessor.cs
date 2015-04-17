@@ -1,19 +1,19 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
     public class InvoiceAccessor
     {
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/25
-        /// 
-        /// Creates a connection with database and 
-        /// calls the stored procedure spSelectInvoiceBookings 
+        ///
+        /// Creates a connection with database and
+        /// calls the stored procedure spSelectInvoiceBookings
         /// that querys the database
         /// for all bookings of a specified hotel guest
         /// </summary>
@@ -69,17 +69,17 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/03
-        /// 
-        /// Creates a connection with database and 
+        ///
+        /// Creates a connection with database and
         /// calls the stored procedure spSelectAllInvoices
         /// that querys the database for a list of all active invoices
         /// </summary>
         /// <remarks>
-        /// Pat Banks 
+        /// Pat Banks
         /// Updated: 2015/03/19
-        /// 
+        ///
         /// Made a generic accessor by moving if active test to InvoiceManager
         /// </remarks>
         /// <returns>List of InvoiceDetails</returns>
@@ -135,11 +135,11 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/25
-        /// 
-        /// Creates a connection with database and 
-        /// calls the stored procedure spSelectInvoiceByGuest 
+        ///
+        /// Creates a connection with database and
+        /// calls the stored procedure spSelectInvoiceByGuest
         /// that querys the database for a guest's invoice information
         /// </summary>
         /// <remarks></remarks>
@@ -193,12 +193,11 @@ namespace com.WanderingTurtle.DataAccess
             return guestInvoice;
         }
 
-
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/03
-        /// 
-        /// Creates a connection with database and 
+        ///
+        /// Creates a connection with database and
         /// calls the stored procedure spArchiveInvoice
         /// that updates database with information to archive an invoice
         /// </summary>
@@ -242,6 +241,5 @@ namespace com.WanderingTurtle.DataAccess
 
             return numRows;
         }
-
     }//end class
 } //end namespace
