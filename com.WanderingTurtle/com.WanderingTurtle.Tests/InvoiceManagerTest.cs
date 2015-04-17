@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
@@ -12,7 +11,7 @@ namespace com.WanderingTurtle.Tests
     {
         private HotelManagerAccessorTest tester = new HotelManagerAccessorTest();
         private InvoiceManager access = new InvoiceManager();
-        List<InvoiceDetails> invoiceList;
+        private List<InvoiceDetails> invoiceList;
 
         [TestInitialize]
         public void initialize()
@@ -92,7 +91,7 @@ namespace com.WanderingTurtle.Tests
             List<HotelGuest> listGuest = HotelGuestAccessor.HotelGuestGet();
             int id = (int)listGuest[1].HotelGuestID;
             List<BookingDetails> guestBookings = access.RetrieveGuestBookingDetailsList(id);
-            
+
             decimal amount = access.CalculateTotalDue(guestBookings);
 
             Assert.AreEqual((decimal)90, amount);

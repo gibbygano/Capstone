@@ -1,10 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-using com.WanderingTurtle.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.Tests
@@ -12,31 +9,30 @@ namespace com.WanderingTurtle.Tests
     /// <summary>
     /// Bryan Hurst
     /// Created 4/2/2015
-    /// 
+    ///
     /// Unit tests for the EventAccessor class in Data Access
     /// </summary>
     [TestClass]
     public class EventAccessorTest
     {
-        int EventItemID = 0;
-        string EventItemName = "asd";
-        bool Transportation = false;
-        int EventTypeID = 10;
-        bool OnSite = true;
-        int ProductID = 100;
-        string Description = "dsa";
-        bool Active = true;
-        Event testEvent;
+        private int EventItemID = 0;
+        private string EventItemName = "asd";
+        private bool Transportation = false;
+        private int EventTypeID = 10;
+        private bool OnSite = true;
+        private int ProductID = 100;
+        private string Description = "dsa";
+        private bool Active = true;
+        private Event testEvent;
 
-        int newEventItemID = 0;
-        string newEventItemName = "dsa";
-        bool newTransportation = true;
-        int newEventTypeID = 22;
-        bool newOnSite = false;
-        int newProductID = 333;
-        string newDescription = "asd";
-        bool newActive = true;
-
+        private int newEventItemID = 0;
+        private string newEventItemName = "dsa";
+        private bool newTransportation = true;
+        private int newEventTypeID = 22;
+        private bool newOnSite = false;
+        private int newProductID = 333;
+        private string newDescription = "asd";
+        private bool newActive = true;
 
         [TestMethod]
         public void AddEvent_ValidEvent()
@@ -57,7 +53,7 @@ namespace com.WanderingTurtle.Tests
         public void AddEvent_InvalidEvent()
         {
             int expected = 1;
-          
+
             Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
 
             int actual = EventAccessor.AddEvent(testEvent);
@@ -90,7 +86,7 @@ namespace com.WanderingTurtle.Tests
         }
 
         [TestMethod]
-        [ExpectedException (typeof (ApplicationException))]
+        [ExpectedException(typeof(ApplicationException))]
         public void UpdateEvent_InvalidEvent()
         {
             int oldEventItemID = 9999;

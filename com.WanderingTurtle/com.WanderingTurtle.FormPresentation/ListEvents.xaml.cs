@@ -1,12 +1,12 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation

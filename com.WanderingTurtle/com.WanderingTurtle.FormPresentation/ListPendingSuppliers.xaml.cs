@@ -1,11 +1,11 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            ((TabItem) this.Parent).Content = new ListSuppliers();
+            ((TabItem)this.Parent).Content = new ListSuppliers();
         }
 
         private void loadPendingSuppliers()

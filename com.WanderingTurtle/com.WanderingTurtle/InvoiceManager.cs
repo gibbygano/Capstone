@@ -1,58 +1,58 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-	public class InvoiceManager
-	{
-        BookingManager _bookingManager = new BookingManager();
-        HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+    public class InvoiceManager
+    {
+        private BookingManager _bookingManager = new BookingManager();
+        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
-		/// <summary>
-		/// Pat Banks 
+        /// <summary>
+        /// Pat Banks
         /// Created: 2015/02/25
-        /// 
-		/// Calls the InvoiceAccessor method that
-		/// retrieves a list of bookings for a hotel guest
-		/// </summary>
-		/// <param name="hotelGuestId">Hotel guest ID</param>
-		/// <returns>List of bookings for a hotel guest</returns>
-		public List<BookingDetails> RetrieveGuestBookingDetailsList(int hotelGuestId)
+        ///
+        /// Calls the InvoiceAccessor method that
+        /// retrieves a list of bookings for a hotel guest
+        /// </summary>
+        /// <param name="hotelGuestId">Hotel guest ID</param>
+        /// <returns>List of bookings for a hotel guest</returns>
+        public List<BookingDetails> RetrieveGuestBookingDetailsList(int hotelGuestId)
         {
             try
             {
-              return InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
+                return InvoiceAccessor.GetInvoiceBookingsByGuest(hotelGuestId);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-		}
+        }
 
-		/// <summary>
-        /// Pat Banks 
+        /// <summary>
+        /// Pat Banks
         /// Created: 2015/03/03
-        /// 
-		/// Calls the InvoiceAccessor method that
-		/// retrieves a list of invoices that are active
-		/// </summary>
-		/// <returns>List of all active guest invoices</returns>
-		public List<InvoiceDetails> RetrieveActiveInvoiceDetails()
+        ///
+        /// Calls the InvoiceAccessor method that
+        /// retrieves a list of invoices that are active
+        /// </summary>
+        /// <returns>List of all active guest invoices</returns>
+        public List<InvoiceDetails> RetrieveActiveInvoiceDetails()
         {
             try
             {
                 List<InvoiceDetails> activeInvoices = new List<InvoiceDetails>();
                 List<InvoiceDetails> allInvoices = InvoiceAccessor.GetAllInvoicesList();
-  
+
                 foreach (InvoiceDetails i in allInvoices)
                 {
                     if (i.Active == true)
                     {
-                        activeInvoices.Add(i);              
+                        activeInvoices.Add(i);
                     }
                 }
                 return activeInvoices;
@@ -61,22 +61,22 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
-		}
+        }
 
-		/// <summary>
-		/// Pat Banks 
+        /// <summary>
+        /// Pat Banks
         /// Created: 2015/02/2015
-        /// 
-		/// Calls the InvoiceAccessor method that
-		/// retrieves Invoice information for a selected hotel guest
-		/// </summary>
+        ///
+        /// Calls the InvoiceAccessor method that
+        /// retrieves Invoice information for a selected hotel guest
+        /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/02/27
         /// </remarks>
-		/// <param name="hotelGuestId">Hotel Guest ID</param>
-		/// <returns>Invoice information for a hotel guest</returns>
-		public InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
+        /// <param name="hotelGuestId">Hotel Guest ID</param>
+        /// <returns>Invoice information for a hotel guest</returns>
+        public InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
         {
             try
             {
@@ -86,12 +86,12 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-		}
+        }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/03
-        /// 
+        ///
         /// Calculates the amount due for a customer's bookings
         /// </summary>
         /// <param name="guestBookings">List of bookings for a guest</param>
@@ -102,15 +102,15 @@ namespace com.WanderingTurtle.BusinessLogic
             return guestBookings.Sum(b => b.TotalCharge);
         }
 
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/09
         ///
         /// Checks if a booking is in the future and has tickets booked
         /// If fails, then guest cannot checkout
         /// <remarks>
-        /// Pat Banks 
+        /// Pat Banks
         /// Updated: 2015/03/19
-        /// 
+        ///
         /// Moved logic to Business Logic Layer
         /// </remarks>
         public ResultsArchive CheckToArchiveInvoice(InvoiceDetails invoiceToArchive, List<BookingDetails> bookingsToArchive)
@@ -125,18 +125,18 @@ namespace com.WanderingTurtle.BusinessLogic
             return ResultsArchive.OkToArchive;
         }
 
-		/// <summary>
-		/// Pat Banks 
+        /// <summary>
+        /// Pat Banks
         /// Created: 2015/03/03
-        /// 
-		/// Calls the InvoiceAccessor method that
-		/// archives invoice information for a selected hotel guest
-		/// </summary>
-		/// <param name="originalInvoice">invoice that was fetched from database - used to check for concurrency errors</param>
-		/// <param name="updatedInvoice">information that needs to be updated in the database</param>
-		/// <returns>boolean true if result was successful</returns>
-		public ResultsArchive ArchiveCurrentGuestInvoice(Invoice invoiceToTry)
-		{
+        ///
+        /// Calls the InvoiceAccessor method that
+        /// archives invoice information for a selected hotel guest
+        /// </summary>
+        /// <param name="originalInvoice">invoice that was fetched from database - used to check for concurrency errors</param>
+        /// <param name="updatedInvoice">information that needs to be updated in the database</param>
+        /// <returns>boolean true if result was successful</returns>
+        public ResultsArchive ArchiveCurrentGuestInvoice(Invoice invoiceToTry)
+        {
             try
             {
                 ////get latest bookings from the guest
@@ -159,14 +159,14 @@ namespace com.WanderingTurtle.BusinessLogic
                 HotelGuest guestToArchive = _hotelGuestManager.GetHotelGuest(invoiceToTry.HotelGuestID);
                 bool guestArchive = _hotelGuestManager.ArchiveHotelGuest(guestToArchive, !guestToArchive.Active);
 
-                if(guestArchive == false)
+                if (guestArchive == false)
                 {
                     return ResultsArchive.ChangedByOtherUser;
-                } 
+                }
                 else
                 {
                     Invoice originalInvoice = RetrieveInvoiceByGuest(invoiceToTry.HotelGuestID);
-                    
+
                     //update invoice record with dateClosed and change active status
                     invoiceToTry.DateClosed = DateTime.Now;
                     invoiceToTry.Active = false;
@@ -179,10 +179,10 @@ namespace com.WanderingTurtle.BusinessLogic
                     }
                     else
                     {
-                        return ResultsArchive.Success; 
+                        return ResultsArchive.Success;
                     }
                 }
-             }
+            }
             catch (ApplicationException ex)
             {
                 throw ex;
@@ -195,14 +195,13 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-		}
-
+        }
 
         /// <summary>
         /// Created on 2015/04/10
         /// Justin Pennington
-        /// 
-        /// Searches the 
+        ///
+        /// Searches the
         /// </summary>
         /// <param name="inSearch"></param>
         /// <returns></returns>
@@ -222,13 +221,12 @@ namespace com.WanderingTurtle.BusinessLogic
                   select inGuest);
                 return myTempList;
 
-                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
             else
             {
                 return RetrieveActiveInvoiceDetails();
             }
-
         }
-	}
+    }
 }

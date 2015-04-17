@@ -1,13 +1,13 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.FormPresentation
         private EmployeeManager _employeeManager = new EmployeeManager();
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/02
         ///
         /// Constructs the add employee form and fills the combo box.
@@ -68,9 +68,9 @@ namespace com.WanderingTurtle.FormPresentation
         private List<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
 
         /// <summary>
-        /// Miguel Santana 
+        /// Miguel Santana
         /// Created: 2015/03/05
-        /// 
+        ///
         /// Closes the window
         /// </summary>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -79,9 +79,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Miguel Santana 
+        /// Miguel Santana
         /// Created: 2015/03/05
-        /// 
+        ///
         /// Resets the fields
         /// </summary>
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -90,15 +90,15 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/15
-        /// 
+        ///
         /// Calls method to open AddEditEmployee UI
         /// </summary>
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/22
-        /// 
+        ///
         /// Added method to update employee
         /// </remarks>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -107,7 +107,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/15
         ///
         /// Method takes values for a new employee from the form and passes values
@@ -122,7 +122,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated: 2015/02/22
         ///
         /// Cast Level to RoleData
-        /// 
+        ///
         /// Updated 2015/04/13 by Tony Noel
         ///Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
@@ -133,15 +133,15 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Debug.Assert(ChkActiveEmployee.IsChecked != null, "ChkActiveEmployee.IsChecked != null");
-               ResultsEdit result = _employeeManager.AddNewEmployee(
-                    new Employee(
-                        TxtFirstName.Text,
-                        TxtLastName.Text,
-                        TxtPassword.Password,
-                        (int)CboUserLevel.SelectedItem,
-                        ChkActiveEmployee.IsChecked.Value
-                        )
-                    );
+                ResultsEdit result = _employeeManager.AddNewEmployee(
+                     new Employee(
+                         TxtFirstName.Text,
+                         TxtLastName.Text,
+                         TxtPassword.Password,
+                         (int)CboUserLevel.SelectedItem,
+                         ChkActiveEmployee.IsChecked.Value
+                         )
+                     );
 
                 if (result == ResultsEdit.Success)
                 {
@@ -161,7 +161,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created: 2015/02/20
         ///
         /// Validates and Updates Employee user
-        /// 
+        ///
         /// Updated 2015/04/13 by Tony Noel
         ///Updated to comply with the ResultsEdit class of error codes.
         /// </summary>
@@ -200,7 +200,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/22
-        /// 
+        ///
         /// Reloads the combobox with values from database
         /// </summary>
         private void ReloadComboBox()
@@ -210,9 +210,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Miguel Santana 
+        /// Miguel Santana
         /// Created: 2015/03/05
-        /// 
+        ///
         /// Resets the values of the fields
         /// </summary>
         private void SetFields()
@@ -240,7 +240,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/13
-        /// 
+        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="message"></param>
@@ -268,7 +268,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/02/20
         ///
         /// Validates the text fields in the form
@@ -276,7 +276,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/20
-        /// 
+        ///
         /// Extracted method
         /// </remarks>
         private bool Validate()

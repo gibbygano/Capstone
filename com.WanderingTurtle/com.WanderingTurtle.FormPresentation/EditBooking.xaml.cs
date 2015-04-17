@@ -1,28 +1,28 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using System;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Ryan Blake
     /// Created: 2015/03/06
-    /// 
+    ///
     /// Interaction logic for EditBooking.xaml
     /// </summary>
     public partial class EditBooking
     {
         public InvoiceDetails inInvoice;
         public BookingDetails originalBookingRecord;
-        ItemListingDetails eventListingToView = new ItemListingDetails();
-        int eID;
-        BookingManager _bookingManager = new BookingManager();
+        private ItemListingDetails eventListingToView = new ItemListingDetails();
+        private int eID;
+        private BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
-        /// Ryan Blake 
+        /// Ryan Blake
         /// Created: 2015/03/06
         /// Allows user to edit a booking
         /// </summary>
@@ -42,11 +42,10 @@ namespace com.WanderingTurtle.FormPresentation
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
-
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015-03-19
-        /// 
+        ///
         /// Populates text fields with object data
         /// </summary>
         private void populateTextFields()
@@ -67,29 +66,29 @@ namespace com.WanderingTurtle.FormPresentation
 
             lblAvailSeats.Content = eventListingToView.QuantityOffered;
 
-            //calculates the maximum quantity for the u/d 
+            //calculates the maximum quantity for the u/d
             udAddBookingQuantity.Maximum = originalBookingRecord.Quantity + eventListingToView.QuantityOffered;
         }
 
         /// <summary>
-        /// Ryan Blake 
+        /// Ryan Blake
         /// Created: 2015/03/06
         ///
         /// </summary>
         /// <remarks>
-        /// Tony Noel 
-        /// Updated: 2015/03/10 
-        /// 
+        /// Tony Noel
+        /// Updated: 2015/03/10
+        ///
         /// To check if the quantity is going up and see if the booking is already full
         /// and if the booking has occured already, it cannot be changed.
-        /// Pat Banks 
-        /// Updated: 2015/03/11 
-        /// 
+        /// Pat Banks
+        /// Updated: 2015/03/11
+        ///
         /// Updated for use of up/down controls for quantity and discount
-        /// Pat Banks 
-        /// Updated: 2015/03/19 
-        /// 
-        /// Moved decision logic to booking manager 
+        /// Pat Banks
+        /// Updated: 2015/03/19
+        ///
+        /// Moved decision logic to booking manager
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -111,9 +110,10 @@ namespace com.WanderingTurtle.FormPresentation
                         await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
                         this.Close();
                         break;
-                    case(ResultsEdit.ListingFull):
+
+                    case (ResultsEdit.ListingFull):
                         throw new ApplicationException("This event is already full. You cannot add more guests to it.");
-                    case(ResultsEdit.ChangedByOtherUser):
+                    case (ResultsEdit.ChangedByOtherUser):
                         throw new ApplicationException("Changed by another user");
                 }
             }
@@ -123,11 +123,10 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Gathers form data to submit to database for changes
         /// </summary>
         /// <returns>booking of the new information</returns>
@@ -143,14 +142,14 @@ namespace com.WanderingTurtle.FormPresentation
             decimal extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, qty);
             decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
-            Booking editedBooking = new Booking(originalBookingRecord.BookingID, originalBookingRecord.GuestID, eID, originalBookingRecord.ItemListID, qty, DateTime.Now, discount,originalBookingRecord.Active, originalBookingRecord.TicketPrice, extendedPrice, totalPrice);
+            Booking editedBooking = new Booking(originalBookingRecord.BookingID, originalBookingRecord.GuestID, eID, originalBookingRecord.ItemListID, qty, DateTime.Now, discount, originalBookingRecord.Active, originalBookingRecord.TicketPrice, extendedPrice, totalPrice);
             return editedBooking;
         }
 
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/23
-        /// 
+        ///
         /// Handles Click event for cancel button
         /// </summary>
         /// <param name="sender"></param>
@@ -161,9 +160,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Calculates the adjusted ticket price based on new data
         /// </summary>
         /// <param name="sender"></param>
@@ -172,10 +171,9 @@ namespace com.WanderingTurtle.FormPresentation
         {
             decimal extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, (int)(udAddBookingQuantity.Value));
             lblTotalDue.Content = (_bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice)).ToString("c");
-           
- //***********************TBD NEED to look at this - not updating correctly
-            lblAvailSeats.Content = eventListingToView.QuantityOffered - _bookingManager.spotsReservedDifference((int)(udAddBookingQuantity.Value), eventListingToView.QuantityOffered);
 
+            //***********************TBD NEED to look at this - not updating correctly
+            lblAvailSeats.Content = eventListingToView.QuantityOffered - _bookingManager.spotsReservedDifference((int)(udAddBookingQuantity.Value), eventListingToView.QuantityOffered);
         }
     }
 }

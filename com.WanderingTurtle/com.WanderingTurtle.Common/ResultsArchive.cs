@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Enum to hold results for Archiving
-    /// Pat Banks 
+    /// Pat Banks
     /// </summary>
     /// <remarks>
     /// </remarks>

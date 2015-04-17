@@ -1,18 +1,17 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-using com.WanderingTurtle.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
 
 namespace com.WanderingTurtle.Tests
 {
     [TestClass]
     public class HotelManagerAccessorTest
     {
-        
         [TestInitialize]
         public void initialize()
         {

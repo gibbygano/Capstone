@@ -1,11 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -16,31 +14,30 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class EventManagerTest
     {
-
-        private Event toTest            = new Event();
-        private Event toTest2           = new Event();
-        private EventManager myMan      = new EventManager();
-        private EventType typeToTest    = new EventType();
+        private Event toTest = new Event();
+        private Event toTest2 = new Event();
+        private EventManager myMan = new EventManager();
+        private EventType typeToTest = new EventType();
 
         private void setup()
         {
-            toTest.EventItemID      = 999;
-            toTest.EventItemName    = "A Test Event";
-            toTest.EventTypeName    = "Boat Ride";
-            toTest.EventTypeID      = 100;
-            toTest.OnSite           = false;
-            toTest.Active           = true;
-            toTest.Description      = "This is a test descrip";
-            toTest.Transportation   = false;
+            toTest.EventItemID = 999;
+            toTest.EventItemName = "A Test Event";
+            toTest.EventTypeName = "Boat Ride";
+            toTest.EventTypeID = 100;
+            toTest.OnSite = false;
+            toTest.Active = true;
+            toTest.Description = "This is a test descrip";
+            toTest.Transportation = false;
 
-            toTest2.EventItemID     = 999;
-            toTest2.EventItemName   = "A Test Event";
-            toTest2.EventTypeName   = "Boat Ride";
-            toTest2.EventTypeID     = 100;
-            toTest2.OnSite          = false;
-            toTest2.Active          = true;
-            toTest2.Description     = "This is a test descrip";
-            toTest2.Transportation  = true;
+            toTest2.EventItemID = 999;
+            toTest2.EventItemName = "A Test Event";
+            toTest2.EventTypeName = "Boat Ride";
+            toTest2.EventTypeID = 100;
+            toTest2.OnSite = false;
+            toTest2.Active = true;
+            toTest2.Description = "This is a test descrip";
+            toTest2.Transportation = true;
         }
 
         private void toTestUpdate()
@@ -54,7 +51,6 @@ namespace com.WanderingTurtle.Tests
                 }
             }
         }
-
 
         /// <summary>
         /// Tests adding correct event
@@ -74,7 +70,6 @@ namespace com.WanderingTurtle.Tests
             Assert.IsNotNull(actual);
         }
 
-     
         [TestMethod]
         public void EventSearch_Test()
         {
@@ -92,11 +87,10 @@ namespace com.WanderingTurtle.Tests
             List<Event> myTempList = new List<Event>();
             myTempList = myMan.EventSearch(inSearch);
             Event[] myArray = myTempList.ToArray();
-            
+
             //assert
             Assert.IsNotNull(myArray[0].EventItemName);
         }
-         
 
         /// <summary>
         /// Tests Retrieving an event from the database
@@ -160,6 +154,7 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(EventManager.EventResult.Success, result, "failed");
         }
          * */
+
         /// <summary>
         /// Tests retrieving an EventTypeList
         /// Written by: Hunter Lind
@@ -169,6 +164,7 @@ namespace com.WanderingTurtle.Tests
         {
             Assert.IsNotNull(myMan.RetrieveEventTypeList(), "result is null");
         }
+
         [TestMethod]
         public void RetrieveEventType_Test()
         {

@@ -1,8 +1,8 @@
-﻿﻿using System;
-﻿using System.Collections.Generic;
-﻿using System.Data;
-﻿using System.Data.SqlClient;
-﻿using com.WanderingTurtle.Common;
+﻿﻿using com.WanderingTurtle.Common;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -11,7 +11,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/13
-        /// 
+        ///
         /// Creates a list of options, has an ItemListID, Quantity, and some event info
         /// to help populate drop downs/ lists for Add Bookings
         /// </summary>
@@ -73,7 +73,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Created by Pat Banks 2015/03/11
-        /// 
+        ///
         /// Retrieves the event listing information to to enable
         /// user to see current number of spots available for a listing
         /// </summary>
@@ -100,7 +100,6 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     while (reader.Read())
                     {
-                        
                         //Below are found on the ItemListing table (ItemListID is a foreign key on booking)
                         eventItemListing.ItemListID = reader.GetInt32(0);
                         eventItemListing.MaxNumGuests = reader.GetInt32(1);
@@ -132,11 +131,10 @@ namespace com.WanderingTurtle.DataAccess
             return eventItemListing;
         }
 
-
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        /// 
+        ///
         /// AddBooking- a method used to insert a booking into the database
         /// </summary>
         /// <remarks>
@@ -175,7 +173,6 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     throw new ApplicationException("Error adding new database entry");
                 }
-
             }
             catch (Exception)
             {
@@ -192,7 +189,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        /// 
+        ///
         /// getBooking- a method used to select a specified booking record from the database
         /// </summary>
         /// <remarks>
@@ -256,7 +253,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        /// 
+        ///
         /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
         /// Quantity, Refund, Cancel, and Active
         /// </summary>
@@ -312,12 +309,10 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-
-
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/11
-        /// 
+        ///
         /// Updates the number of attendees that will be coming to an event
         /// </summary>
         /// <param name="itemID">ID of the item listing</param>
@@ -335,7 +330,7 @@ namespace com.WanderingTurtle.DataAccess
 
             //Set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
-           
+
             cmd.Parameters.AddWithValue("@ItemListID", itemID);
 
             cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", newNumGuests);
@@ -374,10 +369,10 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@ItemListID", itemListID);
-			try
+            try
             {
-                conn.Open();			 
-				var reader = cmd.ExecuteReader();
+                conn.Open();
+                var reader = cmd.ExecuteReader();
 
                 if (reader.HasRows == true)
                 {
@@ -387,7 +382,7 @@ namespace com.WanderingTurtle.DataAccess
                         myBookingNumber.FirstName = reader.GetValue(0).ToString();
                         myBookingNumber.LastName = reader.GetValue(1).ToString();
                         myBookingNumber.Room = reader.GetValue(2).ToString();
-                        myBookingNumber.Quantity= (int)reader.GetValue(3);
+                        myBookingNumber.Quantity = (int)reader.GetValue(3);
                         bookingNumber.Add(myBookingNumber);
                     }
                 }
@@ -397,7 +392,7 @@ namespace com.WanderingTurtle.DataAccess
                     throw ax;
                 }
             }
-			catch (Exception)
+            catch (Exception)
             {
                 throw;
             }
@@ -406,8 +401,7 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
             return bookingNumber;
-		}
-			
+        }
 
         public static HotelGuest verifyGuestPin(string inPIN)
         {
@@ -419,7 +413,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@guestPIN", inPIN);
 
             HotelGuest foundGuest = null;
-
 
             try
             {
@@ -471,5 +464,4 @@ namespace com.WanderingTurtle.DataAccess
             return foundGuest;
         }
     }
-
 }

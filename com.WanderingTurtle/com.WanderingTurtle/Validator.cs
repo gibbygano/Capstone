@@ -9,7 +9,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/28
-        /// 
+        ///
         /// Custom Validator for Company names that can contain certain special characters. Follow industry standards.
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -18,10 +18,11 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9,.?@&!#'~*\s_;+'-]+$");
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/28
-        /// 
+        ///
         /// Custom Validator for Company names that can contain certain special characters. Follow industry standards.
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -37,7 +38,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 return false;
             }
         }
-       
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/01
@@ -91,7 +92,6 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/01
@@ -128,8 +128,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/01
@@ -152,7 +152,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -185,7 +184,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -207,8 +205,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/01
@@ -248,7 +246,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -278,7 +275,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -320,7 +316,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -350,7 +345,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -392,7 +386,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -422,7 +415,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -437,7 +429,6 @@ namespace com.WanderingTurtle.BusinessLogic
             DateTime date;
             return DateTime.TryParse(inputToValidate, out date);
         }
-
 
         /// <summary>
         /// Matt Lapka
@@ -465,8 +456,8 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/01
@@ -494,7 +485,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return false;
             }
-
         }
 
         //Validates the given password meets password complexity requirements
@@ -583,8 +573,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>a boolean value if the string contains only the allow characters</returns>
         public static bool ValidatePhone(string inputToValidate)
         {
-            
-            bool result =  Regex.IsMatch(inputToValidate, @"(\([2-9]\d\d\)|[2-9]\d\d) ?[-.,]? ?[2-9]\d\d ?[-.,]? ?\d{4}");
+            bool result = Regex.IsMatch(inputToValidate, @"(\([2-9]\d\d\)|[2-9]\d\d) ?[-.,]? ?[2-9]\d\d ?[-.,]? ?\d{4}");
             return result;
         }
 
@@ -616,8 +605,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 return false;
             }
         }
-
-
     }
 
     public static class StringTool
@@ -625,7 +612,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/03/07
-        /// 
+        ///
         /// Extention method to truncate a string to the specified character length
         /// and add an ellipses to indicate it had been truncated.
         /// </summary>
@@ -640,6 +627,5 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             return source;
         }
-
     }
 }

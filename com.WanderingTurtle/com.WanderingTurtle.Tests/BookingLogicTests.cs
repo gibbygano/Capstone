@@ -1,35 +1,35 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
-
 
 namespace BookingTests
 {   ///Created- Tony Noel, 2015/3/27, Updated: 2015/4/7, Updated: 2015/4/10
     /// <summary>
-    /// Booking Manager Tests- Creates a fake booking record by using a dummy ItemListing from the database 
+    /// Booking Manager Tests- Creates a fake booking record by using a dummy ItemListing from the database
     /// (ItemListing record 100). Performs actions on this booking based upon manager methods.
     /// </summary>
     [TestClass]
     public class BookingLogicTests
     {
         //
-        int BookingID;
-        int guestID = 100;
-        int empID = 100;
-        int itemID = 100;
+        private int BookingID;
 
-        int bQuantity = 2;
-        DateTime dateBooked = DateTime.Now;
-        decimal ticket = 1234m;
-        decimal extended = 40m;
-        decimal discount = .1m;
-        decimal total = 36m;
-        Booking booking = new Booking();
-        BookingDetails bookingDetails;
-        BookingManager myBook = new BookingManager();
+        private int guestID = 100;
+        private int empID = 100;
+        private int itemID = 100;
+
+        private int bQuantity = 2;
+        private DateTime dateBooked = DateTime.Now;
+        private decimal ticket = 1234m;
+        private decimal extended = 40m;
+        private decimal discount = .1m;
+        private decimal total = 36m;
+        private Booking booking = new Booking();
+        private BookingDetails bookingDetails;
+        private BookingManager myBook = new BookingManager();
 
         public void TestBookingConstructor()
         {
@@ -46,7 +46,6 @@ namespace BookingTests
             booking.TotalCharge = 36m;
         }
 
-
         [TestInitialize]
         public void BookingTestSetup()
         {//Sets up the booking record and calls for the record to be added
@@ -54,17 +53,17 @@ namespace BookingTests
             TestAddBookingResult();
         }
 
-
         [TestMethod]
         public void TestAddBookingResult()
         {
             //booking object created
-            
+
             TestBookingConstructor();
             ResultsEdit result = myBook.AddBookingResult(booking);
             ResultsEdit expected = ResultsEdit.Success;
             Assert.AreEqual(expected, result);
         }
+
         [TestMethod]
         public void TestEditBooking()
         {
@@ -81,6 +80,7 @@ namespace BookingTests
             Booking toCheck = myBook.RetrieveBooking(BookingID);
             Assert.AreEqual(expected, toCheck.Quantity);
         }
+
         [TestMethod]
         public void TestRetrieveActiveItemListings()
         {
@@ -103,6 +103,7 @@ namespace BookingTests
             int expected = 1234;
             Assert.AreEqual(expected, detail.Price);
         }
+
         [TestMethod]
         public void TestRetrieveBooking()
         {
@@ -113,13 +114,15 @@ namespace BookingTests
             int expected = 1234;
             Assert.AreEqual(expected, booking2.TicketPrice);
         }
+
         [TestMethod]
         public void TestCalcTotalCharge()
-        {   //Checks to see what the total price returned will be. 
+        {   //Checks to see what the total price returned will be.
             decimal result = myBook.calcTotalCharge(discount, extended);
             decimal expected = 36m;
             Assert.AreEqual(expected, result);
         }
+
         [TestMethod]
         public void TestAvailableQuantity()
         {
@@ -130,6 +133,7 @@ namespace BookingTests
             int expected = 5;
             Assert.AreEqual(expected, quantity);
         }
+
         [TestMethod]
         public void TestSpotsReserved()
         {
@@ -140,14 +144,16 @@ namespace BookingTests
             int expected = 2;
             Assert.AreEqual(expected, quantity);
         }
+
         [TestMethod]
         public void updateNumberofGuests()
         {
-            //Updates the number of guest in the item listing. Because of the add method, the ItemListing 
+            //Updates the number of guest in the item listing. Because of the add method, the ItemListing
             //# of guests goes up to 32. This method sets it back to 30.
             int rows = myBook.updateNumberOfGuests(booking.ItemListID, 32, 30);
             Assert.IsNotNull(rows);
         }
+
         [TestMethod]
         public void CheckToEditBooking()
         {
@@ -158,6 +164,7 @@ namespace BookingTests
             ResultsEdit result = myBook.CheckToEditBooking(bookingDetails);
             Assert.IsNotNull(result);
         }
+
         [TestMethod]
         public void TestCancelBookingResults()
         {
@@ -183,29 +190,31 @@ namespace BookingTests
             ResultsEdit expected = ResultsEdit.Success;
             Assert.AreEqual(expected, result);
         }
+
         [TestMethod]
         public void TestEditBookingResultsSuccess()
         {
             //Tests the Edit Booking Results method in the Booking Manager- which takes an int and a Booking object.
             //Grabs the ID for the dummy booking
             int id = TestCleanupAccessor.GetBooking();
-            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity 
+            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity
             //to a new amount
             Booking booking1 = myBook.RetrieveBooking(id);
             int original = booking1.Quantity;
             booking1.Quantity = 4;
             //Passes the object to the EditBookingResults method and asserts that that result will be successful
-            ResultsEdit result = myBook.EditBookingResult(original,booking1);
+            ResultsEdit result = myBook.EditBookingResult(original, booking1);
             ResultsEdit expected = ResultsEdit.Success;
             Assert.AreEqual(expected, result);
         }
+
         [TestMethod]
         public void TestEditBookingResultsQuantityZero()
         {
             //Tests the Edit Booking Results method in the Booking Manager- which takes an int and a Booking object.
             //Grabs the ID for the dummy booking
             int id = TestCleanupAccessor.GetBooking();
-            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity 
+            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity
             //to a new amount
             Booking booking1 = myBook.RetrieveBooking(id);
             int original = booking1.Quantity;
@@ -215,13 +224,14 @@ namespace BookingTests
             ResultsEdit expected = ResultsEdit.QuantityZero;
             Assert.AreEqual(expected, result);
         }
+
         [TestMethod]
         public void TestEditBookingResultsListingFull()
         {
             //Tests the Edit Booking Results method in the Booking Manager- which takes an int and a Booking object.
             //Grabs the ID for the dummy booking
             int id = TestCleanupAccessor.GetBooking();
-            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity 
+            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity
             //to a new amount
             Booking booking1 = myBook.RetrieveBooking(id);
             int original = booking1.Quantity;
@@ -231,12 +241,12 @@ namespace BookingTests
             ResultsEdit expected = ResultsEdit.ListingFull;
             Assert.AreEqual(expected, result);
         }
+
         [TestCleanup]
         public void CleanupTest()
         {
             TestCleanupAccessor.resetItemListing100();
             TestCleanupAccessor.testBook(booking);
-
         }
     }
 }
