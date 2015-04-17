@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using com.WanderingTurtle.BusinessLogic;
@@ -64,16 +65,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate() == false)
-            {
-                return;
-            }
-            else
-            {
-                EditSupplier();
-                ListSuppliers.Instance.FillList();
-                //this.Close();
-            }
+            if (!Validate()) { return; }
+
+            EditSupplier();
+            ListSuppliers.Instance.FillList();
+            //this.Close();
         }
 
         /// <summary>
@@ -87,16 +83,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (Validate() == false)
-            {
-                return;
-            }
-            else
-            {
-                AddTheSupplier();
-                ListSuppliers.Instance.FillList();
-                //this.Close();
-            }
+            if (!Validate()) { return; }
+
+            AddTheSupplier();
+            ListSuppliers.Instance.FillList();
+            //this.Close();
         }
 
         /////////////////////////////Custom Methods/////////////////////////////////////
@@ -170,17 +161,19 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (validUserName)
                 {
-                    Supplier tempSupplier = new Supplier();
+                    Supplier tempSupplier = new Supplier
+                    {
+                        CompanyName = txtCompanyName.Text.Trim(),
+                        FirstName = txtFirstName.Text.Trim(),
+                        LastName = txtLastName.Text.Trim(),
+                        Address1 = txtAddress1.Text.Trim(),
+                        Address2 = txtAddress2.Text.Trim(),
+                        PhoneNumber = txtPhoneNumber.Text,
+                        Zip = cboZip.SelectedValue.ToString(),
+                        EmailAddress = txtEmail.Text.Trim(),
+                        SupplyCost = (decimal) numSupplyCost.Value
+                    };
 
-                    tempSupplier.CompanyName = txtCompanyName.Text.Trim();
-                    tempSupplier.FirstName = txtFirstName.Text.Trim();
-                    tempSupplier.LastName = txtLastName.Text.Trim();
-                    tempSupplier.Address1 = txtAddress1.Text.Trim();
-                    tempSupplier.Address2 = txtAddress2.Text.Trim();
-                    tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                    tempSupplier.Zip = cboZip.SelectedValue.ToString();
-                    tempSupplier.EmailAddress = txtEmail.Text.Trim();
-                    tempSupplier.SupplyCost = (decimal)numSupplyCost.Value;
 
                     if (_manager.AddANewSupplier(tempSupplier, txtUserName.Text) == SupplierResult.Success)
                     {
@@ -226,12 +219,9 @@ namespace com.WanderingTurtle.FormPresentation
             txtPhoneNumber.Text = phone;
             txtUserName.Text = _supplierUserName;
 
-            for (int i = 0; i < _zips.Count; i++)
+            foreach (CityState cityState in _zips.Where(t => t.Zip == supplierUpdate.Zip))
             {
-                if (_zips[i].Zip == supplierUpdate.Zip)
-                {
-                    cboZip.SelectedValue = _zips[i].Zip;
-                }
+                cboZip.SelectedValue = cityState.Zip;
             }
             numSupplyCost.Value = (double)(supplierUpdate.SupplyCost);
             //cboZip.SelectedValue = supplierUpdate.Zip;
@@ -266,19 +256,19 @@ namespace com.WanderingTurtle.FormPresentation
                     }
                 }
 
-                Supplier tempSupplier = new Supplier();
-
-                tempSupplier.CompanyName = txtCompanyName.Text.Trim();
-                tempSupplier.FirstName = txtFirstName.Text.Trim();
-                tempSupplier.LastName = txtLastName.Text.Trim();
-                tempSupplier.Address1 = txtAddress1.Text.Trim();
-                tempSupplier.Address2 = txtAddress2.Text.Trim();
-                tempSupplier.PhoneNumber = txtPhoneNumber.Text;
-                tempSupplier.Zip = cboZip.SelectedValue.ToString();
-                tempSupplier.EmailAddress = txtEmail.Text.Trim();
-                tempSupplier.SupplyCost = (decimal)numSupplyCost.Value;
-
-                tempSupplier.SupplierID = _UpdatableSupplier.SupplierID;
+                Supplier tempSupplier = new Supplier
+                {
+                    CompanyName = txtCompanyName.Text.Trim(),
+                    FirstName = txtFirstName.Text.Trim(),
+                    LastName = txtLastName.Text.Trim(),
+                    Address1 = txtAddress1.Text.Trim(),
+                    Address2 = txtAddress2.Text.Trim(),
+                    PhoneNumber = txtPhoneNumber.Text,
+                    Zip = cboZip.SelectedValue.ToString(),
+                    EmailAddress = txtEmail.Text.Trim(),
+                    SupplyCost = (decimal) numSupplyCost.Value,
+                    SupplierID = _UpdatableSupplier.SupplierID
+                };
 
                 if (_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
                 {

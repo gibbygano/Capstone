@@ -124,14 +124,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtSearchBox.Text.Length == 0)
-            {
-                this.btnGuestSearch.Content = "Refresh List";
-            }
-            else
-            {
-                this.btnGuestSearch.Content = "Search";
-            }
+            this.btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)

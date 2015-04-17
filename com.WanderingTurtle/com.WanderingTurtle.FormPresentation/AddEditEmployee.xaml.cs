@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Changed to enum
         /// </remarks>
-        private List<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
+        private List<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
 
         /// <summary>
         /// Miguel Santana 

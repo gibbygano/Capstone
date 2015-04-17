@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using com.WanderingTurtle.BusinessLogic;
@@ -233,13 +234,8 @@ namespace com.WanderingTurtle.FormPresentation
             this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
             this.txtRemarks.Text = CurrentSupplierApplication.Remarks;
 
-            for (int i = 0; i < _zips.Count; i++)
-            {
-                if (_zips[i].Zip == CurrentSupplierApplication.Zip)
-                {
-                    cboZip.SelectedValue = _zips[i].Zip;
-                }
-            }
+            foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == CurrentSupplierApplication.Zip))
+            { cboZip.SelectedValue = cityState.Zip; }
         }
 
         /// <summary>
@@ -269,7 +265,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <remarks>
         /// </remarks>
-        private List<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
+        private IEnumerable<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>(Enum.GetValues(typeof(ApplicationStatus)) as IEnumerable<ApplicationStatus>); } }
 
         /// <summary>
         /// Pat Banks

@@ -45,14 +45,12 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, "Please select a row to edit");
             }
-            else { UpdatePendingSupplier(selectedItem as SupplierApplication); }
-
-            
-       }
+            UpdatePendingSupplier(selectedItem as SupplierApplication);
+        }
 
         private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as TabItem).Content = new ListSuppliers();
+            ((TabItem) this.Parent).Content = new ListSuppliers();
         }
 
         private void loadPendingSuppliers()

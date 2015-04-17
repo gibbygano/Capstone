@@ -133,17 +133,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>booking of the new information</returns>
         private Booking gatherFormInformation()
         {
-            decimal extendedPrice, totalPrice, discount;
-
             //gets quantity from the up/down quantity field
             int qty = (int)(udAddBookingQuantity.Value);
 
             //get discount from form
-            discount = (decimal)(udDiscount.Value);
+            decimal discount = (decimal)(udDiscount.Value);
 
             //calculate values for the tickets
-            extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, qty);
-            totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, qty);
+            decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
             Booking editedBooking = new Booking(originalBookingRecord.BookingID, originalBookingRecord.GuestID, eID, originalBookingRecord.ItemListID, qty, DateTime.Now, discount,originalBookingRecord.Active, originalBookingRecord.TicketPrice, extendedPrice, totalPrice);
             return editedBooking;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using com.WanderingTurtle.BusinessLogic;
@@ -294,8 +295,8 @@ namespace com.WanderingTurtle.FormPresentation
                 invoiceToView = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
 
                 lblGuestNameLookup.Content = invoiceToView.GetFullName;
-                lblCheckInDate.Content = invoiceToView.DateOpened.ToString();
-                lblRoomNum.Content = invoiceToView.GuestRoomNum.ToString();
+                lblCheckInDate.Content = invoiceToView.DateOpened.ToString(CultureInfo.InvariantCulture);
+                lblRoomNum.Content = invoiceToView.GuestRoomNum;
             }
             catch (Exception ex)
             {

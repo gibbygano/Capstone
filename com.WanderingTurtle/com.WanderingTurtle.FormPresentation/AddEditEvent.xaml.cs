@@ -59,10 +59,10 @@ namespace com.WanderingTurtle.FormPresentation
         private async void AddNewEvent()
         {
             var NewEvent = new Event();
-            NewEvent.EventItemName = txtEventName.Text;
 
             try
             {
+                NewEvent.EventItemName = txtEventName.Text;
                 // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
@@ -233,12 +233,12 @@ namespace com.WanderingTurtle.FormPresentation
                     { cboxType.SelectedItem = item; }
                 }
 
-                if (OriginalEvent.Transportation == true)
+                if (OriginalEvent.Transportation)
                 { radTranspYes.IsChecked = true; }
                 else
                 { radTranspNo.IsChecked = true; }
 
-                if (OriginalEvent.OnSite == true)
+                if (OriginalEvent.OnSite)
                 { radOnSiteYes.IsChecked = true; }
                 else
                 { radOnSiteNo.IsChecked = true; }

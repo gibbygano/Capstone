@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -156,7 +157,8 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtLastName.Text = CurrentHotelGuest.LastName;
                 TxtAddress1.Text = CurrentHotelGuest.Address1;
                 TxtAddress2.Text = CurrentHotelGuest.Address2;
-                foreach (CityState cityState in CboZip.Items) { if (cityState.Zip == CurrentHotelGuest.CityState.Zip) { CboZip.SelectedItem = cityState; } }
+                foreach (CityState cityState in CboZip.Items.Cast<CityState>().Where(cityState => cityState.Zip == CurrentHotelGuest.CityState.Zip))
+                { CboZip.SelectedItem = cityState; }
                 TxtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
                 TxtRoomNumber.Text = CurrentHotelGuest.Room;
@@ -220,7 +222,6 @@ namespace com.WanderingTurtle.FormPresentation
                         Close();
                         break;
 
-                    case MessageDialogResult.Negative:
                     default:
                         return;
                 }

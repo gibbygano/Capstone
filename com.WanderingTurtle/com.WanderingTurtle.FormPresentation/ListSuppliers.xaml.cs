@@ -87,8 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                AddEditSupplier addSupplier;
-                addSupplier = new AddEditSupplier();
+                var addSupplier = new AddEditSupplier();
                 addSupplier.ShowDialog();
             }
             catch (Exception ex)
@@ -121,7 +120,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as TabItem).Content = new ListPendingSuppliers();
+            ((TabItem) this.Parent).Content = new ListPendingSuppliers();
         }
 
         /// <summary>
@@ -160,14 +159,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchSupplier_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(txtSearchSupplier.Text.Length == 0)
-            {
-                btnSearchSupplier.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearchSupplier.Content = "Search";
-            }
+            btnSearchSupplier.Content = txtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";
         }
     }
 }

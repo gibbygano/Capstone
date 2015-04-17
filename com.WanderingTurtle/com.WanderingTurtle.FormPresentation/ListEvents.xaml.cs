@@ -108,7 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                Event EventToEdit = (Event)lvEvents.SelectedItem;
+                Event EventToEdit = lvEvents.SelectedItem as Event;
                 var editWindow = new AddEditEvent(EventToEdit);
                 if (editWindow.ShowDialog() == false)
                 {
@@ -168,14 +168,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtSearchInput.Text.Length == 0)
-            {
-                btnSearch.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearch.Content = "Search";
-            }
+            btnSearch.Content = txtSearchInput.Text.Length == 0 ? "Refresh List" : "Search";
         }
     }
 }

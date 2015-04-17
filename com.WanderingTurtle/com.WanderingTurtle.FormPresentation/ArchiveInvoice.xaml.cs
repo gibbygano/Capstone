@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
@@ -54,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
             lblGuestNameLookup.Content = guestToView.GetFullName;
-            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
+            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString(CultureInfo.InvariantCulture);
             lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
             lblAddress.Content = guestToView.Address1;
             lblCityState.Content = guestToView.CityState.GetZipStateCity;

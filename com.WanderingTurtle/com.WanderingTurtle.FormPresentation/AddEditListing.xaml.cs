@@ -27,6 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             Setup();
         }
 
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public AddEditListing(ItemListing CurrentItemListing, bool ReadOnly = false)
         {
             this.CurrentItemListing = CurrentItemListing;
@@ -39,8 +40,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         private async void addItemListing()
         {
-            ItemListing _NewListing = new ItemListing();
             if (!Validator()) return;
+            ItemListing _NewListing = new ItemListing();
 
             try
             {
@@ -66,7 +67,7 @@ namespace com.WanderingTurtle.FormPresentation
                 _NewListing.Price = (decimal)(udPrice.Value);
                 _NewListing.MaxNumGuests = (int)(udSeats.Value);
             }
-                catch (Exception ex)
+            catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex);
             }
@@ -128,8 +129,7 @@ namespace com.WanderingTurtle.FormPresentation
                 foreach (Event item in eventCbox.Items)
                 {
                     if (CurrentItemListing.EventName.Equals(item.EventItemName))
-                    { eventCbox.SelectedItem = item;
-                    }
+                    { eventCbox.SelectedItem = item; }
                 }
                 foreach (Supplier item in supplierCbox.Items)
                 {
@@ -179,17 +179,19 @@ namespace com.WanderingTurtle.FormPresentation
                 DateTime formEndDate = (DateTime)(dateEnd.SelectedDate);
                 DateTime formStartTime = (DateTime)(tpStartTime.Value);
                 DateTime formEndTime = (DateTime)(tpEndTime.Value);
-                ItemListing NewListing = new ItemListing();
+                ItemListing NewListing = new ItemListing
+                {
+                    ItemListID = CurrentItemListing.ItemListID,
+                    EventID = CurrentItemListing.EventID,
+                    StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString())),
+                    EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString())),
+                    Price = (decimal) (udPrice.Value),
+                    MaxNumGuests = (int) (udSeats.Value),
+                    CurrentNumGuests = CurrentItemListing.CurrentNumGuests,
+                    SupplierID = CurrentItemListing.SupplierID
+                };
 
-                NewListing.ItemListID = CurrentItemListing.ItemListID;
-                NewListing.EventID = CurrentItemListing.EventID;
 
-                NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
-                NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
-                NewListing.Price = (decimal)(udPrice.Value);
-                NewListing.MaxNumGuests = (int)(udSeats.Value);
-                NewListing.CurrentNumGuests = CurrentItemListing.CurrentNumGuests;
-                NewListing.SupplierID = CurrentItemListing.SupplierID;
 
                 var numRows = _productManager.EditItemListing(NewListing, CurrentItemListing);
                 if (numRows == listResult.Success)

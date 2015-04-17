@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private async void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
-            ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItem;
+            ItemListing ListingToDelete = lvListing.SelectedItem as ItemListing;
             if (ListingToDelete == null)
             {
                 throw new WanderingTurtleException(this, "Please select a row to delete.");
@@ -129,14 +129,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchListing_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(txtSearchListing.Text.Length == 0)
-            {
-                btnSearchListing.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearchListing.Content = "Search";
-            }
+            btnSearchListing.Content = txtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)

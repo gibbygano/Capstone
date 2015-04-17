@@ -124,18 +124,17 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         private Booking gatherFormInformation()
         {
-            decimal extendedPrice, totalPrice, discount;
             ItemListingDetails selectedItemListing = getSelectedItem();
 
             //gets quantity from the up/down quantity field
             int qty = (int)(udAddBookingQuantity.Value);
 
             //get discount from form
-            discount = (decimal)(udDiscount.Value);
+            decimal discount = (decimal)(udDiscount.Value);
 
             //calculate values for the tickets
-            extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
-            totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
+            decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
             Booking bookingToAdd = new Booking(inInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
             return bookingToAdd;
@@ -169,12 +168,10 @@ namespace com.WanderingTurtle.FormPresentation
         private void refreshCostsToDisplay(ItemListingDetails myItemObject)
         {
             //total cost calculations
-            if (myItemObject != null)
-            {
-                decimal extendedPrice = _bookingManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
-                lblTotalWithDiscount.Content = _bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
-            }
-            return;
+            if (myItemObject == null) return;
+
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
+            lblTotalWithDiscount.Content = _bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
         }
 
         /// <summary>
@@ -208,14 +205,7 @@ namespace com.WanderingTurtle.FormPresentation
             udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
 
 
-            if (myItemObject.QuantityOffered == 0)
-            {
-                udAddBookingQuantity.Value = 0;
-            }
-            else
-            {
-                udAddBookingQuantity.Value = 1;
-            }
+            udAddBookingQuantity.Value = myItemObject.QuantityOffered == 0 ? 0 : 1;
             refreshCostsToDisplay(myItemObject);
         }
 

@@ -133,14 +133,8 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 btnSearchEmployee = new Button();
             }
-            if(txtEmployeeSearch.Text.Length == 0)
-            {
-                btnSearchEmployee.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearchEmployee.Content = "Search";
-            }
+
+            btnSearchEmployee.Content = txtEmployeeSearch.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnSearchEmployee_Click(object sender, RoutedEventArgs e)
