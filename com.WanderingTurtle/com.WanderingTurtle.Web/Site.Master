@@ -45,7 +45,7 @@
                         <ul id="menu">
                             <li><a runat="server" href="~/">Home</a></li>
                             <li><a runat="server" href="/Pages/About">About</a></li>
-                            <li><a runat="server" href="~/Contact">Contact</a></li>
+                            <li><a runat="server" href="/Pages/Contact">Contact</a></li>
                         </ul>
                     </nav>
                     <div id="user_menu">
