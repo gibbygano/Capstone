@@ -1,5 +1,8 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using Microsoft.Reporting.WinForms;
+using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation

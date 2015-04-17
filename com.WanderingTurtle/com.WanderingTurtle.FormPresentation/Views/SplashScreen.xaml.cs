@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
 
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToBoolean(Configuratioanager.AppSettings["Debug"]))
+            if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
             { Globals.UserToken = new com.WanderingTurtle.Common.Employee(100, "Debugger", null, 1); }
 
             do
@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 if (result == null) { break; }
                 try
                 {
-                    int UserId;nM
+                    int UserId;
                     if (!int.TryParse(result.Username, out UserId)) { throw new Exception(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
                     _user = UserId.ToString();
                     if (string.IsNullOrWhiteSpace(result.Password)) { throw new Exception(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
