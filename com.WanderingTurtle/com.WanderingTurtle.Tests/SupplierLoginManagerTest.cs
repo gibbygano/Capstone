@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.Tests

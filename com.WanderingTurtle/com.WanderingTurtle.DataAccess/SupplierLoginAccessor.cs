@@ -1,7 +1,7 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -150,10 +150,8 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-
         public int UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
         {
-
             var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spSupplierLoginUpdate";
             var cmd = new SqlCommand(storedProcedure, conn);
@@ -184,9 +182,9 @@ namespace com.WanderingTurtle.DataAccess
 
             return rowsAffected;
         }
+
         public bool checkUserName(string userName)
         {
-
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSupplierLoginGetUserName";
             bool validName = false;
@@ -210,7 +208,7 @@ namespace com.WanderingTurtle.DataAccess
                     validName = true;
                 }
 
-            return validName;
+                return validName;
             }
             catch (SqlException)
             {
@@ -246,7 +244,7 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     throw new ApplicationException("SupplierID not found.");
                 }
-                    
+
                 return userNameFound;
             }
             catch (SqlException)

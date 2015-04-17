@@ -1,8 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -48,11 +48,9 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
 
         /// <summary>
         /// Get a CityState record by zip

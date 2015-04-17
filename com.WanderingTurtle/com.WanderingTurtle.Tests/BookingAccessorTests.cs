@@ -1,29 +1,29 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
 {   ///Created By: Tony Noel- 2015/4/10
     /// <summary>
-    /// Booking Accessor Tests- Creates a fake booking record by using a dummy ItemListing from the database 
+    /// Booking Accessor Tests- Creates a fake booking record by using a dummy ItemListing from the database
     /// (ItemListing record 100). Performs actions on this booking based upon Accessor methods.
     /// </summary>
     [TestClass]
     public class BookingAccessorTests
     {
-        int BookingID;
-        int guestID = 100;
-        int empID = 100;
-        int itemID = 100;
-        int bQuantity = 2;
-        DateTime dateBooked = DateTime.Now;
-        decimal ticket = 1234m;
-        decimal extended = 40m;
-        decimal discount = .1m;
-        decimal total = 36m;
-        Booking booking;
+        private int BookingID;
+        private int guestID = 100;
+        private int empID = 100;
+        private int itemID = 100;
+        private int bQuantity = 2;
+        private DateTime dateBooked = DateTime.Now;
+        private decimal ticket = 1234m;
+        private decimal extended = 40m;
+        private decimal discount = .1m;
+        private decimal total = 36m;
+        private Booking booking;
 
         [TestInitialize]
         public void BookingTestSetup()
@@ -31,6 +31,7 @@ namespace com.WanderingTurtle.Tests
             TestBookingConstructor();
             TestAddBookingAccess();
         }
+
         [TestMethod]
         public void TestBookingConstructor()
         {
@@ -38,6 +39,7 @@ namespace com.WanderingTurtle.Tests
             booking = new Booking(guestID, empID, itemID, bQuantity, dateBooked, ticket, extended, discount, total);
             Assert.IsNotNull(guestID);
         }
+
         [TestMethod]
         public void TestAddBookingAccess()
         {
@@ -46,14 +48,15 @@ namespace com.WanderingTurtle.Tests
             int expected = 1;
             Assert.AreEqual(expected, result);
         }
+
         [TestMethod]
         public void TestGetEventListingAccess()
         { //A test to retrieve a single listing by ID from the ItemListing table.
             ItemListingDetails details = BookingAccessor.getEventListing(itemID);
             int expected = 1234;
             Assert.AreEqual(expected, details.Price);
-
         }
+
         [TestMethod]
         public void TestGetListItemsAccess()
         { //A test to retrieve a listing of ItemListingDetails, checks to ensure that a list of ItemListingDetails
@@ -65,8 +68,8 @@ namespace com.WanderingTurtle.Tests
                 worked = true;
             }
             Assert.IsTrue(worked);
-        
         }
+
         [TestMethod]
         public void TestGetBookingbyIDAccess()
         {   // Retrieves a booking from the database by ID, first captures the dummy booking from database
@@ -75,8 +78,8 @@ namespace com.WanderingTurtle.Tests
             Booking booking2 = BookingAccessor.getBooking(BookingID);
             decimal expected = 1234;
             Assert.AreEqual(expected, booking2.TicketPrice);
-            
         }
+
         [TestMethod]
         public void TestUpdateBookingAccess()
         {   // Updates the dummy booking in the database, first captures the dummy bookingID from database
@@ -91,14 +94,13 @@ namespace com.WanderingTurtle.Tests
             //Grabs the record to test and see if the update went through
             Booking toCheck = BookingAccessor.getBooking(BookingID);
             Assert.AreEqual(expected, toCheck.Quantity);
-
         }
+
         [TestCleanup]
         public void CleanupTest()
         {
             TestCleanupAccessor.resetItemListing100();
             TestCleanupAccessor.testBook(booking);
-
         }
     }
 }

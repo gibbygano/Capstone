@@ -3,17 +3,13 @@
 namespace com.WanderingTurtle.Common
 {
     /// <summary>
-    /// Class that creates a Lists object. Signifies the actual listing of an 
+    /// Class that creates a Lists object. Signifies the actual listing of an
     /// event by a specific supplier at a specific time as they can be "relisted"
-    /// 
+    ///
     /// Created by Matt Lapka 2/8/15
     /// </summary>
     public class Lists
     {
-        public int SupplierID { get; set; }
-        public int ItemListID { get; set; }
-        public DateTime DateListed { get; set; }
-
         public Lists()
         {
             //default constructor
@@ -25,5 +21,11 @@ namespace com.WanderingTurtle.Common
             ItemListID = itemListID;
             DateListed = dateListed;
         }
+
+        public DateTime DateListed { get; set; }
+
+        public int ItemListID { get; set; }
+
+        public int SupplierID { get; set; }
     }
 }

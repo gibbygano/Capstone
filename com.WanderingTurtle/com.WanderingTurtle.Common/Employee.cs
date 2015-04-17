@@ -14,22 +14,10 @@
     /// </remarks>
     public class Employee
     {
-        public int? EmployeeID { get; private set; }
-
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
-
-        public string Password { get; private set; }
-
-        public RoleData Level { get; private set; }
-
-        public bool Active { get; private set; }
-
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/26
-        /// 
+        ///
         /// Use for creating an employee object with an ID
         /// </summary>
         /// <param name="EmployeeID">Employee ID</param>
@@ -45,7 +33,7 @@
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/26
-        /// 
+        ///
         /// Use for creating a new employee.
         /// </summary>
         /// <remarks>Does not have an Employee ID</remarks>
@@ -58,6 +46,24 @@
         {
             SetValues(null, FirstName, LastName, Password, Level, Active);
         }
+
+        public bool Active { get; private set; }
+
+        public int? EmployeeID { get; private set; }
+
+        public string FirstName { get; private set; }
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// </summary>
+        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+
+        public string LastName { get; private set; }
+
+        public RoleData Level { get; private set; }
+
+        public string Password { get; private set; }
 
         /// <summary>
         /// Miguel Santana
@@ -78,11 +84,5 @@
             this.Level = (RoleData)Level;
             this.Active = Active;
         }
-
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/02/26
-        /// </summary>
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+
 namespace EmployeeLogicTests
 {   ///Created by: Tony Noel, 2015/3/27, Updated 2015/4/10
     /// <summary>
@@ -14,14 +13,14 @@ namespace EmployeeLogicTests
     [TestClass]
     public class EmployeeTests
     {   //Test values
-        string FirstName = "Test";
-        string LastName = "Passman";
-        string Password = "passman_1";
-        RoleData Level = (RoleData)2;
-        bool Active = true;
+        private string FirstName = "Test";
+        private string LastName = "Passman";
+        private string Password = "passman_1";
+        private RoleData Level = (RoleData)2;
+        private bool Active = true;
 
-        Employee testEmp;
-        EmployeeManager myManager;
+        private Employee testEmp;
+        private EmployeeManager myManager;
 
         [TestInitialize]
         public void EmployeeTestSetup()
@@ -31,8 +30,8 @@ namespace EmployeeLogicTests
             TestMethodAddEmployee();
         }
 
-
         #region Additional test attributes
+
         //
         // You can use the following additional attributes as you write your tests:
         //
@@ -44,7 +43,7 @@ namespace EmployeeLogicTests
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
         //
-        // Use TestInitialize to run code before running each test 
+        // Use TestInitialize to run code before running each test
         // [TestInitialize()]
         // public void MyTestInitialize() { }
         //
@@ -52,7 +51,8 @@ namespace EmployeeLogicTests
         // [TestCleanup()]
         // public void MyTestCleanup() { }
         //
-        #endregion
+
+        #endregion Additional test attributes
 
         [TestMethod]
         public void TestMethodAddEmployee()
@@ -66,6 +66,7 @@ namespace EmployeeLogicTests
             }
             Assert.IsTrue(worked);
         }
+
         [TestMethod]
         public void TestMethodFetchEmployee()
         {
@@ -85,6 +86,7 @@ namespace EmployeeLogicTests
             Employee testEmp2 = myManager.FetchEmployee((int)testEmp1.EmployeeID);
             Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
         }
+
         [TestMethod]
         public void TestMethodFetchEmpList()
         {
@@ -93,6 +95,7 @@ namespace EmployeeLogicTests
 
             Assert.IsNotNull(myList);
         }
+
         [TestMethod]
         public void TestMethodGetEmpLogin()
         {
@@ -105,6 +108,7 @@ namespace EmployeeLogicTests
             }
             Assert.IsTrue(worked);
         }
+
         [TestMethod]
         public void TestMethodEditEmployee()
         {
@@ -123,7 +127,6 @@ namespace EmployeeLogicTests
         public void TestMethodDeleteRecord()
         {
             TestCleanupAccessor.testEmp(testEmp);
-
         }
     }
 }

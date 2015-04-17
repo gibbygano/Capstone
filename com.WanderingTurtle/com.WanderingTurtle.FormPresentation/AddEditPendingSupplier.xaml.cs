@@ -1,12 +1,12 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Created:  2015/04/04
         /// Miguel Santana
-        /// 
+        ///
         /// Interaction logic for AddEditPendingSupplier.xaml
         /// </summary>
         public AddEditPendingSupplier()
@@ -52,12 +52,12 @@ namespace com.WanderingTurtle.FormPresentation
             ReloadComboBox();
             fillComboBox();
             SetFields();
-            
+
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -67,7 +67,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -77,7 +77,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -89,10 +89,10 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()))
-                {                   
+                {
                     bool validUserName = false;
 
-                    validUserName= myLoginManager.CheckSupplierUserName(txtUserName.Text);
+                    validUserName = myLoginManager.CheckSupplierUserName(txtUserName.Text);
 
                     if (validUserName)
                     {
@@ -115,7 +115,7 @@ namespace com.WanderingTurtle.FormPresentation
                     }
                     else
                     {
-                        txtUserName.Text = "";                        
+                        txtUserName.Text = "";
                         throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
                     }
                 }
@@ -143,7 +143,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (SqlException ex)
             {
-               // ShowErrorMessage("UserName already used.  Please choose another one.");
+                // ShowErrorMessage("UserName already used.  Please choose another one.");
 
                 throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.", ex);
             }
@@ -151,8 +151,8 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex);
             }
-        } 
-      
+        }
+
         private bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
@@ -213,11 +213,10 @@ namespace com.WanderingTurtle.FormPresentation
             //application id from record in memory
             UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
             UpdatedSupplierApplication.LastStatusDate = DateTime.Now;
-
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private void SetFields()
         {
@@ -270,7 +269,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/04/11
-        /// 
+        ///
         /// Reloads the combobox with values
         /// </summary>
         private void ReloadComboBox()

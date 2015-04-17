@@ -1,10 +1,10 @@
 ﻿//Justin Pennington 2/14/15
 
+using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -14,7 +14,6 @@ namespace com.WanderingTurtle.DataAccess
         //input parameter of EventType, will add the event type to the database, will return a 0 if it fails and a 1 if it was successful (false/true)
         public static int AddEventType(EventType newEventType)
         {
-
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertEventType";
             var cmd = new SqlCommand(cmdText, conn);
@@ -22,7 +21,7 @@ namespace com.WanderingTurtle.DataAccess
             //set up parameters for EventType
             cmd.Parameters.AddWithValue("@EventTypeID", newEventType.EventTypeID);
             cmd.Parameters.AddWithValue("@EventName", newEventType.EventName);
-            
+
             try
             {
                 conn.Open();
@@ -59,7 +58,7 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.Parameters.AddWithValue("@originalEventTypeID", oldEventType.EventName);
             cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventTypeID);
-            
+
             try
             {
                 conn.Open();
@@ -93,7 +92,7 @@ namespace com.WanderingTurtle.DataAccess
             //Set up parameters for EventType
             cmd.Parameters.AddWithValue("@originalEventTypeID", oldEventType.EventName);
             cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventTypeID);
-            
+
             try
             {
                 conn.Open();
@@ -124,7 +123,7 @@ namespace com.WanderingTurtle.DataAccess
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectAllEventTypes";
             var cmd = new SqlCommand(query, conn);
-            
+
             try
             {
                 conn.Open();
@@ -176,7 +175,6 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     theEventType.EventTypeID = reader.GetInt32(0);
                     theEventType.EventName = reader.GetString(1);
-                    
                 }
                 else
                 {

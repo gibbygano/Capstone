@@ -1,6 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -10,7 +10,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             //establish connection
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            //write some query text 
+            //write some query text
             string query = "DELETE FROM Employee WHERE firstName = 'Test' AND lastName = 'Passman'";
             //create a Sql Command
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -31,25 +31,23 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     var up = new ApplicationException("Your record could not be made.");
                     throw up;
-                   
                 }*/
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 conn.Close();
             }
-
         }
+
         public static void testBook(Booking testBook)
         {
             //establish connection
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            //write some query text 
+            //write some query text
             string query = "DELETE FROM Booking WHERE GuestID = 0 AND EmployeeID = 100 AND ItemListID = 100 AND TicketPrice= 1234";
             //create a Sql Command
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -70,23 +68,20 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     var up = new ApplicationException("Your record could not be made.");
                     throw up;
-                   
                 }*/
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 conn.Close();
             }
-
         }
+
         public static int GetBooking()
         {
-
             int result;
 
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
@@ -102,15 +97,12 @@ namespace com.WanderingTurtle.DataAccess
                     reader.Read();
 
                     result = reader.GetInt32(0);
-
-
                 }
                 else
                 {
                     var ex = new ApplicationException("Requested object did not match any records.");
                     throw ex;
                 }
-
             }
             catch (Exception)
             {
@@ -123,6 +115,7 @@ namespace com.WanderingTurtle.DataAccess
 
             return result;
         }
+
         public static int resetItemListing100()
         {
             int rowsAffected;
@@ -144,11 +137,12 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+
         public static void deleteTestApplication()
         {
             //establish connection
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            //write some query text 
+            //write some query text
             string query = "DELETE FROM SupplierApplication WHERE CompanyName = 'Awsome Tours'";
             //create a Sql Command
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -169,12 +163,10 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     var up = new ApplicationException("Your record could not be made.");
                     throw up;
-                   
                 }*/
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
@@ -182,6 +174,5 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
         }
-
     }
 }

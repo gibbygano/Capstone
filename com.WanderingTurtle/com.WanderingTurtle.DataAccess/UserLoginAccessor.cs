@@ -1,6 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {

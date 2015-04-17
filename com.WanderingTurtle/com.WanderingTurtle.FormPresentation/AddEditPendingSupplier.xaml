@@ -40,12 +40,12 @@
             <Label Grid.Column="0" Grid.Row="8" HorizontalContentAlignment="Right" Content="User Name" />
             <TextBox Grid.Column="1" Grid.Row="0" x:Name="txtCompanyName" TabIndex="0" />
             <TextBox Grid.Column="3" Grid.Row="0" x:Name="txtCompanyDescription" Grid.RowSpan="2" Style="{DynamicResource TextArea}" TabIndex="6" />
-            <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtFirstName" TabIndex="1"/>
-            <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtLastName" TabIndex="2"/>
-            <TextBox Grid.Column="1" Grid.Row="3" x:Name="txtAddress" TabIndex="3"/>
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="txtFirstName" TabIndex="1" />
+            <TextBox Grid.Column="1" Grid.Row="2" x:Name="txtLastName" TabIndex="2" />
+            <TextBox Grid.Column="1" Grid.Row="3" x:Name="txtAddress" TabIndex="3" />
             <TextBox Grid.Column="1" Grid.Row="8" x:Name="txtUserName" IsEnabled="False" TabIndex="11" />
             <Label Grid.Column="0" Grid.Row="4" HorizontalContentAlignment="Right" Content="Address 2:" />
-            
+
             <Separator Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="4" />
 
             <Label Grid.Column="0" Grid.Row="5" HorizontalContentAlignment="Right" Content="City, State Zip" />
@@ -54,14 +54,14 @@
             <Label Grid.Column="2" Grid.Row="4" HorizontalContentAlignment="Right" Content="Application Date" />
             <Label Grid.Row="7" HorizontalContentAlignment="Right" Content="Appl. Status" />
 
-            <ComboBox Grid.Column="1" Grid.Row="7" x:Name="cboAppStatus" ItemsSource="{Binding Path=GetStatusList}" SelectionChanged="cboAppStatus_SelectionChanged" TabIndex="10"/>         
-            
+            <ComboBox Grid.Column="1" Grid.Row="7" x:Name="cboAppStatus" ItemsSource="{Binding Path=GetStatusList}" SelectionChanged="cboAppStatus_SelectionChanged" TabIndex="10" />
+
             <Label Grid.Row="9" HorizontalContentAlignment="Right" Content="Remarks" />
 
             <Label Grid.Column="2" Grid.Row="8" HorizontalContentAlignment="Right" Content="Supply Cost:" />
             <TextBox Grid.Column="1" Grid.Row="9" x:Name="txtRemarks" Grid.ColumnSpan="3" TabIndex="13" />
 
-            <TextBox Grid.Column="1" Grid.Row="4" x:Name="txtAddress2" TabIndex="4"/>
+            <TextBox Grid.Column="1" Grid.Row="4" x:Name="txtAddress2" TabIndex="4" />
             <ComboBox x:Name="cboZip"      Grid.Row="5" Grid.Column="1" TabIndex="5" DisplayMemberPath="GetZipStateCity" />
 
             <xctk:MaskedTextBox x:Name="txtPhoneNumber" TabIndex="7" Grid.Row="2" Grid.Column="3" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />

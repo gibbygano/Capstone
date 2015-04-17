@@ -1,10 +1,10 @@
 ﻿//Justin Pennington
 
+using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -48,7 +48,6 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-
         //Justin Pennington 2/14/15
         //needs the event object that is having its name being changed and the new name
         //Returns the number of rows affected (should be 1)
@@ -62,7 +61,6 @@ namespace com.WanderingTurtle.DataAccess
             // set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
 
-
             cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
             cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
@@ -70,7 +68,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
 
             cmd.Parameters.AddWithValue("@EventItemID", oldEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);            
+            cmd.Parameters.AddWithValue("@originalEventItemName", oldEvent.EventItemName);
             cmd.Parameters.AddWithValue("@originalEventTypeID", oldEvent.EventTypeID);
             cmd.Parameters.AddWithValue("@originalEventOnsite", oldEvent.OnSite);
             cmd.Parameters.AddWithValue("@originalTransportation", oldEvent.Transportation);
@@ -94,7 +92,6 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;  // needs to be rows affected
         }
-
 
         //Justin Pennington 2/14/15
         //requires: Event object, Boolean value for active/inactive
@@ -183,7 +180,6 @@ namespace com.WanderingTurtle.DataAccess
             return EventList;
         }
 
-
         //Justin Pennington 2/14/15
         //retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
         public static Event GetEvent(String eventID)
@@ -193,7 +189,6 @@ namespace com.WanderingTurtle.DataAccess
             var conn = DatabaseConnection.GetDatabaseConnection();
             string cmdText = "spSelectEventItem";
             var cmd = new SqlCommand(cmdText, conn);
-
 
             cmd.Parameters.AddWithValue("@EventItemID", eventID);
             try
