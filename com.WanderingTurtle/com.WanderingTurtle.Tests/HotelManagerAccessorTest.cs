@@ -15,13 +15,13 @@ namespace com.WanderingTurtle.Tests
         [TestInitialize]
         public void initialize()
         {
-            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, 6663, true));
+            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "6663", true));
         }
 
         [TestMethod]
         public void HotelAccessorAdd()
         {
-            int changed = HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 234234234, 3456, true));
+            int changed = HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "234234234", "3456", true));
             Assert.AreEqual(2, changed);
         }
 
@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void HotelAccessorAddFail()
         {
-            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, 5678, true));
+            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "5678", true));
         }
 
         [TestMethod]
