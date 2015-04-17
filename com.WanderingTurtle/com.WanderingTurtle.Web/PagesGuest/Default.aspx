@@ -46,29 +46,30 @@
 
     <asp:UpdatePanel runat="server" ID="gvListingsUpdate">
         <ContentTemplate>
-            <asp:GridView ID="gvListings" runat="server" AutoGenerateColumns="False" AllowSorting="True" AutoGenerateSelectButton="True" BackColor="White" BorderColor="#999999" BorderWidth="1px" CellPadding="3" GridLines="Vertical" DataSourceID="ObjectDataSource1" DataKeyNames="ItemListID" BorderStyle="None" OnSelectedIndexChanged="gvListings_SelectedIndexChanged">
-                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+            <asp:GridView ID="gvListings" runat="server" AutoGenerateColumns="False" AllowSorting="True" AutoGenerateSelectButton="True" CellPadding="4" GridLines="None" DataSourceID="ObjectDataSource1" DataKeyNames="ItemListID" OnSelectedIndexChanged="gvListings_SelectedIndexChanged" ForeColor="#333333">
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
                 <HeaderStyle BackColor="#186D99" BorderStyle="None" Font-Bold="True" BorderColor="#327EA7" ForeColor="White" HorizontalAlign="Center" VerticalAlign="Middle" BorderWidth="0px" />
-                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-                <SelectedRowStyle BackColor="#008A8C" ForeColor="White" Font-Bold="True" />
-                <AlternatingRowStyle BackColor="#DCDCDC" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" ForeColor="#333333" Font-Bold="False" />
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
-                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" DataFormatString="{0:ddd, MMM d}, {0:t}" SortExpression="StartDate">
-                        <ControlStyle Width="100px" />
-                        <HeaderStyle BorderWidth="1px" />
-                    </asp:BoundField>
+                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}" >
+                        <ControlStyle Width="150px" />
+                        </asp:BoundField>
                     <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName">
                         <ItemStyle Width="150px" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription" />
+                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription">
+                    </asp:BoundField>
                     <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tix" SortExpression="QuantityOffered" />
                     <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" />
                 </Columns>
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#0000A9" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#000065" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
             </asp:GridView>
             <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" OldValuesParameterFormatString="original_{0}" SelectMethod="RetrieveActiveItemListings"
                 TypeName="com.WanderingTurtle.BusinessLogic.BookingManager"></asp:ObjectDataSource>
@@ -86,10 +87,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="lblGuestPin" Text="Guest Pin:" runat="server" Font-Bold="True" Height="35px"></asp:Label>
+                        <asp:Label ID="lblGuestPin" Text="Guest Pin:" runat="server" Font-Bold ="True" Height="35px"></asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox TextMode="Password" ID="txtGuestPin" ClientIDMode="Static" runat="server" TabIndex="1" ViewStateMode="Enabled"></asp:TextBox>
+                        <asp:TextBox TextMode="Password" ID="txtGuestPin" ClientIDMode="Static" runat ="server" TabIndex="1" ViewStateMode="Enabled" Wrap="False" MaxLength="4"></asp:TextBox>
 
                     </td>
                 </tr>

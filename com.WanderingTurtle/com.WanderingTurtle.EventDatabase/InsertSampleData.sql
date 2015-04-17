@@ -139,7 +139,10 @@ INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Addre
 VALUES
 ('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 1),
 ('Harry''s Boat Rides', 'Harry', 'Smith', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', 101, 1),
-('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 1)
+('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 1),
+('Singing Sisters', 'Cathy', 'Jackson', '234 West Way', ' ', '68137', '666-766-2224', 'info@SingingSisters.com', 103, 1),
+('Snorkels R Us', 'Sue', 'Fox', '1 3rd St', ' ', '77573', '712-766-2224', 'info@SnorkelsRUs.com', 104, 1),
+('Gators For Fun', 'Jose', 'Martinez', '554 Wood Circle', ' ', '52761', '444-724-2224', 'Jose@GatorsForFun.com', 105, 1)
 GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, CompanyDescription, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, Remarks)
@@ -157,7 +160,10 @@ INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transpor
 VALUES
 ('Non-Creepy Boat Ride', 100, 0, 0, 'A totally non creepy midnight boat ride down the river.', 1 ),
 ('Jungle Tour', 101, 0, 1, 'A Majestic Jungle Tour. Not safe for kids under 12.', 1 ),
-('Market Excursion', 102, 0, 1, 'Tour the local marketplace. Haggle your way to some great stuff!', 1 )
+('Market Excursion', 102, 0, 1, 'Tour the local marketplace. Haggle your way to some great stuff!', 1 ),
+('Alligator Wrestling', 101, 0, 0, 'A fun swim with the green guys.', 1 ),
+('Roaring Fun', 103, 0, 0, 'Singing and Comedy all in one.', 1 ),
+('Authentic Cuisine', 102, 0, 0, 'A seven course meal of local food.', 1 )
 GO
 
 INSERT INTO [dbo].[EventType] (EventName)
