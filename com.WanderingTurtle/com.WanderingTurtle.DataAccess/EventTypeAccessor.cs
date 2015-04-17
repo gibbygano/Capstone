@@ -1,8 +1,7 @@
 ﻿//Justin Pennington 2/14/15
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using com.WanderingTurtle.Common;

@@ -1,10 +1,8 @@
-﻿﻿using com.WanderingTurtle.Common;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Data;
+﻿﻿using System;
+﻿using System.Collections.Generic;
+﻿using System.Data;
+﻿using System.Data.SqlClient;
+﻿using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -26,7 +24,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSelectListingFull";
             DateTime now = DateTime.Now;
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@Now", now);
 
@@ -90,7 +88,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSelectOneListingFull";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@itemListID", itemListID);
 
             try
@@ -155,7 +153,7 @@ namespace com.WanderingTurtle.DataAccess
             int rowsAffected = 0;
 
             //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@GuestID", toAdd.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toAdd.EmployeeID);
@@ -277,7 +275,7 @@ namespace com.WanderingTurtle.DataAccess
             int rowsAffected = 0;
 
             //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@Quantity", toUpdate.Quantity);
             cmd.Parameters.AddWithValue("@Discount", toUpdate.Discount);
@@ -336,7 +334,7 @@ namespace com.WanderingTurtle.DataAccess
             int rowsAffected = 0;
 
             //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
            
             cmd.Parameters.AddWithValue("@ItemListID", itemID);
 
@@ -374,7 +372,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSelectBookingNumbers";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@ItemListID", itemListID);
 			try
             {

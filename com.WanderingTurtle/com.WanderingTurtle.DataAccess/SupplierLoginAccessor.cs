@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -32,7 +29,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSupplierLoginGet";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userPassword", userPassword);
             cmd.Parameters.AddWithValue("@userName", userName);
 
@@ -87,7 +84,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSupplierLoginAdd";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userName", userName);
             cmd.Parameters.AddWithValue("@supplierID", supplierID);
 
@@ -129,7 +126,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSupplierLoginArchive";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@active", archive);
             cmd.Parameters.AddWithValue("@original_userID", oldSupplierLogin.UserID);
             cmd.Parameters.AddWithValue("@original_userPassword", "Password#1");
@@ -195,7 +192,7 @@ namespace com.WanderingTurtle.DataAccess
             bool validName = false;
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userName", userName);
 
             try
@@ -232,7 +229,7 @@ namespace com.WanderingTurtle.DataAccess
             string userNameFound;
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@supplierID", supplierID);
 
             try

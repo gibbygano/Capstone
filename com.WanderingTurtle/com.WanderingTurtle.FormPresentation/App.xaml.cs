@@ -1,10 +1,10 @@
-﻿using com.WanderingTurtle.FormPresentation.Models;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {

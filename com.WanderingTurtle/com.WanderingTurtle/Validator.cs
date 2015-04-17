@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 
 namespace com.WanderingTurtle.BusinessLogic
@@ -607,7 +608,7 @@ namespace com.WanderingTurtle.BusinessLogic
             //suggested from stack overflow
             try
             {
-                var addr = new System.Net.Mail.MailAddress(inputToValidate);
+                var addr = new MailAddress(inputToValidate);
                 return true;
             }
             catch

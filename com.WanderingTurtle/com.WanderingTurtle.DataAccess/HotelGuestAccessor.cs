@@ -1,10 +1,8 @@
-﻿using com.WanderingTurtle.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -37,7 +35,7 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(cmdText, conn);
             var numRows = 0;
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@firstName", newHotelGuest.FirstName);
             cmd.Parameters.AddWithValue("@lastName", newHotelGuest.LastName);
             cmd.Parameters.AddWithValue("@zip", newHotelGuest.CityState.Zip);
@@ -161,7 +159,7 @@ namespace com.WanderingTurtle.DataAccess
             var cmd = new SqlCommand(cmdText, conn);
             var numRows = 0;
 
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@firstName", newHotelGuest.FirstName);
             cmd.Parameters.AddWithValue("@lastName", newHotelGuest.LastName);
             cmd.Parameters.AddWithValue("@zip", newHotelGuest.CityState.Zip);

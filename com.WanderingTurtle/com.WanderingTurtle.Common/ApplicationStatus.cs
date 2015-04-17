@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace com.WanderingTurtle.Common
+﻿namespace com.WanderingTurtle.Common
 {
     /// <summary>
     /// Object to hold values for application status drop down

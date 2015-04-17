@@ -1,4 +1,5 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -25,7 +26,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
-            { Globals.UserToken = new com.WanderingTurtle.Common.Employee(100, "Debugger", null, 1); }
+            { Globals.UserToken = new Employee(100, "Debugger", null, 1); }
 
             do
             {

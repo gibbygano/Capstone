@@ -1,8 +1,8 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation

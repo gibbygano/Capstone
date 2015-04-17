@@ -1,24 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle;
 using com.WanderingTurtle.BusinessLogic;
-using Xceed.Wpf.Toolkit;
-using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -49,7 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
             RefreshListItems();
             udDiscount.Maximum = .20;
 
-            eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
+            eID = (int)Globals.UserToken.EmployeeID;
         }
 
         /// <summary>
