@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -15,13 +13,13 @@ namespace com.WanderingTurtle.Tests
         private SupplierAccessor access2 = new SupplierAccessor();
         private SupplierLogin retrieveSupplier;
         private Supplier fakeSupplier;
-        
+
         [TestInitialize]
         public void initialize()
         {
             access.addSupplierLogin("F@k3logg3r", 101);
         }
-        
+
         /// <summary>
         /// Created by Rose Steffensmeier 2015/04/03
         /// Tests to input a new SupplierLogin into the database.
@@ -43,10 +41,10 @@ namespace com.WanderingTurtle.Tests
             retrieveSupplier = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
             Assert.AreEqual("F@k3logg3r", retrieveSupplier.UserName, "There is no such supplier.");
         }
-        
+
         /// <summary>
         /// Created by Rose Steffensmeier 2015/04/03
-        /// Tests if a peice of data fails to retrieve data. 
+        /// Tests if a peice of data fails to retrieve data.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException))]

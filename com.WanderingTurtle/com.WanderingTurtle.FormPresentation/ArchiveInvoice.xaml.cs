@@ -1,10 +1,10 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -113,8 +113,6 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
-
-
             //if (newReportWindow.ShowDialog() == false)
             //{
             //    RefreshEmployeeList();

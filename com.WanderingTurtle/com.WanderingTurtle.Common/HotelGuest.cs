@@ -3,18 +3,18 @@
     /// <summary>
     /// Miguel Santana
     /// Created: 2015/02/18
-    /// 
+    ///
     /// Create a HotelGuest object.
     /// </summary>
     /// <remarks>
     /// Rose Steffensmeier
     /// Updated: 2015/02/27
-    /// 
+    ///
     /// Pat Banks
     /// Updated 2015/04/14
     /// Added Guest Pin
     /// </remarks>
-    public class HotelGuest 
+    public class HotelGuest
     {
         public int? HotelGuestID { get; private set; }
 
@@ -165,11 +165,10 @@
             this.CityState = CityState;
             this.PhoneNumber = PhoneNumber;
             this.EmailAddress = EmailAddress;
-            this.Room = Room;
+            this.Room = Room.ToString();
             this.Active = Active;
-            this.GuestPIN = GuestPIN;
+            this.GuestPIN = GuestPIN.ToString();
         }
-
 
         public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }

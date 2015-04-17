@@ -1,11 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using com.WanderingTurtle.BusinessLogic;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
-using System.Data.SqlClient;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -16,8 +13,8 @@ namespace com.WanderingTurtle.Tests
     [TestClass]
     public class HotelGuestManagerTest
     {
-        HotelManagerAccessorTest setup = new HotelManagerAccessorTest();
-        HotelGuestManager access = new HotelGuestManager();
+        private HotelManagerAccessorTest setup = new HotelManagerAccessorTest();
+        private HotelGuestManager access = new HotelGuestManager();
 
         /*
         [TestInitialize]
@@ -40,6 +37,7 @@ namespace com.WanderingTurtle.Tests
             access.AddHotelGuest(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, 2342, true));
         }
         */
+
         [TestMethod]
         public void HotelManagerGetList()
         {
@@ -60,6 +58,7 @@ namespace com.WanderingTurtle.Tests
         {
             HotelGuest guest = access.GetHotelGuest(-1);
         }
+
         /*
         [TestMethod]
         public void HotelManagerUpdate()
@@ -70,6 +69,7 @@ namespace com.WanderingTurtle.Tests
             Assert.IsTrue(changed);
         }
         */
+
         [TestMethod]
         public void HotelManagerArchive()
         {

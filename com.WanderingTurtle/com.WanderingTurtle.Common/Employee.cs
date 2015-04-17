@@ -29,7 +29,7 @@
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/26
-        /// 
+        ///
         /// Use for creating an employee object with an ID
         /// </summary>
         /// <param name="EmployeeID">Employee ID</param>
@@ -45,7 +45,7 @@
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/26
-        /// 
+        ///
         /// Use for creating a new employee.
         /// </summary>
         /// <remarks>Does not have an Employee ID</remarks>

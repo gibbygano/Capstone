@@ -1,8 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -11,7 +11,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Retrieves Supplier information from the Database using a Stored Procedure.
         /// Creates a Supplier object.
-        /// 
+        ///
         /// Created by Tyler Collins 02/03/15
         /// </summary>
         /// <param name="supplierID">Requires a SupplierID to SELECT the correct Supplier record.</param>
@@ -71,8 +71,8 @@ namespace com.WanderingTurtle.DataAccess
         //{
         //    /*
         //     * Retrieves Supplier information from database based on SupplierID or CompanyName and returns a Supplier Object.
-        //     * 
-        //     * Created by Tyler Collins 02/03/15 
+        //     *
+        //     * Created by Tyler Collins 02/03/15
         //     */
 
         //    Supplier supplierToRetrieve = new Supplier();
@@ -137,7 +137,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Retrieves all Supplier data from the Database using a Stored Procedure.
         /// Creates a Supplier object from retrieved data.
         /// Adds Supplier object to List of Supplier objects.
-        /// 
+        ///
         /// Created by Tyler Collins 02/03/2015
         /// </summary>
         /// <returns>List of Supplier objects</returns>
@@ -193,9 +193,10 @@ namespace com.WanderingTurtle.DataAccess
 
             return supplierList;
         }
+
         /// <summary>
         /// INSERTs a Supplier into the Database using a Stored Procedure.
-        /// 
+        ///
         /// Created by Tyler Collins 02/04/2015
         /// </summary>
         /// <param name="supplierToAdd">Requires a Supplier object to INSERT</param>
@@ -238,7 +239,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// UPDATEs a Supplier record in the Database with new using a Stored Procedure.
-        /// 
+        ///
         /// Created by Tyler Collins 02/04/2015
         /// Updated by Tyler Collins 02/11/2015
         /// </summary>
@@ -247,7 +248,6 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>Returns the number of rows affected.</returns>
         public static int UpdateSupplier(Supplier newSupplierInfo, Supplier oldSupplierInfo)
         {
-
             var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spUpdateSupplier";
             var cmd = new SqlCommand(storedProcedure, conn);
@@ -264,7 +264,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EmailAddress", newSupplierInfo.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", newSupplierInfo.ApplicationID);
             cmd.Parameters.AddWithValue("@SupplyCost", newSupplierInfo.SupplyCost);
-
 
             //Old Supplier Info
             cmd.Parameters.AddWithValue("@SupplierID", oldSupplierInfo.SupplierID);
@@ -300,7 +299,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// DELETEs (Sets Boolean Active field to false) a Supplier record in Database using a Stored Procedure.
-        /// 
+        ///
         /// Created by Tyler Collins 02/05/2015
         /// </summary>
         /// <param name="supplierToDelete">Requires the Supplier object which matches the record to be DELETED in the Database.</param>

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation
@@ -49,6 +49,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         public Event OriginalEvent { get; private set; }
+
         private Event eventToSubmit = new Event();
 
         /// <summary>
@@ -114,7 +115,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                if (ex is InputValidationException) { throw new InputValidationException((InputValidationException) ex); }
+                if (ex is InputValidationException) { throw new InputValidationException((InputValidationException)ex); }
                 throw new WanderingTurtleException(this, ex, "Error adding new event");
             }
         }

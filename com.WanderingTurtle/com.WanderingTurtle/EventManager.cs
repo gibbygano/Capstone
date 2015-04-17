@@ -1,14 +1,13 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
     public class EventManager
     {
-     
         public enum EventResult
         {
             //item could not be found
@@ -30,6 +29,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
             DatabaseError,
         }
+
         public EventManager()
         {
             //default constructor
@@ -37,7 +37,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         //Retrieve a single Event object from the Data Access layer with an eventItemID
         //Created by Matt Lapka 1/31/15
-        public Event RetrieveEvent (string eventItemID)
+        public Event RetrieveEvent(string eventItemID)
         {
             var now = DateTime.Now;
             double cacheExpirationTime = 5;
@@ -77,7 +77,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-			
         }
 
         //Retrieve a list of active Event objects from the Data Access layer with
@@ -99,7 +98,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 else
                 {
                     //check time. If less than 5 min, return cache
-                    
+
                     if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
                     {
                         //get new list from DB
@@ -117,10 +116,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-                
                 throw ex;
             }
-			
         }
 
         //Add a single Event object
@@ -129,7 +126,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if (EventAccessor.AddEvent(newEvent)== 1)
+                if (EventAccessor.AddEvent(newEvent) == 1)
                 {
                     //refresh cache
                     DataCache._currentEventList = EventAccessor.GetEventList();
@@ -148,12 +145,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     return EventResult.ChangedByOtherUser;
                 }
                 return EventResult.DatabaseError;
-            }               
+            }
             catch (Exception)
             {
                 return EventResult.DatabaseError;
             }
-            
         }
 
         //Edit an Event object
@@ -162,7 +158,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if (EventAccessor.UpdateEvent(oldEvent, newEvent)==1)
+                if (EventAccessor.UpdateEvent(oldEvent, newEvent) == 1)
                 {
                     //update cache
                     DataCache._currentEventList = EventAccessor.GetEventList();
@@ -181,13 +177,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     return EventResult.ChangedByOtherUser;
                 }
                 return EventResult.DatabaseError;
-            } 
+            }
             catch (Exception)
             {
-                
                 return EventResult.DatabaseError;
             }
-            
         }
 
         //"Delete" a single Event object (make inactive)
@@ -215,14 +209,12 @@ namespace com.WanderingTurtle.BusinessLogic
                     return EventResult.ChangedByOtherUser;
                 }
                 return EventResult.DatabaseError;
-            } 
+            }
             catch (Exception)
             {
                 return EventResult.DatabaseError;
             }
-            
         }
-        
 
         /// <summary>
         /// Retrieve a single EventType object from the Data Access layer with an eventTypeID
@@ -268,7 +260,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-			
         }
 
         ///Retrieve a list of active EventType objects from the Data Access layer
@@ -309,10 +300,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-            
         }
 
         ///Add a single EventType object
@@ -345,7 +334,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return EventResult.DatabaseError;
             }
-            
         }
 
         //Edit an EventType object
@@ -376,10 +364,8 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception)
             {
-
                 return EventResult.DatabaseError;
             }
-            
         }
 
         //"Delete" a single EventType object (make inactive)
@@ -412,7 +398,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return EventResult.DatabaseError;
             }
-            
         }
 
         public List<Event> EventSearch(String inSearch)
@@ -420,24 +405,22 @@ namespace com.WanderingTurtle.BusinessLogic
             //List<Event> myTempList = new List<Event>();
             if (!inSearch.Equals("") && !inSearch.Equals(null))
             {
-                
                 //Lambda Version
                 //return myTempList.AddRange(DataCache._currentEventList.Where(s => s.EventItemName.ToUpper().Contains(inSearch.ToUpper())).Select(s => s));
                 //LINQ version
-                    List<Event> myTempList = new List<Event>();
-                    myTempList.AddRange(
-                      from inEvent in DataCache._currentEventList
-                      where inEvent.EventItemName.ToUpper().Contains(inSearch.ToUpper())
-                      select inEvent);
-                    return myTempList;
-                
-                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly               
+                List<Event> myTempList = new List<Event>();
+                myTempList.AddRange(
+                  from inEvent in DataCache._currentEventList
+                  where inEvent.EventItemName.ToUpper().Contains(inSearch.ToUpper())
+                  select inEvent);
+                return myTempList;
+
+                //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
             else
             {
                 return DataCache._currentEventList;
             }
-            
         }
 
         public int deleteTestEvent(Event testEvent)
@@ -446,11 +429,10 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return EventAccessor.DeleteEventTestItem(testEvent);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-
         }
     }
 }

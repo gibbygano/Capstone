@@ -23,6 +23,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
             CurrentControl = control;
             DoHandle = handleException;
         }
+
         public WanderingTurtleException(FrameworkElement control, string message, Exception innerException, bool handleException = true)
             : base(message, innerException)
         {

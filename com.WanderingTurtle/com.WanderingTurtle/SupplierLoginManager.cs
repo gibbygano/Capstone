@@ -1,13 +1,13 @@
-﻿using System;
-using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using System;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
     public class SupplierLoginManager
     {
-        SupplierLoginAccessor access = new SupplierLoginAccessor();
+        private SupplierLoginAccessor access = new SupplierLoginAccessor();
 
         public SupplierLoginManager()
         { }
@@ -43,8 +43,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw;
             }
         }
-
-
 
         public int addSupplierLogin(string userName, int supplierID)
         {
@@ -95,7 +93,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw;
             }
         }
-
 
         public bool CheckSupplierUserName(string userName)
         {

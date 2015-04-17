@@ -1,4 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -6,17 +10,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Miguel Santana
     /// Created: 2015/02/16
-    /// 
+    ///
     /// Interaction logic for AddEditHotelGuest.xaml
     /// </summary>
     public partial class AddEditHotelGuest
@@ -26,7 +26,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Create a New Hotel Guest
         /// </summary>
         public AddEditHotelGuest()
@@ -66,9 +66,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
-        /// 
+        ///
         /// Parameter marks whether a database command was successful
         /// </summary>
         public ResultsEdit Result { get; private set; }
@@ -109,7 +109,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Opens the combobox on keyboard focus
         /// </summary>
         /// <param name="sender">System.Windows.Controls.ComboBox</param>
@@ -122,7 +122,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Populates form with required information
         /// </summary>
         private void InitializeEverything()
@@ -134,7 +134,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Resets the values of the input fields
         /// </summary>
         private void ResetFields()
@@ -175,7 +175,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/13
-        /// 
+        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="message"></param>
@@ -205,11 +205,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Validate fields and submit data to HotelGuestManager
         /// </summary>
         /// <remarks>
-        /// Rose Steffensmeier 
+        /// Rose Steffensmeier
         /// Updated: 2015/03/05
         /// </remarks>
         private async void Submit()
@@ -275,18 +275,18 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (SqlException)
             {
-                ShowErrorMessage("PIN Already Assigned.  Please choose a different PIN.", "Error"); 
+                ShowErrorMessage("PIN Already Assigned.  Please choose a different PIN.", "Error");
             }
             catch (Exception ex)
-            { 
-                ShowErrorMessage(ex); 
+            {
+                ShowErrorMessage(ex);
             }
         }
 
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/18
-        /// 
+        ///
         /// Selects all on keyboard focus to allow for easier tabbing between fields
         /// </summary>
         /// <param name="sender">System.Windows.Controls.TextBox</param>
@@ -299,7 +299,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
+        ///
         /// Allows submitting the form by hitting enter on any field
         /// </summary>
         /// <param name="sender"></param>
@@ -315,7 +315,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/10
-        /// 
+        ///
         /// Runs validation on the input fields
         /// </summary>
         /// <returns>True if valid</returns>
@@ -373,7 +373,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/10
-        /// 
+        ///
         /// Checks to see if the fields have been changed
         /// </summary>
         /// <returns>True if valid</returns>

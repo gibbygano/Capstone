@@ -1,14 +1,13 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
     public class SupplierApplicationAccessor
     {
-
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/08
@@ -39,7 +38,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@Remarks", supplierApplicationToAdd.Remarks);
 
             var rowsAffected = 0;
-          
+
             try
             {
                 conn.Open();
@@ -107,7 +106,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Open();
                 rowsAffected = cmd.ExecuteNonQuery();
-                               
+
                 if (rowsAffected == 0)
                 {
                     throw new ApplicationException("Concurrency Violation");
@@ -121,8 +120,9 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return rowsAffected; 
+            return rowsAffected;
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/08
@@ -130,7 +130,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <remarks>
         /// Edited by Rose Steffensmeier 2015/04/03
-        /// added param to input so that stored procedure will work, param does not affect the actual 
+        /// added param to input so that stored procedure will work, param does not affect the actual
         /// </remarks>
         /// <returns>List of SupplierApplication objects</returns>
         public static List<SupplierApplication> GetSupplierApplicationList()
@@ -140,7 +140,7 @@ namespace com.WanderingTurtle.DataAccess
             var cmdText = "spSelectAllSupplierApplication";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-            
+
             try
             {
                 conn.Open();
@@ -155,7 +155,7 @@ namespace com.WanderingTurtle.DataAccess
                         currentSupplierApplication.CompanyName = reader.GetValue(1).ToString();
                         currentSupplierApplication.CompanyDescription = !reader.IsDBNull(2) ? currentSupplierApplication.CompanyDescription = reader.GetValue(2).ToString() : null;
                         currentSupplierApplication.FirstName = reader.GetValue(3).ToString();
-                        currentSupplierApplication.LastName= reader.GetValue(4).ToString();
+                        currentSupplierApplication.LastName = reader.GetValue(4).ToString();
                         currentSupplierApplication.Address1 = reader.GetValue(5).ToString();
                         currentSupplierApplication.Address2 = reader.GetValue(6).ToString();
                         currentSupplierApplication.Zip = reader.GetValue(7).ToString();
@@ -185,6 +185,7 @@ namespace com.WanderingTurtle.DataAccess
             }
             return ApplicationList;
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/08
@@ -209,7 +210,7 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     currentSupplierApplication.ApplicationID = reader.GetInt32(0);
                     currentSupplierApplication.CompanyName = reader.GetValue(1).ToString();
-                    currentSupplierApplication.CompanyDescription = !reader.IsDBNull(2) ? currentSupplierApplication.CompanyDescription = reader.GetString(2): null;
+                    currentSupplierApplication.CompanyDescription = !reader.IsDBNull(2) ? currentSupplierApplication.CompanyDescription = reader.GetString(2) : null;
                     currentSupplierApplication.FirstName = reader.GetValue(3).ToString();
                     currentSupplierApplication.LastName = reader.GetValue(4).ToString();
                     currentSupplierApplication.Address1 = reader.GetValue(5).ToString();
@@ -303,7 +304,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return rowsAffected; 
+            return rowsAffected;
         }
     }
 }

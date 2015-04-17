@@ -1,11 +1,8 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
-using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace com.WanderingTurtle.Tests
 {
@@ -22,7 +19,7 @@ namespace com.WanderingTurtle.Tests
             BookingManager bkManager = new BookingManager();
             bkManager.RefreshItemDetailsListCacheData();
             var expected = DataCache._currentItemListingDetailsList;
-            
+
             var actual = bkManager.RetrieveActiveItemListings();
 
             Assert.AreEqual(expected, actual);
@@ -35,9 +32,9 @@ namespace com.WanderingTurtle.Tests
             BookingManager bkManager = new BookingManager();
             bkManager.RefreshItemDetailsListCacheData();
         }
-         
+
          RefreshItemDetailsListCacheData() is private
-         
+
          */
 
         [TestMethod]
@@ -59,15 +56,15 @@ namespace com.WanderingTurtle.Tests
             var actual = bkManager.RetrieveEventListing(9999);
         }
 
-        int guestID = 8;
-        int empID = 101;
-        int itemID = 103;
-        int bQuantity = 5;
-        DateTime dateBooked = new DateTime(2015, 3, 28, 8, 30, 0);
-        decimal ticket = 10;
-        decimal extended = 50;
-        decimal discount = 0;
-        decimal total = 50;
+        private int guestID = 8;
+        private int empID = 101;
+        private int itemID = 103;
+        private int bQuantity = 5;
+        private DateTime dateBooked = new DateTime(2015, 3, 28, 8, 30, 0);
+        private decimal ticket = 10;
+        private decimal extended = 50;
+        private decimal discount = 0;
+        private decimal total = 50;
 
         [TestMethod]
         public void AddBookingResult_Valid()
@@ -155,13 +152,11 @@ namespace com.WanderingTurtle.Tests
             string EventItemName;
             DateTime StartDate;
             int InvoiceID;
-
         }
 
         [TestMethod]
         public void CalculateTime_Valid()
         {
-
         }*/
 
         [TestMethod]
@@ -170,7 +165,7 @@ namespace com.WanderingTurtle.Tests
             BookingManager bkManager = new BookingManager();
 
             decimal expected = 50;
-            
+
             decimal actual = bkManager.calcTotalCharge(discount, extended);
 
             Assert.AreEqual(expected, actual);
@@ -182,8 +177,6 @@ namespace com.WanderingTurtle.Tests
         public void availableQuantity_MathCheck()
         {
             BookingManager bkManager = new BookingManager();
-
-
         }*/
 
         [TestMethod]
@@ -208,29 +201,23 @@ namespace com.WanderingTurtle.Tests
             int actual = bkManager.updateNumberOfGuests()
         }*/
 
-
         /*
         I don't understand booking details
         [TestMethod]
         public void CheckToEditBooking_Valid()
         {
             BookingManager bkManager = new BookingManager();
-
-
         }
 
         [TestMethod]
         public void CancelBookingResults_Valid()
         {
-
         }
 
         [TestMethod]
         public void EditBookingResult_Valid()
         {
             BookingManager bkManager = new BookingManager();
-
-
         }*/
     }
 }

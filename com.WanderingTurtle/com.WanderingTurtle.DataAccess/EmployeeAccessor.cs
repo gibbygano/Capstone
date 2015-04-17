@@ -1,8 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -12,7 +12,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
-        /// 
+        ///
         /// Method takes in a parameter of newEmployee
         ///     Database is queried using stored procedure and looks for matching
         ///     information from the object passed to the method
@@ -20,7 +20,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/26
-        /// 
+        ///
         /// Renamed stored procedure to spEmployeeAdd
         /// </remarks>
         /// <param name="newEmployee">Employee object to add to databse</param>
@@ -64,7 +64,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/18
-        /// 
+        ///
         /// Method takes in an Employee ID,
         ///     submits those variables to the stored procedure spEmployeeGet,
         ///     which will return the specific employee that matches the ID
@@ -72,7 +72,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/26
-        /// 
+        ///
         /// Renamed stored procedure to spEmployeeGet
         /// Reconfigured employee object creation from data retrieved from database.
         /// </remarks>
@@ -125,7 +125,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
-        /// 
+        ///
         /// Method takes in an employee first name and last name,
         ///     submits those variables to the stored procedure spEmployeeSelectName,
         ///     which will return the specific employee that matches the firstName and lastName
@@ -133,7 +133,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/26
-        /// 
+        ///
         /// Renamed stored procedure to spEmployeeSelectName
         /// Reconfigured employee object creation from data retrieved from database
         /// </remarks>
@@ -188,7 +188,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
-        /// 
+        ///
         /// Method creates a connection to the database and calls
         ///     the stored procedure spEmployeeList that querys the database
         ///     for all of the active employees
@@ -196,7 +196,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/26
-        /// 
+        ///
         /// Renamed stored procedure to spEmployeeGet.
         /// Reconfigured employee object creation from data retrieved from database.
         /// </remarks>
@@ -253,7 +253,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
-        /// 
+        ///
         /// Method takes in originalEmployee and updatedEmployee
         ///     the parameters are inserted into the stored procedure and update the
         ///     information from orignalEmployee with updatedEmployee
@@ -261,7 +261,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/26
-        /// 
+        ///
         /// Renamed stored procedure to spEmployeeUpdate
         /// </remarks>
         /// <param name="originalEmployee">Original employee object, should match information stored in database</param>
@@ -311,7 +311,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Arik Chadima
         /// Created: 2015/03/03
-        /// 
+        ///
         /// Checks an employee's ID and password against the database.
         /// </summary>
         /// <param name="employeeId">The employee's unique ID</param>

@@ -1,38 +1,38 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
     //markup for data object to bind
-    [DataObject (true)]
-	public class BookingManager
-	{
+    [DataObject(true)]
+    public class BookingManager
+    {
         /// <summary>
         /// Tony Noel
         /// Created: 15/2/13
-        /// 
-		/// RetrieveListItemList- a method used to retrieve a list of ItemListingDetails (a subclass of Booking) through the data access layer, from the database
-		/// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
-		/// </summary>
+        ///
+        /// RetrieveListItemList- a method used to retrieve a list of ItemListingDetails (a subclass of Booking) through the data access layer, from the database
+        /// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
+        /// </summary>
         /// <remarks>
-        /// Pat Banks 
+        /// Pat Banks
         /// Updated: 2015/03/30
-        /// 
-        /// Added DataCache 
+        ///
+        /// Added DataCache
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
-       [DataObjectMethod(DataObjectMethodType.Select)]
-		public List<ItemListingDetails> RetrieveActiveItemListings()
-		{
+        [DataObjectMethod(DataObjectMethodType.Select)]
+        public List<ItemListingDetails> RetrieveActiveItemListings()
+        {
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
             var now = DateTime.Now;
-            
-			try
-			{
+
+            try
+            {
                 if (DataCache._currentItemListingDetailsList == null)
                 {
                     RefreshItemDetailsListCacheData();
@@ -52,19 +52,19 @@ namespace com.WanderingTurtle.BusinessLogic
                     }
                 }
             }
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
-				throw ax;
-			}
-		}
+            catch (Exception)
+            {
+                var ax = new ApplicationException("There was a problem accessing the server. \nPlease contact your system administrator.");
+                throw ax;
+            }
+        }
 
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/30
-        /// 
-        /// Refreshes the data cache 
-        /// </summary>       
+        ///
+        /// Refreshes the data cache
+        /// </summary>
         private void RefreshItemDetailsListCacheData()
         {
             //data hasn't been retrieved yet. get data, set it to the cache and return the result.
@@ -81,16 +81,16 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/11
-        /// 
+        ///
         /// Retrieves Event Listing information for the one selected item listing
         /// Information is human readable with data from joined tables
         /// </summary>
         /// <param name="itemListID">ItemList ID</param>
         /// <returns>an ItemListingDetails containing the item listing information</returns>
-		public ItemListingDetails RetrieveEventListing(int itemListID)
-		{
+        public ItemListingDetails RetrieveEventListing(int itemListID)
+        {
             var now = DateTime.Now;
             double cacheExpirationTime = 5;
 
@@ -131,110 +131,109 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-			
-		}
+        }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Takes data from the presentation layer and determines the results of attempting to add a booking
         /// </summary>
         /// <param name="bookingToAdd">Booking information from presentation Layer form</param>
         /// <returns>Results of adding the booking</returns>
         public ResultsEdit AddBookingResult(Booking bookingToAdd)
         {
-           ItemListingDetails originalItem = RetrieveEventListing(bookingToAdd.ItemListID);
+            ItemListingDetails originalItem = RetrieveEventListing(bookingToAdd.ItemListID);
 
-           if (bookingToAdd.Quantity == 0)
-           {
-               return ResultsEdit.QuantityZero;
-           }
-           else
-           //try to add booking
-           {
-               try
-               {
-                   //calls method to add a booking. BookingID is auto-generated in database                
-                   int result = BookingAccessor.addBooking(bookingToAdd);
+            if (bookingToAdd.Quantity == 0)
+            {
+                return ResultsEdit.QuantityZero;
+            }
+            else
+            //try to add booking
+            {
+                try
+                {
+                    //calls method to add a booking. BookingID is auto-generated in database
+                    int result = BookingAccessor.addBooking(bookingToAdd);
 
-                   //if add booking was successful 
-                   if (result == 1)
-                   {
-                       //change quantity of guests
-                       int updatedGuests = originalItem.CurrentNumGuests + bookingToAdd.Quantity;
+                    //if add booking was successful
+                    if (result == 1)
+                    {
+                        //change quantity of guests
+                        int updatedGuests = originalItem.CurrentNumGuests + bookingToAdd.Quantity;
 
-                       int result2 = updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
+                        int result2 = updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
 
-                       if (result2 == 1)
-                       {
-                           //update cache
-                           RefreshItemDetailsListCacheData();
+                        if (result2 == 1)
+                        {
+                            //update cache
+                            RefreshItemDetailsListCacheData();
 
-                           return ResultsEdit.Success;
-                       }
-                       else
-                       {
-                           return ResultsEdit.DatabaseError;
-                       }
-                   }
-                   else
-                   {
-                       return ResultsEdit.DatabaseError;
-                   }
-               }
-               catch (Exception ex)
-               {
-                   throw ex;
-               }
-           }
+                            return ResultsEdit.Success;
+                        }
+                        else
+                        {
+                            return ResultsEdit.DatabaseError;
+                        }
+                    }
+                    else
+                    {
+                        return ResultsEdit.DatabaseError;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/05
-        /// 
-		/// EditBooking- a method used to update a booking through the data access layer to be added to the database
-		/// As the BookingID number will not change or be updated in the database the method uses the same booking ID number to search
-		/// the database through the Retrieve Booking method. This will pull the originally record into an object "oldOne". Then the
-		/// original record and the new booking object that was passed to the method can both be passed to upDateBooking to be updated.
-		/// </summary>
-		/// <param name="newOne">Takes an input of a booking object</param>
-		/// <returns> Returns an int- the number of rows affected, if add is successful</returns>
-		public int EditBooking(Booking newOne)
-		{
-			Booking oldOne = RetrieveBooking(newOne.BookingID);
-			var numRows = BookingAccessor.updateBooking(oldOne, newOne);
-			return numRows;
-		}
+        ///
+        /// EditBooking- a method used to update a booking through the data access layer to be added to the database
+        /// As the BookingID number will not change or be updated in the database the method uses the same booking ID number to search
+        /// the database through the Retrieve Booking method. This will pull the originally record into an object "oldOne". Then the
+        /// original record and the new booking object that was passed to the method can both be passed to upDateBooking to be updated.
+        /// </summary>
+        /// <param name="newOne">Takes an input of a booking object</param>
+        /// <returns> Returns an int- the number of rows affected, if add is successful</returns>
+        public int EditBooking(Booking newOne)
+        {
+            Booking oldOne = RetrieveBooking(newOne.BookingID);
+            var numRows = BookingAccessor.updateBooking(oldOne, newOne);
+            return numRows;
+        }
 
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/05
-        /// 
-		/// RetrieveBooking- a method used to request a booking from the data access layer and database
-		/// </summary>
-		/// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
-		/// <returns>Output is a booking object to hold the booking record.</returns>
+        ///
+        /// RetrieveBooking- a method used to request a booking from the data access layer and database
+        /// </summary>
+        /// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
+        /// <returns>Output is a booking object to hold the booking record.</returns>
 
         [DataObjectMethod(DataObjectMethodType.Select)]
-		public Booking RetrieveBooking(int bookingId)
-		{
-			try
-			{
-				return BookingAccessor.getBooking(bookingId);
-			}
-			catch (Exception)
-			{
-				var ax = new ApplicationException("There was a problem accessing your data.");
-				throw ax;
-			}
-		}
+        public Booking RetrieveBooking(int bookingId)
+        {
+            try
+            {
+                return BookingAccessor.getBooking(bookingId);
+            }
+            catch (Exception)
+            {
+                var ax = new ApplicationException("There was a problem accessing your data.");
+                throw ax;
+            }
+        }
 
         /// <summary>
-        /// Tony Noel 
+        /// Tony Noel
         /// Updated: 2015/03/10
-        /// 
+        ///
         /// Method to calculate the cancellation fee using the CalculateTime method * TotalCharge
         /// </summary>
         /// <param name="bookingToCancel"></param>
@@ -249,16 +248,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        /// 
+        ///
         /// A method to compare two different dates and determine a cancellation fee amount.
         /// Stores today's date, then subtracts todays date from the start date of the event
         /// Uses a TimeSpan object which represents an interval of time and is able to perform calculations on time.
         /// The difference of days is stored on an double and used to test conditions.
         /// </summary>
         /// <remarks>
-        /// Pat Banks 
+        /// Pat Banks
         /// Updated: 2015/03/07
-        /// Tony Noel 
+        /// Tony Noel
         /// Updated: 2015/03/10
         /// </remarks>
         /// <returns>decimal containing the total cancellation fee % amount</returns>
@@ -294,9 +293,9 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Tony Noel 
-        /// Created: 2015/03/10 
-        /// 
+        /// Tony Noel
+        /// Created: 2015/03/10
+        ///
         /// Calculates the extended price of for the order of quantity of tickets multiplied by the unit price
         /// </summary>
         /// <param name="price">price of one ticket</param>
@@ -304,13 +303,13 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>the extended price</returns>
         public decimal calcExtendedPrice(decimal price, int quantity)
         {
-            return quantity * price;            
+            return quantity * price;
         }
 
         /// <summary>
-        /// Tony Noel 
+        /// Tony Noel
         /// Created: 2015/03/10 - Moved to Order Manager
-        /// 
+        ///
         /// Calculates the total charge of discount * Extended price
         /// </summary>
         /// <param name="discount">percentage from form</param>
@@ -337,10 +336,11 @@ namespace com.WanderingTurtle.BusinessLogic
 
             return availableQuantity;
         }
+
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/10
-        /// 
+        ///
         /// A helper method to calculate the quantity of guests being added onto a booking compared to the original
         /// amount reserved for the booking. Returns the difference between the two.
         /// </summary>
@@ -349,15 +349,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>number of spots different</returns>
         public int spotsReservedDifference(int newQuantity, int currentQuantity)
         {
-           int quantity = newQuantity - currentQuantity;
+            int quantity = newQuantity - currentQuantity;
 
             return quantity;
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/11
-        /// 
+        ///
         /// Calls the Booking Accessor to update the number of guests attending an event
         /// Needed after a booking is added, edited or cancelled
         /// </summary>
@@ -366,19 +366,19 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newNumGuests">new number of guests</param>
         /// <returns>number of rows affected</returns>
         public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
-		{
+        {
             var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
 
             //refresh Data Cache
             RefreshItemDetailsListCacheData();
 
-			return numRows;
-		}
+            return numRows;
+        }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Checks if a booking can be edited by performing logical checks if booking is too old or cancelled
         /// </summary>
         /// <param name="bookingToCheck"></param>
@@ -388,7 +388,7 @@ namespace com.WanderingTurtle.BusinessLogic
             if (bookingToCheck.StartDate < DateTime.Now)
             {
                 return ResultsEdit.CannotEditTooOld;
-            } 
+            }
             else if (bookingToCheck.Quantity == 0)
             {
                 return ResultsEdit.Cancelled;
@@ -400,9 +400,9 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Gives the results of cancelling a booking to the preseantation layer
         /// </summary>
         /// <param name="bookingToCancel"></param>
@@ -448,21 +448,21 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
             }
             catch (Exception ex)
-            {              
+            {
                 throw ex;
             }
         }
 
         /// <summary>
-        /// Pat Banks 
+        /// Pat Banks
         /// Created: 2015/03/19
-        /// 
+        ///
         /// Gives the results of editing a booking to the presentation layer
         /// </summary>
         /// <remarks>
         /// Pat Banks
-        /// Updated: 2015/03/30 
-        /// 
+        /// Updated: 2015/03/30
+        ///
         /// Updated to include data cache refresh
         /// </remarks>
         /// <param name="originalQty"></param>
@@ -481,7 +481,6 @@ namespace com.WanderingTurtle.BusinessLogic
                 //assigned the difference of the MaxNumGuests - currentNum of guests
                 int quantityOffered = availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
 
-
                 //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
                 if (quantityOffered == 0 && (numGuestsDifference > editedBooking.Quantity))
                 {
@@ -498,8 +497,8 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     return ResultsEdit.QuantityZero;
                 }
-          
-                //send the changes to the database       
+
+                //send the changes to the database
                 int numRows = EditBooking(editedBooking);
 
                 if (numRows == 1)
@@ -524,7 +523,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
         }
-	    
+
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/30
@@ -537,7 +536,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 //retrieve guest
                 return BookingAccessor.verifyGuestPin(inPIN);
-
             }
             catch (Exception)
             {
@@ -545,6 +543,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ax;
             }
         }
+
         /// <summary>
         /// Matt Lapka
         /// Created 2015/04/14
@@ -555,7 +554,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>names of hotel guests, room #s, and quantities of tickets for each booking related to that item listing</returns>
         public List<BookingNumbers> RetrieveBookingNumbers(int itemListID)
         {
-            
             try
             {
                 return BookingAccessor.GetBookingNumbers(itemListID);
@@ -564,7 +562,6 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw ex;
             }
-
         }
     }
 }
