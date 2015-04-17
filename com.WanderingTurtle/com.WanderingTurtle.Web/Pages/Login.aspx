@@ -30,7 +30,7 @@
                     <asp:Button runat="server" OnClick="CheckLogin" Text="Log in" />
                 </fieldset>
         <p>
-            <a href="~/Pages/SupplierApplicationPage.aspx">Submit an Application</a> if you wish to become a Supplier.
+            <a href="/Pages/SupplierApplicationPage.aspx">Submit an Application</a> if you wish to become a Supplier.
         </p>
     </section>
 
