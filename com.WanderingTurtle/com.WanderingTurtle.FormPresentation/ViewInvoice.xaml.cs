@@ -56,12 +56,19 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            AddBooking myBooking = new AddBooking(invoiceToView);
-
-            if (myBooking.ShowDialog() == false)
+            try
             {
-                //fill the booking list after the AddBooking UI closes
-                refreshBookingList();
+                AddBooking myBooking = new AddBooking(invoiceToView);
+
+                if (myBooking.ShowDialog() == false)
+                {
+                    //fill the booking list after the AddBooking UI closes
+                    refreshBookingList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -90,13 +97,20 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
 
                 case (ResultsArchive.OkToArchive):
-                    
-                    //opens UI with guest information
-                    ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
-                    if (myGuest.ShowDialog() == false)
+                    try
                     {
-                        this.Close();
+                        //opens UI with guest information
+                        ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
+
+                        if (myGuest.ShowDialog() == false)
+                        {
+                            this.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new WanderingTurtleException(this, ex);
                     }
                     break;
             }
@@ -138,12 +152,19 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "This booking has already been cancelled.", "Warning");
 
                 case (ResultsEdit.OkToEdit):
-                    //opens the ui and passes the booking details object in
-                    CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, invoiceToView);
-
-                    if (cancel.ShowDialog() == false)
+                    try
                     {
-                        refreshBookingList();
+                        //opens the ui and passes the booking details object in
+                        CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, invoiceToView);
+
+                        if (cancel.ShowDialog() == false)
+                        {
+                            refreshBookingList();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new WanderingTurtleException(this, ex);
                     }
                     break;
             }
@@ -216,11 +237,18 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "This booking has been cancelled and cannot be edited.");
 
                 case (ResultsEdit.OkToEdit):
-                    EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem, ReadOnly);
-
-                    if (editForm.ShowDialog() == false)
+                    try
                     {
-                        refreshBookingList();
+                        EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem, ReadOnly);
+
+                        if (editForm.ShowDialog() == false)
+                        {
+                            refreshBookingList();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new WanderingTurtleException(this, ex);
                     }
                     break;
             }

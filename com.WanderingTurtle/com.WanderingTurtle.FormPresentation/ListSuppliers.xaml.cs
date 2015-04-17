@@ -66,10 +66,17 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private static void UpdateSupplier(Supplier supplierToUpdate, bool ReadOnly = false)
+        private void UpdateSupplier(Supplier supplierToUpdate, bool ReadOnly = false)
         {
-            new AddEditSupplier(supplierToUpdate, ReadOnly).ShowDialog();
-            //addSupplier.FillUpdateList(supplierToUpdate);
+            try
+            {
+                new AddEditSupplier(supplierToUpdate, ReadOnly).ShowDialog();
+                //addSupplier.FillUpdateList(supplierToUpdate);
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>
@@ -84,9 +91,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
         {
-            AddEditSupplier addSupplier;
-            addSupplier = new AddEditSupplier();
-            addSupplier.ShowDialog();
+            try
+            {
+                AddEditSupplier addSupplier;
+                addSupplier = new AddEditSupplier();
+                addSupplier.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>
