@@ -61,11 +61,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
-            Window AddEvent = new AddEditEvent();
-
-            if (AddEvent.ShowDialog() == false)
+            try
             {
-                Refresh();
+                Window AddEvent = new AddEditEvent();
+
+                if (AddEvent.ShowDialog() == false)
+                {
+                    Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -136,7 +143,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                throw new WanderingTurtleException(this, ex, "Please select an event to edit");
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

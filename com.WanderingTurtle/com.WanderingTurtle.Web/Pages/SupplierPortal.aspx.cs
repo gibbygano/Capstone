@@ -45,12 +45,11 @@ namespace com.WanderingTurtle.Web.Pages
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
                 //get # of listings for supplier
                 try
                 {
                     _currentItemListings = _myManager.RetrieveItemListingList();
-                    var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID);
+                    var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                     currentListingCount = myList.Count();
 
                     //get # of guests signed up for the listings
@@ -58,18 +57,11 @@ namespace com.WanderingTurtle.Web.Pages
                     {
                         currentGuestsCount += listing.CurrentNumGuests;
                     }
-
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
- 
-
-            
-
-
         }
 
         public IEnumerable<ItemListing> GetItemLists()

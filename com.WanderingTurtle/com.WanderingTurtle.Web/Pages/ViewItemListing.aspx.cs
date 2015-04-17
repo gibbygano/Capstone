@@ -13,20 +13,40 @@ namespace com.WanderingTurtle.Web.Pages
         ProductManager _myManager = new ProductManager();
         EventManager _eventManager = new EventManager();
         SupplierManager _supplierManager = new SupplierManager();
-        List<ItemListing> _listedLists;
+        IEnumerable<ItemListing> _listedLists;
         public bool loggedIn = false;
         public List<Supplier> _suppliers;
         public List<Event> _events;
         public Supplier _currentSupplier = null;
         private decimal minPrice = 0;
+        private int supplierID;
 
-        protected void Page_PreLoad(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            testLogin();
+
+            if (!Page.IsPostBack)
+            {
+                try
+                {
+                    _suppliers = _supplierManager.RetrieveSupplierList();
+                    _events = _eventManager.RetrieveEventList();
+                }
+                catch (Exception ex)
+                {
+                    //nothing
+                }
+            }
+        }
+
+        private void testLogin()
         {
             try
             {
                 //attempt to get session value if they are logged in
                 loggedIn = (bool)Session["loggedin"];
                 _currentSupplier = (Supplier)Session["user"];
+                supplierID = _currentSupplier.SupplierID;
             }
             catch (Exception)
             {
@@ -41,46 +61,47 @@ namespace com.WanderingTurtle.Web.Pages
                 //if not logged in, send them to login page
                 Response.Redirect("~/login");
             }
-            if (!Page.IsPostBack)
-            {
-                _suppliers = _supplierManager.RetrieveSupplierList();
-                _events = _eventManager.RetrieveEventList();
-            }
         }
 
         public IEnumerable<ItemListing> GetLists()
         {
+            testLogin();
             try
             {
-                _listedLists = _myManager.RetrieveItemListingList();
+                var list = _myManager.RetrieveItemListingList(supplierID);
+
+                _listedLists = list;
                 return _listedLists;
             }
             catch (Exception e)
             {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving List\")</SCRIPT>");
+                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving List" + e.Message + "\")</SCRIPT>");
                 return null;
             }
+
+
         }
         private void bindData()
         {
             lvLists.DataSource = _listedLists;
             lvLists.DataBind();
         }
-      
+
         public void FormValidate(int eventItemID)
         {
-           
+
         }
 
         private String addError(String list, String text)
         {
             return list.Length > 0 ? list + ", " + text : text;
         }
-        public void UpdateList(int ItemListID)
+        public void UpdateList()
         {
             string errorText = "";
             lblError.Text = "";
-
+            int ItemListID = int.Parse(Request.Form["itemID"]);
+            
             try
             {
                 ItemListing myList = _listedLists.Where(ev => ev.ItemListID == ItemListID).FirstOrDefault();
@@ -91,27 +112,27 @@ namespace com.WanderingTurtle.Web.Pages
                 newList.EndDate = DateTime.Parse(Request.Form["end"]);
                 newList.Price = decimal.Parse(Request.Form["price"]);
                 newList.MaxNumGuests = int.Parse(Request.Form["max"]);
-                newList.MinNumGuests = int.Parse(Request.Form["min"]);
+                newList.MinNumGuests = 0;
 
                 listResult result;
 
-                if (!Validator.ValidateDecimal(newList.Price.ToString("G"), minPrice) )
+                if (!Validator.ValidateDecimal(newList.Price.ToString("G"), minPrice))
                 {
-                    errorText = addError(errorText, "Please add a valid, positive price");                      
+                    errorText = addError(errorText, "Please add a valid, positive price");
                 }
-                if(!Validator.ValidateDateTime(newList.StartDate.ToString()))
+                if (!Validator.ValidateDateTime(newList.StartDate.ToString()))
                 {
                     errorText = addError(errorText, "Please add a valid start date");
                 }
-                if (!Validator.ValidateDateTime(newList.EndDate.ToString(), newList.StartDate)) 
+                if (!Validator.ValidateDateTime(newList.EndDate.ToString(), newList.StartDate))
                 {
                     errorText = addError(errorText, "Please add a valid end date after your start date");
                 }
-                if (!Validator.ValidateInt(newList.MaxNumGuests.ToString(), newList.MinNumGuests)) 
+                if (!Validator.ValidateInt(newList.MaxNumGuests.ToString(), newList.MinNumGuests))
                 {
                     errorText = addError(errorText, "Please add a valid max number of guests higher than your minimum");
                 }
-                if (!Validator.ValidateInt(newList.MinNumGuests.ToString(), 0, newList.MaxNumGuests)) 
+                if (!Validator.ValidateInt(newList.MinNumGuests.ToString(), 0, newList.MaxNumGuests))
                 {
                     errorText = addError(errorText, "Please add a valid min number of guests lower than your maximum, higher than zero");
                 }
@@ -119,19 +140,23 @@ namespace com.WanderingTurtle.Web.Pages
                 if (myList != null && errorText.Length == 0)
                 {
                     result = _myManager.EditItemListing(newList, myList);
+                    if(result != listResult.Success)
+                    {
+                        Response.Write("<script>alert('Problem!');</script>");
+                    }
                     return;
                 }
-                else 
+                else
                 {
                     lblError.Text = errorText;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Updating Event" + ex.Message + "\" )</SCRIPT>");
             }
         }
-     
+
         private void showError(string errorMessage)
         {
             lblError.Text = errorMessage;

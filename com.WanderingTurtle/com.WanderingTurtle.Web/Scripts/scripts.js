@@ -56,19 +56,28 @@ $(document).ready(function () {
         start: 0
     });
 
+    var current2 = $('#MainContent_lvLists_listCurrent_0').val();
+    console.log(current2);
+    $("#listmax").spinner({
+        min: current2,
+        max: 999,
+        step: 1,
+        start: 0
+    });
+
    
 
     $("#eventStart").datetimepicker(
         {
             controlType: 'select',
             oneLine: true,
-            timeFormat: 'hh:mm:ss tt'
+            timeFormat: 'hh:mm tt'
         });
     $("#eventEnd").datetimepicker(
         {
             controlType: 'select',
             oneLine: true,
-            timeFormat: 'hh:mm:ss tt'
+            timeFormat: 'hh:mm tt'
         });
 
     /* last function because it will break on most pages */

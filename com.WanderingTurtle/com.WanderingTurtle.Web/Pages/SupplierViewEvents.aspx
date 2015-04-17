@@ -32,9 +32,9 @@
                 <td><%# Item.TransportString %></td>
                 <td><%# Item.OnSiteString %></td>
                 <td>
-                    <asp:Button CommandName="Edit" Text="Edit" runat="server" />
+                    <%--  <asp:Button CommandName="Edit" Text="Edit" runat="server" /> --%>
                     <asp:Button ID="btnList" runat="server" Text="List This Event" CommandArgument ="<%# Item.EventItemID %>" OnClick="btn_Click"/>
-                    <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
+                    <%-- <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" /> --%>
                 </td>
             </tr>
         </ItemTemplate>
