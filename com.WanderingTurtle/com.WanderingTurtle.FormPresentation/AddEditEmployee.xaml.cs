@@ -245,9 +245,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <returns>awaitable Task of MEssageDialogResult</returns>
-        private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
+        private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
-            return DialogBox.ShowMessageDialog(this, message, title, style);
+            return await DialogBox.ShowMessageDialog(this, message, title, style);
         }
 
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)

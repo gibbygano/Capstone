@@ -55,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Creates an event to replace the old version of itself.
         /// </summary>
-        private void AddNewEvent()
+        private async void AddNewEvent()
         {
             var NewEvent = new Event();
             NewEvent.EventItemName = txtEventName.Text;
@@ -107,7 +107,7 @@ namespace com.WanderingTurtle.FormPresentation
                 EventManager.EventResult result = _eventManager.AddNewEvent(NewEvent);
                 if (result == EventManager.EventResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Successfully Added Event");
+                    await DialogBox.ShowMessageDialog(this, "Successfully Added Event");
                     this.Close();
                 }
             }
@@ -140,7 +140,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Fills out our form with information from EventToEdit.
         /// Also saves an Unrevised version of EventToEdit.
         /// </summary>
-        private void EditExistingEvent()
+        private async void EditExistingEvent()
         {
             eventToSubmit.EventItemName = txtEventName.Text;
 
@@ -198,7 +198,7 @@ namespace com.WanderingTurtle.FormPresentation
                 var EventManagerResult = _eventManager.EditEvent(OriginalEvent, eventToSubmit);
                 if (EventManagerResult.Equals(EventManager.EventResult.Success))
                 {
-                    DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
+                    await DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
                     this.Close();
                 }
                 else { throw new WanderingTurtleException(this, EventManagerResult.ToString()); }

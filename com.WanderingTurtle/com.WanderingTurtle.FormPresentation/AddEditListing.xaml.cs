@@ -39,7 +39,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         public ItemListing CurrentItemListing { get; private set; }
 
-        private void addItemListing()
+        private async void addItemListing()
         {
             ItemListing _NewListing = new ItemListing();
             if (!Validator()) return;
@@ -76,7 +76,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 _productManager.AddItemListing(_NewListing);
-                DialogBox.ShowMessageDialog(this, "Listing successfully added!");
+                await DialogBox.ShowMessageDialog(this, "Listing successfully added!");
                 this.Close();
             }
             catch (Exception ex)
@@ -173,7 +173,7 @@ namespace com.WanderingTurtle.FormPresentation
             populateFields();
         }
 
-        private void updateItemListing()
+        private async void updateItemListing()
         {
             try
             {
@@ -196,7 +196,7 @@ namespace com.WanderingTurtle.FormPresentation
                 var numRows = _productManager.EditItemListing(NewListing, CurrentItemListing);
                 if (numRows == listResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Item successfully changed.");
+                    await DialogBox.ShowMessageDialog(this, "Item successfully changed.");
                     this.Close();
                 }
             }
