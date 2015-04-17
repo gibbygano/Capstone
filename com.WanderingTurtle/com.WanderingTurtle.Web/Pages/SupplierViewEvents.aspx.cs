@@ -25,6 +25,7 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
+            lblError.ForeColor = System.Drawing.Color.Red;
             try
             {
                 //attempt to get session value if they are logged in
@@ -262,7 +263,8 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 addListing.Style.Add("display", "none");
                 theLists.Style.Add("display", "block");
-                //success message i guess
+                lblError.Text = "Listing Added.";
+                lblError.ForeColor = System.Drawing.Color.Black;
             }
 
 
