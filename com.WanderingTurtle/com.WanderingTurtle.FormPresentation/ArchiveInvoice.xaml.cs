@@ -113,12 +113,12 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
         {
+            PrintableInvoice newReportWindow = new PrintableInvoice((int)guestToView.HotelGuestID);
 
-
-            //if (newReportWindow.ShowDialog() == false)
-            //{
-            //    RefreshEmployeeList();
-            //}
+            if (newReportWindow.ShowDialog() == false)
+            {
+                //RefreshEmployeeList();
+            }
         }
     }
 }

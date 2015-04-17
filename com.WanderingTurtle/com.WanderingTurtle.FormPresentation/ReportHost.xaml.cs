@@ -35,6 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="guestID">guest id of the guest to use for the invoice</param>
         /// <returns>bool successful</returns>
+        /// <remarks>Updated by Arik Chadima 2015/4/17</remarks>
         public bool BuildInvoice(int guestID)
         {
             //builds the managers required
@@ -45,24 +46,28 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 ReportDataSource reportDataSource1 = new ReportDataSource();
                 reportDataSource1.Name = "HotelGuestDataset"; //Name of the report dataset in our .RDLC file
-                reportDataSource1.Value = guestManager.GetHotelGuest(guestID);
+                List<HotelGuest> guestSet = new List<HotelGuest>();
+                guestSet.Add(guestManager.GetHotelGuest(guestID));
+                reportDataSource1.Value = guestSet;
                 rvHostArea.LocalReport.DataSources.Add(reportDataSource1);
                 ReportDataSource reportDataSource2 = new ReportDataSource();
                 reportDataSource2.Name = "InvoiceDetailsDataset"; //Name of the report dataset in our .RDLC file
-                reportDataSource2.Value = invoiceManager.RetrieveInvoiceByGuest(guestID);
+                List<InvoiceDetails> invoiceSet = new List<InvoiceDetails>();
+                invoiceSet.Add(invoiceManager.RetrieveInvoiceByGuest(guestID));
+                reportDataSource2.Value = invoiceSet;
                 rvHostArea.LocalReport.DataSources.Add(reportDataSource2);
                 ReportDataSource reportDataSource3 = new ReportDataSource();
                 reportDataSource3.Name = "BookingDetailsSet"; //Name of the report dataset in our .RDLC file
                 reportDataSource3.Value = invoiceManager.RetrieveGuestBookingDetailsList(guestID);
                 rvHostArea.LocalReport.DataSources.Add(reportDataSource3);
-                rvHostArea.LocalReport.ReportEmbeddedResource = "<VSProjectName>.PrintableInvoice.rdlc";
+                rvHostArea.LocalReport.ReportEmbeddedResource = "com.WanderingTurtle.FormPresentation.PrintableInvoice.rdlc";
 
                 rvHostArea.RefreshReport();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("Supplied is invalid.");
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
                 return false;
             }
         }
