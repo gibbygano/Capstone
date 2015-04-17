@@ -29,7 +29,7 @@
             <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnRegisterGuest" Content="Register Guest" Click="btnRegisterGuest_Click" />
             <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnViewGuest"     Content="View Guest"     Click="btnViewGuest_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvHotelGuestList}" />
             <TextBox Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchBox" TextWrapping="Wrap"  TextChanged="txtSearchBox_TextChanged" />
-            <Button  Grid.Column="3" Content="Refresh List" x:Name="btnGuestSearch"  Click="btnGuestSearch_Click"/>
+            <Button  Grid.Column="3" Content="Refresh List" x:Name="btnGuestSearch"  Click="btnGuestSearch_Click" />
         </Grid>
     </Grid>
 </UserControl>

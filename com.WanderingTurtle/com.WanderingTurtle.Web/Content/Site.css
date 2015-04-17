@@ -855,6 +855,7 @@ button.ui-button-text-only {
     border-style: solid;
     padding: 7px;
     padding-bottom: 42px;
+    overflow:hidden;
 }
 
 .ui-dialog-title {
@@ -971,3 +972,12 @@ input.myMoney{
     font-size: 0.85em;
     width:50px;
 }
+
+.footer{
+    position: fixed;
+    bottom: 0;
+}
+
+ #MainContent_lvDetails_tbl1{
+     color:#FFFFFF;
+ }  

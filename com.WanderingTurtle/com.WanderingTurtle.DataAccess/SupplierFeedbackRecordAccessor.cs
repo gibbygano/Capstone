@@ -1,14 +1,14 @@
 ﻿//Justin Pennington
 
+using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
-    class SupplierFeedbackRecordAccessor
+    internal class SupplierFeedbackRecordAccessor
     {
         /// <summary>
         /// Created by Justin Pennington 2015/02/25
@@ -26,7 +26,6 @@ namespace com.WanderingTurtle.DataAccess
             var conn = DatabaseConnection.GetDatabaseConnection();
             string cmdText = "spSelectSupplierFeedbackRecord";
             var cmd = new SqlCommand(cmdText, conn);
-
 
             cmd.Parameters.AddWithValue("@RatingID", ratingID);
             try
@@ -172,7 +171,6 @@ namespace com.WanderingTurtle.DataAccess
             // set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
 
-
             cmd.Parameters.AddWithValue("@RatingID", newFeedbackRecord.RatingID);
             cmd.Parameters.AddWithValue("@SupplierID", newFeedbackRecord.SupplierID);
             cmd.Parameters.AddWithValue("@EmployeeID", newFeedbackRecord.EmployeeID);
@@ -244,6 +242,5 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
-
     }
 }

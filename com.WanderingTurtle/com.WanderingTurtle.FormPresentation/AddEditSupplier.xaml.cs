@@ -1,12 +1,12 @@
-﻿using System;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -171,9 +171,8 @@ namespace com.WanderingTurtle.FormPresentation
                         PhoneNumber = txtPhoneNumber.Text,
                         Zip = cboZip.SelectedValue.ToString(),
                         EmailAddress = txtEmail.Text.Trim(),
-                        SupplyCost = (decimal) numSupplyCost.Value
+                        SupplyCost = (decimal)numSupplyCost.Value
                     };
-
 
                     if (_manager.AddANewSupplier(tempSupplier, txtUserName.Text) == SupplierResult.Success)
                     {
@@ -248,7 +247,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     //update user name
                     ResultsEdit result = _loginManager.UpdateSupplierLogin(txtUserName.Text, _supplierUserName, _UpdatableSupplier.SupplierID);
-                
+
                     if (result.Equals(ResultsEdit.Success))
                     {
                         await DialogBox.ShowMessageDialog(this, "Supplier was updated.");
@@ -266,7 +265,7 @@ namespace com.WanderingTurtle.FormPresentation
                     PhoneNumber = txtPhoneNumber.Text,
                     Zip = cboZip.SelectedValue.ToString(),
                     EmailAddress = txtEmail.Text.Trim(),
-                    SupplyCost = (decimal) numSupplyCost.Value,
+                    SupplyCost = (decimal)numSupplyCost.Value,
                     SupplierID = _UpdatableSupplier.SupplierID
                 };
 
@@ -280,7 +279,6 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "Supplier wasn't added to the database.");
                 }
             }
-
             catch (SqlException)
             {
                 // ShowErrorMessage("UserName already used.  Please choose another one.");
@@ -292,7 +290,6 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, ex);
             }
         }
-
 
         /// <summary>
         /// fills the zip code combo box

@@ -31,8 +31,8 @@
         <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker-deets.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery-slider.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/scripts.js") %>"></script>
-        <header>
-            <div class="content-wrapper">
+        <header class="header">
+            <div class="content-wrapper" id="header2">
                 <div class="float-left">
                     <p class="site-title">
                         <a runat="server" href="~/">
@@ -44,8 +44,8 @@
                     <nav>
                         <ul id="menu">
                             <li><a runat="server" href="~/">Home</a></li>
-                            <li><a runat="server" href="~/About">About</a></li>
-                            <li><a runat="server" href="~/Contact">Contact</a></li>
+                            <li><a runat="server" href="/Pages/About">About</a></li>
+                            <li><a runat="server" href="/Pages/Contact">Contact</a></li>
                         </ul>
                     </nav>
                     <div id="user_menu">
@@ -71,7 +71,7 @@
                 </div>
             </div>
         </div>
-        <footer>
+        <footer class="myfooter">
             <div class="content-wrapper">
                 <div class="float-left">
                     <p>&copy; <%: DateTime.Now.Year %> - Wandering Turtle Resort</p>

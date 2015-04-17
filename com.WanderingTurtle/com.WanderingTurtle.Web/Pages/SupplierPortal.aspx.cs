@@ -99,6 +99,7 @@ namespace com.WanderingTurtle.Web.Pages
             var b = (Button)sender;
             int i = int.Parse(b.CommandArgument);
            GetNumbers(i);
+           Response.Write("<script> showDetails(); </script>");
            
         }
     }

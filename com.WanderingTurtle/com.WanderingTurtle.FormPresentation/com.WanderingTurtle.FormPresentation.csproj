@@ -157,6 +157,9 @@
       <DependentUpon>ListPendingSuppliers.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Exceptions.cs" />
+    <Compile Include="PrintableInvoice.xaml.cs">
+      <DependentUpon>PrintableInvoice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportHost.xaml.cs">
       <DependentUpon>ReportHost.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddEditEvent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PrintableInvoice.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -309,6 +316,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="PrintableInvoice.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
@@ -15,14 +14,14 @@ namespace com.WanderingTurtle.Tests
     public class EmployeeAccessorTests
     {
         //Test values
-        string FirstName = "Test";
-        string LastName = "Passman";
-        string Password = "passman_1";
-        RoleData Level = (RoleData)2;
-        bool Active = true;
+        private string FirstName = "Test";
 
-        Employee testEmp;
+        private string LastName = "Passman";
+        private string Password = "passman_1";
+        private RoleData Level = (RoleData)2;
+        private bool Active = true;
 
+        private Employee testEmp;
 
         [TestInitialize]
         public void EmployeeAccessTestSetup()
@@ -31,6 +30,7 @@ namespace com.WanderingTurtle.Tests
             testEmp = new Employee(FirstName, LastName, Password, (int)Level, Active);
             TestMethodAddEmployeeAccess();
         }
+
         [TestMethod]
         public void TestMethodAddEmployeeAccess()
         {
@@ -43,6 +43,7 @@ namespace com.WanderingTurtle.Tests
             }
             Assert.IsTrue(worked);
         }
+
         [TestMethod]
         public void TestMethodFetchEmployeeAccess()
         {
@@ -64,6 +65,7 @@ namespace com.WanderingTurtle.Tests
             Employee testEmp2 = EmployeeAccessor.GetEmployee((int)testEmp1.EmployeeID);
             Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
         }
+
         [TestMethod]
         public void TestMethodFetchEmpListAccess()
         {
@@ -73,6 +75,7 @@ namespace com.WanderingTurtle.Tests
 
             Assert.IsNotNull(myList);
         }
+
         [TestMethod]
         public void TestMethodGetEmpLoginAccess()
         {
@@ -85,6 +88,7 @@ namespace com.WanderingTurtle.Tests
             }
             Assert.IsTrue(worked);
         }
+
         [TestMethod]
         public void TestMethodEditEmployeeAccess()
         {
@@ -103,7 +107,6 @@ namespace com.WanderingTurtle.Tests
         public void TestMethodDeleteEmpRecordAccess()
         {
             TestCleanupAccessor.testEmp(testEmp);
-
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using System;
 using System.Collections.Generic;
-using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -13,28 +13,39 @@ namespace com.WanderingTurtle.BusinessLogic
     public class DataCache
     {
         /******* EVENT ********/
+
         public static List<Event> _currentEventList { get; set; }
+
         public static DateTime _EventListTime { get; set; }
 
         /******* EVENT TYPE ********/
+
         public static List<EventType> _currentEventTypeList { get; set; }
+
         public static DateTime _EventTypeListTime { get; set; }
 
         /******* ITEM LISTING ********/
+
         public static List<ItemListing> _currentItemListingList { get; set; }
+
         public static DateTime _ItemListingListTime { get; set; }
 
         /******* SUPPLIER ********/
+
         public static List<Supplier> _currentSupplierList { get; set; }
+
         public static DateTime _SupplierListTime { get; set; }
 
         /******* ITEMLISTINGDETAILS ********/
+
         public static List<ItemListingDetails> _currentItemListingDetailsList { get; set; }
+
         public static DateTime _ItemListingDetailsListTime { get; set; }
 
         /******* CityState ********/
-        public static List<CityState> _currentCityStateList { get; set; }
-        public static DateTime _currentCityStateListTime { get; set; }
 
+        public static List<CityState> _currentCityStateList { get; set; }
+
+        public static DateTime _currentCityStateListTime { get; set; }
     }
 }

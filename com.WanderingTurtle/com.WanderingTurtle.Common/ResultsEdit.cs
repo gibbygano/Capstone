@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Enum to hold results for editing
-    /// Pat Banks 
+    /// Pat Banks
     /// </summary>
     /// <remarks>
     /// </remarks>
@@ -25,9 +25,9 @@
 
         //already cancelled
         Cancelled,
+
         QuantityZero,
         DatabaseError,
         ListingFull
-
     }
 }

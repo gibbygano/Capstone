@@ -116,44 +116,47 @@ GO
 
 INSERT INTO [dbo].[HotelGuest] (FirstName, LastName, Zip, Address1, Address2, PhoneNumber, EmailAddress, Room, GuestPIN)
 VALUES
-('David', 'Tennant', '52404', '234 33rd Ave SW', ' ', '(319) 258-4566', 'comewithme@yahoo.com', '101', '7754'),
-('Edward', 'Elric', '52641', '2234 Benton Ave', ' ', ' ', ' ', 102, '8643'),
-('Alphonse', 'Elric', '10001', '123 Wall St', 'Apt 114', ' ', 'fullmetal@gmail.com', '103', '0864'),
-('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', ' ', '(223) 145-9908',' ', '104', '2222'),
-('Rose', 'Tyler', '73078', '6453 Benton Ave', ' ','(223) 456-1234', ' ', '105', '7786'),
-('Martha', 'Jones', '73078', '6453 Benton Ave', ' ', ' ', ' ', '201', '6434'),
-('Susan', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', ' ', ' ', '202', '7533'),
-('Barbara', 'Wright', '73102', '5634 Main St',' ', '(456) 223-1234', ' ', '203', '5432'),
-('Peter', 'Capaldi', '52641', '2232 Benton Ave', ' ', '(319) 217-4455', 'doctorwho@kirkwood.edu', '204', '5165'),
-('Clara', 'Oswald', '52641', '1455 Benton Ave', ' ', '(319) 931-9983', ' ', '205', '1234')
+('David', 'Tennant', '52404', '234 33rd Ave SW', '', '(319) 258-4566', 'comewithme@yahoo.com', '101', '7754'),
+('Edward', 'Elric', '52641', '2234 Benton Ave', '', '', '', 102, '8643'),
+('Alphonse', 'Elric', '10001', '123 Wall St', 'Apt 114', '', 'fullmetal@gmail.com', '103', '0864'),
+('Ichigo', 'Kurasaki', '10007', '4567 Broadway Ave', '', '(223) 145-9908','', '104', '2222'),
+('Rose', 'Tyler', '73078', '6453 Benton Ave', '','(223) 456-1234', '', '105', '7786'),
+('Martha', 'Jones', '73078', '6453 Benton Ave', '', '', '', '201', '6434'),
+('Susan', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', '', '', '202', '7533'),
+('Barbara', 'Wright', '73102', '5634 Main St','', '(456) 223-1234', '', '203', '5432'),
+('Peter', 'Capaldi', '52641', '2232 Benton Ave', '', '(319) 217-4455', 'doctorwho@kirkwood.edu', '204', '5165'),
+('Clara', 'Oswald', '52641', '1455 Benton Ave', '', '(319) 931-9983', '', '205', '1234')
 GO
 
 INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)
 VALUES
 ('FJones', 100),
 ('HSmith', 101),
-('GAllen', 102)
+('GAllen', 102),
+('CJackson', 103),
+('SueFox', 104),
+('JoseM', 105)
 GO
 
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, Active)
 VALUES
-('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', ' ', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 1),
+('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', '', '50229', '555-542-8796', 'franciscotours@gmail.com', 100, 1),
 ('Harry''s Boat Rides', 'Harry', 'Smith', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', 101, 1),
-('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', ' ', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 1),
-('Singing Sisters', 'Cathy', 'Jackson', '234 West Way', ' ', '68137', '666-766-2224', 'info@SingingSisters.com', 103, 1),
-('Snorkels R Us', 'Sue', 'Fox', '1 3rd St', ' ', '77573', '712-766-2224', 'info@SnorkelsRUs.com', 104, 1),
-('Gators For Fun', 'Jose', 'Martinez', '554 Wood Circle', ' ', '52761', '444-724-2224', 'Jose@GatorsForFun.com', 105, 1)
+('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', '', '50229', '555-766-1124', 'info@theyregrapetours.com', 102, 1),
+('Singing Sisters', 'Cathy', 'Jackson', '234 West Way', '', '68137', '666-766-2224', 'info@SingingSisters.com', 103, 1),
+('Snorkels R Us', 'Sue', 'Fox', '1 3rd St', '', '77573', '712-766-2224', 'info@SnorkelsRUs.com', 104, 1),
+('Gators For Fun', 'Jose', 'Martinez', '554 Wood Circle', '', '52761', '444-724-2224', 'Jose@GatorsForFun.com', 105, 1)
 GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, CompanyDescription, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, Remarks)
 VALUES
-('Skywalker Tours', ' ', 'Luke', 'Skywalker', '1 Skywalker Ranch', ' ', '73102', '499-222-1124', 'Luke@Tattoine.net', '2015-03-29', 'Pending', CURRENT_TIMESTAMP, ' '),
-('Vader''s Van Service', ' ', 'Darth','Vader', '2 Death Star Way', ' ', '12235', '666-444-5999', 'Vader@SithLords.com', '2015-04-02', 'Pending', CURRENT_TIMESTAMP, ' '),
-('Falcon Enterprises', ' ', 'Han', 'Solo', '3000 Millenium Dr', ' ', '58214', '555-344-1987', 'Han@falconEnterprises.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' '),
-('Cantina Bands', ' ', 'Alien', 'Dude', '1 Desert Dr', ' ', '58214', '222-844-1978', 'Alien@CantinaBands.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, ' '),
-('BobaFett''s FunHouse', ' ', 'Boba', 'Fett', '79 Clone Dr', ' ', '58214', '555-244-8087', 'Boba@FettFunhouse.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ' '),
-('Gringott''s', ' ', 'Griphook', 'Goblin', '14 Diagon Alley', ' ', '51537', '555-344-1987', 'Griphook@Gringotts.com', '2015-04-13', 'Pending', CURRENT_TIMESTAMP, ' '),
-('Weasley''s Wizarding Wonders', ' ', 'George', 'Weasley', '33 Diagon Alley', ' ', '58214', '222-844-1978', 'Twins@weasleys.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, ' ')
+('Skywalker Tours', '', 'Luke', 'Skywalker', '1 Skywalker Ranch', '', '73102', '499-222-1124', 'Luke@Tattoine.net', '2015-03-29', 'Pending', CURRENT_TIMESTAMP, ''),
+('Vader''s Van Service', '', 'Darth','Vader', '2 Death Star Way', '', '12235', '666-444-5999', 'Vader@SithLords.com', '2015-04-02', 'Pending', CURRENT_TIMESTAMP, ''),
+('Falcon Enterprises', '', 'Han', 'Solo', '3000 Millenium Dr', '', '58214', '555-344-1987', 'Han@falconEnterprises.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ''),
+('Cantina Bands', '', 'Alien', 'Dude', '1 Desert Dr', '', '58214', '222-844-1978', 'Alien@CantinaBands.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, ''),
+('BobaFett''s FunHouse', '', 'Boba', 'Fett', '79 Clone Dr', '', '58214', '555-244-8087', 'Boba@FettFunhouse.com', '2015-04-06', 'Pending', CURRENT_TIMESTAMP, ''),
+('Gringott''s', '', 'Griphook', 'Goblin', '14 Diagon Alley', '', '51537', '555-344-1987', 'Griphook@Gringotts.com', '2015-04-13', 'Pending', CURRENT_TIMESTAMP, ''),
+('Weasley''s Wizarding Wonders', '', 'George', 'Weasley', '33 Diagon Alley', '', '58214', '222-844-1978', 'Twins@weasleys.com', '2015-04-10', 'Pending', CURRENT_TIMESTAMP, '')
 GO
 
 INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transportation, EventDescription, Active)

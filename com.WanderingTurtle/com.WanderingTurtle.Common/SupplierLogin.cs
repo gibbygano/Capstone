@@ -2,12 +2,6 @@
 {
     public class SupplierLogin
     {
-        public int UserID{ get; set; }
-        public string UserPassword { get; set; }
-        public string UserName { get; set; }
-        public string SupplierID { get; set; }
-        public bool Active { get; set; }
-
         public SupplierLogin()
         { }
 
@@ -24,5 +18,15 @@
             this.UserName = UserName;
             this.Active = Active;
         }
+
+        public bool Active { get; set; }
+
+        public string SupplierID { get; set; }
+
+        public int UserID { get; set; }
+
+        public string UserName { get; set; }
+
+        public string UserPassword { get; set; }
     }
 }
