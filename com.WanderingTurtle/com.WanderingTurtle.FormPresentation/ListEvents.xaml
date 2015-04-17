@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvEvents" MouseDoubleClick="lvEvents_MouseDoubleClick">
+        <DataGrid Grid.Row="0" x:Name="lvEvents">
             <DataGrid.Columns>
                 <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL
@@ -17,6 +17,11 @@
                 <DataGridTextColumn Width="150" Header="Transportation" Binding="{Binding TransportString}" />
                 <DataGridTextColumn Width="Auto" Header="On-Site"        Binding="{Binding OnSiteString}" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="lvEvents_MouseDoubleClick" />
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

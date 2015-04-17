@@ -72,7 +72,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 foreach (FrameworkElement child in content.Children)
                 {
                     // Return if this child control is set in controlsToKeepEnabled
-                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child)) { return; }
+                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child)) { continue; }
 
                     // If child component is a container, then call the recursive method to get inner child components
                     if (child is Panel) { MakeReadOnly(child as Panel, controlsToKeepEnabled); }

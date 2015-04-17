@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:views="clr-namespace:com.WanderingTurtle.FormPresentation.Views"
-        Style="{DynamicResource WindowStyle}"
+        Style="{DynamicResource MainWindowStyle}"
         Title="Wandering Turtle Resort"
         Height="525" Width="950" MinHeight="125"
         Icon="Resources/Icon.ico"

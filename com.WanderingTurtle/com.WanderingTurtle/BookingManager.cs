@@ -115,7 +115,9 @@ namespace com.WanderingTurtle.BusinessLogic
                     {
                         //get event from cached list
                         var list = DataCache._currentItemListingDetailsList;
-                        ItemListingDetails requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
+                        ItemListingDetails requestedEvent = new ItemListingDetails();
+                        requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
+
                         if (requestedEvent != null)
                         {
                             return requestedEvent;

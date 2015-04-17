@@ -18,9 +18,11 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="WindowStyle" TargetType="{x:Type Metro:MetroWindow}">
-                <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
                 <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <Style x:Key="MainWindowStyle" TargetType="{x:Type Metro:MetroWindow}" BasedOn="{StaticResource WindowStyle}">
+                <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
             </Style>
 
             <system:Double x:Key="TextBoxHeight">30</system:Double>

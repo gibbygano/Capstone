@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvListing" MouseDoubleClick="lvListing_MouseDoubleClick">
+        <DataGrid Grid.Row="0" x:Name="lvListing">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto"  Header="ID"              Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width="*" Header="Supplier"            Binding="{Binding SupplierName}" />
@@ -19,6 +19,11 @@
                 <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}" />
                 <DataGridTextColumn Width="Auto"  Header="Attendees"       Binding="{Binding CurrentNumGuests}" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="lvListing_MouseDoubleClick" />
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
