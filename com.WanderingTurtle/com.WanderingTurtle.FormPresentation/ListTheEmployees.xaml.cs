@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
@@ -81,55 +80,6 @@ namespace com.WanderingTurtle.FormPresentation
             UpdateEmployee(selectedItem as Employee);
         }
 
-        /// <summary>
-        /// Will Fritz
-        /// Created: 2015/02/27
-        ///
-        /// This method will sort the listview column in both asending and desending order
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvEmployeeListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEmployeesList.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
-            }
-        }
-
         private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdateEmployee(DataGridHelper.DataGridRow_Click<Employee>(sender, e), true);
@@ -199,6 +149,5 @@ namespace com.WanderingTurtle.FormPresentation
             lvEmployeesList.ItemsSource = myList;
             lvEmployeesList.Items.Refresh();
         }
-
     }
 }

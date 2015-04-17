@@ -54,20 +54,6 @@ namespace com.WanderingTurtle.FormPresentation
         //////////////////////Windows Events//////////////////////////////
 
         /// <summary>
-        /// Will fill the list and set error message to nothing
-        /// created by Will Fritz 2/6/15
-        /// </summary>
-        /// /// <remarks>
-        /// edited by will fritz 2/19/15
-        /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            //btnEdit.IsEnabled = false;
-        }
-
-        /// <summary>
         /// Will validate the fields and edit the current supplier
         /// created by Will Fritz 2/6/15
         /// </summary>
@@ -303,10 +289,6 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new WanderingTurtleException(this, "Supplier wasn't added to the database.");
                 }
-
-
-
-
             }
 
             catch (SqlException)

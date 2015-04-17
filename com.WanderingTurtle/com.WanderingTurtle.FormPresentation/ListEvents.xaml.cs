@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
@@ -105,24 +104,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// Hunter Lind || 2015/2/23
-        /// Unimplemented delete button code.
-        /// Will be implemented by: 2015/2/27
-        /// </summary>
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Event EventToDelete = (Event)lvEvents.SelectedItems[0];
-                myMan.ArchiveAnEvent(EventToDelete);
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
-        }
-
         private void btnEditEvent_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -156,53 +137,6 @@ namespace com.WanderingTurtle.FormPresentation
             List<Event> myTempList = myMan.EventSearch(txtSearchInput.Text);
             lvEvents.ItemsSource = myTempList;
             txtSearchInput.Text = "";
-        }
-
-        /// <summary>
-        /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvEventListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEvents.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
-            }
         }
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)

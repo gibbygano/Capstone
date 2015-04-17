@@ -67,18 +67,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-
                 throw new WanderingTurtleException(this, ex);
             }
-
-            
-
         }
 
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdatePendingSupplier(DataGridHelper.DataGridRow_Click<SupplierApplication>(sender, e), true);
         }
-
     }
 }

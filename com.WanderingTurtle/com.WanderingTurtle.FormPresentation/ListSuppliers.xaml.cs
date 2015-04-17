@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
@@ -137,17 +136,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //var selectedItem = this.lvSuppliersList.SelectedItem;
-
-            //if(selectedItem == null)
-            //{
-            //     throw new WanderingTurtleException(this, "You Must Select A Supplier Before You Can Update");
-            //}
-            //else
-            //{
-            //    UpdateSupplier(selectedItem as Supplier);
-            //}
-
             try
             {
                 UpdateSupplier(lvSuppliersList.SelectedItems[0] as Supplier);
@@ -155,52 +143,6 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex, "You Must Select A Supplier Before You Can Update");
-            }
-        }
-
-        /// <summary>
-        /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvSupplierListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvSuppliersList.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
             }
         }
 
