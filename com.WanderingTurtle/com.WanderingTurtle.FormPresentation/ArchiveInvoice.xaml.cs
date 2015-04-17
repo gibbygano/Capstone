@@ -119,5 +119,15 @@ namespace com.WanderingTurtle.FormPresentation
         {
             this.DialogResult = false;
         }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            //if (newReportWindow.ShowDialog() == false)
+            //{
+            //    RefreshEmployeeList();
+            //}
+        }
     }
 }

@@ -13,15 +13,6 @@ namespace com.WanderingTurtle.Web.Pages {
     public partial class GuestViewListings {
         
         /// <summary>
-        /// lblMessage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMessage;
-        
-        /// <summary>
         /// gvListingsUpdate control.
         /// </summary>
         /// <remarks>
@@ -49,6 +40,15 @@ namespace com.WanderingTurtle.Web.Pages {
         protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
         
         /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
+        
+        /// <summary>
         /// lblTickets control.
         /// </summary>
         /// <remarks>
@@ -56,6 +56,15 @@ namespace com.WanderingTurtle.Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTickets;
+        
+        /// <summary>
+        /// hfGuestMaxTickets control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfGuestMaxTickets;
         
         /// <summary>
         /// txtGuestTickets control.
