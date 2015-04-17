@@ -75,10 +75,5 @@
     <asp:Button ID="btnSubmitApplication" runat="server" OnClick="btnSubmitApplication_Click" Text="Submit Application" Width="182px" />
     </section>
     <aside>
-        <h3>Hunter is being a dBag</h3>
-        <p>        
-            needs to be information of why hes being a dbag.
-        </p>
- 
     </aside>
 </asp:Content>

@@ -49,7 +49,7 @@ namespace com.WanderingTurtle.Web.Pages
                 try
                 {
                     _currentItemListings = _myManager.RetrieveItemListingList();
-                    var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID);
+                    var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                     currentListingCount = myList.Count();
 
                     //get # of guests signed up for the listings

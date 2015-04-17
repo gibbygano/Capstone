@@ -56,13 +56,6 @@ $(document).ready(function () {
         start: 0
     });
 
-    $("#listmin").spinner({
-        min: 0,
-        max: 999,
-        step: 1,
-        start: 0
-    });
-
     var current2 = $('#MainContent_lvLists_listCurrent_0').val();
     console.log(current2);
     $("#listmax").spinner({

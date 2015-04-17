@@ -96,11 +96,12 @@ namespace com.WanderingTurtle.Web.Pages
         {
             return list.Length > 0 ? list + ", " + text : text;
         }
-        public void UpdateList(int ItemListID)
+        public void UpdateList()
         {
             string errorText = "";
             lblError.Text = "";
-
+            int ItemListID = int.Parse(Request.Form["itemID"]);
+            
             try
             {
                 ItemListing myList = _listedLists.Where(ev => ev.ItemListID == ItemListID).FirstOrDefault();
@@ -111,7 +112,7 @@ namespace com.WanderingTurtle.Web.Pages
                 newList.EndDate = DateTime.Parse(Request.Form["end"]);
                 newList.Price = decimal.Parse(Request.Form["price"]);
                 newList.MaxNumGuests = int.Parse(Request.Form["max"]);
-                newList.MinNumGuests = int.Parse(Request.Form["min"]);
+                newList.MinNumGuests = 0;
 
                 listResult result;
 
@@ -139,6 +140,10 @@ namespace com.WanderingTurtle.Web.Pages
                 if (myList != null && errorText.Length == 0)
                 {
                     result = _myManager.EditItemListing(newList, myList);
+                    if(result != listResult.Success)
+                    {
+                        Response.Write("<script>alert('Problem!');</script>");
+                    }
                     return;
                 }
                 else
