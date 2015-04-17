@@ -32,9 +32,16 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void UpdatePendingSupplier(SupplierApplication selectedItem, bool ReadOnly = false)
         {
-            if (new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog() == false)
+            try
             {
-                loadPendingSuppliers();
+                if (new AddEditPendingSupplier(selectedItem, ReadOnly).ShowDialog() == false)
+                {
+                    loadPendingSuppliers();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

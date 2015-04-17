@@ -40,12 +40,19 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
-            Window AddItemListings = new AddEditListing();
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
-            //AddItemListings.Show();
-            if (AddItemListings.ShowDialog() == false)
+            try
             {
-                refreshData();
+                Window AddItemListings = new AddEditListing();
+                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
+                //AddItemListings.Show();
+                if (AddItemListings.ShowDialog() == false)
+                {
+                    refreshData();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -89,13 +96,20 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, "Please select a row to edit");
             }
 
-            Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
-
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
-            //AddItemListings.Show();
-            if (EditListings.ShowDialog() == false)
+            try
             {
-                refreshData();
+                Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
+
+                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
+                //AddItemListings.Show();
+                if (EditListings.ShowDialog() == false)
+                {
+                    refreshData();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

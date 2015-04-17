@@ -48,11 +48,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            AddEmployee newAddWindow = new AddEmployee();
-
-            if (newAddWindow.ShowDialog() == false)
+            try
             {
-                RefreshEmployeeList();
+                AddEmployee newAddWindow = new AddEmployee();
+
+                if (newAddWindow.ShowDialog() == false)
+                {
+                    RefreshEmployeeList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -154,11 +161,18 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void UpdateEmployee(Employee selectedEmployee, bool ReadOnly = false)
         {
-            AddEmployee newAddWindow = new AddEmployee(selectedEmployee, ReadOnly);
-
-            if (newAddWindow.ShowDialog() == false)
+            try
             {
-                RefreshEmployeeList();
+                AddEmployee newAddWindow = new AddEmployee(selectedEmployee, ReadOnly);
+
+                if (newAddWindow.ShowDialog() == false)
+                {
+                    RefreshEmployeeList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 

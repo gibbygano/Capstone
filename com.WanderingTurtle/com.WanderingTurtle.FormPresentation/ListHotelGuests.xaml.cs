@@ -46,12 +46,19 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
         {
-            AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
-
-            //When the UI closes, the Hotel Guest list will refresh
-            if (addEditHotelGuest.ShowDialog() == false)
+            try
             {
-                RefreshGuestList();
+                AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
+
+                //When the UI closes, the Hotel Guest list will refresh
+                if (addEditHotelGuest.ShowDialog() == false)
+                {
+                    RefreshGuestList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -111,11 +118,18 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void ViewHotelGuest(InvoiceDetails selectedGuest)
         {
-            ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
-
-            if (custInvoice.ShowDialog() == false)
+            try
             {
-                RefreshGuestList();
+                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
+
+                if (custInvoice.ShowDialog() == false)
+                {
+                    RefreshGuestList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -130,7 +144,6 @@ namespace com.WanderingTurtle.FormPresentation
                 this.btnGuestSearch.Content = "Search";
             }
         }
-
 
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)
         {
