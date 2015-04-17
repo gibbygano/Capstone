@@ -1,21 +1,10 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -46,12 +35,19 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
         {
-            AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
-
-            //When the UI closes, the Hotel Guest list will refresh
-            if (addEditHotelGuest.ShowDialog() == false)
+            try
             {
-                RefreshGuestList();
+                AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
+
+                //When the UI closes, the Hotel Guest list will refresh
+                if (addEditHotelGuest.ShowDialog() == false)
+                {
+                    RefreshGuestList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -111,26 +107,25 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void ViewHotelGuest(InvoiceDetails selectedGuest)
         {
-            ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
-
-            if (custInvoice.ShowDialog() == false)
+            try
             {
-                RefreshGuestList();
+                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
+
+                if (custInvoice.ShowDialog() == false)
+                {
+                    RefreshGuestList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
         private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtSearchBox.Text.Length == 0)
-            {
-                this.btnGuestSearch.Content = "Refresh List";
-            }
-            else
-            {
-                this.btnGuestSearch.Content = "Search";
-            }
+            this.btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
         }
-
 
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)
         {

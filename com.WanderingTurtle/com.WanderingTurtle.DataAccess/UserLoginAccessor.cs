@@ -1,11 +1,6 @@
-﻿using com.WanderingTurtle.Common;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System;
 using System.Data.SqlClient;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {

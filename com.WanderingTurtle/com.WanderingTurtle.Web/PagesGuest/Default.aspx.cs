@@ -7,6 +7,7 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.Web;
 using System.Data;
 using System.Drawing;
+using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.Web.Pages
 {
@@ -33,7 +34,7 @@ namespace com.WanderingTurtle.Web.Pages
         private void bindData()
         {
             gvListings.DataSource = _currentItemListings;
-            gvListings.DataBind();            
+            gvListings.DataBind();
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace com.WanderingTurtle.Web.Pages
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             //if something isn't selected - throw error
-            if (gvListings.SelectedValue != null)
+            if (gvListings.SelectedValue == null)
             {
                 lblMessage.Text = "Please select an event";
                 return;
@@ -89,30 +90,26 @@ namespace com.WanderingTurtle.Web.Pages
             ItemListingDetails selectedItemListing = getSelectedItem();
 
             //gets quantity from the quantity field
-            if(!Validator.ValidateInt(txtGuestTickets.Text,1))
+            if (!Validator.ValidateInt(txtGuestTickets.Text, 1))
             {
                 lblMessage.Text = "You must enter a valid number of tickets.";
-                txtGuestTickets.BorderColor = Color.Red;
                 return;
             }
 
             if (!Validator.ValidateInt(txtGuestPin.Text, 1))
             {
                 lblMessage.Text = "You must enter a valid pin.";
-                txtGuestTickets.BorderColor = Color.Red;
                 return;
             }
 
-            txtGuestTickets.BorderColor = Color.Black;
-            txtGuestTickets.BorderColor = Color.Black;
-
             try
             {
-                int inPin = Int32.Parse(txtGuestPin.Text);
+                string inPin = txtGuestPin.Text;
 
-                //see if it is a valid pin
-                ResultsEdit answer = _myManager.checkValidPIN(inPin);
-                    
+                //see if it is a valid pin = if not there will be an exception
+
+                HotelGuest foundGuest = _myManager.checkValidPIN(inPin);
+
                 int qty = Int32.Parse(txtGuestTickets.Text);
 
                 //get discount from form - web form is 0
@@ -122,55 +119,37 @@ namespace com.WanderingTurtle.Web.Pages
                 extendedPrice = _myManager.calcExtendedPrice(selectedItemListing.Price, qty);
                 totalPrice = _myManager.calcTotalCharge(discount, extendedPrice);
 
-                switch (answer)
+                int guestID = (int)foundGuest.HotelGuestID;
+
+                Booking webBookingToAdd = new Booking(guestID, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+
+                ResultsEdit addResult = _myManager.AddBookingResult(webBookingToAdd);
+
+                switch (addResult)
                 {
-                    case ResultsEdit.NotFound:
-                        lblMessage.Text = "PIN not found.";
+                    case ResultsEdit.Success:
+                        lblMessage.Text = ("Thank You, " + foundGuest.GetFullName + ". You have successfully signed up for " + selectedItemListing.EventName + ".");
+                        clearFields();
+                        gvListings.DataBind();
                         break;
 
-                    case ResultsEdit.OkToEdit:
-
-                        Booking webBookingToAdd = new Booking(999, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
-                        addWebBooking(inPin, webBookingToAdd);
+                    case ResultsEdit.ListingFull:
+                        lblMessage.Text = "full";
                         break;
-
-                    default:
+                    case ResultsEdit.DatabaseError:
+                        lblMessage.Text = "db error";
                         break;
                 }
+            }
+            catch (SqlException)
+            {
+                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Incorrect PIN\")</SCRIPT>");
 
             }
             catch (Exception)
             {
-                    
-                    throw;
-            }
-            
-        }
+                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"There was an error\")</SCRIPT>");
 
-        private void addWebBooking(int inPin, Booking webBookingToAdd)
-        {
-            //add the booking & return result
-            int guestID = _myManager.FindGuest(inPin);
-            
-            //update the id from the pin
-            webBookingToAdd.GuestID = guestID;
-            
-            ResultsEdit addResult = _myManager.AddBookingResult(webBookingToAdd);
-
-            switch (addResult)
-            {
-                case ResultsEdit.Success:
-                    lblMessage.Text = "You have successfully signed up for the event.";
-                    clearFields();
-                    gvListings.DataBind();
-                    break;
-
-                case ResultsEdit.ListingFull:
-                    lblMessage.Text = "full";
-                    break;
-                case ResultsEdit.DatabaseError:
-                    lblMessage.Text = "db error";
-                    break;
             }
         }
 
@@ -178,8 +157,9 @@ namespace com.WanderingTurtle.Web.Pages
         {
             txtGuestTickets.Text = "";
             txtGuestPin.Text = "";
+            gvListings.SelectedIndex = -1;
         }
-    
+
         private ItemListingDetails getSelectedItem()
         {
             int itemID = (int)gvListings.SelectedDataKey.Value;
@@ -192,6 +172,12 @@ namespace com.WanderingTurtle.Web.Pages
         protected void lvListings_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             bindData();
+        }
+
+        protected void gvListings_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int maxTickets = getSelectedItem().QuantityOffered;
+            hfGuestMaxTickets.Value = maxTickets.ToString();
         }
 
     }

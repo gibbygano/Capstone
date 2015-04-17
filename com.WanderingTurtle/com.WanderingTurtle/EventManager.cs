@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
-using System;
-using System.Linq;
 
 namespace com.WanderingTurtle.BusinessLogic
 {

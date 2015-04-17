@@ -9,7 +9,6 @@
     [PhoneNumber]   VARCHAR (15)  NOT NULL,
     [EmailAddress]  VARCHAR (100) NOT NULL,
     [ApplicationID] INT           NOT NULL,
-    [UserID]        INT           NULL,
     [Active]        INT           NOT NULL,
 	[SupplyCost]	DECIMAL(3,2)		  NOT NULL DEFAULT(.70), 
     CONSTRAINT [PK_Supplier] PRIMARY KEY CLUSTERED ([SupplierID] ASC) ON [PRIMARY], 
@@ -18,3 +17,4 @@
 GO
 CREATE NONCLUSTERED INDEX [SupplierIndex]
     ON [dbo].[Supplier]([SupplierID] ASC);
+GO

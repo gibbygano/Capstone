@@ -1,26 +1,18 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for ListEventss.xaml
+    /// Interaction logic for ListEvents.xaml
     /// </summary>
     public partial class ListEvents : UserControl
     {
@@ -61,11 +53,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
         {
-            Window AddEvent = new AddEditEvent();
-
-            if (AddEvent.ShowDialog() == false)
+            try
             {
-                Refresh();
+                Window AddEvent = new AddEditEvent();
+
+                if (AddEvent.ShowDialog() == false)
+                {
+                    Refresh();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -88,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
                 case MessageDialogResult.Affirmative:
                     try
                     {
-                        Event EventToDelete = (Event)lvEvents.SelectedItems[0];
+                        Event EventToDelete = lvEvents.SelectedItems[0] as Event;
                         myMan.ArchiveAnEvent(EventToDelete);
                         Refresh();
                     }
@@ -105,29 +104,11 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// Hunter Lind || 2015/2/23
-        /// Unimplemented delete button code.
-        /// Will be implemented by: 2015/2/27
-        /// </summary>
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Event EventToDelete = (Event)lvEvents.SelectedItems[0];
-                myMan.ArchiveAnEvent(EventToDelete);
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
-        }
-
         private void btnEditEvent_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Event EventToEdit = (Event)lvEvents.SelectedItem;
+                Event EventToEdit = lvEvents.SelectedItem as Event;
                 var editWindow = new AddEditEvent(EventToEdit);
                 if (editWindow.ShowDialog() == false)
                 {
@@ -136,7 +117,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
             catch (Exception ex)
             {
-                throw new WanderingTurtleException(this, ex, "Please select an event to edit");
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
@@ -156,53 +137,6 @@ namespace com.WanderingTurtle.FormPresentation
             List<Event> myTempList = myMan.EventSearch(txtSearchInput.Text);
             lvEvents.ItemsSource = myTempList;
             txtSearchInput.Text = "";
-        }
-
-        /// <summary>
-        /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvEventListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvEvents.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
-            }
         }
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -234,14 +168,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtSearchInput.Text.Length == 0)
-            {
-                btnSearch.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearch.Content = "Search";
-            }
+            btnSearch.Content = txtSearchInput.Text.Length == 0 ? "Refresh List" : "Search";
         }
     }
 }

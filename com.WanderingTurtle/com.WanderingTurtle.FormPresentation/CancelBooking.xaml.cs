@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data.SqlClient;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
@@ -108,7 +97,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.ChangedByOtherUser):
-                        throw new Exception("This booking has already been cancelled.");
+                        throw new ApplicationException("This booking has already been cancelled.");
 
                     case (ResultsEdit.Success):
                         await DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");

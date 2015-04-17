@@ -3,27 +3,28 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="433*"/>
-            <ColumnDefinition Width="447*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Column="0" Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}" MouseDoubleClick="lvPendingSuppliers_MouseDoubleClick" Grid.ColumnSpan="2">
+        <DataGrid Grid.Row="0" x:Name="lvPendingSuppliers" DataContext="{Binding Path=GetPendingSuppliers}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*"    Header="Company Name"        Binding="{Binding CompanyName}" />
-                <DataGridTextColumn Width="*"    Header="First Name"          Binding="{Binding FirstName}" />
-                <DataGridTextColumn Width="*"    Header="Last Name"           Binding="{Binding LastName}" />
-                <DataGridTextColumn Width="*"   Header="Phone #"             Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn Width="Auto" Header="Application Date"    Binding="{Binding ApplicationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
-                <DataGridTextColumn Width="Auto" Header="ApplicationStatus"   Binding="{Binding ApplicationStatus}" />
+                <DataGridTextColumn Width="*"    Header="Company Name"      Binding="{Binding CompanyName}" />
+                <DataGridTextColumn Width="*"    Header="First Name"        Binding="{Binding FirstName}" />
+                <DataGridTextColumn Width="*"    Header="Last Name"         Binding="{Binding LastName}" />
+                <DataGridTextColumn Width="*"   Header="Phone #"            Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn Width="Auto" Header="Application Date"  Binding="{Binding ApplicationDate, StringFormat='{}{0:MM/dd/yyyy}'}" />
+                <DataGridTextColumn Width="Auto" Header="ApplicationStatus" Binding="{Binding ApplicationStatus}" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="lvPendingSuppliers_MouseDoubleClick" />
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
-        <WrapPanel Grid.Row="1" Grid.ColumnSpan="2">
-            <Button Content="View Approved Suppliers"    Margin="{DynamicResource Button Spacing}" Click="btnViewApprovedSuppliers_Click" />
+        <WrapPanel Grid.Row="1">
+            <Button Content="View Approved Suppliers" Margin="{DynamicResource Button Spacing}" Click="btnViewApprovedSuppliers_Click" />
             <Button Content="Update Pending Supplier" Margin="{DynamicResource Button Spacing}" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvPendingSuppliers}" />
         </WrapPanel>
     </Grid>

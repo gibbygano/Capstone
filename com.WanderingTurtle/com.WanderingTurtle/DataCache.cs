@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.BusinessLogic
@@ -33,6 +31,10 @@ namespace com.WanderingTurtle.BusinessLogic
         /******* ITEMLISTINGDETAILS ********/
         public static List<ItemListingDetails> _currentItemListingDetailsList { get; set; }
         public static DateTime _ItemListingDetailsListTime { get; set; }
+
+        /******* CityState ********/
+        public static List<CityState> _currentCityStateList { get; set; }
+        public static DateTime _currentCityStateListTime { get; set; }
 
     }
 }

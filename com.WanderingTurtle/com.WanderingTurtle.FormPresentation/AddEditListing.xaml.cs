@@ -1,17 +1,15 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 // Worked on by:
-///Hunter
-////Fritz
-/////Matthew 10:15
+// Hunter
+// Fritz
+// Matthew 10:15
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
@@ -29,6 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             Setup();
         }
 
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public AddEditListing(ItemListing CurrentItemListing, bool ReadOnly = false)
         {
             this.CurrentItemListing = CurrentItemListing;
@@ -39,10 +38,10 @@ namespace com.WanderingTurtle.FormPresentation
 
         public ItemListing CurrentItemListing { get; private set; }
 
-        private void addItemListing()
+        private async void addItemListing()
         {
+            if (!Validator()) return;
             ItemListing _NewListing = new ItemListing();
-            if (!Valdiator()) return;
 
             try
             {
@@ -52,13 +51,19 @@ namespace com.WanderingTurtle.FormPresentation
                 DateTime formStartTime = (DateTime)(tpStartTime.Value);
                 DateTime formEndTime = (DateTime)(tpEndTime.Value);
 
-                _NewListing.EventID = Int32.Parse(eventCbox.SelectedValue.ToString());
-                _NewListing.SupplierID = Int32.Parse(supplierCbox.SelectedValue.ToString());
+
 
                 //date is your existing Date object, time is the nullable DateTime object from your TimePicker
                 _NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
                 _NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
 
+                if (_NewListing.StartDate > _NewListing.EndDate)
+                {
+                    throw new WanderingTurtleException(this, "End Date must be after Start Date");
+
+                }
+                _NewListing.EventID = ((Event)eventCbox.SelectedItem).EventItemID;
+                _NewListing.SupplierID = ((Supplier)supplierCbox.SelectedItem).SupplierID;
                 _NewListing.Price = (decimal)(udPrice.Value);
                 _NewListing.MaxNumGuests = (int)(udSeats.Value);
             }
@@ -70,7 +75,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 _productManager.AddItemListing(_NewListing);
-                DialogBox.ShowMessageDialog(this, "Listing successfully added!");
+                await DialogBox.ShowMessageDialog(this, "Listing successfully added!");
                 this.Close();
             }
             catch (Exception ex)
@@ -145,9 +150,14 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 eventCbox.Items.Clear();
-                eventCbox.ItemsSource = _eventManager.RetrieveEventList();
+                eventCbox.ItemsSource = DataCache._currentEventList;
+                eventCbox.DisplayMemberPath = "EventItemName";
+                eventCbox.SelectedValue = "EventItemID";
+
+
                 supplierCbox.Items.Clear();
                 supplierCbox.ItemsSource = _supplierManager.RetrieveSupplierList();
+                
             }
             catch (Exception ex)
             {
@@ -161,7 +171,7 @@ namespace com.WanderingTurtle.FormPresentation
             populateFields();
         }
 
-        private void updateItemListing()
+        private async void updateItemListing()
         {
             try
             {
@@ -169,20 +179,24 @@ namespace com.WanderingTurtle.FormPresentation
                 DateTime formEndDate = (DateTime)(dateEnd.SelectedDate);
                 DateTime formStartTime = (DateTime)(tpStartTime.Value);
                 DateTime formEndTime = (DateTime)(tpEndTime.Value);
-                ItemListing NewListing = new ItemListing();
-                NewListing.ItemListID = CurrentItemListing.ItemListID;
-                NewListing.EventID = CurrentItemListing.EventID;
-                NewListing.StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString()));
-                NewListing.EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString()));
-                NewListing.Price = (decimal)(udPrice.Value);
-                NewListing.MaxNumGuests = (int)(udSeats.Value);
-                NewListing.CurrentNumGuests = CurrentItemListing.CurrentNumGuests;
-                NewListing.SupplierID = CurrentItemListing.SupplierID;
+                ItemListing NewListing = new ItemListing
+                {
+                    ItemListID = CurrentItemListing.ItemListID,
+                    EventID = CurrentItemListing.EventID,
+                    StartDate = DateTime.Parse(string.Format("{0} {1}", formStartDate.ToShortDateString(), formStartTime.ToLongTimeString())),
+                    EndDate = DateTime.Parse(string.Format("{0} {1}", formEndDate.ToShortDateString(), formEndTime.ToLongTimeString())),
+                    Price = (decimal) (udPrice.Value),
+                    MaxNumGuests = (int) (udSeats.Value),
+                    CurrentNumGuests = CurrentItemListing.CurrentNumGuests,
+                    SupplierID = CurrentItemListing.SupplierID
+                };
+
+
 
                 var numRows = _productManager.EditItemListing(NewListing, CurrentItemListing);
-                if (numRows == ProductManager.listResult.Success)
+                if (numRows == listResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Item successfully changed.");
+                    await DialogBox.ShowMessageDialog(this, "Item successfully changed.");
                     this.Close();
                 }
             }
@@ -192,7 +206,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private bool Valdiator()
+        private bool Validator()
         {
             if (eventCbox.SelectedIndex.Equals(-1))
             {

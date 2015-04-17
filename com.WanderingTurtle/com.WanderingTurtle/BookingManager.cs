@@ -1,11 +1,9 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
 using System.ComponentModel;
-using System.Data;
+using System.Linq;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -115,7 +113,9 @@ namespace com.WanderingTurtle.BusinessLogic
                     {
                         //get event from cached list
                         var list = DataCache._currentItemListingDetailsList;
-                        ItemListingDetails requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
+                        ItemListingDetails requestedEvent = new ItemListingDetails();
+                        requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
+
                         if (requestedEvent != null)
                         {
                             return requestedEvent;
@@ -531,46 +531,38 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="inPIN"></param>
         /// <returns></returns>
-        public ResultsEdit checkValidPIN(int inPIN)
+        public HotelGuest checkValidPIN(string inPIN)
         {
             try
             {
-                //retrieve recent guest list
-                bool result = true;
-                //see if pin is in it
-                if (result)
-                {
-                    return ResultsEdit.OkToEdit;
-                }
-                else
-                {
-                    return ResultsEdit.NotFound;
-                }
+                //retrieve guest
+                return BookingAccessor.verifyGuestPin(inPIN);
 
-            }
-            catch (SqlException ex)
-            {
-                return ResultsEdit.NotFound;
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/30
-        /// </summary>
-        /// <param name="inPin"></param>
-        /// <returns></returns>
-        public int FindGuest(int inPin)
-        {
-            try
-            {
-                return 5;
             }
             catch (Exception)
             {
-                
-                throw;
+                var ax = new ApplicationException("PIN does not exist.");
+                throw ax;
+            }
+        }
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/14
+        /// Retrieves numbers from a specific event listing
+        /// Not cached since it will differ each time
+        /// </summary>
+        /// <param name="itemListID">id of event listing</param>
+        /// <returns>names of hotel guests, room #s, and quantities of tickets for each booking related to that item listing</returns>
+        public List<BookingNumbers> RetrieveBookingNumbers(int itemListID)
+        {
+            
+            try
+            {
+                return BookingAccessor.GetBookingNumbers(itemListID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
         }

@@ -1,4 +1,5 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -25,7 +26,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
-            { Globals.UserToken = new com.WanderingTurtle.Common.Employee(100, "Debugger", null, 1); }
+            { Globals.UserToken = new Employee(100, "Debugger", null, 1); }
 
             do
             {
@@ -43,11 +44,11 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 try
                 {
                     int UserId;
-                    if (!int.TryParse(result.Username, out UserId)) { throw new Exception(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
+                    if (!int.TryParse(result.Username, out UserId)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
                     _user = UserId.ToString();
-                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new Exception(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
+                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
                     Globals.UserToken = new EmployeeManager().GetEmployeeLogin(UserId, result.Password);
-                    if (Globals.UserToken == null) { throw new Exception("Error setting User Token"); }
+                    if (Globals.UserToken == null) { throw new ApplicationException("Error setting User Token"); }
                     else { _exception = null; }
                 }
                 catch (Exception ex) { _exception = ex; }

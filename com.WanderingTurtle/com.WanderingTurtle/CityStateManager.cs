@@ -1,9 +1,8 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -16,12 +15,40 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Miguel Santana 2/18/2015
         public List<CityState> GetCityStateList()
         {
+            double cacheExpirationTime = 60; //how long the cache should live (minutes)
+            var now = DateTime.Now;
             try
             {
-                return CityStateAccessor.CityStateGet();
+                if (DataCache._currentCityStateList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    var list = CityStateAccessor.CityStateGet();
+                    DataCache._currentCityStateList = list;
+                    DataCache._currentCityStateListTime = now;
+                    return list;
+                }
+                else
+                {
+                    //check time. If less than 60 min, return cache
+
+                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        var list = CityStateAccessor.CityStateGet();
+                        //set cache to new list and update time
+                        DataCache._currentCityStateList = list;
+                        DataCache._currentCityStateListTime = now;
+                        return list;
+                    }
+                    else
+                    {
+                        return DataCache._currentCityStateList;
+                    }
+                }
             }
             catch (Exception ex)
             {
+
                 throw ex;
             }
         }

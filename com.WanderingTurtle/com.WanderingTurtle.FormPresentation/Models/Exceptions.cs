@@ -10,13 +10,21 @@ namespace com.WanderingTurtle.FormPresentation.Models
 
         public InputValidationException(FrameworkElement component, string message, string title)
             : base(component, message, title, true) { }
+
+        public InputValidationException(WanderingTurtleException exception)
+            : base(exception.CurrentControl, exception.Message, exception.Title) { }
     }
 
     internal class WanderingTurtleException : ApplicationException
     {
-
         public WanderingTurtleException(FrameworkElement control, string message, bool handleException = true)
             : base(message)
+        {
+            CurrentControl = control;
+            DoHandle = handleException;
+        }
+        public WanderingTurtleException(FrameworkElement control, string message, Exception innerException, bool handleException = true)
+            : base(message, innerException)
         {
             CurrentControl = control;
             DoHandle = handleException;

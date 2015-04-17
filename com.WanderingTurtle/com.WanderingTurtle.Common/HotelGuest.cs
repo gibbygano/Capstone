@@ -9,6 +9,10 @@
     /// <remarks>
     /// Rose Steffensmeier
     /// Updated: 2015/02/27
+    /// 
+    /// Pat Banks
+    /// Updated 2015/04/14
+    /// Added Guest Pin
     /// </remarks>
     public class HotelGuest 
     {
@@ -30,9 +34,9 @@
 
         public bool Active { get; private set; }
 
-        public int? Room { get; private set; }
+        public string Room { get; private set; }
 
-        public int? GuestPIN { get; private set; }
+        public string GuestPIN { get; private set; }
 
         /// <summary>
         /// Rose Steffensmeier
@@ -54,7 +58,7 @@
         /// <param name="Room"></param>
         /// <param name="Active"></param>
         /// <param name="GuestPIN"></param>
-        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, int? GuestPIN, bool Active = true)
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active = true)
         {
             SetValues(HotelGuestID, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, GuestPIN, Active);
         }
@@ -78,7 +82,7 @@
         /// <param name="Room"></param>
         /// <param name="Active"></param>
         /// <param name="GuestPIN"></param>
-        public HotelGuest(string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, int? GuestPIN, bool Active = true)
+        public HotelGuest(string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active = true)
         {
             SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, GuestPIN, Active);
         }
@@ -103,7 +107,7 @@
         /// <param name="Room"></param>
         /// <param name="Active"></param>
         /// <param name="GuestPIN"></param>
-        private void SetValues(int? HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int? Room, int? GuestPIN, bool Active = true)
+        private void SetValues(int? HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active = true)
         {
             this.HotelGuestID = HotelGuestID;
             this.FirstName = FirstName;

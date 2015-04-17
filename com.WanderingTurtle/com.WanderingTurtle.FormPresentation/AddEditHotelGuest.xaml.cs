@@ -1,14 +1,15 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -40,17 +41,20 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
         /// Edit an Existing Hotel Guest
         /// </summary>
         /// <param name="hotelGuest"></param>
-        public AddEditHotelGuest(HotelGuest hotelGuest)
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
+        public AddEditHotelGuest(HotelGuest hotelGuest, bool ReadOnly = false)
         {
             InitializeComponent();
 
             CurrentHotelGuest = hotelGuest;
             Title = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         /// <summary>
@@ -153,11 +157,12 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtLastName.Text = CurrentHotelGuest.LastName;
                 TxtAddress1.Text = CurrentHotelGuest.Address1;
                 TxtAddress2.Text = CurrentHotelGuest.Address2;
-                foreach (CityState cityState in CboZip.Items) { if (cityState.Zip == CurrentHotelGuest.CityState.Zip) { CboZip.SelectedItem = cityState; } }
+                foreach (CityState cityState in CboZip.Items.Cast<CityState>().Where(cityState => cityState.Zip == CurrentHotelGuest.CityState.Zip))
+                { CboZip.SelectedItem = cityState; }
                 TxtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
-                TxtRoomNumber.Text = CurrentHotelGuest.Room.ToString();
-                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN.ToString();
+                TxtRoomNumber.Text = CurrentHotelGuest.Room;
+                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN;
             }
             TxtFirstName.Focus();
         }
@@ -177,9 +182,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="title"></param>
         /// <param name="style"></param>
         /// <returns>awaitable Task of MessageDialogResult</returns>
-        private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
+        private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
-            return DialogBox.ShowMessageDialog(this, message, title, style);
+            return await DialogBox.ShowMessageDialog(this, message, title, style);
         }
 
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
@@ -217,7 +222,6 @@ namespace com.WanderingTurtle.FormPresentation
                         Close();
                         break;
 
-                    case MessageDialogResult.Negative:
                     default:
                         return;
                 }
@@ -238,8 +242,8 @@ namespace com.WanderingTurtle.FormPresentation
                             (CityState)CboZip.SelectedItem,
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
-                            int.Parse(TxtRoomNumber.Text.Trim()),
-                            int.Parse(TxtGuestPIN.Text)
+                            TxtRoomNumber.Text.Trim(),
+                            TxtGuestPIN.Text.Trim()
                         )
                     );
                 }
@@ -255,8 +259,8 @@ namespace com.WanderingTurtle.FormPresentation
                                 (CityState)CboZip.SelectedItem,
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
-                                int.Parse(TxtRoomNumber.Text.Trim()),
-                                int.Parse(TxtGuestPIN.Text)
+                                TxtRoomNumber.Text.Trim(),
+                                TxtGuestPIN.Text.Trim()
                             )
                         );
                 }
@@ -269,8 +273,14 @@ namespace com.WanderingTurtle.FormPresentation
                 else
                 { ShowErrorMessage("Error Processing Request", "Error"); }
             }
+            catch (SqlException)
+            {
+                ShowErrorMessage("PIN Already Assigned.  Please choose a different PIN.", "Error"); 
+            }
             catch (Exception ex)
-            { ShowErrorMessage(ex); }
+            { 
+                ShowErrorMessage(ex); 
+            }
         }
 
         /// <summary>
@@ -351,7 +361,7 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateInt(TxtGuestPIN.Text.Trim(), 1000, 9999))
+            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
             {
                 ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
                 return false;

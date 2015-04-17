@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
+using System.Data;
 using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -31,7 +29,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSupplierLoginGet";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userPassword", userPassword);
             cmd.Parameters.AddWithValue("@userName", userName);
 
@@ -86,7 +84,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSupplierLoginAdd";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userName", userName);
             cmd.Parameters.AddWithValue("@supplierID", supplierID);
 
@@ -128,7 +126,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSupplierLoginArchive";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@active", archive);
             cmd.Parameters.AddWithValue("@original_userID", oldSupplierLogin.UserID);
             cmd.Parameters.AddWithValue("@original_userPassword", "Password#1");
@@ -152,32 +150,113 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        public string checkUserName(string userName)
+
+        public int UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
+        {
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spSupplierLoginUpdate";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            //Updated Supplier Info:
+            cmd.Parameters.AddWithValue("@UserName", newUserName);
+
+            //Old Supplier Info
+            cmd.Parameters.AddWithValue("@original_UserName", oldUserName);
+            cmd.Parameters.AddWithValue("@original_SupplierID", oldSupplierID);
+
+            int rowsAffected;
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
+        public bool checkUserName(string userName)
         {
 
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSupplierLoginGetUserName";
-            string retrievedUserName = "";
+            bool validName = false;
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@userName", userName);
 
-            conn.Open();
-            var reader = cmd.ExecuteReader();
-
-            if (reader.HasRows == true)
+            try
             {
-                reader.Read();
+                conn.Open();
+                var reader = cmd.ExecuteReader();
 
-                retrievedUserName = reader.GetValue(0).ToString();
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+                    validName = false;
+                }
+                else
+                {
+                    validName = true;
+                }
+
+            return validName;
             }
-            else
+            catch (SqlException)
             {
-                retrievedUserName = "";
+                throw;
             }
-                
-            return retrievedUserName;
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string retrieveSupplierUserNameByID(int supplierID)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSupplierLoginGetByID";
+            string userNameFound;
+
+            var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@supplierID", supplierID);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    userNameFound = reader.GetString(0);
+                }
+                else
+                {
+                    throw new ApplicationException("SupplierID not found.");
+                }
+                    
+                return userNameFound;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

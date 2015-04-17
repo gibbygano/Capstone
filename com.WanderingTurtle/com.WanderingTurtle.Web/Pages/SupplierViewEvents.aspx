@@ -12,7 +12,9 @@
         Hunter Lind
         View List of Events and Options to Edit or Delete
         -->
-    <h1>Listed Events</h1>
+    <div id="theLists" runat="server">
+    <h1>Listed Events</h1><div id="eventSearch">
+        <asp:TextBox ID="txtEventSearch" runat="server"></asp:TextBox><asp:Button ID="btnEventSearch" OnClick="btnEventSearch_Click" runat="server" Text="Search" /></div><div class="clear"></div>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" 
         SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
@@ -30,8 +32,9 @@
                 <td><%# Item.TransportString %></td>
                 <td><%# Item.OnSiteString %></td>
                 <td>
-                    <asp:Button CommandName="Edit" Text="Edit" runat="server" />
-                    <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
+                    <%--  <asp:Button CommandName="Edit" Text="Edit" runat="server" /> --%>
+                    <asp:Button ID="btnList" runat="server" Text="List This Event" CommandArgument ="<%# Item.EventItemID %>" OnClick="btn_Click"/>
+                    <%-- <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" /> --%>
                 </td>
             </tr>
         </ItemTemplate>
@@ -135,4 +138,19 @@
                 NextPageText="-->" ButtonType="Link" />
         </Fields>
     </asp:DataPager>--%>
+</div>
+    <div id="addListing" runat="server" style="display: none;">
+        <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label><br />
+        <asp:Label ID="lblAddError" runat="server" Text="" ForeColor="#CC0000"></asp:Label><br />
+        Start Date & Time:
+        <input type="text" id="listStartDate" name="startdate" class="mydate" /> <br />
+        End Date & Time
+        <input type="text" id="listEndDate" name="enddate" class="mydate" /> <br />
+        Ticket Price: $
+        <input id="listPrice" name="price" value="0.00" class="myspinner"> <br />
+        Number of Tickets Available:
+        <input id="listTickets" name="tickets" value="0" class="myspinner"><br />
+        <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click"/>
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
+    </div>
 </asp:Content>

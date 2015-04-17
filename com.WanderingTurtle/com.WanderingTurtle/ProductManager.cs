@@ -1,12 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
+    public enum listResult
+    {
+        //item could not be found
+        NotFound = 0,
+
+        //new event could not be added
+        NotAdded,
+
+        NotChanged,
+
+        //worked
+        Success,
+
+        //Can change record
+        OkToEdit,
+
+        //concurrency error
+        ChangedByOtherUser,
+
+        DatabaseError,
+
+
+    }
     public class ProductManager
     {
         public ProductManager()
@@ -14,29 +36,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         }
 
-        public enum listResult
-        {
-            //item could not be found
-            NotFound = 0,
 
-            //new event could not be added
-            NotAdded,
-
-            NotChanged,
-
-            //worked
-            Success,
-
-            //Can change record
-            OkToEdit,
-
-            //concurrency error
-            ChangedByOtherUser,
-
-            DatabaseError,
-
-
-        }
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
@@ -112,7 +112,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ListsAccessor.UpdateLists(oldLists, newLists)== 1)
+                if (ListsAccessor.UpdateLists(oldLists, newLists) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
@@ -199,7 +199,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
                 return DataCache._currentItemListingList;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw new Exception();
             }
@@ -216,14 +216,14 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ItemListingAccessor.AddItemListing(newItemListing) ==1)
+                if (ItemListingAccessor.AddItemListing(newItemListing) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
                 }
                 return listResult.NotAdded;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return listResult.DatabaseError;
             }
@@ -242,7 +242,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists) == 1)
+                if (ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
@@ -266,7 +266,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if(ItemListingAccessor.DeleteItemListing(itemListToDelete)==1)
+                if (ItemListingAccessor.DeleteItemListing(itemListToDelete) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
@@ -300,6 +300,42 @@ namespace com.WanderingTurtle.BusinessLogic
             else
             {
                 return DataCache._currentItemListingList;
+            }
+        }
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/16
+        /// returns a list of listing from a specific supplier
+        /// </summary>
+        /// <param name="supplierID">supplier id</param>
+        /// <returns></returns>
+        public IEnumerable<ItemListing> RetrieveItemListingList(int supplierID)
+        {
+            try
+            {
+                double cacheExpirationTime = 5; //how long the cache should live (minutes)
+                var now = DateTime.Now;
+                if (DataCache._currentItemListingList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    DataCache._ItemListingListTime = now;
+                }
+                else
+                {
+                    //check time. If less than 5 min, return cache
+                    if (now > DataCache._ItemListingListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                        DataCache._ItemListingListTime = now;
+                    }
+                }
+                return DataCache._currentItemListingList.Where(l => l.SupplierID == supplierID && l.StartDate > now);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
         }
     }

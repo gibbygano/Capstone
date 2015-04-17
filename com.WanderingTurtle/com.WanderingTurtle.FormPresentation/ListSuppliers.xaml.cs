@@ -1,21 +1,13 @@
-﻿using com.WanderingTurtle.BusinessLogic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -37,6 +29,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// This will fill the list of suppliers and set this object to the "Instance variable"
         /// Created by will fritz 15/2/6
         /// </summary>
+        /// <exception cref="WanderingTurtleException">Failed to get suppliers list.</exception>
         public ListSuppliers()
         {
             InitializeComponent();
@@ -51,6 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// edited by will fritz 15/2/19
         /// </remarks>
+        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
         public void FillList()
         {
             try
@@ -66,15 +60,22 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private static void UpdateSupplier(Supplier supplierToUpdate, bool ReadOnly = false)
+        private void UpdateSupplier(Supplier supplierToUpdate, bool ReadOnly = false)
         {
-            new AddEditSupplier(supplierToUpdate, ReadOnly).ShowDialog();
-            //addSupplier.FillUpdateList(supplierToUpdate);
+            try
+            {
+                new AddEditSupplier(supplierToUpdate, ReadOnly).ShowDialog();
+                //addSupplier.FillUpdateList(supplierToUpdate);
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>
         /// opens the AddEditSupplier window
-        /// ceated by Pat 15/2/6
+        /// created by Pat 15/2/6
         /// </summary>
         /// <remarks>
         /// Edited to make it a singleton pattern
@@ -84,9 +85,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
         {
-            AddEditSupplier addSupplier;
-            addSupplier = new AddEditSupplier();
-            addSupplier.ShowDialog();
+            try
+            {
+                var addSupplier = new AddEditSupplier();
+                addSupplier.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>
@@ -113,7 +120,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as TabItem).Content = new ListPendingSuppliers();
+            ((TabItem) this.Parent).Content = new ListPendingSuppliers();
         }
 
         /// <summary>
@@ -138,52 +145,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvSupplierListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvSuppliersList.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
-            }
-        }
-
         private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             UpdateSupplier(DataGridHelper.DataGridRow_Click<Supplier>(sender, e), true);
@@ -198,14 +159,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchSupplier_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(txtSearchSupplier.Text.Length == 0)
-            {
-                btnSearchSupplier.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearchSupplier.Content = "Search";
-            }
+            btnSearchSupplier.Content = txtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";
         }
     }
 }

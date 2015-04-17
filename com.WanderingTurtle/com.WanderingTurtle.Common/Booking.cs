@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace com.WanderingTurtle.Common
 {
@@ -23,17 +20,17 @@ namespace com.WanderingTurtle.Common
     /// </remarks>
     public class Booking
     {
-        public int BookingID { get; set; }
-        public int GuestID { get; set; }
-        public int EmployeeID { get; set; }
-        public int ItemListID { get; set; }
-        public int Quantity { get; set; }
+        public int      BookingID { get; set; }
+        public int      GuestID { get; set; }
+        public int      EmployeeID { get; set; }
+        public int      ItemListID { get; set; }
+        public int      Quantity { get; set; }
         public DateTime DateBooked { get; set; }
-        public decimal Discount { get; set; }
-        public bool Active { get; set; }
-        public decimal TicketPrice { get; set; }
-        public decimal ExtendedPrice { get; set; }
-        public decimal TotalCharge { get; set; }
+        public decimal  Discount { get; set; }
+        public bool     Active { get; set; }
+        public decimal  TicketPrice { get; set; }
+        public decimal  ExtendedPrice { get; set; }
+        public decimal  TotalCharge { get; set; }
 
         public Booking()
         {
@@ -57,16 +54,15 @@ namespace com.WanderingTurtle.Common
         /// <param name="dateBooked"></param>
         public Booking(int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal ticket, decimal extended, decimal discount, decimal total)
         {
-
-            GuestID = guestID;
-            EmployeeID = empID;
-            ItemListID = itemID;
-            Quantity = bQuantity;
-            DateBooked = dateBooked;
-            TicketPrice = ticket;
-            ExtendedPrice = extended;
-            Discount = discount;
-            TotalCharge = total;
+            GuestID         = guestID;
+            EmployeeID      = empID;
+            ItemListID      = itemID;
+            Quantity        = bQuantity;
+            DateBooked      = dateBooked;
+            TicketPrice     = ticket;
+            ExtendedPrice   = extended;
+            Discount        = discount;
+            TotalCharge     = total;
         }
         /// <summary>
         /// Tony Noel
@@ -87,17 +83,17 @@ namespace com.WanderingTurtle.Common
         /// <param name="total"></param>
         public Booking(int bookingID, int guestID, int empID, int itemID, int bQuantity, DateTime dateBooked, decimal discount, bool active, decimal ticket, decimal extended, decimal total)
         {
-            BookingID = bookingID;
-            GuestID = guestID;
-            EmployeeID = empID;
-            ItemListID = itemID;
-            Quantity = bQuantity;
-            DateBooked = dateBooked;
-            Discount = discount;
-            Active = active;
-            TicketPrice = ticket;
-            ExtendedPrice = extended;
-            TotalCharge = total;
+            BookingID       = bookingID;
+            GuestID         = guestID;
+            EmployeeID      = empID;
+            ItemListID      = itemID;
+            Quantity        = bQuantity;
+            DateBooked      = dateBooked;
+            Discount        = discount;
+            Active          = active;
+            TicketPrice     = ticket;
+            ExtendedPrice   = extended;
+            TotalCharge     = total;
         }
     }
     /// <summary>
@@ -114,8 +110,8 @@ namespace com.WanderingTurtle.Common
     public class BookingDetails : Booking
     {
         public string EventItemName { get; set; }
-        public DateTime StartDate { get; set; }
-        public int InvoiceID { get; set; }
+        public DateTime StartDate   { get; set; }
+        public int InvoiceID        { get; set; }
 
         public BookingDetails() : base() { }
 

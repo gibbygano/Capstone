@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace com.WanderingTurtle.Common
+﻿namespace com.WanderingTurtle.Common
 {
     /// <summary>
     /// Object to hold employee role data for the employee forms

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
 using System.Data.SqlClient;
-using System.Data;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -94,7 +90,7 @@ namespace com.WanderingTurtle.DataAccess
             int result;
 
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "Select BookingID FROM Booking WHERE GuestID = 0 AND EmployeeID = 100 AND ItemListID = 100 AND TicketPrice= 1234";
+            string query = "Select BookingID FROM Booking WHERE GuestID = 100 AND EmployeeID = 100 AND ItemListID = 100 AND TicketPrice= 1234";
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
@@ -147,6 +143,44 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
             return rowsAffected;
+        }
+        public static void deleteTestApplication()
+        {
+            //establish connection
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            //write some query text 
+            string query = "DELETE FROM SupplierApplication WHERE CompanyName = 'Awsome Tours'";
+            //create a Sql Command
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            try
+            {
+                //this part must be in the try as it is attempting to establish connection.
+                //open connection
+                conn.Open();
+                //execute the command and capture the results to a SqlDataReader
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+                }
+                /*else
+                {
+                    var up = new ApplicationException("Your record could not be made.");
+                    throw up;
+                   
+                }*/
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
     }

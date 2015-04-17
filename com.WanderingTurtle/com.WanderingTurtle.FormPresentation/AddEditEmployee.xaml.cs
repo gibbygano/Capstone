@@ -1,13 +1,13 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -32,12 +32,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/20
-        ///
         /// Constructs a form with data from employee to update
         /// </summary>
         /// <remarks>
         /// </remarks>
         /// <param name="employee">Employee to update</param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
         public AddEmployee(Employee employee, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -64,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Changed to enum
         /// </remarks>
-        private List<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
+        private List<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
 
         /// <summary>
         /// Miguel Santana 
@@ -244,10 +245,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
+        /// <param name="style"></param>
         /// <returns>awaitable Task of MEssageDialogResult</returns>
-        private Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
+        private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
-            return DialogBox.ShowMessageDialog(this, message, title, style);
+            return await DialogBox.ShowMessageDialog(this, message, title, style);
         }
 
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)

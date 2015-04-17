@@ -1,24 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle;
 using com.WanderingTurtle.BusinessLogic;
-using Xceed.Wpf.Toolkit;
-using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -47,7 +33,9 @@ namespace com.WanderingTurtle.FormPresentation
 
             InitializeComponent();
             RefreshListItems();
-            eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
+            udDiscount.Maximum = .20;
+
+            eID = (int)Globals.UserToken.EmployeeID;
         }
 
         /// <summary>
@@ -136,18 +124,17 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         private Booking gatherFormInformation()
         {
-            decimal extendedPrice, totalPrice, discount;
             ItemListingDetails selectedItemListing = getSelectedItem();
 
             //gets quantity from the up/down quantity field
             int qty = (int)(udAddBookingQuantity.Value);
 
             //get discount from form
-            discount = (decimal)(udDiscount.Value);
+            decimal discount = (decimal)(udDiscount.Value);
 
             //calculate values for the tickets
-            extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
-            totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
+            decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
             Booking bookingToAdd = new Booking(inInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
             return bookingToAdd;
@@ -181,12 +168,10 @@ namespace com.WanderingTurtle.FormPresentation
         private void refreshCostsToDisplay(ItemListingDetails myItemObject)
         {
             //total cost calculations
-            if (myItemObject != null)
-            {
-                decimal extendedPrice = _bookingManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
-                lblTotalWithDiscount.Content = _bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
-            }
-            return;
+            if (myItemObject == null) return;
+
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
+            lblTotalWithDiscount.Content = _bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
         }
 
         /// <summary>
@@ -219,14 +204,8 @@ namespace com.WanderingTurtle.FormPresentation
             txtEventDescription.Text = myItemObject.EventDescription;
             udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
 
-            if (myItemObject.QuantityOffered == 0)
-            {
-                udAddBookingQuantity.Value = 0;
-            }
-            else
-            {
-                udAddBookingQuantity.Value = 1;
-            }
+
+            udAddBookingQuantity.Value = myItemObject.QuantityOffered == 0 ? 0 : 1;
             refreshCostsToDisplay(myItemObject);
         }
 

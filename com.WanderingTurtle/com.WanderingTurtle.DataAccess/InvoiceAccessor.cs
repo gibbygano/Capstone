@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
 using System.Data;
+using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -115,7 +113,7 @@ namespace com.WanderingTurtle.DataAccess
                         details.Active = reader.GetBoolean(5);
                         details.GuestLastName = reader.GetValue(6).ToString();
                         details.GuestFirstName = reader.GetValue(7).ToString();
-                        details.GuestRoomNum = reader.GetInt32(8);
+                        details.GuestRoomNum = reader.GetValue(8).ToString();
 
                         guestList.Add(details);
                     }
@@ -177,7 +175,7 @@ namespace com.WanderingTurtle.DataAccess
                     if (!reader.IsDBNull(5)) guestInvoice.TotalPaid = reader.GetDecimal(5);
                     guestInvoice.GuestLastName = reader.GetValue(6).ToString();
                     guestInvoice.GuestFirstName = reader.GetValue(7).ToString();
-                    guestInvoice.GuestRoomNum = reader.GetInt32(8);
+                    guestInvoice.GuestRoomNum = reader.GetValue(8).ToString();
                 }
                 else
                 {

@@ -1,8 +1,8 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.FormPresentation.Models;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.FormPresentation.Models;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation
@@ -25,11 +25,12 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
-        ///
         /// Fills out our form with information from NewEvent.
         /// Also saves an Unrevised version of NewEvent.
         /// </summary>
         /// <param name="EventToEdit">The Event we are going to edit</param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
         public AddEditEvent(Event EventToEdit, bool ReadOnly = false)
         {
             this.OriginalEvent = EventToEdit;
@@ -55,13 +56,13 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Creates an event to replace the old version of itself.
         /// </summary>
-        private void AddNewEvent()
+        private async void AddNewEvent()
         {
             var NewEvent = new Event();
-            NewEvent.EventItemName = txtEventName.Text;
 
             try
             {
+                NewEvent.EventItemName = txtEventName.Text;
                 // On-site //
                 if (radOnSiteYes.IsChecked == true)
                 {
@@ -107,13 +108,13 @@ namespace com.WanderingTurtle.FormPresentation
                 EventManager.EventResult result = _eventManager.AddNewEvent(NewEvent);
                 if (result == EventManager.EventResult.Success)
                 {
-                    DialogBox.ShowMessageDialog(this, "Successfully Added Event");
+                    await DialogBox.ShowMessageDialog(this, "Successfully Added Event");
                     this.Close();
                 }
             }
             catch (Exception ex)
             {
-                if (ex is InputValidationException) { throw ex; }
+                if (ex is InputValidationException) { throw new InputValidationException((InputValidationException) ex); }
                 throw new WanderingTurtleException(this, ex, "Error adding new event");
             }
         }
@@ -140,7 +141,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Fills out our form with information from EventToEdit.
         /// Also saves an Unrevised version of EventToEdit.
         /// </summary>
-        private void EditExistingEvent()
+        private async void EditExistingEvent()
         {
             eventToSubmit.EventItemName = txtEventName.Text;
 
@@ -198,7 +199,7 @@ namespace com.WanderingTurtle.FormPresentation
                 var EventManagerResult = _eventManager.EditEvent(OriginalEvent, eventToSubmit);
                 if (EventManagerResult.Equals(EventManager.EventResult.Success))
                 {
-                    DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
+                    await DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
                     this.Close();
                 }
                 else { throw new WanderingTurtleException(this, EventManagerResult.ToString()); }
@@ -232,12 +233,12 @@ namespace com.WanderingTurtle.FormPresentation
                     { cboxType.SelectedItem = item; }
                 }
 
-                if (OriginalEvent.Transportation == true)
+                if (OriginalEvent.Transportation)
                 { radTranspYes.IsChecked = true; }
                 else
                 { radTranspNo.IsChecked = true; }
 
-                if (OriginalEvent.OnSite == true)
+                if (OriginalEvent.OnSite)
                 { radOnSiteYes.IsChecked = true; }
                 else
                 { radOnSiteNo.IsChecked = true; }

@@ -1,10 +1,8 @@
-﻿﻿using com.WanderingTurtle.Common;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Data;
+﻿﻿using System;
+﻿using System.Collections.Generic;
+﻿using System.Data;
+﻿using System.Data.SqlClient;
+﻿using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -26,7 +24,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSelectListingFull";
             DateTime now = DateTime.Now;
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@Now", now);
 
@@ -90,7 +88,7 @@ namespace com.WanderingTurtle.DataAccess
             string query = "spSelectOneListingFull";
 
             var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@itemListID", itemListID);
 
             try
@@ -150,12 +148,12 @@ namespace com.WanderingTurtle.DataAccess
         public static int addBooking(Booking toAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spAddBooking";
+            var cmdText = "spInsertBooking";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
 
             //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@GuestID", toAdd.GuestID);
             cmd.Parameters.AddWithValue("@EmployeeID", toAdd.EmployeeID);
@@ -277,7 +275,7 @@ namespace com.WanderingTurtle.DataAccess
             int rowsAffected = 0;
 
             //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
 
             cmd.Parameters.AddWithValue("@Quantity", toUpdate.Quantity);
             cmd.Parameters.AddWithValue("@Discount", toUpdate.Discount);
@@ -336,7 +334,7 @@ namespace com.WanderingTurtle.DataAccess
             int rowsAffected = 0;
 
             //Set command type to stored procedure and add parameters
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.CommandType = CommandType.StoredProcedure;
            
             cmd.Parameters.AddWithValue("@ItemListID", itemID);
 
@@ -358,5 +356,120 @@ namespace com.WanderingTurtle.DataAccess
             }
             return rowsAffected;
         }
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/14
+        /// Gets Booking numbers from database for specific event listing
+        /// </summary>
+        /// <param name="itemListID"></param>
+        /// <returns></returns>
+        public static List<BookingNumbers> GetBookingNumbers(int itemListID)
+        {
+            var bookingNumber = new List<BookingNumbers>();
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSelectBookingNumbers";
+
+            var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@ItemListID", itemListID);
+			try
+            {
+                conn.Open();			 
+				var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    while (reader.Read())
+                    {
+                        var myBookingNumber = new BookingNumbers();
+                        myBookingNumber.FirstName = reader.GetValue(0).ToString();
+                        myBookingNumber.LastName = reader.GetValue(1).ToString();
+                        myBookingNumber.Room = reader.GetValue(2).ToString();
+                        myBookingNumber.Quantity= (int)reader.GetValue(3);
+                        bookingNumber.Add(myBookingNumber);
+                    }
+                }
+                else
+                {
+                    var ax = new ApplicationException("Booking data not found!");
+                    throw ax;
+                }
+            }
+			catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return bookingNumber;
+		}
+			
+
+        public static HotelGuest verifyGuestPin(string inPIN)
+        {
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+
+            var cmdText = "spSelectHotelGuestPinGet";
+            SqlCommand cmd = new SqlCommand(cmdText, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@guestPIN", inPIN);
+
+            HotelGuest foundGuest = null;
+
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        foundGuest = new HotelGuest(
+                                reader.GetInt32(0), //HotelGuestID
+                                reader.GetString(1), //FirstName
+                                reader.GetString(2), //LastName
+                                reader.GetString(3), //Address1
+                                !reader.IsDBNull(4) ? reader.GetString(4) : null, //Address2
+                                new CityState(
+                                    reader.GetString(5), //Zip
+                                    reader.GetString(6), //City
+                                    reader.GetString(7) //State
+                                ),
+                                !reader.IsDBNull(8) ? reader.GetString(8) : null, //PhoneNumber
+                                !reader.IsDBNull(9) ? reader.GetString(9) : null, //EmailAdddress
+                                !reader.IsDBNull(10) ? reader.GetString(10) : null, //Room
+                                !reader.IsDBNull(11) ? reader.GetString(11) : null, // PIN
+                                reader.GetBoolean(12) //Active
+                        );
+                    } // end while
+                }
+                else
+                {
+                    var ax = new ApplicationException("PIN not found");
+                    throw ax;
+                }
+            }
+            catch (SqlException)
+            {
+                var ax = new ApplicationException("PIN not found");
+                throw ax;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return foundGuest;
+        }
     }
+
 }

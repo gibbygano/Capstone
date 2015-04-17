@@ -1,8 +1,13 @@
-﻿CREATE TABLE [dbo].[SupplierLogin](
-	[UserID]		int			NOT NULL IDENTITY(101, 1),
-	[UserPassword]	varchar(50)	NOT NULL DEFAULT 'Password#1',
-	[UserName]		varchar(50)	NOT NULL UNIQUE,
-	[SupplierID]    int NOT NULL,
-	[Active]			bit			NOT NULL DEFAULT 1,
-	CONSTRAINT	[PK_SupplierLogin]	PRIMARY KEY ([UserID] ASC) ON [PRIMARY]
-) ON [PRIMARY];
+﻿CREATE TABLE [dbo].[SupplierLogin] (
+    [UserID]       INT          IDENTITY (101, 1) NOT NULL,
+    [UserPassword] VARCHAR (50) DEFAULT ('Password#1') NOT NULL,
+    [UserName]     VARCHAR (50) NOT NULL,
+    [SupplierID]   INT          NOT NULL,
+    [Active]       BIT          DEFAULT ((1)) NOT NULL,
+    CONSTRAINT [PK_SupplierLogin] PRIMARY KEY CLUSTERED ([UserID] ASC)
+)	ON [PRIMARY];
+	GO
+
+CREATE UNIQUE NONCLUSTERED INDEX [UniqueUserName]
+	ON [SupplierLogin]([SupplierID]);
+GO

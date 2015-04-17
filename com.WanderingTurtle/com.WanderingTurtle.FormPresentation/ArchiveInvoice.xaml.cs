@@ -1,19 +1,10 @@
-﻿using com.WanderingTurtle.BusinessLogic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Windows;
+using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -32,11 +23,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
-        ///
         /// Constructs a populated form that shows the final charges for a guest and
         /// allows employee to submit to close the invoice
         /// </summary>
         /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
+        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
         public ArchiveInvoice(int selectedHotelGuestID)
         {
             try
@@ -64,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
             lblGuestNameLookup.Content = guestToView.GetFullName;
-            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString();
+            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString(CultureInfo.InvariantCulture);
             lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
             lblAddress.Content = guestToView.Address1;
             lblCityState.Content = guestToView.CityState.GetZipStateCity;
@@ -95,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsArchive.ChangedByOtherUser):
-                        throw new Exception("Record already changed by another user.");
+                        throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
                         await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
@@ -118,6 +109,16 @@ namespace com.WanderingTurtle.FormPresentation
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+        }
+
+        private void btnPrint_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            //if (newReportWindow.ShowDialog() == false)
+            //{
+            //    RefreshEmployeeList();
+            //}
         }
     }
 }

@@ -5,26 +5,22 @@ using System.Windows.Input;
 
 namespace com.WanderingTurtle.FormPresentation.Models
 {
-    internal class DataGridHelper
+    internal static class DataGridHelper
     {
+        /// <exception cref="WanderingTurtleException">An error occoured while trying to retrieve the object stored inside the DataGrid Row.</exception>
         public static T DataGridRow_Click<T>(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                IInputElement element = e.MouseDevice.DirectlyOver;
-                if (element != null && element is FrameworkElement)
+                var row = sender as DataGridRow;
+                if (row != null && row.Item != null)
                 {
-                    if (((FrameworkElement)element).Parent is DataGridCell)
-                    {
-                        var dataGrid = sender as DataGrid;
-                        if (dataGrid != null && dataGrid.SelectedItems != null && dataGrid.SelectedItems.Count == 1)
-                        { return (T)dataGrid.SelectedItem; }
-                    }
+                    return (T)row.Item;
                 }
                 throw new ApplicationException("Error Getting Selected DataGrid Row.");
             }
             catch (Exception ex)
-            { throw new WanderingTurtleException(sender is FrameworkElement ? sender as FrameworkElement : null, ex); }
+            { throw new WanderingTurtleException(sender as FrameworkElement, ex); }
         }
     }
 }

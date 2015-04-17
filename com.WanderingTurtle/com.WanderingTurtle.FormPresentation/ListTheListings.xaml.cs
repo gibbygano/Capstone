@@ -1,21 +1,13 @@
-﻿using com.WanderingTurtle.BusinessLogic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -40,18 +32,25 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
-            Window AddItemListings = new AddEditListing();
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
-            //AddItemListings.Show();
-            if (AddItemListings.ShowDialog() == false)
+            try
             {
-                refreshData();
+                Window AddItemListings = new AddEditListing();
+                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDialog only being able to be used on hidden
+                //AddItemListings.Show();
+                if (AddItemListings.ShowDialog() == false)
+                {
+                    refreshData();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
         private async void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
-            ItemListing ListingToDelete = (ItemListing)lvListing.SelectedItem;
+            ItemListing ListingToDelete = lvListing.SelectedItem as ItemListing;
             if (ListingToDelete == null)
             {
                 throw new WanderingTurtleException(this, "Please select a row to delete.");
@@ -63,7 +62,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     case MessageDialogResult.Affirmative:
                         var numRows = prodMan.ArchiveItemListing(ListingToDelete);
-                        if (numRows == ProductManager.listResult.Success)
+                        if (numRows == listResult.Success)
                         {
                             await DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
                         }
@@ -89,66 +88,26 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, "Please select a row to edit");
             }
 
-            Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
-
-            //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
-            //AddItemListings.Show();
-            if (EditListings.ShowDialog() == false)
+            try
             {
-                refreshData();
+                Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
+
+                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDialog only being able to be used on hidden
+                //AddItemListings.Show();
+                if (EditListings.ShowDialog() == false)
+                {
+                    refreshData();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
             }
         }
 
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             EditListing(DataGridHelper.DataGridRow_Click<ItemListing>(sender, e), true);
-        }
-
-        /// <summary>
-        /// This method will sort the listview column in both asending and desending order
-        /// Created by Will Fritz 15/2/27
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lvListingsListHeaderClick(object sender, RoutedEventArgs e)
-        {
-            GridViewColumnHeader column = e.OriginalSource as GridViewColumnHeader;
-            if (column == null)
-            {
-                return;
-            }
-
-            if (_sortColumn == column)
-            {
-                // Toggle sorting direction
-                _sortDirection = _sortDirection == ListSortDirection.Ascending ? ListSortDirection.Descending : ListSortDirection.Ascending;
-            }
-            else
-            {
-                _sortColumn = column;
-                _sortDirection = ListSortDirection.Ascending;
-            }
-
-            string header = string.Empty;
-
-            // if binding is used and property name doesn't match header content
-            Binding b = _sortColumn.Column.DisplayMemberBinding as Binding;
-
-            if (b != null)
-            {
-                header = b.Path.Path;
-            }
-
-            try
-            {
-                ICollectionView resultDataView = CollectionViewSource.GetDefaultView(lvListing.ItemsSource);
-                resultDataView.SortDescriptions.Clear();
-                resultDataView.SortDescriptions.Add(new SortDescription(header, _sortDirection));
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex, "There must be data in the list before you can sort it");
-            }
         }
 
         private void refreshData()
@@ -170,14 +129,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchListing_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(txtSearchListing.Text.Length == 0)
-            {
-                btnSearchListing.Content = "Refresh List";
-            }
-            else
-            {
-                btnSearchListing.Content = "Search";
-            }
+            btnSearchListing.Content = txtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)

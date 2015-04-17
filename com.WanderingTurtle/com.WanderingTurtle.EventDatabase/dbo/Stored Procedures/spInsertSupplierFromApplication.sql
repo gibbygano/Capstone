@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spUpdateApplicationAddSupplierAddLogin]
+﻿CREATE PROCEDURE [dbo].[spInsertSupplierFromApplication]
 (
 	@UserName				varchar(50),
 	@SupplyCost				decimal(3,2),
@@ -69,8 +69,8 @@ AS
 
 	IF @rowCount = 1
 	INSERT INTO [Supplier]
-	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, UserID, SupplyCost, Active) 
-	VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @originalApplicationID, 7777, @SupplyCost, 1)
+	(CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, SupplyCost, Active) 
+	VALUES (@CompanyName, @FirstName, @LastName, @Address1, @Address2, @Zip, @PhoneNumber, @EmailAddress, @originalApplicationID, @SupplyCost, 1)
 	
 	SET @supplierID = @@IDENTITY
 	SET @rowCount2 = @@ROWCOUNT

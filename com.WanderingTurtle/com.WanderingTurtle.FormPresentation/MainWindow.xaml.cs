@@ -1,9 +1,7 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.FormPresentation.Models;
-using com.WanderingTurtle.FormPresentation.Views;
-using MahApps.Metro.Controls.Dialogs;
-using System;
+﻿using System;
 using System.Windows;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.FormPresentation.Views;
 
 namespace com.WanderingTurtle.FormPresentation
 {

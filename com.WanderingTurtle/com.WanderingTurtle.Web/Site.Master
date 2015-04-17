@@ -9,9 +9,11 @@
     <meta charset="utf-8" />
     <title><%: Page.Title %> - Wandering Turtle Resort</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/themes/jquery-datetimepicker.css" rel="stylesheet" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <asp:PlaceHolder runat="server">
         <script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>
+        
     </asp:PlaceHolder>
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
@@ -24,8 +26,13 @@
                 <asp:ScriptReference Name="jquery.ui.combined" />
             </Scripts>
         </asp:ScriptManager>
-        <header>
-            <div class="content-wrapper">
+        <script src="<%: ResolveUrl("~/Scripts/jquery-TimePicker-1.0.0.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker-deets.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-slider.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/scripts.js") %>"></script>
+        <header class="header">
+            <div class="content-wrapper" id="header2">
                 <div class="float-left">
                     <p class="site-title">
                         <a runat="server" href="~/">
@@ -54,17 +61,17 @@
                 <asp:ContentPlaceHolder runat="server" ID="MainContent" />
             </section>
         </div>
-        <div id="errorMessage" runat="server" visible="false">
+        <div id="errorMess" runat="server" title="There was a problem..." visible="false">
             <div class="errorMsg">
-                <asp:Label ID="lblErrorMessage" runat="server" Text="This is a longer and more important error message that you need to read." ForeColor="#CC0000"></asp:Label>
+                <asp:Label ID="lblErrorMessage" runat="server" Text="This is a longer and more important error message that you need to read." ForeColor="#FFFFFF"></asp:Label>
                 <br />
                 <div id="errorButton">
-                    <asp:Button ID="btnErrorOK" runat="server" Text="OK" BackColor="#33A133" CssClass="errorButtonStyle" ForeColor="White" OnClick="errorButton_Click" CausesValidation="False" />
+                   
 
                 </div>
             </div>
         </div>
-        <footer>
+        <footer class="myfooter">
             <div class="content-wrapper">
                 <div class="float-left">
                     <p>&copy; <%: DateTime.Now.Year %> - Wandering Turtle Resort</p>

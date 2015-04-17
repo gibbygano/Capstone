@@ -2,7 +2,6 @@
         x:Class="com.WanderingTurtle.FormPresentation.AddBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
         Title="Add Booking" Height="400" Width="800"
@@ -37,12 +36,11 @@
 
             <Label Grid.Row="1" Grid.Column="0" x:Name="lblAddBookingQuantity" Content="Quantity:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="0" x:Name="lblAddBookingDiscount" Content="Discount:" HorizontalContentAlignment="Right" />
-
-            <Metro:NumericUpDown Grid.Column="1" Grid.Row="1" Minimum="0" x:Name="udAddBookingQuantity" Value="0"  Maximum="{Binding}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+            
+            <Metro:NumericUpDown Grid.Column="1" Grid.Row="1" Minimum="0" x:Name="udAddBookingQuantity" Value="0"  Maximum="{Binding}" VerticalAlignment="Center"/>
 
             <TextBox Grid.Row="2" Grid.Column="1" x:Name="tbAddBookingDiscount" TabIndex="2" UndoLimit="2" VerticalAlignment="Center" HorizontalContentAlignment="Left" />
-            <Metro:NumericUpDown Grid.Column="1" Grid.Row="2" Minimum="0" StringFormat="P0" x:Name="udDiscount" Value="0"  IsEnabled="{Binding ElementName=lvEventListItems}" Maximum="{Binding}" Interval=".01" />
-
+            <Metro:NumericUpDown Grid.Column="1" Grid.Row="2" Minimum="0" StringFormat="P0" x:Name="udDiscount" Value="0"  Interval=".01" ></Metro:NumericUpDown>
 
             <Label Grid.Row="0" Grid.Column="3" Content="Total Discounted Price" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
             <Label Grid.Row="1" Grid.Column="3" x:Name="lblTotalWithDiscount" Content="{Binding}" ContentStringFormat="{}{0:C}" VerticalAlignment="Center" HorizontalContentAlignment="Center" />

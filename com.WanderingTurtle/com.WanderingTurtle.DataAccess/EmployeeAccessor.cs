@@ -1,8 +1,8 @@
-﻿using com.WanderingTurtle.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.DataAccess
 {
@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.DataAccess
 
             var conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spEmployeeAdd";
+            var cmdText = "spInsertEmployee";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 

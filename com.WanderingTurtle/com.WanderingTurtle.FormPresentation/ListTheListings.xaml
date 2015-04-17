@@ -6,7 +6,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvListing" MouseDoubleClick="lvListing_MouseDoubleClick">
+        <DataGrid Grid.Row="0" x:Name="lvListing">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto"  Header="ID"              Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width="*" Header="Supplier"            Binding="{Binding SupplierName}" />
@@ -19,13 +19,25 @@
                 <DataGridTextColumn Width="Auto"  Header="Seats"           Binding="{Binding Seats}" />
                 <DataGridTextColumn Width="Auto"  Header="Attendees"       Binding="{Binding CurrentNumGuests}" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="lvListing_MouseDoubleClick" />
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
-        <WrapPanel Grid.Row="1">
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnAddListing"     Content="Add"    Click="btnAddListing_Click" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnEditListing"    Content="Edit"   Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
-            <Button Margin="{DynamicResource Button Spacing}" x:Name="btnArchiveListing" Content="Delete" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
-            <TextBox x:Name="txtSearchListing" Height="23" TextWrapping="NoWrap" Width="120" TextChanged="txtSearchListing_TextChanged"/>
-            <Button x:Name="btnSearchListing" Content="Refresh List" Width="87" Click="btnSearchListing_Click"/>
-        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddListing"     Content="Add Listing"    Click="btnAddListing_Click" />
+            <Button Grid.Column="1"  Margin="{DynamicResource Button Spacing Inline}" x:Name="btnEditListing"    Content="Edit Listing"   Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
+            <Button Grid.Column="2"  Margin="{DynamicResource Button Spacing Inline}" x:Name="btnArchiveListing" Content="Archive Listing" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
+            <TextBox Grid.Column="3"  Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchListing" TextWrapping="Wrap" TextChanged="txtSearchListing_TextChanged"/>
+            <Button Grid.Column="4" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnSearchListing" Content="Refresh List" Click="btnSearchListing_Click"/>
+        </Grid>
     </Grid>
 </UserControl>

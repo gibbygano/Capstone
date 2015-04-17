@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using com.WanderingTurtle.Common;
 using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -34,11 +24,12 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Ryan Blake 
         /// Created: 2015/03/06
-        /// 
         /// Allows user to edit a booking
         /// </summary>
         /// <param name="inInvoice">Invoice info from the view invoice UI</param>
         /// <param name="inBookingDetails">Booking info from the view invoice UI</param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails, bool ReadOnly = false)
         {
             this.inInvoice = inInvoice;
@@ -46,7 +37,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
 
             populateTextFields();
-            eID = (int)com.WanderingTurtle.FormPresentation.Models.Globals.UserToken.EmployeeID;
+            eID = (int)Globals.UserToken.EmployeeID;
 
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
@@ -58,8 +49,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// 
         /// Populates text fields with object data
         /// </summary>
-        /// <param name="inInvoice"></param>
-        /// <param name="inBookingDetails"></param>
         private void populateTextFields()
         {
             //get latest data on the eventItemListing
@@ -117,15 +106,15 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case (ResultsEdit.QuantityZero):
-                        throw new Exception("Please use cancel instead of setting quantity 0.");
+                        throw new ApplicationException("Please use cancel instead of setting quantity 0.");
                     case (ResultsEdit.Success):
                         await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
                         this.Close();
                         break;
                     case(ResultsEdit.ListingFull):
-                        throw new Exception("This event is already full. You cannot add more guests to it.");
+                        throw new ApplicationException("This event is already full. You cannot add more guests to it.");
                     case(ResultsEdit.ChangedByOtherUser):
-                        throw new Exception("Changed by another user");
+                        throw new ApplicationException("Changed by another user");
                 }
             }
             catch (Exception ex)
@@ -144,17 +133,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>booking of the new information</returns>
         private Booking gatherFormInformation()
         {
-            decimal extendedPrice, totalPrice, discount;
-
             //gets quantity from the up/down quantity field
             int qty = (int)(udAddBookingQuantity.Value);
 
             //get discount from form
-            discount = (decimal)(udDiscount.Value);
+            decimal discount = (decimal)(udDiscount.Value);
 
             //calculate values for the tickets
-            extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, qty);
-            totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+            decimal extendedPrice = _bookingManager.calcExtendedPrice(originalBookingRecord.TicketPrice, qty);
+            decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
             Booking editedBooking = new Booking(originalBookingRecord.BookingID, originalBookingRecord.GuestID, eID, originalBookingRecord.ItemListID, qty, DateTime.Now, discount,originalBookingRecord.Active, originalBookingRecord.TicketPrice, extendedPrice, totalPrice);
             return editedBooking;

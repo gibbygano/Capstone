@@ -24,14 +24,12 @@
 
 		public int ApplicationID { get; set; }
 
-		public int? UserID { get; set; }
-
         public decimal? SupplyCost { get; set; }
 
 		public bool Active { get; set; }
 
 		public Supplier(int supplierID, string companyName, string firstName, string lastName, string address1,
-			string address2, string zip, string phoneNumber, string emailAddress, int applicationID, int userID, bool active)
+			string address2, string zip, string phoneNumber, string emailAddress, int applicationID, bool active)
 		{
 			SupplierID = supplierID;
 			CompanyName = companyName;
@@ -51,7 +49,7 @@
 		}
 
         public Supplier(string companyName, string firstName, string lastName, string address1,
-        string address2, string zip, string phoneNumber, string emailAddress, int applicationID, int userID, decimal supplyCost, bool active)
+        string address2, string zip, string phoneNumber, string emailAddress, int applicationID, decimal supplyCost, bool active)
         {
             CompanyName = companyName;
             FirstName = firstName;
@@ -64,6 +62,11 @@
             ApplicationID = applicationID;
             SupplyCost = supplyCost;
             Active = active;
+        }
+
+        public Supplier ShallowCopy()
+        {
+            return (Supplier)this.MemberwiseClone();
         }
 	}
 }

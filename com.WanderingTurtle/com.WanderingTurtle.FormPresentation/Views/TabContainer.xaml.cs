@@ -1,6 +1,5 @@
 ﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls;
 using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation.Views
@@ -10,6 +9,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
     /// </summary>
     public partial class TabContainer
     {
+        /// <exception cref="WanderingTurtleException"/>
         public TabContainer()
         {
             InitializeComponent();

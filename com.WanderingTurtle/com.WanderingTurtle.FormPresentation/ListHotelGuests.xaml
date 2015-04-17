@@ -6,14 +6,18 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList" MouseDoubleClick="lvHotelGuestList_MouseDoubleClick">
+        <DataGrid Grid.Row="0" x:Name="lvHotelGuestList">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="Auto" Header="ID"           Binding="{Binding HotelGuestID}" />
                 <DataGridTextColumn Width="Auto" Header="Room #"       Binding="{Binding GuestRoomNum}" />
                 <DataGridTextColumn Width="*" Header="Date Registered" Binding="{Binding DateOpened, StringFormat='{}{0:D}'}" />
                 <DataGridTextColumn Width="*" Header="Last Name"       Binding="{Binding GuestLastName}" />
                 <DataGridTextColumn Width="*" Header="First Name"      Binding="{Binding GuestFirstName}" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">
+                    <EventSetter Event="MouseDoubleClick" Handler="lvHotelGuestList_MouseDoubleClick" />
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

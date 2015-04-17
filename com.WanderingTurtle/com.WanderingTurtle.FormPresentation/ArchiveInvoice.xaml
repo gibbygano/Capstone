@@ -58,7 +58,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Submit" x:Name="BtnSubmit" Click="btnFinalizeInvoice_Click" />
-            <Button Grid.Column="2" Content="cancel" x:Name="btnCancel" Click="BtnCancel_Click" />
+            <Button Grid.Column="1" Content="Cancel" x:Name="btnCancel" Click="BtnCancel_Click" />
+            <Button Grid.Column="2" Content="Print" x:Name="btnPrint" Click="btnPrint_Click" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>

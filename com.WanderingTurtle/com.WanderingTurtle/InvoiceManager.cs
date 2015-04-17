@@ -1,9 +1,9 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data.SqlClient;
+using System.Linq;
+using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -139,7 +139,7 @@ namespace com.WanderingTurtle.BusinessLogic
 		{
             try
             {
-                //get latest bookings from the guest
+                ////get latest bookings from the guest
                 List<BookingDetails> bookingsToArchive = RetrieveGuestBookingDetailsList(invoiceToTry.HotelGuestID);
 
                 //archive guest's bookings by changing active field to false
@@ -148,7 +148,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     b.Active = false;
 
                     int numrows = _bookingManager.EditBooking(b);
-                    
+
                     if (numrows != 1)
                     {
                         return ResultsArchive.ChangedByOtherUser;
