@@ -10,12 +10,6 @@ namespace com.WanderingTurtle.Common
     /// </summary>
     public class Lists
     {
-        public int SupplierID { get; set; }
-
-        public int ItemListID { get; set; }
-
-        public DateTime DateListed { get; set; }
-
         public Lists()
         {
             //default constructor
@@ -27,5 +21,11 @@ namespace com.WanderingTurtle.Common
             ItemListID = itemListID;
             DateListed = dateListed;
         }
+
+        public DateTime DateListed { get; set; }
+
+        public int ItemListID { get; set; }
+
+        public int SupplierID { get; set; }
     }
 }

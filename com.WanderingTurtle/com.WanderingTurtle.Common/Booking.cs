@@ -20,28 +20,6 @@ namespace com.WanderingTurtle.Common
     /// </remarks>
     public class Booking
     {
-        public int BookingID { get; set; }
-
-        public int GuestID { get; set; }
-
-        public int EmployeeID { get; set; }
-
-        public int ItemListID { get; set; }
-
-        public int Quantity { get; set; }
-
-        public DateTime DateBooked { get; set; }
-
-        public decimal Discount { get; set; }
-
-        public bool Active { get; set; }
-
-        public decimal TicketPrice { get; set; }
-
-        public decimal ExtendedPrice { get; set; }
-
-        public decimal TotalCharge { get; set; }
-
         public Booking()
         {
         }
@@ -105,6 +83,28 @@ namespace com.WanderingTurtle.Common
             ExtendedPrice = extended;
             TotalCharge = total;
         }
+
+        public bool Active { get; set; }
+
+        public int BookingID { get; set; }
+
+        public DateTime DateBooked { get; set; }
+
+        public decimal Discount { get; set; }
+
+        public int EmployeeID { get; set; }
+
+        public decimal ExtendedPrice { get; set; }
+
+        public int GuestID { get; set; }
+
+        public int ItemListID { get; set; }
+
+        public int Quantity { get; set; }
+
+        public decimal TicketPrice { get; set; }
+
+        public decimal TotalCharge { get; set; }
     }
 
     /// <summary>
@@ -120,15 +120,15 @@ namespace com.WanderingTurtle.Common
     /// </remarks>
     public class BookingDetails : Booking
     {
-        public string EventItemName { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-        public int InvoiceID { get; set; }
-
         public BookingDetails()
             : base()
         {
         }
+
+        public string EventItemName { get; set; }
+
+        public int InvoiceID { get; set; }
+
+        public DateTime StartDate { get; set; }
     }
 }

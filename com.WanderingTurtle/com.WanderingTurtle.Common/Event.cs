@@ -2,32 +2,8 @@
 {
     public class Event
     {
-        //Bryan Hurst Feb.19
-        //Object for the creation of Event objects with set data fields
-        public int EventItemID { get; set; }
-
-        public string EventItemName { get; set; }
-
-        public bool Transportation { get; set; }
-
-        public int EventTypeID { get; set; }
-
-        public bool OnSite { get; set; }
-
-        public int ProductID { get; set; }
-
-        public string Description { get; set; }
-
-        public bool Active { get; set; }
-
-        public string EventTypeName { get; set; }
-
-        public string TransportString { get; set; }
-
-        public string OnSiteString { get; set; }
-
         public Event(int eventItemID, string eventItemName,
-            bool transportation, int eventTypeID, bool onSite, int productID, string description, bool active)
+                    bool transportation, int eventTypeID, bool onSite, int productID, string description, bool active)
         {
             EventItemID = eventItemID;
             EventItemName = eventItemName;
@@ -38,6 +14,34 @@
             Description = description;
             Active = active;
         }
+
+        public Event()
+        {
+        }
+
+        public bool Active { get; set; }
+
+        public string Description { get; set; }
+
+        //Bryan Hurst Feb.19
+        //Object for the creation of Event objects with set data fields
+        public int EventItemID { get; set; }
+
+        public string EventItemName { get; set; }
+
+        public int EventTypeID { get; set; }
+
+        public string EventTypeName { get; set; }
+
+        public bool OnSite { get; set; }
+
+        public string OnSiteString { get; set; }
+
+        public int ProductID { get; set; }
+
+        public bool Transportation { get; set; }
+
+        public string TransportString { get; set; }
 
         public void setFields()
         {
@@ -58,10 +62,6 @@
             {
                 OnSiteString = "No";
             }
-        }
-
-        public Event()
-        {
         }
     }
 }

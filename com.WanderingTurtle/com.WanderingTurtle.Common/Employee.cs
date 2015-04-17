@@ -14,18 +14,6 @@
     /// </remarks>
     public class Employee
     {
-        public int? EmployeeID { get; private set; }
-
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
-
-        public string Password { get; private set; }
-
-        public RoleData Level { get; private set; }
-
-        public bool Active { get; private set; }
-
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/26
@@ -59,6 +47,24 @@
             SetValues(null, FirstName, LastName, Password, Level, Active);
         }
 
+        public bool Active { get; private set; }
+
+        public int? EmployeeID { get; private set; }
+
+        public string FirstName { get; private set; }
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// </summary>
+        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+
+        public string LastName { get; private set; }
+
+        public RoleData Level { get; private set; }
+
+        public string Password { get; private set; }
+
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/26
@@ -78,11 +84,5 @@
             this.Level = (RoleData)Level;
             this.Active = Active;
         }
-
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/02/26
-        /// </summary>
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }
 }

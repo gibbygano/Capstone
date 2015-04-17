@@ -9,34 +9,6 @@ namespace com.WanderingTurtle.Common
     /// </summary>
     public class SupplierApplication
     {
-        public int ApplicationID { get; set; }
-
-        public string CompanyName { get; set; }
-
-        public string CompanyDescription { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string Address1 { get; set; }
-
-        public string Address2 { get; set; }
-
-        public string Zip { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string EmailAddress { get; set; }
-
-        public DateTime ApplicationDate { get; set; }
-
-        public string ApplicationStatus { get; set; }
-
-        public DateTime LastStatusDate { get; set; }
-
-        public string Remarks { get; set; }
-
         public SupplierApplication()
         {
             //default
@@ -77,5 +49,33 @@ namespace com.WanderingTurtle.Common
             LastStatusDate = DateTime.Now;
             Remarks = "";
         }
+
+        public string Address1 { get; set; }
+
+        public string Address2 { get; set; }
+
+        public DateTime ApplicationDate { get; set; }
+
+        public int ApplicationID { get; set; }
+
+        public string ApplicationStatus { get; set; }
+
+        public string CompanyDescription { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string EmailAddress { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public DateTime LastStatusDate { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Remarks { get; set; }
+
+        public string Zip { get; set; }
     }
 }

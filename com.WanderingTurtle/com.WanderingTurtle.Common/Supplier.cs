@@ -2,34 +2,8 @@
 {
     public class Supplier
     {
-        //Bryan Hurst Feb.19
-        //Object for the creation of Supplier objects with set data fields
-        public int SupplierID { get; set; }
-
-        public string CompanyName { get; set; }
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string Address1 { get; set; }
-
-        public string Address2 { get; set; }
-
-        public string Zip { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string EmailAddress { get; set; }
-
-        public int ApplicationID { get; set; }
-
-        public decimal? SupplyCost { get; set; }
-
-        public bool Active { get; set; }
-
         public Supplier(int supplierID, string companyName, string firstName, string lastName, string address1,
-            string address2, string zip, string phoneNumber, string emailAddress, int applicationID, bool active)
+                    string address2, string zip, string phoneNumber, string emailAddress, int applicationID, bool active)
         {
             SupplierID = supplierID;
             CompanyName = companyName;
@@ -49,7 +23,7 @@
         }
 
         public Supplier(string companyName, string firstName, string lastName, string address1,
-        string address2, string zip, string phoneNumber, string emailAddress, int applicationID, decimal supplyCost, bool active)
+                string address2, string zip, string phoneNumber, string emailAddress, int applicationID, decimal supplyCost, bool active)
         {
             CompanyName = companyName;
             FirstName = firstName;
@@ -63,6 +37,32 @@
             SupplyCost = supplyCost;
             Active = active;
         }
+
+        public bool Active { get; set; }
+
+        public string Address1 { get; set; }
+
+        public string Address2 { get; set; }
+
+        public int ApplicationID { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string EmailAddress { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        //Bryan Hurst Feb.19
+        //Object for the creation of Supplier objects with set data fields
+        public int SupplierID { get; set; }
+
+        public decimal? SupplyCost { get; set; }
+
+        public string Zip { get; set; }
 
         public Supplier ShallowCopy()
         {

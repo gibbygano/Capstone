@@ -16,28 +16,6 @@
     /// </remarks>
     public class HotelGuest
     {
-        public int? HotelGuestID { get; private set; }
-
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
-
-        public string Address1 { get; private set; }
-
-        public string Address2 { get; private set; }
-
-        public CityState CityState { get; private set; }
-
-        public string PhoneNumber { get; private set; }
-
-        public string EmailAddress { get; private set; }
-
-        public bool Active { get; private set; }
-
-        public string Room { get; private set; }
-
-        public string GuestPIN { get; private set; }
-
         /// <summary>
         /// Rose Steffensmeier
         /// Created: 2015/02/27
@@ -86,6 +64,7 @@
         {
             SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, GuestPIN, Active);
         }
+
         /// <summary>
         /// Rose Steffensmeier
         /// Created: 2015/02/27
@@ -135,6 +114,30 @@
             SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room.ToString(), GuestPIN.ToString(), Active);
         }
 
+        public bool Active { get; private set; }
+
+        public string Address1 { get; private set; }
+
+        public string Address2 { get; private set; }
+
+        public CityState CityState { get; private set; }
+
+        public string EmailAddress { get; private set; }
+
+        public string FirstName { get; private set; }
+
+        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+
+        public string GuestPIN { get; private set; }
+
+        public int? HotelGuestID { get; private set; }
+
+        public string LastName { get; private set; }
+
+        public string PhoneNumber { get; private set; }
+
+        public string Room { get; private set; }
+
         /// <summary>
         /// Rose Steffensmeier
         /// Created: 2015/02/27
@@ -169,7 +172,5 @@
             this.Active = Active;
             this.GuestPIN = GuestPIN.ToString();
         }
-
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
     }
 }

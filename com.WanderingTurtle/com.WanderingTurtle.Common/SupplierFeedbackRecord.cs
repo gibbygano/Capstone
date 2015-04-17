@@ -12,16 +12,6 @@
 
     public class SupplierFeedbackRecord
     {
-        public int RatingID { get; set; }
-
-        public int SupplierID { get; set; }
-
-        public int EmployeeID { get; set; }
-
-        public int Rating { get; set; }
-
-        public string RatingNotes { get; set; }
-
         public SupplierFeedbackRecord()
         {
         }
@@ -34,5 +24,15 @@
             Rating = rating;
             RatingNotes = ratingNotes;
         }
+
+        public int EmployeeID { get; set; }
+
+        public int Rating { get; set; }
+
+        public int RatingID { get; set; }
+
+        public string RatingNotes { get; set; }
+
+        public int SupplierID { get; set; }
     }
 }
