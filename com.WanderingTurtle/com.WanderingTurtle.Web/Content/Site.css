@@ -936,17 +936,28 @@ button.ui-button-text-only {
     width: 75px;
 }
 
-#ui-datepicker-div {
+.ui-datepicker-calendar, .ui-datepicker-header, .ui-datepicker-buttonpane, .ui-timepicker-div  {
     background-color: rgb(51,161,51);
     color: #fff;
     padding: 5px;
+    
+}
+
+.ui-datepicker-calendar th{
+    margin: auto;
+    padding-left: 5px;
+}
+
+.ui-datepicker-calendar td{
+    margin: auto;
+    padding-left: 5px;
 }
 
 #eventSearch{
     float:right;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
     background-color: rgb(51,161,51);
     color: #fff;
     border: 0px;

@@ -45,7 +45,6 @@ namespace com.WanderingTurtle.Web.Pages
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-
                 //get # of listings for supplier
                 try
                 {
@@ -58,18 +57,11 @@ namespace com.WanderingTurtle.Web.Pages
                     {
                         currentGuestsCount += listing.CurrentNumGuests;
                     }
-
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
- 
-
-            
-
-
         }
 
         public IEnumerable<ItemListing> GetItemLists()
