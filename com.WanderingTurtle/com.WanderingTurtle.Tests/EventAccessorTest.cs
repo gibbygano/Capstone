@@ -1,151 +1,142 @@
-﻿using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using com.WanderingTurtle.DataAccess;
+using com.WanderingTurtle.Common;
 using System.Data.SqlClient;
+using System.Data;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.Tests
 {
     /// <summary>
     /// Bryan Hurst
     /// Created 4/2/2015
-    ///
-    /// Unit tests for the EventAccessor class in Data Access
+    /// 
+    /// Unit tests for the methods in Event Accessor
     /// </summary>
     [TestClass]
     public class EventAccessorTest
     {
-        private int EventItemID = 0;
-        private string EventItemName = "asd";
-        private bool Transportation = false;
-        private int EventTypeID = 10;
-        private bool OnSite = true;
-        private int ProductID = 100;
-        private string Description = "dsa";
-        private bool Active = true;
-        private Event testEvent;
 
-        private int newEventItemID = 0;
-        private string newEventItemName = "dsa";
-        private bool newTransportation = true;
-        private int newEventTypeID = 22;
-        private bool newOnSite = false;
-        private int newProductID = 333;
-        private string newDescription = "asd";
-        private bool newActive = true;
+        Event eventToTest = new Event();
+        Event eventToEdit = new Event();
+        List<Event> list = new List<Event>();
 
+        /// <summary>
+        /// Sets up our events to use in unit tests.
+        /// </summary>
+        public void setup()
+        {
+            eventToTest.EventItemID = 0;
+            eventToTest.EventItemName = "TEST";
+            eventToTest.Transportation = false;
+            eventToTest.EventTypeID = 100;
+            eventToTest.OnSite = true;
+            eventToTest.ProductID = 100;
+            eventToTest.Description = "dsa";
+            eventToTest.Active = true;
+
+            eventToEdit.EventItemID = 0;
+            eventToEdit.EventItemName = "TEST2";
+            eventToEdit.Transportation = false;
+            eventToEdit.EventTypeID = 100;
+            eventToEdit.OnSite = true;
+            eventToEdit.ProductID = 100;
+            eventToEdit.Description = "dsa";
+            eventToEdit.Active = true;
+        }
+
+        /// <summary>
+        /// Tests adding events to the database
+        /// from the eventAccessor
+        /// </summary>
         [TestMethod]
         public void AddEvent_ValidEvent()
         {
             int expected = 1;
-            testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
+            setup();
 
-            int actual = EventAccessor.AddEvent(testEvent);
+            int actual = EventAccessor.AddEvent(eventToTest);
 
-            EventAccessor.DeleteEventTestItem(testEvent);
+            EventAccessor.DeleteEventTestItem(eventToTest);
 
             Assert.AreEqual(expected, actual);
         }
 
-        /*
-        [TestMethod]
-        [ExpectedException (typeof (ApplicationException))]
-        public void AddEvent_InvalidEvent()
-        {
-            int expected = 1;
-
-            Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
-
-            int actual = EventAccessor.AddEvent(testEvent);
-
-            Assert.AreEqual(expected, actual);
-        }*/
-
+        /// <summary>
+        /// Tests updating event via the eventAccessor
+        /// </summary>
         [TestMethod]
         public void UpdateEvent_ValidEvent()
         {
+            setup();
+            EventAccessor.AddEvent(eventToTest);
+            eventToTest = getEventObjectID(list);
+
             int expected = 1;
-            Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
-            EventAccessor.AddEvent(testEvent);
 
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            string cmdText = "SELECT EventItemID FROM EventItem WHERE EventItemName = '" + EventItemName + "'";
-            var cmd = new SqlCommand(cmdText, conn);
-
-            conn.Open();
-            newEventItemID = (int)cmd.ExecuteScalar();
-            conn.Close();
-
-            Event newtestEvent = new Event(newEventItemID, newEventItemName, newTransportation, newEventTypeID, newOnSite, newProductID, newDescription, newActive);
-
-            int actual = EventAccessor.UpdateEvent(testEvent, newtestEvent);
-
-            EventAccessor.DeleteEventTestItem(newtestEvent);
-
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, EventAccessor.UpdateEvent(eventToTest, eventToEdit));
         }
 
+        private Event getEventObjectID(List<Event> list)
+        {
+            list = EventAccessor.GetEventList();
+            foreach (Event item in list)
+            {
+                if (item.EventItemName.Equals("TEST"))
+                {
+                    return item;
+                }
+            }
+            return new Event();
+        }
+
+        /// <summary>
+        /// Tests an attempt to update an event
+        /// that does not exist in the database.
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException))]
         public void UpdateEvent_InvalidEvent()
         {
-            int oldEventItemID = 9999;
-            string oldEventItemName = "asd";
-            bool oldTransportation = false;
-            int oldEventTypeID = 10;
-            bool oldOnSite = true;
-            int oldProductID = 100;
-            string oldDescription = "dsa";
-            bool oldActive = true;
-
-            Event testEvent = new Event(oldEventItemID, oldEventItemName, oldTransportation, oldEventTypeID, oldOnSite, oldProductID, oldDescription, oldActive);
-            Event newtestEvent = new Event(newEventItemID, newEventItemName, newTransportation, newEventTypeID, newOnSite, newProductID, newDescription, newActive);
-
-            int actual = EventAccessor.UpdateEvent(testEvent, newtestEvent);
+            setup();
+            eventToTest.EventItemID = 9999;
+            EventAccessor.UpdateEvent(eventToTest, eventToEdit);
         }
 
+        /// <summary>
+        /// Tests the archiving (deletion) of a 
+        /// valid event in the database.
+        /// </summary>
         [TestMethod]
         public void DeleteEvent_ValidEvent()
         {
             int expected = 1;
-            Event testEvent = new Event(EventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
-            EventAccessor.AddEvent(testEvent);
-
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            string cmdText = "SELECT EventItemID FROM EventItem WHERE EventItemName = '" + EventItemName + "'";
-            var cmd = new SqlCommand(cmdText, conn);
-
-            conn.Open();
-            newEventItemID = (int)cmd.ExecuteScalar();
-            conn.Close();
-
-            Event newTestEvent = new Event(newEventItemID, EventItemName, Transportation, EventTypeID, OnSite, ProductID, Description, Active);
-
-            int actual = EventAccessor.DeleteEventItem(newTestEvent);
-
-            EventAccessor.DeleteEventTestItem(testEvent);
-
+            setup();
+            EventAccessor.AddEvent(eventToTest);
+            eventToTest = getEventObjectID(list);
+            int actual = EventAccessor.DeleteEventItem(eventToTest);
+            EventAccessor.DeleteEventTestItem(eventToTest);
             Assert.AreEqual(expected, actual);
+
         }
 
+        /// <summary>
+        /// Tests the archiving (deletion) of 
+        /// an invalid event in the database
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException))]
         public void DeleteEvent_InvalidEvent()
         {
             int expected = 1;
-
-            Event testEvent = new Event(newEventItemID, newEventItemName, newTransportation, newEventTypeID, newOnSite, newProductID, newDescription, newActive);
-
-            int actual = EventAccessor.DeleteEventItem(testEvent);
-
+            setup();
+            eventToEdit.EventItemID = 9999;
+            int actual = EventAccessor.DeleteEventItem(eventToEdit);
             Assert.AreEqual(expected, actual);
         }
-
-        //[TestMethod]
-        //[ExpectedException(typeof (ApplicationException))]
-        //public void GetEventList_DBMissing()
-        //{
-        //    EventAccessor.GetEventList();
-        //}
     }
 }
