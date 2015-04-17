@@ -38,11 +38,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/04/09
-        /// 
         /// Handles loading of the screen with data from the list.
         /// </summary>
         /// <param name="CurrentSupplierApplication"></param>
         /// <param name="ReadOnly"></param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();

@@ -11,13 +11,14 @@ namespace com.WanderingTurtle.FormPresentation.Models
     internal static class WindowHelper
     {
         /// <summary>
-        /// Returns the base parent <typeparamref name="MainWindow"/>
+        /// Returns the base parent MainWinow
         /// </summary>
         /// <remarks>
         /// Miguel Santana 2015/03/10
         /// </remarks>
-        /// <param name="control">The control that you wish to find main window of. In most cases you will use <typeparamref name="this"/></param>
-        /// <returns>Base Parent <typeparamref name="MainWindow"/></returns>
+        /// <param name="control">The control that you wish to find main window of. In most cases you will use 'this'</param>
+        /// <returns>Base Parent MainWinow</returns>
+        /// <exception cref="WanderingTurtleException"/>
         internal static MainWindow GetMainWindow(FrameworkElement control)
         {
             try
@@ -33,13 +34,14 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Returns the parent <typeparamref name="MetroWindow"/> of any child control
+        /// Returns the parent MetroWindow of any child control
         /// </summary>
         /// <remarks>
         /// Miguel Santana 2015/03/10
         /// </remarks>
-        /// <param name="control">The control that you wish to find the parent of. In most cases you will use <typeparamref name="this"/></param>
-        /// <returns>Parent <typeparamref name="MetroWindow"/></returns>
+        /// <param name="control">The control that you wish to find the parent of. In most cases you will use 'this'</param>
+        /// <returns>Parent MetroWindow</returns>
+        /// <exception cref="WanderingTurtleException"/>
         internal static MetroWindow GetWindow(FrameworkElement control)
         {
             try
@@ -65,6 +67,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
+        /// <exception cref="WanderingTurtleException">Condition.</exception>
         internal static void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
         {
             try

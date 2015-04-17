@@ -10,7 +10,7 @@ using com.WanderingTurtle.FormPresentation.Models;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// This Window allows the administrator to directly add a suplier
+    /// This Window allows the administrator to directly add a supplier
     /// </summary>
     public partial class AddEditSupplier
     {
@@ -35,6 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
             Instance = this;
         }
 
+        /// <exception cref="WanderingTurtleException"/>
         public AddEditSupplier(Supplier supplierToEdit, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -115,14 +116,15 @@ namespace com.WanderingTurtle.FormPresentation
         /////////////////////////////Custom Methods/////////////////////////////////////
 
         /// <summary>
-        /// checks to see if all the feilds are fill out and formated with the correct data
-        /// It returns a false if there is an invalid feilds(s) and will output an error message to the lblError label
+        /// checks to see if all the fields are fill out and formated with the correct data
+        /// It returns a false if there is an invalid fields and will output an error message to the lblError label
         /// Created By Will Fritz 2/4/15
         /// </summary>
         /// <remarks>
         /// edited by will fritz 2/19/15
         /// </remarks>
         /// <returns></returns>
+        /// <exception cref="InputValidationException">Validation Error Handling.</exception>
         public bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
@@ -217,7 +219,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// This will fill the add/edit tab feilds with the data from a selected Supplier from the list view
+        /// This will fill the add/edit tab fields with the data from a selected Supplier from the list view
         /// Created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>

@@ -24,11 +24,12 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Ryan Blake 
         /// Created: 2015/03/06
-        /// 
         /// Allows user to edit a booking
         /// </summary>
         /// <param name="inInvoice">Invoice info from the view invoice UI</param>
         /// <param name="inBookingDetails">Booking info from the view invoice UI</param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public EditBooking(InvoiceDetails inInvoice, BookingDetails inBookingDetails, bool ReadOnly = false)
         {
             this.inInvoice = inInvoice;
@@ -48,8 +49,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// 
         /// Populates text fields with object data
         /// </summary>
-        /// <param name="inInvoice"></param>
-        /// <param name="inBookingDetails"></param>
         private void populateTextFields()
         {
             //get latest data on the eventItemListing

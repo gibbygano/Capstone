@@ -22,11 +22,11 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Created by Pat Banks 2015/03/03
-        ///
         /// Constructs a populated form that shows the final charges for a guest and
         /// allows employee to submit to close the invoice
         /// </summary>
         /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
+        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
         public ArchiveInvoice(int selectedHotelGuestID)
         {
             try

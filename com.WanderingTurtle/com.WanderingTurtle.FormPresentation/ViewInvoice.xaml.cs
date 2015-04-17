@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Displays information for the selected guest's invoice
         /// </summary>
-        /// <param name="selectedHotelGuestID">Selected guest's id to retrieve</param>
+        /// <param name="selectedGuest">Selected guest to retrieve</param>
         public ViewInvoice(InvoiceDetails selectedGuest)
         {
             InitializeComponent();

@@ -9,6 +9,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
     /// </summary>
     public partial class TabContainer
     {
+        /// <exception cref="WanderingTurtleException"/>
         public TabContainer()
         {
             InitializeComponent();

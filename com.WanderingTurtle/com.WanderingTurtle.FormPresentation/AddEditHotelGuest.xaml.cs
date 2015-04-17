@@ -40,10 +40,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        /// 
         /// Edit an Existing Hotel Guest
         /// </summary>
         /// <param name="hotelGuest"></param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public AddEditHotelGuest(HotelGuest hotelGuest, bool ReadOnly = false)
         {
             InitializeComponent();

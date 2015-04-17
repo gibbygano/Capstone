@@ -7,6 +7,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
 {
     internal class DataGridHelper
     {
+        /// <exception cref="WanderingTurtleException">An error occoured while trying to retrieve the object stored inside the DataGrid Row.</exception>
         public static T DataGridRow_Click<T>(object sender, MouseButtonEventArgs e)
         {
             try

@@ -25,11 +25,12 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Hunter Lind || 2015/2/23
-        ///
         /// Fills out our form with information from NewEvent.
         /// Also saves an Unrevised version of NewEvent.
         /// </summary>
         /// <param name="EventToEdit">The Event we are going to edit</param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
         public AddEditEvent(Event EventToEdit, bool ReadOnly = false)
         {
             this.OriginalEvent = EventToEdit;

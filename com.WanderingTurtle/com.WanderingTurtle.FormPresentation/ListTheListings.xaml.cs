@@ -36,7 +36,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 Window AddItemListings = new AddEditListing();
-                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
+                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDialog only being able to be used on hidden
                 //AddItemListings.Show();
                 if (AddItemListings.ShowDialog() == false)
                 {
@@ -93,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
 
-                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDailog only being able to be used on hidden
+                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDialog only being able to be used on hidden
                 //AddItemListings.Show();
                 if (EditListings.ShowDialog() == false)
                 {

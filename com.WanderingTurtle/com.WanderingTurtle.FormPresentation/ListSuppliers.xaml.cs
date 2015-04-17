@@ -30,6 +30,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// This will fill the list of suppliers and set this object to the "Instance variable"
         /// Created by will fritz 15/2/6
         /// </summary>
+        /// <exception cref="WanderingTurtleException">Failed to get suppliers list.</exception>
         public ListSuppliers()
         {
             InitializeComponent();
@@ -44,6 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// edited by will fritz 15/2/19
         /// </remarks>
+        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
         public void FillList()
         {
             try
@@ -74,7 +76,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// opens the AddEditSupplier window
-        /// ceated by Pat 15/2/6
+        /// created by Pat 15/2/6
         /// </summary>
         /// <remarks>
         /// Edited to make it a singleton pattern

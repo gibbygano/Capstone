@@ -32,12 +32,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/20
-        ///
         /// Constructs a form with data from employee to update
         /// </summary>
         /// <remarks>
         /// </remarks>
         /// <param name="employee">Employee to update</param>
+        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
         public AddEmployee(Employee employee, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -244,6 +245,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
+        /// <param name="style"></param>
         /// <returns>awaitable Task of MEssageDialogResult</returns>
         private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {

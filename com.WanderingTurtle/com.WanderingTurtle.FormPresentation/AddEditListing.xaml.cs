@@ -7,9 +7,9 @@ using com.WanderingTurtle.FormPresentation.Models;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 // Worked on by:
-///Hunter
-////Fritz
-/////Matthew 10:15
+// Hunter
+// Fritz
+// Matthew 10:15
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>

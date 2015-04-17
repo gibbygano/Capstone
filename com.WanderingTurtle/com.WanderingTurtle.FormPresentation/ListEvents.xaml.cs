@@ -13,7 +13,7 @@ using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for ListEventss.xaml
+    /// Interaction logic for ListEvents.xaml
     /// </summary>
     public partial class ListEvents : UserControl
     {
@@ -88,7 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
                 case MessageDialogResult.Affirmative:
                     try
                     {
-                        Event EventToDelete = (Event)lvEvents.SelectedItems[0];
+                        Event EventToDelete = lvEvents.SelectedItems[0] as Event;
                         myMan.ArchiveAnEvent(EventToDelete);
                         Refresh();
                     }
