@@ -17,18 +17,35 @@ namespace BookingTests
     {
         //
         int BookingID;
-        int guestID = 0;
+        int guestID = 100;
         int empID = 100;
         int itemID = 100;
+
         int bQuantity = 2;
         DateTime dateBooked = DateTime.Now;
         decimal ticket = 1234m;
         decimal extended = 40m;
         decimal discount = .1m;
         decimal total = 36m;
-        Booking booking;
+        Booking booking = new Booking();
         BookingDetails bookingDetails;
         BookingManager myBook = new BookingManager();
+
+        public void TestBookingConstructor()
+        {
+            //booking object created
+            booking = new Booking();
+            booking.GuestID = 100;
+            booking.EmployeeID = 100;
+            booking.ItemListID = 101;
+            booking.Quantity = 2;
+            booking.DateBooked = DateTime.Now;
+            booking.TicketPrice = 1234m;
+            booking.ExtendedPrice = 40m;
+            booking.Discount = .1m;
+            booking.TotalCharge = 36m;
+        }
+
 
         [TestInitialize]
         public void BookingTestSetup()
@@ -36,17 +53,14 @@ namespace BookingTests
             TestBookingConstructor();
             TestAddBookingResult();
         }
-        [TestMethod]
-        public void TestBookingConstructor()
-        {
-            //booking object created
-            booking = new Booking(guestID, empID, itemID, bQuantity, dateBooked, ticket, extended, discount, total);
-            Assert.IsNotNull(guestID);
-        }
+
+
         [TestMethod]
         public void TestAddBookingResult()
         {
             //booking object created
+            
+            TestBookingConstructor();
             ResultsEdit result = myBook.AddBookingResult(booking);
             ResultsEdit expected = ResultsEdit.Success;
             Assert.AreEqual(expected, result);

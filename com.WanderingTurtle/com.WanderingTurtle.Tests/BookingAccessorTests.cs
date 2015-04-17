@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.Tests
     public class BookingAccessorTests
     {
         int BookingID;
-        int guestID = 0;
+        int guestID = 100;
         int empID = 100;
         int itemID = 100;
         int bQuantity = 2;
@@ -71,9 +71,9 @@ namespace com.WanderingTurtle.Tests
         public void TestGetBookingbyIDAccess()
         {   // Retrieves a booking from the database by ID, first captures the dummy booking from database
             //using a TestAccessor, then uses a real accessor method to be tested.
-           BookingID = TestCleanupAccessor.GetBooking();
-           Booking booking2 = BookingAccessor.getBooking(BookingID);
-            int expected = 1234;
+            BookingID = TestCleanupAccessor.GetBooking();
+            Booking booking2 = BookingAccessor.getBooking(BookingID);
+            decimal expected = 1234;
             Assert.AreEqual(expected, booking2.TicketPrice);
             
         }

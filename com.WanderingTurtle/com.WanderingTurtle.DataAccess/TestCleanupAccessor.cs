@@ -94,7 +94,7 @@ namespace com.WanderingTurtle.DataAccess
             int result;
 
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "Select BookingID FROM Booking WHERE GuestID = 0 AND EmployeeID = 100 AND ItemListID = 100 AND TicketPrice= 1234";
+            string query = "Select BookingID FROM Booking WHERE GuestID = 100 AND EmployeeID = 100 AND ItemListID = 100 AND TicketPrice= 1234";
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
