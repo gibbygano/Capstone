@@ -98,9 +98,18 @@ namespace com.WanderingTurtle.Web.Pages
         {
             var b = (Button)sender;
             int i = int.Parse(b.CommandArgument);
-           GetNumbers(i);
-           Response.Write("<script> showDetails(); </script>");
-           
+            GetNumbers(i);
+            actions.Style.Add("display", "none");
+            leftcontainer.Style.Add("display", "none");
+            eventsDetails.Style.Add("display", "block");
+            //Response.Write("<script> showDetails(); </script>"); 
+        }
+
+        public void btnGoBack_Click(object sender, EventArgs e)
+        {
+            actions.Style.Add("display", "block");
+            leftcontainer.Style.Add("display", "block");
+            eventsDetails.Style.Add("display", "none");
         }
     }
 }

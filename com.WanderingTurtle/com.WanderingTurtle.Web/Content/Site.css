@@ -979,5 +979,25 @@ input.myMoney{
 }
 
  #MainContent_lvDetails_tbl1{
-     color:#FFFFFF;
+     color: #333;
  }  
+
+@media print {
+    * {
+        color: black;
+        background-image: none;
+        background-color: white;
+    }
+
+    body {
+        border: none;
+    }
+
+    input {
+        visibility: hidden;
+    }
+
+   header .float-right {
+       visibility: hidden;
+   }
+}

@@ -13,6 +13,24 @@ namespace com.WanderingTurtle.Web.Pages {
     public partial class SupplierPortal {
         
         /// <summary>
+        /// leftcontainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl leftcontainer;
+        
+        /// <summary>
+        /// actions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl actions;
+        
+        /// <summary>
         /// lvLists control.
         /// </summary>
         /// <remarks>
@@ -20,6 +38,33 @@ namespace com.WanderingTurtle.Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView lvLists;
+        
+        /// <summary>
+        /// eventsDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl eventsDetails;
+        
+        /// <summary>
+        /// lvDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListView lvDetails;
+        
+        /// <summary>
+        /// btnGoBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGoBack;
         
         /// <summary>
         /// eventdetails control.
@@ -31,12 +76,12 @@ namespace com.WanderingTurtle.Web.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl eventdetails;
         
         /// <summary>
-        /// lvDetails control.
+        /// lvDetailsOld control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvDetails;
+        protected global::System.Web.UI.WebControls.ListView lvDetailsOld;
     }
 }
