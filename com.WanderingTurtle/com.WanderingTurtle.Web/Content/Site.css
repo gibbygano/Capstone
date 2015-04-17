@@ -945,3 +945,18 @@ button.ui-button-text-only {
 #eventSearch{
     float:right;
 }
+
+input[type=submit] {
+    background-color: rgb(51,161,51);
+    color: #fff;
+    border: 0px;
+}
+
+input.myDate{
+    font-size: 0.85em;
+}
+
+input.myMoney{
+    font-size: 0.85em;
+    width:50px;
+}

@@ -303,5 +303,41 @@ namespace com.WanderingTurtle.BusinessLogic
                 return DataCache._currentItemListingList;
             }
         }
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/16
+        /// returns a list of listing from a specific supplier
+        /// </summary>
+        /// <param name="supplierID">supplier id</param>
+        /// <returns></returns>
+        public IEnumerable<ItemListing> RetrieveItemListingList(int supplierID)
+        {
+            try
+            {
+                double cacheExpirationTime = 5; //how long the cache should live (minutes)
+                var now = DateTime.Now;
+                if (DataCache._currentItemListingList == null)
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    DataCache._ItemListingListTime = now;
+                }
+                else
+                {
+                    //check time. If less than 5 min, return cache
+                    if (now > DataCache._ItemListingListTime.AddMinutes(cacheExpirationTime))
+                    {
+                        //get new list from DB
+                        DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                        DataCache._ItemListingListTime = now;
+                    }
+                }
+                return DataCache._currentItemListingList.Where(l => l.SupplierID == supplierID && l.StartDate > now);
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+        }
     }
 }
