@@ -44,13 +44,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// Edit an Existing Hotel Guest
         /// </summary>
         /// <param name="hotelGuest"></param>
-        public AddEditHotelGuest(HotelGuest hotelGuest)
+        public AddEditHotelGuest(HotelGuest hotelGuest, bool ReadOnly = false)
         {
             InitializeComponent();
 
             CurrentHotelGuest = hotelGuest;
             Title = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         /// <summary>
