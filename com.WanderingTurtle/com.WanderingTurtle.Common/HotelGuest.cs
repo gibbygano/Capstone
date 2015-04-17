@@ -86,6 +86,54 @@
         {
             SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, GuestPIN, Active);
         }
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created: 2015/02/27
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/03
+        /// Added GuestPIN
+        /// </remarks>
+        /// <param name="HotelGuestID"></param>
+        /// <param name="FirstName"></param>
+        /// <param name="LastName"></param>
+        /// <param name="Address1"></param>
+        /// <param name="Address2"></param>
+        /// <param name="CityState"></param>
+        /// <param name="PhoneNumber"></param>
+        /// <param name="EmailAddress"></param>
+        /// <param name="Room"></param>
+        /// <param name="Active"></param>
+        /// <param name="GuestPIN"></param>
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int Room, int GuestPIN, bool Active = true)
+        {
+            SetValues(HotelGuestID, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room.ToString(), GuestPIN.ToString(), Active);
+        }
+
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created: 2015/02/27
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/03
+        /// Added GuestPIN
+        /// </remarks>
+        /// <param name="FirstName"></param>
+        /// <param name="LastName"></param>
+        /// <param name="Address1"></param>
+        /// <param name="Address2"></param>
+        /// <param name="CityState"></param>
+        /// <param name="PhoneNumber"></param>
+        /// <param name="EmailAddress"></param>
+        /// <param name="Room"></param>
+        /// <param name="Active"></param>
+        /// <param name="GuestPIN"></param>
+        public HotelGuest(string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, int Room, int GuestPIN, bool Active = true)
+        {
+            SetValues(null, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room.ToString(), GuestPIN.ToString(), Active);
+        }
 
         /// <summary>
         /// Rose Steffensmeier
