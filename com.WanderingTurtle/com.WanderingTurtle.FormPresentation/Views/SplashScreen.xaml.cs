@@ -53,7 +53,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 catch (Exception ex) { _exception = ex; }
                 if (_exception != null) { await DialogBox.ShowMessageDialog(this, _exception.Message, "Login Error"); }
             } while (_exception != null);
-            if (Globals.UserToken != null) { WindowHelper.GetMainWindow(this).MainContent.Content = new TabContainer(); }
+            if (Globals.UserToken != null) { this.GetMainWindow().MainContent.Content = new TabContainer(); }
         }
     }
 }

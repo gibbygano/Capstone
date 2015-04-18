@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ListTheEmployees.xaml
     /// </summary>
-    public partial class ListTheEmployees : UserControl
+    public partial class ListTheEmployees : IDataGridContextMenu
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
         private GridViewColumnHeader _sortColumn;
@@ -22,19 +22,67 @@ namespace com.WanderingTurtle.FormPresentation
         private ListSortDirection _sortDirection;
 
         private List<Employee> employeeList;
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/02/19
-        ///
-        /// Displays and refreshes the list of active employees
-        /// </summary>
-        /// <remarks>
-        /// </remarks>
 
+        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
+        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public ListTheEmployees()
         {
             InitializeComponent();
             RefreshEmployeeList();
+
+            lvEmployeesList.SetContextMenu(this);
+        }
+
+        /// <exception cref="WanderingTurtleException"/>
+        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridContextMenuResult command;
+            var selectedItem = DataGridHelper.ContextMenuClick<Employee>(sender, out command);
+            switch (command)
+            {
+                case DataGridContextMenuResult.Add:
+                    OpenEmployee();
+                    break;
+
+                case DataGridContextMenuResult.View:
+                    OpenEmployee(selectedItem, true);
+                    break;
+
+                case DataGridContextMenuResult.Edit:
+                    OpenEmployee(selectedItem);
+                    break;
+
+                case DataGridContextMenuResult.Archive:
+                    OpenEmployee();
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
+            }
+        }
+
+        private void OpenEmployee(Employee selectedItem = null, bool readOnly = false)
+        {
+            try
+            {
+                if (selectedItem == null)
+                {
+                    if (new AddEmployee().ShowDialog() == false) return;
+                    RefreshEmployeeList();
+                }
+                else
+                {
+                    if (new AddEmployee(selectedItem, readOnly).ShowDialog() == false) return;
+                    if (readOnly) return;
+                    RefreshEmployeeList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>
@@ -47,19 +95,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AddEmployee newAddWindow = new AddEmployee();
-
-                if (newAddWindow.ShowDialog() == false)
-                {
-                    RefreshEmployeeList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
+            OpenEmployee();
         }
 
         /// <summary>
@@ -72,17 +108,12 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItem = this.lvEmployeesList.SelectedItem;
-            if (selectedItem == null)
-            {
-                throw new WanderingTurtleException(this, "Please select a row to edit");
-            }
-            UpdateEmployee(selectedItem as Employee);
+            OpenEmployee(lvEmployeesList.SelectedItem as Employee);
         }
 
         private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateEmployee(DataGridHelper.DataGridRow_Click<Employee>(sender, e), true);
+            OpenEmployee(DataGridHelper.RowClick<Employee>(sender), true);
         }
 
         /// <summary>
@@ -106,23 +137,6 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex, "Unable to retrieve employee list from the database.");
-            }
-        }
-
-        private void UpdateEmployee(Employee selectedEmployee, bool ReadOnly = false)
-        {
-            try
-            {
-                AddEmployee newAddWindow = new AddEmployee(selectedEmployee, ReadOnly);
-
-                if (newAddWindow.ShowDialog() == false)
-                {
-                    RefreshEmployeeList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
             }
         }
 

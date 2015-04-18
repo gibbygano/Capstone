@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace com.WanderingTurtle.FormPresentation
 {
-    public partial class ListHotelGuests : UserControl
+    public partial class ListHotelGuests : IDataGridContextMenu
     {
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
         private InvoiceManager _invoiceManager = new InvoiceManager();
@@ -19,10 +19,57 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Initializes the UI that displays a list of active hotel guests
         /// </summary>
+        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
+        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public ListHotelGuests()
         {
             InitializeComponent();
             RefreshGuestList();
+
+            lvHotelGuestList.SetContextMenu(this, new[] { DataGridContextMenuResult.Add, DataGridContextMenuResult.View });
+        }
+
+        /// <exception cref="WanderingTurtleException"/>
+        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridContextMenuResult command;
+            var selectedItem = DataGridHelper.ContextMenuClick<InvoiceDetails>(sender, out command);
+            switch (command)
+            {
+                case DataGridContextMenuResult.Add:
+                    OpenHotelGuest();
+                    break;
+
+                case DataGridContextMenuResult.View:
+                    OpenHotelGuest(selectedItem);
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
+            }
+        }
+
+        private void OpenHotelGuest(InvoiceDetails selectedItem = null)
+        {
+            try
+            {
+                if (selectedItem == null)
+                {
+                    if (new AddEditListing().ShowDialog() == false) return;
+                    RefreshGuestList();
+                }
+                else
+                {
+                    if (new ViewInvoice(selectedItem).ShowDialog() == false) return;
+                    RefreshGuestList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>
@@ -35,20 +82,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnRegisterGuest_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AddEditHotelGuest addEditHotelGuest = new AddEditHotelGuest();
-
-                //When the UI closes, the Hotel Guest list will refresh
-                if (addEditHotelGuest.ShowDialog() == false)
-                {
-                    RefreshGuestList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
+            OpenHotelGuest();
         }
 
         /// <summary>
@@ -61,19 +95,12 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event arguments</param>
         private void btnViewGuest_Click(object sender, RoutedEventArgs e)
         {
-            var selectedGuest = this.lvHotelGuestList.SelectedItem;
-
-            if (selectedGuest == null)
-            {
-                throw new WanderingTurtleException(this, "Please select a guest to view.");
-            }
-
-            ViewHotelGuest(selectedGuest as InvoiceDetails);
+            OpenHotelGuest(lvHotelGuestList.SelectedItem as InvoiceDetails);
         }
 
         private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ViewHotelGuest(DataGridHelper.DataGridRow_Click<InvoiceDetails>(sender, e));
+            OpenHotelGuest(DataGridHelper.RowClick<InvoiceDetails>(sender));
         }
 
         /// <summary>
@@ -102,23 +129,6 @@ namespace com.WanderingTurtle.FormPresentation
             catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex, "Unable to retrieve Hotel Guest listing from the database.");
-            }
-        }
-
-        private void ViewHotelGuest(InvoiceDetails selectedGuest)
-        {
-            try
-            {
-                ViewInvoice custInvoice = new ViewInvoice(selectedGuest);
-
-                if (custInvoice.ShowDialog() == false)
-                {
-                    RefreshGuestList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
             }
         }
 

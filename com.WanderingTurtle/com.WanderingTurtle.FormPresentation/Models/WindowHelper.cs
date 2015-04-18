@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <param name="control">The control that you wish to find main window of. In most cases you will use 'this'</param>
         /// <returns>Base Parent MainWinow</returns>
         /// <exception cref="WanderingTurtleException"/>
-        internal static MainWindow GetMainWindow(FrameworkElement control)
+        internal static MainWindow GetMainWindow(this FrameworkElement control)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <param name="control">The control that you wish to find the parent of. In most cases you will use 'this'</param>
         /// <returns>Parent MetroWindow</returns>
         /// <exception cref="WanderingTurtleException"/>
-        internal static MetroWindow GetWindow(FrameworkElement control)
+        internal static MetroWindow GetWindow(this FrameworkElement control)
         {
             try
             {

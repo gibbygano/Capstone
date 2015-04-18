@@ -151,6 +151,7 @@
     <Compile Include="AddEditEvent.xaml.cs">
       <DependentUpon>AddEditEvent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ControlHelper.cs" />
     <Compile Include="Models\DataGridHelper.cs" />
     <Compile Include="Models\DialogBox.cs" />
     <Compile Include="ListPendingSuppliers.xaml.cs">

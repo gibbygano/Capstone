@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ListEvents.xaml
     /// </summary>
-    public partial class ListEvents : UserControl
+    public partial class ListEvents : IDataGridContextMenu
     {
         private GridViewColumnHeader _sortColumn;
 
@@ -28,37 +28,59 @@ namespace com.WanderingTurtle.FormPresentation
         /// Hunter Lind || 2015/2/23
         /// Fills our Listview with events and initializes the window.
         /// </summary>
+        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
+        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public ListEvents()
         {
             InitializeComponent();
             Refresh();
+
+            lvEvents.SetContextMenu(this);
         }
 
-        private void ViewEventDetails(Event eventToView, bool ReadOnly = false)
+        /// <exception cref="WanderingTurtleException"/>
+        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridContextMenuResult command;
+            var selectedItem = DataGridHelper.ContextMenuClick<Event>(sender, out command);
+            switch (command)
+            {
+                case DataGridContextMenuResult.Add:
+                    OpenEvent();
+                    break;
+
+                case DataGridContextMenuResult.View:
+                    OpenEvent(selectedItem, true);
+                    break;
+
+                case DataGridContextMenuResult.Edit:
+                    OpenEvent(selectedItem);
+                    break;
+
+                case DataGridContextMenuResult.Archive:
+                    ArchiveEvent(selectedItem);
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
+            }
+        }
+
+        private void OpenEvent(Event selectedEvent = null, bool readOnly = false)
         {
             try
             {
-                new AddEditEvent(eventToView, ReadOnly).ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
-        }
-
-        /// <summary>
-        /// Hunter Lind || 2015/2/23
-        /// Opens a new AddNewEvent window for the user to interact with.
-        /// When the window closes, we refresh our listview.
-        /// </summary>
-        private void btnAddEvent_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Window AddEvent = new AddEditEvent();
-
-                if (AddEvent.ShowDialog() == false)
+                if (selectedEvent == null)
                 {
+                    if (new AddEditEvent().ShowDialog() == false) return;
+                    Refresh();
+                }
+                else
+                {
+                    if (new AddEditEvent(selectedEvent, readOnly).ShowDialog() == false) return;
+                    if (readOnly) return;
                     Refresh();
                 }
             }
@@ -68,11 +90,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        /// <summary>
-        /// Hunter Lind || 2015/2/23
-        /// Archives a no longer offered event.
-        /// </summary>
-        private async void btnArchiveEvent_Click(object sender, RoutedEventArgs e)
+        private async void ArchiveEvent(Event selectedEvent)
         {
             // Configure the message box to be displayed
             string messageBoxText = "Are you sure you want to delete this event?";
@@ -87,8 +105,7 @@ namespace com.WanderingTurtle.FormPresentation
                 case MessageDialogResult.Affirmative:
                     try
                     {
-                        Event EventToDelete = lvEvents.SelectedItems[0] as Event;
-                        myMan.ArchiveAnEvent(EventToDelete);
+                        myMan.ArchiveAnEvent(selectedEvent);
                         Refresh();
                     }
                     catch (Exception ex)
@@ -104,21 +121,28 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Opens a new AddNewEvent window for the user to interact with.
+        /// When the window closes, we refresh our listview.
+        /// </summary>
+        private void btnAddEvent_Click(object sender, RoutedEventArgs e)
+        {
+            OpenEvent();
+        }
+
+        /// <summary>
+        /// Hunter Lind || 2015/2/23
+        /// Archives a no longer offered event.
+        /// </summary>
+        private void btnArchiveEvent_Click(object sender, RoutedEventArgs e)
+        {
+            ArchiveEvent(lvEvents.SelectedItem as Event);
+        }
+
         private void btnEditEvent_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Event EventToEdit = lvEvents.SelectedItem as Event;
-                var editWindow = new AddEditEvent(EventToEdit);
-                if (editWindow.ShowDialog() == false)
-                {
-                    Refresh();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
+            OpenEvent(lvEvents.SelectedItem as Event);
         }
 
         /// <summary>
@@ -141,7 +165,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ViewEventDetails(DataGridHelper.DataGridRow_Click<Event>(sender, e), true);
+            OpenEvent(DataGridHelper.RowClick<Event>(sender), true);
         }
 
         /// <summary>

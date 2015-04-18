@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ListTheListings.xaml
     /// </summary>
-    public partial class ListTheListings : UserControl
+    public partial class ListTheListings : IDataGridContextMenu
     {
         private GridViewColumnHeader _sortColumn;
 
@@ -24,21 +24,59 @@ namespace com.WanderingTurtle.FormPresentation
         private List<ItemListing> myListingList;
         private ProductManager prodMan = new ProductManager();
 
+        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
+        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public ListTheListings()
         {
             InitializeComponent();
             refreshData();
+
+            lvListing.SetContextMenu(this);
         }
 
-        private void btnAddListing_Click(object sender, RoutedEventArgs e)
+        /// <exception cref="WanderingTurtleException"/>
+        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridContextMenuResult command;
+            var selectedItem = DataGridHelper.ContextMenuClick<ItemListing>(sender, out command);
+            switch (command)
+            {
+                case DataGridContextMenuResult.Add:
+                    OpenListing();
+                    break;
+
+                case DataGridContextMenuResult.View:
+                    OpenListing(selectedItem, true);
+                    break;
+
+                case DataGridContextMenuResult.Edit:
+                    OpenListing(selectedItem);
+                    break;
+
+                case DataGridContextMenuResult.Archive:
+                    ArchiveListing();
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
+            }
+        }
+
+        private void OpenListing(ItemListing selectedItem = null, bool readOnly = false)
         {
             try
             {
-                Window AddItemListings = new AddEditListing();
-                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDialog only being able to be used on hidden
-                //AddItemListings.Show();
-                if (AddItemListings.ShowDialog() == false)
+                if (selectedItem == null)
                 {
+                    if (new AddEditListing().ShowDialog() == false) return;
+                    refreshData();
+                }
+                else
+                {
+                    if (new AddEditListing(selectedItem, readOnly).ShowDialog() == false) return;
+                    if (readOnly) return;
                     refreshData();
                 }
             }
@@ -48,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private async void btnArchiveListing_click(object sender, RoutedEventArgs e)
+        private async void ArchiveListing()
         {
             ItemListing ListingToDelete = lvListing.SelectedItem as ItemListing;
             if (ListingToDelete == null)
@@ -76,38 +114,24 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void btnEditListing_click(object sender, RoutedEventArgs e)
+        private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
-            EditListing(lvListing.SelectedItem as ItemListing);
+            OpenListing();
         }
 
-        private void EditListing(ItemListing ListingEdit, bool ReadOnly = false)
+        private void btnArchiveListing_click(object sender, RoutedEventArgs e)
         {
-            if (ListingEdit == null)
-            {
-                throw new WanderingTurtleException(this, "Please select a row to edit");
-            }
+            ArchiveListing();
+        }
 
-            try
-            {
-                Window EditListings = new AddEditListing(ListingEdit, ReadOnly);
-
-                //Commented out by Justin Penningtonon 3/10/2015 4:02 AM causes errors due to ShowDialog only being able to be used on hidden
-                //AddItemListings.Show();
-                if (EditListings.ShowDialog() == false)
-                {
-                    refreshData();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
+        private void btnEditListing_click(object sender, RoutedEventArgs e)
+        {
+            OpenListing(lvListing.SelectedItem as ItemListing);
         }
 
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EditListing(DataGridHelper.DataGridRow_Click<ItemListing>(sender, e), true);
+            OpenListing(DataGridHelper.RowClick<ItemListing>(sender), true);
         }
 
         private void refreshData()

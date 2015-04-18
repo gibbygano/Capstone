@@ -12,7 +12,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Presents user with guest invoice information
     /// </summary>
-    public partial class ViewInvoice
+    public partial class ViewInvoice : IDataGridContextMenu
     {
         private BookingManager _bookingManager = new BookingManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
@@ -27,6 +27,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// Displays information for the selected guest's invoice
         /// </summary>
         /// <param name="selectedGuest">Selected guest to retrieve</param>
+        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
+        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public ViewInvoice(InvoiceDetails selectedGuest)
         {
             InitializeComponent();
@@ -36,6 +40,114 @@ namespace com.WanderingTurtle.FormPresentation
 
             //fills the list view
             refreshBookingList();
+
+            lvGuestBookings.SetContextMenu(this);
+        }
+
+        /// <exception cref="WanderingTurtleException"/>
+        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridContextMenuResult command;
+            var selectedItem = DataGridHelper.ContextMenuClick<BookingDetails>(sender, out command);
+            switch (command)
+            {
+                case DataGridContextMenuResult.Add:
+                    OpenBookingDetail();
+                    break;
+
+                case DataGridContextMenuResult.View:
+                    OpenBookingDetail(selectedItem, true);
+                    break;
+
+                case DataGridContextMenuResult.Edit:
+                    OpenBookingDetail(selectedItem);
+                    break;
+
+                case DataGridContextMenuResult.Archive:
+                    CancelBooking();
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
+            }
+        }
+
+        private void OpenBookingDetail(BookingDetails selectedItem = null, bool readOnly = false)
+        {
+            try
+            {
+                if (selectedItem == null)
+                {
+                    if (new AddBooking(invoiceToView).ShowDialog() == false) return;
+                    DialogResult = true;
+                    refreshBookingList();
+                }
+                else
+                {
+                    if (readOnly)
+                    {
+                        new EditBooking(invoiceToView, selectedItem, true).ShowDialog();
+                        return;
+                    }
+                    //check if selected item can be edited
+                    switch (_bookingManager.CheckToEditBooking(selectedItem))
+                    {
+                        case (ResultsEdit.CannotEditTooOld):
+                            throw new WanderingTurtleException(this, "Bookings in the past cannot be edited.");
+                        case (ResultsEdit.Cancelled):
+                            throw new WanderingTurtleException(this, "This booking has been cancelled and cannot be edited.");
+
+                        case (ResultsEdit.OkToEdit):
+                            if (new EditBooking(invoiceToView, selectedItem).ShowDialog() == false) return;
+                            DialogResult = true;
+                            refreshBookingList();
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
+        }
+
+        private void CancelBooking()
+        {
+            //check if something was selected
+            if (lvGuestBookings.SelectedItem == null)
+            {
+                throw new WanderingTurtleException(this, "Please select a booking to cancel.");
+            }
+
+            //check if selected item can be cancelled
+            ResultsEdit result = _bookingManager.CheckToEditBooking((BookingDetails)lvGuestBookings.SelectedItem);
+
+            switch (result)
+            {
+                case (ResultsEdit.CannotEditTooOld):
+                    throw new WanderingTurtleException(this, "Bookings in the past cannot be cancelled.", "Warning");
+
+                case (ResultsEdit.Cancelled):
+                    throw new WanderingTurtleException(this, "This booking has already been cancelled.", "Warning");
+
+                case (ResultsEdit.OkToEdit):
+                    try
+                    {
+                        //opens the ui and passes the booking details object in
+                        CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, invoiceToView);
+
+                        if (cancel.ShowDialog() == false)
+                        {
+                            DialogResult = true;
+                            refreshBookingList();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new WanderingTurtleException(this, ex);
+                    }
+                    break;
+            }
         }
 
         /// <summary>
@@ -48,20 +160,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event parameter</param>
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                AddBooking myBooking = new AddBooking(invoiceToView);
-
-                if (myBooking.ShowDialog() == false)
-                {
-                    //fill the booking list after the AddBooking UI closes
-                    refreshBookingList();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
+            OpenBookingDetail();
         }
 
         /// <summary>
@@ -81,9 +180,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
         {
             //check if invoice can be closed
-            ResultsArchive result = _invoiceManager.CheckToArchiveInvoice(invoiceToView, myBookingList);
-
-            switch (result)
+            switch (_invoiceManager.CheckToArchiveInvoice(invoiceToView, myBookingList))
             {
                 case (ResultsArchive.CannotArchive):
                     throw new WanderingTurtleException(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
@@ -95,10 +192,9 @@ namespace com.WanderingTurtle.FormPresentation
                         //opens UI with guest information
                         ArchiveInvoice myGuest = new ArchiveInvoice(invoiceToView.HotelGuestID);
 
-                        if (myGuest.ShowDialog() == false)
-                        {
-                            this.Close();
-                        }
+                        if (myGuest.ShowDialog() == false) return;
+                        DialogResult = true;
+                        this.Close();
                     }
                     catch (Exception ex)
                     {
@@ -126,40 +222,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCancelBooking_Click(object sender, RoutedEventArgs e)
         {
-            //check if something was selected
-            if (lvGuestBookings.SelectedItem == null)
-            {
-                throw new WanderingTurtleException(this, "Please select a booking to cancel.");
-            }
-
-            //check if selected item can be cancelled
-            ResultsEdit result = _bookingManager.CheckToEditBooking((BookingDetails)lvGuestBookings.SelectedItem);
-
-            switch (result)
-            {
-                case (ResultsEdit.CannotEditTooOld):
-                    throw new WanderingTurtleException(this, "Bookings in the past cannot be cancelled.", "Warning");
-
-                case (ResultsEdit.Cancelled):
-                    throw new WanderingTurtleException(this, "This booking has already been cancelled.", "Warning");
-
-                case (ResultsEdit.OkToEdit):
-                    try
-                    {
-                        //opens the ui and passes the booking details object in
-                        CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, invoiceToView);
-
-                        if (cancel.ShowDialog() == false)
-                        {
-                            refreshBookingList();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new WanderingTurtleException(this, ex);
-                    }
-                    break;
-            }
+            CancelBooking();
         }
 
         /// <summary>
@@ -178,15 +241,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnEditBooking_Click(object sender, RoutedEventArgs e)
         {
-            BookingDetails bookingToEdit = (BookingDetails)lvGuestBookings.SelectedItem;
-
-            //check form input error
-            if (lvGuestBookings.SelectedItem == null)
-            {
-                throw new WanderingTurtleException(this, "Please select a booking to edit.");
-            }
-
-            EditBooking(bookingToEdit);
+            OpenBookingDetail(lvGuestBookings.SelectedItem as BookingDetails);
         }
 
         /// <summary>
@@ -216,39 +271,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void EditBooking(BookingDetails bookingToEdit, bool ReadOnly = false)
-        {
-            //check if selected item can be edited
-            ResultsEdit result = _bookingManager.CheckToEditBooking(bookingToEdit);
-
-            switch (result)
-            {
-                case (ResultsEdit.CannotEditTooOld):
-                    throw new WanderingTurtleException(this, "Bookings in the past cannot be edited.");
-                case (ResultsEdit.Cancelled):
-                    throw new WanderingTurtleException(this, "This booking has been cancelled and cannot be edited.");
-
-                case (ResultsEdit.OkToEdit):
-                    try
-                    {
-                        EditBooking editForm = new EditBooking(invoiceToView, (BookingDetails)lvGuestBookings.SelectedItem, ReadOnly);
-
-                        if (editForm.ShowDialog() == false)
-                        {
-                            refreshBookingList();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new WanderingTurtleException(this, ex);
-                    }
-                    break;
-            }
-        }
-
         private void lvGuestBookings_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EditBooking(DataGridHelper.DataGridRow_Click<BookingDetails>(sender, e), true);
+            OpenBookingDetail(DataGridHelper.RowClick<BookingDetails>(sender), true);
         }
 
         /// <summary>

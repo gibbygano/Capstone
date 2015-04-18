@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for ListSuppliers.xaml
     /// </summary>
-    public partial class ListSuppliers : UserControl
+    public partial class ListSuppliers : IDataGridContextMenu
     {
         public static ListSuppliers Instance;
         private SupplierManager _manager = new SupplierManager();
@@ -29,12 +29,89 @@ namespace com.WanderingTurtle.FormPresentation
         /// This will fill the list of suppliers and set this object to the "Instance variable"
         /// Created by will fritz 15/2/6
         /// </summary>
-        /// <exception cref="WanderingTurtleException">Failed to get suppliers list.</exception>
+        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
+        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public ListSuppliers()
         {
             InitializeComponent();
             FillList();
             Instance = this;
+
+            lvSuppliersList.SetContextMenu(this);
+        }
+
+        /// <exception cref="WanderingTurtleException"/>
+        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridContextMenuResult command;
+            var selectedItem = DataGridHelper.ContextMenuClick<Supplier>(sender, out command);
+            switch (command)
+            {
+                case DataGridContextMenuResult.Add:
+                    OpenSupplier();
+                    break;
+
+                case DataGridContextMenuResult.View:
+                    OpenSupplier(selectedItem, true);
+                    break;
+
+                case DataGridContextMenuResult.Edit:
+                    OpenSupplier(selectedItem);
+                    break;
+
+                case DataGridContextMenuResult.Archive:
+                    ArchiveSupplier();
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
+            }
+        }
+
+        private void OpenSupplier(Supplier selectedItem = null, bool readOnly = false)
+        {
+            try
+            {
+                if (selectedItem == null)
+                {
+                    if (new AddEditSupplier().ShowDialog() == false) return;
+                    FillList();
+                }
+                else
+                {
+                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false) return;
+                    if (readOnly) return;
+                    FillList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
+        }
+
+        private async void ArchiveSupplier()
+        {
+            try
+            {
+                Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
+                MessageDialogResult result =
+                    await
+                        DialogBox.ShowMessageDialog(this, "Are you sure you want to delete?", "Confirm Delete",
+                            MessageDialogStyle.AffirmativeAndNegative);
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    _manager.ArchiveSupplier(supplierToDelete);
+                }
+                FillList();
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex, "You Must Select A Supplier Before You Can Delete");
+            }
         }
 
         /// <summary>
@@ -60,19 +137,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-        private void UpdateSupplier(Supplier supplierToUpdate, bool ReadOnly = false)
-        {
-            try
-            {
-                new AddEditSupplier(supplierToUpdate, ReadOnly).ShowDialog();
-                //addSupplier.FillUpdateList(supplierToUpdate);
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
-        }
-
         /// <summary>
         /// opens the AddEditSupplier window
         /// created by Pat 15/2/6
@@ -85,15 +149,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var addSupplier = new AddEditSupplier();
-                addSupplier.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                throw new WanderingTurtleException(this, ex);
-            }
+            OpenSupplier();
         }
 
         /// <summary>
@@ -102,20 +158,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void btnDelete_Click(object sender, RoutedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
-                MessageDialogResult result = await DialogBox.ShowMessageDialog(this, "Are you sure you want to delete?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
-                if (result == MessageDialogResult.Affirmative)
-                {
-                    _manager.ArchiveSupplier(supplierToDelete);
-                }
-                FillList();
-            }
-            catch (Exception ex)
-            { throw new WanderingTurtleException(this, ex, "You Must Select A Supplier Before You Can Delete"); }
+            ArchiveSupplier();
         }
 
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
@@ -137,7 +182,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                UpdateSupplier(lvSuppliersList.SelectedItems[0] as Supplier);
+                OpenSupplier(lvSuppliersList.SelectedItems[0] as Supplier);
             }
             catch (Exception ex)
             {
@@ -147,7 +192,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            UpdateSupplier(DataGridHelper.DataGridRow_Click<Supplier>(sender, e), true);
+            OpenSupplier(DataGridHelper.RowClick<Supplier>(sender), true);
         }
 
         private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)

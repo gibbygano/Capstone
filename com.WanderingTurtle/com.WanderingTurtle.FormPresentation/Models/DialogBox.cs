@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <returns>awaitable Task of type LoginDialogData</returns>
         /// <exception cref="WanderingTurtleException"/>
         public static Task<LoginDialogData> ShowLoginDialog(FrameworkElement control, string message, string title = null, LoginDialogSettings settings = null)
-        { return WindowHelper.GetWindow(control).ShowLoginAsync(title, message, settings); }
+        { return control.GetWindow().ShowLoginAsync(title, message, settings); }
 
         /// <summary>
         /// Show Message Dialog
@@ -33,6 +33,6 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <returns>awaitable Task of type MessageDialogResult</returns>
         /// <exception cref="WanderingTurtleException"/>
         public static Task<MessageDialogResult> ShowMessageDialog(FrameworkElement control, string message, string title = null, MessageDialogStyle? style = null, MetroDialogSettings settings = null)
-        { return WindowHelper.GetWindow(control).ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
+        { return control.GetWindow().ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
     }
 }
