@@ -101,6 +101,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                     case (ResultsEdit.Success):
                         await DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");
+                        DialogResult = true;
                         this.Close();
                         break;
                 }

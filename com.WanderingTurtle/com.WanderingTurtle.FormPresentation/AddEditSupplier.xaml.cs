@@ -177,6 +177,7 @@ namespace com.WanderingTurtle.FormPresentation
                     if (_manager.AddANewSupplier(tempSupplier, txtUserName.Text) == SupplierResult.Success)
                     {
                         await DialogBox.ShowMessageDialog(this, "Supplier was added to the database.");
+                        DialogResult = true;
                         this.Close();
                     }
                     else
@@ -251,6 +252,7 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result.Equals(ResultsEdit.Success))
                     {
                         await DialogBox.ShowMessageDialog(this, "Supplier was updated.");
+                        DialogResult = true;
                         this.Close();
                     }
                 }

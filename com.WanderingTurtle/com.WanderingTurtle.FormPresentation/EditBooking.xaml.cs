@@ -108,6 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new ApplicationException("Please use cancel instead of setting quantity 0.");
                     case (ResultsEdit.Success):
                         await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        DialogResult = true;
                         this.Close();
                         break;
 

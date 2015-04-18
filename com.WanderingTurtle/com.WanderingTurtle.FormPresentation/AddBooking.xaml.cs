@@ -97,6 +97,7 @@ namespace com.WanderingTurtle.FormPresentation
                     case (ResultsEdit.Success):
                         btnAddBookingAdd.IsEnabled = false;
                         await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        DialogResult = true;
                         this.Close();
                         break;
                 }

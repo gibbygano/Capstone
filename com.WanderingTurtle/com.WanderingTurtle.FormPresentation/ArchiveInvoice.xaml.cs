@@ -90,6 +90,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                     case (ResultsArchive.Success):
                         await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        DialogResult = true;
                         this.Close();
                         break;
                 }
@@ -108,7 +109,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            this.Close();
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)

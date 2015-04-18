@@ -269,6 +269,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (Result == ResultsEdit.Success)
                 {
                     await ShowMessage("Your Request was Processed Successfully", "Success");
+                    DialogResult = true;
                     Close();
                 }
                 else

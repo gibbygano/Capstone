@@ -110,6 +110,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (result == EventManager.EventResult.Success)
                 {
                     await DialogBox.ShowMessageDialog(this, "Successfully Added Event");
+                    DialogResult = true;
                     this.Close();
                 }
             }
@@ -201,6 +202,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (EventManagerResult.Equals(EventManager.EventResult.Success))
                 {
                     await DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
+                    DialogResult = true;
                     this.Close();
                 }
                 else { throw new WanderingTurtleException(this, EventManagerResult.ToString()); }

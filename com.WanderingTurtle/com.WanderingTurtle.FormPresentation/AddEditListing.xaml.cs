@@ -73,6 +73,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 _productManager.AddItemListing(_NewListing);
                 await DialogBox.ShowMessageDialog(this, "Listing successfully added!");
+                DialogResult = true;
                 this.Close();
             }
             catch (Exception ex)
@@ -190,6 +191,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (numRows == listResult.Success)
                 {
                     await DialogBox.ShowMessageDialog(this, "Item successfully changed.");
+                    DialogResult = true;
                     this.Close();
                 }
             }

@@ -147,6 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     await ShowMessage("Employee added successfully");
                     //closes window after successful add
+                    DialogResult = true;
                     Close();
                 }
             }
@@ -188,6 +189,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     await ShowMessage("Employee updated successfully");
                     //closes window after successful add
+                    DialogResult = true;
                     Close();
                 }
             }

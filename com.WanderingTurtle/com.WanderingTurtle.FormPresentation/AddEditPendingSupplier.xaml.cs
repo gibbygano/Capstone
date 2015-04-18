@@ -106,6 +106,7 @@ namespace com.WanderingTurtle.FormPresentation
                         if (result == SupplierResult.Success)
                         {
                             await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                            DialogResult = true;
                             this.Close();
                         }
                         else
@@ -129,6 +130,7 @@ namespace com.WanderingTurtle.FormPresentation
                     if (result == SupplierResult.Success)
                     {
                         await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+                        DialogResult = true;
                         this.Close();
                     }
                     else
