@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace com.WanderingTurtle.FormPresentation.Models
 {
     internal enum DataGridContextMenuResult
     {
-        Add = 0,
+        Add,
         View,
         Edit,
         Archive
@@ -29,24 +30,41 @@ namespace com.WanderingTurtle.FormPresentation.Models
             Debug.Assert(menuItem.CommandParameter != null, "menuItem.CommandParameter != null");
             Debug.Assert(menuItem.Parent != null, "menuItem.Parent != null");
             command = ((DataGridContextMenuResult)menuItem.CommandParameter);
-            return (T)((DataGridRow)menuItem.GetParent<ContextMenu>().PlacementTarget).Item;
+            return (T)((DataGrid)menuItem.GetParent<ContextMenu>().PlacementTarget).SelectedItem;
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
-        public static DataGrid SetContextMenu(this DataGrid component, IDataGridContextMenu context, DataGridContextMenuResult[] contextMenus = null)
+        /// <exception cref="OverflowException"><paramref name="(menuItem.Header)" /> is outside the range of the underlying type of <paramref name="(DataGridContextMenuResult)" />.</exception>
+        public static FrameworkElement SetContextMenu(this FrameworkElement component, IDataGridContextMenu context, DataGridContextMenuResult[] contextMenus = null)
         {
-            var menus = contextMenus ?? Enum.GetValues(typeof(DataGridContextMenuResult)) as DataGridContextMenuResult[];
-            Debug.Assert(menus != null, "menus != null");
             var contextMenu = new ContextMenu();
-            foreach (var menuItem in menus.Select(menu => new MenuItem { Header = Enum.GetName(typeof(DataGridContextMenuResult), menu), CommandParameter = menu }))
+            foreach (
+                var menuItem in
+                    (contextMenus ?? (DataGridContextMenuResult[])Enum.GetValues(typeof(DataGridContextMenuResult)))
+                        .Select(menu => new MenuItem
+                        {
+                            Header = Enum.GetName(typeof(DataGridContextMenuResult), menu),
+                            CommandParameter = menu
+                        }))
             {
                 menuItem.Click += context.ContextMenuItem_Click;
+                var result = ((DataGridContextMenuResult)(Enum.Parse(typeof(DataGridContextMenuResult), menuItem.Header.ToString())));
+                var dataGrid = component as DataGrid;
+                if (dataGrid != null
+                    && result != DataGridContextMenuResult.Add)
+                {
+                    menuItem.SetBinding(UIElement.IsEnabledProperty, new Binding
+                    {
+                        Source = dataGrid.SelectedItems,
+                        Path = new PropertyPath("Count"),
+                    });
+                }
                 contextMenu.Items.Add(menuItem);
             }
-            component.RowStyle.Setters.Add(new Setter(FrameworkElement.ContextMenuProperty, contextMenu));
+            component.ContextMenu = contextMenu;
             return component;
         }
 

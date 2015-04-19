@@ -86,6 +86,7 @@
             <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
                 <Setter Property="IsReadOnly" Value="True" />
                 <Setter Property="AutoGenerateColumns" Value="False" />
+                <Setter Property="SelectionMode" Value="Single" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
