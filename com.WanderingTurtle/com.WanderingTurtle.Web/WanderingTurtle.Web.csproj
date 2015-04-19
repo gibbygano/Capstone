@@ -417,13 +417,13 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
+    <ProjectReference Include="..\com.WanderingTurtle.Common\WanderingTurtle.Common.csproj">
       <Project>{b27ea16a-c7d9-4664-a33e-50f4c7c1e166}</Project>
-      <Name>com.WanderingTurtle.Common</Name>
+      <Name>WanderingTurtle.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj">
+    <ProjectReference Include="..\com.WanderingTurtle\WanderingTurtle.BusinessLogic.csproj">
       <Project>{825ba7b8-c006-4ef9-b596-700b863a2296}</Project>
-      <Name>com.WanderingTurtle.BusinessLogic</Name>
+      <Name>WanderingTurtle.BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
