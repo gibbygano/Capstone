@@ -180,7 +180,7 @@ GO
 INSERT INTO [dbo].[ItemListing] (StartDate, EndDate, EventItemID, Price, Active, SupplierID, CurrentNumberOfGuests, MaxNumberOfGuests)
 VALUES
 --this is a dummy record to be used in unit tests
-('20090101 10:00:00 AM', '20090131 10:00:00 AM', 102, 1234.00, 0, 102, 10, 40), 
+('20200101 10:00:00 AM', '20200131 10:00:00 AM', 102, 1234.00, 0, 102, 10, 40), 
 --begin usable records
 ('20150419 11:30:00 AM', '20150419 05:30:00 PM', 100, 15.00, 1, 100, 30, 50),
 ('20150414 01:30:00 PM', '20150414 07:00:00 PM', 101, 25.00, 1, 101, 10, 15),

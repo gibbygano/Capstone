@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 
-namespace BookingTests
-{   ///Created- Tony Noel, 2015/3/27, Updated: 2015/4/7, Updated: 2015/4/10
+namespace com.WanderingTurtle.Tests
+{///Created- Tony Noel, 2015/3/27, Updated: 2015/4/7, Updated: 2015/4/10
     /// <summary>
     /// Booking Manager Tests- Creates a fake booking record by using a dummy ItemListing from the database
     /// (ItemListing record 100). Performs actions on this booking based upon manager methods.
     /// </summary>
     [TestClass]
-    public class BookingLogicTests
+    public class BookingManagerTests
     {
         //
         private int BookingID;
@@ -34,25 +34,21 @@ namespace BookingTests
         public void TestBookingConstructor()
         {
             //booking object created
-            booking = new Booking();
-            booking.GuestID = 100;
-            booking.EmployeeID = 100;
-            booking.ItemListID = 101;
-            booking.Quantity = 2;
-            booking.DateBooked = DateTime.Now;
-            booking.TicketPrice = 1234m;
-            booking.ExtendedPrice = 40m;
-            booking.Discount = .1m;
-            booking.TotalCharge = 36m;
+            booking = new Booking(guestID, empID, itemID, bQuantity, dateBooked, ticket, extended, discount, total);
         }
 
         [TestInitialize]
         public void BookingTestSetup()
         {//Sets up the booking record and calls for the record to be added
             TestBookingConstructor();
-            TestAddBookingResult();
+            
         }
-
+        public void AddBookingResult()
+        {
+            ResultsEdit result = myBook.AddBookingResult(booking);
+            ResultsEdit expected = ResultsEdit.Success;
+            Assert.AreEqual(expected, result);
+        }
         [TestMethod]
         public void TestAddBookingResult()
         {

@@ -57,7 +57,6 @@
     <Compile Include="EventManagerTest.cs" />
     <Compile Include="HotelGuestManagerTest.cs" />
     <Compile Include="HotelManagerAccessorTest.cs" />
-    <Compile Include="BookingManagerTest.cs" />
     <Compile Include="EventAccessorTest.cs" />
     <Compile Include="InvoiceManagerTest.cs" />
     <Compile Include="ItemListingAccessorTest.cs" />
@@ -66,10 +65,10 @@
     <Compile Include="SupplierManagerTest.cs" />
     <Compile Include="SupplierLoginManagerTest.cs" />
     <Compile Include="EmployeeTests.cs" />
-    <Compile Include="BookingLogicTests.cs" />
     <Compile Include="EmployeeAccessorTests.cs" />
     <Compile Include="BookingAccessorTests.cs" />
     <Compile Include="InvoiceAccessorTest.cs" />
+    <Compile Include="BookingManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
