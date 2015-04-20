@@ -5,7 +5,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
-        Title="AddEditHotelGuest" Height="400" Width="350"
+        Title="AddEditHotelGuest" Height="300" Width="700"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
@@ -16,11 +16,10 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width=".5*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -33,19 +32,19 @@
             <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Address1:" />
             <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Address2:" />
             <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="ZIP Code:" />
-            <Label Grid.Row="5" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Phone Number:" />
-            <Label Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Email Address:" />
-            <Label Grid.Row="7" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Room Number:" />
-            <Label Grid.Row="8" Grid.Column="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Guest PIN:" />
+            <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Phone Number:" />
+            <Label Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Email Address:" />
+            <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Room Number:" />
+            <Label Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Right" VerticalAlignment="Center" Content="Guest PIN:" />
             <TextBox  Grid.Column="1" Grid.Row="0" TabIndex="0" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtFirstName" />
             <TextBox  Grid.Column="1" Grid.Row="1" TabIndex="1" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtLastName" />
             <TextBox  Grid.Column="1" Grid.Row="2" TabIndex="2" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtAddress1" />
             <TextBox  Grid.Column="1" Grid.Row="3" TabIndex="3" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtAddress2" />
             <ComboBox Grid.Column="1" Grid.Row="4" TabIndex="4" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="cboZip_GotKeyboardFocus"   x:Name="CboZip" DisplayMemberPath="GetZipStateCity" />
-            <xctk:MaskedTextBox Mask="(000) 000-0000" Grid.Column="1" Grid.Row="5" TabIndex="5"   KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtPhoneNumber" MaxLength="12" />
-            <TextBox  Grid.Column="1" Grid.Row="6" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtEmailAddress" MaxLength="100" />
-            <TextBox  Grid.Column="1" Grid.Row="7" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtRoomNumber" MaxLength="4" />
-            <TextBox  Grid.Column="1" Grid.Row="8" TabIndex="8" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtGuestPIN" MaxLength="4" />
+            <xctk:MaskedTextBox Mask="(000) 000-0000" Grid.Column="3" Grid.Row="0" TabIndex="5"   KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtPhoneNumber" MaxLength="12" />
+            <TextBox  Grid.Column="3" Grid.Row="1" TabIndex="6" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtEmailAddress" MaxLength="100" />
+            <TextBox  Grid.Column="3" Grid.Row="2" TabIndex="7" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtRoomNumber" MaxLength="4" />
+            <TextBox  Grid.Column="3" Grid.Row="3" TabIndex="8" VerticalContentAlignment="Center" KeyUp="txtInput_KeyUp" GotKeyboardFocus="txtInput_GotKeyboardFocus" x:Name="TxtGuestPIN" MaxLength="4" />
         </Grid>
         <Grid Grid.Row="1" Margin="{DynamicResource Spacing Top}">
             <Grid.ColumnDefinitions>

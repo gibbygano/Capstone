@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="com.WanderingTurtle.FormPresentation.AdminFunctions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" x:Name="lblTitle" FontSize="16" FontWeight="Bold" Content="Event Type Administration" />
+        <Grid  Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width=".25*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Content="Current Event Types" />
+            <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Content="Add Event Type:" />
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtEventType"/>            
+            <ListBox Grid.Row="1" Grid.Column="3" x:Name="listbEventTypes"/>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Content="Edit Event Type:" />
+            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAccessType"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Any current events with the archived event type will be changed to another event type. " Grid.ColumnSpan="4"/>
+            <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" Content="Archive Event Type" />
+            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboArchiveEvent"/>
+            <ComboBox Grid.Row="4" Grid.Column="3"  x:Name="cboReplaceEventType" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Margin="0,0,5,0" />
+            <Button Grid.Column="1" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Margin="2.5,0" />
+            <Button Grid.Column="2" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Margin="5,0,0,0" />
+        </Grid>
+    </Grid>
+</UserControl>

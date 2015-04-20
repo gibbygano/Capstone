@@ -162,11 +162,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created: 2015/02/20
         ///
         /// Validates and Updates Employee user
-        ///
-        /// Updated 2015/04/13 by Tony Noel
-        ///Updated to comply with the ResultsEdit class of error codes.
         /// </summary>
         /// <remarks>
+        /// 2015/04/13 Tony Noel
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         private async void EmployeeUpdate()
         {

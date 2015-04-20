@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -81,6 +82,20 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 throw;
             }
+        }
+
+        private string RandomString(int Size)
+        {
+            Random rg = new Random();
+            string input = "abcdefghijklmnopqrstuvwxyz0123456789";
+            StringBuilder builder = new StringBuilder();
+            char ch;
+            for (int i = 0; i < Size; i++)
+            {
+                ch = input[rg.Next(0, input.Length)];
+                builder.Append(ch);
+            }
+            return builder.ToString();
         }
 
         /// <summary>
