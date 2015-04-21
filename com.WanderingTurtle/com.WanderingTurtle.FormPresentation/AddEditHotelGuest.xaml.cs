@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditHotelGuest()
         {
             InitializeComponent();
-            Title = "Add New Hotel Guest";
+            Title = "Add a new Guest";
             TxtRoomNumber.MaxLength = 4;
             TxtGuestPIN.MaxLength = 4;
             InitializeEverything();
@@ -51,7 +51,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
 
             CurrentHotelGuest = hotelGuest;
-            Title = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
+            Title = String.Format("Editing Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
 
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
@@ -232,8 +232,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 //FormatException found in if loop
                 if (CurrentHotelGuest == null)
-                {  
-
+                {
                     Result = _hotelGuestManager.AddHotelGuest(
                         new HotelGuest(
                             TxtFirstName.Text.Trim(),
@@ -294,7 +293,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 ShowErrorMessage(ex);
             }
-            
         }
 
         /// <summary>

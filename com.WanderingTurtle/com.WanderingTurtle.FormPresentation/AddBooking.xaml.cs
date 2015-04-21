@@ -13,8 +13,9 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking
     {
+        private InvoiceDetails _CurrentInvoice { get; set; }
+
         private List<ItemListingDetails> myEventList = new List<ItemListingDetails>();
-        private InvoiceDetails inInvoice;
         private int eID;
         private BookingManager _bookingManager = new BookingManager();
         public ItemListing originalItem;
@@ -26,13 +27,14 @@ namespace com.WanderingTurtle.FormPresentation
         /// UI for adding a booking
         /// Access from the View Invoice screen
         /// </summary>
-        /// <param name="inInvoice">brings the invoice data from the prior list view</param>
+        /// <param name="_currentInvoice">brings the invoice data from the prior list view</param>
         public AddBooking(InvoiceDetails inInvoice)
         {
-            this.inInvoice = inInvoice;
+            _CurrentInvoice = inInvoice;
 
             InitializeComponent();
             RefreshListItems();
+            Title = "Add a new Booking";
             udDiscount.Maximum = .20;
 
             eID = (int)Globals.UserToken.EmployeeID;
@@ -136,7 +138,7 @@ namespace com.WanderingTurtle.FormPresentation
             decimal extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
             decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
 
-            Booking bookingToAdd = new Booking(inInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+            Booking bookingToAdd = new Booking(_CurrentInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
             return bookingToAdd;
         }
 

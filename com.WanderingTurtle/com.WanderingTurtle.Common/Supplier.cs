@@ -68,5 +68,7 @@
         {
             return (Supplier)this.MemberwiseClone();
         }
+
+        public string GetFullName { get { return FirstName + " " + LastName; } }
     }
 }

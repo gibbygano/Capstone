@@ -14,8 +14,10 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class CancelBooking
     {
-        private BookingDetails myBooking;
-        private InvoiceDetails myInvoice;
+        private BookingDetails _CurrentBooking { get; set; }
+
+        private InvoiceDetails _CurrentInvoice { get; set; }
+
         private decimal cancelFee = 0m;
         private BookingManager _bookingManager = new BookingManager();
 
@@ -32,8 +34,9 @@ namespace com.WanderingTurtle.FormPresentation
         public CancelBooking(BookingDetails booking, InvoiceDetails invoice)
         {
             InitializeComponent();
-            myBooking = booking;
-            myInvoice = invoice;
+            _CurrentBooking = booking;
+            _CurrentInvoice = invoice;
+            Title = "Canceling Booking: " + _CurrentBooking.EventItemName;
             populateText();
         }
 
@@ -52,16 +55,16 @@ namespace com.WanderingTurtle.FormPresentation
         public void populateText()
         {
             //populating with data from objects that opened the form
-            lblBookingID.Content = myBooking.BookingID;
-            lblGuestName.Content = myInvoice.GetFullName;
-            lblQuantity.Content = myBooking.Quantity;
-            lblEventName.Content = myBooking.EventItemName;
-            lblDiscount.Content = myBooking.Discount.ToString("p");
-            lblEventTime.Content = myBooking.StartDate;
-            lblTicketPrice.Content = myBooking.TicketPrice.ToString("c");
-            lblTotalDue.Content = myBooking.TotalCharge.ToString("c");
+            lblBookingID.Content = _CurrentBooking.BookingID;
+            lblGuestName.Content = _CurrentInvoice.GetFullName;
+            lblQuantity.Content = _CurrentBooking.Quantity;
+            lblEventName.Content = _CurrentBooking.EventItemName;
+            lblDiscount.Content = _CurrentBooking.Discount.ToString("p");
+            lblEventTime.Content = _CurrentBooking.StartDate;
+            lblTicketPrice.Content = _CurrentBooking.TicketPrice.ToString("c");
+            lblTotalDue.Content = _CurrentBooking.TotalCharge.ToString("c");
 
-            cancelFee = _bookingManager.CalculateCancellationFee(myBooking);
+            cancelFee = _bookingManager.CalculateCancellationFee(_CurrentBooking);
             lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
         }
 
@@ -89,10 +92,10 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 //get the cancellation fee
-                myBooking.TotalCharge = cancelFee;
+                _CurrentBooking.TotalCharge = cancelFee;
 
                 //cancel booking and get results
-                ResultsEdit result = _bookingManager.CancelBookingResults(myBooking);
+                ResultsEdit result = _bookingManager.CancelBookingResults(_CurrentBooking);
 
                 switch (result)
                 {

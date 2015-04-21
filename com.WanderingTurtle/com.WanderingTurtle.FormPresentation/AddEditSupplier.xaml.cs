@@ -15,14 +15,12 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditSupplier
     {
-        public static AddEditSupplier Instance;
+        private CityStateManager _cityStateManager = new CityStateManager();
+        private SupplierLoginManager _loginManager = new SupplierLoginManager();
         private SupplierManager _manager = new SupplierManager();
+        private string _supplierUserName;
         private Supplier _UpdatableSupplier;
         private List<CityState> _zips;
-        private CityStateManager _cityStateManager = new CityStateManager();
-
-        private SupplierLoginManager _loginManager = new SupplierLoginManager();
-        private string _supplierUserName;
 
         /// <summary>
         /// Constructs the object and will fill the list of suppliers
@@ -31,66 +29,65 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditSupplier()
         {
             InitializeComponent();
-            btnEdit.IsEnabled = false;
+            Title = "Add a new Supplier";
             fillComboBox();
-            Instance = this;
+            FillUpdateList();
         }
 
         /// <exception cref="WanderingTurtleException"/>
         public AddEditSupplier(Supplier supplierToEdit, bool ReadOnly = false)
         {
             InitializeComponent();
-            Instance = this;
-            this.Title = "Edit Supplier";
+            _UpdatableSupplier = supplierToEdit;
+            Title = "Editing Supplier: " + _UpdatableSupplier.GetFullName;
 
             //retrieve the username
             _supplierUserName = _loginManager.retrieveSupplierUserName(supplierToEdit.SupplierID);
 
             fillComboBox();
-            FillUpdateList(supplierToEdit);
+            FillUpdateList();
 
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { }); }
         }
 
-        //////////////////////Windows Events//////////////////////////////
-
         /// <summary>
-        /// Will validate the fields and edit the current supplier
-        /// created by Will Fritz 2/6/15
+        /// This will fill the add/edit tab fields with the data from a selected Supplier from the list view
+        /// Created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/19/15
+        /// edited by will fritz 2/15/15
+        /// changed zip to a drop down
         /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        public void FillUpdateList()
         {
-            if (!Validate()) { return; }
-
-            EditSupplier();
-            ListSuppliers.Instance.FillList();
-            //this.Close();
+            if (_UpdatableSupplier == null)
+            {
+                txtCompanyName.Text = null;
+                txtFirstName.Text = null;
+                txtLastName.Text = null;
+                txtAddress1.Text = null;
+                txtAddress2.Text = null;
+                txtEmail.Text = null;
+                txtPhoneNumber.Text = null;
+                txtUserName.Text = null;
+                cboZip.SelectedItem = null;
+                numSupplyCost.Value = .70;
+            }
+            else
+            {
+                txtCompanyName.Text = _UpdatableSupplier.CompanyName.Trim();
+                txtFirstName.Text = _UpdatableSupplier.FirstName.Trim();
+                txtLastName.Text = _UpdatableSupplier.LastName.Trim();
+                txtAddress1.Text = _UpdatableSupplier.Address1.Trim();
+                txtAddress2.Text = _UpdatableSupplier.Address2.Trim();
+                txtEmail.Text = _UpdatableSupplier.EmailAddress.Trim();
+                txtPhoneNumber.Text = _UpdatableSupplier.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+                txtUserName.Text = _supplierUserName;
+                foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == _UpdatableSupplier.Zip)) { cboZip.SelectedValue = cityState.Zip; }
+                numSupplyCost.Value = (double)(_UpdatableSupplier.SupplyCost);
+                //cboZip.SelectedValue = supplierUpdate.Zip;
+            }
         }
-
-        /// <summary>
-        /// Will validate the fields and call add supplier method
-        /// created by Will Fritz 2/6/15
-        /// </summary>
-        /// <remarks>
-        /// edited by will fritz 2/19/15
-        /// </remarks>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Validate()) { return; }
-
-            AddTheSupplier();
-            ListSuppliers.Instance.FillList();
-            //this.Close();
-        }
-
-        /////////////////////////////Custom Methods/////////////////////////////////////
 
         /// <summary>
         /// checks to see if all the fields are fill out and formated with the correct data
@@ -204,40 +201,31 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
+            FillUpdateList();
         }
 
         /// <summary>
-        /// This will fill the add/edit tab fields with the data from a selected Supplier from the list view
-        /// Created by Will Fritz 2/6/15
+        /// Will validate the fields and call add/edit supplier method
+        /// created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// changed zip to a drop down
+        /// edited by will fritz 2/19/15
         /// </remarks>
-        /// <param name="supplierUpdate"></param>
-        public void FillUpdateList(Supplier supplierUpdate)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            txtCompanyName.Text = supplierUpdate.CompanyName.Trim();
-            txtFirstName.Text = supplierUpdate.FirstName.Trim();
-            txtLastName.Text = supplierUpdate.LastName.Trim();
-            txtAddress1.Text = supplierUpdate.Address1.Trim();
-            txtAddress2.Text = supplierUpdate.Address2.Trim();
-            txtEmail.Text = supplierUpdate.EmailAddress.Trim();
-            //throw new WanderingTurtleException(supplierUpdate.PhoneNumber);
-            string phone = supplierUpdate.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
-            txtPhoneNumber.Text = phone;
-            txtUserName.Text = _supplierUserName;
+            if (!Validate()) { return; }
 
-            foreach (CityState cityState in _zips.Where(t => t.Zip == supplierUpdate.Zip))
+            if (_UpdatableSupplier == null)
             {
-                cboZip.SelectedValue = cityState.Zip;
+                AddTheSupplier();
             }
-            numSupplyCost.Value = (double)(supplierUpdate.SupplyCost);
-            //cboZip.SelectedValue = supplierUpdate.Zip;
-            _UpdatableSupplier = supplierUpdate;
-
-            btnSubmit.IsEnabled = false;
-            btnEdit.IsEnabled = true;
+            else
+            {
+                EditSupplier();
+            }
+            ListSuppliers.Instance.FillList();
         }
 
         /// <summary>
@@ -319,17 +307,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex, "Error Retrieving the list of zip codes");
             }
-        }
-
-        /// <summary>
-        /// necessary to make the singleton pattern work
-        /// Will Fritz 2015/3/6
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_Closed(object sender, EventArgs e)
-        {
-            Instance = null;
         }
     }
 }

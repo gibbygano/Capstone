@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEmployee()
         {
             InitializeComponent();
-            Title = "Add Employee";
+            Title = "Add a new Employee";
             ReloadComboBox();
             ChkActiveEmployee.IsEnabled = false;
         }
@@ -43,7 +43,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             CurrentEmployee = employee;
-            Title = "Editing: " + CurrentEmployee.GetFullName;
+            Title = "Editing Employee: " + CurrentEmployee.GetFullName;
             ReloadComboBox();
 
             SetFields();
