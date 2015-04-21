@@ -23,7 +23,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/2015
-        ///
         /// Displays information for the selected guest's invoice
         /// </summary>
         /// <param name="selectedGuest">Selected guest to retrieve</param>
@@ -31,6 +30,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="OverflowException"><paramref name="(menuItem.Header)" /> is outside the range of the underlying type of <paramref name="(DataGridContextMenuResult)" />.</exception>
         public ViewInvoice(InvoiceDetails selectedGuest)
         {
             InitializeComponent();
@@ -63,7 +63,7 @@ namespace com.WanderingTurtle.FormPresentation
                     OpenBookingDetail(selectedItem);
                     break;
 
-                case DataGridContextMenuResult.Archive:
+                case DataGridContextMenuResult.Delete:
                     CancelBooking();
                     break;
 

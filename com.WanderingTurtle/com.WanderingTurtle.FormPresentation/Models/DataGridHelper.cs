@@ -7,23 +7,44 @@ using System.Windows.Data;
 
 namespace com.WanderingTurtle.FormPresentation.Models
 {
+    /// <summary>
+    /// Predefined values for context menu
+    /// </summary>
     internal enum DataGridContextMenuResult
     {
         Add,
         View,
         Edit,
-        Archive
+        Delete
     }
 
+    /// <summary>
+    /// All classes that wish to use the context menu must implement this interface
+    /// </summary>
     internal interface IDataGridContextMenu
     {
+        /// <summary>
+        /// Click event handler for ContextMenus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void ContextMenuItem_Click(object sender, RoutedEventArgs e);
     }
 
+    /// <summary>
+    /// Class containing any tools or extention methods to be used by WPF DataGrids
+    /// </summary>
     internal static class DataGridHelper
     {
+        /// <summary>
+        /// Gets the selected item from the data grid context menu
+        /// </summary>
+        /// <typeparam name="T">The type of object to cast the selected item into</typeparam>
+        /// <param name="sender"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
         /// <exception cref="WanderingTurtleException">Error getting specified parent.</exception>
-        public static T ContextMenuClick<T>(object sender, out DataGridContextMenuResult command)
+        public static T ContextMenuClick<T>(this object sender, out DataGridContextMenuResult command)
         {
             var menuItem = sender as MenuItem;
             Debug.Assert(menuItem != null, "menuItem != null");
@@ -33,11 +54,18 @@ namespace com.WanderingTurtle.FormPresentation.Models
             return (T)((DataGrid)menuItem.GetParent<ContextMenu>().PlacementTarget).SelectedItem;
         }
 
-        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
-        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <summary>
+        /// Sets the context menu on the specified component
+        /// </summary>
+        /// <param name="component">the component on which to ad the context menu</param>
+        /// <param name="context">the class that implements <see cref="IDataGridContextMenu"/></param>
+        /// <param name="contextMenus"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
+        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
-        /// <exception cref="OverflowException"><paramref name="(menuItem.Header)" /> is outside the range of the underlying type of <paramref name="(DataGridContextMenuResult)" />.</exception>
+        /// <exception cref="OverflowException"><value>menuItem.Header</value> is outside the range of the underlying type of <paramref name="(DataGridContextMenuResult)" />.</exception>
         public static FrameworkElement SetContextMenu(this FrameworkElement component, IDataGridContextMenu context, DataGridContextMenuResult[] contextMenus = null)
         {
             var contextMenu = new ContextMenu();
@@ -53,31 +81,28 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 menuItem.Click += context.ContextMenuItem_Click;
                 var result = ((DataGridContextMenuResult)(Enum.Parse(typeof(DataGridContextMenuResult), menuItem.Header.ToString())));
                 var dataGrid = component as DataGrid;
-                if (dataGrid != null
-                    && result != DataGridContextMenuResult.Add)
-                {
-                    menuItem.SetBinding(UIElement.IsEnabledProperty, new Binding
-                    {
-                        Source = dataGrid.SelectedItems,
-                        Path = new PropertyPath("Count"),
-                    });
-                }
+                if (dataGrid != null && result != DataGridContextMenuResult.Add)
+                { menuItem.SetBinding(UIElement.IsEnabledProperty, new Binding("Count") { Source = dataGrid.SelectedItems }); }
                 contextMenu.Items.Add(menuItem);
             }
             component.ContextMenu = contextMenu;
             return component;
         }
 
+        /// <summary>
+        /// Gets the selected DataGrid row and returns it as the specified object <typeparam name="T"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sender"></param>
+        /// <returns></returns>
         /// <exception cref="WanderingTurtleException">An error occoured while trying to retrieve the object stored inside the DataGrid Row.</exception>
-        internal static T RowClick<T>(object sender)
+        internal static T RowClick<T>(this object sender)
         {
             try
             {
                 var row = sender as DataGridRow;
                 if (row != null && row.Item != null)
-                {
-                    return (T)row.Item;
-                }
+                { return (T)row.Item; }
                 throw new ApplicationException("Error Getting Selected DataGrid Row.");
             }
             catch (ApplicationException ex)

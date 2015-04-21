@@ -59,7 +59,7 @@ namespace com.WanderingTurtle.FormPresentation
                     OpenEvent(selectedItem);
                     break;
 
-                case DataGridContextMenuResult.Archive:
+                case DataGridContextMenuResult.Delete:
                     ArchiveEvent(selectedItem);
                     break;
 

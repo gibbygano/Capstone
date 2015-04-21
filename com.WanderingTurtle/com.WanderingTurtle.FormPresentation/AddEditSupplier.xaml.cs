@@ -197,6 +197,15 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
         /// <summary>
         /// This will fill the add/edit tab fields with the data from a selected Supplier from the list view
         /// Created by Will Fritz 2/6/15

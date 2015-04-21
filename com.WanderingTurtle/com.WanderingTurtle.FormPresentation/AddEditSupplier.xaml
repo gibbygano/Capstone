@@ -58,9 +58,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSubmit" Grid.Column="0" Content="Submit" Click="btnSubmit_Click" />
-            <Separator Width="0"       Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" />
-            <Button x:Name="btnEdit"   Grid.Column="2" Content="Submit Edit"         Click="btnEdit_Click" />
+            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
+            <Button Grid.Column="1" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click"  Margin="2.5,0" />
+            <Button Grid.Column="2" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>
