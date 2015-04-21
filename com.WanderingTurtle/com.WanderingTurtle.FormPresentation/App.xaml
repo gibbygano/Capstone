@@ -25,6 +25,10 @@
                 <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
             </Style>
 
+            <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource MetroTabItem}">
+                <Setter Property="Padding" Value="15,0" />
+            </Style>
+
             <system:Double x:Key="TextBoxHeight">30</system:Double>
             <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>

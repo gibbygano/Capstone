@@ -163,7 +163,6 @@ namespace com.WanderingTurtle.FormPresentation
             CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
             dateStart.BlackoutDates.Add(cdr);
             dateEnd.BlackoutDates.Add(cdr);
-
             populateFields();
         }
 
@@ -188,6 +187,7 @@ namespace com.WanderingTurtle.FormPresentation
                 };
 
                 var numRows = _productManager.EditItemListing(NewListing, CurrentItemListing);
+
                 if (numRows == listResult.Success)
                 {
                     await DialogBox.ShowMessageDialog(this, "Item successfully changed.");
