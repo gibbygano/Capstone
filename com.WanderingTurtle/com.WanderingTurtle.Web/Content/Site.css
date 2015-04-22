@@ -870,7 +870,7 @@ button.ui-button-text-only {
     padding-bottom: 10px;
 }
 
-#leftcontainer {
+#MainContent_leftcontainer {
     width: 33%;
     float: left;
 }
