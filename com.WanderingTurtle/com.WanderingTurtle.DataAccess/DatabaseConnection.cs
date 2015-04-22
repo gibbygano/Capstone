@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.DataAccess
 
         public static void TestConnection()
         {
-            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            SqlConnection conn = GetDatabaseConnection();
 
             try
             {

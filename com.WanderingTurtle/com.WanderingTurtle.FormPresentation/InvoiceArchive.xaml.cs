@@ -89,9 +89,9 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
-                        await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        await this.ShowMessageDialog("Guest checkout complete.");
                         DialogResult = true;
-                        this.Close();
+                        Close();
                         break;
                 }
             }
@@ -109,7 +109,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)

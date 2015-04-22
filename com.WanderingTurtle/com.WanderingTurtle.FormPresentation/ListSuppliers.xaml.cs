@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<Supplier>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<Supplier>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -101,7 +101,7 @@ namespace com.WanderingTurtle.FormPresentation
                 Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
                 MessageDialogResult result =
                     await
-                        DialogBox.ShowMessageDialog(this, "Are you sure you want to delete?", "Confirm Delete",
+                        this.ShowMessageDialog("Are you sure you want to delete?", "Confirm Delete",
                             MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
@@ -166,7 +166,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
         {
-            ((TabItem)this.Parent).Content = new ListPendingSuppliers();
+            ((TabItem)Parent).Content = new ListPendingSuppliers();
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenSupplier(DataGridHelper.RowClick<Supplier>(sender), true);
+            OpenSupplier(sender.RowClick<Supplier>(), true);
         }
 
         private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)

@@ -103,9 +103,9 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new ApplicationException("This booking has already been cancelled.");
 
                     case (ResultsEdit.Success):
-                        await DialogBox.ShowMessageDialog(this, "Booking successfully cancelled.");
+                        await this.ShowMessageDialog("Booking successfully cancelled.");
                         DialogResult = true;
-                        this.Close();
+                        Close();
                         break;
                 }
             }

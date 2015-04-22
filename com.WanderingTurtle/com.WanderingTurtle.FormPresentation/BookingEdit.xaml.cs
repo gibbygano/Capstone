@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation
             populateTextFields();
             eID = (int)Globals.UserToken.EmployeeID;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         /// <summary>
@@ -110,9 +110,9 @@ namespace com.WanderingTurtle.FormPresentation
                     case (ResultsEdit.QuantityZero):
                         throw new ApplicationException("Please use cancel instead of setting quantity 0.");
                     case (ResultsEdit.Success):
-                        await DialogBox.ShowMessageDialog(this, "The booking has been successfully added.");
+                        await this.ShowMessageDialog("The booking has been successfully added.");
                         DialogResult = true;
-                        this.Close();
+                        Close();
                         break;
 
                     case (ResultsEdit.ListingFull):
@@ -160,7 +160,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>

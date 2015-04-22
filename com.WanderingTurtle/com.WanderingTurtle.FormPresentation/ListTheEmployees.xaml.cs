@@ -40,7 +40,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<Employee>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<Employee>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -110,7 +110,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenEmployee(DataGridHelper.RowClick<Employee>(sender), true);
+            OpenEmployee(sender.RowClick<Employee>(), true);
         }
 
         /// <summary>

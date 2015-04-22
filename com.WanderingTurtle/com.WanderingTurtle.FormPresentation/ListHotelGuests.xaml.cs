@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<InvoiceDetails>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<InvoiceDetails>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -100,7 +100,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenHotelGuest(DataGridHelper.RowClick<InvoiceDetails>(sender));
+            OpenHotelGuest(sender.RowClick<InvoiceDetails>());
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
+            btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)

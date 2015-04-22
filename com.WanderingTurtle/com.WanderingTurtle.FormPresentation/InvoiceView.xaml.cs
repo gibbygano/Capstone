@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<BookingDetails>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<BookingDetails>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -195,7 +195,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                         if (myGuest.ShowDialog() == false) return;
                         DialogResult = true;
-                        this.Close();
+                        Close();
                     }
                     catch (Exception ex)
                     {
@@ -274,7 +274,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvGuestBookings_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenBookingDetail(DataGridHelper.RowClick<BookingDetails>(sender), true);
+            OpenBookingDetail(sender.RowClick<BookingDetails>(), true);
         }
 
         /// <summary>
