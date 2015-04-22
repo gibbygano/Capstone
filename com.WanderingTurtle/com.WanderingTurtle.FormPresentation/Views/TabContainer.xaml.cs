@@ -1,6 +1,7 @@
 ﻿using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using System.Windows.Controls;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation.Views
 {
@@ -16,6 +17,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
             if (Globals.UserToken != null)
             {
                 this.CurrentUserLabel.Content = Globals.UserToken.GetFullName;
+
                 switch (Globals.UserToken.Level)
                 {
                     case RoleData.Admin:
@@ -40,6 +42,9 @@ namespace com.WanderingTurtle.FormPresentation.Views
                         AddTab(TabName.Listings, new ListTheListings());
                         break;
                 }
+
+                //Filling ZipCode Cache
+                new CityStateManager().PopulateCityStateCache();
             }
             else { throw new WanderingTurtleException(this, "Could not find logged in user", "Login Error"); }
         }

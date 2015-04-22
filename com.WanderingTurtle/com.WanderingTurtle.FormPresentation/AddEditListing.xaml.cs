@@ -33,6 +33,9 @@ namespace com.WanderingTurtle.FormPresentation
             this.CurrentItemListing = CurrentItemListing;
             Setup();
 
+            eventCbox.IsEnabled = false;
+            supplierCbox.IsEnabled = false;
+
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 

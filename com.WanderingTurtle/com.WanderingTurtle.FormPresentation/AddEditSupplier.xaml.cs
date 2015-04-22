@@ -301,7 +301,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                _zips = _cityStateManager.GetCityStateList();
+                _zips = DataCache._currentCityStateList;
                 cboZip.ItemsSource = _zips;
                 cboZip.DisplayMemberPath = "GetZipStateCity";
                 cboZip.SelectedValuePath = "Zip";

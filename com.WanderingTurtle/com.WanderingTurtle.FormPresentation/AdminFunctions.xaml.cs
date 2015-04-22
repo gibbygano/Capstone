@@ -21,11 +21,14 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AdminFunctions : UserControl
     {
-
+        BusinessLogic.EventManager myMan = new BusinessLogic.EventManager();
 
         public AdminFunctions()
         {
             InitializeComponent();
+            var list = DataCache._currentEventTypeList;
+            listbEventTypes.DataContext = list;
+
 
         }
 

@@ -4,12 +4,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
-        Title="Add Booking" Height="400" Width="825"
+        Title="Add Booking" Height="500" Width="825"
 		WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Grid Margin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height=".75*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -18,7 +18,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition Height="33" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -55,7 +55,6 @@
 
             <DataGrid Grid.Row="1" x:Name="lvEventListItems" SelectionChanged="lvEventListItems_SelectionChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width ="40" Header="ID" Binding="{Binding ItemListID}" />
                     <DataGridTextColumn Width ="100" Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
                     <DataGridTextColumn Width ="100" Header="Start Time" Binding="{Binding StartDate, StringFormat='{}{0:t}'}" />
                     <DataGridTextColumn Width ="100" Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:ddd, MMM d}'}" />
@@ -63,7 +62,7 @@
                     <DataGridTextColumn Width ="150" Header="Event Name" Binding="{Binding EventName}" />
 
                     <DataGridTextColumn Width ="80" Header="Qty Avail" Binding="{Binding QuantityOffered}" />
-                    <DataGridTextColumn Width ="110" Header="Ticket Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" />
+                    <DataGridTextColumn Width ="110" Header="Price" Binding="{Binding Price, StringFormat='{}{0:C}'}" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

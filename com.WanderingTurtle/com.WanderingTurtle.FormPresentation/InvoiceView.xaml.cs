@@ -78,8 +78,9 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (selectedItem == null)
                 {
-                    if (new AddBooking(invoiceToView).ShowDialog() == false) return;
-                    DialogResult = true;
+                    new AddBooking(invoiceToView).ShowDialog();
+                    //if (new AddBooking(invoiceToView).ShowDialog() == false) return;
+                   // DialogResult = true;
                     refreshBookingList();
                 }
                 else

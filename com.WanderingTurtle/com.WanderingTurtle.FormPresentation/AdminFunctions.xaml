@@ -14,8 +14,7 @@
         <Label Grid.Row="0" x:Name="lblTitle" FontSize="16" FontWeight="Bold" Content="Event Type Administration" />
         <Grid  Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height=".5*" />
-                <RowDefinition Height="*" />
+                
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -26,16 +25,14 @@
                 <ColumnDefinition Width=".25*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom" Content="Current Event Types" />
-            <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Content="Add Event Type:" />
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtEventType"/>            
-            <ListBox Grid.Row="1" Grid.Column="3" x:Name="listbEventTypes"/>
-            <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Content="Edit Event Type:" />
-            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAccessType"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Any current events with the archived event type will be changed to another event type. " Grid.ColumnSpan="4"/>
-            <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" Content="Archive Event Type" />
-            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboArchiveEvent"/>
-            <ComboBox Grid.Row="4" Grid.Column="3"  x:Name="cboReplaceEventType" />
+            <Label Grid.Row="0" Grid.Column="3" HorizontalContentAlignment="Center" Content="Select Event Type to Edit" Margin="0,83,0,0" />
+            <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" Content="Add Event Type:" />
+            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtEventType"/>
+            <ListBox Grid.Row="1" Grid.Column="3" x:Name="listbEventTypes" ItemsSource="{Binding}" />
+            <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Content="Edit Event Type:" />
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtAccessType"/>
+            <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Content="Archive Event Type" />
+            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboArchiveEvent"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
