@@ -140,12 +140,16 @@ GO
 
 INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)
 VALUES
-('FJones', 100),
-('HSmith', 101),
-('GAllen', 102),
-('CJackson', 103),
-('SueFox', 104),
-('JoseM', 105)
+('GMcKenzie', 100),
+('FJones', 101),
+('HSmith', 102),
+('GAllen', 103),
+('CJackson', 104),
+('SueFox', 105),
+('JoseM', 106),
+('GosseK', 107),
+('GBasurto', 108),
+('HMacCoinnich', 109)
 GO
 
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, Active)
