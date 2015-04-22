@@ -43,14 +43,14 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created:  2015/04/09
         /// Handles loading of the screen with data from the list.
         /// </summary>
-        /// <param name="CurrentSupplierApplication"></param>
+        /// <param name="currentSupplierApplication"></param>
         /// <param name="ReadOnly"></param>
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
-        public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
+        public AddEditPendingSupplier(SupplierApplication currentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
 
-            _cityStateManager.GetCityStateList();
+            _cityStateManager.PopulateCityStateCache();
             CurrentSupplierApplication = currentSupplierApplication;
             Title = "Editing Pending Supplier: " + CurrentSupplierApplication.GetFullName;
 

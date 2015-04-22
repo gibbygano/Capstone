@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
-        public AddEditListing(ItemListing CurrentItemListing, bool ReadOnly = false)
+        public AddEditListing(ItemListing currentItemListing, bool ReadOnly = false)
         {
             CurrentItemListing = currentItemListing;
             Setup();
