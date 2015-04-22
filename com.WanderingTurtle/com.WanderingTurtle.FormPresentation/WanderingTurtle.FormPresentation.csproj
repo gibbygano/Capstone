@@ -127,8 +127,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddBooking.xaml.cs">
-      <DependentUpon>AddBooking.xaml</DependentUpon>
+    <Compile Include="BookingAdd.xaml.cs">
+      <DependentUpon>BookingAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditEmployee.xaml.cs">
       <DependentUpon>AddEditEmployee.xaml</DependentUpon>
@@ -142,11 +142,14 @@
     <Compile Include="AddEditListing.xaml.cs">
       <DependentUpon>AddEditListing.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ArchiveInvoice.xaml.cs">
-      <DependentUpon>ArchiveInvoice.xaml</DependentUpon>
+    <Compile Include="AdminFunctions.xaml.cs">
+      <DependentUpon>AdminFunctions.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CancelBooking.xaml.cs">
-      <DependentUpon>CancelBooking.xaml</DependentUpon>
+    <Compile Include="InvoiceArchive.xaml.cs">
+      <DependentUpon>InvoiceArchive.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BookingCancel.xaml.cs">
+      <DependentUpon>BookingCancel.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditEvent.xaml.cs">
       <DependentUpon>AddEditEvent.xaml</DependentUpon>
@@ -164,22 +167,19 @@
     <Compile Include="ReportHost.xaml.cs">
       <DependentUpon>ReportHost.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateBooking.xaml.cs">
-      <DependentUpon>UpdateBooking.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TabContainer.xaml.cs">
       <DependentUpon>TabContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditBooking.xaml.cs">
-      <DependentUpon>EditBooking.xaml</DependentUpon>
+    <Compile Include="BookingEdit.xaml.cs">
+      <DependentUpon>BookingEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\WindowHelper.cs" />
-    <Compile Include="ViewInvoice.xaml.cs">
-      <DependentUpon>ViewInvoice.xaml</DependentUpon>
+    <Compile Include="InvoiceView.xaml.cs">
+      <DependentUpon>InvoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditSupplier.xaml.cs">
       <DependentUpon>AddEditSupplier.xaml</DependentUpon>
@@ -199,7 +199,7 @@
     <Compile Include="ListTheListings.xaml.cs">
       <DependentUpon>ListTheListings.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddBooking.xaml">
+    <Page Include="BookingAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,11 +219,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ArchiveInvoice.xaml">
+    <Page Include="AdminFunctions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CancelBooking.xaml">
+    <Page Include="InvoiceArchive.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BookingCancel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,10 +251,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UpdateBooking.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\StartupScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -259,11 +259,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditBooking.xaml">
+    <Page Include="BookingEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewInvoice.xaml">
+    <Page Include="InvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

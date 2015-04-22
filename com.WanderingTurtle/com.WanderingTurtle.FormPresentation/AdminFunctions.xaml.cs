@@ -9,26 +9,30 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
-    /// Interaction logic for PrintableInvoice.xaml
+    /// Interaction logic for AdminFunctions.xaml
     /// </summary>
-    public partial class PrintableInvoice
+    public partial class AdminFunctions : UserControl
     {
-        private int _guestID;
-        public PrintableInvoice(int guestID)
+        BusinessLogic.EventManager myMan = new BusinessLogic.EventManager();
+
+        public AdminFunctions()
         {
             InitializeComponent();
-            _guestID = guestID;
-            BindData();
+            var list = DataCache._currentEventTypeList;
+            listbEventTypes.DataContext = list;
+
+
         }
 
-        private void BindData()
-        {
-            report.BuildInvoice(_guestID);
-        }
+
+
     }
 }

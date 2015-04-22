@@ -95,7 +95,6 @@
     <Build Include="dbo\Stored Procedures\spHotelGuestAdd.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestGet.sql" />
     <Build Include="dbo\Tables\ItemListing.sql" />
-    <Build Include="dbo\Tables\Lists.sql" />
     <Build Include="dbo\Tables\EventType.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllEventItems.sql" />
     <Build Include="dbo\Stored Procedures\spSelectEventItem.sql" />
@@ -104,19 +103,10 @@
     <Build Include="dbo\Stored Procedures\spSelectItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllItemListings.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteItemListing.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateLists.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectAllLists.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectLists.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateEventType.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllEventTypes.sql" />
     <Build Include="dbo\Stored Procedures\spSelectEventType.sql" />
     <Build Include="dbo\Stored Procedures\spInsertItemListing.sql" />
-    <Build Include="dbo\Tables\SupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectAllSupplierFeedbackRecords.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectSupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spInsertSupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateSupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spDeleteSupplierFeedbackRecord.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestArchive.sql" />
     <Build Include="dbo\Tables\Invoice.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllInvoices.sql" />

@@ -36,7 +36,7 @@
             <ComboBox   Grid.Row="0" Grid.Column="1" x:Name="eventCbox"    Grid.ColumnSpan="2" DisplayMemberPath="EventItemName" />
             <ComboBox   Grid.Row="1" Grid.Column="1" x:Name="supplierCbox" Grid.ColumnSpan="2" DisplayMemberPath="CompanyName" />
             <DatePicker Grid.Row="2" Grid.Column="1" x:Name="dateStart" />
-            <DatePicker Grid.Row="3" Grid.Column="1" x:Name="dateEnd" />
+            <DatePicker Grid.Row="3" Grid.Column="1" x:Name="dateEnd"  />
             <Metro:NumericUpDown Grid.Row="4" Grid.Column="1" x:Name="udPrice" StringFormat="C2" Interval="5" />
 
             <Label Grid.Row="2" Grid.Column="2"  Content="Start Time:" HorizontalAlignment="Right" VerticalAlignment="Center" />

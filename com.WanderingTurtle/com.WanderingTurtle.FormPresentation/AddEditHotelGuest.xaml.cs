@@ -127,7 +127,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void InitializeEverything()
         {
-            CboZip.ItemsSource = RetrieveZipCodeList();
+            CboZip.ItemsSource = DataCache._currentCityStateList;
             ResetFields();
         }
 
@@ -165,11 +165,6 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN;
             }
             TxtFirstName.Focus();
-        }
-
-        private List<CityState> RetrieveZipCodeList()
-        {
-            return new CityStateManager().GetCityStateList();
         }
 
         /// <summary>

@@ -96,6 +96,57 @@
                 </tr>
             </table>
 
+
+
+
+                    <div id="eventsDetails" runat="server" style="display: none;">
+            <asp:ListView ID="lvDetails" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Item.FirstName +" " + Item.LastName%></td>
+                        <td><%# Item.Quantity %></td>
+                    </tr>
+                </ItemTemplate>
+                <LayoutTemplate>
+                    <table id="tbl1" runat="server">
+                        <tr id="tr1" runat="server">
+                            <td id="td8" class="eventheader" runat="server">Guest Name</td>
+                            <td id="td2" class="eventheader" runat="server">Number of Tickets</td>
+                        </tr>
+                        <tr id="ItemPlaceholder" runat="server">
+                        </tr>
+                    </table>
+                </LayoutTemplate>
+            </asp:ListView>
+            <asp:Button ID="btnGoBack" runat="server" Text="Go Back" OnClick="btnGoBack_Click"   UseSubmitBehavior="False"  />
+        </div>
+
+
+
+
+
+                    <div class="hide">
+        <div id="eventdetails" runat="server" style="display: none;">
+            <asp:ListView ID="lvDetailsOld" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Item.FirstName +" " + Item.LastName%></td>
+                        <td><%# Item.Quantity %></td>
+                    </tr>
+                </ItemTemplate>
+                <LayoutTemplate>
+                    <table id="tbl1" runat="server">
+                        <tr id="tr1" runat="server">
+                            <td id="td8" class="eventheader" runat="server">Guest Name</td>
+                            <td id="td2" class="eventheader" runat="server">Number of Tickets</td>
+                        </tr>
+                        <tr id="ItemPlaceholder" runat="server">
+                        </tr>
+                    </table>
+                </LayoutTemplate>
+            </asp:ListView>
+        </div>
+
             <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
         </ContentTemplate>
     </asp:UpdatePanel>
