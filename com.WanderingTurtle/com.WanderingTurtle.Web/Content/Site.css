@@ -589,7 +589,7 @@ input[type="radio"] {
 /**View Events Header**/
 .eventheader {
     font-weight: bold;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /**USER MENU STYLES*/
@@ -999,5 +999,9 @@ input.myMoney{
 
    header .float-right {
        visibility: hidden;
+   }
+
+   a.sortheader{
+       text-decoration: none;
    }
 }

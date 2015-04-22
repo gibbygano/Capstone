@@ -31,6 +31,7 @@
                 <h2>Upcoming Events</h2>
                 <asp:ListView ID="lvLists" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemLists" DataKeyNames="ItemListID" EnableViewState="False" runat="server">
                     <ItemTemplate>
+
                         <tr>
                             <td><%# Item.EventName.Truncate(25) %></td>
                             <td><%# Item.StartDate %></td>
@@ -40,16 +41,18 @@
                                 <asp:Button ID="btnDetails" runat="server" CommandArgument="<%#Item.ItemListID %>" Text="View Details" OnClick="btnDetails_Click" UseSubmitBehavior="False" />
                             </td>
                         </tr>
+
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table id="tbl1" runat="server">
-                            <tr id="tr1" runat="server">
-                                <td id="td8" class="eventheader" runat="server">Event Name</td>
-                                <td id="td2" class="eventheader" runat="server">Start Time</td>
-                                <td id="td3" class="eventheader" runat="server">End Time</td>
-                                <td id="td5" class="eventheader" runat="server">Current # Guests</td>
-                                <td></td>
-                            </tr>
+                        <table id="tblmain" class="sortable" runat="server">
+                            <thead>
+                                <tr id="tr1" runat="server">
+                                    <th id="td8" class="eventheader" runat="server">Event Name</th>
+                                    <th id="td2" class="eventheader" runat="server">Start Time</th>
+                                    <th id="td3" class="eventheader" runat="server">End Time</th>
+                                    <th id="td5" class="eventheader" runat="server"># Guests</th>
+                                </tr>
+                            </thead>
                             <tr id="ItemPlaceholder" runat="server">
                             </tr>
                         </table>
@@ -67,10 +70,10 @@
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table id="tbl1" runat="server">
+                        <table id="tbl1" class="sortable" runat="server">
                             <tr id="tr1" runat="server">
-                                <td id="td8" class="eventheader" runat="server">Guest Name</td>
-                                <td id="td2" class="eventheader" runat="server">Number of Tickets</td>
+                                <th id="td8" class="eventheader" runat="server">Guest Name</th>
+                                <th id="td2" class="eventheader" runat="server">Number of Tickets</th>
                             </tr>
                             <tr id="ItemPlaceholder" runat="server">
                             </tr>
