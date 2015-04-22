@@ -39,7 +39,7 @@
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
-            <table id="tbl1" runat="server">
+            <table id="tbl1" class="sortable" runat="server">
                 <tr id="tr1" runat="server">
                     <td id="td1" class="eventheader" runat="server">Event Name</td>
                     <td id="td2" class="eventheader" runat="server">Event Type</td>

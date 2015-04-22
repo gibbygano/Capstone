@@ -19,7 +19,6 @@ a {
     outline: none;
     padding-left: 3px;
     padding-right: 3px;
-    text-decoration: underline;
 }
 
 
@@ -1004,4 +1003,15 @@ input.myMoney{
    a.sortheader{
        text-decoration: none;
    }
+   td.eventheader a{
+     text-decoration: none;
+   }
+   tr#MainContent_lvLists_tr1 a{
+       text-decoration: none;
+   }
+
+   a:-webkit-any-link {
+  text-decoration: none;
+  cursor: auto;
+}
 }
