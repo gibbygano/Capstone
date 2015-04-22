@@ -84,7 +84,6 @@
             </div>
         </div>
 
-
         <div class="hide">
             <div id="eventdetails" runat="server" style="display: none;">
                 <asp:ListView ID="lvDetailsOld" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
@@ -106,8 +105,6 @@
                     </LayoutTemplate>
                 </asp:ListView>
             </div>
-
-
         </div>
     </div>
 </asp:Content>

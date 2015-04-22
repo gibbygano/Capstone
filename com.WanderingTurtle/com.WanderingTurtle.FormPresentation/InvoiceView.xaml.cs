@@ -80,7 +80,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (selectedItem == null)
                 {
-                    new AddBooking(invoiceToView).ShowDialog();
+                    new AddBooking(_CurrentInvoice).ShowDialog();
                     refreshBookingList();
                 }
                 else

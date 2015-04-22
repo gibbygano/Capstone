@@ -28,10 +28,10 @@ namespace com.WanderingTurtle.FormPresentation
             Title = "Add a new Listing";
         }
 
-        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
+        /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
         public AddEditListing(ItemListing CurrentItemListing, bool ReadOnly = false)
         {
-            CurrentItemListing = currentItemListing;
+            
             Setup();
             Title = "Editing Listing: " + CurrentItemListing.EventName;
 

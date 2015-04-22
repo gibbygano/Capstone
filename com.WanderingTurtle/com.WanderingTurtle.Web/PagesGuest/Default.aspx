@@ -9,28 +9,29 @@
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server" ID="head">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-    <script>
-        function pageLoad() {
-            console.log("jquery is ready.");
-            $("#txtGuestTickets").spinner({
-                min: 0,
-                max: $("#hfGuestMaxTickets").val()
-            });
+     <script>
+         function pageLoad() {
+             console.log("jquery is ready.");
+             $("#txtGuestTickets").spinner({
+                 min: 0,
+                 max: $("#hfGuestMaxTickets").val()
+             });
 
-            $("#txtGuestPin").change(function () {
-                var pinValue = $(this).val();
-                if (!($.isNumeric(pinValue) && Math.floor(pinValue) == pinValue)) {
-                    $(this).css('background-color', 'red');
-                    return;
-                }
-                else {
-                    $(this).css('background-color', 'white');
-                }
-            });
-        }
+             $("#txtGuestPin").change(function () {
+                 var pinValue = $(this).val();
 
+                 $('#demo1').alphanum()
+
+                 if (!($.isNumeric(pinValue))) {
+                     $(this).css('background-color', 'red');
+                     return;
+                 }
+                 else {
+                     $(this).css('background-color', 'white');
+                 }
+             });
+         }
     </script>
 </asp:Content>
 
@@ -41,8 +42,6 @@
         -->
     <h2>Upcoming Event Listings</h2>
     <h3>Please select an event to book your tickets:</h3>
-
-
 
     <asp:UpdatePanel runat="server" ID="gvListingsUpdate">
         <ContentTemplate>
@@ -55,14 +54,13 @@
                 <SelectedRowStyle BackColor="#E2DED6" ForeColor="#333333" Font-Bold="False" />
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
-                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}" >
+                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}">
                         <ControlStyle Width="150px" />
-                        </asp:BoundField>
+                    </asp:BoundField>
                     <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName">
                         <ItemStyle Width="150px" />
                     </asp:BoundField>
-                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription">
-                    </asp:BoundField>
+                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription"></asp:BoundField>
                     <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tix" SortExpression="QuantityOffered" />
                     <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" />
                 </Columns>
@@ -75,79 +73,43 @@
                 TypeName="com.WanderingTurtle.BusinessLogic.BookingManager"></asp:ObjectDataSource>
             <br />
 
-        <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
-            <table>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblTickets" Text="# Tickets To Add:" runat="server" Height="35px" Font-Bold="True"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:HiddenField ID="hfGuestMaxTickets" runat="server" ClientIDMode="Static" Value="0" />
-                        <asp:TextBox ID="txtGuestTickets" runat="server" ClientIDMode="Static" TabIndex="0"></asp:TextBox></td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblGuestPin" Text="Guest Pin:" runat="server" Font-Bold ="True" Height="35px"></asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox TextMode="Password" ID="txtGuestPin" ClientIDMode="Static" runat ="server" TabIndex="1" ViewStateMode="Enabled" Wrap="False" MaxLength="4"></asp:TextBox>
+            <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
 
-                    </td>
-                </tr>
-            </table>
-
-
-
-
-                    <div id="eventsDetails" runat="server" style="display: none;">
-            <asp:ListView ID="lvDetails" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
-                <ItemTemplate>
+            <div class="hide">
+                <div id="confirmDetails" runat="server" enableviewstate="False" style="display: none;">
+                    <h3>Confirmation Agreement</h3>
+                    <p>
+                        I, <%= guestName %>, agree to pay <%= totalPrice.ToString("C")  %> for <%= ticketQty %> tickets to
+                        <%= eventName %> on <%= date %>.  This amount will be charged to my credit card on file. 
+                    </p>
+                    <asp:Button ID="btnConfirm" runat="server" Text="I Agree" OnClick="btnConfirm_Click" UseSubmitBehavior="False"  />
+                    <asp:Button ID="btnCancel" runat="server" Text="Go Back" OnClick="btnCancel_Click" UseSubmitBehavior="False" />
+                </div>
+            </div>
+            <div id="ticketRequest" runat="server" enableviewstate="False" style="display: block;">
+                <table>
                     <tr>
-                        <td><%# Item.FirstName +" " + Item.LastName%></td>
-                        <td><%# Item.Quantity %></td>
+                        <td>
+                            <asp:Label ID="lblTickets" Text="# Tickets To Add:" runat="server" Height="35px" Font-Bold="True"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:HiddenField ID="hfGuestMaxTickets" runat="server" ClientIDMode="Static" Value="0" />
+                            <asp:TextBox ID="txtGuestTickets" runat="server" ClientIDMode="Static" TabIndex="0"></asp:TextBox></td>
                     </tr>
-                </ItemTemplate>
-                <LayoutTemplate>
-                    <table id="tbl1" runat="server">
-                        <tr id="tr1" runat="server">
-                            <td id="td8" class="eventheader" runat="server">Guest Name</td>
-                            <td id="td2" class="eventheader" runat="server">Number of Tickets</td>
-                        </tr>
-                        <tr id="ItemPlaceholder" runat="server">
-                        </tr>
-                    </table>
-                </LayoutTemplate>
-            </asp:ListView>
-            <asp:Button ID="btnGoBack" runat="server" Text="Go Back" OnClick="btnGoBack_Click"   UseSubmitBehavior="False"  />
-        </div>
-
-
-
-
-
-                    <div class="hide">
-        <div id="eventdetails" runat="server" style="display: none;">
-            <asp:ListView ID="lvDetailsOld" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
-                <ItemTemplate>
                     <tr>
-                        <td><%# Item.FirstName +" " + Item.LastName%></td>
-                        <td><%# Item.Quantity %></td>
-                    </tr>
-                </ItemTemplate>
-                <LayoutTemplate>
-                    <table id="tbl1" runat="server">
-                        <tr id="tr1" runat="server">
-                            <td id="td8" class="eventheader" runat="server">Guest Name</td>
-                            <td id="td2" class="eventheader" runat="server">Number of Tickets</td>
-                        </tr>
-                        <tr id="ItemPlaceholder" runat="server">
-                        </tr>
-                    </table>
-                </LayoutTemplate>
-            </asp:ListView>
-        </div>
+                        <td>
+                            <asp:Label ID="lblGuestPin" Text="Guest Pin:" runat="server" Font-Bold="True" Height="35px"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox TextMode="Password" ID="txtGuestPin" ClientIDMode="Static" runat="server" TabIndex="1" ViewStateMode="Enabled" Wrap="False" MaxLength="5"></asp:TextBox>
 
-            <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
+                        </td>
+                    </tr>
+                </table>
+
+                <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" UseSubmitBehavior="False" />
+            </div>
         </ContentTemplate>
     </asp:UpdatePanel>
 </asp:Content>
+

@@ -31,8 +31,6 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditPendingSupplier()
         {
             InitializeComponent();
-
-            _cityStateManager.PopulateCityStateCache();
             Title = "Add a new Pending Supplier";
             SetFields();
             ReloadComboBox();
@@ -46,11 +44,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="CurrentSupplierApplication"></param>
         /// <param name="ReadOnly"></param>
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
-        public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
+        public AddEditPendingSupplier(SupplierApplication currentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
 
-            _cityStateManager.GetCityStateList();
             CurrentSupplierApplication = currentSupplierApplication;
             Title = "Editing Pending Supplier: " + CurrentSupplierApplication.GetFullName;
 
