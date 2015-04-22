@@ -21,6 +21,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditEvent()
         {
             Setup();
+            Title = "Add a new Event";
         }
 
         /// <summary>
@@ -33,7 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
         public AddEditEvent(Event EventToEdit, bool ReadOnly = false)
         {
-            this.OriginalEvent = EventToEdit;
+            OriginalEvent = EventToEdit;
 
             eventToSubmit.Active = EventToEdit.Active;
             eventToSubmit.Description = EventToEdit.Description;
@@ -44,6 +45,8 @@ namespace com.WanderingTurtle.FormPresentation
             eventToSubmit.EventItemID = EventToEdit.EventItemID;
 
             Setup();
+
+            Title = "Editing Event: " + OriginalEvent.EventItemName;
 
             if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }

@@ -49,6 +49,17 @@
                 <Setter Property="VerticalContentAlignment" Value="Top" />
             </Style>
             <Style TargetType="{x:Type xctk:MaskedTextBox}" BasedOn="{StaticResource TextBoxStyle}" />
+            <Style x:Key="SearchTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource SearchMetroTextBox}">
+                <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
+                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
+                <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="True" />
+                <Setter Property="Metro:TextBoxHelper.Watermark" Value="Search" />
+                <Style.Triggers>
+                    <Trigger Property="Metro:TextBoxHelper.HasText" Value="True">
+                        <Setter Property="Metro:TextBoxHelper.ButtonTemplate" Value="{DynamicResource ChromelessButtonTemplate}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MetroPasswordBox}">
                 <Setter Property="Height" Value="{StaticResource TextBoxHeight}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />

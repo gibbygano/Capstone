@@ -31,7 +31,9 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditPendingSupplier()
         {
             InitializeComponent();
+
             _cityStateManager.PopulateCityStateCache();
+            Title = "Add a new Pending Supplier";
             SetFields();
             ReloadComboBox();
         }
@@ -47,8 +49,11 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
-            _cityStateManager.PopulateCityStateCache();
-            this.CurrentSupplierApplication = CurrentSupplierApplication;
+
+            _cityStateManager.GetCityStateList();
+            CurrentSupplierApplication = currentSupplierApplication;
+            Title = "Editing Pending Supplier: " + CurrentSupplierApplication.GetFullName;
+
             ReloadComboBox();
             fillComboBox();
             SetFields();

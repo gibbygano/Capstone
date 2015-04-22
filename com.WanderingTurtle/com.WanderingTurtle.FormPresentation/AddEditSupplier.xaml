@@ -47,7 +47,7 @@
             <TextBox            x:Name="txtEmail"       TabIndex="8" Grid.Row="2" Grid.Column="3" />
 
             <Label Content="Supply Cost" Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Metro:NumericUpDown Grid.Column="3" Grid.Row="3" TabIndex="9" Minimum=".01" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" x:Name="numSupplyCost" />
+            <Metro:NumericUpDown Grid.Column="3" Grid.Row="3" TabIndex="9" Minimum=".01" Maximum =".99" Interval=".01" StringFormat="P0" x:Name="numSupplyCost" />
 
             <Label Grid.Row="4" Grid.Column="2" Content="User Name"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <TextBox  Grid.Row="4" Grid.Column="3" x:Name="txtUserName"  TabIndex="10" />
@@ -58,9 +58,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnSubmit" Grid.Column="0" Content="Submit" Click="btnSubmit_Click" />
-            <Separator Width="0"       Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" />
-            <Button x:Name="btnEdit"   Grid.Column="2" Content="Submit Edit"         Click="btnEdit_Click" />
+            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
+            <Button Grid.Column="1" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click"  Margin="2.5,0" />
+            <Button Grid.Column="2" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>
