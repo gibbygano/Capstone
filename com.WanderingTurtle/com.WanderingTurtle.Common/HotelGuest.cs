@@ -77,7 +77,7 @@
 
         public string FirstName { get; private set; }
 
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+        public string GetFullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
 
         public string GuestPIN { get; private set; }
 

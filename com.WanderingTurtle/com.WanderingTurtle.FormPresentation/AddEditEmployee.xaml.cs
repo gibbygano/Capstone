@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             SetFields();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         public Employee CurrentEmployee { get; private set; }
@@ -250,7 +250,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>awaitable Task of MEssageDialogResult</returns>
         private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
-            return await DialogBox.ShowMessageDialog(this, message, title, style);
+            return await this.ShowMessageDialog(message, title, style);
         }
 
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)

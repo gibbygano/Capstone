@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <example>LoginDialogData result = await DialogBox.ShowLoginDialog(...)</example>
         /// <returns>awaitable Task of type LoginDialogData</returns>
         /// <exception cref="WanderingTurtleException"/>
-        public static Task<LoginDialogData> ShowLoginDialog(FrameworkElement control, string message, string title = null, LoginDialogSettings settings = null)
+        public static Task<LoginDialogData> ShowLoginDialog(this FrameworkElement control, string message, string title = null, LoginDialogSettings settings = null)
         { return control.GetWindow().ShowLoginAsync(title, message, settings); }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <example>MessageDialogResult result = await DialogBox.ShowMessageDialog(...)</example>
         /// <returns>awaitable Task of type MessageDialogResult</returns>
         /// <exception cref="WanderingTurtleException"/>
-        public static Task<MessageDialogResult> ShowMessageDialog(FrameworkElement control, string message, string title = null, MessageDialogStyle? style = null, MetroDialogSettings settings = null)
+        public static Task<MessageDialogResult> ShowMessageDialog(this FrameworkElement control, string message, string title = null, MessageDialogStyle? style = null, MetroDialogSettings settings = null)
         { return control.GetWindow().ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
     }
 }

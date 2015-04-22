@@ -34,7 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<SupplierApplication>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<SupplierApplication>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.View:
@@ -101,7 +101,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenPendingSupplier(DataGridHelper.RowClick<SupplierApplication>(sender), true);
+            OpenPendingSupplier(sender.RowClick<SupplierApplication>(), true);
         }
     }
 }

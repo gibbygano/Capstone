@@ -47,7 +47,7 @@ namespace com.WanderingTurtle.FormPresentation
             fillComboBox();
             FillUpdateList();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { }); }
         }
 
         /// <summary>
@@ -173,9 +173,9 @@ namespace com.WanderingTurtle.FormPresentation
 
                     if (_manager.AddANewSupplier(tempSupplier, txtUserName.Text) == SupplierResult.Success)
                     {
-                        await DialogBox.ShowMessageDialog(this, "Supplier was added to the database.");
+                        await this.ShowMessageDialog("Supplier was added to the database.");
                         DialogResult = true;
-                        this.Close();
+                        Close();
                     }
                     else
                     {
@@ -196,7 +196,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -248,9 +248,9 @@ namespace com.WanderingTurtle.FormPresentation
 
                     if (result.Equals(ResultsEdit.Success))
                     {
-                        await DialogBox.ShowMessageDialog(this, "Supplier was updated.");
+                        await this.ShowMessageDialog("Supplier was updated.");
                         DialogResult = true;
-                        this.Close();
+                        Close();
                     }
                 }
 
@@ -270,8 +270,8 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
                 {
-                    await DialogBox.ShowMessageDialog(this, "The Supplier was successfully edited.");
-                    this.Close();
+                    await this.ShowMessageDialog("The Supplier was successfully edited.");
+                    Close();
                 }
                 else
                 {

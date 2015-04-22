@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             Title = "Editing Event: " + OriginalEvent.EventItemName;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         public Event OriginalEvent { get; private set; }
@@ -112,9 +112,9 @@ namespace com.WanderingTurtle.FormPresentation
                 EventManager.EventResult result = _eventManager.AddNewEvent(NewEvent);
                 if (result == EventManager.EventResult.Success)
                 {
-                    await DialogBox.ShowMessageDialog(this, "Successfully Added Event");
+                    await this.ShowMessageDialog("Successfully Added Event");
                     DialogResult = true;
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -204,9 +204,9 @@ namespace com.WanderingTurtle.FormPresentation
                 var EventManagerResult = _eventManager.EditEvent(OriginalEvent, eventToSubmit);
                 if (EventManagerResult.Equals(EventManager.EventResult.Success))
                 {
-                    await DialogBox.ShowMessageDialog(this, "Event Changed Successfully!");
+                    await this.ShowMessageDialog("Event Changed Successfully!");
                     DialogResult = true;
-                    this.Close();
+                    Close();
                 }
                 else { throw new WanderingTurtleException(this, EventManagerResult.ToString()); }
             }

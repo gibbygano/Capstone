@@ -41,7 +41,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<ItemListing>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<ItemListing>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -96,14 +96,14 @@ namespace com.WanderingTurtle.FormPresentation
             }
             try
             {
-                MessageDialogResult result = await DialogBox.ShowMessageDialog(this, "Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
+                MessageDialogResult result = await this.ShowMessageDialog("Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
                 switch (result)
                 {
                     case MessageDialogResult.Affirmative:
                         var numRows = prodMan.ArchiveItemListing(ListingToDelete);
                         if (numRows == listResult.Success)
                         {
-                            await DialogBox.ShowMessageDialog(this, "Listing successfully deleted.");
+                            await this.ShowMessageDialog("Listing successfully deleted.");
                         }
                         refreshData();
                         break;
@@ -132,7 +132,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenListing(DataGridHelper.RowClick<ItemListing>(sender), true);
+            OpenListing(sender.RowClick<ItemListing>(), true);
         }
 
         private void refreshData()

@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation
             eventCbox.IsEnabled = false;
             supplierCbox.IsEnabled = false;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         public ItemListing CurrentItemListing { get; private set; }
@@ -77,9 +77,9 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 _productManager.AddItemListing(_NewListing);
-                await DialogBox.ShowMessageDialog(this, "Listing successfully added!");
+                await this.ShowMessageDialog("Listing successfully added!");
                 DialogResult = true;
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -89,7 +89,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -195,9 +195,9 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (numRows == listResult.Success)
                 {
-                    await DialogBox.ShowMessageDialog(this, "Item successfully changed.");
+                    await this.ShowMessageDialog("Item successfully changed.");
                     DialogResult = true;
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)

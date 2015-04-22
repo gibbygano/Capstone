@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         internal void StartUp()
         {
-            this.MainContent.Content = new StartupScreen();
+            MainContent.Content = new StartupScreen();
         }
 
         private void _DBConnectError(Exception ex)

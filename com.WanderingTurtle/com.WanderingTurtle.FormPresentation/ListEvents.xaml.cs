@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<Event>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<Event>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -97,7 +97,7 @@ namespace com.WanderingTurtle.FormPresentation
             string caption = "Delete Event?";
 
             // Display message box
-            MessageDialogResult result = await DialogBox.ShowMessageDialog(this, messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
+            MessageDialogResult result = await this.ShowMessageDialog(messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
 
             // Process message box results
             switch (result)
@@ -165,7 +165,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenEvent(DataGridHelper.RowClick<Event>(sender), true);
+            OpenEvent(sender.RowClick<Event>(), true);
         }
 
         /// <summary>
