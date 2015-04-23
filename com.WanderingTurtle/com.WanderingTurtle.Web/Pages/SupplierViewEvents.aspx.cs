@@ -276,18 +276,6 @@ namespace com.WanderingTurtle.Web.Pages
             theLists.Style.Add("display", "block");
         }
 
-        protected void btnEventSearch_Click(object sender, EventArgs e)
-        {
-            lblError.Text="";
-            if(String.IsNullOrEmpty(txtEventSearch.Text))
-            {
-                lblError.Text = "Please enter a search term";
-                return;
-            }
-            search = true;
-            searchTerm = txtEventSearch.Text;
-            //GetEvents();
-        }
     }
 
 }
