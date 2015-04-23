@@ -94,7 +94,7 @@ namespace com.WanderingTurtle.Web.Pages
 
         private String addError(String list, String text)
         {
-            return list.Length > 0 ? list + ", " + text : text;
+            return list.Length > 0 ? list + "\n" + text : text;
         }
         public void UpdateList()
         {
@@ -140,10 +140,22 @@ namespace com.WanderingTurtle.Web.Pages
                 if (myList != null && errorText.Length == 0)
                 {
                     result = _myManager.EditItemListing(newList, myList);
-                    if(result != listResult.Success)
+                    if(result == listResult.NoDateChange)
                     {
-                        Response.Write("<script>alert('Problem!');</script>");
+                        errorText = addError(errorText, "You cannot change the date after guests have signed up!");
+                        lblError.Text = errorText;
                     }
+                    if (result == listResult.NoPriceChange)
+                    {
+                        errorText = addError(errorText, "You cannot change the price after guests have signed up!");
+                        lblError.Text = errorText;
+                    }
+                    if (result == listResult.MaxSmallerThanCurrent)
+                    {
+                        errorText = addError(errorText, "You cannot change the Max Number of Guests to be lower than the number signed up!");
+                        lblError.Text = errorText;
+                    }
+                    
                     return;
                 }
                 else

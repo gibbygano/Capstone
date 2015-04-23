@@ -26,6 +26,20 @@ namespace com.WanderingTurtle.BusinessLogic
         ChangedByOtherUser,
 
         DatabaseError,
+
+        NoDateChange,
+
+        MaxSmallerThanCurrent,
+
+        NoPriceChange,
+
+        StartEndDateError,
+
+        DateInPast
+
+
+
+
     }
 
     public class ProductManager
@@ -124,6 +138,32 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>int number of rows affected-- should be 1</returns>
         public listResult EditItemListing(ItemListing newItemLists, ItemListing oldItemLists)
         {
+            if (newItemLists.CurrentNumGuests > 0)
+            {
+                if (newItemLists.StartDate != oldItemLists.StartDate || newItemLists.EndDate != oldItemLists.EndDate)
+                {
+                    return listResult.NoDateChange;
+                }
+
+                if (newItemLists.MaxNumGuests < newItemLists.CurrentNumGuests)
+                {
+                    return listResult.MaxSmallerThanCurrent;
+                }
+                if(newItemLists.Price != oldItemLists.Price)
+                {
+                    return listResult.NoPriceChange;
+                }
+            }
+
+            if (newItemLists.StartDate > newItemLists.EndDate)
+            {
+                return listResult.StartEndDateError;
+            }
+            if (newItemLists.StartDate < DateTime.Now)
+            {
+                return listResult.DateInPast;
+            }
+
             try
             {
                 if (ItemListingAccessor.UpdateItemListing(newItemLists, oldItemLists) == 1)

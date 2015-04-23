@@ -14,6 +14,12 @@ $(document).ready(function () {
 
     });
 
+    $('#tblitems').DataTable({
+        stateSave: true
+
+
+    });
+
     $('#tbl1').DataTable({
         searching: false
     });

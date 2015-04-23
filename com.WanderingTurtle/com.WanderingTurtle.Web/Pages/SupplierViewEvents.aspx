@@ -13,7 +13,7 @@
         View List of Events and Options to Edit or Delete
         -->
     <div id="theLists" runat="server">
-    <h1>Listed Events</h1>
+    <h1>Events Available to be Offered</h1>
     <div class="clear"></div>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" 
