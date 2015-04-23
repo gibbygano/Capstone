@@ -65,28 +65,41 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
-        /// <exception cref="OverflowException"><value>menuItem.Header</value> is outside the range of the underlying type of <paramref name="(DataGridContextMenuResult)" />.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public static FrameworkElement SetContextMenu(this FrameworkElement component, IDataGridContextMenu context, DataGridContextMenuResult[] contextMenus = null)
         {
-            var contextMenu = new ContextMenu();
-            foreach (
-                var menuItem in
-                    (contextMenus ?? (DataGridContextMenuResult[])Enum.GetValues(typeof(DataGridContextMenuResult)))
-                        .Select(menu => new MenuItem
-                        {
-                            Header = Enum.GetName(typeof(DataGridContextMenuResult), menu),
-                            CommandParameter = menu
-                        }))
+            try
             {
-                menuItem.Click += context.ContextMenuItem_Click;
-                var result = ((DataGridContextMenuResult)(Enum.Parse(typeof(DataGridContextMenuResult), menuItem.Header.ToString())));
-                var dataGrid = component as DataGrid;
-                if (dataGrid != null && result != DataGridContextMenuResult.Add)
-                { menuItem.SetBinding(UIElement.IsEnabledProperty, new Binding("Count") { Source = dataGrid.SelectedItems }); }
-                contextMenu.Items.Add(menuItem);
+                var contextMenu = new ContextMenu();
+                foreach (
+                    var menuItem in
+                        (contextMenus ??
+                         (DataGridContextMenuResult[]) Enum.GetValues(typeof (DataGridContextMenuResult)))
+                            .Select(menu => new MenuItem
+                            {
+                                Header = Enum.GetName(typeof (DataGridContextMenuResult), menu),
+                                CommandParameter = menu
+                            }))
+                {
+                    menuItem.Click += context.ContextMenuItem_Click;
+                    var result =
+                        ((DataGridContextMenuResult)
+                            (Enum.Parse(typeof (DataGridContextMenuResult), menuItem.Header.ToString())));
+                    var dataGrid = component as DataGrid;
+                    if (dataGrid != null && result != DataGridContextMenuResult.Add)
+                    {
+                        menuItem.SetBinding(UIElement.IsEnabledProperty,
+                            new Binding("Count") {Source = dataGrid.SelectedItems});
+                    }
+                    contextMenu.Items.Add(menuItem);
+                }
+                component.ContextMenu = contextMenu;
+                return component;
             }
-            component.ContextMenu = contextMenu;
-            return component;
+            catch (OverflowException ex)
+            {
+                throw new WanderingTurtleException(component, ex, "Error occurred setting context menu.");
+            }
         }
 
         /// <summary>
