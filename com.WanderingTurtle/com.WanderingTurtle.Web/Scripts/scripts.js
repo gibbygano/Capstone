@@ -79,8 +79,9 @@ $(document).ready(function () {
         start: 0
     });
 
-    var current2 = $('#MainContent_lvLists_listCurrent_0').val();
+    var current2 = $('#listCurrent').val();
     console.log(current2);
+
     $("#listmax").spinner({
         min: current2,
         max: 999,

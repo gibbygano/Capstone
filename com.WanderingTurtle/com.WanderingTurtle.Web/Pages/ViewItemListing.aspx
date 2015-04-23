@@ -58,11 +58,11 @@
                 <td>
                     <input name="price" value="<%# Item.Price.ToString("F") %>" maxlength="255" class="myMoney" /></td>
                 <td>
-                    <input size="3" name="max" id="listmax" class="myspinner myDate" value="<%# Item.MaxNumGuests %>" maxlength="4" /></td>
+                    <input size="3" name="max" id="listmax" class="myspinner myDate" value="<%# Item.MaxNumGuests %>" maxlength="3" /></td>
                 <td>
                     <asp:Button CommandName="Update" Text="Update" CausesValidation="true" runat="server" ID="btnUpdate" />
                     <asp:Button CommandName="Cancel" Text="Cancel" runat="server" /></td>
-                <asp:HiddenField ID="listCurrent" Value="<%# Item.CurrentNumGuests %>" runat="server" />
+                <input type="hidden" id="listCurrent" value="<%# Item.CurrentNumGuests %>" />
                 <input type="hidden" name="itemID" value="<%# Item.ItemListID %>" />
             </tr>
         </EditItemTemplate>
