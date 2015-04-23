@@ -1,6 +1,5 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using System.Windows.Controls;
-using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.FormPresentation.Models;
 using com.WanderingTurtle.Common;
 using System.Collections.Generic;
@@ -48,7 +47,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
             txtAddEventType.Text = updateEventType.Name;
 
             var list = DataCache._currentEventTypeList;
-            listEventTypes.DataContext = list;
+           // listEventTypes.DataContext = list;
 
         }
 

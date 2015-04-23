@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheListings : IDataGridContextMenu
     {
         private List<ItemListing> _myListingList;
-
+        private ProductManager _productManager = new ProductManager();
 
         /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
