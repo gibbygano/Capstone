@@ -16,13 +16,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/17
-        ///
         /// Initializes the UI that displays a list of active hotel guests
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public ListHotelGuests()
         {
             InitializeComponent();
@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<InvoiceDetails>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<InvoiceDetails>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -57,7 +57,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (selectedItem == null)
                 {
-                    if (new AddEditListing().ShowDialog() == false) return;
+                    if (new AddEditHotelGuest().ShowDialog() == false) return;
                     RefreshGuestList();
                 }
                 else
@@ -100,7 +100,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenHotelGuest(DataGridHelper.RowClick<InvoiceDetails>(sender));
+            OpenHotelGuest(sender.RowClick<InvoiceDetails>());
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
+            btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)

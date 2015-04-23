@@ -31,7 +31,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditPendingSupplier()
         {
             InitializeComponent();
-            _cityStateManager.GetCityStateList();
+            Title = "Add a new Pending Supplier";
             SetFields();
             ReloadComboBox();
         }
@@ -41,19 +41,22 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created:  2015/04/09
         /// Handles loading of the screen with data from the list.
         /// </summary>
-        /// <param name="CurrentSupplierApplication"></param>
+        /// <param name="currentSupplierApplication"></param>
         /// <param name="ReadOnly"></param>
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
-        public AddEditPendingSupplier(SupplierApplication CurrentSupplierApplication, bool ReadOnly = false)
+        public AddEditPendingSupplier(SupplierApplication currentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
-            _cityStateManager.GetCityStateList();
-            this.CurrentSupplierApplication = CurrentSupplierApplication;
+
+            _cityStateManager.PopulateCityStateCache();
+            CurrentSupplierApplication = currentSupplierApplication;
+            Title = "Editing Pending Supplier: " + CurrentSupplierApplication.GetFullName;
+
             ReloadComboBox();
             fillComboBox();
             SetFields();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         /// <summary>
@@ -63,7 +66,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /// <summary>
@@ -105,9 +108,9 @@ namespace com.WanderingTurtle.FormPresentation
 
                         if (result == SupplierResult.Success)
                         {
-                            await DialogBox.ShowMessageDialog(this, "Supplier application approved: Supplier added.");
+                            await this.ShowMessageDialog("Supplier application approved: Supplier added.");
                             DialogResult = true;
-                            this.Close();
+                            Close();
                         }
                         else
                         {
@@ -129,9 +132,9 @@ namespace com.WanderingTurtle.FormPresentation
 
                     if (result == SupplierResult.Success)
                     {
-                        await DialogBox.ShowMessageDialog(this, "Supplier application updated.");
+                        await this.ShowMessageDialog("Supplier application updated.");
                         DialogResult = true;
-                        this.Close();
+                        Close();
                     }
                     else
                     {
@@ -198,19 +201,19 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void GetFormData()
         {
-            UpdatedSupplierApplication.CompanyName = this.txtCompanyName.Text;
-            UpdatedSupplierApplication.CompanyDescription = this.txtCompanyDescription.Text;
-            UpdatedSupplierApplication.FirstName = this.txtFirstName.Text;
-            UpdatedSupplierApplication.LastName = this.txtLastName.Text;
-            UpdatedSupplierApplication.Address1 = this.txtAddress.Text;
-            UpdatedSupplierApplication.Address2 = this.txtAddress2.Text;
+            UpdatedSupplierApplication.CompanyName = txtCompanyName.Text;
+            UpdatedSupplierApplication.CompanyDescription = txtCompanyDescription.Text;
+            UpdatedSupplierApplication.FirstName = txtFirstName.Text;
+            UpdatedSupplierApplication.LastName = txtLastName.Text;
+            UpdatedSupplierApplication.Address1 = txtAddress.Text;
+            UpdatedSupplierApplication.Address2 = txtAddress2.Text;
             UpdatedSupplierApplication.Zip = cboZip.SelectedValue.ToString();
 
-            UpdatedSupplierApplication.PhoneNumber = this.txtPhoneNumber.Text;
-            UpdatedSupplierApplication.EmailAddress = this.txtEmailAddress.Text;
+            UpdatedSupplierApplication.PhoneNumber = txtPhoneNumber.Text;
+            UpdatedSupplierApplication.EmailAddress = txtEmailAddress.Text;
             UpdatedSupplierApplication.ApplicationDate = CurrentSupplierApplication.ApplicationDate;
-            UpdatedSupplierApplication.ApplicationStatus = this.cboAppStatus.SelectedValue.ToString();
-            UpdatedSupplierApplication.Remarks = this.txtRemarks.Text;
+            UpdatedSupplierApplication.ApplicationStatus = cboAppStatus.SelectedValue.ToString();
+            UpdatedSupplierApplication.Remarks = txtRemarks.Text;
 
             //application id from record in memory
             UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
@@ -222,18 +225,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void SetFields()
         {
-            this.txtCompanyName.Text = CurrentSupplierApplication.CompanyName;
-            this.txtCompanyDescription.Text = CurrentSupplierApplication.CompanyDescription;
-            this.txtFirstName.Text = CurrentSupplierApplication.FirstName;
-            this.txtLastName.Text = CurrentSupplierApplication.LastName;
-            this.txtAddress.Text = CurrentSupplierApplication.Address1;
-            this.txtAddress2.Text = CurrentSupplierApplication.Address2;
+            txtCompanyName.Text = CurrentSupplierApplication.CompanyName;
+            txtCompanyDescription.Text = CurrentSupplierApplication.CompanyDescription;
+            txtFirstName.Text = CurrentSupplierApplication.FirstName;
+            txtLastName.Text = CurrentSupplierApplication.LastName;
+            txtAddress.Text = CurrentSupplierApplication.Address1;
+            txtAddress2.Text = CurrentSupplierApplication.Address2;
             string phoneNumberMasked = CurrentSupplierApplication.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
-            this.txtPhoneNumber.Text = phoneNumberMasked;
-            this.txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
-            this.dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
-            this.cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
-            this.txtRemarks.Text = CurrentSupplierApplication.Remarks;
+            txtPhoneNumber.Text = phoneNumberMasked;
+            txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
+            dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
+            cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
+            txtRemarks.Text = CurrentSupplierApplication.Remarks;
 
             foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == CurrentSupplierApplication.Zip))
             { cboZip.SelectedValue = cityState.Zip; }

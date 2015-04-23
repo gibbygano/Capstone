@@ -32,6 +32,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public ListEvents()
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<Event>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<Event>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -59,7 +60,7 @@ namespace com.WanderingTurtle.FormPresentation
                     OpenEvent(selectedItem);
                     break;
 
-                case DataGridContextMenuResult.Archive:
+                case DataGridContextMenuResult.Delete:
                     ArchiveEvent(selectedItem);
                     break;
 
@@ -97,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation
             string caption = "Delete Event?";
 
             // Display message box
-            MessageDialogResult result = await DialogBox.ShowMessageDialog(this, messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
+            MessageDialogResult result = await this.ShowMessageDialog(messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
 
             // Process message box results
             switch (result)
@@ -165,7 +166,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenEvent(DataGridHelper.RowClick<Event>(sender), true);
+            OpenEvent(sender.RowClick<Event>(), true);
         }
 
         /// <summary>

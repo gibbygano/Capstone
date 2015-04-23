@@ -4,7 +4,7 @@
         Background="#FF006AA0"
         x:Class="com.WanderingTurtle.FormPresentation.Views.StartupScreen">
     <UserControl.Resources>
-        <Style x:Key="SignIn" TargetType="{x:Type Button}" BasedOn="{StaticResource Button}">
+        <Style x:Key="SignIn" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
             <Setter Property="FontSize" Value="50px" />
         </Style>
         <Thickness x:Key="Local Margin">10</Thickness>

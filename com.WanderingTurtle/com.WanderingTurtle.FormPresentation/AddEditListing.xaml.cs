@@ -25,15 +25,20 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditListing()
         {
             Setup();
+            Title = "Add a new Listing";
         }
 
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
-        public AddEditListing(ItemListing CurrentItemListing, bool ReadOnly = false)
+        public AddEditListing(ItemListing currentItemListing, bool ReadOnly = false)
         {
-            this.CurrentItemListing = CurrentItemListing;
+            
             Setup();
+            Title = "Editing Listing: " + CurrentItemListing.EventName;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            eventCbox.IsEnabled = false;
+            supplierCbox.IsEnabled = false;
+
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         public ItemListing CurrentItemListing { get; private set; }
@@ -72,9 +77,9 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 _productManager.AddItemListing(_NewListing);
-                await DialogBox.ShowMessageDialog(this, "Listing successfully added!");
+                await this.ShowMessageDialog("Listing successfully added!");
                 DialogResult = true;
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -84,7 +89,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -163,7 +168,6 @@ namespace com.WanderingTurtle.FormPresentation
             CalendarDateRange cdr = new CalendarDateRange(DateTime.MinValue, DateTime.Now);
             dateStart.BlackoutDates.Add(cdr);
             dateEnd.BlackoutDates.Add(cdr);
-
             populateFields();
         }
 
@@ -188,11 +192,12 @@ namespace com.WanderingTurtle.FormPresentation
                 };
 
                 var numRows = _productManager.EditItemListing(NewListing, CurrentItemListing);
+
                 if (numRows == listResult.Success)
                 {
-                    await DialogBox.ShowMessageDialog(this, "Item successfully changed.");
+                    await this.ShowMessageDialog("Item successfully changed.");
                     DialogResult = true;
-                    this.Close();
+                    Close();
                 }
             }
             catch (Exception ex)

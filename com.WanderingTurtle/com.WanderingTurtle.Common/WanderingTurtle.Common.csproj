@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{825BA7B8-C006-4EF9-B596-700B863A2296}</ProjectGuid>
+    <ProjectGuid>{B27EA16A-C7D9-4664-A33E-50F4C7C1E166}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.WanderingTurtle.BusinessLogic</RootNamespace>
-    <AssemblyName>WanderingTurtle.BusinessLogic</AssemblyName>
+    <RootNamespace>com.WanderingTurtle.Common</RootNamespace>
+    <AssemblyName>WanderingTurtle.Common</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,38 +30,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CityStateManager.cs" />
-    <Compile Include="ConnectionManager.cs" />
-    <Compile Include="DataCache.cs" />
-    <Compile Include="EmployeeManager.cs" />
-    <Compile Include="HotelGuestManager.cs" />
-    <Compile Include="InvoiceManager.cs" />
-    <Compile Include="BookingManager.cs" />
-    <Compile Include="EventManager.cs" />
-    <Compile Include="ProductManager.cs" />
+    <Compile Include="ApplicationStatus.cs" />
+    <Compile Include="BookingNumbers.cs" />
+    <Compile Include="ResultsArchive.cs" />
+    <Compile Include="Booking.cs" />
+    <Compile Include="ResultsEdit.cs" />
+    <Compile Include="EventType.cs" />
+    <Compile Include="Invoice.cs" />
+    <Compile Include="CityState.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="Event.cs" />
+    <Compile Include="HotelGuest.cs" />
+    <Compile Include="ItemListing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SupplierLoginManager.cs" />
-    <Compile Include="SupplierManager.cs" />
-    <Compile Include="Validator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
-      <Project>{b27ea16a-c7d9-4664-a33e-50f4c7c1e166}</Project>
-      <Name>com.WanderingTurtle.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\com.WanderingTurtle.DataAccess\com.WanderingTurtle.DataAccess.csproj">
-      <Project>{49d534c8-8bf7-4624-873c-4809d555bc99}</Project>
-      <Name>com.WanderingTurtle.DataAccess</Name>
-    </ProjectReference>
+    <Compile Include="RoleData.cs" />
+    <Compile Include="Supplier.cs" />
+    <Compile Include="SupplierApplication.cs" />
+    <Compile Include="SupplierLogin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

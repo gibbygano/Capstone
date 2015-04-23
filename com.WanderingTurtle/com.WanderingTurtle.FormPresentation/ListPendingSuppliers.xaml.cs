@@ -21,6 +21,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public ListPendingSuppliers()
         {
             InitializeComponent();
@@ -33,7 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<SupplierApplication>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<SupplierApplication>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.View:
@@ -100,7 +101,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenPendingSupplier(DataGridHelper.RowClick<SupplierApplication>(sender), true);
+            OpenPendingSupplier(sender.RowClick<SupplierApplication>(), true);
         }
     }
 }

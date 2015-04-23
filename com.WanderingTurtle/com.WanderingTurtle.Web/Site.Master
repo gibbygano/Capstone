@@ -30,7 +30,9 @@
         <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker-deets.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery-slider.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/sortable_us.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/scripts.js") %>"></script>
+
         <header class="header">
             <div class="content-wrapper" id="header2">
                 <div class="float-left">

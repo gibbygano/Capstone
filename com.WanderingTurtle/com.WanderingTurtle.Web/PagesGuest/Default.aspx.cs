@@ -13,15 +13,53 @@ namespace com.WanderingTurtle.Web.Pages
 {
     public partial class GuestViewListings : System.Web.UI.Page
     {
-        BookingManager _myManager = new BookingManager();
-        List<ItemListingDetails> _currentItemListings;
-        private string _userMessage = "";
+        private BookingManager myManager = new BookingManager();
+        private string userMessage = "";
+
+        public List<ItemListingDetails> currentItemListings;
+
+        public ItemListingDetails selectedItemListing;
+        public decimal extendedPrice;
+        public decimal totalPrice;
+        public decimal discount;
+        public HotelGuest foundGuest;
+        public int ticketQty;
+        public string guestName;
+        public string eventName;
+        public DateTime date;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session.IsNewSession)
             {
+                foundGuest = null;
+                ticketQty= 0;
+                guestName="";
+                eventName = "";
+                date = DateTime.Now;
+                discount = 0;
+                totalPrice = 0;
+                extendedPrice = 0m;
+                selectedItemListing = null;
 
+                //create new session variables
+                Session["foundGuest"] = foundGuest;
+                Session["ticketQty"] = ticketQty;
+                Session["selectedItemListing"] = selectedItemListing;
+                Session["extendedPrice"] = extendedPrice;
+                Session["totalPrice"] = totalPrice;
+                Session["discount"] =discount;
+
+            }
+            else
+            {
+                //update variables with Session variables
+                foundGuest = (HotelGuest)Session["foundGuest"];
+                ticketQty = (int)Session["ticketQty"];
+                selectedItemListing = (ItemListingDetails)Session["selectedItemListing"];
+                extendedPrice = (decimal)Session["extendedPrice"];
+                totalPrice = (decimal)Session["totalPrice"];
+                discount = (decimal)Session["discount"];
             }
         }
 
@@ -33,7 +71,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// </summary>
         private void bindData()
         {
-            gvListings.DataSource = _currentItemListings;
+            gvListings.DataSource = currentItemListings;
             gvListings.DataBind();
         }
 
@@ -50,8 +88,8 @@ namespace com.WanderingTurtle.Web.Pages
         {
             try
             {
-                _currentItemListings = _myManager.RetrieveActiveItemListings();
-                return _currentItemListings;
+                currentItemListings = myManager.RetrieveActiveItemListings();
+                return currentItemListings;
             }
             catch (Exception)
             {
@@ -63,8 +101,8 @@ namespace com.WanderingTurtle.Web.Pages
 
         private void showMessage(string message)
         {
-            _userMessage = message;
-            lblMessage.Text = _userMessage;
+            userMessage = message;
+            lblMessage.Text = userMessage;
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
@@ -86,8 +124,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// </summary>
         private void gatherFormInformation()
         {
-            decimal extendedPrice, totalPrice, discount;
-            ItemListingDetails selectedItemListing = getSelectedItem();
+            selectedItemListing = getSelectedItem();
 
             //gets quantity from the quantity field
             if (!Validator.ValidateInt(txtGuestTickets.Text, 1))
@@ -95,8 +132,13 @@ namespace com.WanderingTurtle.Web.Pages
                 lblMessage.Text = "You must enter a valid number of tickets.";
                 return;
             }
+            else if (Int32.Parse(txtGuestTickets.Text) > getSelectedItem().QuantityOffered)
+            {
+                lblMessage.Text = "You cannot request more tickets than available";
+                return;
+            }
 
-            if (!Validator.ValidateInt(txtGuestPin.Text, 1))
+            if (!Validator.ValidateAlphaNumeric(txtGuestPin.Text))
             {
                 lblMessage.Text = "You must enter a valid pin.";
                 return;
@@ -106,40 +148,31 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 string inPin = txtGuestPin.Text;
 
-                //see if it is a valid pin = if not there will be an exception
+                //see if pin was found = if not there will be an exception
 
-                HotelGuest foundGuest = _myManager.checkValidPIN(inPin);
+                foundGuest = myManager.checkValidPIN(inPin);
 
-                int qty = Int32.Parse(txtGuestTickets.Text);
-
-                //get discount from form - web form is 0
-                discount = 0;
+                ticketQty = Int32.Parse(txtGuestTickets.Text);
 
                 //calculate values for the tickets
-                extendedPrice = _myManager.calcExtendedPrice(selectedItemListing.Price, qty);
-                totalPrice = _myManager.calcTotalCharge(discount, extendedPrice);
+                extendedPrice = myManager.calcExtendedPrice(selectedItemListing.Price, ticketQty);
+                totalPrice = myManager.calcTotalCharge(discount, extendedPrice);
 
-                int guestID = (int)foundGuest.HotelGuestID;
+                guestName = foundGuest.GetFullName;
+                eventName = selectedItemListing.EventName;
+                date = selectedItemListing.StartDate;
 
-                Booking webBookingToAdd = new Booking(guestID, 100, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+                Session["foundGuest"] = foundGuest;
+                Session["ticketQty"] = ticketQty;
+                Session["selectedItemListing"] = selectedItemListing;
+                Session["extendedPrice"] = extendedPrice;
+                Session["totalPrice"] = totalPrice;
+                Session["discount"] = discount;
 
-                ResultsEdit addResult = _myManager.AddBookingResult(webBookingToAdd);
-
-                switch (addResult)
-                {
-                    case ResultsEdit.Success:
-                        lblMessage.Text = ("Thank You, " + foundGuest.GetFullName + ". You have successfully signed up for " + selectedItemListing.EventName + ".");
-                        clearFields();
-                        gvListings.DataBind();
-                        break;
-
-                    case ResultsEdit.ListingFull:
-                        lblMessage.Text = "full";
-                        break;
-                    case ResultsEdit.DatabaseError:
-                        lblMessage.Text = "db error";
-                        break;
-                }
+                //Need confirmation from guest before can officially submit
+                //hide the submit panel and show the confirmation panel
+                confirmDetails.Style.Add("display", "block");
+                ticketRequest.Style.Add("display", "none");
             }
             catch (SqlException)
             {
@@ -149,7 +182,6 @@ namespace com.WanderingTurtle.Web.Pages
             catch (Exception)
             {
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"There was an error\")</SCRIPT>");
-
             }
         }
 
@@ -163,10 +195,8 @@ namespace com.WanderingTurtle.Web.Pages
         private ItemListingDetails getSelectedItem()
         {
             int itemID = (int)gvListings.SelectedDataKey.Value;
-
-            ItemListingDetails selected = _myManager.RetrieveEventListing(itemID);
-
-            return selected;
+            selectedItemListing = myManager.RetrieveEventListing(itemID);
+            return selectedItemListing;
         }
 
         protected void lvListings_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
@@ -180,5 +210,36 @@ namespace com.WanderingTurtle.Web.Pages
             hfGuestMaxTickets.Value = maxTickets.ToString();
         }
 
+        //Need confirmation from guest before can officially submit
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
+            Booking webBookingToAdd = new Booking((int)foundGuest.HotelGuestID, 100, selectedItemListing.ItemListID, ticketQty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+
+            ResultsEdit addResult = myManager.AddBookingResult(webBookingToAdd);
+
+            switch (addResult)
+            {
+                case ResultsEdit.Success:
+                    lblMessage.Text = ("Thank You, " + foundGuest.GetFullName + ". You have successfully signed up for " + selectedItemListing.EventName + ".");
+                    clearFields();
+                    gvListings.DataBind();
+                    confirmDetails.Style.Add("display", "none");
+                    ticketRequest.Style.Add("display", "block");
+                    break;
+
+                case ResultsEdit.ListingFull:
+                    lblMessage.Text = "full";
+                    break;
+                case ResultsEdit.DatabaseError:
+                    lblMessage.Text = "db error";
+                    break;
+            }
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            clearFields();
+            confirmDetails.Style.Add("display", "none");
+        }
     }
 }

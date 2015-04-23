@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditHotelGuest()
         {
             InitializeComponent();
-            Title = "Add New Hotel Guest";
+            Title = "Add a new Guest";
             TxtRoomNumber.MaxLength = 4;
             TxtGuestPIN.MaxLength = 4;
             InitializeEverything();
@@ -51,10 +51,10 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
 
             CurrentHotelGuest = hotelGuest;
-            Title = String.Format("Editing Hotel Guest: {0}", CurrentHotelGuest.GetFullName);
+            Title = String.Format("Editing Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { BtnCancel }); }
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void InitializeEverything()
         {
-            CboZip.ItemsSource = RetrieveZipCodeList();
+            CboZip.ItemsSource = DataCache._currentCityStateList;
             ResetFields();
         }
 
@@ -167,11 +167,6 @@ namespace com.WanderingTurtle.FormPresentation
             TxtFirstName.Focus();
         }
 
-        private List<CityState> RetrieveZipCodeList()
-        {
-            return new CityStateManager().GetCityStateList();
-        }
-
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/13
@@ -184,7 +179,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>awaitable Task of MessageDialogResult</returns>
         private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
-            return await DialogBox.ShowMessageDialog(this, message, title, style);
+            return await this.ShowMessageDialog(message, title, style);
         }
 
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
@@ -232,8 +227,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 //FormatException found in if loop
                 if (CurrentHotelGuest == null)
-                {  
-
+                {
                     Result = _hotelGuestManager.AddHotelGuest(
                         new HotelGuest(
                             TxtFirstName.Text.Trim(),
@@ -244,7 +238,8 @@ namespace com.WanderingTurtle.FormPresentation
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
                             TxtRoomNumber.Text.Trim(),
-                            TxtGuestPIN.Text.Trim()
+                            TxtGuestPIN.Text.Trim(),
+                            true
                         )
                     );
                 }
@@ -261,7 +256,8 @@ namespace com.WanderingTurtle.FormPresentation
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
                                 TxtRoomNumber.Text.Trim(),
-                                TxtGuestPIN.Text.Trim()
+                                TxtGuestPIN.Text.Trim(),
+                                true
                             )
                         );
                 }
@@ -294,7 +290,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 ShowErrorMessage(ex);
             }
-            
         }
 
         /// <summary>

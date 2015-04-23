@@ -5,8 +5,9 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Style="{DynamicResource WindowStyle}"
-        Title="Edit Booking" Height="350" Width="500" WindowStartupLocation="CenterScreen">
-    <Grid Margin="{DynamicResource Grid Margin}">
+        Title="Edit Booking" Height="350" Width="500"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="{DynamicResource Spacing.Container}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />

@@ -36,7 +36,7 @@
         /// <param name="Room"></param>
         /// <param name="Active"></param>
         /// <param name="GuestPIN"></param>
-        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active = true)
+        public HotelGuest(int HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active)
         {
             SetValues(HotelGuestID, FirstName, LastName, Address1, Address2, CityState, PhoneNumber, EmailAddress, Room, GuestPIN, Active);
         }
@@ -77,7 +77,7 @@
 
         public string FirstName { get; private set; }
 
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+        public string GetFullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
 
         public string GuestPIN { get; private set; }
 
@@ -109,7 +109,7 @@
         /// <param name="Room"></param>
         /// <param name="Active"></param>
         /// <param name="GuestPIN"></param>
-        private void SetValues(int? HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active = true)
+        private void SetValues(int? HotelGuestID, string FirstName, string LastName, string Address1, string Address2, CityState CityState, string PhoneNumber, string EmailAddress, string Room, string GuestPIN, bool Active)
         {
             this.HotelGuestID = HotelGuestID;
             this.FirstName = FirstName;
@@ -119,9 +119,9 @@
             this.CityState = CityState;
             this.PhoneNumber = PhoneNumber;
             this.EmailAddress = EmailAddress;
-            this.Room = Room.ToString();
+            this.Room = Room;
             this.Active = Active;
-            this.GuestPIN = GuestPIN.ToString();
+            this.GuestPIN = GuestPIN;
         }
     }
 }

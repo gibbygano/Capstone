@@ -31,27 +31,40 @@ namespace com.WanderingTurtle.FormPresentation
             //builds the managers required
             InvoiceManager invoiceManager = new InvoiceManager();
             HotelGuestManager guestManager = new HotelGuestManager();
+            HotelGuest foundGuest;
 
             try
             {
+                rvHostArea.LocalReport.DataSources.Clear();
                 ReportDataSource reportDataSource1 = new ReportDataSource();
                 reportDataSource1.Name = "HotelGuestDataset"; //Name of the report dataset in our .RDLC file
                 List<HotelGuest> guestSet = new List<HotelGuest>();
-                guestSet.Add(guestManager.GetHotelGuest(guestID));
+                foundGuest = guestManager.GetHotelGuest(guestID);
+                guestSet.Add(foundGuest);
                 reportDataSource1.Value = guestSet;
                 rvHostArea.LocalReport.DataSources.Add(reportDataSource1);
+
                 ReportDataSource reportDataSource2 = new ReportDataSource();
                 reportDataSource2.Name = "InvoiceDetailsDataset"; //Name of the report dataset in our .RDLC file
                 List<InvoiceDetails> invoiceSet = new List<InvoiceDetails>();
                 invoiceSet.Add(invoiceManager.RetrieveInvoiceByGuest(guestID));
                 reportDataSource2.Value = invoiceSet;
                 rvHostArea.LocalReport.DataSources.Add(reportDataSource2);
+
                 ReportDataSource reportDataSource3 = new ReportDataSource();
                 reportDataSource3.Name = "BookingDetailsSet"; //Name of the report dataset in our .RDLC file
                 reportDataSource3.Value = invoiceManager.RetrieveGuestBookingDetailsList(guestID);
                 rvHostArea.LocalReport.DataSources.Add(reportDataSource3);
-                rvHostArea.LocalReport.ReportEmbeddedResource = "com.WanderingTurtle.FormPresentation.PrintableInvoice.rdlc";
+               
 
+                ReportDataSource reportDataSource4 = new ReportDataSource();
+                reportDataSource4.Name = "ZipCodeDataset"; //Name of the report dataset in our .RDLC file
+                List<CityState> ZipSet = new List<CityState>();
+                ZipSet.Add(foundGuest.CityState);
+                reportDataSource4.Value = ZipSet;
+                rvHostArea.LocalReport.DataSources.Add(reportDataSource4);
+                
+                rvHostArea.LocalReport.ReportEmbeddedResource = "com.WanderingTurtle.FormPresentation.PrintableInvoice.rdlc";
                 rvHostArea.RefreshReport();
                 return true;
             }

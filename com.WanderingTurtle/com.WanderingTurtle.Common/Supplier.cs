@@ -66,7 +66,9 @@
 
         public Supplier ShallowCopy()
         {
-            return (Supplier)this.MemberwiseClone();
+            return (Supplier)MemberwiseClone();
         }
+
+        public string GetFullName { get { return FirstName + " " + LastName; } }
     }
 }

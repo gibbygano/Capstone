@@ -25,7 +25,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
-            { Globals.UserToken = new com.WanderingTurtle.Common.Employee(100, "Debugger", null, 1); }
+            { Globals.UserToken = new Common.Employee(100, "Debugger", null, 1); }
 
             do
             {
@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     AffirmativeButtonText = "Log In",
                     InitialUsername = _user
                 };
-                LoginDialogData result = await DialogBox.ShowLoginDialog(this, "Enter your credentials.", "Authentication", settings);
+                LoginDialogData result = await this.ShowLoginDialog("Enter your credentials.", "Authentication", settings);
                 if (result == null) { break; }
                 try
                 {
@@ -51,7 +51,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     else { _exception = null; }
                 }
                 catch (Exception ex) { _exception = ex; }
-                if (_exception != null) { await DialogBox.ShowMessageDialog(this, _exception.Message, "Login Error"); }
+                if (_exception != null) { await this.ShowMessageDialog(_exception.Message, "Login Error"); }
             } while (_exception != null);
             if (Globals.UserToken != null) { this.GetMainWindow().MainContent.Content = new TabContainer(); }
         }

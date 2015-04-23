@@ -27,9 +27,9 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <WrapPanel Grid.Row="1">
-            <Button Content="View Approved Suppliers" Margin="{DynamicResource Button Spacing}" Click="btnViewApprovedSuppliers_Click" />
-            <Button Content="Update Pending Supplier" Margin="{DynamicResource Button Spacing}" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvPendingSuppliers}" />
+        <WrapPanel Grid.Row="1" Margin="{StaticResource Spacing.Top}">
+            <Button Content="View Approved Suppliers" Margin="{StaticResource Spacing.Right}" Click="btnViewApprovedSuppliers_Click" />
+            <Button Content="Update Pending Supplier" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvPendingSuppliers}" />
         </WrapPanel>
     </Grid>
 </UserControl>

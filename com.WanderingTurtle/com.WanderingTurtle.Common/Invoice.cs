@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.Common
 
         public DateTime DateOpened { get; set; }
 
-        public string GetTotalFormat { get { return String.Format("{0:C}", this.TotalPaid); } }
+        public string GetTotalFormat { get { return String.Format("{0:C}", TotalPaid); } }
 
         public int HotelGuestID { get; set; }
 
@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.Common
         {
         }
 
-        public string GetFullName { get { return string.Format("{0}, {1}", this.GuestLastName, this.GuestFirstName); } }
+        public string GetFullName { get { return string.Format("{0}, {1}", GuestLastName, GuestFirstName); } }
 
         public string GuestFirstName { get; set; }
 

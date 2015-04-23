@@ -77,5 +77,7 @@ namespace com.WanderingTurtle.Common
         public string Remarks { get; set; }
 
         public string Zip { get; set; }
+
+        public string GetFullName { get { return FirstName + " " + LastName; } }
     }
 }

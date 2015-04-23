@@ -27,19 +27,20 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public ListTheEmployees()
         {
             InitializeComponent();
             RefreshEmployeeList();
 
-            lvEmployeesList.SetContextMenu(this);
+            lvEmployeesList.SetContextMenu(this, new[] { DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit });
         }
 
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
-            var selectedItem = DataGridHelper.ContextMenuClick<Employee>(sender, out command);
+            var selectedItem = sender.ContextMenuClick<Employee>(out command);
             switch (command)
             {
                 case DataGridContextMenuResult.Add:
@@ -52,10 +53,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                 case DataGridContextMenuResult.Edit:
                     OpenEmployee(selectedItem);
-                    break;
-
-                case DataGridContextMenuResult.Archive:
-                    OpenEmployee();
                     break;
 
                 default:
@@ -113,7 +110,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OpenEmployee(DataGridHelper.RowClick<Employee>(sender), true);
+            OpenEmployee(sender.RowClick<Employee>(), true);
         }
 
         /// <summary>

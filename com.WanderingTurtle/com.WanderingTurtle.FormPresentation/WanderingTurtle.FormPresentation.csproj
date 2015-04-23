@@ -127,8 +127,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddBooking.xaml.cs">
-      <DependentUpon>AddBooking.xaml</DependentUpon>
+    <Compile Include="AdminFunctions.xaml.cs">
+      <DependentUpon>AdminFunctions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BookingAdd.xaml.cs">
+      <DependentUpon>BookingAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditEmployee.xaml.cs">
       <DependentUpon>AddEditEmployee.xaml</DependentUpon>
@@ -142,11 +145,13 @@
     <Compile Include="AddEditListing.xaml.cs">
       <DependentUpon>AddEditListing.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ArchiveInvoice.xaml.cs">
-      <DependentUpon>ArchiveInvoice.xaml</DependentUpon>
+
+    <Compile Include="CheckOutGuest.xaml.cs">
+      <DependentUpon>CheckOutGuest.xaml</DependentUpon>
+
     </Compile>
-    <Compile Include="CancelBooking.xaml.cs">
-      <DependentUpon>CancelBooking.xaml</DependentUpon>
+    <Compile Include="BookingCancel.xaml.cs">
+      <DependentUpon>BookingCancel.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditEvent.xaml.cs">
       <DependentUpon>AddEditEvent.xaml</DependentUpon>
@@ -164,8 +169,8 @@
     <Compile Include="ReportHost.xaml.cs">
       <DependentUpon>ReportHost.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateBooking.xaml.cs">
-      <DependentUpon>UpdateBooking.xaml</DependentUpon>
+    <Compile Include="Views\Admin\EventType.xaml.cs">
+      <DependentUpon>EventType.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
@@ -173,13 +178,13 @@
     <Compile Include="Views\TabContainer.xaml.cs">
       <DependentUpon>TabContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditBooking.xaml.cs">
-      <DependentUpon>EditBooking.xaml</DependentUpon>
+    <Compile Include="BookingEdit.xaml.cs">
+      <DependentUpon>BookingEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\WindowHelper.cs" />
-    <Compile Include="ViewInvoice.xaml.cs">
-      <DependentUpon>ViewInvoice.xaml</DependentUpon>
+    <Compile Include="InvoiceView.xaml.cs">
+      <DependentUpon>InvoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditSupplier.xaml.cs">
       <DependentUpon>AddEditSupplier.xaml</DependentUpon>
@@ -199,7 +204,11 @@
     <Compile Include="ListTheListings.xaml.cs">
       <DependentUpon>ListTheListings.xaml</DependentUpon>
     </Compile>
-    <Page Include="AddBooking.xaml">
+    <Page Include="AdminFunctions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BookingAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,11 +228,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ArchiveInvoice.xaml">
+    <Page Include="AdminFunctions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CancelBooking.xaml">
+    <Page Include="CheckOutGuest.xaml">
+
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BookingCancel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,7 +261,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UpdateBooking.xaml">
+    <Page Include="Views\Admin\EventType.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -259,11 +273,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditBooking.xaml">
+    <Page Include="BookingEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewInvoice.xaml">
+    <Page Include="InvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -324,6 +338,8 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\com.WanderingTurtle.Common.CityState.datasource" />
+    <None Include="Properties\DataSources\com.WanderingTurtle.Common.HotelGuest.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -332,13 +348,13 @@
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\com.WanderingTurtle.Common\com.WanderingTurtle.Common.csproj">
+    <ProjectReference Include="..\com.WanderingTurtle.Common\WanderingTurtle.Common.csproj">
       <Project>{b27ea16a-c7d9-4664-a33e-50f4c7c1e166}</Project>
-      <Name>com.WanderingTurtle.Common</Name>
+      <Name>WanderingTurtle.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\com.WanderingTurtle\com.WanderingTurtle.BusinessLogic.csproj">
+    <ProjectReference Include="..\com.WanderingTurtle\WanderingTurtle.BusinessLogic.csproj">
       <Project>{825ba7b8-c006-4ef9-b596-700b863a2296}</Project>
-      <Name>com.WanderingTurtle.BusinessLogic</Name>
+      <Name>WanderingTurtle.BusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

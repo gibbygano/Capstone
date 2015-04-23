@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEmployee()
         {
             InitializeComponent();
-            Title = "Add Employee";
+            Title = "Add a new Employee";
             ReloadComboBox();
             ChkActiveEmployee.IsEnabled = false;
         }
@@ -43,12 +43,12 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             CurrentEmployee = employee;
-            Title = "Editing: " + CurrentEmployee.GetFullName;
+            Title = "Editing Employee: " + CurrentEmployee.GetFullName;
             ReloadComboBox();
 
             SetFields();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(this.Content as Panel, new FrameworkElement[] { btnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         public Employee CurrentEmployee { get; private set; }
@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Changed to enum
         /// </remarks>
-        private List<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
+        private static IEnumerable<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
 
         /// <summary>
         /// Miguel Santana
@@ -162,11 +162,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created: 2015/02/20
         ///
         /// Validates and Updates Employee user
-        ///
-        /// Updated 2015/04/13 by Tony Noel
-        ///Updated to comply with the ResultsEdit class of error codes.
         /// </summary>
         /// <remarks>
+        /// 2015/04/13 Tony Noel
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         private async void EmployeeUpdate()
         {
@@ -251,7 +250,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>awaitable Task of MEssageDialogResult</returns>
         private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
-            return await DialogBox.ShowMessageDialog(this, message, title, style);
+            return await this.ShowMessageDialog(message, title, style);
         }
 
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)

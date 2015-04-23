@@ -34,12 +34,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"  Margin="{DynamicResource Button Spacing Inline}" x:Name="btnPendingSuppliers" Content="View Pending Suppliers" Click="btnPendingSuppliers_Click" />
-            <Button Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddSupplier"      Content="Add Supplier"      Click="btnAddSupplier_Click" />
-            <Button Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnUpdate"           Content="Update Supplier"   Click="btnUpdate_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
-            <Button Grid.Column="3" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnDelete"           Content="Delete Supplier"   Click="btnDelete_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
-            <TextBox Grid.Column="4"  Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchSupplier" TextWrapping="Wrap"  TextChanged="txtSearchSupplier_TextChanged" />
-            <Button Grid.Column="5" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnSearchSupplier" Content="Refresh List" Click="btnSearchSupplier_Click" />
+            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="btnPendingSuppliers" Content="View Pending Suppliers" Click="btnPendingSuppliers_Click" />
+            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="btnAddSupplier"      Content="Add Supplier"      Click="btnAddSupplier_Click" />
+            <Button  Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="btnUpdate"           Content="Update Supplier"   Click="btnUpdate_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
+            <Button  Grid.Column="3" Margin="{StaticResource Spacing.Right}" x:Name="btnDelete"           Content="Delete Supplier"   Click="btnDelete_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvSuppliersList}" />
+            <TextBox Grid.Column="4" Margin="{StaticResource Spacing.Right}" x:Name="txtSearchSupplier" TextWrapping="Wrap"  TextChanged="txtSearchSupplier_TextChanged" Style="{DynamicResource SearchTextBox.Inline}" />
+            <Button  Grid.Column="5" x:Name="btnSearchSupplier" Content="Refresh List" Click="btnSearchSupplier_Click" />
         </Grid>
     </Grid>
 </UserControl>

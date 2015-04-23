@@ -23,7 +23,7 @@ namespace com.WanderingTurtle.FormPresentation
                 var exception = e.Exception as InputValidationException;
                 if (exception.Title == null) { exception.Title = "Validation Error"; }
                 if (exception.CurrentControl != null && exception.CurrentControl.IsLoaded)
-                { await DialogBox.ShowMessageDialog(exception.CurrentControl, exception.Message, exception.Title); }
+                { await exception.CurrentControl.ShowMessageDialog(exception.Message, exception.Title); }
                 else
                 { MessageBox.Show(exception.Message, exception.Title); }
                 Debug.Assert(exception.CurrentControl != null, "exception.CurrentControl != null");
@@ -49,7 +49,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (exception.Title == null) { exception.Title = "An Error Occurred"; }
 
                 if (exception.CurrentControl != null && exception.CurrentControl.IsLoaded)
-                { await DialogBox.ShowMessageDialog(exception.CurrentControl, exceptionMessage.ToString(), exception.Title); }
+                { await exception.CurrentControl.ShowMessageDialog(exceptionMessage.ToString(), exception.Title); }
                 else
                 { MessageBox.Show(exceptionMessage.ToString(), exception.Title); }
             }

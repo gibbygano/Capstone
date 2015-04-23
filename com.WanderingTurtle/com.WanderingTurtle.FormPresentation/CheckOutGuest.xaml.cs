@@ -13,9 +13,9 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ArchiveInvoice
     {
+        private Invoice _CurrentInvoice { get; set; }
+
         private List<BookingDetails> myBookingList;
-        private Invoice invoiceToArchive;
-        private Invoice originalInvoice;
         private HotelGuest guestToView;
         private InvoiceManager _invoiceManager = new InvoiceManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
@@ -33,12 +33,12 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 InitializeComponent();
-                originalInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
-                invoiceToArchive = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+                _CurrentInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+                Title = "Archiving Invoice";
 
-                guestToView = _hotelGuestManager.GetHotelGuest(invoiceToArchive.HotelGuestID);
-                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(invoiceToArchive.HotelGuestID);
-                FillFormFields(selectedHotelGuestID);
+                guestToView = _hotelGuestManager.GetHotelGuest(_CurrentInvoice.HotelGuestID);
+                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(_CurrentInvoice.HotelGuestID);
+                FillFormFields();
             }
             catch (Exception ex)
             {
@@ -51,18 +51,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// Populates form fields
         /// </summary>
         /// <param name="selectedHotelGuestID"></param>
-        private void FillFormFields(int selectedHotelGuestID)
+        private void FillFormFields()
         {
-            invoiceToArchive.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
+            _CurrentInvoice.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
             lblGuestNameLookup.Content = guestToView.GetFullName;
-            lblCheckInDate.Content = invoiceToArchive.DateOpened.ToString(CultureInfo.InvariantCulture);
-            lblInvoice.Content = invoiceToArchive.InvoiceID.ToString();
+            lblCheckInDate.Content = _CurrentInvoice.DateOpened.ToString(CultureInfo.InvariantCulture);
+            lblInvoice.Content = _CurrentInvoice.InvoiceID.ToString();
             lblAddress.Content = guestToView.Address1;
             lblCityState.Content = guestToView.CityState.GetZipStateCity;
             lblPhoneNum.Content = guestToView.PhoneNumber;
             lblRoomNum.Content = guestToView.Room;
-            lblInvoice.Content = invoiceToArchive.InvoiceID;
-            lblTotalPrice.Content = invoiceToArchive.GetTotalFormat;
+            lblInvoice.Content = _CurrentInvoice.InvoiceID;
+            lblTotalPrice.Content = _CurrentInvoice.GetTotalFormat;
             lblPhoneNum.Content = guestToView.PhoneNumber;
         }
 
@@ -81,7 +81,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                ResultsArchive result = _invoiceManager.ArchiveCurrentGuestInvoice(invoiceToArchive);
+                ResultsArchive result = _invoiceManager.ArchiveCurrentGuestInvoice(_CurrentInvoice);
 
                 switch (result)
                 {
@@ -89,9 +89,14 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
-                        await DialogBox.ShowMessageDialog(this, "Guest checkout complete.");
+                        
+                        PrintableInvoice newReportWindow = new PrintableInvoice((int)guestToView.HotelGuestID);
+                        newReportWindow.ShowDialog();                      
+                        
+                        await this.ShowMessageDialog("Guest checkout complete.");
+                        
                         DialogResult = true;
-                        this.Close();
+                        Close();
                         break;
                 }
             }
@@ -109,7 +114,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void btnPrint_Click(object sender, RoutedEventArgs e)
@@ -120,7 +125,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 //RefreshEmployeeList();
             }
-
         }
     }
 }

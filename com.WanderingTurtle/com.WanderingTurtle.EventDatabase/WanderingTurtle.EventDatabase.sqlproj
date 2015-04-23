@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>com.WanderingTurtle.EventDatabase</Name>
+    <Name>WanderingTurtle.EventDatabase</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{4d1ffef7-1b8a-44a6-9e03-7104e2c354b6}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -47,6 +47,7 @@
     <DefineTrace>true</DefineTrace>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <SqlTargetName>com.WanderingTurtle</SqlTargetName>
   </PropertyGroup>
   <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
   <PropertyGroup>
@@ -94,7 +95,6 @@
     <Build Include="dbo\Stored Procedures\spHotelGuestAdd.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestGet.sql" />
     <Build Include="dbo\Tables\ItemListing.sql" />
-    <Build Include="dbo\Tables\Lists.sql" />
     <Build Include="dbo\Tables\EventType.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllEventItems.sql" />
     <Build Include="dbo\Stored Procedures\spSelectEventItem.sql" />
@@ -103,19 +103,10 @@
     <Build Include="dbo\Stored Procedures\spSelectItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllItemListings.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteItemListing.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateLists.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectAllLists.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectLists.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateEventType.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllEventTypes.sql" />
     <Build Include="dbo\Stored Procedures\spSelectEventType.sql" />
     <Build Include="dbo\Stored Procedures\spInsertItemListing.sql" />
-    <Build Include="dbo\Tables\SupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectAllSupplierFeedbackRecords.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectSupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spInsertSupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateSupplierFeedbackRecord.sql" />
-    <Build Include="dbo\Stored Procedures\spDeleteSupplierFeedbackRecord.sql" />
     <Build Include="dbo\Stored Procedures\spHotelGuestArchive.sql" />
     <Build Include="dbo\Tables\Invoice.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllInvoices.sql" />

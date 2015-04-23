@@ -57,7 +57,7 @@
         /// Miguel Santana
         /// Created: 2015/02/26
         /// </summary>
-        public string GetFullName { get { return string.Format("{0} {1}", this.FirstName, this.LastName); } }
+        public string GetFullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
 
         public string LastName { get; private set; }
 

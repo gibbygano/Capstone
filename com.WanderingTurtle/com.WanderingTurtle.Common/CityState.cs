@@ -11,14 +11,14 @@ namespace com.WanderingTurtle.Common
     {
         public CityState(string zip, string city, string state)
         {
-            this.Zip = zip;
-            this.City = city;
-            this.State = state;
+            Zip = zip;
+            City = city;
+            State = state;
         }
 
         public string City { get; set; }
 
-        public string GetZipStateCity { get { return String.Format("{1}{0}{2}{0}{3}", " - ", this.Zip, this.State, this.City); } }
+        public string GetZipStateCity { get { return String.Format("{1}{0}{2}{0}{3}", " - ", Zip, State, City); } }
 
         public string State { get; set; }
 

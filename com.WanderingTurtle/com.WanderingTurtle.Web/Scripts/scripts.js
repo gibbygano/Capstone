@@ -1,6 +1,8 @@
 ﻿console.log("Javascript is working.");
 $(document).ready(function () {
     console.log("JQuery loaded");
+
+
     $("#errorMess").dialog({
         modal: true,
         buttons: {

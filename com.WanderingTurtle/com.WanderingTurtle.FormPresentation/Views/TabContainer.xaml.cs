@@ -1,4 +1,5 @@
-﻿using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using System.Windows.Controls;
 
@@ -15,7 +16,8 @@ namespace com.WanderingTurtle.FormPresentation.Views
             InitializeComponent();
             if (Globals.UserToken != null)
             {
-                this.CurrentUserLabel.Content = Globals.UserToken.GetFullName;
+                CurrentUserLabel.Content = Globals.UserToken.GetFullName;
+
                 switch (Globals.UserToken.Level)
                 {
                     case RoleData.Admin:
@@ -24,6 +26,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                         AddTab(TabName.Employees, new ListTheEmployees());
                         AddTab(TabName.Events, new ListEvents());
                         AddTab(TabName.Listings, new ListTheListings());
+                        AddTab(TabName.AdminFunctions, new AdminFunctions());
                         break;
 
                     case RoleData.Concierge:
@@ -39,6 +42,9 @@ namespace com.WanderingTurtle.FormPresentation.Views
                         AddTab(TabName.Listings, new ListTheListings());
                         break;
                 }
+
+                //Filling ZipCode Cache
+                new CityStateManager().PopulateCityStateCache();
             }
             else { throw new WanderingTurtleException(this, "Could not find logged in user", "Login Error"); }
         }
@@ -63,6 +69,8 @@ namespace com.WanderingTurtle.FormPresentation.Views
             internal static string Employees { get { return "Employees"; } }
 
             internal static string HotelGuests { get { return "Hotel Guests"; } }
+
+            internal static string AdminFunctions { get { return "Admin Functions"; } }
         }
     }
 }
