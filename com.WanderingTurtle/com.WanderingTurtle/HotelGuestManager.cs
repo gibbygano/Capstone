@@ -83,40 +83,6 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/02/12
-        ///
-        /// Gets a list of all Hotel Guests
-        /// </summary>
-        /// <remarks>
-        /// Miguel Santana
-        /// Updated: 2015/02/18
-        /// Rose Steffensmeier
-        /// Updated: 2015/03/12
-        ///
-        /// Updated try/catch blocks
-        /// </remarks>
-        /// <returns>List of HotelGuest Objects</returns>
-        public List<HotelGuest> GetHotelGuestList()
-        {
-            try
-            {
-                return HotelGuestAccessor.HotelGuestGet();
-            }
-            catch (ApplicationException)
-            {
-                throw;
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
         /// <summary>
         /// Miguel Santana

@@ -29,7 +29,11 @@ namespace com.WanderingTurtle.Tests
         public void BookingTestSetup()
         {   //Sets up the booking record and calls for the record to be added
             TestBookingConstructor();
-            TestAddBookingAccess();
+            AddBooking();
+        }
+        public void AddBooking()
+        {
+            int result = BookingAccessor.addBooking(booking);
         }
 
         [TestMethod]
@@ -95,7 +99,21 @@ namespace com.WanderingTurtle.Tests
             Booking toCheck = BookingAccessor.getBooking(BookingID);
             Assert.AreEqual(expected, toCheck.Quantity);
         }
-
+        [TestMethod]
+        public void TestVerifyGuestPINBookingAccessor()
+        {   //Checks using a pin in the database, stores guest info from database into a guest object
+            //Asserts that a record is found, that guest is not null
+            HotelGuest guest = BookingAccessor.verifyGuestPin("7754");
+            Assert.IsNotNull(guest);
+        }
+        [TestMethod]
+        public void TestGetBookingNumbersAccessor()
+        {
+            //Checks using the dummy itemListing, returns a BookingNumbers object(nums)  
+            //Asserts that a record is found, that nums is not null
+            List<BookingNumbers> nums = BookingAccessor.GetBookingNumbers(100);
+            Assert.IsNotNull(nums);
+        }
         [TestCleanup]
         public void CleanupTest()
         {

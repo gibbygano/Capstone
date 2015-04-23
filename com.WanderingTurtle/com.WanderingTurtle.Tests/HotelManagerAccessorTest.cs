@@ -9,13 +9,17 @@ using System.Text;
 
 namespace com.WanderingTurtle.Tests
 {
+    /// <summary>
+    /// Updated: Tony Noel, 2015/04/22- Updated three methods that were failing- HotelAccessorGet, Update, and Archive
+    /// All Tests passing as of the date above.
+    /// </summary>
     [TestClass]
     public class HotelManagerAccessorTest
     {
         [TestInitialize]
         public void initialize()
         {
-            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "6663", true));
+            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "6663", true));
         }
 
         [TestMethod]
@@ -29,13 +33,17 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void HotelAccessorAddFail()
         {
-            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "5678", true));
+            HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "5678", true));
         }
 
         [TestMethod]
         public void HotelAccessorGet()
         {
-            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
+            //calls generic Test accessor to grab the guestID
+            int guestID = TestCleanupAccessor.GetHotelGuest();
+            //Calls to the accessor method
+            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet(guestID);
+            //Asserts that the firstname of the in the list corresponds to the dummy record first name
             Assert.AreEqual("Fake", guest[guest.Count - 1].FirstName);
         }
 
@@ -49,7 +57,10 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void HotelAccessorUpdate()
         {
-            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
+            //gets the guestID from the Test accessor
+            int guestID = TestCleanupAccessor.GetHotelGuest();
+            //passes guestID to the HotelGuestAccessor method to grab the guest.
+            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet(guestID);
             int hotelGuest = guest.Count - 1;
             guest.Add(new HotelGuest((int)guest[hotelGuest].HotelGuestID, guest[hotelGuest].FirstName, guest[hotelGuest].LastName, guest[hotelGuest].Address1, guest[hotelGuest].Address2, guest[hotelGuest].CityState, guest[hotelGuest].PhoneNumber, guest[hotelGuest].EmailAddress, guest[hotelGuest].Room, guest[hotelGuest].GuestPIN, false));
             int changed = HotelGuestAccessor.HotelGuestUpdate(guest[guest.Count - 2], guest[hotelGuest]);
@@ -59,8 +70,13 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void HotelAccessorArchive()
         {
-            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
+            //gets the guestID from the Test accessor
+            int guestID = TestCleanupAccessor.GetHotelGuest();
+            //passes guestID to the HotelGuestAccessor method to grab the guest.
+            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet(guestID);
+            //Calls to archive guest through the accessor
             int changed = HotelGuestAccessor.HotelGuestArchive(guest[guest.Count - 1], false);
+            //asserts that a record was affected
             Assert.AreEqual(1, changed);
         }
 

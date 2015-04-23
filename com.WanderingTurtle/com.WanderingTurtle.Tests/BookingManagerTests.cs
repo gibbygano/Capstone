@@ -41,13 +41,12 @@ namespace com.WanderingTurtle.Tests
         public void BookingTestSetup()
         {//Sets up the booking record and calls for the record to be added
             TestBookingConstructor();
+            AddBookingResult();
             
         }
         public void AddBookingResult()
         {
             ResultsEdit result = myBook.AddBookingResult(booking);
-            ResultsEdit expected = ResultsEdit.Success;
-            Assert.AreEqual(expected, result);
         }
         [TestMethod]
         public void TestAddBookingResult()
@@ -237,7 +236,22 @@ namespace com.WanderingTurtle.Tests
             ResultsEdit expected = ResultsEdit.ListingFull;
             Assert.AreEqual(expected, result);
         }
-
+        [TestMethod]
+        public void TestBookingGuestPIN()
+        {
+            //Checks using a pin in the database, stores guest info from database into a guest object
+            //Asserts that a record is found, that guest is not null
+            HotelGuest guest = myBook.checkValidPIN("7754");
+            Assert.IsNotNull(guest);
+        }
+        [TestMethod]
+        public void TestBookingNumbers()
+        {
+            //Checks using the dummy itemListing, returns a BookingNumbers object(nums)  
+            //Asserts that a record is found, that nums is not null
+            List<BookingNumbers> nums = myBook.RetrieveBookingNumbers(100);
+            Assert.IsNotNull(nums);
+        }
         [TestCleanup]
         public void CleanupTest()
         {

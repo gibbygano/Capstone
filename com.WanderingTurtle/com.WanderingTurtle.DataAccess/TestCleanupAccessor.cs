@@ -116,6 +116,42 @@ namespace com.WanderingTurtle.DataAccess
             return result;
         }
 
+        public static int GetHotelGuest()
+        {
+            int result;
+
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "Select HotelGuestID FROM HotelGuest WHERE FirstName= 'Fake' AND LastName = 'Person' AND Address1 = '1111 Fake St.' AND EmailAddress='fake@gmail.com' ";
+            SqlCommand cmd = new SqlCommand(query, conn);
+
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    result = reader.GetInt32(0);
+                }
+                else
+                {
+                    var ex = new ApplicationException("Requested object did not match any records.");
+                    throw ex;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
         public static int resetItemListing100()
         {
             int rowsAffected;

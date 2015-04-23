@@ -3,11 +3,15 @@ using com.WanderingTurtle.Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.Tests
 {
     /// <summary>
-    /// Created by Rose Steffensmeier 2015/04/09
+    /// Created by Rose Steffensmeier 2015/04/09, 
+    /// Updated by Tony Noel- 2015/04/20, 2015/04/22 - All tests passing as of 04/22
+    /// Updates: Fixed methods that were not working, updated tests to match the manager methods in the HotelGuestManager, and commented each test method
     /// Tests for different things in the HotelGuestManager
     /// </summary>
     [TestClass]
@@ -15,41 +19,37 @@ namespace com.WanderingTurtle.Tests
     {
         private HotelManagerAccessorTest setup = new HotelManagerAccessorTest();
         private HotelGuestManager access = new HotelGuestManager();
-
-        /*
+        HotelGuest TestGuest;
+        
         [TestInitialize]
         public void initialize()
         {
-            setup.initialize();
+            //Contructs the HotelGuest object to be used for all tests.
+            TestGuest = new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "234234", "3453", true);
         }
 
         [TestMethod]
         public void HotelManagerAdd()
         {
-            bool changed = access.AddHotelGuest(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 234234, 3453, true));
-            Assert.IsTrue(changed);
+            //Assigns a Results Edit object after attempting to add the TestGuest into the database
+            ResultsEdit changed = access.AddHotelGuest(TestGuest);
+            //Asserts that the add will be successful.
+            Assert.AreEqual(ResultsEdit.Success, changed);
         }
 
         [TestMethod]
         [ExpectedException(typeof(SqlException))]
         public void HotelManagerAddFail()
         {
-            access.AddHotelGuest(new HotelGuest("Fake", "Guest", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", 000, 2342, true));
-        }
-        */
-
-        [TestMethod]
-        public void HotelManagerGetList()
-        {
-            List<HotelGuest> list = access.GetHotelGuestList();
-            Assert.AreEqual(0, (int)list[0].HotelGuestID);
+            access.AddHotelGuest(TestGuest);
+            access.AddHotelGuest(TestGuest);
         }
 
         [TestMethod]
         public void HotelManagerGet()
         {
-            HotelGuest guest = access.GetHotelGuest(0);
-            Assert.AreEqual(0, guest.HotelGuestID);
+            HotelGuest guest = access.GetHotelGuest(100);
+            Assert.AreEqual(100, guest.HotelGuestID);
         }
 
         [TestMethod]
@@ -59,23 +59,34 @@ namespace com.WanderingTurtle.Tests
             HotelGuest guest = access.GetHotelGuest(-1);
         }
 
-        /*
         [TestMethod]
         public void HotelManagerUpdate()
         {
-            List<HotelGuest> guest = access.GetHotelGuestList();
-            guest.Add(new HotelGuest((int)guest[guest.Count - 1].HotelGuestID, guest[guest.Count - 1].FirstName, guest[guest.Count - 1].LastName, guest[guest.Count - 1].Address1, guest[guest.Count - 1].Address2, guest[guest.Count - 1].CityState, guest[guest.Count - 1].PhoneNumber, guest[guest.Count - 1].EmailAddress, guest[guest.Count - 1].Room, guest[guest.Count - 1].GuestPIN, false));
-            bool changed = access.UpdateHotelGuest(guest[guest.Count - 2], guest[guest.Count - 1]);
-            Assert.IsTrue(changed);
+            ResultsEdit changed = access.AddHotelGuest(TestGuest);
+            //locates the fake record ID
+            int guestID = TestCleanupAccessor.GetHotelGuest();
+            //pulls from real manager
+            HotelGuest guest = access.GetHotelGuest(guestID);
+            //assigns a new value in guest2
+            HotelGuest guest2 = new HotelGuest(guest.FirstName, "Individual", guest.Address1, guest.Address2, guest.CityState, guest.PhoneNumber, guest.EmailAddress, guest.Room, guest.GuestPIN, guest.Active);
+            //calls to manager to complete update
+            ResultsEdit edited = access.UpdateHotelGuest(guest, guest2);
+            Assert.AreEqual(ResultsEdit.Success, edited);
         }
-        */
+
 
         [TestMethod]
         public void HotelManagerArchive()
         {
-            List<HotelGuest> guest = access.GetHotelGuestList();
-            bool changed = access.ArchiveHotelGuest(guest[guest.Count - 1], false);
-            Assert.IsTrue(changed);
+            ResultsEdit changed = access.AddHotelGuest(TestGuest);
+            //locates the fake record ID
+            int guestID = TestCleanupAccessor.GetHotelGuest();
+            //pulls from real manager
+            HotelGuest guest = access.GetHotelGuest(guestID);
+            //archives the guest using the manager method
+            bool archived = access.ArchiveHotelGuest(guest, false);
+            //asserts that the test will pass
+            Assert.IsTrue(archived);
         }
 
         [TestCleanup]
