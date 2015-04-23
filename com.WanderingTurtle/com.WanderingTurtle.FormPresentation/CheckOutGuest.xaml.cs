@@ -89,7 +89,12 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
+                        
+                        PrintableInvoice newReportWindow = new PrintableInvoice((int)guestToView.HotelGuestID);
+                        newReportWindow.ShowDialog();                      
+                        
                         await this.ShowMessageDialog("Guest checkout complete.");
+                        
                         DialogResult = true;
                         Close();
                         break;

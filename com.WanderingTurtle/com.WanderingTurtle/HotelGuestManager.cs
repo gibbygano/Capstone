@@ -90,7 +90,7 @@ namespace com.WanderingTurtle.BusinessLogic
             string input = "abcdefghijklmnopqrstuvwxyz0123456789";
             StringBuilder builder = new StringBuilder();
             char ch;
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < 5; i++)
             {
                 ch = input[rg.Next(0, input.Length)];
                 builder.Append(ch);

@@ -11,7 +11,7 @@
 	@original_emailAddress varchar(100),
 	@original_room char(4),
 	@original_active bit,
-	@original_guestpin char(4))
+	@original_guestpin char(5))
 AS
 BEGIN
 	UPDATE HotelGuest

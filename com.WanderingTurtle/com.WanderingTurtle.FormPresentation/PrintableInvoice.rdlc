@@ -1040,7 +1040,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=First(Fields!CityState.Value, "HotelGuestDataset")</Value>
+                <Value>=First(Fields!GetZipStateCity.Value, "ZipCodeDataset")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -1595,10 +1595,10 @@
   </Body>
   <Width>6.3472in</Width>
   <Page>
-    <LeftMargin>1in</LeftMargin>
-    <RightMargin>1in</RightMargin>
-    <TopMargin>1in</TopMargin>
-    <BottomMargin>1in</BottomMargin>
+    <LeftMargin>0.5in</LeftMargin>
+    <RightMargin>0.25in</RightMargin>
+    <TopMargin>0.75in</TopMargin>
+    <BottomMargin>0.75in</BottomMargin>
     <Style />
   </Page>
   <AutoRefresh>0</AutoRefresh>
@@ -1623,6 +1623,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>4c29c826-1195-4f8b-884e-d64ea1647386</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="comWanderingTurtleCommon3">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>277a5640-8b55-4dff-966e-a90662cacdaf</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1811,6 +1818,35 @@
         <rd:DataSetName>com.WanderingTurtle.Common</rd:DataSetName>
         <rd:TableName>HotelGuest</rd:TableName>
         <rd:ObjectDataSourceType>com.WanderingTurtle.Common.HotelGuest, WanderingTurtle.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+    <DataSet Name="ZipCodeDataset">
+      <Query>
+        <DataSourceName>comWanderingTurtleCommon3</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="City">
+          <DataField>City</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GetZipStateCity">
+          <DataField>GetZipStateCity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="State">
+          <DataField>State</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Zip">
+          <DataField>Zip</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>com.WanderingTurtle.Common</rd:DataSetName>
+        <rd:TableName>CityState</rd:TableName>
+        <rd:ObjectDataSourceType>com.WanderingTurtle.Common.CityState, WanderingTurtle.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

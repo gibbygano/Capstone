@@ -238,7 +238,8 @@ namespace com.WanderingTurtle.FormPresentation
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
                             TxtRoomNumber.Text.Trim(),
-                            TxtGuestPIN.Text.Trim()
+                            TxtGuestPIN.Text.Trim(),
+                            true
                         )
                     );
                 }
@@ -255,7 +256,8 @@ namespace com.WanderingTurtle.FormPresentation
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
                                 TxtRoomNumber.Text.Trim(),
-                                TxtGuestPIN.Text.Trim()
+                                TxtGuestPIN.Text.Trim(),
+                                true
                             )
                         );
                 }

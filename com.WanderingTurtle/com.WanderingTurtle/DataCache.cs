@@ -46,6 +46,5 @@ namespace com.WanderingTurtle.BusinessLogic
 
         public static List<CityState> _currentCityStateList { get; set; }
 
-        public static DateTime _currentCityStateListTime { get; set; }
     }
 }
