@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         {
             InitializeComponent();
             var list = DataCache._currentEventTypeList;
-            listbEventTypes.DataContext = list;
+            listEventTypes.DataContext = list;
         }
     }
 }

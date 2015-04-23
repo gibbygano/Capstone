@@ -16,12 +16,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheEmployees : IDataGridContextMenu
     {
         private EmployeeManager _employeeManager = new EmployeeManager();
-        private GridViewColumnHeader _sortColumn;
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private List<Employee> employeeList;
+        private List<Employee> _employeeList;
 
         /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
@@ -127,8 +122,8 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                employeeList = _employeeManager.FetchListEmployees();
-                lvEmployeesList.ItemsSource = employeeList;
+                _employeeList = _employeeManager.FetchListEmployees();
+                lvEmployeesList.ItemsSource = _employeeList;
                 lvEmployeesList.Items.Refresh();
             }
             catch (Exception ex)
