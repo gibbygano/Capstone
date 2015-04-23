@@ -34,7 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Title = "Add a new Guest";
             TxtRoomNumber.MaxLength = 4;
-            TxtGuestPIN.MaxLength = 4;
+            TxtGuestPIN.MaxLength = 5;
             InitializeEverything();
         }
 

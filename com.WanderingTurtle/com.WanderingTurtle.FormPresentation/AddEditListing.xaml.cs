@@ -31,7 +31,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
         public AddEditListing(ItemListing currentItemListing, bool ReadOnly = false)
         {
-            
             Setup();
             Title = "Editing Listing: " + CurrentItemListing.EventName;
 
@@ -64,6 +63,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new WanderingTurtleException(this, "End Date must be after Start Date");
                 }
+
                 _NewListing.EventID = ((Event)eventCbox.SelectedItem).EventItemID;
                 _NewListing.SupplierID = ((Supplier)supplierCbox.SelectedItem).SupplierID;
                 _NewListing.Price = (decimal)(udPrice.Value);

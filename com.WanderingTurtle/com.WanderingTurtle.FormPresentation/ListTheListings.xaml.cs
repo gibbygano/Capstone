@@ -16,11 +16,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheListings : IDataGridContextMenu
     {
-        private GridViewColumnHeader _sortColumn;
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
         private List<ItemListing> myListingList;
         private ProductManager prodMan = new ProductManager();
 
