@@ -4,8 +4,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
-        Title="Cancel Booking" Height="300" Width="500" WindowStartupLocation="CenterScreen">
-    <Grid Margin="{DynamicResource Grid Margin}">
+        Title="Cancel Booking" Height="300" Width="500"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="{DynamicResource Spacing.Container}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="160" />

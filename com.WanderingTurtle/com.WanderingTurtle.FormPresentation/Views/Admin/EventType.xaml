@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Submit" />
-            <Separator Grid.Column="1" Margin="{StaticResource 'Button Spacing Inline'}" />
+            <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Button Grid.Column="2" Content="Reset" />
         </Grid>
     </Grid>

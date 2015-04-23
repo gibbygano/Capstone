@@ -3,49 +3,63 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
         Style="{DynamicResource WindowStyle}"
         Title="Employee Updates" Height="300" Width="300"
-        WindowStartupLocation="CenterScreen">
-    <Grid Margin="{DynamicResource Grid Margin}">
+        WindowStartupLocation="CenterOwner">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="First Name:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <Label Grid.Row="1" Content="Last Name:"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <Label Grid.Row="2" Content="Password:"   VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <Label Grid.Row="3" Content="Confirm&#xD;&#xA;:Password"   VerticalContentAlignment="Center" FlowDirection="RightToLeft" />
-            <Label Grid.Row="4" Content="User Level:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <TextBox     Grid.Row="0" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="TxtFirstName"      VerticalContentAlignment="Center" VerticalAlignment="Center" />
-            <TextBox     Grid.Row="1" Grid.Column="1" TabIndex="1" Grid.ColumnSpan="2" x:Name="TxtLastName"       VerticalContentAlignment="Center" VerticalAlignment="Center" />
-            <PasswordBox Grid.Row="2" Grid.Column="1" TabIndex="2" Grid.ColumnSpan="1" x:Name="TxtPassword"       VerticalContentAlignment="Center" VerticalAlignment="Center"  Tag="Testing" />
-            <PasswordBox Grid.Row="3" Grid.Column="1" TabIndex="3" Grid.ColumnSpan="1" x:Name="TxtPassword2"      VerticalContentAlignment="Center" VerticalAlignment="Center" />
-            <CheckBox    Grid.Row="2" Grid.Column="2" TabIndex="4" Grid.ColumnSpan="1" x:Name="ChkActiveEmployee" VerticalAlignment="Center" IsChecked="True" Content="Active" Margin="5,0,0,0" />
-            <ComboBox    Grid.Row="4" Grid.Column="1" TabIndex="5" Grid.ColumnSpan="1" x:Name="CboUserLevel"      VerticalContentAlignment="Center" ItemsSource="{Binding Path=GetUserLevelList}" />
-        </Grid>
+        <ScrollViewer Grid.Row="0">
+            <Grid Margin="{DynamicResource Spacing.Container}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="First Name:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="2" Grid.Column="0" Content="Last Name:"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="4" Grid.Column="0" Content="Password:"   VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="6" Grid.Column="0" Content="Password:"   VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+                <Label Grid.Row="8" Grid.Column="0" Content="User Level:" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
+                <TextBox     Grid.Row="0" Grid.Column="1" TabIndex="0" Grid.ColumnSpan="2" x:Name="TxtFirstName"      VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                <TextBox     Grid.Row="2" Grid.Column="1" TabIndex="1" Grid.ColumnSpan="2" x:Name="TxtLastName"       VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                <PasswordBox Grid.Row="4" Grid.Column="1" TabIndex="2" x:Name="TxtPassword"       VerticalContentAlignment="Center" VerticalAlignment="Center"  Tag="Testing" />
+                <PasswordBox Grid.Row="6" Grid.Column="1" TabIndex="3" x:Name="TxtPassword2"      VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                <CheckBox    Grid.Row="6" Grid.Column="2" TabIndex="4" x:Name="ChkActiveEmployee" VerticalAlignment="Center" IsChecked="True" Content="Active" Margin="5,0,0,0" />
+                <ComboBox    Grid.Row="8" Grid.Column="1" TabIndex="5" x:Name="CboUserLevel"      VerticalContentAlignment="Center" ItemsSource="{Binding Path=GetUserLevelList}" />
+            </Grid>
+        </ScrollViewer>
 
-        <Grid Grid.Row="1" Margin="{DynamicResource Button Spacing Top}">
+        <Grid Grid.Row="1" Margin="{DynamicResource Spacing.Container}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="6" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
-            <Button Grid.Column="1" TabIndex="7" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click"  Margin="2.5,0" />
-            <Button Grid.Column="2" TabIndex="8" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
+            <Button Grid.Column="0" TabIndex="6" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="7" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="8" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" />
+            <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
+            <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>

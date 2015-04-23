@@ -7,60 +7,67 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         Style="{DynamicResource WindowStyle}"
         Title="Add Supplier" Height="300" Width="600"
-		WindowStartupLocation="CenterScreen">
-    <Grid Margin="{DynamicResource Grid Margin}">
+		WindowStartupLocation="CenterOwner">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <ScrollViewer Grid.Row="0">
+            <Grid Margin="{StaticResource Spacing.Container}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Content="First Name"      Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="Last Name"       Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="Address 1"       Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="Address 2"       Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="City, State Zip" Grid.Row="8" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <TextBox  x:Name="txtFirstName" Grid.Row="0" Grid.Column="1" TabIndex="1" />
+                <TextBox  x:Name="txtLastName"  Grid.Row="2" Grid.Column="1" TabIndex="2" />
+                <TextBox  x:Name="txtAddress1"  Grid.Row="4" Grid.Column="1" TabIndex="3" />
+                <TextBox  x:Name="txtAddress2"  Grid.Row="6" Grid.Column="1" TabIndex="4" />
+                <ComboBox x:Name="cboZip"       Grid.Row="8" Grid.Column="1" TabIndex="5" DisplayMemberPath="GetZipStateCity" />
+
+                <Label Content="Company Name"  Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="Phone Number"  Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="Email Address" Grid.Row="4" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="Supply Cost"   Grid.Row="6" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="User Name"     Grid.Row="8" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <TextBox             Grid.Row="0" Grid.Column="3" TabIndex="6"  x:Name="txtCompanyName" />
+                <xctk:MaskedTextBox  Grid.Row="2" Grid.Column="3" TabIndex="7"  x:Name="txtPhoneNumber" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />
+                <TextBox             Grid.Row="4" Grid.Column="3" TabIndex="8"  x:Name="txtEmail" />
+                <Metro:NumericUpDown Grid.Row="6" Grid.Column="3" TabIndex="9"  x:Name="numSupplyCost" Minimum=".01" Maximum =".99" Interval=".01" StringFormat="P0" />
+                <TextBox             Grid.Row="8" Grid.Column="3" TabIndex="10" x:Name="txtUserName" />
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Container}">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Label Content="First Name"      Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Content="Last Name"       Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Content="Address 1"       Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Content="Address 2"       Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Content="City, State Zip" Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <TextBox x:Name="txtFirstName" Grid.Row="0" Grid.Column="1" TabIndex="1" />
-            <TextBox x:Name="txtLastName"  Grid.Row="1" Grid.Column="1" TabIndex="2" />
-            <TextBox x:Name="txtAddress1"  Grid.Row="2" Grid.Column="1" TabIndex="3" />
-            <TextBox x:Name="txtAddress2"  Grid.Row="3" Grid.Column="1" TabIndex="4" />
-            <ComboBox x:Name="cboZip"      Grid.Row="4" Grid.Column="1" TabIndex="5" DisplayMemberPath="GetZipStateCity" />
-
-            <Label Content="Company Name"  Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Content="Phone Number"  Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Content="Email Address" Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <TextBox            x:Name="txtCompanyName" TabIndex="6" Grid.Row="0" Grid.Column="3" />
-            <xctk:MaskedTextBox x:Name="txtPhoneNumber" TabIndex="7" Grid.Row="1" Grid.Column="3" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />
-            <TextBox            x:Name="txtEmail"       TabIndex="8" Grid.Row="2" Grid.Column="3" />
-
-            <Label Content="Supply Cost" Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Metro:NumericUpDown Grid.Column="3" Grid.Row="3" TabIndex="9" Minimum=".01" Maximum =".99" Interval=".01" StringFormat="P0" x:Name="numSupplyCost" />
-
-            <Label Grid.Row="4" Grid.Column="2" Content="User Name"  HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <TextBox  Grid.Row="4" Grid.Column="3" x:Name="txtUserName"  TabIndex="10" />
-        </Grid>
-        <Grid Grid.Row="1" Margin="{DynamicResource Button Spacing Top}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" Margin="0,0,5,0" />
-            <Button Grid.Column="1" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click"  Margin="2.5,0" />
-            <Button Grid.Column="2" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" Margin="5,0,0,0" />
+            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
+            <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
+            <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>
     </Grid>
 </Metro:MetroWindow>

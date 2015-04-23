@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation
             eventCbox.IsEnabled = false;
             supplierCbox.IsEnabled = false;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
 
         public ItemListing CurrentItemListing { get; private set; }

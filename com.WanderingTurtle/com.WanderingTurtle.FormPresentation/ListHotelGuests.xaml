@@ -24,16 +24,16 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnRegisterGuest" Content="Register Guest" Click="btnRegisterGuest_Click" />
-            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnViewGuest"     Content="View Guest"     Click="btnViewGuest_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvHotelGuestList}" />
-            <TextBox Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchBox" TextWrapping="Wrap"  TextChanged="txtSearchBox_TextChanged" Style="{DynamicResource SearchTextBox}" />
+            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="btnRegisterGuest" Content="Register Guest" Click="btnRegisterGuest_Click" />
+            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="btnViewGuest"     Content="View Guest"     Click="btnViewGuest_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvHotelGuestList}" />
+            <TextBox Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="txtSearchBox" TextWrapping="Wrap"  TextChanged="txtSearchBox_TextChanged" Style="{DynamicResource SearchTextBox.Inline}" />
             <Button  Grid.Column="3" Content="Refresh List" x:Name="btnGuestSearch"  Click="btnGuestSearch_Click" />
         </Grid>
     </Grid>

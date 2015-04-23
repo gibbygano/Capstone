@@ -27,7 +27,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -36,10 +36,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddEvent"     Content="Add Event"    Click="btnAddEvent_Click" />
-            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnEditEvent"    Content="Edit Event"   Click="btnEditEvent_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
-            <Button  Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnArchiveEvent" Content="Archive Event" Click="btnArchiveEvent_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
-            <TextBox Grid.Column="4" Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchInput" TextChanged="txtSearchInput_TextChanged" Style="{DynamicResource SearchTextBox}" />
+            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="btnAddEvent"     Content="Add Event"    Click="btnAddEvent_Click" />
+            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="btnEditEvent"    Content="Edit Event"   Click="btnEditEvent_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <Button  Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="btnArchiveEvent" Content="Archive Event" Click="btnArchiveEvent_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEvents}" />
+            <TextBox Grid.Column="4" Margin="{StaticResource Spacing.Right}" x:Name="txtSearchInput" TextChanged="txtSearchInput_TextChanged" Style="{DynamicResource SearchTextBox.Inline}" />
             <Button  Grid.Column="5" x:Name ="btnSearch" Content="Refresh List" Click="btnSearch_Click" />
         </Grid>
     </Grid>

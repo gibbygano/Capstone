@@ -37,10 +37,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnAddListing"     Content="Add Listing"     Click="btnAddListing_Click" />
-            <Button  Grid.Column="1" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnEditListing"    Content="Edit Listing"    Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
-            <Button  Grid.Column="2" Margin="{DynamicResource Button Spacing Inline}" x:Name="btnArchiveListing" Content="Archive Listing" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
-            <TextBox Grid.Column="3" Margin="{DynamicResource Button Spacing Inline}" x:Name="txtSearchListing"  TextWrapping="Wrap" TextChanged="txtSearchListing_TextChanged" Style="{DynamicResource SearchTextBox}" />
+            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="btnAddListing"     Content="Add Listing"     Click="btnAddListing_Click" />
+            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="btnEditListing"    Content="Edit Listing"    Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
+            <Button  Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="btnArchiveListing" Content="Archive Listing" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
+            <TextBox Grid.Column="3" Margin="{StaticResource Spacing.Right}" x:Name="txtSearchListing"  TextWrapping="Wrap" TextChanged="txtSearchListing_TextChanged" Style="{DynamicResource SearchTextBox}" />
             <Button  Grid.Column="4" x:Name="btnSearchListing" Content="Refresh List" Click="btnSearchListing_Click" />
         </Grid>
     </Grid>
