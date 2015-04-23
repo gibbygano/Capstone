@@ -145,10 +145,8 @@
     <Compile Include="AddEditListing.xaml.cs">
       <DependentUpon>AddEditListing.xaml</DependentUpon>
     </Compile>
-
     <Compile Include="CheckOutGuest.xaml.cs">
       <DependentUpon>CheckOutGuest.xaml</DependentUpon>
-
     </Compile>
     <Compile Include="BookingCancel.xaml.cs">
       <DependentUpon>BookingCancel.xaml</DependentUpon>
@@ -228,12 +226,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AdminFunctions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="CheckOutGuest.xaml">
-
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
