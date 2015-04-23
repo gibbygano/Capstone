@@ -26,15 +26,15 @@ namespace com.WanderingTurtle.BusinessLogic
         ChangedByOtherUser,
 
         DatabaseError,
-
+        //can't change date with guests signed up
         NoDateChange,
-
+        //max guest can't be smaller than # signed up already
         MaxSmallerThanCurrent,
-
+        //can't change price once guests are signed up
         NoPriceChange,
-
+        //start date can't be after end date
         StartEndDateError,
-
+        //start date can't be in past
         DateInPast
 
 

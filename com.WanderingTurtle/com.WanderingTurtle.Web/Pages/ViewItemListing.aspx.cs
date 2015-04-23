@@ -155,6 +155,16 @@ namespace com.WanderingTurtle.Web.Pages
                         errorText = addError(errorText, "You cannot change the Max Number of Guests to be lower than the number signed up!");
                         lblError.Text = errorText;
                     }
+                    if (result == listResult.StartEndDateError)
+                    {
+                        errorText = addError(errorText, "Start Date cannot be after End Date!");
+                        lblError.Text = errorText;
+                    }
+                    if (result == listResult.DateInPast)
+                    {
+                        errorText = addError(errorText, "Date cannot be in the past!");
+                        lblError.Text = errorText;
+                    }
                     
                     return;
                 }

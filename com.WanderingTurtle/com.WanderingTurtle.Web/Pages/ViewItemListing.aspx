@@ -19,8 +19,8 @@
         <ItemTemplate>
             <tr>
                 <td><%# Item.EventName.Truncate(20) %></td>
-                <td><%# Item.StartDate %></td>
-                <td><%# Item.EndDate %></td>
+                <td><%# Item.StartDate.ToString("MM/dd/yy hh:mmt") %></td>
+                <td><%# Item.EndDate.ToString("MM/dd/yy hh:mmt") %></td>
                 <td><%# Item.Price.ToString("C") %></td>
                 <td><%# Item.MaxNumGuests %></td>
                 <td>
