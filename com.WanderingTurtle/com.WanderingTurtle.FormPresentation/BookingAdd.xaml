@@ -5,7 +5,7 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
         Title="Add Booking" Height="500" Width="825"
-		WindowStartupLocation="CenterOwner">
+		WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Spacing.Container}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

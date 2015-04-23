@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Style="{DynamicResource WindowStyle}"
         Title="Employee Updates" Height="300" Width="300"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -55,9 +55,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="6" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" />
-            <Button Grid.Column="2" TabIndex="7" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click" />
-            <Button Grid.Column="4" TabIndex="8" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" />
+            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>

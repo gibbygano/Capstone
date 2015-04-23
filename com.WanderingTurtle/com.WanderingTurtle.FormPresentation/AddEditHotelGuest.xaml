@@ -6,7 +6,7 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
         Title="AddEditHotelGuest" Height="300" Width="600"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -59,9 +59,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
-            <Button Grid.Column="2" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
-            <Button Grid.Column="4" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
+            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>
