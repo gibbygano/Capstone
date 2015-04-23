@@ -2,6 +2,21 @@
 $(document).ready(function () {
     console.log("JQuery loaded");
 
+    $('#tblmain').DataTable({
+        stateSave: true
+
+
+    });
+
+    $('#tblevents').DataTable({
+        stateSave: true
+
+
+    });
+
+    $('#tbl1').DataTable({
+        searching: false
+    });
 
     $("#errorMess").dialog({
         modal: true,
@@ -67,7 +82,7 @@ $(document).ready(function () {
         start: 0
     });
 
-   
+
 
     $("#eventStart").datetimepicker(
         {
@@ -84,8 +99,10 @@ $(document).ready(function () {
 
     /* last function because it will break on most pages */
     var inside = document.getElementById('MainContent_eventdetails');
-    if ((inside.innerText.replace(" ", "") == "")) {
-        $('#MainContent_eventdetails').dialog('close');
+    if ((inside != null)) {
+        if ((inside.innerText.replace(" ", "") == "")) {
+            $('#MainContent_eventdetails').dialog('close');
+        }
     }
 
 

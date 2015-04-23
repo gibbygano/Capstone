@@ -144,7 +144,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\themes\jquery-datetimepicker.css" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="PagesGuest\About.aspx" />
     <Content Include="PagesGuest\Contacts.aspx" />
     <Content Include="Pages\Login.aspx" />
@@ -221,6 +227,7 @@
     <Content Include="Scripts\jquery-TimePicker-1.0.0.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Pages\SupplierAddEvent.aspx" />
     <Content Include="Pages\SupplierViewEvents.aspx" />

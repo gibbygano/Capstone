@@ -39,15 +39,18 @@
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
-            <table id="tbl1" class="sortable" runat="server">
+            <table id="tblevents" class="sortable">
+                <thead>
                 <tr id="tr1" runat="server">
                     <td id="td1" class="eventheader" runat="server">Event Name</td>
                     <td id="td2" class="eventheader" runat="server">Event Type</td>
                     <td id="td3" class="eventheader" runat="server">Description</td>
                     <td id="td4" class="eventheader" runat="server">Transportation</td>
                     <td id="td5" class="eventheader" runat="server">On-Site</td>
-                    <td></td>
+                    <td style="display: none;"></td>
                 </tr>
+
+                </thead>
                 <tr id="ItemPlaceholder" runat="server">
                 </tr>
             </table>
