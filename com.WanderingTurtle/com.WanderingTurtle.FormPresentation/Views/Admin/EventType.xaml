@@ -32,6 +32,7 @@
             <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboEditEvent" ItemsSource = "{Binding}" SelectionChanged="cboEditEvent_SelectionChanged"/>
             <TextBox  Grid.Row="2" Grid.Column="4" x:Name="txtEventTypeEdit" />
             <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboArchiveEvent" ItemsSource = "{Binding}" SelectionChanged="cboArchiveEvent_SelectionChanged" />
+
         </Grid>
         <Grid Grid.Row="2" MaxWidth="500">
             <Grid.ColumnDefinitions>

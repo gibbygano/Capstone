@@ -20,7 +20,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         }
 
         private string _user;
-        private Exception _exception = null;
+        private Exception _exception;
 
         private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
         {
@@ -42,15 +42,15 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 if (result == null) { break; }
                 try
                 {
-                    int UserId;
-                    if (!int.TryParse(result.Username, out UserId)) { throw new Exception(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
-                    _user = UserId.ToString();
-                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new Exception(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
-                    Globals.UserToken = new EmployeeManager().GetEmployeeLogin(UserId, result.Password);
-                    if (Globals.UserToken == null) { throw new Exception("Error setting User Token"); }
+                    int userId;
+                    if (!int.TryParse(result.Username, out userId)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
+                    _user = userId.ToString();
+                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
+                    Globals.UserToken = new EmployeeManager().GetEmployeeLogin(userId, result.Password);
+                    if (Globals.UserToken == null) { throw new ApplicationException("Error setting User Token"); }
                     else { _exception = null; }
                 }
-                catch (Exception ex) { _exception = ex; }
+                catch (ApplicationException ex) { _exception = ex; }
                 if (_exception != null) { await this.ShowMessageDialog(_exception.Message, "Login Error"); }
             } while (_exception != null);
             if (Globals.UserToken != null) { this.GetMainWindow().MainContent.Content = new TabContainer(); }

@@ -17,6 +17,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditListing
     {
+        public ItemListing CurrentItemListing { get; private set; }
         private EventManager _eventManager = new EventManager();
         private ProductManager _productManager = new ProductManager();
         private SupplierManager _supplierManager = new SupplierManager();
@@ -32,6 +33,7 @@ namespace com.WanderingTurtle.FormPresentation
         public AddEditListing(ItemListing currentItemListing, bool ReadOnly = false)
         {
             Setup();
+            CurrentItemListing = currentItemListing;
             Title = "Editing Listing: " + CurrentItemListing.EventName;
 
             eventCbox.IsEnabled = false;
@@ -39,9 +41,6 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
         }
-
-        public ItemListing CurrentItemListing { get; private set; }
-
         private async void addItemListing()
         {
             if (!Validator()) return;

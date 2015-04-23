@@ -16,13 +16,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListSuppliers : IDataGridContextMenu
     {
-        public static ListSuppliers Instance;
-        private SupplierManager _manager = new SupplierManager();
-        private GridViewColumnHeader _sortColumn;
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
+        private SupplierManager _supplierManager = new SupplierManager();
         private List<Supplier> _suppliers;
 
         /// <summary>
@@ -38,7 +32,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
             FillList();
-            Instance = this;
 
             lvSuppliersList.SetContextMenu(this);
         }
@@ -104,7 +97,7 @@ namespace com.WanderingTurtle.FormPresentation
                             MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
-                    _manager.ArchiveSupplier(supplierToDelete);
+                    _supplierManager.ArchiveSupplier(supplierToDelete);
                 }
                 FillList();
             }
@@ -127,7 +120,7 @@ namespace com.WanderingTurtle.FormPresentation
             try
             {
                 lvSuppliersList.ItemsSource = null;
-                _suppliers = _manager.RetrieveSupplierList();
+                _suppliers = _supplierManager.RetrieveSupplierList();
                 lvSuppliersList.Items.Clear();
                 lvSuppliersList.ItemsSource = _suppliers;
             }
@@ -197,7 +190,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)
         {
-            var myList = _manager.searchSupplier(txtSearchSupplier.Text);
+            var myList = _supplierManager.searchSupplier(txtSearchSupplier.Text);
             lvSuppliersList.ItemsSource = myList;
             lvSuppliersList.Items.Refresh();
         }

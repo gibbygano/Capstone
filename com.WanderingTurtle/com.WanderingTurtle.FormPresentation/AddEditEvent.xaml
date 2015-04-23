@@ -4,8 +4,8 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
 		x:Class="com.WanderingTurtle.FormPresentation.AddEditEvent"
         Style="{DynamicResource WindowStyle}"
-        Title="Add a New Event"  Height="350" Width="400"
-		WindowStartupLocation="CenterOwner">
+        Title="Add a New Event" Height="350" Width="400"
+		WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -27,9 +27,9 @@
                 <Label Content="Event Name:"  Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" />
                 <Label Content="Event Type:"  Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" />
                 <Label Content="Description:" Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" />
-                <TextBox  x:Name="txtEventName" Grid.Row="0" Grid.Column="1" MaxLength="255" />
-                <ComboBox x:Name="cboxType"     Grid.Row="0" Grid.Column="3" DisplayMemberPath="EventName" />
-                <TextBox  x:Name="txtDescrip"   Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" MaxLength="255" Style="{DynamicResource TextArea}" Height="Auto" />
+                <TextBox  Grid.Row="0" Grid.Column="1" TabIndex="0" x:Name="txtEventName" MaxLength="255" />
+                <ComboBox Grid.Row="0" Grid.Column="3" TabIndex="1" x:Name="cboxType" DisplayMemberPath="EventName" />
+                <TextBox  Grid.Row="1" Grid.Column="1" TabIndex="2" x:Name="txtDescrip" Grid.ColumnSpan="3" MaxLength="255" Style="{DynamicResource TextArea}" Height="Auto" />
 
                 <Grid Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="0" Height="65">
                     <Grid.ColumnDefinitions>
@@ -43,12 +43,12 @@
                     <Label Grid.Row="0" Grid.Column="0" Content="Provided Transportation?" />
                     <Label Grid.Row="0" Grid.Column="1" Content="On Site?" />
                     <Canvas Grid.Row="1" Grid.Column="0" x:Name="radTransp" Margin="10,0,0,0">
-                        <RadioButton x:Name="radTranspYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="11" />
-                        <RadioButton x:Name="radTranspNo"  Content="No"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="72" Canvas.Top="10" TabIndex="12" />
+                        <RadioButton TabIndex="3" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="radTranspYes" Content="Yes" Canvas.Left="5"  Canvas.Top="10" />
+                        <RadioButton TabIndex="4" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="radTranspNo"  Content="No"  Canvas.Left="72" Canvas.Top="10" />
                     </Canvas>
                     <Canvas Grid.Row="1" Grid.Column="1" x:Name="radOnSite" Margin="10,0,0,0">
-                        <RadioButton x:Name="radOnSiteYes" Content="Yes" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="5" Canvas.Top="10" TabIndex="13" />
-                        <RadioButton x:Name="radOnSiteNo"  Content="No"  HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="70" Canvas.Top="10" TabIndex="14" />
+                        <RadioButton TabIndex="5" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="radOnSiteYes" Content="Yes" Canvas.Left="5"  Canvas.Top="10" />
+                        <RadioButton TabIndex="6" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="radOnSiteNo"  Content="No"  Canvas.Left="70" Canvas.Top="10" />
                     </Canvas>
                 </Grid>
             </Grid>
@@ -61,9 +61,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="8"  Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
-            <Button Grid.Column="2" TabIndex="9"  Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
-            <Button Grid.Column="4" TabIndex="10" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
+            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>

@@ -20,7 +20,6 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         public EventType()
         {
             InitializeComponent();
-           
             cboArchiveEvent.ItemsSource = DataCache._currentEventTypeList;
             cboEditEvent.ItemsSource = DataCache._currentEventTypeList;
         }
@@ -47,6 +46,10 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         private void getAddInformation()
         {
             txtAddEventType.Text = updateEventType.Name;
+
+            var list = DataCache._currentEventTypeList;
+            listEventTypes.DataContext = list;
+
         }
 
         private void getEditInformation()

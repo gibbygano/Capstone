@@ -225,7 +225,6 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 EditSupplier();
             }
-            ListSuppliers.Instance.FillList();
         }
 
         /// <summary>

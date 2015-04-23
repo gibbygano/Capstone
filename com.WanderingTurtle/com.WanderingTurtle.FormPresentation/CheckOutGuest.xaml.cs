@@ -50,7 +50,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created by Pat Banks 2015/03/03
         /// Populates form fields
         /// </summary>
-        /// <param name="selectedHotelGuestID"></param>
         private void FillFormFields()
         {
             _CurrentInvoice.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);

@@ -18,7 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="WindowStyle" TargetType="{x:Type Metro:MetroWindow}">
-                <Setter Property="BorderBrush" Value="{DynamicResource AccentColorBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource AccentColorBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
             </Style>
             <Style x:Key="MainWindowStyle" TargetType="{x:Type Metro:MetroWindow}" BasedOn="{StaticResource WindowStyle}">
@@ -30,8 +30,13 @@
             </Style>
 
             <system:Double x:Key="Component.Height">30</system:Double>
-            <Thickness x:Key="Component.MarginSpacing">0,5</Thickness>
-            <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
+            <Thickness x:Key="Spacing.Container">5</Thickness>
+            <Thickness x:Key="Spacing.TopBottom">0,5</Thickness>
+            <Thickness x:Key="Spacing.Inline">5,0</Thickness>
+            <Thickness x:Key="Spacing.Right">0,0,5,0</Thickness>
+            <Thickness x:Key="Spacing.Top">0,5,0,0</Thickness>
+
+            <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Stretch</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
@@ -39,7 +44,7 @@
             </Style>
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" x:Key="TextBoxStyle">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
                 <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="{StaticResource TextBoxClearTextButton}" />
             </Style>
@@ -63,46 +68,46 @@
             </Style>
             <Style x:Key="SearchTextBox" TargetType="{x:Type TextBox}" BasedOn="{StaticResource SearchTextBox.Inline}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
             </Style>
             <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MetroPasswordBox}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
                 <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="{StaticResource TextBoxClearTextButton}" />
             </Style>
-            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource VirtualisedMetroComboBox}">
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type Metro:NumericUpDown}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type xctk:IntegerUpDown}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type xctk:TimePicker}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type xctk:DecimalUpDown}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource MetroDatePicker}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
             <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource MetroListBox}">
-                <Setter Property="Margin" Value="{StaticResource Component.MarginSpacing}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
             </Style>
 
             <Style TargetType="{x:Type Button}" x:Key="ButtonStyle" BasedOn="{StaticResource AccentedSquareButtonStyle}">
@@ -112,11 +117,6 @@
                 <Setter Property="Metro:ButtonHelper.PreserveTextCase" Value="True" />
             </Style>
             <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}" />
-            <Thickness x:Key="Spacing.Container">5</Thickness>
-            <Thickness x:Key="Spacing.Inline">5,0</Thickness>
-            <Thickness x:Key="Spacing.Right">0,0,5,0</Thickness>
-            <Thickness x:Key="Spacing.Top">0,5,0,0</Thickness>
-
             <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource MetroDataGrid}">
                 <Setter Property="IsReadOnly" Value="True" />
                 <Setter Property="AutoGenerateColumns" Value="False" />
@@ -129,7 +129,7 @@
                 <Setter Property="Width" Value="0" />
             </Style>
             <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource MetroScrollViewer}">
-                <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+                <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
