@@ -127,6 +127,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdminFunctions.xaml.cs">
+      <DependentUpon>AdminFunctions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookingAdd.xaml.cs">
       <DependentUpon>BookingAdd.xaml</DependentUpon>
     </Compile>
@@ -141,9 +144,6 @@
     </Compile>
     <Compile Include="AddEditListing.xaml.cs">
       <DependentUpon>AddEditListing.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AdminFunctions.xaml.cs">
-      <DependentUpon>AdminFunctions.xaml</DependentUpon>
     </Compile>
     <Compile Include="InvoiceArchive.xaml.cs">
       <DependentUpon>InvoiceArchive.xaml</DependentUpon>
@@ -166,6 +166,9 @@
     </Compile>
     <Compile Include="ReportHost.xaml.cs">
       <DependentUpon>ReportHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EventType.xaml.cs">
+      <DependentUpon>EventType.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
@@ -199,6 +202,10 @@
     <Compile Include="ListTheListings.xaml.cs">
       <DependentUpon>ListTheListings.xaml</DependentUpon>
     </Compile>
+    <Page Include="AdminFunctions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BookingAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,10 +225,6 @@
     <Page Include="AddEditListing.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="AdminFunctions.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="InvoiceArchive.xaml">
       <SubType>Designer</SubType>
@@ -248,6 +251,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ListPendingSuppliers.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\EventType.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
