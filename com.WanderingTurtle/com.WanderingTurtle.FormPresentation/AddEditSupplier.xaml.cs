@@ -47,6 +47,8 @@ namespace com.WanderingTurtle.FormPresentation
             fillComboBox();
             FillUpdateList();
 
+            txtUserName.IsEnabled = false;
+
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { }); }
         }
 
@@ -239,20 +241,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                //check if user name has changed
-                if (!_supplierUserName.Equals(txtUserName.Text))
-                {
-                    //update user name
-                    ResultsEdit result = _loginManager.UpdateSupplierLogin(txtUserName.Text, _supplierUserName, _UpdatableSupplier.SupplierID);
-
-                    if (result.Equals(ResultsEdit.Success))
-                    {
-                        await this.ShowMessageDialog("Supplier was updated.");
-                        DialogResult = true;
-                        Close();
-                    }
-                }
-
                 Supplier tempSupplier = new Supplier
                 {
                     CompanyName = txtCompanyName.Text.Trim(),
