@@ -30,7 +30,7 @@
                 <h2>Upcoming Events</h2>
                 <asp:ListView ID="lvLists" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemLists" DataKeyNames="ItemListID" EnableViewState="False" runat="server">
                     <ItemTemplate>
-                    
+
                         <tr>
                             <td><%# Item.EventName.Truncate(25) %></td>
                             <td><%# Item.StartDate.ToString("MM/dd/yy hh:mmt") %></td>
@@ -40,7 +40,7 @@
                                 <asp:Button ID="btnDetails" runat="server" CommandArgument="<%#Item.ItemListID %>" Text="View Details" OnClick="btnDetails_Click" UseSubmitBehavior="False" />
                             </td>
                         </tr>
-                    
+
                     </ItemTemplate>
 
                     <LayoutTemplate>
@@ -57,7 +57,7 @@
                             </thead>
                             <tr id="ItemPlaceholder" runat="server">
                             </tr>
-                                
+
                         </table>
                     </LayoutTemplate>
                 </asp:ListView>
@@ -75,10 +75,10 @@
                     <LayoutTemplate>
                         <table id="tbl1" class="sortable">
                             <thead>
-                            <tr id="tr1" runat="server">
-                                <th id="td8" class="eventheader" runat="server">Guest Name</th>
-                                <th id="td2" class="eventheader" runat="server">Number of Tickets</th>
-                            </tr>
+                                <tr id="tr1" runat="server">
+                                    <th id="td8" class="eventheader" runat="server">Guest Name</th>
+                                    <th id="td2" class="eventheader" runat="server">Number of Tickets</th>
+                                </tr>
 
                             </thead>
                             <tr id="ItemPlaceholder" runat="server">
@@ -90,27 +90,6 @@
             </div>
         </div>
 
-        <div class="hide">
-            <div id="eventdetails" runat="server" style="display: none;">
-                <asp:ListView ID="lvDetailsOld" ItemType="com.WanderingTurtle.Common.BookingNumbers" DataKeyNames="Room" EnableViewState="False" runat="server">
-                    <ItemTemplate>
-                        <tr>
-                            <td><%# Item.FirstName +" " + Item.LastName%></td>
-                            <td><%# Item.Quantity %></td>
-                        </tr>
-                    </ItemTemplate>
-                    <LayoutTemplate>
-                        <table id="tbl1" runat="server">
-                            <tr id="tr1" runat="server">
-                                <td id="td8" class="eventheader" runat="server">Guest Name</td>
-                                <td id="td2" class="eventheader" runat="server">Number of Tickets</td>
-                            </tr>
-                            <tr id="ItemPlaceholder" runat="server">
-                            </tr>
-                        </table>
-                    </LayoutTemplate>
-                </asp:ListView>
-            </div>
-        </div>
+
     </div>
 </asp:Content>

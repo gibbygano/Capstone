@@ -50,18 +50,7 @@ $(document).ready(function () {
         closeText: "X"
     });
 
-    $("#MainContent_eventdetails").dialog({
-        modal: false,
-        buttons: {
-            Ok: function () {
-                $(this).dialog("close");
-            }
-        },
-        closeOnEscape: true,
-        closeText: "X",
-        dialogClass: "events",
-        autoOpen: true
-    });
+   
 
     $("#listStartDate").datetimepicker(
            {
@@ -120,21 +109,13 @@ $(document).ready(function () {
             timeFormat: 'hh:mm tt'
         });
 
-    /* last function because it will break on most pages */
-    var inside = document.getElementById('MainContent_eventdetails');
-    if ((inside != null)) {
-        if ((inside.innerText.replace(" ", "") == "")) {
-            $('#MainContent_eventdetails').dialog('close');
-        }
-    }
-
 
 
 });
 
 function showDetails() {
 
-    $('#MainContent_eventdetails').dialog('open');
+   
 
 
 }

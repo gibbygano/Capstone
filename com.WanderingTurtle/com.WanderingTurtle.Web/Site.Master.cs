@@ -96,7 +96,7 @@ namespace com.WanderingTurtle.Web
                     var stuff4 = new MenuItem();
 
                     stuff1.NavigateUrl = "/events";
-                    stuff1.Text = "View/Edit Events";
+                    stuff1.Text = "View Events";
                     stuff2.NavigateUrl = "/events/add";
                     stuff2.Text = "Add an Event";
                     stuff3.NavigateUrl = "/listings";
