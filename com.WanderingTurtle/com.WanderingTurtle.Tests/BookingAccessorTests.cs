@@ -101,9 +101,11 @@ namespace com.WanderingTurtle.Tests
         }
         [TestMethod]
         public void TestVerifyGuestPINBookingAccessor()
-        {   //Checks using a pin in the database, stores guest info from database into a guest object
-            //Asserts that a record is found, that guest is not null
-            HotelGuest guest = BookingAccessor.verifyGuestPin("7754");
+        {   //Pulls a guest from the database and collects the guest information
+            List<HotelGuest> guest1 = HotelGuestAccessor.HotelGuestGet(100);
+            //Checks using a pin in the database, stores guest info from database into a guest object
+            //Asserts that a record is found, that guest is not null by passing the guest1 guest pin
+            HotelGuest guest = BookingAccessor.verifyGuestPin(guest1[guest1.Count - 1].GuestPIN);
             Assert.IsNotNull(guest);
         }
         [TestMethod]

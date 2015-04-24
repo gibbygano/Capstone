@@ -139,7 +139,67 @@ namespace com.WanderingTurtle.Tests
             int expected = 2;
             Assert.AreEqual(expected, quantity);
         }
-
+        [TestMethod]
+        public void TestBookingCalculateTimeFee0()
+        {
+            //Creates a Bookingdetails object to pass to BookingManager to check calculation of CalculateTime
+            BookingDetails bookingD = new BookingDetails();
+            DateTime value = new DateTime(2100, 01, 31, 17, 30, 00);
+            bookingD.StartDate = value;
+            decimal result = myBook.CalculateTime(bookingD);
+            decimal expected = 0m;
+            //Asserts that the expected and the result will be 0M
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void TestBookingCalculateTimeFee1()
+        {
+            //Creates a Bookingdetails object to pass to BookingManager to check calculation of CalculateTime
+            BookingDetails bookingD = new BookingDetails();
+            DateTime value = new DateTime(2000, 01, 31, 17, 30, 00);
+            bookingD.StartDate = value;
+            decimal result = myBook.CalculateTime(bookingD);
+            decimal expected = 1.0m;
+            //Asserts that the expected and the result will be 1.0M
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void TestBookingCalculateTimeFeeHalf()
+        {
+            //Creates a Bookingdetails object to pass to BookingManager to check calculation of CalculateTime
+            BookingDetails bookingD = new BookingDetails();
+            DateTime today = DateTime.Now;
+            DateTime value = today.AddDays(2);
+            bookingD.StartDate = value;
+            decimal result = myBook.CalculateTime(bookingD);
+            decimal expected = .5m;
+            //Asserts that the expected and the result will be .5M
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void TestBookingCalcExtendedPrice()
+        {
+            //Creates a decimal and an int to be calculated
+            decimal numA = 2.0m;
+            int numB = 2;
+            decimal expected = 4.0m;
+            decimal result = myBook.calcExtendedPrice(numA, numB);
+            //Asserts that the expected and the result will be .5M
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void TestBookingCalcCancellationFee()
+        {
+            //Creates a bookingDetails object used to perform calculations. Method uses the TotalCharge and the startdate
+            BookingDetails bookingD = new BookingDetails();
+            DateTime value = new DateTime(2000, 01, 31);
+            bookingD.StartDate = value;
+            bookingD.TotalCharge = 3.0m;
+            decimal expected = 3.0m;
+            decimal result = myBook.CalculateCancellationFee(bookingD);
+            //Asserts that the expected and the result will be .5M
+            Assert.AreEqual(expected, result);
+        }
         [TestMethod]
         public void updateNumberofGuests()
         {
@@ -239,9 +299,11 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestBookingGuestPIN()
         {
+            //Pulls a guest from the database and collects the guest information
+            List<HotelGuest> guest1 = HotelGuestAccessor.HotelGuestGet(100);
             //Checks using a pin in the database, stores guest info from database into a guest object
-            //Asserts that a record is found, that guest is not null
-            HotelGuest guest = myBook.checkValidPIN("7754");
+            //Asserts that a record is found, that guest is not null by passing the guest1 guest pin
+            HotelGuest guest = myBook.checkValidPIN(guest1[guest1.Count - 1].GuestPIN);
             Assert.IsNotNull(guest);
         }
         [TestMethod]

@@ -2,11 +2,13 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using com.WanderingTurtle.DataAccess;
 
-namespace com.WanderingTurtle.DataAccess
+namespace com.WanderingTurtle.Tests
 {
     public class TestCleanupAccessor
     {
+
         public static void testEmp(Employee testEmp)
         {
             //establish connection
@@ -80,7 +82,58 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Close();
             }
         }
+        /// <summary>
+        /// Created: Tony Noel 2015/04/24
+        /// Uses the stored procedure listed to locate an invoice where the guestID matches the fake
+        /// hotel guestID and then removes it from the database.
+        /// </summary>
+        public static void ClearOutInvoice()
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "testSPClearHotelGuest";
+            var cmd = new SqlCommand(cmdText, conn);
 
+            //Set command type to stored procedure and add parameters
+            cmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                Console.Write("Fail!");
+            }
+            finally 
+            { 
+                conn.Close(); 
+            }
+        }
+        /// <summary>
+        /// Created: Tony Noel- 2015/04/24, Deletes the dummy Hotel Guest record from the database.
+        /// </summary>
+        public static void DeleteHotelGuest()
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string commandText3 = @"DELETE FROM [dbo].[HotelGuest] WHERE FirstName = 'Fake' AND Address1 = '1111 Fake St.' AND PhoneNumber = '5556667777'";
+
+            var cmd3 = new SqlCommand(commandText3, conn);
+
+            try
+            {
+                conn.Open();
+                cmd3.ExecuteNonQuery();
+                //cmd2.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                Console.Write("Fail!");
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
         public static int GetBooking()
         {
             int result;
