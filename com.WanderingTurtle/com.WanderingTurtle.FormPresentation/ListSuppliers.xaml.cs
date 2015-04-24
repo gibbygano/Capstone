@@ -71,14 +71,13 @@ namespace com.WanderingTurtle.FormPresentation
                 if (selectedItem == null)
                 {
                     if (new AddEditSupplier().ShowDialog() == false) return;
-                    FillList();
                 }
                 else
                 {
                     if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false) return;
                     if (readOnly) return;
-                    FillList();
                 }
+                FillList();
             }
             catch (Exception ex)
             {
@@ -199,5 +198,11 @@ namespace com.WanderingTurtle.FormPresentation
         {
             btnSearchSupplier.Content = txtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";
         }
+
+        private void lvSuppliersList_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            FillList();
+        }
+
     }
 }

@@ -14,12 +14,12 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class CancelBooking
     {
-        private BookingDetails _CurrentBooking { get; set; }
+        private BookingDetails CurrentBooking { get; set; }
 
-        private InvoiceDetails _CurrentInvoice { get; set; }
+        private InvoiceDetails CurrentInvoice { get; set; }
 
-        private decimal cancelFee = 0m;
-        private BookingManager _bookingManager = new BookingManager();
+        private decimal _cancelFee = 0m;
+        private readonly BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
         /// Tony Noel
@@ -34,10 +34,10 @@ namespace com.WanderingTurtle.FormPresentation
         public CancelBooking(BookingDetails booking, InvoiceDetails invoice)
         {
             InitializeComponent();
-            _CurrentBooking = booking;
-            _CurrentInvoice = invoice;
-            Title = "Canceling Booking: " + _CurrentBooking.EventItemName;
-            populateText();
+            CurrentBooking = booking;
+            CurrentInvoice = invoice;
+            Title = "Canceling Booking: " + CurrentBooking.EventItemName;
+            PopulateText();
         }
 
         /// <summary>
@@ -52,20 +52,20 @@ namespace com.WanderingTurtle.FormPresentation
         ///
         /// Updated with new fields and formatting;  Moved fee calculation to BLL
         /// </remarks>
-        public void populateText()
+        private void PopulateText()
         {
             //populating with data from objects that opened the form
-            lblBookingID.Content = _CurrentBooking.BookingID;
-            lblGuestName.Content = _CurrentInvoice.GetFullName;
-            lblQuantity.Content = _CurrentBooking.Quantity;
-            lblEventName.Content = _CurrentBooking.EventItemName;
-            lblDiscount.Content = _CurrentBooking.Discount.ToString("p");
-            lblEventTime.Content = _CurrentBooking.StartDate;
-            lblTicketPrice.Content = _CurrentBooking.TicketPrice.ToString("c");
-            lblTotalDue.Content = _CurrentBooking.TotalCharge.ToString("c");
+            lblBookingID.Content = CurrentBooking.BookingID;
+            lblGuestName.Content = CurrentInvoice.GetFullName;
+            lblQuantity.Content = CurrentBooking.Quantity;
+            lblEventName.Content = CurrentBooking.EventItemName;
+            lblDiscount.Content = CurrentBooking.Discount.ToString("p");
+            lblEventTime.Content = CurrentBooking.StartDate;
+            lblTicketPrice.Content = CurrentBooking.TicketPrice.ToString("c");
+            lblTotalDue.Content = CurrentBooking.TotalCharge.ToString("c");
 
-            cancelFee = _bookingManager.CalculateCancellationFee(_CurrentBooking);
-            lblCancelMessage.Content = "A fee of " + cancelFee.ToString("c") + " will be charged to cancel this booking.";
+            _cancelFee = _bookingManager.CalculateCancellationFee(CurrentBooking);
+            lblCancelMessage.Content = "A fee of " + _cancelFee.ToString("c") + " will be charged to cancel this booking.";
         }
 
         /// <summary>
@@ -87,15 +87,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void btnConfirmCancel_Click(object sender, RoutedEventArgs e)
+        private async void BtnConfirmCancel_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 //get the cancellation fee
-                _CurrentBooking.TotalCharge = cancelFee;
+                CurrentBooking.TotalCharge = _cancelFee;
 
                 //cancel booking and get results
-                ResultsEdit result = _bookingManager.CancelBookingResults(_CurrentBooking);
+                ResultsEdit result = _bookingManager.CancelBookingResults(CurrentBooking);
 
                 switch (result)
                 {
@@ -113,6 +113,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex);
             }
+        }
+
+        private void BtnCancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
