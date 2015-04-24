@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// UI for adding a booking
         /// Access from the View Invoice screen
         /// </summary>
-        /// <param name="_currentInvoice">brings the invoice data from the prior list view</param>
+        /// <param name="inInvoice">brings the invoice data from the prior list view</param>
         public AddBooking(InvoiceDetails inInvoice)
         {
             _CurrentInvoice = inInvoice;
@@ -108,6 +108,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex);
             }
+        }
+
+        private void btnCancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         /// <summary>

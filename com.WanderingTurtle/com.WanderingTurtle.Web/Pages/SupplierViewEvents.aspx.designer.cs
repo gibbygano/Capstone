@@ -22,24 +22,6 @@ namespace com.WanderingTurtle.Web.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl theLists;
         
         /// <summary>
-        /// txtEventSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEventSearch;
-        
-        /// <summary>
-        /// btnEventSearch control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnEventSearch;
-        
-        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>

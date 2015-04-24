@@ -66,7 +66,23 @@
         <tr>
             <td>Zip</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtZip" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtZip" runat="server" Width="168px"></asp:TextBox> <table id="zips">
+        <thead id="hideme">
+            <tr>
+                <th style="display: none;">Zip</th>
+                <th style="display: none;">City</th>
+                <th style="display: none;">State</th>
+            </tr>
+        </thead>
+            <tbody>
+        <%
+            foreach (var zip in zips)
+            {
+                Response.Write("<tr><td>" + zip.Zip + "</td><td>" + zip.City + "</td><td>" + zip.State + "</tr>");
+            } 
+             %>
+</tbody>
+        </table>
             </td>
         </tr>
     </table>
@@ -74,6 +90,4 @@
     <br />
     <asp:Button ID="btnSubmitApplication" runat="server" OnClick="btnSubmitApplication_Click" Text="Submit Application" Width="182px" />
     </section>
-    <aside>
-    </aside>
 </asp:Content>

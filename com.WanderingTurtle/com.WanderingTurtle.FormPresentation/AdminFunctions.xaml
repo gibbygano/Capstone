@@ -11,10 +11,7 @@
     <ScrollViewer>
         <StackPanel>
             <admin:EventType />
-            <Separator />
-            <admin:EventType />
-            <Separator />
-            <admin:EventType />
+
         </StackPanel>
     </ScrollViewer>
 </UserControl>

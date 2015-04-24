@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Style="{DynamicResource WindowStyle}"
         Title="Edit Booking" Height="350" Width="500"
-        WindowStartupLocation="CenterOwner">
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Spacing.Container}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

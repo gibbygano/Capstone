@@ -16,13 +16,8 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheListings : IDataGridContextMenu
     {
-        private GridViewColumnHeader _sortColumn;
-
-        //Class level variables needed for sorting method
-        private ListSortDirection _sortDirection;
-
-        private List<ItemListing> myListingList;
-        private ProductManager prodMan = new ProductManager();
+        private List<ItemListing> _myListingList;
+        private ProductManager _productManager = new ProductManager();
 
         /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
         /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
@@ -100,7 +95,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case MessageDialogResult.Affirmative:
-                        var numRows = prodMan.ArchiveItemListing(ListingToDelete);
+                        var numRows = _productManager.ArchiveItemListing(ListingToDelete);
                         if (numRows == listResult.Success)
                         {
                             await this.ShowMessageDialog("Listing successfully deleted.");
@@ -139,12 +134,12 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                myListingList = prodMan.RetrieveItemListingList();
-                foreach (ItemListing item in myListingList)
+                _myListingList = _productManager.RetrieveItemListingList();
+                foreach (ItemListing item in _myListingList)
                 {
                     item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
                 }
-                lvListing.ItemsSource = myListingList;
+                lvListing.ItemsSource = _myListingList;
             }
             catch (Exception ex)
             {
@@ -159,7 +154,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)
         {
-            var myList = prodMan.SearchItemLists(txtSearchListing.Text);
+            var myList = _productManager.SearchItemLists(txtSearchListing.Text);
             foreach (ItemListing item in myList)
             {
                 item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);

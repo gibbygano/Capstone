@@ -112,11 +112,40 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 lblMessage.Text = "Please select an event";
                 return;
-            }
-            else
+            } 
+            //gets quantity from the quantity field
+            else if (!Validator.ValidateInt(txtGuestTickets.Text, 1))
             {
-                gatherFormInformation();
+                lblMessage.Text = "You must enter a valid number of tickets.";
+                txtGuestTickets.Text = "";
+                return;
             }
+            else if (Int32.Parse(txtGuestTickets.Text) > getSelectedItem().QuantityOffered)
+            {
+                lblMessage.Text = "You cannot request more tickets than available";
+                txtGuestTickets.Text = "";
+                return;
+            }
+            else if (!Validator.ValidateAlphaNumeric(txtGuestPin.Text))
+            {
+                    lblMessage.Text = "You must enter a valid pin.";
+                    txtGuestTickets.Text = "";
+                    return;
+            }
+            try
+            {
+                string inPin = txtGuestPin.Text;
+
+                //see if pin was found = if not there will be an exception
+                foundGuest = myManager.checkValidPIN(inPin);
+            }
+            catch (Exception)
+            {
+                lblMessage.Text = "You must enter a valid pin.";
+                return;
+            }
+
+            gatherFormInformation();
         }
 
         /// <summary>
@@ -124,34 +153,8 @@ namespace com.WanderingTurtle.Web.Pages
         /// </summary>
         private void gatherFormInformation()
         {
-            selectedItemListing = getSelectedItem();
-
-            //gets quantity from the quantity field
-            if (!Validator.ValidateInt(txtGuestTickets.Text, 1))
-            {
-                lblMessage.Text = "You must enter a valid number of tickets.";
-                return;
-            }
-            else if (Int32.Parse(txtGuestTickets.Text) > getSelectedItem().QuantityOffered)
-            {
-                lblMessage.Text = "You cannot request more tickets than available";
-                return;
-            }
-
-            if (!Validator.ValidateAlphaNumeric(txtGuestPin.Text))
-            {
-                lblMessage.Text = "You must enter a valid pin.";
-                return;
-            }
-
             try
             {
-                string inPin = txtGuestPin.Text;
-
-                //see if pin was found = if not there will be an exception
-
-                foundGuest = myManager.checkValidPIN(inPin);
-
                 ticketQty = Int32.Parse(txtGuestTickets.Text);
 
                 //calculate values for the tickets
@@ -174,14 +177,10 @@ namespace com.WanderingTurtle.Web.Pages
                 confirmDetails.Style.Add("display", "block");
                 ticketRequest.Style.Add("display", "none");
             }
-            catch (SqlException)
+            catch (Exception ax)
             {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Incorrect PIN\")</SCRIPT>");
-
-            }
-            catch (Exception)
-            {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"There was an error\")</SCRIPT>");
+                lblMessage.Text = ax.ToString();
+                return;
             }
         }
 

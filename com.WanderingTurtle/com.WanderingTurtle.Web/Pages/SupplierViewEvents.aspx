@@ -13,8 +13,8 @@
         View List of Events and Options to Edit or Delete
         -->
     <div id="theLists" runat="server">
-    <h1>Listed Events</h1><div id="eventSearch">
-        <asp:TextBox ID="txtEventSearch" runat="server"></asp:TextBox><asp:Button ID="btnEventSearch" OnClick="btnEventSearch_Click" runat="server" Text="Search" /></div><div class="clear"></div>
+    <h1>Events Available to be Offered</h1>
+    <div class="clear"></div>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:ListView ID="lvEvents" ItemType="com.WanderingTurtle.Common.Event" 
         SelectMethod="GetEvents" DataKeyNames="EventItemID" UpdateMethod="UpdateEvent"
@@ -39,15 +39,18 @@
             </tr>
         </ItemTemplate>
         <LayoutTemplate>
-            <table id="tbl1" class="sortable" runat="server">
+            <table id="tblevents" class="sortable">
+                <thead>
                 <tr id="tr1" runat="server">
                     <td id="td1" class="eventheader" runat="server">Event Name</td>
                     <td id="td2" class="eventheader" runat="server">Event Type</td>
                     <td id="td3" class="eventheader" runat="server">Description</td>
                     <td id="td4" class="eventheader" runat="server">Transportation</td>
                     <td id="td5" class="eventheader" runat="server">On-Site</td>
-                    <td></td>
+                    <td style="display: none;"></td>
                 </tr>
+
+                </thead>
                 <tr id="ItemPlaceholder" runat="server">
                 </tr>
             </table>

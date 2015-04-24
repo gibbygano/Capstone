@@ -5,60 +5,68 @@
         xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
 		Title="Guest Final Invoice" Height="400" Width="500"
-		WindowStartupLocation="CenterOwner">
+		WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="{DynamicResource Spacing.Container}">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Label Grid.Row="0" x:Name="lblGuestFinalInvoice" Content="Guest Final Invoice Summary" FontSize="16" FontWeight="Bold" />
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Guest Name:" />
-                <Label Grid.Row="2"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Checked In:" />
-                <Label Grid.Row="4"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Address:" />
-                <Label Grid.Row="6"  Grid.Column="0" HorizontalContentAlignment="Right" Content="City/State:" />
-                <Label Grid.Row="8"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Phone #:" />
-                <Label Grid.Row="10" Grid.Column="0" HorizontalContentAlignment="Right" Content="Email:" />
-                <Label Grid.Row="12" Grid.Column="0" HorizontalContentAlignment="Right" Content="Total Due:" />
-                <Label Grid.Row="0"  Grid.Column="1" x:Name="lblGuestNameLookup" />
-                <Label Grid.Row="2"  Grid.Column="1" x:Name="lblCheckInDate" />
-                <Label Grid.Row="4"  Grid.Column="1" x:Name="lblAddress" />
-                <Label Grid.Row="6"  Grid.Column="1" x:Name="lblCityState" />
-                <Label Grid.Row="8"  Grid.Column="1" x:Name="lblPhoneNum" />
-                <Label Grid.Row="10" Grid.Column="1" x:Name="lblEmail" />
-                <Label Grid.Row="12" Grid.Column="1" x:Name="lblTotalPrice" />
+            <ScrollViewer Grid.Row="1">
+                <Grid Margin="{DynamicResource Spacing.Container}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Guest Name:" />
+                        <Label Grid.Row="2"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Checked In:" />
+                        <Label Grid.Row="4"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Address:" />
+                        <Label Grid.Row="6"  Grid.Column="0" HorizontalContentAlignment="Right" Content="City/State:" />
+                        <Label Grid.Row="8"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Phone #:" />
+                        <Label Grid.Row="10" Grid.Column="0" HorizontalContentAlignment="Right" Content="Email:" />
+                        <Label Grid.Row="12" Grid.Column="0" HorizontalContentAlignment="Right" Content="Total Due:" />
+                        <Label Grid.Row="0"  Grid.Column="1" x:Name="lblGuestNameLookup" />
+                        <Label Grid.Row="2"  Grid.Column="1" x:Name="lblCheckInDate" />
+                        <Label Grid.Row="4"  Grid.Column="1" x:Name="lblAddress" />
+                        <Label Grid.Row="6"  Grid.Column="1" x:Name="lblCityState" />
+                        <Label Grid.Row="8"  Grid.Column="1" x:Name="lblPhoneNum" />
+                        <Label Grid.Row="10" Grid.Column="1" x:Name="lblEmail" />
+                        <Label Grid.Row="12" Grid.Column="1" x:Name="lblTotalPrice" />
 
-                <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Content="Invoice #:" />
-                <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" Content="Room #:" />
-                <Label Grid.Row="0" Grid.Column="3" x:Name="lblInvoice" />
-                <Label Grid.Row="2" Grid.Column="3" x:Name="lblRoomNum" />
-            </Grid>
+                        <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Content="Invoice #:" />
+                        <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" Content="Room #:" />
+                        <Label Grid.Row="0" Grid.Column="3" x:Name="lblInvoice" />
+                        <Label Grid.Row="2" Grid.Column="3" x:Name="lblRoomNum" />
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
         </Grid>
         <Grid Grid.Row="1" Margin="{DynamicResource Spacing.Container}">
             <Grid.ColumnDefinitions>
@@ -68,9 +76,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Submit" x:Name="BtnSubmit" Click="btnFinalizeInvoice_Click" />
-            <Button Grid.Column="2" Content="Cancel" x:Name="btnCancel" Click="BtnCancel_Click" />
-            <Button Grid.Column="4" Content="Print"  x:Name="btnPrint"  Click="btnPrint_Click" />
+            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="BtnSubmit" Click="btnFinalizeInvoice_Click" />
+            <Button Grid.Column="2" TabIndex="101" Content="Cancel" x:Name="btnCancel" Click="BtnCancel_Click" />
+            <Button Grid.Column="4" TabIndex="102" Content="Print"  x:Name="btnPrint"  Click="btnPrint_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>

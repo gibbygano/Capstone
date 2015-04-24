@@ -62,7 +62,10 @@
       <HintPath>..\packages\MahApps.Metro.1.1.3-ALPHA015\lib\net40\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -164,11 +167,11 @@
     <Compile Include="PrintableInvoice.xaml.cs">
       <DependentUpon>PrintableInvoice.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ReportHost.xaml.cs">
-      <DependentUpon>ReportHost.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Admin\EventType.xaml.cs">
       <DependentUpon>EventType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportHost.xaml.cs">
+      <DependentUpon>ReportHost.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SplashScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
@@ -242,10 +245,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ReportHost.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -255,6 +254,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Admin\EventType.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReportHost.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -324,11 +327,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="PrintableInvoice.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\PrintableInvoice.rdlc" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\com.WanderingTurtle.Common.CityState.datasource" />
