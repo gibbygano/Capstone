@@ -68,21 +68,19 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
         /// <exception cref="WanderingTurtleException">Condition.</exception>
-        internal static void MakeReadOnly(Panel content, FrameworkElement[] controlsToKeepEnabled = null)
+        internal static void MakeReadOnly(Panel content, params FrameworkElement[] controlsToKeepEnabled)
         {
             try
             {
-                foreach (FrameworkElement child in content.Children)
+                // Iterates loop if child is not part of the controlsToKeepEnabled array
+                // Does not bother marking Labels as ReadOnly
+                foreach (var child in content.Children.Cast<FrameworkElement>().Where(child => (controlsToKeepEnabled == null || !controlsToKeepEnabled.Contains(child)) && !(child is Label)))
                 {
-                    // Return if this child control is set in controlsToKeepEnabled
-                    if (controlsToKeepEnabled != null && controlsToKeepEnabled.Contains(child)) { continue; }
-
                     // If child component is a container, then call the recursive method to get inner child components
-                    if (child is Panel) { MakeReadOnly(child as Panel, controlsToKeepEnabled); }
-                    // Does not bother marking Labels as ReadOnly
-                    else if (child is Label) { continue; }
+                    if (child is Panel) { MakeReadOnly(child as Panel, controlsToKeepEnabled); continue; }
+
                     // If the child is a valid control
-                    else if (child is Control)
+                    if (child is Control)
                     {
                         var childControl = child as Control;
 
@@ -98,7 +96,6 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         ControlsHelper.SetMouseOverBorderBrush(childControl, childControl.BorderBrush);
                         ControlsHelper.SetFocusBorderBrush(childControl, childControl.BorderBrush);
                         TextBoxHelper.SetClearTextButton(childControl, false);
-                        //SetStyle(childControl, new Setter[] { new Setter(TextBoxHelper.ClearTextButtonProperty, false) });
                     }
                     // Don't know why this would throw, but it's here just in case
                     else { throw new ApplicationException("Unknown Component"); }

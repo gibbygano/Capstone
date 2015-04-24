@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvSuppliersList" d:DataContext="{d:DesignInstance common:Supplier }" GotKeyboardFocus="lvSuppliersList_GotKeyboardFocus">
+        <DataGrid Grid.Row="0" x:Name="lvSuppliersList" d:DataContext="{d:DesignInstance common:Supplier }">
             <DataGrid.Columns>
                 <DataGridTextColumn Width ="*"    Header="Company Name"  Binding="{Binding CompanyName}" />
                 <DataGridTextColumn Width ="*"    Header="First Name"    Binding="{Binding FirstName}" />

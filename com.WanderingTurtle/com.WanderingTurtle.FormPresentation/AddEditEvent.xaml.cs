@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             Title = "Editing Event: " + OriginalEvent.EventItemName;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
         public Event OriginalEvent { get; private set; }

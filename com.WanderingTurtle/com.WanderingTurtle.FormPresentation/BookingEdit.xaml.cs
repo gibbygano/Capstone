@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation
             populateTextFields();
             eID = (int)Globals.UserToken.EmployeeID;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
         /// <summary>

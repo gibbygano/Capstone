@@ -54,7 +54,7 @@ namespace com.WanderingTurtle.FormPresentation
             Title = String.Format("Editing Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { BtnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
         /// <summary>

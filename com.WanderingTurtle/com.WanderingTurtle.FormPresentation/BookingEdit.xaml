@@ -39,8 +39,8 @@
                 <Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingGuestName" Grid.ColumnSpan="2" />
                 <Label Grid.Row="1" Grid.Column="1" x:Name="lblEventName" Grid.ColumnSpan="2" />
                 <Label Grid.Row="2" Grid.Column="1" x:Name="lblStartDate" />
-                <xctk:IntegerUpDown Grid.Row="3" Grid.Column="1" Value="0" Minimum="0" ClipValueToMinMax="True" Name="udAddBookingQuantity" />
-                <xctk:DecimalUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" FormatString="P0" IsEnabled="{Binding ElementName=lvEventListItems}" Name="udDiscount" Increment=".01" />
+                <Metro:NumericUpDown Grid.Row="3" Grid.Column="1" Value="0" Minimum="0" Name="udAddBookingQuantity" />
+                <Metro:NumericUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" StringFormat="P0" IsEnabled="{Binding ElementName=lvEventListItems}" Name="udDiscount" Interval=".01" />
                 <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />

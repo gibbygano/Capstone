@@ -49,7 +49,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             txtUserName.IsEnabled = false;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel); }
         }
 
         /// <summary>
