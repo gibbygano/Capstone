@@ -36,7 +36,8 @@ $(document).ready(function () {
     });
 
     $('#tbl1').DataTable({
-        searching: false
+        searching: false,
+        paging: false
     });
 
     $("#errorMess").dialog({
@@ -109,6 +110,18 @@ $(document).ready(function () {
             timeFormat: 'hh:mm tt'
         });
 
+    $("#DateFrom").datetimepicker(
+        {
+            controlType: 'select',
+            oneLine: true,
+            timeFormat: 'hh:mm tt'
+        });
+    $("#DateTo").datetimepicker(
+        {
+            controlType: 'select',
+            oneLine: true,
+            timeFormat: 'hh:mm tt'
+        });
 
 
 });
