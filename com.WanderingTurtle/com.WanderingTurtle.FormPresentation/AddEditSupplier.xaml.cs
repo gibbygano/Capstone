@@ -70,6 +70,9 @@ namespace com.WanderingTurtle.FormPresentation
                 txtEmail.Text = null;
                 txtPhoneNumber.Text = null;
                 txtUserName.Text = null;
+                //making user name items visible so that they can be changed
+                txtUserName.Visibility = System.Windows.Visibility.Visible;
+                lblUserName.Visibility = System.Windows.Visibility.Visible;
                 cboZip.SelectedItem = null;
                 numSupplyCost.Value = .70;
             }
@@ -83,6 +86,9 @@ namespace com.WanderingTurtle.FormPresentation
                 txtEmail.Text = _UpdatableSupplier.EmailAddress.Trim();
                 txtPhoneNumber.Text = _UpdatableSupplier.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
                 txtUserName.Text = _supplierUserName;
+                //making user name items invisible so that they can't be changed
+                txtUserName.Visibility = System.Windows.Visibility.Hidden;
+                lblUserName.Visibility = System.Windows.Visibility.Hidden;
                 foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == _UpdatableSupplier.Zip)) { cboZip.SelectedValue = cityState.Zip; }
                 numSupplyCost.Value = (double)(_UpdatableSupplier.SupplyCost);
                 //cboZip.SelectedValue = supplierUpdate.Zip;
@@ -234,12 +240,14 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// edited by will fritz 2/15/15
         /// added conformation message box
+        /// edited by Rose Steffensmeier 2015/24/04
+        /// commented out checking supplierUserName updated
         /// </remarks>
         private async void EditSupplier()
         {
             try
             {
-                //check if user name has changed
+                /*//check if user name has changed
                 if (!_supplierUserName.Equals(txtUserName.Text))
                 {
                     //update user name
@@ -251,7 +259,7 @@ namespace com.WanderingTurtle.FormPresentation
                         DialogResult = true;
                         Close();
                     }
-                }
+                }*/
 
                 Supplier tempSupplier = new Supplier
                 {
