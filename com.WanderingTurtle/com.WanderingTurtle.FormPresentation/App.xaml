@@ -36,7 +36,7 @@
             <Thickness x:Key="Spacing.Right">0,0,5,0</Thickness>
             <Thickness x:Key="Spacing.Top">0,5,0,0</Thickness>
 
-            <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Stretch</VerticalAlignment>
+            <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>
             <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
@@ -84,7 +84,7 @@
             <Style TargetType="{x:Type Metro:NumericUpDown}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
                 <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
-                <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
             </Style>
             <Style TargetType="{x:Type xctk:IntegerUpDown}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
@@ -124,12 +124,15 @@
             </Style>
 
             <Style x:Key="ButtonSeparator" TargetType="{x:Type Separator}">
-                <Setter Property="Margin" Value="{StaticResource Spacing.Inline}" />
+                <Setter Property="Margin" Value="{StaticResource Spacing.Right}" />
                 <Setter Property="Height" Value="0" />
                 <Setter Property="Width" Value="0" />
             </Style>
             <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource MetroScrollViewer}">
                 <Setter Property="VerticalScrollBarVisibility" Value="Visible" />
+            </Style>
+            <Style x:Key="ButtonContainer" TargetType="{x:Type Grid}">
+                <Setter Property="Margin" Value="{StaticResource Spacing.Container}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

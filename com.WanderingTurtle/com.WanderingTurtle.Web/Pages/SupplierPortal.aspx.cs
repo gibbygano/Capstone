@@ -15,7 +15,7 @@ namespace com.WanderingTurtle.Web.Pages
         public Supplier _currentSupplier;
         private ProductManager _myManager = new ProductManager();
         private BookingManager _myBookingManager = new BookingManager();
-        private List<ItemListing> _currentItemListings;
+        private static List<ItemListing> _currentItemListings;
         public int currentListingCount = 0;
         public int currentGuestsCount = 0;
         public int current = 0;
@@ -68,7 +68,7 @@ namespace com.WanderingTurtle.Web.Pages
         {
 
                 return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
-
+            
         }
 
         public void GetNumbers(int itemListID)
@@ -94,6 +94,42 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        public IEnumerable<ItemListing> GetItemListsByDate()
+        {
+            try
+            {
+                DateTime From = DateTime.Parse(Request.Form["dateFrom"]);
+                DateTime To = DateTime.Parse(Request.Form["dateTo"]);
+
+                if (Request.Form["dateFrom"] != null && Request.Form["dateTo"] != null)
+                {
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > From && l.EndDate < To);
+                }
+                else
+                {
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+                }
+            }
+            catch (Exception)
+            {
+                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+            }
+        } 
+
+        public decimal getTotal()
+        {
+            decimal _extendedSum = 0;
+
+            IEnumerable<ItemListing> currentListings = GetItemListsByDate();
+
+            foreach (ItemListing i in currentListings)
+            {
+                _extendedSum += (i.Price * i.CurrentNumGuests);
+            }
+
+            return _extendedSum;
+        }
+
         public void btnDetails_Click(object sender, EventArgs e)
         {
             var b = (Button)sender;
@@ -102,6 +138,7 @@ namespace com.WanderingTurtle.Web.Pages
             actions.Style.Add("display", "none");
             leftcontainer.Style.Add("display", "none");
             eventsDetails.Style.Add("display", "block");
+            ViewMoneyDets.Style.Add("display", "none");
             //Response.Write("<script> showDetails(); </script>"); 
         }
 
@@ -110,6 +147,22 @@ namespace com.WanderingTurtle.Web.Pages
             actions.Style.Add("display", "block");
             leftcontainer.Style.Add("display", "block");
             eventsDetails.Style.Add("display", "none");
+            ViewMoneyDets.Style.Add("display", "none");
         }
+
+        public void btnViewMoneyDets_Click(object sender, EventArgs e)
+        {
+            actions.Style.Add("display", "none");
+            leftcontainer.Style.Add("display", "none");
+            eventsDetails.Style.Add("display", "none");
+            ViewMoneyDets.Style.Add("display", "block");
+        }
+
+        public void btnRefreshDate_Click(object sender, EventArgs e)
+        {
+            GetItemListsByDate();
+            ListView1.DataBind();
+        }
+
     }
 }

@@ -12,6 +12,7 @@ namespace com.WanderingTurtle.Tests
     /// <summary>
     /// Updated: Tony Noel, 2015/04/22- Updated three methods that were failing- HotelAccessorGet, Update, and Archive
     /// All Tests passing as of the date above.
+    /// Updated: Tony Noel, 2015/04/24 - Updated with a new invoice cleanup
     /// </summary>
     [TestClass]
     public class HotelManagerAccessorTest
@@ -20,12 +21,17 @@ namespace com.WanderingTurtle.Tests
         public void initialize()
         {
             HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "6663", true));
+            //This line below must remain here, helps to properly track and delete invoice
+            TestCleanupAccessor.ClearOutInvoice();
         }
 
         [TestMethod]
         public void HotelAccessorAdd()
         {
             int changed = HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "234234234", "3456", true));
+            //This line below must remain here, helps to properly track and delete invoice, which is linked to Guest record
+            TestCleanupAccessor.ClearOutInvoice();
+            //Asserts that the update has been made
             Assert.AreEqual(2, changed);
         }
 
@@ -34,6 +40,8 @@ namespace com.WanderingTurtle.Tests
         public void HotelAccessorAddFail()
         {
             HotelGuestAccessor.HotelGuestAdd(new HotelGuest("Fake", "Person", "1111 Fake St.", "", new CityState("52641", "Mt. Pleasant", "IA"), "5556667777", "fake@gmail.com", "000", "5678", true));
+            //This line below must remain here, helps to properly track and delete invoice
+            TestCleanupAccessor.ClearOutInvoice();
         }
 
         [TestMethod]
@@ -83,26 +91,8 @@ namespace com.WanderingTurtle.Tests
         [TestCleanup]
         public void cleanup()
         {
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            string commandText = @"DELETE FROM Invoice WHERE HotelGuestID >= 10";
-            string commandText3 = @"DELETE FROM [dbo].[HotelGuest] WHERE FirstName = 'Fake'";
-
-            var cmd = new SqlCommand(commandText, conn);
-            //var cmd2 = new SqlCommand(commandText2, conn);
-            var cmd3 = new SqlCommand(commandText3, conn);
-
-            try
-            {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                //cmd2.ExecuteNonQuery();
-                cmd3.ExecuteNonQuery();
-            }
-            catch (SqlException)
-            {
-                Console.Write("Fail!");
-            }
-            finally { conn.Close(); }
+              TestCleanupAccessor.ClearOutInvoice();
+              TestCleanupAccessor.DeleteHotelGuest();
         }
     }
 }

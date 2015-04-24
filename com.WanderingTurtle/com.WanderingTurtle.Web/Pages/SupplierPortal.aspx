@@ -23,6 +23,7 @@
             <br />
                 with a total of <%=currentGuestsCount %> guests signed up.<br />
             </div>
+            <asp:Button ID="btnViewMoneyDets" runat="server" Text="View Financial Details" OnClick="btnViewMoneyDets_Click" UseSubmitBehavior="False" />
 
         </div>
         <div id="rightcontainer">
@@ -58,7 +59,7 @@
                             <tr id="ItemPlaceholder" runat="server">
                             </tr>
 
-                        </table>
+                        </table>                       
                     </LayoutTemplate>
                 </asp:ListView>
 
@@ -87,7 +88,69 @@
                     </LayoutTemplate>
                 </asp:ListView>
                 <asp:Button ID="btnGoBack" runat="server" Text="Go Back" OnClick="btnGoBack_Click" UseSubmitBehavior="False" />
+                <asp:Button ID="btnPrint" runat="server" Text="Print" OnClientClick="javascript:window.print();" OnClick="btnGoBack_Click" UseSubmitBehavior="False" />
             </div>
+
+            <div id="ViewMoneyDets" runat="server" style="display: none;">
+                <h2>Selected Events</h2>
+
+                <div id="dateRange" class="dontPrint">
+                    <h3>Date Range</h3>
+                    <div id="dateFrom" style="float: left">
+                        <label>From:</label>
+                        <input type="text" name="dateFrom" id="DateFrom"/>
+                    </div>
+                    <div id="dateTo" style="float: left">
+                        <label>To:</label>
+                        <input type="text" name="dateTo" id="DateTo"/>
+                    </div>
+                    <div style="float: left">
+                        <label>&nbsp;</label>
+                        <asp:Button ID="btnRefreshDate" runat="server" Text="refreshList" OnClick="btnRefreshDate_Click" />  
+                    </div>
+                </div>
+                <asp:ListView ID="ListView1" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemListsByDate" DataKeyNames="ItemListID" EnableViewState="False" runat="server">
+                    <ItemTemplate>
+                        <tr>
+                            <td><%# Item.EventName.Truncate(25) %></td>
+                            <td><%# Item.StartDate.ToString("MM/dd/yy hh:mmt") %></td>
+                            <td><%# Item.EndDate.ToString("MM/dd/yy hh:mmt") %></td>
+                            <td><%# Item.CurrentNumGuests %></td>
+                            <td><%# Item.Price.ToString("C") %></td>
+                            <td><%# (Item.Price * Item.CurrentNumGuests).ToString("C") %></td>
+                        </tr>
+                    </ItemTemplate>
+                    <LayoutTemplate>
+                        <table id="tbl1" runat="server">
+                            <tr id="tr1" runat="server">
+                                <td id="td8" class="eventheader" runat="server">Event Name</td>
+                                <td id="td2" class="eventheader" runat="server">Start Time</td>
+                                <td id="td4" class="eventheader" runat="server">End Time</td>
+                                <td id="td3" class="eventheader" runat="server"># Tickets</td>
+                                <td id="td5" class="eventheader" runat="server">Ticket Cost</td>
+                                <td id="td1" class="eventheader" runat="server">Extended</td>
+                                <td></td>
+                            </tr>
+                            <tr id="ItemPlaceholder" runat="server">
+                            </tr>
+                        </table>
+                    </LayoutTemplate>
+                </asp:ListView>
+                <table>
+                    <tr>
+                        <th class="eventheader">Supplier Cost </th>
+                        <td><%= (int)(_currentSupplier.SupplyCost*100) %>%</td>
+                    </tr>
+                    <tr>
+                        <th class="eventheader">Total</th>
+                        <td><%= ((decimal)(getTotal() * _currentSupplier.SupplyCost)).ToString("C") %></td>
+
+                    </tr>
+                </table>
+                <asp:Button ID="btnGoBackHome" runat="server" Text="Go Back" OnClick="btnGoBack_Click" UseSubmitBehavior="False" />
+                <asp:Button ID="btnPrintFinacial" runat="server" Text="Print" OnClientClick="javascript:window.print();" OnClick="btnViewMoneyDets_Click" UseSubmitBehavior="False" />
+            </div>
+
         </div>
 
 

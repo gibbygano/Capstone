@@ -47,6 +47,8 @@ namespace com.WanderingTurtle.FormPresentation
             fillComboBox();
             FillUpdateList();
 
+            txtUserName.IsEnabled = false;
+
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { }); }
         }
 
@@ -260,7 +262,6 @@ namespace com.WanderingTurtle.FormPresentation
                         Close();
                     }
                 }*/
-
                 Supplier tempSupplier = new Supplier
                 {
                     CompanyName = txtCompanyName.Text.Trim(),
