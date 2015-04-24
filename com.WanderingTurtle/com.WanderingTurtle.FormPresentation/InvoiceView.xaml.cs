@@ -80,8 +80,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (selectedItem == null)
                 {
-                    new AddBooking(CurrentInvoice).ShowDialog();
-
+                    if (new AddBooking(CurrentInvoice).ShowDialog() == false) return;
                     refreshBookingList();
                 }
                 else
@@ -138,11 +137,8 @@ namespace com.WanderingTurtle.FormPresentation
                         //opens the ui and passes the booking details object in
                         CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, CurrentInvoice);
 
-                        if (cancel.ShowDialog() == false)
-                        {
-                            DialogResult = true;
-                            refreshBookingList();
-                        }
+                        if (cancel.ShowDialog() == false) return;
+                        refreshBookingList();
                     }
                     catch (Exception ex)
                     {
@@ -262,10 +258,8 @@ namespace com.WanderingTurtle.FormPresentation
                 HotelGuest selectedGuest = _hotelGuestManager.GetHotelGuest(CurrentInvoice.HotelGuestID);
 
                 //refreshes guest information after AddEditHotelGuest UI
-                if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false)
-                {
-                    refreshGuestInformation(CurrentInvoice.HotelGuestID);
-                }
+                if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false) return;
+                refreshGuestInformation(CurrentInvoice.HotelGuestID);
             }
             catch (Exception ex)
             {
