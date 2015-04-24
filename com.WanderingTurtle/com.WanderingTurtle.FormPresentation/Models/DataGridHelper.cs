@@ -74,22 +74,22 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 foreach (
                     var menuItem in
                         (contextMenus ??
-                         (DataGridContextMenuResult[]) Enum.GetValues(typeof (DataGridContextMenuResult)))
+                         (DataGridContextMenuResult[])Enum.GetValues(typeof(DataGridContextMenuResult)))
                             .Select(menu => new MenuItem
                             {
-                                Header = Enum.GetName(typeof (DataGridContextMenuResult), menu),
+                                Header = Enum.GetName(typeof(DataGridContextMenuResult), menu),
                                 CommandParameter = menu
                             }))
                 {
                     menuItem.Click += context.ContextMenuItem_Click;
                     var result =
                         ((DataGridContextMenuResult)
-                            (Enum.Parse(typeof (DataGridContextMenuResult), menuItem.Header.ToString())));
+                            (Enum.Parse(typeof(DataGridContextMenuResult), menuItem.Header.ToString())));
                     var dataGrid = component as DataGrid;
                     if (dataGrid != null && result != DataGridContextMenuResult.Add)
                     {
                         menuItem.SetBinding(UIElement.IsEnabledProperty,
-                            new Binding("Count") {Source = dataGrid.SelectedItems});
+                            new Binding("Count") { Source = dataGrid.SelectedItems });
                     }
                     contextMenu.Items.Add(menuItem);
                 }

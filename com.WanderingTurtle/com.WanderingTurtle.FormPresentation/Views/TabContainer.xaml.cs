@@ -1,6 +1,7 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using System;
 using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation.Views
@@ -10,7 +11,11 @@ namespace com.WanderingTurtle.FormPresentation.Views
     /// </summary>
     public partial class TabContainer
     {
-        /// <exception cref="WanderingTurtleException"/>
+        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
+        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public TabContainer()
         {
             InitializeComponent();

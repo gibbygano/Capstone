@@ -23,11 +23,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// This will fill the list of suppliers and set this object to the "Instance variable"
         /// Created by will fritz 15/2/6
         /// </summary>
-        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
-        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
+        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public ListSuppliers()
         {
             InitializeComponent();
