@@ -50,23 +50,6 @@ $(document).ready(function () {
         closeText: "X"
     });
 
-   
-
-    $("#listStartDate").datetimepicker(
-           {
-               controlType: 'select',
-               oneLine: true,
-               stepMinute: 10,
-               timeFormat: 'hh:mm tt'
-           });
-
-    $("#listEndDate").datetimepicker(
-           {
-               controlType: 'select',
-               oneLine: true,
-               stepMinute: 10,
-               timeFormat: 'hh:mm tt'
-           });
 
     $("#listPrice").spinner({
         min: 0.00,
@@ -96,20 +79,24 @@ $(document).ready(function () {
 
 
 
-    $("#eventStart").datetimepicker(
+    var startDateTextBox = $('#eventStart');
+    var endDateTextBox = $('#eventEnd');
+
+    $.timepicker.datetimeRange(
+        startDateTextBox,
+        endDateTextBox,
         {
+            minInterval: (1000 * 30 * 60), // 1hr
+            dateFormat: 'dd M yy',
+            timeFormat: 'hh:mm tt',
             controlType: 'select',
             oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
-    $("#eventEnd").datetimepicker(
-        {
-            controlType: 'select',
-            oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
-
-
+            showButtonPanel: false,
+            stepMinute: 10,
+            start: {}, // start picker options
+            end: {} // end picker options					
+        }
+    );
 
 });
 
