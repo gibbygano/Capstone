@@ -65,11 +65,12 @@ $(document).ready(function () {
            });
 
     $("#listPrice").spinner({
-        min: 0,
-        max: 999,
-        step: 1,
-        start: 0.00,
-        numberFormat: "C"
+        min: 0.00,
+        max: 999.00,
+        step: .01,
+        numberFormat:"C",
+        start: 0.00
+        
     });
 
     $("#listTickets").spinner({

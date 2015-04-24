@@ -56,7 +56,7 @@
                 <td>
                     <input name="end" id="eventEnd" value="<%# Item.EndDate %>" maxlength="255" class="myDate" /></td>
                 <td>
-                    <input name="price" value="<%# Item.Price.ToString("F") %>" maxlength="255" class="myMoney" /></td>
+                    $<input name="price" id="listPrice" value="<%# Item.Price.ToString() %>" maxlength="255" class="myMoney" /></td>
                 <td>
                     <input size="3" name="max" id="listmax" class="myspinner myDate" value="<%# Item.MaxNumGuests %>" maxlength="3" /></td>
                 <td>
