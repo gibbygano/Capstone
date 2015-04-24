@@ -4,7 +4,6 @@ using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <exception cref="WanderingTurtleException"/>
-        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<ItemListing>(out command);

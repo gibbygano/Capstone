@@ -41,6 +41,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
+
         private async void addItemListing()
         {
             if (!Validator()) return;

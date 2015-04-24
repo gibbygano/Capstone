@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
             lblTotalDue.Content = CurrentBookingDetails.TotalCharge.ToString("c");
 
             udAddBookingQuantity.Value = CurrentBookingDetails.Quantity;
-            udDiscount.Value = (double?) CurrentBookingDetails.Discount;
+            udDiscount.Value = (double?)CurrentBookingDetails.Discount;
 
             lblAvailSeats.Content = _eventListingToView.QuantityOffered;
 

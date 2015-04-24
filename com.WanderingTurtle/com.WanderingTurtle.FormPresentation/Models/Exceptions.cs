@@ -4,12 +4,13 @@ using System.Windows;
 namespace com.WanderingTurtle.FormPresentation.Models
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="InputValidationException"/> class.
+    /// Initializes a new instance of the <see cref="InputValidationException" /> class.
     /// </summary>
     internal class InputValidationException : WanderingTurtleException
     {
         /// <summary>
-        /// Show <see cref="InputValidationException"/> Error Message with a <see cref="string"/> <paramref name="message"/>.
+        /// Initializes a new instance of the <see cref="InputValidationException" /> class. Show
+        /// <see cref="InputValidationException" /> Error Message with a <see cref="string" /><paramref name="message" />.
         /// </summary>
         /// <param name="component"></param>
         /// <param name="message"></param>
@@ -17,7 +18,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
             : base(component, message, true) { }
 
         /// <summary>
-        /// Show <see cref="InputValidationException"/> Error Message with a <see cref="string"/> <paramref name="message"/> and <see cref="string"/> <paramref name="title"/>.
+        /// Initializes a new instance of the <see cref="InputValidationException" /> class. Show
+        /// <see cref="InputValidationException" /> Error Message with a
+        /// <see cref="string" /><paramref name="message" /> and <see cref="string" /><paramref name="title" />.
         /// </summary>
         /// <param name="component"></param>
         /// <param name="message"></param>
@@ -26,7 +29,8 @@ namespace com.WanderingTurtle.FormPresentation.Models
             : base(component, message, title, true) { }
 
         /// <summary>
-        /// Show <see cref="InputValidationException"/> Error Message with an already constructed <see cref="WanderingTurtleException"/> <paramref name="exception"/>.
+        /// Initializes a new instance of the <see cref="InputValidationException" /> class. Show
+        /// <see cref="InputValidationException" /> Error Message with an already constructed <see cref="WanderingTurtleException" /><paramref name="exception" />.
         /// </summary>
         /// <param name="exception"></param>
         public InputValidationException(WanderingTurtleException exception)
@@ -34,12 +38,13 @@ namespace com.WanderingTurtle.FormPresentation.Models
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="WanderingTurtleException"/> class.
+    /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class.
     /// </summary>
     internal class WanderingTurtleException : ApplicationException
     {
         /// <summary>
-        /// Show <see cref="WanderingTurtleException"/> Error Message with a <see cref="string"/> <paramref name="message"/>.
+        /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class. Show
+        /// <see cref="WanderingTurtleException" /> Error Message with a <see cref="string" /><paramref name="message" />.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -52,7 +57,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Show <see cref="WanderingTurtleException"/> Error Message with a <see cref="string"/> <paramref name="message"/> and <see cref="Exception.InnerException"/> <paramref name="innerException"/>.
+        /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class. Show
+        /// <see cref="WanderingTurtleException" /> Error Message with a
+        /// <see cref="string" /><paramref name="message" /> and <see cref="Exception.InnerException" /><paramref name="innerException" />.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -66,7 +73,8 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Show <see cref="WanderingTurtleException"/> Error Message with an <see cref="string"/> <see cref="Exception"/>.
+        /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class. Show
+        /// <see cref="WanderingTurtleException" /> Error Message with an <see cref="string" /><see cref="Exception" />.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="exception"></param>
@@ -79,7 +87,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Show <see cref="WanderingTurtleException"/> Error Message with an <see cref="string"/> <see cref="Exception"/> and <see cref="string"/> <paramref name="title"/>.
+        /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class. Show
+        /// <see cref="WanderingTurtleException" /> Error Message with an
+        /// <see cref="string" /><see cref="Exception" /> and <see cref="string" /><paramref name="title" />.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="exception"></param>
@@ -94,7 +104,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Show <see cref="WanderingTurtleException"/> Error Message with a <see cref="string"/> <paramref name="message"/> and <see cref="string"/> <paramref name="title"/>.
+        /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class. Show
+        /// <see cref="WanderingTurtleException" /> Error Message with a
+        /// <see cref="string" /><paramref name="message" /> and <see cref="string" /><paramref name="title" />.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -109,7 +121,10 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Show <see cref="WanderingTurtleException"/> Error Message with a <see cref="string"/> <paramref name="message"/> and <see cref="string"/> <paramref name="title"/> and <see cref="Exception.InnerException"/> <paramref name="innerException"/>.
+        /// Initializes a new instance of the <see cref="WanderingTurtleException" /> class. Show
+        /// <see cref="WanderingTurtleException" /> Error Message with a
+        /// <see cref="string" /><paramref name="message" /> and
+        /// <see cref="string" /><paramref name="title" /> and <see cref="Exception.InnerException" /><paramref name="innerException" />.
         /// </summary>
         /// <param name="control"></param>
         /// <param name="message"></param>
@@ -124,10 +139,19 @@ namespace com.WanderingTurtle.FormPresentation.Models
             Title = title;
         }
 
+        /// <summary>
+        /// Gets or sets the current control.
+        /// </summary>
         public FrameworkElement CurrentControl { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether do handle.
+        /// </summary>
         public bool DoHandle { get; set; }
 
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
         public string Title { get; set; }
     }
 }

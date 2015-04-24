@@ -3,7 +3,6 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -343,7 +342,7 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtAddress1, "Please enter an Address");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) &&!Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
+            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
             {
                 ShowInputErrorMessage(TxtAddress2, "Error adding Address2");
                 return false;

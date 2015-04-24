@@ -3,14 +3,17 @@ using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation.Models
 {
+    /// <summary>
+    /// The control helper.
+    /// </summary>
     internal static class ControlHelper
     {
         /// <summary>
-        /// Attempts to get the parent of the type specified in the Generic Parameter <typeparam name="T"/>
+        /// Attempts to get the parent of the type specified in the Generic Parameter <typeparam name="T" />
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="control"></param>
-        /// <returns></returns>
+        /// <returns>Generic Type of <typeparamref name="T" /></returns>
         /// <exception cref="WanderingTurtleException">Error getting specified parent.</exception>
         internal static T GetParent<T>(this FrameworkElement control) where T : class
         {
@@ -29,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                         { break; }
                     }
                 }
-                return (parent as T);
+                return parent as T;
             }
             catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Parent Window"); }
         }

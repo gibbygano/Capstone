@@ -17,6 +17,6 @@
         </Grid.RowDefinitions>
         <Image Margin="{DynamicResource Local Margin}" Source="/WanderingTurtle;component/Resources/Logo_White.png" />
         <Separator Grid.Row="1" />
-        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{DynamicResource Local Margin}" Click="BtnSignIn_Click" Content="Please Sign In" Style="{DynamicResource SignIn}" />
+        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{DynamicResource Local Margin}" Click="BtnSignInClick" Content="Please Sign In" Style="{DynamicResource SignIn}" />
     </Grid>
 </UserControl>

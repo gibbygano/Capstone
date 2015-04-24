@@ -47,7 +47,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <exception cref="WanderingTurtleException"/>
-        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<BookingDetails>(out command);
