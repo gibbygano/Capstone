@@ -181,6 +181,7 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         //Justin Pennington 2/14/15
+        //Updated Bryan Hurst 4/24/2015 While missing from If & "cmd.CommandType = CommandType.StoredProcedure;" added
         //retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
         public static Event GetEvent(String eventID)
         {
@@ -190,6 +191,8 @@ namespace com.WanderingTurtle.DataAccess
             string cmdText = "spSelectEventItem";
             var cmd = new SqlCommand(cmdText, conn);
 
+            cmd.CommandType = CommandType.StoredProcedure;
+
             cmd.Parameters.AddWithValue("@EventItemID", eventID);
             try
             {
@@ -197,13 +200,17 @@ namespace com.WanderingTurtle.DataAccess
                 var reader = cmd.ExecuteReader();
                 if (reader.HasRows == true)
                 {
-                    theEvent.EventItemID = reader.GetInt32(0);
-                    theEvent.EventItemName = reader.GetString(1);
-                    theEvent.EventTypeID = reader.GetInt32(2);
-                    theEvent.OnSite = reader.GetBoolean(3);
-                    theEvent.Transportation = reader.GetBoolean(4);
-                    theEvent.Description = reader.GetString(5);
-                    theEvent.Active = reader.GetBoolean(6);
+                    while (reader.Read())
+                    {
+                        theEvent.EventItemID = reader.GetInt32(0);
+                        theEvent.EventItemName = reader.GetString(1);
+                        theEvent.EventTypeID = reader.GetInt32(2);
+                        theEvent.OnSite = reader.GetBoolean(3);
+                        theEvent.Transportation = reader.GetBoolean(4);
+                        theEvent.Description = reader.GetString(5);
+                        theEvent.Active = reader.GetBoolean(6);
+                    }
+                    
                 }
                 else
                 {

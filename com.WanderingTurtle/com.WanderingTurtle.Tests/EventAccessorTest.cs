@@ -147,5 +147,38 @@ namespace com.WanderingTurtle.Tests
             int actual = EventAccessor.DeleteEventItem(eventToEdit);
             Assert.AreEqual(expected, actual);
         }
+
+        /// <summary>
+        /// Test retrieving a single record from the EventItem database
+        /// </summary>
+        [TestMethod]
+        public void GetEvent_Valid()
+        {
+            setup();
+
+            string expected = eventToTest.EventItemName;
+
+            EventAccessor.AddEvent(eventToTest);
+            eventToEdit = getEventObjectID(list);
+
+            Event actual = EventAccessor.GetEvent(eventToEdit.EventItemID.ToString());
+
+            EventAccessor.DeleteEventTestItem(eventToTest);
+
+            Assert.AreEqual(expected, actual.EventItemName);
+        }
+
+        /// <summary>
+        /// Test retrieving a single nonexistent record from the EventItem database
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ApplicationException))]
+        public void GetEvent_Invalid()
+        {
+            setup();
+            eventToEdit.EventItemID = 9999;
+
+            Event actual = EventAccessor.GetEvent(eventToEdit.EventItemID.ToString());
+        }
     }
 }
