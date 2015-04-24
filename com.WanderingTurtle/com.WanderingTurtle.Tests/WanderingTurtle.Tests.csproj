@@ -69,6 +69,7 @@
     <Compile Include="BookingAccessorTests.cs" />
     <Compile Include="InvoiceAccessorTest.cs" />
     <Compile Include="BookingManagerTests.cs" />
+    <Compile Include="TestCleanupAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\WanderingTurtle.Common.csproj">

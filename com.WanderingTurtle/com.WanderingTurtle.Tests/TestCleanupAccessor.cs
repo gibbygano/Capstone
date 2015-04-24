@@ -1,5 +1,6 @@
 ﻿using com.WanderingTurtle.Common;
 using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace com.WanderingTurtle.DataAccess
@@ -209,6 +210,33 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
+        }
+
+        public static int DeleteTestSupplier(Supplier supplierToDelete)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spDeleteTestSupplier";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@SupplierID", supplierToDelete.SupplierID);
+
+            int rowsAffected;
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
         }
     }
 }

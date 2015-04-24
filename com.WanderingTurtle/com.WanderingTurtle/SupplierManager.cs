@@ -432,25 +432,6 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        /// <summary>
-        /// Tony Noel
-        /// Created on 2015/04/2015
-        ///
-        /// Used for testing only
-        /// </summary>
-        /// <param name="testSupplier"></param>
-        /// <returns></returns>
-        public int deleteTestSupplier(Supplier testSupplier)
-        {
-            try
-            {
-                return SupplierAccessor.DeleteTestSupplier(testSupplier);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
 
         /// <summary>
         /// Justin Pennington

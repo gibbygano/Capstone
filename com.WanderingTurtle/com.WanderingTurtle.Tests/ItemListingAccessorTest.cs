@@ -116,7 +116,7 @@ namespace com.WanderingTurtle.Tests
             testSupp.SupplierID = modSupp.SupplierID;
             testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
             SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
-            SupplierAccessor.DeleteTestSupplier(testSupp);
+            TestCleanupAccessor.DeleteTestSupplier(testSupp);
                     
             Assert.AreEqual(expected, actual);
         }
@@ -142,7 +142,7 @@ namespace com.WanderingTurtle.Tests
             testSupp.SupplierID = modSupp.SupplierID;
             testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
             SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
-            SupplierAccessor.DeleteTestSupplier(testSupp);
+            TestCleanupAccessor.DeleteTestSupplier(testSupp);
 
             Assert.AreEqual(expected, actual);
         }
@@ -186,7 +186,7 @@ namespace com.WanderingTurtle.Tests
             testSupp.SupplierID = modSupp.SupplierID;
             testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
             SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
-            SupplierAccessor.DeleteTestSupplier(testSupp);
+            TestCleanupAccessor.DeleteTestSupplier(testSupp);
 
             Assert.AreEqual(expected, actual);
         }
