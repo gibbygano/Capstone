@@ -343,7 +343,7 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtAddress1, "Please enter an Address");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
+            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) &&!Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
             {
                 ShowInputErrorMessage(TxtAddress2, "Error adding Address2");
                 return false;
@@ -353,22 +353,22 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(CboZip, "Please select a Zip Code");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtPhoneNumber.Text.Trim()) && !Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
+            if (!Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
             {
                 ShowInputErrorMessage(TxtPhoneNumber, "Please enter a valid Phone Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtEmailAddress.Text.Trim()) && !Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
+            if (!Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
             {
                 ShowInputErrorMessage(TxtEmailAddress, "Please enter a valid Email Address");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtRoomNumber.Text.Trim()) && !Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
+            if (!Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
             {
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtGuestPIN.Text.Trim()) && !Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()))
+            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()) || TxtGuestPIN.Text.Length > 4)
             {
                 ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
                 return false;
