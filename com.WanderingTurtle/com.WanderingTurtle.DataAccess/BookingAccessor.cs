@@ -255,7 +255,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created: 2015/02/03
         ///
         /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
-        /// Quantity, Refund, Cancel, and Active
+        /// Quantity, Refund, Cancel
         /// </summary>
         /// <remarks>
         /// Tony Noel

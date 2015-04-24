@@ -11,6 +11,7 @@ namespace com.WanderingTurtle.BusinessLogic
     {
         private BookingManager _bookingManager = new BookingManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private InvoiceAccessor _invoiceAccessor = new InvoiceAccessor();
 
         /// <summary>
         /// Pat Banks
@@ -135,53 +136,21 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="originalInvoice">invoice that was fetched from database - used to check for concurrency errors</param>
         /// <param name="updatedInvoice">information that needs to be updated in the database</param>
         /// <returns>boolean true if result was successful</returns>
-        public ResultsArchive ArchiveCurrentGuestInvoice(Invoice invoiceToTry)
+        public ResultsArchive ArchiveGuestInvoice(int GuestID)
         {
             try
             {
-                ////get latest bookings from the guest
-                List<BookingDetails> bookingsToArchive = RetrieveGuestBookingDetailsList(invoiceToTry.HotelGuestID);
+                int numRows = _invoiceAccessor.ArchiveGuestInvoice(GuestID);
 
-                //archive guest's bookings by changing active field to false
-                foreach (BookingDetails b in bookingsToArchive)
-                {
-                    b.Active = false;
-
-                    int numrows = _bookingManager.EditBooking(b);
-
-                    if (numrows != 1)
-                    {
-                        return ResultsArchive.ChangedByOtherUser;
-                    }
-                }
-
-                //Get the latest hotel guest info
-                HotelGuest guestToArchive = _hotelGuestManager.GetHotelGuest(invoiceToTry.HotelGuestID);
-                bool guestArchive = _hotelGuestManager.ArchiveHotelGuest(guestToArchive, !guestToArchive.Active);
-
-                if (guestArchive == false)
+                if (numRows == 2)
                 {
                     return ResultsArchive.ChangedByOtherUser;
                 }
                 else
                 {
-                    Invoice originalInvoice = RetrieveInvoiceByGuest(invoiceToTry.HotelGuestID);
-
-                    //update invoice record with dateClosed and change active status
-                    invoiceToTry.DateClosed = DateTime.Now;
-                    invoiceToTry.Active = false;
-
-                    int numRows = InvoiceAccessor.ArchiveGuestInvoice(originalInvoice, invoiceToTry);
-
-                    if (numRows != 1)
-                    {
-                        return ResultsArchive.ChangedByOtherUser;
-                    }
-                    else
-                    {
-                        return ResultsArchive.Success;
-                    }
+                    return ResultsArchive.Success;
                 }
+                
             }
             catch (ApplicationException ex)
             {
