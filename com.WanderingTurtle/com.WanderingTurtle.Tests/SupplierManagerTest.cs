@@ -256,7 +256,7 @@ namespace com.WanderingTurtle.Tests
         {
             Setup("AddAppWorkingTest");
             SupplierMang.AddASupplierApplication(testSupplierApp);
-            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplier);
             TestCleanupAccessor.deleteTestApplication();
         }
 
@@ -274,7 +274,7 @@ namespace com.WanderingTurtle.Tests
             //test 1 empty Supplier
             Supplier testSupplierEmpty = new Supplier();
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierEmpty, "FJones"), SupplierResult.DatabaseError);
-            SupplierMang.deleteTestSupplier(testSupplierEmpty);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplierEmpty);
         }
 
         /// <summary>
@@ -291,7 +291,7 @@ namespace com.WanderingTurtle.Tests
             Supplier testSupplierNull = new Supplier();
             testSupplierNull = null;
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplierNull, "FJones"), SupplierResult.DatabaseError);
-            SupplierMang.deleteTestSupplier(testSupplierNull);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplierNull);
         }
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace com.WanderingTurtle.Tests
             testSupplier.Zip = null;
             testSupplier.LastName = null;
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.DatabaseError);
-            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -319,7 +319,7 @@ namespace com.WanderingTurtle.Tests
             Setup("AddWorkingTest");
             Assert.AreEqual(SupplierMang.AddANewSupplier(testSupplier, "FJones"), SupplierResult.Success);
             findTestItemDetails();
-            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace com.WanderingTurtle.Tests
             findTestItemDetails();
             Supplier testSupplier2 = test2();
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
-            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplier);
         }
 
         private void findTestItemDetails()
@@ -469,7 +469,7 @@ namespace com.WanderingTurtle.Tests
 
             SupplierMang.EditSupplierApplication(testSupplierApp, testSupplierApp2);
             testSupplierApp = testSupplierApp2;
-            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplier);
         }
 
         /// <summary>
@@ -527,7 +527,7 @@ namespace com.WanderingTurtle.Tests
                 }
             }
             Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplier), SupplierResult.Success);
-            SupplierMang.deleteTestSupplier(testSupplier);
+            TestCleanupAccessor.DeleteTestSupplier(testSupplier);
         }
     }
 }

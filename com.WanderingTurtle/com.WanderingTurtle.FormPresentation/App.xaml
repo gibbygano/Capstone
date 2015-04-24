@@ -76,7 +76,7 @@
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
                 <Setter Property="Metro:TextBoxHelper.ClearTextButton" Value="{StaticResource TextBoxClearTextButton}" />
             </Style>
-            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}">
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource VirtualisedMetroComboBox}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
                 <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
