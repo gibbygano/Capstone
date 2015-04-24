@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.FormPresentation
         private BookingManager _bookingManager = new BookingManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
         private InvoiceManager _invoiceManager = new InvoiceManager();
-        private List<BookingDetails> myBookingList;
+        private List<BookingDetails> _bookingDetailsList;
 
         /// <summary>
         /// Pat Banks
@@ -100,7 +100,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                         case (ResultsEdit.OkToEdit):
                             if (new EditBooking(CurrentInvoice, selectedItem).ShowDialog() == false) return;
-                            DialogResult = true;
                             refreshBookingList();
                             break;
                     }
@@ -178,7 +177,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
         {
             //check if invoice can be closed
-            switch (_invoiceManager.CheckToArchiveInvoice(CurrentInvoice, myBookingList))
+            switch (_invoiceManager.CheckToArchiveInvoice(CurrentInvoice, _bookingDetailsList))
             {
                 case (ResultsArchive.CannotArchive):
                     throw new WanderingTurtleException(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
@@ -288,11 +287,11 @@ namespace com.WanderingTurtle.FormPresentation
             lvGuestBookings.ItemsPanel.LoadContent();
             try
             {
-                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(CurrentInvoice.HotelGuestID);
+                _bookingDetailsList = _invoiceManager.RetrieveGuestBookingDetailsList(CurrentInvoice.HotelGuestID);
 
-                lvGuestBookings.ItemsSource = myBookingList;
+                lvGuestBookings.ItemsSource = _bookingDetailsList;
                 lvGuestBookings.Items.Refresh();
-                lblBookingsMessage.Content = "Guest has " + myBookingList.Count + " booking(s).";
+                lblBookingsMessage.Content = "Guest has " + _bookingDetailsList.Count + " booking(s).";
             }
             catch (Exception ex)
             {

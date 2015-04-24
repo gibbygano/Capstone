@@ -40,7 +40,7 @@
                 <Label Grid.Row="1" Grid.Column="1" x:Name="lblEventName" Grid.ColumnSpan="2" />
                 <Label Grid.Row="2" Grid.Column="1" x:Name="lblStartDate" />
                 <Metro:NumericUpDown Grid.Row="3" Grid.Column="1" Value="0" Minimum="0" Name="udAddBookingQuantity" />
-                <Metro:NumericUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" StringFormat="P0" IsEnabled="{Binding ElementName=lvEventListItems}" Name="udDiscount" Interval=".01" />
+                <Metro:NumericUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" StringFormat="P0" Name="udDiscount" Interval=".01" />
                 <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -64,7 +64,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="btnEditBooking" Content="Submit" Click="btnEditBooking_Click" VerticalAlignment="Center" />
+            <Button Grid.Column="0" x:Name="btnSubmit" Content="Submit" Click="btnSubmitBooking_Click" VerticalAlignment="Center" />
             <Button Grid.Column="2" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click"  VerticalAlignment="Center" />
             <Separator Grid.Column="1" Style="{StaticResource ButtonSeparator}" />
         </Grid>
