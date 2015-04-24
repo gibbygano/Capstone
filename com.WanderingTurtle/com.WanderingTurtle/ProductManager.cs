@@ -254,7 +254,7 @@ namespace com.WanderingTurtle.BusinessLogic
                         DataCache._ItemListingListTime = now;
                     }
                 }
-                return DataCache._currentItemListingList.Where(l => l.SupplierID == supplierID && l.StartDate > now);
+                return DataCache._currentItemListingList.Where(l => l.SupplierID == supplierID);
             }
             catch (Exception)
             {

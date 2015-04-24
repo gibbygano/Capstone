@@ -77,7 +77,7 @@
                 <Metro:NumericUpDown Grid.Column="3" Grid.Row="16" TabIndex="12" x:Name="numSupplyCost" Minimum=".01" Maximum =".99" Interval=".01" Value=".70" StringFormat="P0" IsEnabled="False" />
             </Grid>
         </ScrollViewer>
-        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Container}">
+        <Grid Grid.Row="1" Style="{StaticResource ButtonContainer}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

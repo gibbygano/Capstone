@@ -47,7 +47,7 @@
             </Grid>
         </ScrollViewer>
 
-        <Grid Grid.Row="1" Margin="{DynamicResource Spacing.Container}">
+        <Grid Grid.Row="1" Style="{StaticResource ButtonContainer}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

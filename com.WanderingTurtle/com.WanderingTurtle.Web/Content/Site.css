@@ -1016,6 +1016,9 @@ input.myMoney{
         text-decoration: none;
         cursor: auto;
     }
+    .dontPrint {
+        display: none;
+    }
 }
 
 #zips_length, #zips_filter, #zips_info, #zips_paginate{
