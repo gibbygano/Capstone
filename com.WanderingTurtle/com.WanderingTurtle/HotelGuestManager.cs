@@ -140,41 +140,5 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             return ResultsEdit.DatabaseError;
         }
-
-        /// <summary>
-        /// Rose Steffensmeier
-        /// Created: 2013/02/26
-        ///
-        /// Archives a hotel guest
-        /// </summary>
-        /// <remarks>
-        /// Rose Steffensmeier
-        /// Updated: 2015/03/12
-        ///
-        /// Updated try/catch blocks
-        /// </remarks>
-        /// <param name="oldGuest"></param>
-        /// <param name="newActive"></param>
-        /// <exception cref="Exception">an exception was hit in the HotelGuestAccessor or HotelGuestAccessor can't be found</exception>
-        /// <returns>true if rows were affected, false if not</returns>
-        public bool ArchiveHotelGuest(HotelGuest oldGuest, bool newActive)
-        {
-            try
-            {
-                return HotelGuestAccessor.HotelGuestArchive(oldGuest, newActive) > 0;
-            }
-            catch (ApplicationException)
-            {
-                throw;
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

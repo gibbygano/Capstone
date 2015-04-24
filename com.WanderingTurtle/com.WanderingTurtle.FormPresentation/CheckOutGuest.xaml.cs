@@ -80,7 +80,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                ResultsArchive result = _invoiceManager.ArchiveCurrentGuestInvoice(_CurrentInvoice);
+                ResultsArchive result = _invoiceManager.ArchiveGuestInvoice(_CurrentInvoice.HotelGuestID);
 
                 switch (result)
                 {
