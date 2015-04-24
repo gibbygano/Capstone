@@ -60,15 +60,15 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        public ResultsEdit UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
+        public ResultsEdit UpdateSupplierLogin(string newPassword, SupplierLogin oldLogin)
         {
             try
             {
-                bool result1 = CheckSupplierUserName(newUserName);
+                bool result1 = CheckSupplierUserName(oldLogin.UserName);
 
                 if (result1)
                 {
-                    int result = access.UpdateSupplierLogin(newUserName, oldUserName, oldSupplierID);
+                    int result = access.UpdateSupplierLogin(newPassword, oldLogin);
 
                     if (result == 1)
                     {

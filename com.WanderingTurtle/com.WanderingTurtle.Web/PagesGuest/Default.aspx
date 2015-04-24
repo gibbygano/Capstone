@@ -10,29 +10,52 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-     <script>
-         function pageLoad() {
-             console.log("jquery is ready.");
-             $("#txtGuestTickets").spinner({
-                 min: 0,
-                 max: $("#hfGuestMaxTickets").val()
-             });
+    <script>
+        function pageLoad() {
+            console.log("jquery is ready.");
+            $("#txtGuestTickets").spinner({
+                min: 0,
+                max: $("#hfGuestMaxTickets").val()
+            });
 
-             $("#txtGuestPin").change(function () {
-                 var pinValue = $(this).val();
+            $("#txtGuestTickets").change(function () {
+                if (($.isNumeric($(this).val()))) {
+                    if ($(this).val() > 0 && $(this).val() < $("#hfGuestMaxTickets").val()) {
+                        $(this).css("background-color", "white");
+                        return;
+                    }
+                    else {
+                        $(this).css("background-color", "red");
+                    }
+                }
+                else {
+                    $(this).css("background-color", "red");
+                }
 
-                 $('#demo1').alphanum()
+            });
 
-                 if (!($.isNumeric(pinValue))) {
-                     $(this).css('background-color', 'red');
-                     return;
-                 }
-                 else {
-                     $(this).css('background-color', 'white');
-                 }
-             });
-         }
+            $("#txtGuestPin").change(function () {
+                var pinValue = $(this).val();
+
+                if (pinValue.length > 5) {
+                    $(this).css("background-color", "red");
+                }
+                else {
+                    $(this).css("background-color", "white");
+                }
+            });
+        }
     </script>
+    <style>
+        .hide div {
+            width: 500px;
+            background-color: white;
+            border: 1px solid #186D99;
+            border-radius: 3px;
+            padding: 4px;
+            padding-left: 8px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
@@ -82,7 +105,7 @@
                         I, <%= guestName %>, agree to pay <%= totalPrice.ToString("C")  %> for <%= ticketQty %> tickets to
                         <%= eventName %> on <%= date %>.  This amount will be charged to my credit card on file. 
                     </p>
-                    <asp:Button ID="btnConfirm" runat="server" Text="I Agree" OnClick="btnConfirm_Click" UseSubmitBehavior="False"  />
+                    <asp:Button ID="btnConfirm" runat="server" Text="I Agree" OnClick="btnConfirm_Click" UseSubmitBehavior="False" />
                     <asp:Button ID="btnCancel" runat="server" Text="Go Back" OnClick="btnCancel_Click" UseSubmitBehavior="False" />
                 </div>
             </div>

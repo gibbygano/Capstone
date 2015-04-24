@@ -13,8 +13,8 @@
     <Grid Margin="{DynamicResource Spacing.Container}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height=".75*" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label Grid.Row="0" x:Name="lblGeneralAddBooking" FontSize="16" FontWeight="Bold" Content="Add Booking for Guest" />
@@ -67,11 +67,11 @@
         </Grid>
         <Grid Grid.Row="3" Margin="{StaticResource Spacing.Top}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="1" x:Name="btnAddBookingAdd" Content="Submit" Click="btnAddBookingAdd_Click" />
             <Button Grid.Column="3" x:Name="btnCancelButton"     Content="Cancel" Click="btnCancelButton_Click" />
