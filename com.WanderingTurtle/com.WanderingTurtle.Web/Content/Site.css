@@ -979,7 +979,7 @@ input.myMoney{
 
  #MainContent_lvDetails_tbl1{
      color: #333;
- }  
+ }
 
 @media print {
     * {
@@ -996,22 +996,60 @@ input.myMoney{
         visibility: hidden;
     }
 
-   header .float-right {
-       visibility: hidden;
-   }
+    header .float-right {
+        visibility: hidden;
+    }
 
-   a.sortheader{
-       text-decoration: none;
-   }
-   td.eventheader a{
-     text-decoration: none;
-   }
-   tr#MainContent_lvLists_tr1 a{
-       text-decoration: none;
-   }
+    a.sortheader {
+        text-decoration: none;
+    }
 
-   a:-webkit-any-link {
-  text-decoration: none;
-  cursor: auto;
+    td.eventheader a {
+        text-decoration: none;
+    }
+
+    tr#MainContent_lvLists_tr1 a {
+        text-decoration: none;
+    }
+
+    a:-webkit-any-link {
+        text-decoration: none;
+        cursor: auto;
+    }
 }
+
+#zips_length, #zips_filter, #zips_info, #zips_paginate{
+    display: none;
+}
+
+#zips{
+    display: none;
+    float: left;
+}
+
+#zips_wrapper{
+    float: left;
+    margin-top: -21px;
+}
+
+#zips tr{
+    height: 24.09px;
+}
+
+#MainContent_txtZip{
+    float: left;
+}
+
+table.dataTable.no-footer {
+  border-bottom: 0px;
+}
+
+#hideme{
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+table.dataTable tbody tr {
+  background-color: #EFEEEF;
 }

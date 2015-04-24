@@ -2,6 +2,42 @@
 $(document).ready(function () {
     console.log("JQuery loaded");
 
+    $("#MainContent_txtPhoneNumber").mask("(999) 999-9999");
+    $("#MainContent_txtZip").mask("99999");
+    var allZips = $('#zips').DataTable({
+    });
+
+    $('#MainContent_txtZip').keyup(function () {
+        var search = $(this).val();
+        if (search != null) {
+            if (search != "") {
+                $('#zips').css('display', 'block');
+            }
+            else {
+                $('#zips').css('display', 'none');
+            }
+        }
+
+        allZips.search(search).draw();
+
+    });
+
+
+    $('#tblmain').DataTable({
+        stateSave: true
+    });
+
+    $('#tblevents').DataTable({
+        stateSave: true
+    });
+
+    $('#tblitems').DataTable({
+        stateSave: true
+    });
+
+    $('#tbl1').DataTable({
+        searching: false
+    });
 
     $("#errorMess").dialog({
         modal: true,
@@ -44,11 +80,12 @@ $(document).ready(function () {
            });
 
     $("#listPrice").spinner({
-        min: 0,
-        max: 999,
-        step: 1,
-        start: 0.00,
-        numberFormat: "C"
+        min: 0.00,
+        max: 999.00,
+        step: .01,
+        numberFormat:"C",
+        start: 0.00
+        
     });
 
     $("#listTickets").spinner({
@@ -58,8 +95,9 @@ $(document).ready(function () {
         start: 0
     });
 
-    var current2 = $('#MainContent_lvLists_listCurrent_0').val();
+    var current2 = $('#listCurrent').val();
     console.log(current2);
+
     $("#listmax").spinner({
         min: current2,
         max: 999,
@@ -67,7 +105,7 @@ $(document).ready(function () {
         start: 0
     });
 
-   
+
 
     $("#eventStart").datetimepicker(
         {
@@ -84,8 +122,10 @@ $(document).ready(function () {
 
     /* last function because it will break on most pages */
     var inside = document.getElementById('MainContent_eventdetails');
-    if ((inside.innerText.replace(" ", "") == "")) {
-        $('#MainContent_eventdetails').dialog('close');
+    if ((inside != null)) {
+        if ((inside.innerText.replace(" ", "") == "")) {
+            $('#MainContent_eventdetails').dialog('close');
+        }
     }
 
 

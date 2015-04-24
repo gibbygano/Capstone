@@ -15,15 +15,19 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Miguel Santana 2/18/2015
         public void PopulateCityStateCache()
         {
-            try
+            //need to check if it has already been populated first
+            if (DataCache._currentCityStateList == null)
             {
-                //data hasn't been retrieved yet. get data, set it to the cache and return the result.
-                var list = CityStateAccessor.CityStateGet();
-                DataCache._currentCityStateList = list;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                try
+                {
+                    //data hasn't been retrieved yet. get data, set it to the cache and return the result.
+                    var list = CityStateAccessor.CityStateGet();
+                    DataCache._currentCityStateList = list;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }
