@@ -72,15 +72,24 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void UpdateEvent_ValidEvent()
         {
+            int expected = 1;
+
             setup();
             EventAccessor.AddEvent(eventToTest);
             eventToTest = getEventObjectID(list);
 
-            int expected = 1;
+            int actual = EventAccessor.UpdateEvent(eventToTest, eventToEdit);
 
-            Assert.AreEqual(expected, EventAccessor.UpdateEvent(eventToTest, eventToEdit));
+            EventAccessor.DeleteEventTestItem(eventToEdit);
+
+            Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// Method for retrieveing the test record created by theses methods
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         private Event getEventObjectID(List<Event> list)
         {
             list = EventAccessor.GetEventList();

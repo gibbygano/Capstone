@@ -271,5 +271,38 @@ namespace com.WanderingTurtle.DataAccess
 
             return rowsAffected;
         }
+
+        //Bryan Hurst 4/23/2015
+        //Method for deletion of test records created with the unit tests
+        public static int DeleteItemListingTestItem(ItemListing TestListing)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spDeleteTestItemListing";
+            var cmd = new SqlCommand(cmdText, conn);
+            var rowsAffected = 0;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@EndDate", TestListing.EndDate);
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Concurrency Violation");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return rowsAffected;  // needs to be rows affected
+        }
     }
 }

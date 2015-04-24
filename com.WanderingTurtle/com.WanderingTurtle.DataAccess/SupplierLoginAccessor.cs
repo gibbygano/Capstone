@@ -256,5 +256,34 @@ namespace com.WanderingTurtle.DataAccess
                 throw;
             }
         }
+
+        //Bryan Hurst 4/23/2015
+        //Method for the deletion of test login records in the database
+        public static int DeleteTestSupplierLogin(SupplierLogin supplierLoginToDelete)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spDeleteTestSupplierLogin";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@UserName", supplierLoginToDelete.UserName);
+
+            int rowsAffected;
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
     }
 }

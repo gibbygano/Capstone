@@ -222,6 +222,8 @@ namespace com.WanderingTurtle.DataAccess
             return theEvent;
         }
 
+        //Hunter Lind
+        //Method for deletion of test records created with the unit tests
         public static int DeleteEventTestItem(Event TestEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

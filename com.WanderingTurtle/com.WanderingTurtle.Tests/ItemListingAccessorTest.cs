@@ -2,92 +2,162 @@
 using com.WanderingTurtle.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.Tests
 {
     /// <summary>
+    /// Bryan Hurst
+    /// Created 4/2/2015
+    /// 
     /// Summary description for ItemListingAccessorTest
     /// </summary>
     [TestClass]
     public class ItemListingAccessorTest
     {
-        private int itemListID = 104;
-        private int eventID = 102;
-        private DateTime startDate = new DateTime(2015, 3, 28, 8, 30, 0);
-        private DateTime endDate = new DateTime(2015, 3, 28, 10, 30, 0);
-        private decimal price = 10.0000M;
-        private int quantityOffered = 5;
-        private string productSize = "10";
-        private int maxNumGuests = 11;
-        private int minNumGuests = 0;
-        private int currentNumGuests = 10;
-        public int supplierID = 102;
+        SupplierLoginAccessor sLA = new SupplierLoginAccessor();
+        Supplier testSupp = new Supplier();
+        Supplier modSupp = new Supplier();
+        SupplierLogin testLog = new SupplierLogin();
+        ItemListing itemListingToTest = new ItemListing();
+        ItemListing itemListingToEdit = new ItemListing();
+        List<ItemListing> itemList = new List<ItemListing>();
+        List<Supplier> suppList = new List<Supplier>();
 
+        /// <summary>
+        /// Setup method for ItemListingAccessorTest unit tests
+        /// </summary>
+        public void setup()
+        {
+            itemListingToTest.ItemListID = 204;
+            itemListingToTest.EventID = 102;
+            itemListingToTest.StartDate = new DateTime(2015, 5, 28, 8, 30, 0);
+            itemListingToTest.EndDate = new DateTime(2525, 5, 28, 10, 30, 0);
+            itemListingToTest.Price = 10.0000M;
+            itemListingToTest.MaxNumGuests = 11;
+            itemListingToTest.MinNumGuests = 0;
+            itemListingToTest.CurrentNumGuests = 10;
+            itemListingToTest.SupplierID = 100;
+
+            itemListingToEdit.ItemListID = 204;
+            itemListingToEdit.EventID = 102;
+            itemListingToEdit.StartDate = new DateTime(2015, 5, 28, 8, 30, 0);
+            itemListingToEdit.EndDate = new DateTime(2525, 5, 28, 10, 30, 0);
+            itemListingToEdit.Price = 222;
+            itemListingToEdit.MaxNumGuests = 15;
+            itemListingToEdit.MinNumGuests = 1;
+            itemListingToEdit.CurrentNumGuests = 8;
+            itemListingToEdit.SupplierID = 100;
+
+            testSupp.CompanyName = "Test";
+            testSupp.FirstName = "Test";
+            testSupp.LastName = "Test";
+            testSupp.Address1 = "Test";
+            testSupp.Address2 = "Test";
+            testSupp.Zip = "55555";
+            testSupp.PhoneNumber = "555-555-5555";
+            testSupp.EmailAddress = "Test@Test.Test";
+            testSupp.ApplicationID = 0;
+            testSupp.SupplyCost = new decimal(.7);
+        }
+
+        /// <summary>
+        /// Retrieves the test ItemListing object used in this class's unit tests
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        private ItemListing getItemListingTestObject(List<ItemListing> list)
+        {
+            list = ItemListingAccessor.GetItemListingList();
+            foreach (ItemListing item in list)
+            {
+                if (item.EndDate.Equals(new DateTime(2525, 5, 28, 10, 30, 0)))
+                {
+                    return item;
+                }
+            }
+            return new ItemListing();
+        }
+
+        /// <summary>
+        /// Retrieves the Test Supplier record for use in the test methods
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        private Supplier getSupplierListCompName(List<Supplier> list)
+        {
+            list = SupplierAccessor.GetSupplierList();
+            foreach (Supplier item in list)
+            {
+                if (item.CompanyName.Equals("Test"))
+                {
+                    return item;
+                }
+            }
+            return new Supplier();
+        }
+        /// <summary>
+        /// Tests adding a valid ItemListing object
+        /// </summary>
         [TestMethod]
         public void AddItemListing_ValidItemListing()
         {
             int expected = 1;
-            ItemListing testItemListing = new ItemListing(itemListID, eventID, startDate, endDate, price, quantityOffered, productSize, maxNumGuests, minNumGuests, currentNumGuests);
+            setup();
 
-            int actual = ItemListingAccessor.AddItemListing(testItemListing);
+            SupplierAccessor.AddSupplier(testSupp, "Test");
+            modSupp = getSupplierListCompName(suppList);
+            itemListingToTest.SupplierID = modSupp.SupplierID;
 
+            int actual = ItemListingAccessor.AddItemListing(itemListingToTest);
+
+            ItemListingAccessor.DeleteItemListingTestItem(itemListingToTest);
+            testSupp.SupplierID = modSupp.SupplierID;
+            testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
+            SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
+            SupplierAccessor.DeleteTestSupplier(testSupp);
+                    
             Assert.AreEqual(expected, actual);
         }
-
-        /*[TestMethod]
-        [ExpectedException(typeof(ApplicationException))]
-        public void AddItemListing_InvalidItemListing()
-        {
-            ItemListing testItemListing = new ItemListing(itemListID, eventID, startDate, endDate, price, quantityOffered, productSize, maxNumGuests, minNumGuests, currentNumGuests);
-
-            int actual = ItemListingAccessor.AddItemListing(testItemListing);
-        }*/
-
+        /// <summary>
+        /// Tests updating a valid ItemListing record
+        /// </summary>
         [TestMethod]
         public void UpdateItemListing_ValidItemListing()
         {
             int expected = 1;
+            setup();
 
-            int newEventID = 10;
-            int newItemListID = 0;
-            DateTime newStartDate = DateTime.Now;
-            DateTime newEndDate = DateTime.Now;
-            decimal newPrice = 222;
-            int newQuantityOffered = 67;
-            string newProductSize = "12";
-            int newMaxNumGuests = 15;
-            int newMinNumGuests = 1;
-            int newCurrentNumGuests = 8;
-            ItemListing testItemListing = new ItemListing(itemListID, eventID, startDate, endDate, price, quantityOffered, productSize, maxNumGuests, minNumGuests, currentNumGuests);
-            ItemListing newTestItemListing = new ItemListing(newItemListID, newEventID, newStartDate, newEndDate, newPrice, newQuantityOffered, newProductSize, newMaxNumGuests, newMinNumGuests, newCurrentNumGuests);
-            testItemListing.SupplierID = 102;
-            newTestItemListing.SupplierID = 102;
+            SupplierAccessor.AddSupplier(testSupp, "Test");
+            modSupp = getSupplierListCompName(suppList);
+            itemListingToEdit.SupplierID = modSupp.SupplierID;
+            ItemListingAccessor.AddItemListing(itemListingToTest);
+            itemListingToTest = getItemListingTestObject(itemList);
+            itemListingToEdit.SupplierID = modSupp.SupplierID;
 
-            int actual = ItemListingAccessor.UpdateItemListing(newTestItemListing, testItemListing);
+            int actual = ItemListingAccessor.UpdateItemListing(itemListingToEdit, itemListingToTest);
+
+            ItemListingAccessor.DeleteItemListingTestItem(itemListingToEdit);
+            testSupp.SupplierID = modSupp.SupplierID;
+            testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
+            SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
+            SupplierAccessor.DeleteTestSupplier(testSupp);
 
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// Tests attempting to update a nonexistent ItemListing record
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException))]
         public void UpdateItemListing_InvalidItemListing()
         {
-            int oldItemListID = 999;
+            setup();
+            itemListingToTest.ItemListID = 99;
 
-            int newItemListID = 10;
-            int newEventID = 10;
-            DateTime newStartDate = DateTime.Now;
-            DateTime newEndDate = DateTime.Now;
-            decimal newPrice = 222;
-            int newQuantityOffered = 67;
-            string newProductSize = "12";
-            int newMaxNumGuests = 15;
-            int newMinNumGuests = 1;
-            int newCurrentNumGuests = 8;
-            ItemListing testItemListing = new ItemListing(oldItemListID, eventID, startDate, endDate, price, quantityOffered, productSize, maxNumGuests, minNumGuests, currentNumGuests);
-            ItemListing newTestItemListing = new ItemListing(newItemListID, newEventID, newStartDate, newEndDate, newPrice, newQuantityOffered, newProductSize, newMaxNumGuests, newMinNumGuests, newCurrentNumGuests);
-
-            int actual = ItemListingAccessor.UpdateItemListing(testItemListing, newTestItemListing);
+            int actual = ItemListingAccessor.UpdateItemListing(itemListingToEdit, itemListingToTest);
 
             if (actual == 0)
             {
@@ -95,25 +165,43 @@ namespace com.WanderingTurtle.Tests
             }
         }
 
+        /// <summary>
+        /// Tests marking a valid ItemListing record as inactive
+        /// </summary>
         [TestMethod]
         public void DeleteItemListing_ValidItemListing()
         {
             int expected = 1;
-            ItemListing testItemListing = new ItemListing(itemListID, eventID, startDate, endDate, price, quantityOffered, productSize, maxNumGuests, minNumGuests, currentNumGuests);
-            testItemListing.SupplierID = 102;
+            setup();
 
-            int actual = ItemListingAccessor.DeleteItemListing(testItemListing);
+            SupplierAccessor.AddSupplier(testSupp, "Test");
+            modSupp = getSupplierListCompName(suppList);
+            itemListingToTest.SupplierID = modSupp.SupplierID;
+            ItemListingAccessor.AddItemListing(itemListingToTest);
+            itemListingToTest = getItemListingTestObject(itemList);
+
+            int actual = ItemListingAccessor.DeleteItemListing(itemListingToTest);
+
+            ItemListingAccessor.DeleteItemListingTestItem(itemListingToTest);
+            testSupp.SupplierID = modSupp.SupplierID;
+            testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
+            SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
+            SupplierAccessor.DeleteTestSupplier(testSupp);
 
             Assert.AreEqual(expected, actual);
         }
 
+        /// <summary>
+        /// Tests marking a nonexistent ItemListing record as inactive
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ApplicationException))]
         public void DeleteItemListing_InvalidItemListing()
         {
-            ItemListing testItemListing = new ItemListing(itemListID, eventID, startDate, endDate, price, quantityOffered, productSize, maxNumGuests, minNumGuests, currentNumGuests);
+            setup();
+            itemListingToTest.ItemListID = 99;
 
-            int actual = ItemListingAccessor.DeleteItemListing(testItemListing);
+            int actual = ItemListingAccessor.DeleteItemListing(itemListingToTest);
 
             if (actual == 0)
             {
