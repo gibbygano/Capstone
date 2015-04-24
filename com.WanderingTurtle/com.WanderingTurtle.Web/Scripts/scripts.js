@@ -2,22 +2,37 @@
 $(document).ready(function () {
     console.log("JQuery loaded");
 
+    $("#MainContent_txtPhoneNumber").mask("(999) 999-9999");
+    $("#MainContent_txtZip").mask("99999");
+    var allZips = $('#zips').DataTable({
+    });
+
+    $('#MainContent_txtZip').keyup(function () {
+        var search = $(this).val();
+        if (search != null) {
+            if (search != "") {
+                $('#zips').css('display', 'block');
+            }
+            else {
+                $('#zips').css('display', 'none');
+            }
+        }
+
+        allZips.search(search).draw();
+
+    });
+
+
     $('#tblmain').DataTable({
         stateSave: true
-
-
     });
 
     $('#tblevents').DataTable({
         stateSave: true
-
-
     });
 
     $('#tblitems').DataTable({
         stateSave: true
-
-
     });
 
     $('#tbl1').DataTable({

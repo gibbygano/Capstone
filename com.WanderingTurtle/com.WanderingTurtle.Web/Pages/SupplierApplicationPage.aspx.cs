@@ -2,6 +2,7 @@
 using System.Drawing;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
+using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Web.Pages
 {  
@@ -11,8 +12,26 @@ namespace com.WanderingTurtle.Web.Pages
     /// </summary>
     public partial class SupplierApplicationPage : System.Web.UI.Page
     {
+        public static List<CityState> zips = new List<CityState>();
+        private CityStateManager zipMan = new CityStateManager();
         private string _errorMessage = "";
         private SupplierManager ApplicationManager = new SupplierManager();
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if(!Page.IsPostBack)
+            {
+                try
+                {
+                    zipMan.PopulateCityStateCache();
+                    zips = DataCache._currentCityStateList;
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = "There was an error loading Zip Code Information: " + ex.Message;
+                }
+            }
+        }
         private bool validateText(System.Web.UI.WebControls.TextBox textBox, String toolTipText)
         {
             if (String.IsNullOrEmpty(textBox.Text)) 
@@ -21,6 +40,7 @@ namespace com.WanderingTurtle.Web.Pages
                 textBox.BorderColor = Color.Red;
                 return true;
             }
+            textBox.BorderColor = Color.Empty;
             return false;
         }
 
@@ -35,8 +55,27 @@ namespace com.WanderingTurtle.Web.Pages
             if (validateText(txtAddress, "Please enter your address")) errorCount++;
             if (validateText(txtZip, "Please enter your zip code")) errorCount++;
             if (validateText(txtDescription, "Please enter your description")) errorCount++;
-            if (validateText(txtEmail, "Please enter your email")) errorCount++;
-            if (validateText(txtPhoneNumber, "Please enter your phone number")) errorCount++;
+            if (!Validator.ValidateEmail(txtEmail.Text))
+            {
+                txtEmail.ToolTip = "Please enter a valid e-mail";
+                txtEmail.BorderColor = Color.Red;
+                errorCount++;
+            }
+            else
+            {
+                txtEmail.ToolTip = "";
+                txtEmail.BorderColor = Color.Empty;
+            }
+            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            {
+                txtPhoneNumber.ToolTip = "Please enter a valid phone number";
+                txtPhoneNumber.BorderColor = Color.Red;
+            }
+            else
+            {
+                txtPhoneNumber.ToolTip = "";
+                txtPhoneNumber.BorderColor = Color.Empty;
+            }
 
             if (errorCount > 0)
             {
@@ -57,13 +96,14 @@ namespace com.WanderingTurtle.Web.Pages
 
                 try
                 {
-                    //create new Event                                                                            
+                    //create new Suppler Application                                                                           
                     SupplierApplication application = new SupplierApplication(txtCompanyName.Text, txtDescription.Text, txtFirstName.Text, txtLastName.Text, txtAddress.Text, txtAddress2.Text, txtZip.Text, txtPhoneNumber.Text, txtEmail.Text, DateTime.Now);
                     SupplierResult result = ApplicationManager.AddASupplierApplication(application);
 
                     if (result==SupplierResult.Success)
                     {
                         showError("Record added");
+                        clearForm();
                     }
 
                 }
@@ -84,7 +124,6 @@ namespace com.WanderingTurtle.Web.Pages
             txtCompanyName.Text = "";
             txtEmail.Text = "";
             txtPhoneNumber.Text = "";
-            showError("");
         }
 
         private void showError(String message) 

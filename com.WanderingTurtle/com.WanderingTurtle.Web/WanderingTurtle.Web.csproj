@@ -224,15 +224,14 @@
     <Content Include="Scripts\jquery-datetimepicker-deets.js" />
     <Content Include="Scripts\jquery-datetimepicker.js" />
     <Content Include="Scripts\jquery-slider.js" />
-    <Content Include="Scripts\jquery-TimePicker-1.0.0.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Pages\SupplierAddEvent.aspx" />
     <Content Include="Pages\SupplierViewEvents.aspx" />
     <Content Include="Scripts\scripts.js" />
-    <Content Include="Scripts\sortable_us.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
   </ItemGroup>

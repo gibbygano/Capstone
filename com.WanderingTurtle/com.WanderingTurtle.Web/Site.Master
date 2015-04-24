@@ -27,11 +27,11 @@
                 <asp:ScriptReference Name="jquery.ui.combined" />
             </Scripts>
         </asp:ScriptManager>
-        <script src="<%: ResolveUrl("~/Scripts/jquery-TimePicker-1.0.0.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery-datetimepicker-deets.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery-slider.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/jquery.dataTables.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery.maskedinput.js") %>"></script>
         <script src="<%: ResolveUrl("~/Scripts/scripts.js") %>"></script>
 
         <header class="header">
