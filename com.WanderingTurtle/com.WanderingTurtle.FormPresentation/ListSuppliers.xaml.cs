@@ -74,10 +74,17 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false) return;
-                    if (readOnly) return;
+                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false)
+                    {
+                        FillList();
+                        return;
+                    }
+                    if (readOnly)
+                    {
+                        FillList();
+                        return;
+                    }
                 }
-                FillList();
             }
             catch (Exception ex)
             {
@@ -199,10 +206,6 @@ namespace com.WanderingTurtle.FormPresentation
             btnSearchSupplier.Content = txtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
-        private void lvSuppliersList_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            FillList();
-        }
 
     }
 }
