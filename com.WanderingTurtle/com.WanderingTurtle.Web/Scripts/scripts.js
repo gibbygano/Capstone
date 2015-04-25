@@ -68,11 +68,9 @@ $(document).ready(function () {
         start: 0
     });
 
-    var current2 = $('#listCurrent').val();
-    console.log(current2);
 
     $("#listmax").spinner({
-        min: current2,
+        min: $('#listCurrent').val(),
         max: 999,
         step: 1,
         start: 0

@@ -117,7 +117,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 if (ItemListingAccessor.AddItemListing(newItemListing) == 1)
                 {
-                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    DataCache._currentItemListingList = ItemListingAccessor.GetAllItemListingList();
                     return listResult.Success;
                 }
                 return listResult.NotAdded;

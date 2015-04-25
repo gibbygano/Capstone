@@ -106,9 +106,10 @@
                     </div>
                     <div style="float: left">
                         <label>&nbsp;</label>
-                        <asp:Button ID="btnRefreshDate" runat="server" Text="refreshList" OnClick="btnRefreshDate_Click" />  
+                        <asp:Button ID="btnRefreshDate" runat="server" Text="Refresh List" OnClick="btnRefreshDate_Click" />  
                     </div>
                 </div>
+                <div class="clear"></div>
                 <asp:ListView ID="ListView1" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemListsByDate" DataKeyNames="ItemListID" EnableViewState="False" runat="server">
                     <ItemTemplate>
                         <tr>
@@ -121,16 +122,18 @@
                         </tr>
                     </ItemTemplate>
                     <LayoutTemplate>
-                        <table id="tbl1" runat="server">
+                        <table id="tbl1">
+                            <thead>
                             <tr id="tr1" runat="server">
-                                <td id="td8" class="eventheader" runat="server">Event Name</td>
-                                <td id="td2" class="eventheader" runat="server">Start Time</td>
-                                <td id="td4" class="eventheader" runat="server">End Time</td>
-                                <td id="td3" class="eventheader" runat="server"># Tickets</td>
-                                <td id="td5" class="eventheader" runat="server">Ticket Cost</td>
-                                <td id="td1" class="eventheader" runat="server">Extended</td>
-                                <td></td>
+                                <th id="td8" class="eventheader" runat="server">Event Name</th>
+                                <th id="td2" class="eventheader" runat="server">Start Time</th>
+                                <th id="td4" class="eventheader" runat="server">End Time</th>
+                                <th id="td3" class="eventheader" runat="server"># Tickets</th>
+                                <th id="td5" class="eventheader" runat="server">Ticket Cost</th>
+                                <th id="td1" class="eventheader" runat="server">Extended</th>
+                                
                             </tr>
+                                </thead>
                             <tr id="ItemPlaceholder" runat="server">
                             </tr>
                         </table>

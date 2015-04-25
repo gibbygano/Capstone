@@ -133,6 +133,71 @@ namespace com.WanderingTurtle.DataAccess
 
             return itemListingList;
         }
+        /// <summary>
+        /// Retrieves all ItemListing data from the Database using a Stored Procedure.
+        /// Creates an ItemListing object from retrieved data.
+        /// Adds ItemListing object to List of ItemListing objects.
+        ///
+        /// Created by Tyler Collins 02/10/2015
+        /// </summary>
+        /// <returns>List of ItemListing objects</returns>
+        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
+        public static List<ItemListing> GetAllItemListingList()
+        {
+            List<ItemListing> itemListingList = new List<ItemListing>();
+
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spSelectAllItemListings";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        ItemListing currentItemListing = new ItemListing();
+
+                        currentItemListing.StartDate = reader.GetDateTime(0);
+                        currentItemListing.EndDate = reader.GetDateTime(1);
+                        currentItemListing.ItemListID = reader.GetInt32(2);
+                        currentItemListing.EventID = reader.GetInt32(3);
+                        currentItemListing.Price = reader.GetDecimal(4);
+
+                        //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
+                        //Updated by Justin Pennington
+                        currentItemListing.SupplierID = reader.GetInt32(5);
+                        currentItemListing.CurrentNumGuests = reader.GetInt32(6);
+                        currentItemListing.MaxNumGuests = reader.GetInt32(7);
+                        currentItemListing.MinNumGuests = reader.GetInt32(8);
+                        currentItemListing.EventName = reader.GetString(9);
+                        currentItemListing.SupplierName = reader.GetString(10);
+
+                        itemListingList.Add(currentItemListing);
+                        
+                    }
+                }
+                else
+                {
+                    var pokeball = new ApplicationException("Data Not Found!");
+                    throw pokeball;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return itemListingList;
+        }
 
         /// <summary>
         /// INSERTs an ItemListing into the Database using a Stored Procedure.
