@@ -8,21 +8,37 @@ using System.Windows;
 namespace com.WanderingTurtle.FormPresentation.Views
 {
     /// <summary>
-    /// Interaction logic for SplashScreen.xaml
-    /// Miguel Santana 2015/03/10
+    /// Interaction logic for <see cref="SplashScreen" />
     /// </summary>
+    /// <remarks>Miguel Santana 2015/03/10</remarks>
     public partial class StartupScreen
     {
+        /// <summary>
+        /// Temporary exception to handle user validation
+        /// </summary>
+        private Exception _exception;
+
+        /// <summary>
+        /// Temporary user for user validation
+        /// </summary>
+        private string _user;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StartupScreen" /> class.
+        /// </summary>
         public StartupScreen()
         {
             Globals.UserToken = null;
             InitializeComponent();
         }
 
-        private string _user;
-        private Exception _exception;
-
-        private async void BtnSignIn_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// The sign-in button click event handler.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
+        /// <exception cref="ApplicationException"></exception>
+        private async void BtnSignInClick(object sender, RoutedEventArgs e)
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
             { Globals.UserToken = new Common.Employee(100, "Debugger", null, 1); }

@@ -17,8 +17,8 @@ namespace com.WanderingTurtle.FormPresentation
         private List<SupplierApplication> GetPendingSuppliers = new List<SupplierApplication>();
         private SupplierManager supplierManager = new SupplierManager();
 
-        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
-        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
+        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         /// <exception cref="WanderingTurtleException" />
@@ -27,11 +27,11 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             loadPendingSuppliers();
 
-            lvPendingSuppliers.SetContextMenu(this, new[] { DataGridContextMenuResult.View, DataGridContextMenuResult.Edit });
+            lvPendingSuppliers.SetContextMenu(this, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
         }
 
         /// <exception cref="WanderingTurtleException"/>
-        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<SupplierApplication>(out command);

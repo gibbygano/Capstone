@@ -204,25 +204,17 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="originalInvoice">invoice that was fetched from database - used to check for concurrency errors</param>
         /// <param name="updatedInvoice">information that needs to be updated in the database</param>
         /// <returns>Number of rows affected</returns>
-        public static int ArchiveGuestInvoice(Invoice originalInvoice, Invoice updatedInvoice)
+        public int ArchiveGuestInvoice(int GuestID)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spArchiveInvoice";
+            var cmdText = "spInvoiceGuestBookingArchive";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             var numRows = 0;
 
             //parameters for stored procedure
-            cmd.Parameters.AddWithValue("@hotelGuestID", updatedInvoice.HotelGuestID);
-            cmd.Parameters.AddWithValue("@active", updatedInvoice.Active);
-            cmd.Parameters.AddWithValue("@dateOpened", updatedInvoice.DateOpened);
-            cmd.Parameters.AddWithValue("@dateClosed", updatedInvoice.DateClosed);
-            cmd.Parameters.AddWithValue("@totalPaid", updatedInvoice.TotalPaid);
+            cmd.Parameters.AddWithValue("@GuestID", GuestID);
 
-            cmd.Parameters.AddWithValue("@original_invoiceID", originalInvoice.InvoiceID);
-            cmd.Parameters.AddWithValue("@original_hotelGuestID", originalInvoice.HotelGuestID);
-            cmd.Parameters.AddWithValue("@original_active", originalInvoice.Active);
-            cmd.Parameters.AddWithValue("@original_dateOpened", originalInvoice.DateOpened);
 
             //connect to db
             try

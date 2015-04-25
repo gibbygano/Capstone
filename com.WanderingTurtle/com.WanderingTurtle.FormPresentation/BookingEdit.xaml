@@ -7,52 +7,66 @@
         Style="{DynamicResource WindowStyle}"
         Title="Edit Booking" Height="350" Width="500"
         WindowStartupLocation="CenterScreen">
-    <Grid Margin="{DynamicResource Spacing.Container}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="51*" />
-            <RowDefinition Height="51*" />
-            <RowDefinition Height="51*" />
-            <RowDefinition Height="51*" />
-            <RowDefinition Height="51*" />
-            <RowDefinition Height="50*" />
-            <RowDefinition Height="51*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Edit Booking" FontWeight="Bold" FontSize="16" HorizontalAlignment="Right" Height="Auto" Margin="0,4,0,0" />
+        <Label Grid.Row="0" Grid.Column="0" Content="Edit Booking" FontWeight="Bold" FontSize="16" />
+        <ScrollViewer Grid.Row="1">
+            <Grid Margin="{DynamicResource Spacing.Container}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Guest Name:" />
+                <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Event Name:" />
+                <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Event Start Date:" />
+                <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Quantity:" />
+                <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Discount:" />
+                <Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingGuestName" Grid.ColumnSpan="2" />
+                <Label Grid.Row="1" Grid.Column="1" x:Name="lblEventName" Grid.ColumnSpan="2" />
+                <Label Grid.Row="2" Grid.Column="1" x:Name="lblStartDate" />
+                <Metro:NumericUpDown Grid.Row="3" Grid.Column="1" Value="0" Minimum="0" Name="udAddBookingQuantity" />
+                <Metro:NumericUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" StringFormat="P0" Name="udDiscount" Interval=".01" />
+                <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Quantity Seats Available:" />
+                    <Label Grid.Column="1" x:Name="lblAvailSeats" />
+                </Grid>
 
-        <Label Grid.Row="1" Grid.Column="1" x:Name="lblEditBookingGuestName"  HorizontalContentAlignment="Left" Grid.ColumnSpan="2" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
-        <Label Grid.Row="1"  Grid.Column="0" Content="Guest Name:"  x:Name="lblEditBookingGuestLbl" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
+                <Label Grid.Row="4" Grid.Column="2" HorizontalContentAlignment="Right" Content="Ticket Price:" />
+                <Label Grid.Row="5" Grid.Column="2" HorizontalContentAlignment="Right" Content="Total Due:" />
+                <Label Grid.Row="4" Grid.Column="3" x:Name="lblTicketPrice" />
+                <Label Grid.Row="5" Grid.Column="3" x:Name="lblTotalDue" />
 
-        <Label Grid.Row="2" Grid.Column="1" x:Name="lblEventName" Grid.ColumnSpan="2" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" />
-        <Label Grid.Row="2"  Grid.Column="0" Content="Event Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,4,0,3" />
-
-        <Label  Grid.Row="3" Grid.Column="0" Content="Event Start Date:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" />
-        <Label  Grid.Row="3" Grid.Column="1" x:Name="lblStartDate" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" />
-
-        <Label Grid.Row="4"  Grid.Column="0" Content="Quantity:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3" />
-        <xctk:IntegerUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Value="0" Maximum="{Binding}" ClipValueToMinMax="True"  Name="udAddBookingQuantity" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" />
-
-        <Label Grid.Row="4"  Grid.Column="2" Content="Ticket Price:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
-        <Label Grid.Row="5" Grid.Column="0" x:Name="lblEditBookingDiscount" Content="Discount:" HorizontalContentAlignment="Right" />
-        <xctk:DecimalUpDown Grid.Row="5" Grid.Column="1" FormatString="P0"  Value="3"  IsEnabled="{Binding ElementName=lvEventListItems}" Minimum="0" Maximum =".20" Name="udDiscount" Increment=".01" />
-        <Label  Grid.Row="4" Grid.Column="3" x:Name="lblTicketPrice" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
-
-        <Label  Grid.Row="5" Grid.Column="2" Content="Total Due:" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
-        <Label  Grid.Row="5" Grid.Column="3" x:Name="lblTotalDue" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Height="Auto" Margin="0,3,0,4" />
-
-        <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"  Content="Quantity Seats Available:" VerticalAlignment="Center"  HorizontalAlignment="Right" />
-        <Label  Grid.Row="6" Grid.Column="2" x:Name="lblAvailSeats" VerticalAlignment="Center" HorizontalAlignment="Left" />
-
-        <Button Grid.Row="7" Grid.Column="1" x:Name="btnEditBooking" Content="Submit" Click="btnEditBooking_Click" VerticalAlignment="Center" />
-        <Button Grid.Row="7" Grid.Column="3" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click"  VerticalAlignment="Center" />
-
-        <Button Grid.Row="3" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Re-calculate" Click="btnCalculateTicketPrice_Click" />
+                <Button Grid.Row="3" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Re-calculate" Click="btnCalculateTicketPrice_Click" Margin="{DynamicResource Spacing.Container}" />
+            </Grid>
+        </ScrollViewer>
+        <Grid Grid.Row="2" Style="{StaticResource ButtonContainer}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnSubmit" Content="Submit" Click="btnSubmitBooking_Click" VerticalAlignment="Center" />
+            <Button Grid.Column="2" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click"  VerticalAlignment="Center" />
+            <Separator Grid.Column="1" Style="{StaticResource ButtonSeparator}" />
+        </Grid>
     </Grid>
 </Metro:MetroWindow>   

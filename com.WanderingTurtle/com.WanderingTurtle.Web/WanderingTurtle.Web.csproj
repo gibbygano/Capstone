@@ -153,6 +153,7 @@
     <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="PagesGuest\About.aspx" />
     <Content Include="PagesGuest\Contacts.aspx" />
+    <Content Include="PagesGuest\ViewBookings.aspx" />
     <Content Include="Pages\Login.aspx" />
     <Content Include="Pages\About.aspx" />
     <Content Include="Account\Login.aspx" />
@@ -261,6 +262,13 @@
     </Compile>
     <Compile Include="PagesGuest\Contacts.aspx.designer.cs">
       <DependentUpon>Contacts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PagesGuest\ViewBookings.aspx.cs">
+      <DependentUpon>ViewBookings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PagesGuest\ViewBookings.aspx.designer.cs">
+      <DependentUpon>ViewBookings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.FormPresentation
         private BookingManager _bookingManager = new BookingManager();
         private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
         private InvoiceManager _invoiceManager = new InvoiceManager();
-        private List<BookingDetails> myBookingList;
+        private List<BookingDetails> _bookingDetailsList;
 
         /// <summary>
         /// Pat Banks
@@ -27,8 +27,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// Displays information for the selected guest's invoice
         /// </summary>
         /// <param name="selectedGuest">Selected guest to retrieve</param>
-        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
-        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
+        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         /// <exception cref="WanderingTurtleException" />
@@ -47,7 +47,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <exception cref="WanderingTurtleException"/>
-        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<BookingDetails>(out command);
@@ -80,8 +80,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 if (selectedItem == null)
                 {
-                    new AddBooking(CurrentInvoice).ShowDialog();
-
+                    if (new AddBooking(CurrentInvoice).ShowDialog() == false) return;
                     refreshBookingList();
                 }
                 else
@@ -101,7 +100,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                         case (ResultsEdit.OkToEdit):
                             if (new EditBooking(CurrentInvoice, selectedItem).ShowDialog() == false) return;
-                            DialogResult = true;
                             refreshBookingList();
                             break;
                     }
@@ -138,11 +136,8 @@ namespace com.WanderingTurtle.FormPresentation
                         //opens the ui and passes the booking details object in
                         CancelBooking cancel = new CancelBooking((BookingDetails)lvGuestBookings.SelectedItem, CurrentInvoice);
 
-                        if (cancel.ShowDialog() == false)
-                        {
-                            DialogResult = true;
-                            refreshBookingList();
-                        }
+                        if (cancel.ShowDialog() == false) return;
+                        refreshBookingList();
                     }
                     catch (Exception ex)
                     {
@@ -182,7 +177,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void btnArchiveInvoice_Click(object sender, RoutedEventArgs e)
         {
             //check if invoice can be closed
-            switch (_invoiceManager.CheckToArchiveInvoice(CurrentInvoice, myBookingList))
+            switch (_invoiceManager.CheckToArchiveInvoice(CurrentInvoice, _bookingDetailsList))
             {
                 case (ResultsArchive.CannotArchive):
                     throw new WanderingTurtleException(this, "Guest has bookings in the future and cannot be checked out.", "Warning");
@@ -262,10 +257,8 @@ namespace com.WanderingTurtle.FormPresentation
                 HotelGuest selectedGuest = _hotelGuestManager.GetHotelGuest(CurrentInvoice.HotelGuestID);
 
                 //refreshes guest information after AddEditHotelGuest UI
-                if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false)
-                {
-                    refreshGuestInformation(CurrentInvoice.HotelGuestID);
-                }
+                if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false) return;
+                refreshGuestInformation(CurrentInvoice.HotelGuestID);
             }
             catch (Exception ex)
             {
@@ -294,11 +287,11 @@ namespace com.WanderingTurtle.FormPresentation
             lvGuestBookings.ItemsPanel.LoadContent();
             try
             {
-                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(CurrentInvoice.HotelGuestID);
+                _bookingDetailsList = _invoiceManager.RetrieveGuestBookingDetailsList(CurrentInvoice.HotelGuestID);
 
-                lvGuestBookings.ItemsSource = myBookingList;
+                lvGuestBookings.ItemsSource = _bookingDetailsList;
                 lvGuestBookings.Items.Refresh();
-                lblBookingsMessage.Content = "Guest has " + myBookingList.Count + " booking(s).";
+                lblBookingsMessage.Content = "Guest has " + _bookingDetailsList.Count + " booking(s).";
             }
             catch (Exception ex)
             {

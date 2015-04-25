@@ -202,8 +202,9 @@ VALUES
 ('Entertainment'),
 ('Experience')
 GO
-
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2000-01-01 10:00:00', '2000-01-31 10:00:00', 102, CAST(1234.0000 AS Money), 102, 0, 10, 40, 0)
+--Dummy record
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2020-01-01 10:00:00', '2020-01-31 10:00:00', 102, CAST(1234.0000 AS Money), 102, 0, 10, 40, 0)
+--Begin real records
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-19 11:30:00', '2015-04-19 17:30:00', 100, CAST(15.0000 AS Money), 102, 1, 0, 50, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(45.0000 AS Money), 109, 1, 15, 15, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-30 10:00:00', '2015-04-30 12:00:00', 102, CAST(20.0000 AS Money), 103, 1, 21, 25, 0)

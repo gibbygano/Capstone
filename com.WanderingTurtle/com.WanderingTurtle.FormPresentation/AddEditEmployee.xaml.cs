@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             SetFields();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, new FrameworkElement[] { btnCancel }); }
+            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
         public Employee CurrentEmployee { get; private set; }

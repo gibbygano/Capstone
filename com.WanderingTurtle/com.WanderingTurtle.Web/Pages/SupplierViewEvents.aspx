@@ -139,9 +139,9 @@
         <asp:Label ID="lblEventName" runat="server" Text="" Font-Size="X-Large"></asp:Label><br />
         <asp:Label ID="lblAddError" runat="server" Text="" ForeColor="#CC0000"></asp:Label><br />
         Start Date & Time:
-        <input type="text" id="listStartDate" name="startdate" class="mydate" /> <br />
+        <input type="text" id="eventStart" name="startdate" class="mydate" /> <br />
         End Date & Time
-        <input type="text" id="listEndDate" name="enddate" class="mydate" /> <br />
+        <input type="text" id="eventEnd" name="enddate" class="mydate" /> <br />
         Ticket Price: $
         <input id="listPrice" name="price" value="0.00" class="myspinner"> <br />
         Number of Tickets Available:

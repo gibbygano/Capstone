@@ -150,7 +150,7 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        public int UpdateSupplierLogin(string newUserName, string oldUserName, int oldSupplierID)
+        public int UpdateSupplierLogin(string newPassword, SupplierLogin oldLogin)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spSupplierLoginUpdate";
@@ -158,11 +158,12 @@ namespace com.WanderingTurtle.DataAccess
             cmd.CommandType = CommandType.StoredProcedure;
 
             //Updated Supplier Info:
-            cmd.Parameters.AddWithValue("@UserName", newUserName);
+            cmd.Parameters.AddWithValue("@Password", newPassword);
 
             //Old Supplier Info
-            cmd.Parameters.AddWithValue("@original_UserName", oldUserName);
-            cmd.Parameters.AddWithValue("@original_SupplierID", oldSupplierID);
+            cmd.Parameters.AddWithValue("@original_UserName", oldLogin.UserName);
+            cmd.Parameters.AddWithValue("@original_Password", oldLogin.UserPassword);
+            cmd.Parameters.AddWithValue("@original_SupplierID", oldLogin.SupplierID);
 
             int rowsAffected;
 

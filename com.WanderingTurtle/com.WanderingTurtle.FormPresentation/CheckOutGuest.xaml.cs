@@ -80,7 +80,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                ResultsArchive result = _invoiceManager.ArchiveCurrentGuestInvoice(_CurrentInvoice);
+                ResultsArchive result = _invoiceManager.ArchiveGuestInvoice(_CurrentInvoice.HotelGuestID);
 
                 switch (result)
                 {
@@ -88,12 +88,12 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
-                        
+
                         PrintableInvoice newReportWindow = new PrintableInvoice((int)guestToView.HotelGuestID);
-                        newReportWindow.ShowDialog();                      
-                        
+                        newReportWindow.ShowDialog();
+
                         await this.ShowMessageDialog("Guest checkout complete.");
-                        
+
                         DialogResult = true;
                         Close();
                         break;

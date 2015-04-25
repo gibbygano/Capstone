@@ -47,7 +47,7 @@
                 <Label Content="Phone Number"  Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
                 <Label Content="Email Address" Grid.Row="4" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
                 <Label Content="Supply Cost"   Grid.Row="6" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-                <Label Content="User Name"     Grid.Row="8" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
+                <Label Content="User Name"     Grid.Row="8" Grid.Column="2" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" x:Name="lblUserName" />
                 <TextBox             Grid.Row="0" Grid.Column="3" TabIndex="5" x:Name="txtCompanyName" />
                 <xctk:MaskedTextBox  Grid.Row="2" Grid.Column="3" TabIndex="6" x:Name="txtPhoneNumber" Mask="(000) 000-0000" ValueDataType="{x:Type s:String}" />
                 <TextBox             Grid.Row="4" Grid.Column="3" TabIndex="7" x:Name="txtEmail" />
@@ -55,7 +55,7 @@
                 <TextBox             Grid.Row="8" Grid.Column="3" TabIndex="9" x:Name="txtUserName" />
             </Grid>
         </ScrollViewer>
-        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Container}">
+        <Grid Grid.Row="1" Style="{StaticResource ButtonContainer}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />

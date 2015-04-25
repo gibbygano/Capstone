@@ -4,7 +4,6 @@ using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,11 +22,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// This will fill the list of suppliers and set this object to the "Instance variable"
         /// Created by will fritz 15/2/6
         /// </summary>
-        /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="(DataGridContextMenuResult)" /> is null. </exception>
-        /// <exception cref="ArgumentException"><paramref name="(DataGridContextMenuResult)" /> is not an <see cref="T:System.Enum" />. </exception>
+        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
+        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
         /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
+        /// <exception cref="WanderingTurtleException" />
         public ListSuppliers()
         {
             InitializeComponent();
@@ -37,7 +36,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <exception cref="WanderingTurtleException"/>
-        public void ContextMenuItem_Click(object sender, RoutedEventArgs e)
+        public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<Supplier>(out command);
@@ -71,13 +70,19 @@ namespace com.WanderingTurtle.FormPresentation
                 if (selectedItem == null)
                 {
                     if (new AddEditSupplier().ShowDialog() == false) return;
-                    FillList();
                 }
                 else
                 {
-                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false) return;
-                    if (readOnly) return;
-                    FillList();
+                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false)
+                    {
+                        FillList();
+                        return;
+                    }
+                    if (readOnly)
+                    {
+                        FillList();
+                        return;
+                    }
                 }
             }
             catch (Exception ex)

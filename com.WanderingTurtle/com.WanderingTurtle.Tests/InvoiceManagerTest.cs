@@ -24,9 +24,7 @@ namespace com.WanderingTurtle.Tests
         {
             List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
             int id = (int)guest[guest.Count - 1].HotelGuestID;
-
             Invoice invoice = access.RetrieveInvoiceByGuest(id);
-
             Assert.AreEqual(id, invoice.HotelGuestID);
         }
 
@@ -35,9 +33,7 @@ namespace com.WanderingTurtle.Tests
         {
             invoiceList = InvoiceAccessor.GetAllInvoicesList();
             Invoice oldInvoice = invoiceList[invoiceList.Count - 1];
-
             ResultsArchive result = access.ArchiveCurrentGuestInvoice(oldInvoice);
-
             Assert.AreEqual(ResultsArchive.Success, result);
         }
 
@@ -47,9 +43,7 @@ namespace com.WanderingTurtle.Tests
             List<BookingDetails> guestBookings = null;
             List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
             int id = (int)guest[guest.Count - 1].HotelGuestID;
-
             guestBookings = access.RetrieveGuestBookingDetailsList(id);
-
             Assert.AreNotEqual(null, guestBookings);
         }
 
@@ -57,9 +51,7 @@ namespace com.WanderingTurtle.Tests
         public void InvoiceManagerGetAll()
         {
             List<InvoiceDetails> invoiceList = null;
-
             invoiceList = access.RetrieveActiveInvoiceDetails();
-
             Assert.IsNotNull(invoiceList);
         }
 
@@ -69,9 +61,7 @@ namespace com.WanderingTurtle.Tests
             List<BookingDetails> guestBookings = null;
             List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet();
             int id = (int)guest[0].HotelGuestID;
-
             guestBookings = access.RetrieveGuestBookingDetailsList(id);
-
             Assert.IsNotNull(guestBookings);
         }
 
@@ -79,9 +69,7 @@ namespace com.WanderingTurtle.Tests
         public void InvoiceManagerRetrieveInvoiceDetails()
         {
             List<InvoiceDetails> invoices = null;
-
             invoices = access.RetrieveActiveInvoiceDetails();
-
             Assert.IsNotNull(invoices);
         }
 
@@ -105,9 +93,7 @@ namespace com.WanderingTurtle.Tests
             List<BookingDetails> guestBookings = access.RetrieveGuestBookingDetailsList(id);
             var invoices = access.RetrieveActiveInvoiceDetails();
             var invoice = invoices[1];
-
             var result = access.CheckToArchiveInvoice(invoice, guestBookings);
-
             Assert.AreEqual(ResultsArchive.CannotArchive, result);
         }
 
