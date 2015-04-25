@@ -54,7 +54,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void populateTextFields()
         {
             //get latest data on the eventItemListing
-            _eventListingToView = _bookingManager.RetrieveEventListing(CurrentBookingDetails.ItemListID);
+            _eventListingToView = _bookingManager.RetrieveItemListingDetailsList(CurrentBookingDetails.ItemListID);
             _eventListingToView.QuantityOffered = _bookingManager.availableQuantity(_eventListingToView.MaxNumGuests, _eventListingToView.CurrentNumGuests);
 
             //populate form fields with object data

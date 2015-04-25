@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spInvoiceGuestBookingArchive]
+﻿CREATE PROCEDURE [dbo].[spArchiveInvoiceGuestBooking]
 @guestID int
 
 AS

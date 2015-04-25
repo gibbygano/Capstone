@@ -67,25 +67,24 @@
   <ItemGroup>
     <Build Include="dbo\Tables\EventItem.sql" />
     <Build Include="dbo\Tables\Supplier.sql" />
-    <Build Include="dbo\Stored Procedures\spInsertBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spInsertBookingUpdateListingNum.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteEventItem.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteSupplier.sql" />
     <Build Include="dbo\Stored Procedures\spInsertEventItem.sql" />
     <Build Include="dbo\Stored Procedures\spInsertSupplier.sql" />
     <Build Include="dbo\Stored Procedures\spSelectAllBookings.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectBooking.sql" />
-    <Build Include="dbo\Stored Procedures\spUpdateBooking.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectBookingByID.sql" />
+    <Build Include="dbo\Stored Procedures\spUpdateBookingUpdateListingNum.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateEventItem.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateSupplier.sql" />
     <Build Include="dbo\Tables\CityState.sql" />
-    <Build Include="dbo\Stored Procedures\spCityStateCreate.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateRead.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateUpdate.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadAll.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadCity.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadState.sql" />
     <Build Include="dbo\Stored Procedures\spCityStateReadCityState.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectListingFull.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectItemListingDetailsList.sql" />
     <Build Include="dbo\Tables\SupplierApplication.sql" />
     <Build Include="dbo\Tables\Employee.sql" />
     <Build Include="dbo\Stored Procedures\spInsertEmployee.sql" />
@@ -112,12 +111,11 @@
     <Build Include="dbo\Stored Procedures\spSelectAllInvoices.sql" />
     <Build Include="dbo\Stored Procedures\spSelectInvoiceBookings.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeGet.sql" />
-    <Build Include="dbo\Stored Procedures\spArchiveInvoice.sql" />
     <Build Include="dbo\Stored Procedures\spEmployeeCheckPassword.sql" />
     <Build Include="dbo\Tables\Booking.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spUpdateCurrentNumGuests.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectOneListingFull.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectItemListingDetailsByID.sql" />
     <Build Include="dbo\Stored Procedures\spSelectInvoiceByGuest.sql" />
     <Build Include="dbo\Tables\SupplierLogin.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
@@ -131,7 +129,7 @@
     <Build Include="dbo\Stored Procedures\spInsertSupplierFromApplication.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetUserName.sql" />
     <Build Include="dbo\Stored Procedures\spSelectBookingNumbers.sql" />
-    <Build Include="dbo\Stored Procedures\spSelectHotelGuestPinGet.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectHotelGuestPin.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestEvent.sql" />
     <Build Include="dbo\Stored Procedures\spSupplierLoginGetByID.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestSupplier.sql" />
@@ -140,7 +138,7 @@
     <Build Include="dbo\Stored Procedures\spDeleteTestItemListing.sql" />
     <Build Include="dbo\Stored Procedures\spDeleteTestSupplierLogin.sql" />
     <Build Include="dbo\Stored Procedures\testSPClearHotelGuest.sql" />
-    <Build Include="dbo\Stored Procedures\spInvoiceGuestBookingArchive.sql" />
+    <Build Include="dbo\Stored Procedures\spArchiveInvoiceGuestBooking.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />

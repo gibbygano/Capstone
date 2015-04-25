@@ -88,7 +88,7 @@ namespace com.WanderingTurtle.Web.Pages
         {
             try
             {
-                currentItemListings = myManager.RetrieveActiveItemListings();
+                currentItemListings = myManager.RetrieveActiveItemListingDetailsList();
                 return currentItemListings;
             }
             catch (Exception)
@@ -97,7 +97,6 @@ namespace com.WanderingTurtle.Web.Pages
                 return null;
             }
         }
-
 
         private void showMessage(string message)
         {
@@ -194,7 +193,7 @@ namespace com.WanderingTurtle.Web.Pages
         private ItemListingDetails getSelectedItem()
         {
             int itemID = (int)gvListings.SelectedDataKey.Value;
-            selectedItemListing = myManager.RetrieveEventListing(itemID);
+            selectedItemListing = myManager.RetrieveItemListingDetailsList(itemID);
             return selectedItemListing;
         }
 

@@ -74,21 +74,6 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(ResultsEdit.Success, edited);
         }
 
-
-        [TestMethod]
-        public void HotelManagerArchive()
-        {
-            ResultsEdit changed = access.AddHotelGuest(TestGuest);
-            //locates the fake record ID
-            int guestID = TestCleanupAccessor.GetHotelGuest();
-            //pulls from real manager
-            HotelGuest guest = access.GetHotelGuest(guestID);
-            //archives the guest using the manager method
-            bool archived = access.ArchiveHotelGuest(guest, false);
-            //asserts that the test will pass
-            Assert.IsTrue(archived);
-        }
-
         [TestCleanup]
         public void cleanup()
         {

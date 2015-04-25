@@ -52,7 +52,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                myEventList = _bookingManager.RetrieveActiveItemListings();
+                myEventList = _bookingManager.RetrieveActiveItemListingDetailsList();
                 lvEventListItems.ItemsSource = myEventList;
                 lvEventListItems.Items.Refresh();
             }

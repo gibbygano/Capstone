@@ -75,19 +75,6 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual(1, changed);
         }
 
-        [TestMethod]
-        public void HotelAccessorArchive()
-        {
-            //gets the guestID from the Test accessor
-            int guestID = TestCleanupAccessor.GetHotelGuest();
-            //passes guestID to the HotelGuestAccessor method to grab the guest.
-            List<HotelGuest> guest = HotelGuestAccessor.HotelGuestGet(guestID);
-            //Calls to archive guest through the accessor
-            int changed = HotelGuestAccessor.HotelGuestArchive(guest[guest.Count - 1], false);
-            //asserts that a record was affected
-            Assert.AreEqual(1, changed);
-        }
-
         [TestCleanup]
         public void cleanup()
         {

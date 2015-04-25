@@ -1,5 +1,5 @@
 ﻿/* ------------------------------Select- General --------------created by: Tony Noel-----------------*/
-CREATE PROCEDURE [dbo].[spSelectBooking]
+CREATE PROCEDURE [dbo].[spSelectBookingByID]
 	(@bookingID int)
 AS
 BEGIN

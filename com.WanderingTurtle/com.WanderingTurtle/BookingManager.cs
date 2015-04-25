@@ -26,7 +26,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
         [DataObjectMethod(DataObjectMethodType.Select)]
-        public List<ItemListingDetails> RetrieveActiveItemListings()
+        public List<ItemListingDetails> RetrieveActiveItemListingDetailsList()
         {
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
             var now = DateTime.Now;
@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 if (DataCache._currentItemListingDetailsList == null)
                 {
-                    RefreshItemDetailsListCacheData();
+                    RefreshItemListingDetailsListCacheData();
                     return DataCache._currentItemListingDetailsList;
                 }
                 else
@@ -43,7 +43,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     //check time. If less than 5 min, return cache
                     if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
                     {
-                        RefreshItemDetailsListCacheData();
+                        RefreshItemListingDetailsListCacheData();
                         return DataCache._currentItemListingDetailsList;
                     }
                     else
@@ -65,10 +65,10 @@ namespace com.WanderingTurtle.BusinessLogic
         ///
         /// Refreshes the data cache
         /// </summary>
-        private void RefreshItemDetailsListCacheData()
+        private void RefreshItemListingDetailsListCacheData()
         {
             //data hasn't been retrieved yet. get data, set it to the cache and return the result.
-            var activeEventListings = BookingAccessor.getListItems();
+            var activeEventListings = BookingAccessor.GetItemListingDetailsList();
 
             //calculating the quantity of available tickets for each listing
             foreach (ItemListingDetails lIO in activeEventListings)
@@ -89,7 +89,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="itemListID">ItemList ID</param>
         /// <returns>an ItemListingDetails containing the item listing information</returns>
-        public ItemListingDetails RetrieveEventListing(int itemListID)
+        public ItemListingDetails RetrieveItemListingDetailsList(int itemListID)
         {
             var now = DateTime.Now;
             double cacheExpirationTime = 5;
@@ -98,7 +98,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 if (DataCache._currentItemListingDetailsList == null)
                 {
-                    return BookingAccessor.getEventListing(itemListID);
+                    return BookingAccessor.GetItemListingDetails(itemListID);
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
                     {
                         //get event from DB
-                        var requestedEvent = BookingAccessor.getEventListing(itemListID);
+                        var requestedEvent = BookingAccessor.GetItemListingDetails(itemListID);
                         return requestedEvent;
                     }
                     else
@@ -143,8 +143,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>Results of adding the booking</returns>
         public ResultsEdit AddBookingResult(Booking bookingToAdd)
         {
-            ItemListingDetails originalItem = RetrieveEventListing(bookingToAdd.ItemListID);
-
             if (bookingToAdd.Quantity == 0)
             {
                 return ResultsEdit.QuantityZero;
@@ -154,28 +152,15 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 try
                 {
-                    //calls method to add a booking. BookingID is auto-generated in database
-                    int result = BookingAccessor.addBooking(bookingToAdd);
+                    //calls method to add a booking and update itemListing Table with current number of guests
+                    int result = BookingAccessor.AddBooking(bookingToAdd);
 
-                    //if add booking was successful
-                    if (result == 1)
+                    if (result == 2)
                     {
-                        //change quantity of guests
-                        int updatedGuests = originalItem.CurrentNumGuests + bookingToAdd.Quantity;
+                        //update cache
+                        RefreshItemListingDetailsListCacheData();
 
-                        int result2 = updateNumberOfGuests(originalItem.ItemListID, originalItem.CurrentNumGuests, updatedGuests);
-
-                        if (result2 == 1)
-                        {
-                            //update cache
-                            RefreshItemDetailsListCacheData();
-
-                            return ResultsEdit.Success;
-                        }
-                        else
-                        {
-                            return ResultsEdit.DatabaseError;
-                        }
+                        return ResultsEdit.Success;
                     }
                     else
                     {
@@ -203,7 +188,7 @@ namespace com.WanderingTurtle.BusinessLogic
         public int EditBooking(Booking newOne)
         {
             Booking oldOne = RetrieveBooking(newOne.BookingID);
-            var numRows = BookingAccessor.updateBooking(oldOne, newOne);
+            var numRows = BookingAccessor.UpdateBooking(oldOne, newOne);
             return numRows;
         }
 
@@ -215,13 +200,12 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="bookingId">Takes an input of an int- the BookingID number to locate the requested record.</param>
         /// <returns>Output is a booking object to hold the booking record.</returns>
-
         [DataObjectMethod(DataObjectMethodType.Select)]
         public Booking RetrieveBooking(int bookingId)
         {
             try
             {
-                return BookingAccessor.getBooking(bookingId);
+                return BookingAccessor.GetBooking(bookingId);
             }
             catch (Exception)
             {
@@ -308,7 +292,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Tony Noel
-        /// Created: 2015/03/10 - Moved to Order Manager
+        /// Created: 2015/03/10 - Moved to Booking Manager
         ///
         /// Calculates the total charge of discount * Extended price
         /// </summary>
@@ -324,7 +308,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Tony Noel
-        /// Created: 2015/03/10 - Moved to Order Manager, as it does a calculation.
+        /// Created: 2015/03/10 - Moved to Booking Manager, as it does a calculation.
         /// </summary>
         /// <param name="maxQuantity"></param>
         /// <param name="currentQuantity"></param>
@@ -352,27 +336,6 @@ namespace com.WanderingTurtle.BusinessLogic
             int quantity = newQuantity - currentQuantity;
 
             return quantity;
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/11
-        ///
-        /// Calls the Booking Accessor to update the number of guests attending an event
-        /// Needed after a booking is added, edited or cancelled
-        /// </summary>
-        /// <param name="itemID">id of the eventListing</param>
-        /// <param name="oldNumGuests">eventListing number of guests that were attending</param>
-        /// <param name="newNumGuests">new number of guests</param>
-        /// <returns>number of rows affected</returns>
-        public int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
-        {
-            var numRows = BookingAccessor.updateNumberOfGuests(itemID, oldNumGuests, newNumGuests);
-
-            //refresh Data Cache
-            RefreshItemDetailsListCacheData();
-
-            return numRows;
         }
 
         /// <summary>
@@ -411,37 +374,21 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                //retrieve latest guest info from database
-                ItemListingDetails originalEventListing = RetrieveEventListing(bookingToCancel.ItemListID);
+                //update the numbers
+                bookingToCancel.Quantity = 0;
+                bookingToCancel.TicketPrice = 0;
+                bookingToCancel.ExtendedPrice = 0;
+                bookingToCancel.Discount = 0;
 
-                int newNumGuests = originalEventListing.CurrentNumGuests - bookingToCancel.Quantity;
+                int result = EditBooking(bookingToCancel);
 
-                //updating number of guests
-                int result1 = updateNumberOfGuests(bookingToCancel.ItemListID, originalEventListing.CurrentNumGuests, newNumGuests);
-
-                // if update to number of guests was successful will now try to update other fields
-                if (result1 == 1)
+                //result should be 2 - one for the booking, one to update the number of guests for the item listing
+                if (result == 2)
                 {
-                    bookingToCancel.Quantity = 0;
-                    bookingToCancel.TicketPrice = 0;
-                    bookingToCancel.ExtendedPrice = 0;
-                    bookingToCancel.Discount = 0;
-
-                    int result = EditBooking(bookingToCancel);
-
-                    if (result == 1)
-                    {
-                        //refresh Data Cache
-                        RefreshItemDetailsListCacheData();
-
-                        return ResultsEdit.Success;
-                    }
-                    else
-                    {
-                        return ResultsEdit.ChangedByOtherUser;
-                    }
+                    //refresh Data Cache
+                    RefreshItemListingDetailsListCacheData();
+                    return ResultsEdit.Success;
                 }
-                //if update failed
                 else
                 {
                     return ResultsEdit.ChangedByOtherUser;
@@ -476,7 +423,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 int numGuestsDifference = spotsReservedDifference(editedBooking.Quantity, originalQty);
 
                 // creates an ItemListing object by retrieving the record of the specific object based on it's ItemListID
-                ItemListingDetails originalItem = RetrieveEventListing(editedBooking.ItemListID);
+                ItemListingDetails originalItem = RetrieveItemListingDetailsList(editedBooking.ItemListID);
 
                 //assigned the difference of the MaxNumGuests - currentNum of guests
                 int quantityOffered = availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
@@ -501,16 +448,10 @@ namespace com.WanderingTurtle.BusinessLogic
                 //send the changes to the database
                 int numRows = EditBooking(editedBooking);
 
-                if (numRows == 1)
+                if (numRows == 2)
                 {
-                    //change number of seasts available
-                    int newNumGuests = originalItem.CurrentNumGuests + numGuestsDifference;
-
-                    int result1 = updateNumberOfGuests(editedBooking.ItemListID, originalItem.CurrentNumGuests, newNumGuests);
-
                     //refresh Data Cache
-                    RefreshItemDetailsListCacheData();
-
+                    RefreshItemListingDetailsListCacheData();
                     return ResultsEdit.Success;
                 }
                 else
@@ -527,6 +468,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/30
+        /// 
+        /// Passes data to the Accessor to verify that the pin is not being used.
         /// </summary>
         /// <param name="inPIN"></param>
         /// <returns></returns>
@@ -535,12 +478,11 @@ namespace com.WanderingTurtle.BusinessLogic
             try
             {
                 //retrieve guest
-                return BookingAccessor.verifyGuestPin(inPIN);
+                return BookingAccessor.VerifyHotelGuestPin(inPIN);
             }
-            catch (Exception)
+            catch (Exception ax)
             {
-                var ax = new ApplicationException("PIN does not exist.");
-                throw ax;
+               throw ax;
             }
         }
 

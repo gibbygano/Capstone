@@ -81,7 +81,7 @@ namespace com.WanderingTurtle.Tests
         {
             //A test to retrieve a listing of ItemListingDetails, checks to ensure that a list of ItemListingDetails
             //is being returned and that the count is greater than 1 record.
-            List<ItemListingDetails> activeEventListings = myBook.RetrieveActiveItemListings();
+            List<ItemListingDetails> activeEventListings = myBook.RetrieveActiveItemListingDetailsList();
             bool worked = false;
             if (activeEventListings.Count > 1)
             {
@@ -94,7 +94,7 @@ namespace com.WanderingTurtle.Tests
         public void TestRetrieveEventListing()
         {
             //A test to retrieve a single listing by ID from the ItemListing table.
-            ItemListingDetails detail = myBook.RetrieveEventListing(itemID);
+            ItemListingDetails detail = myBook.RetrieveItemListingDetailsList(itemID);
             int expected = 1234;
             Assert.AreEqual(expected, detail.Price);
         }
@@ -200,15 +200,7 @@ namespace com.WanderingTurtle.Tests
             //Asserts that the expected and the result will be .5M
             Assert.AreEqual(expected, result);
         }
-        [TestMethod]
-        public void updateNumberofGuests()
-        {
-            //Updates the number of guest in the item listing. Because of the add method, the ItemListing
-            //# of guests goes up to 32. This method sets it back to 30.
-            int rows = myBook.updateNumberOfGuests(booking.ItemListID, 32, 30);
-            Assert.IsNotNull(rows);
-        }
-
+ 
         [TestMethod]
         public void CheckToEditBooking()
         {

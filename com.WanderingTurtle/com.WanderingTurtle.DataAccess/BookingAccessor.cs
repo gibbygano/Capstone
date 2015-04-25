@@ -16,17 +16,14 @@ namespace com.WanderingTurtle.DataAccess
         /// to help populate drop downs/ lists for Add Bookings
         /// </summary>
         /// <returns>a list of ItemListingDetails objects (is created from two tables, ItemListing and Event Item)</returns>
-        public static List<ItemListingDetails> getListItems()
+        public static List<ItemListingDetails> GetItemListingDetailsList()
         {
             var BookingOpsList = new List<ItemListingDetails>();
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectListingFull";
-            DateTime now = DateTime.Now;
+            string query = "spSelectItemListingDetailsList";
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@Now", now);
 
             try
             {
@@ -79,13 +76,13 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="itemListID">Id for the itemListing</param>
         /// <returns></returns>
-        public static ItemListingDetails getEventListing(int itemListID)
+        public static ItemListingDetails GetItemListingDetails(int itemListID)
         {
             var eventItemListing = new ItemListingDetails();
 
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectOneListingFull";
+            string query = "spSelectItemListingDetailsByID";
 
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -140,13 +137,16 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Updated By:  Pat Banks -2015/02/19
         /// exception  handling if add wasn't successful
+        /// Pat Banks
+        /// Updated:  2015/04/25
+        /// SP also updates the Current Number of guests based on the total number of bookings for that Item ID
         /// </remarks>
         /// <param name="toAdd">input- a Booking object to be inserted</param>
         /// <returns>Output is the number of rows affected by the insert</returns>
-        public static int addBooking(Booking toAdd)
+        public static int AddBooking(Booking toAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spInsertBooking";
+            var cmdText = "spInsertBookingUpdateListingNum";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
 
@@ -168,7 +168,6 @@ namespace com.WanderingTurtle.DataAccess
                 conn.Open();
                 rowsAffected = (int)cmd.ExecuteNonQuery();
 
-                //added exception handling pb 2/19/15
                 if (rowsAffected == 0)
                 {
                     throw new ApplicationException("Error adding new database entry");
@@ -182,7 +181,6 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-
             return rowsAffected;
         }
 
@@ -198,13 +196,13 @@ namespace com.WanderingTurtle.DataAccess
         /// </remarks>
         /// <param name="BookingID">Takes an input of an int- the BookingID number to locate the requested record.</param>
         /// <returns>Output is a booking object to hold the booking record.</returns>
-        public static Booking getBooking(int BookingID)
+        public static Booking GetBooking(int BookingID)
         {
             //create Booking object to store info
             Booking BookingToGet = new Booking();
 
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSelectBooking";
+            string query = "spSelectBookingByID";
 
             SqlCommand command = new SqlCommand(query, conn);
             command.CommandType = CommandType.StoredProcedure;
@@ -260,14 +258,18 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tony Noel
         /// Updated: 2015/03/02
+        /// 
+        /// Pat Banks
+        /// Updated:  2015/04/25
+        /// SP also updates the Current Number of guests based on the total number of bookings for that Item ID
         /// </remarks>
         /// <param name="oldOne">The original Booking object/values</param>
         /// <param name="toUpdate">The new booking object values to replace the old</param>
         /// <returns>Output is the rows affected by the update</returns>
-        public static int updateBooking(Booking oldOne, Booking toUpdate)
+        public static int UpdateBooking(Booking oldOne, Booking toUpdate)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spUpdateBooking";
+            var cmdText = "spUpdateBookingUpdateListingNum";
             var cmd = new SqlCommand(cmdText, conn);
             int rowsAffected = 0;
 
@@ -292,49 +294,6 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@original_TicketPrice", oldOne.TicketPrice);
             cmd.Parameters.AddWithValue("@original_ExtendedPrice", oldOne.ExtendedPrice);
             cmd.Parameters.AddWithValue("@original_TotalCharge", oldOne.TotalCharge);
-
-            try
-            {
-                conn.Open();
-                rowsAffected = cmd.ExecuteNonQuery();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return rowsAffected;
-        }
-
-        /// <summary>
-        /// Pat Banks
-        /// Created: 2015/03/11
-        ///
-        /// Updates the number of attendees that will be coming to an event
-        /// </summary>
-        /// <param name="itemID">ID of the item listing</param>
-        /// <param name="oldNumGuests">Number of guests that were to attend</param>
-        /// <param name="newNumGuests">updated number of guests</param>
-        /// <returns>
-        /// number of rows affected
-        /// </returns>
-        public static int updateNumberOfGuests(int itemID, int oldNumGuests, int newNumGuests)
-        {
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spUpdateCurrentNumGuests";
-            var cmd = new SqlCommand(cmdText, conn);
-            int rowsAffected = 0;
-
-            //Set command type to stored procedure and add parameters
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@ItemListID", itemID);
-
-            cmd.Parameters.AddWithValue("@CurrentNumberOfGuests", newNumGuests);
-            cmd.Parameters.AddWithValue("@original_CurrentNumberOfGuests", oldNumGuests);
 
             try
             {
@@ -403,11 +362,19 @@ namespace com.WanderingTurtle.DataAccess
             return bookingNumber;
         }
 
-        public static HotelGuest verifyGuestPin(string inPIN)
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/14
+        /// 
+        /// Verifies the hotel guest pin to sign up for an item listing and create a booking
+        /// </summary>
+        /// <param name="inPIN"></param>
+        /// <returns>Hotel guest that has that pin</returns>
+        public static HotelGuest VerifyHotelGuestPin(string inPIN)
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spSelectHotelGuestPinGet";
+            var cmdText = "spSelectHotelGuestByPin";
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@guestPIN", inPIN);

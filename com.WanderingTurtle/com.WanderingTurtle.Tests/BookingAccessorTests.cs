@@ -33,7 +33,7 @@ namespace com.WanderingTurtle.Tests
         }
         public void AddBooking()
         {
-            int result = BookingAccessor.addBooking(booking);
+            int result = BookingAccessor.AddBooking(booking);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.Tests
         public void TestAddBookingAccess()
         {
             //Added to database and checked to see if an int row is returned, then compared to expected result
-            int result = BookingAccessor.addBooking(booking);
+            int result = BookingAccessor.AddBooking(booking);
             int expected = 1;
             Assert.AreEqual(expected, result);
         }
@@ -56,7 +56,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestGetEventListingAccess()
         { //A test to retrieve a single listing by ID from the ItemListing table.
-            ItemListingDetails details = BookingAccessor.getEventListing(itemID);
+            ItemListingDetails details = BookingAccessor.GetItemListingDetails(itemID);
             int expected = 1234;
             Assert.AreEqual(expected, details.Price);
         }
@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.Tests
         public void TestGetListItemsAccess()
         { //A test to retrieve a listing of ItemListingDetails, checks to ensure that a list of ItemListingDetails
             //is being returned and that the count is greater than 1 record.
-            List<ItemListingDetails> details = BookingAccessor.getListItems();
+            List<ItemListingDetails> details = BookingAccessor.GetItemListingDetailsList();
             bool worked = false;
             if (details.Count > 1)
             {
@@ -79,7 +79,7 @@ namespace com.WanderingTurtle.Tests
         {   // Retrieves a booking from the database by ID, first captures the dummy booking from database
             //using a TestAccessor, then uses a real accessor method to be tested.
             BookingID = TestCleanupAccessor.GetBooking();
-            Booking booking2 = BookingAccessor.getBooking(BookingID);
+            Booking booking2 = BookingAccessor.GetBooking(BookingID);
             decimal expected = 1234;
             Assert.AreEqual(expected, booking2.TicketPrice);
         }
@@ -90,13 +90,13 @@ namespace com.WanderingTurtle.Tests
             //using a TestAccessor
             BookingID = TestCleanupAccessor.GetBooking();
             //Assigns one booking object to be the old record and one to be the new record
-            Booking old = BookingAccessor.getBooking(BookingID);
+            Booking old = BookingAccessor.GetBooking(BookingID);
             Booking newB = new Booking(guestID, empID, itemID, 3, dateBooked, ticket, extended, discount, total);
             //Updates the old with the new quantity
-            int rows = BookingAccessor.updateBooking(old, newB);
+            int rows = BookingAccessor.UpdateBooking(old, newB);
             int expected = 3;
             //Grabs the record to test and see if the update went through
-            Booking toCheck = BookingAccessor.getBooking(BookingID);
+            Booking toCheck = BookingAccessor.GetBooking(BookingID);
             Assert.AreEqual(expected, toCheck.Quantity);
         }
         [TestMethod]
@@ -105,7 +105,7 @@ namespace com.WanderingTurtle.Tests
             List<HotelGuest> guest1 = HotelGuestAccessor.HotelGuestGet(100);
             //Checks using a pin in the database, stores guest info from database into a guest object
             //Asserts that a record is found, that guest is not null by passing the guest1 guest pin
-            HotelGuest guest = BookingAccessor.verifyGuestPin(guest1[guest1.Count - 1].GuestPIN);
+            HotelGuest guest = BookingAccessor.VerifyHotelGuestPin(guest1[guest1.Count - 1].GuestPIN);
             Assert.IsNotNull(guest);
         }
         [TestMethod]

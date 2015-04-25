@@ -207,7 +207,7 @@ namespace com.WanderingTurtle.DataAccess
         public int ArchiveGuestInvoice(int GuestID)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spInvoiceGuestBookingArchive";
+            var cmdText = "spArchiveInvoiceGuestBooking";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             var numRows = 0;

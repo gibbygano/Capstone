@@ -29,15 +29,6 @@ namespace com.WanderingTurtle.Tests
         }
 
         [TestMethod]
-        public void InvoiceManagerArchive()
-        {
-            invoiceList = InvoiceAccessor.GetAllInvoicesList();
-            Invoice oldInvoice = invoiceList[invoiceList.Count - 1];
-            ResultsArchive result = access.ArchiveCurrentGuestInvoice(oldInvoice);
-            Assert.AreEqual(ResultsArchive.Success, result);
-        }
-
-        [TestMethod]
         public void InvoiceManagerGetByBooking()
         {
             List<BookingDetails> guestBookings = null;
