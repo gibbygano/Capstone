@@ -94,8 +94,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 var contextMenu = new ContextMenu();
                 foreach (
                     var menuItem in
-                        (contextMenus ??
-                         (DataGridContextMenuResult[])Enum.GetValues(typeof(DataGridContextMenuResult)))
+                        (contextMenus.Length > 0
+                            ? contextMenus
+                            : (DataGridContextMenuResult[])Enum.GetValues(typeof(DataGridContextMenuResult)))
                             .Select(menu => new MenuItem
                             {
                                 Header = Enum.GetName(typeof(DataGridContextMenuResult), menu),
