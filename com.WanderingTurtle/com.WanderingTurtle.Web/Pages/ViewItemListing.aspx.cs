@@ -70,7 +70,7 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 var list = _myManager.RetrieveItemListingList(supplierID);
 
-                _listedLists = list;
+                _listedLists = list.Where(l => l.StartDate > DateTime.Now);
                 return _listedLists;
             }
             catch (Exception e)

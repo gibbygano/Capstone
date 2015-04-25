@@ -48,7 +48,7 @@ namespace com.WanderingTurtle.Web.Pages
                 //get # of listings for supplier
                 try
                 {
-                    _currentItemListings = _myManager.RetrieveItemListingList();
+                    _currentItemListings = _myManager.RetrieveItemListingList(_currentSupplier.SupplierID).ToList();
                     var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                     currentListingCount = myList.Count();
 

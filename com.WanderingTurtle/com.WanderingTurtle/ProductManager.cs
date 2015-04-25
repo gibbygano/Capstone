@@ -241,7 +241,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 if (DataCache._currentItemListingList == null)
                 {
                     //data hasn't been retrieved yet. get data, set it to the cache and return the result.
-                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    DataCache._currentItemListingList = ItemListingAccessor.GetAllItemListingList();
                     DataCache._ItemListingListTime = now;
                 }
                 else
@@ -250,7 +250,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     if (now > DataCache._ItemListingListTime.AddMinutes(cacheExpirationTime))
                     {
                         //get new list from DB
-                        DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                        DataCache._currentItemListingList = ItemListingAccessor.GetAllItemListingList();
                         DataCache._ItemListingListTime = now;
                     }
                 }
