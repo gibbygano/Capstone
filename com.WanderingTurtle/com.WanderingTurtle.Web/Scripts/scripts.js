@@ -9,7 +9,9 @@ $(document).ready(function () {
 
     $('#MainContent_txtZip').keyup(function () {
         var search = $(this).val();
+
         if (search != null) {
+            console.log(search);
             if (search != "") {
                 $('#zips').css('display', 'block');
             }
@@ -32,7 +34,8 @@ $(document).ready(function () {
     });
 
     $('#tblitems').DataTable({
-        stateSave: true
+        stateSave: true,
+        autoWidth: false
     });
 
     $('#tbl1').DataTable({
@@ -68,17 +71,13 @@ $(document).ready(function () {
         start: 0
     });
 
-    var current2 = $('#listCurrent').val();
-    console.log(current2);
 
     $("#listmax").spinner({
-        min: current2,
+        min: $('#listCurrent').val(),
         max: 999,
         step: 1,
         start: 0
     });
-
-
 
     var startDateTextBox = $('#eventStart');
     var endDateTextBox = $('#eventEnd');
@@ -92,21 +91,7 @@ $(document).ready(function () {
             timeFormat: 'hh:mm tt',
             controlType: 'select',
             oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
-
-    $("#DateFrom").datetimepicker(
-        {
-            controlType: 'select',
-            oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
-    $("#DateTo").datetimepicker(
-        {
-            controlType: 'select',
-            oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
+            timeFormat: 'hh:mm tt',
             showButtonPanel: false,
             stepMinute: 10,
             start: {}, // start picker options
@@ -114,8 +99,9 @@ $(document).ready(function () {
         }
     );
 
-
 });
+
+
 
 function showDetails() {
 

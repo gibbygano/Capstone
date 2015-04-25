@@ -61,7 +61,6 @@
       <Project>{b27ea16a-c7d9-4664-a33e-50f4c7c1e166}</Project>
       <Name>WanderingTurtle.Common</Name>
     </ProjectReference>
-    <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\WanderingTurtle.Common.csproj">

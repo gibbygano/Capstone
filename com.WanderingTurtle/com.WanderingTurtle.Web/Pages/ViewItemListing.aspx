@@ -24,8 +24,6 @@
                 <td><%# Item.Price.ToString("C") %></td>
                 <td><%# Item.MaxNumGuests %></td>
                 <td>
-
-
                     <asp:Button CommandName="Edit" CommandArgument="<%# Item.EventID %>" Text="Edit" runat="server" />
                     <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
                 </td>
@@ -61,9 +59,9 @@
                     <input size="3" name="max" id="listmax" class="myspinner myDate" value="<%# Item.MaxNumGuests %>" maxlength="3" /></td>
                 <td>
                     <asp:Button CommandName="Update" Text="Update" CausesValidation="true" runat="server" ID="btnUpdate" />
-                    <asp:Button CommandName="Cancel" Text="Cancel" runat="server" /></td>
+                    <asp:Button CommandName="Cancel" Text="Cancel" runat="server" />
                 <input type="hidden" id="listCurrent" value="<%# Item.CurrentNumGuests %>" />
-                <input type="hidden" name="itemID" value="<%# Item.ItemListID %>" />
+                <input type="hidden" name="itemID" value="<%# Item.ItemListID %>" /></td>
             </tr>
         </EditItemTemplate>
 
