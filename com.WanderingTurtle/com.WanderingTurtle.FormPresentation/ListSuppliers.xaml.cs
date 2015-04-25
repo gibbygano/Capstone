@@ -70,19 +70,12 @@ namespace com.WanderingTurtle.FormPresentation
                 if (selectedItem == null)
                 {
                     if (new AddEditSupplier().ShowDialog() == false) return;
+                    FillList();
                 }
                 else
                 {
-                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false)
-                    {
-                        FillList();
-                        return;
-                    }
-                    if (readOnly)
-                    {
-                        FillList();
-                        return;
-                    }
+                    if (new AddEditSupplier(selectedItem, readOnly).ShowDialog() == false || readOnly) return;
+                    FillList();
                 }
             }
             catch (Exception ex)

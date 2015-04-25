@@ -279,6 +279,7 @@ namespace com.WanderingTurtle.FormPresentation
                 if (_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
                 {
                     await this.ShowMessageDialog("The Supplier was successfully edited.");
+                    DialogResult = true;
                     Close();
                 }
                 else
