@@ -98,11 +98,11 @@
                     <h3>Date Range</h3>
                     <div id="dateFrom" style="float: left">
                         <label>From:</label>
-                        <input type="text" name="dateFrom" id="DateFrom"/>
+                        <input type="text" name="dateFrom" id="eventStart" />
                     </div>
                     <div id="dateTo" style="float: left">
                         <label>To:</label>
-                        <input type="text" name="dateTo" id="DateTo"/>
+                        <input type="text" name="dateTo" id="eventEnd" />
                     </div>
                     <div style="float: left">
                         <label>&nbsp;</label>

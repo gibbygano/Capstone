@@ -92,21 +92,7 @@ $(document).ready(function () {
             timeFormat: 'hh:mm tt',
             controlType: 'select',
             oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
-
-    $("#DateFrom").datetimepicker(
-        {
-            controlType: 'select',
-            oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
-    $("#DateTo").datetimepicker(
-        {
-            controlType: 'select',
-            oneLine: true,
-            timeFormat: 'hh:mm tt'
-        });
+            timeFormat: 'hh:mm tt',
             showButtonPanel: false,
             stepMinute: 10,
             start: {}, // start picker options
@@ -114,8 +100,22 @@ $(document).ready(function () {
         }
     );
 
+$("#DateFrom").datetimepicker(
+       {
+           controlType: 'select',
+           oneLine: true,
+           timeFormat: 'hh:mm tt'
+       });
+$("#DateTo").datetimepicker(
+    {
+        controlType: 'select',
+        oneLine: true,
+        timeFormat: 'hh:mm tt'
+    });
 
 });
+
+
 
 function showDetails() {
 
