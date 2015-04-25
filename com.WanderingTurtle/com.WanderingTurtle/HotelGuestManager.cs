@@ -84,15 +84,18 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        private string RandomString(int Size)
+        public string GenerateRandomPIN()
         {
             Random rg = new Random();
-            string input = "abcdefghijklmnopqrstuvwxyz0123456789";
+            string numInput = "0123456789";
+            string alphaInput = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             StringBuilder builder = new StringBuilder();
             char ch;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                ch = input[rg.Next(0, input.Length)];
+                ch = alphaInput[rg.Next(0, alphaInput.Length)];
+                builder.Append(ch);
+                ch = numInput[rg.Next(0, numInput.Length)];
                 builder.Append(ch);
             }
             return builder.ToString();

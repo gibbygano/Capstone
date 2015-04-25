@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -33,7 +34,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Title = "Add a new Guest";
             TxtRoomNumber.MaxLength = 4;
-            TxtGuestPIN.MaxLength = 5;
+            TxtGuestPIN.MaxLength = 6;
             InitializeEverything();
         }
 
@@ -44,7 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="hotelGuest"></param>
         /// <param name="ReadOnly">Make the form ReadOnly.</param>
-        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
+        /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
         public AddEditHotelGuest(HotelGuest hotelGuest, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -66,7 +67,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana
         /// Created: 2015/02/16
         ///
-        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// Updated 2015/04/13 by Tony Noel - Updated to comply with the ResultsEdit class of error codes.
         ///
         /// Parameter marks whether a database command was successful
         /// </summary>
@@ -148,7 +149,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = null;
                 TxtEmailAddress.Text = null;
                 TxtRoomNumber.Text = null;
-                TxtGuestPIN.Text = null;
+                TxtGuestPIN.Text = _hotelGuestManager.GenerateRandomPIN();
             }
             else
             {
@@ -158,7 +159,9 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtAddress2.Text = CurrentHotelGuest.Address2;
                 foreach (CityState cityState in CboZip.Items.Cast<CityState>().Where(cityState => cityState.Zip == CurrentHotelGuest.CityState.Zip))
                 { CboZip.SelectedItem = cityState; }
-                TxtPhoneNumber.Text = CurrentHotelGuest.PhoneNumber;
+
+                string phoneNumberMasked = CurrentHotelGuest.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+                TxtPhoneNumber.Text = phoneNumberMasked;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
                 TxtRoomNumber.Text = CurrentHotelGuest.Room;
                 TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN;
@@ -181,16 +184,43 @@ namespace com.WanderingTurtle.FormPresentation
             return await this.ShowMessageDialog(message, title, style);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/04/13
+        ///
+        /// Show Message Dialog
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <returns>error message</returns>
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
         {
             throw new InputValidationException(component, message, title);
         }
 
+        /// <summary>
+        ///         /// Miguel Santana
+        /// Created: 2015/04/13
+        ///
+        /// Show Message Dialog - overloaded
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        /// <returns>error message</returns>
         private void ShowErrorMessage(string message, string title = null)
         {
             throw new WanderingTurtleException(this, message, title);
         }
 
+        /// <summary>
+        ///  Miguel Santana
+        /// Created: 2015/04/13
+        ///
+        /// Show error Message Dialog - overloaded
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="title"></param>
         private void ShowErrorMessage(Exception exception, string title = null)
         {
             throw new WanderingTurtleException(this, exception, title);
@@ -290,6 +320,19 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Pat Banks
+        /// Created 2015-04-24
+        /// 
+        /// Used to generate a random PIN for a customer to access the website
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnGeneratePIN_Click(object sender, RoutedEventArgs e)
+        {
+            TxtGuestPIN.Text = _hotelGuestManager.GenerateRandomPIN();
+        }
+
+        /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/18
         ///
@@ -367,9 +410,9 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!Validator.ValidateNumeric(TxtGuestPIN.Text.Trim()) || TxtGuestPIN.Text.Length > 4)
+            if (!Validator.ValidateAlphaNumeric(TxtGuestPIN.Text.Trim()) || TxtGuestPIN.Text.Length !=6)
             {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid PIN Number between 1000 and 9999.");
+                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid 6 digit alphanumeric PIN.");
                 return false;
             }
 

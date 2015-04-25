@@ -8,7 +8,7 @@
 	@email varchar(100),
 	@room char(4),
 	@active bit,
-	@guestpin char(5),
+	@guestpin char(6),
 	
 	@original_hotelGuestID int,
 	@original_firstName varchar(50),
@@ -20,7 +20,7 @@
 	@original_email varchar(100),
 	@original_room char(4),
 	@original_active bit,
-	@original_guestpin char(5)
+	@original_guestpin char(6)
 AS
 BEGIN
 	UPDATE [HotelGuest]

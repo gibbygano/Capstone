@@ -43,7 +43,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="currentSupplierApplication"></param>
         /// <param name="ReadOnly"></param>
-        /// <exception cref="WanderingTurtleException">Occurrs making components readonly.</exception>
+        /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
         public AddEditPendingSupplier(SupplierApplication currentSupplierApplication, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -60,7 +60,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///
+        /// Miguel Santana
+        /// Created:  2015/04/04
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -70,7 +71,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///
+        /// Miguel Santana
+        /// Created:  2015/04/04
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -80,8 +82,17 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///
+        /// Miguel Santana
+        /// Created:  2015/04/04
+        /// 
+        /// Handles the results from the logic layer
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated 2015/04/14
+        /// 
+        /// Added rejected/approved/pending combo
+        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -158,6 +169,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2014/04/13
+        /// 
+        /// Validates user input
+        /// </summary>
+        /// <returns></returns>
         private bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
@@ -199,6 +217,13 @@ namespace com.WanderingTurtle.FormPresentation
             return true;
         }
 
+
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/15
+        /// 
+        /// Gathers form data to send to the manager for addition to the database
+        /// </summary>
         private void GetFormData()
         {
             UpdatedSupplierApplication.CompanyName = txtCompanyName.Text;
@@ -215,13 +240,16 @@ namespace com.WanderingTurtle.FormPresentation
             UpdatedSupplierApplication.ApplicationStatus = cboAppStatus.SelectedValue.ToString();
             UpdatedSupplierApplication.Remarks = txtRemarks.Text;
 
-            //application id from record in memory
+            //application id from record in variable
             UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
             UpdatedSupplierApplication.LastStatusDate = DateTime.Now;
         }
 
         /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/04
         ///
+        /// Initial commit  - reads in data and sets the field for the user.
         /// </summary>
         private void SetFields()
         {
@@ -243,8 +271,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// will fritz 
+        /// Created 2/19/2015
         /// fills the zip code combo box
-        /// created by will fritz 2/19/2015
         /// </summary>
         private void fillComboBox()
         {
@@ -268,6 +297,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Defines application status for the combo box
         /// </summary>
         /// <remarks>
+        /// Miguel Santana
+        /// Updated:  2015/04/16
+        /// updated format of code to IEnum
         /// </remarks>
         private IEnumerable<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>(Enum.GetValues(typeof(ApplicationStatus)) as IEnumerable<ApplicationStatus>); } }
 
@@ -283,6 +315,14 @@ namespace com.WanderingTurtle.FormPresentation
             cboAppStatus.ItemsSource = GetStatusList;
         }
 
+        /// <summary>
+        /// Ryan Blake
+        /// Created:  2015/04/11
+        /// 
+        /// Turns fields on and off depending on the status of the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cboAppStatus.SelectedIndex.Equals(1))

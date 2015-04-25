@@ -20,7 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// This will fill the list of suppliers and set this object to the "Instance variable"
-        /// Created by will fritz 15/2/6
+        /// Created by will fritz 2015/02/06
         /// </summary>
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
         /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>

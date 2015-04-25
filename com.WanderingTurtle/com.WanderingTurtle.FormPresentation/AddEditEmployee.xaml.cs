@@ -51,6 +51,11 @@ namespace com.WanderingTurtle.FormPresentation
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/22
+        /// Holds information on the current employee
+        /// </summary>
         public Employee CurrentEmployee { get; private set; }
 
         /// <summary>
@@ -247,22 +252,47 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <param name="style"></param>
-        /// <returns>awaitable Task of MEssageDialogResult</returns>
+        /// <returns>awaitable Task of MessageDialogResult</returns>
         private async Task<MessageDialogResult> ShowMessage(string message, string title = null, MessageDialogStyle? style = null)
         {
             return await this.ShowMessageDialog(message, title, style);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/04/13
+        ///
+        /// Show input error Message Dialog
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
         {
             throw new InputValidationException(component, message, title);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/04/13
+        ///
+        /// Show error message
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="title"></param>
         private void ShowErrorMessage(string message, string title = null)
         {
             throw new WanderingTurtleException(this, message, title);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/04/13
+        ///
+        /// Show error message for exception
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <param name="title"></param>
         private void ShowErrorMessage(Exception exception, string title = null)
         {
             throw new WanderingTurtleException(this, exception, title);

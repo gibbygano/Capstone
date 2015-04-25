@@ -118,26 +118,26 @@ GO
 
 INSERT INTO [dbo].[HotelGuest] (FirstName, LastName, Zip, Address1, Address2, PhoneNumber, EmailAddress, Room, GuestPIN)
 VALUES
-('Leontius', 'Womack', '52404', '234 33rd Ave SW', '', '(319) 258-4566', 'comewithme@yahoo.com', '101', '7754a'),
-('Shiva', 'Maddox', '52641', '2234 Benton Ave', '', '', '', '102', '8643b'),
-('Wanda', 'Elric', '10001', '123 Wall St', 'Apt 114', '', 'fullmetal@gmail.com', '103', '0864c'),
-('Ichigo', 'Farkas', '10007', '4567 Broadway Ave', '', '(223) 145-9908','', '104', '222d2'),
-('Hugo', 'Tyler', '73078', '6453 Benton Ave', '','(223) 456-1234', '', '105', '77e86'),
-('Martha', 'Sessa', '73078', '6453 Benton Ave', '', '', '', '201', '64f34'),
-('Aslanbek', 'Foreman', '73102', '3345 Main St', 'Apt. 4432', '', '', '202', '753g3'),
-('Barbara', 'Bach', '73102', '5634 Main St','', '(456) 223-1234', '', '203', '54d32'),
-('Jannike', 'Capaldi', '52641', '2232 Benton Ave', '', '(319) 217-4455', 'JannikeC@Oakwood.edu', '204', '5s165'),
-('Clara', 'Brownlow', '52641', '1455 Benton Ave', '', '(319) 931-9983', '', '205', '12qe4'),
-('Agapetus', 'Espenson', '52404', '234 33rd Ave SW', '', '(319) 258-4566', 'comewithme@yahoo.com', '1010', '775qa'),
-('Reyhan', 'Wolfe', '52641', '2234 Benton Ave', '', '', '', '1020', '864qb'),
-('Jalal', 'Michel', '10001', '123 Wall St', 'Apt 114', '', 'fullmetal@gmail.com', '1030', 'q864c'),
-('Emil', 'Abbate', '10007', '4567 Broadway Ave', '', '(223) 145-9908','', '1040', '22ed2'),
-('Evan', 'Ezra', '73078', '6453 Benton Ave', '','(223) 456-1234', '', '1005', '77ew6'),
-('Swati', 'Samson', '73078', '6453 Benton Ave', '', '', '', '2001', '64r34'),
-('Joaquin', 'Delaney', '73102', '3345 Main St', 'Apt. 4432', '', '', '2020', '753t3'),
-('Fatima', 'Dali', '73102', '5634 Main St','', '(456) 223-1234', '', '2030', '54dt2'),
-('Timo', 'Pharlain', '52641', '2232 Benton Ave', '', '(319) 217-4455', 'JannikeC@Oakwood.edu', '2004', '5s1t5'),
-('Jenni', 'Stablum', '52641', '1455 Benton Ave', '', '(319) 931-9983', '', '2005', '12h34')
+('Leontius', 'Womack', '52404', '234 33rd Ave SW', 'Suite 3', '(319) 258-4566', 'comewithme@yahoo.com', '101', '7754a'),
+('Shiva', 'Maddox', '52641', '2234 Benton Ave', '', '(432) 987-2255', 'ShivaMaddox32@hotmail.com', '102', '8643b'),
+('Wanda', 'Elric', '10001', '123 Wall St', 'Apt 114', '(547) 325-8545', 'fullmetal@gmail.com', '103', '0864c'),
+('Ichigo', 'Farkas', '10007', '45657 Broadway Ave', '', '(223) 145-9908','IchigoFarkas01@aol.com', '104', '222d2'),
+('Hugo', 'Tyler', '73078', '6453 3rd Ave', '','(223) 456-1234', 'HugoT@Tyler.com', '105', '77e86'),
+('Martha', 'Sessa', '73078', '6453 Rawson Ave', '', '(319) 489-8521', 'MarthaSessa@Sessa.net', '201', '64f34'),
+('Aslanbek', 'Foreman', '73102', '3345 Otapolik St', 'Apt. 4432', '(524) 578-9354', 'AslanbekF@ymail.com', '202', '753g3'),
+('Barbara', 'Bach', '73102', '5634 Pearson St','', '(456) 223-1234', 'BarbieB@composers.com', '203', '54d32'),
+('Jannike', 'Capaldi', '52641', '2232 Knapp Ave', '', '(319) 217-4455', 'JannikeC@Oakwood.edu', '204', '5s165'),
+('Clara', 'Brownlow', '52641', '1455 Storms Ave', '', '(319) 931-9983', 'Clara@doctorfan.net', '205', '12qe4'),
+('Agapetus', 'Espenson', '52404', '2345 33rd Ave SW', '', '(319) 258-4566', 'comewithme@yahoo.com', '1010', '775qa'),
+('Reyhan', 'Wolfe', '52641', '2234 Lowe Ave', '', '(215) 584-2544', 'Wolfe@Imthewolfman.org', '1020', '864qb'),
+('Jalal', 'Michel', '10001', '123 Friley St', 'Apt 1145', '(847) 544-5426', 'fullmetal@gmail.com', '1030', 'q864c'),
+('Emil', 'Abbate', '10007', '45567 Maple Ave', '', '(223) 145-9908','EmilAbbate@aol.com', '1040', '22ed2'),
+('Evan', 'Ezra', '73078', '6453 Larch Ave', '','(223) 456-1234', '', '1005', '77ew6'),
+('Swati', 'Samson', '73078', '6453 Oak Ave', '', '(545) 878-6542', 'Swati@samsonIndustries.com', '2001', '64r34'),
+('Joaquin', 'Delaney', '73102', '3345 Outside Dr', 'Apt. 4432', '(245) 547-9654', 'JoaquinDelaney@DelaneyEnterprises.com', '2020', '753t3'),
+('Fatima', 'Dali', '73102', '5634 Lovelace St','', '(456) 223-1234', '', '2030', '54dt2'),
+('Timo', 'Pharlain', '52641', '332 Wilson Ave', '', '(515) 217-4355', 'JannikeC@Oakwood.edu', '2004', '5s1t5'),
+('Jenni', 'Stablum', '52641', '1455 Wallace Ave', '', '(319) 931-9983', '', '2005', '12h34')
 GO
 
 INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)
@@ -156,28 +156,28 @@ GO
 
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, Active)
 VALUES
-('The Wandering Turtle', 'Gema', 'McKenzie', '42 Wallabee Way', '', '32465', '555-333-5468', 'EventCoordinator@thewanderingturtle.com', 0, 1),
-('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', '', '50229', '555-542-8796', 'franciscotours@gmail.com', 0, 1),
-('Harry''s Boat Rides', 'Harry', 'Smith', '19925 Wilmington Ave', 'Suite 206', '50229',  '555-874-9663', 'harrythehammer@gmail.com', 0, 1),
-('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', '', '50229', '555-766-1124', 'info@theyregrapetours.com', 0, 1),
-('Singing Sisters', 'Cathy', 'Jackson', '234 West Way', '', '68137', '666-766-2224', 'info@SingingSisters.com', 0, 1),
-('Snorkels R Us', 'Sue', 'Fox', '1 3rd St', '', '77573', '712-766-2224', 'info@SnorkelsRUs.com', 0, 1),
-('Gators For Fun', 'Jose', 'Martinez', '554 Wood Circle', '', '50010', '484-784-2824', 'Jose@GatorsForFun.com', 0, 1),
-('Kita Tours, LLC', 'Gosse', 'Kita', '1644 East Central Way', '', '50229', '585-768-1124', 'info@KitaTours.com', 0, 1),
-('Zipping Around', 'Giusseppe', 'Basurto', '234 West Way', '', '68137', '666-786-2224', 'Bausurto@ZippingAround.com', 0, 1),
-('Jump N Jungle', 'Hannah', 'Mac Coinnich', '1 3rd St', '', '77578', '712-866-2824', 'info@JumpNJungle.com', 0, 1)
+('The Wandering Turtle', 'Gema', 'McKenzie', '42 Wallabee Way', '', '32465', '(555) 333-5468', 'EventCoordinator@thewanderingturtle.com', 0, 1),
+('Francisco''s Tours', 'Francisco', 'Jones', '255 East West St', '', '50229', '(335) 542-8796', 'franciscotours@gmail.com', 0, 1),
+('Harry''s Boat Rides', 'Harry', 'Smith', '19925 Wilmington Ave', 'Suite 206', '50229',  '(555) 874-9663', 'harrythehammer@gmail.com', 0, 1),
+('They''re Grape Tours, LLC', 'Gregory', 'Allen', '1644 East Central Way', '', '50229', '(555) 766-1124', 'info@theyregrapetours.com', 0, 1),
+('Singing Sisters', 'Cathy', 'Jackson', '234 West Way', '', '68137', '(666) 766-2224', 'info@SingingSisters.com', 0, 1),
+('Snorkels R Us', 'Sue', 'Fox', '1 3rd St', '', '77573', '(712) 766-2224', 'info@SnorkelsRUs.com', 0, 1),
+('Gators For Fun', 'Jose', 'Martinez', '554 Wood Circle', '', '50010', '(484) 784-2824', 'Jose@GatorsForFun.com', 0, 1),
+('Kita Tours, LLC', 'Gosse', 'Kita', '1644 East Central Way', '', '50229', '(585) 768-1124', 'info@KitaTours.com', 0, 1),
+('Zipping Around', 'Giusseppe', 'Basurto', '234 West Way', '', '68137', '(626) 786-2224', 'Bausurto@ZippingAround.com', 0, 1),
+('Jump N Jungle', 'Hannah', 'Mac Coinnich', '1 3rd St', '', '77578', '(712) 866-2824', 'info@JumpNJungle.com', 0, 1)
 
 GO
 
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, CompanyDescription, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, Remarks)
 VALUES
-('Local Farm Tours', '', 'Aviv', 'Kroger', '1 Walker Ranch', '', '73102', '499-222-1124', 'Aviv@FarmTours.net', '2015-04-29', 'Pending', CURRENT_TIMESTAMP, ''),
-('Kristof''s Van Service', '', 'Kristof','Ebner', '2 Star Way', '', '12235', '666-444-5999', 'Kristof@KristofVanService.com', '2015-04-22', 'Pending', CURRENT_TIMESTAMP, ''),
-('Crespo Enterprises', '', 'Florina', 'Crespo', '3000 Millenium Dr', '', '58214', '555-344-1987', 'Florina@CrespoEnterprises.com', '2015-04-26', 'Pending', CURRENT_TIMESTAMP, ''),
-('Cantina Bands', '', 'Tatiana', 'Bohn', '1392 Week Way', '', '58214', '222-844-1978', 'Tatiana@CantinaBands.com', '2015-04-20', 'Pending', CURRENT_TIMESTAMP, ''),
-('Mokosh''s FunHouse', '', 'Mokosh', 'Labelle', '79 Clone Dr', '', '58214', '555-244-8087', 'Mokosh@Funhouse.com', '2015-04-16', 'Pending', CURRENT_TIMESTAMP, ''),
-('McWilliam Tours', '', 'Katherina', 'McWilliam', '14 Diamond Alley', '', '51537', '555-344-1987', 'Katherina@McWilliamTours.com', '2015-04-23', 'Pending', CURRENT_TIMESTAMP, ''),
-('Steven''s Magic Show', '', 'Silvius', 'Stevens', '33 Mario Way', '', '58214', '222-844-1978', 'Silvius@MagicShow.com', '2015-04-20', 'Pending', CURRENT_TIMESTAMP, '')
+('Local Farm Tours', '', 'Aviv', 'Kroger', '1 Walker Ranch', '', '73102', '(499) 222-1124', 'Aviv@FarmTours.net', '2015-04-29', 'Pending', CURRENT_TIMESTAMP, ''),
+('Kristof''s Van Service', '', 'Kristof','Ebner', '2 Star Way', '', '12235', '(236) 444-5999', 'Kristof@KristofVanService.com', '2015-04-22', 'Pending', CURRENT_TIMESTAMP, ''),
+('Crespo Enterprises', '', 'Florina', 'Crespo', '3000 Millenium Dr', '', '58214', '(325) 344-1987', 'Florina@CrespoEnterprises.com', '2015-04-26', 'Pending', CURRENT_TIMESTAMP, ''),
+('Cantina Bands', '', 'Tatiana', 'Bohn', '1392 Week Way', '', '58214', '(322) 844-1978', 'Tatiana@CantinaBands.com', '2015-04-20', 'Pending', CURRENT_TIMESTAMP, ''),
+('Mokosh''s FunHouse', '', 'Mokosh', 'Labelle', '79 Clone Dr', '', '58214', '(755) 244-8087', 'Mokosh@Funhouse.com', '2015-04-16', 'Pending', CURRENT_TIMESTAMP, ''),
+('McWilliam Tours', '', 'Katherina', 'McWilliam', '14 Diamond Alley', '', '51537', '(555) 344-1987', 'Katherina@McWilliamTours.com', '2015-04-23', 'Pending', CURRENT_TIMESTAMP, ''),
+('Steven''s Magic Show', '', 'Silvius', 'Stevens', '33 Mario Way', '', '58214', '(222) 844-1978', 'Silvius@MagicShow.com', '2015-04-20', 'Pending', CURRENT_TIMESTAMP, '')
 GO
 
 INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transportation, EventDescription, Active)
@@ -203,24 +203,33 @@ VALUES
 ('Experience')
 GO
 --Dummy record
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2020-01-01 10:00:00', '2020-01-31 10:00:00', 102, CAST(1234.0000 AS Money), 102, 0, 10, 40, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2020-01-01 10:00:00', '2020-01-31 10:00:00', 102, CAST(1234.0000 AS Money), 100, 0, 10, 40, 0)
+--Data for financial records
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-01 11:30:00', '2015-04-01 17:30:00', 101, CAST(30.0000 AS Money), 101, 1, 15, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-10 17:00:00', '2015-04-10 19:00:00', 101, CAST(30.0000 AS Money), 101, 1, 10, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-03 10:00:00', '2015-04-03 12:00:00', 108, CAST(40.0000 AS Money), 101, 1, 21, 25, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-04 13:00:00', '2015-04-04 16:00:00', 109, CAST(60.0000 AS Money), 101, 1, 7, 10, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-15 20:00:00', '2015-04-15 22:00:00', 102, CAST(25.0000 AS Money), 101, 1, 10, 10, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(30.0000 AS Money), 101, 1, 15, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-19 10:00:00', '2015-04-19 12:00:00', 101, CAST(30.0000 AS Money), 101, 1, 12, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-07 13:00:00', '2015-04-07 16:00:00', 101, CAST(30.0000 AS Money), 101, 1, 13, 15, 0)
 --Begin real records
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-19 11:30:00', '2015-04-19 17:30:00', 100, CAST(15.0000 AS Money), 102, 1, 0, 50, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-29 11:30:00', '2015-04-19 17:30:00', 100, CAST(15.0000 AS Money), 102, 1, 0, 50, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(45.0000 AS Money), 109, 1, 15, 15, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-30 10:00:00', '2015-04-30 12:00:00', 102, CAST(20.0000 AS Money), 103, 1, 21, 25, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-16 13:00:00', '2015-05-16 16:00:00', 103, CAST(60.0000 AS Money), 106, 1, 0, 10, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-15 20:00:00', '2015-05-15 22:00:00', 104, CAST(25.0000 AS Money), 104, 1, 0, 100, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-15 20:00:00', '2015-05-15 22:00:00', 104, CAST(25.0000 AS Money), 101, 1, 0, 100, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-09 19:00:00', '2015-05-09 22:00:00', 105, CAST(75.0000 AS Money), 100, 1, 4, 100, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-20 08:30:00', '2015-04-20 09:30:00', 106, CAST(30.0000 AS Money), 108, 1, 0, 50, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-28 13:00:00', '2015-04-28 15:00:00', 101, CAST(50.0000 AS Money), 109, 1, 3, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-29 12:00:00', '2015-04-29 17:30:00', 101, CAST(40.0000 AS Money), 107, 1, 9, 35, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-24 15:00:00', '2015-04-24 18:00:00', 108, CAST(50.0000 AS Money), 101, 1, 15, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 09:00:00', '2015-04-22 12:00:00', 106, CAST(75.0000 AS Money), 108, 1, 10, 30, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-26 19:00:00', '2015-04-26 21:00:00', 105, CAST(75.0000 AS Money), 100, 1, 32, 50, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-25 08:30:00', '2015-04-25 10:30:00', 101, CAST(50.0000 AS Money), 107, 1, 17, 25, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-29 09:00:00', '2015-04-29 11:00:00', 109, CAST(40.0000 AS Money), 101, 1, 10, 20, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-24 08:30:00', '2015-04-24 10:30:00', 107, CAST(65.0000 AS Money), 105, 1, 22, 30, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-28 09:00:00', '2015-04-28 12:30:00', 102, CAST(30.0000 AS Money), 103, 1, 10, 35, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-10 08:30:00', '2015-05-10 09:30:00', 106, CAST(30.0000 AS Money), 108, 1, 0, 50, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-28 13:00:00', '2015-05-28 15:00:00', 101, CAST(50.0000 AS Money), 109, 1, 3, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-19 12:00:00', '2015-05-19 17:30:00', 101, CAST(40.0000 AS Money), 107, 1, 9, 35, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-11 15:00:00', '2015-05-11 18:00:00', 108, CAST(50.0000 AS Money), 101, 1, 15, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-12 09:00:00', '2015-05-12 12:00:00', 106, CAST(75.0000 AS Money), 108, 1, 10, 30, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-26 19:00:00', '2015-05-26 21:00:00', 105, CAST(75.0000 AS Money), 100, 1, 32, 50, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-25 08:30:00', '2015-05-25 10:30:00', 101, CAST(50.0000 AS Money), 101, 1, 17, 25, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-29 09:00:00', '2015-05-29 11:00:00', 109, CAST(40.0000 AS Money), 101, 1, 10, 20, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-24 08:30:00', '2015-05-24 10:30:00', 107, CAST(65.0000 AS Money), 105, 1, 22, 30, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-28 09:00:00', '2015-05-28 12:30:00', 102, CAST(30.0000 AS Money), 103, 1, 10, 35, 0)
 GO
 
 SET IDENTITY_INSERT [dbo].[Booking] ON
@@ -266,24 +275,24 @@ SET IDENTITY_INSERT [dbo].[Booking] OFF
 GO
 INSERT INTO [dbo].[Invoice] (HotelGuestID, Active, DateOpened)
 VALUES
-(100, DEFAULT, '20150421 07:00:00 PM'),
-(101, DEFAULT, '20150416 05:00:00 PM'),
-(102, DEFAULT, '20150425 04:20:00 PM'),
-(103, DEFAULT, '20150423 02:00:00 PM'),
-(104, DEFAULT, '20150422 04:00:00 PM'),
-(105, DEFAULT, '20150421 10:00:00 PM'),
-(106, DEFAULT, '20150427 06:00:00 PM'),
-(107, DEFAULT, '20150422 01:00:00 AM'),
-(108, DEFAULT, '20150423 09:00:00 PM'),
-(109, DEFAULT, '20150425 04:00:00 AM'),
-(110, DEFAULT, '20150421 07:00:00 PM'),
-(111, DEFAULT, '20150416 05:00:00 PM'),
-(112, DEFAULT, '20150425 04:20:00 PM'),
-(113, DEFAULT, '20150423 02:00:00 PM'),
-(114, DEFAULT, '20150422 04:00:00 PM'),
-(115, DEFAULT, '20150421 10:00:00 PM'),
-(116, DEFAULT, '20150427 06:00:00 PM'),
-(117, DEFAULT, '20150422 01:00:00 AM'),
-(118, DEFAULT, '20150423 09:00:00 PM'),
-(119, DEFAULT, '20150425 04:00:00 AM')
+(100, DEFAULT, '20150504 07:00:00 PM'),
+(101, DEFAULT, '20150504 05:00:00 PM'),
+(102, DEFAULT, '20150505 04:20:00 PM'),
+(103, DEFAULT, '20150503 02:00:00 PM'),
+(104, DEFAULT, '20150502 04:00:00 PM'),
+(105, DEFAULT, '20150501 10:00:00 PM'),
+(106, DEFAULT, '20150502 06:00:00 PM'),
+(107, DEFAULT, '20150503 01:00:00 AM'),
+(108, DEFAULT, '20150504 09:00:00 PM'),
+(109, DEFAULT, '20150505 04:00:00 AM'),
+(110, DEFAULT, '20150506 07:00:00 PM'),
+(111, DEFAULT, '20150506 05:00:00 PM'),
+(112, DEFAULT, '20150428 04:20:00 PM'),
+(113, DEFAULT, '20150505 02:00:00 PM'),
+(114, DEFAULT, '20150503 04:00:00 PM'),
+(115, DEFAULT, '20150501 10:00:00 PM'),
+(116, DEFAULT, '20150429 06:00:00 PM'),
+(117, DEFAULT, '20150430 01:00:00 AM'),
+(118, DEFAULT, '20150429 09:00:00 PM'),
+(119, DEFAULT, '20150508 04:00:00 AM')
 GO

@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spSelectHotelGuestPinGet]
 	(
-		@guestPIN char(5)
+		@guestPIN char(6)
 	)
 AS
 

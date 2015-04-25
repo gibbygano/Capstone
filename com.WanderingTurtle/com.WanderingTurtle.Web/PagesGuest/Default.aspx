@@ -37,7 +37,7 @@
             $("#txtGuestPin").change(function () {
                 var pinValue = $(this).val();
 
-                if (pinValue.length > 5) {
+                if (pinValue.length != 6) {
                     $(this).css("background-color", "red");
                 }
                 else {
@@ -124,7 +124,7 @@
                             <asp:Label ID="lblGuestPin" Text="Guest Pin:" runat="server" Font-Bold="True" Height="35px"></asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox TextMode="Password" ID="txtGuestPin" ClientIDMode="Static" runat="server" TabIndex="1" ViewStateMode="Enabled" Wrap="False" MaxLength="5"></asp:TextBox>
+                            <asp:TextBox TextMode="Password" ID="txtGuestPin" ClientIDMode="Static" runat="server" TabIndex="1" ViewStateMode="Enabled" Wrap="False" MaxLength="6"></asp:TextBox>
 
                         </td>
                     </tr>
