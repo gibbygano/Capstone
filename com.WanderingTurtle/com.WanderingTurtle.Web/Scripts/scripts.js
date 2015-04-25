@@ -9,7 +9,9 @@ $(document).ready(function () {
 
     $('#MainContent_txtZip').keyup(function () {
         var search = $(this).val();
+
         if (search != null) {
+            console.log(search);
             if (search != "") {
                 $('#zips').css('display', 'block');
             }
@@ -32,7 +34,8 @@ $(document).ready(function () {
     });
 
     $('#tblitems').DataTable({
-        stateSave: true
+        stateSave: true,
+        autoWidth: false
     });
 
     $('#tbl1').DataTable({
@@ -76,8 +79,6 @@ $(document).ready(function () {
         start: 0
     });
 
-
-
     var startDateTextBox = $('#eventStart');
     var endDateTextBox = $('#eventEnd');
 
@@ -97,19 +98,6 @@ $(document).ready(function () {
             end: {} // end picker options					
         }
     );
-
-$("#DateFrom").datetimepicker(
-       {
-           controlType: 'select',
-           oneLine: true,
-           timeFormat: 'hh:mm tt'
-       });
-$("#DateTo").datetimepicker(
-    {
-        controlType: 'select',
-        oneLine: true,
-        timeFormat: 'hh:mm tt'
-    });
 
 });
 
