@@ -134,16 +134,9 @@
 
 
     </asp:ListView>
-    <%--    <asp:DataPager runat="server" ID="dpEvents" PageSize="2" PagedControlID="lvEvents">
-        <Fields>
-            <asp:NumericPagerField ButtonCount="10"
-                PreviousPageText="<--"
-                NextPageText="-->" ButtonType="Link" />
-        </Fields>
-    </asp:DataPager>--%>
 </div>
     <div id="addListing" runat="server" style="display: none;">
-        <asp:Label ID="lblEventName" runat="server" Text=""></asp:Label><br />
+        <asp:Label ID="lblEventName" runat="server" Text="" Font-Size="X-Large"></asp:Label><br />
         <asp:Label ID="lblAddError" runat="server" Text="" ForeColor="#CC0000"></asp:Label><br />
         Start Date & Time:
         <input type="text" id="listStartDate" name="startdate" class="mydate" /> <br />
