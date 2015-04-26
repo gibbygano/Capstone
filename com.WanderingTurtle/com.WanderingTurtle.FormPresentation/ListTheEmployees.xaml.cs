@@ -54,6 +54,15 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/18
+        /// 
+        /// Opens employee UI as read only or with edit capability
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="readOnly"></param>
         private void OpenEmployee(Employee selectedItem = null, bool readOnly = false)
         {
             try
@@ -102,6 +111,13 @@ namespace com.WanderingTurtle.FormPresentation
             OpenEmployee(lvEmployeesList.SelectedItem as Employee);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/04
+        /// Opens the readonly employee UI with the selected employee
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvEmployeesList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenEmployee(sender.RowClick<Employee>(), true);
@@ -131,6 +147,14 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/14
+        /// 
+        /// Searches for an employee
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtEmployeeSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Yes for some reason this is required
@@ -142,6 +166,14 @@ namespace com.WanderingTurtle.FormPresentation
             btnSearchEmployee.Content = txtEmployeeSearch.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/14
+        /// 
+        /// Searches for an employee
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearchEmployee_Click(object sender, RoutedEventArgs e)
         {
             var myList = _employeeManager.SearchEmployee(txtEmployeeSearch.Text);

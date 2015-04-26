@@ -104,29 +104,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Ryan Blake
         /// Created: 2015/02/12
         ///
-        /// Method takes in new and old employee parameters and then submits them to the
-        ///     Data Access Layer method to update the employee record for oldEmployee
-        ///     with the the information held in newEmployee
-        /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <returns></returns>
-        public Employee FetchEmployee(string firstName, string lastName)
-        {
-            try
-            {
-                return EmployeeAccessor.GetEmployee(firstName, lastName);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        /// <summary>
-        /// Ryan Blake
-        /// Created: 2015/02/12
-        ///
         /// Method makes a call to getEmployeeList method from the EmployeeAccessor to retrieve a list of all active employees
         /// </summary>
         /// <exception cref="Exception">Exception is thrown from Accessor that states that employee could not be found in the database</exception>

@@ -22,11 +22,11 @@ namespace com.WanderingTurtle.DataAccess
         /// <exception cref="SqlException">If the database cannot be accessed.</exception>
         /// <exception cref="ApplicationException">If the login information is not found.</exception>
         /// <returns>A SupplierLogin object that contains the information about the supplier.</returns>
-        public SupplierLogin retrieveSupplierLogin(string userPassword, string userName)
+        public SupplierLogin RetrieveSupplierLogin(string userPassword, string userName)
         {
             SupplierLogin getSupplierInfo = new SupplierLogin();
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSupplierLoginGet";
+            string query = "spSelectSupplierLogin";
 
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -77,11 +77,11 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="userName">The username the supplier wants.</param>
         /// <exception cref="SqlException">Goes off if unable to connect to the database or the username is already taken.</exception>
         /// <returns>The number of rows that were affected. Should never be greater than one.</returns>
-        public int addSupplierLogin(String userName, int supplierID)
+        public int AddSupplierLogin(String userName, int supplierID)
         {
             int rowsAdded = 0;
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSupplierLoginAdd";
+            string query = "spInsertSupplierLogin";
 
             var cmd = new SqlCommand(query, conn);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -109,51 +109,11 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
-        /// </summary>
-        /// <remarks>
-        /// Updated by Rose Steffensmeier 2015/04/13
-        /// added new paramenter, added Exception catch block
-        /// </remarks>
-        /// <param name="oldSupplierLogin"></param>
-        /// <param name="archive"></param>
-        /// <returns></returns>
-        public int archiveSupplierLogin(SupplierLogin oldSupplierLogin, bool archive)
-        {
-            int rowsAffected = 0;
-            var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSupplierLoginArchive";
 
-            var cmd = new SqlCommand(query, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@active", archive);
-            cmd.Parameters.AddWithValue("@original_userID", oldSupplierLogin.UserID);
-            cmd.Parameters.AddWithValue("@original_userPassword", "Password#1");
-            cmd.Parameters.AddWithValue("@original_userName", oldSupplierLogin.UserName);
-            cmd.Parameters.AddWithValue("@original_supplierID", oldSupplierLogin.SupplierID);
-
-            try
-            {
-                conn.Open();
-                rowsAffected = cmd.ExecuteNonQuery();
-
-                return rowsAffected;
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public int UpdateSupplierLogin(string newPassword, SupplierLogin oldLogin)
+        public int UpdateSupplierPassword(string newPassword, SupplierLogin oldLogin)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string storedProcedure = "spSupplierLoginUpdate";
+            string storedProcedure = "spUpdateSupplierPassword";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -184,10 +144,10 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        public bool checkUserName(string userName)
+        public bool CheckUserName(string userName)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSupplierLoginGetUserName";
+            string query = "spSelectSupplierLoginbyUserName";
             bool validName = false;
 
             var cmd = new SqlCommand(query, conn);
@@ -221,10 +181,10 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        public string retrieveSupplierUserNameByID(int supplierID)
+        public string RetrieveSupplierUserNameByID(int supplierID)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "spSupplierLoginGetByID";
+            string query = "spSelectSupplierLoginByID";
             string userNameFound;
 
             var cmd = new SqlCommand(query, conn);

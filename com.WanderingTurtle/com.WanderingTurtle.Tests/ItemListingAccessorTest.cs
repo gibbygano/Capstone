@@ -114,7 +114,7 @@ namespace com.WanderingTurtle.Tests
 
             ItemListingAccessor.DeleteItemListingTestItem(itemListingToTest);
             testSupp.SupplierID = modSupp.SupplierID;
-            testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
+            testLog = sLA.RetrieveSupplierLogin("Password#1", "Test");
             SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
             TestCleanupAccessor.DeleteTestSupplier(testSupp);
                     
@@ -140,7 +140,7 @@ namespace com.WanderingTurtle.Tests
 
             ItemListingAccessor.DeleteItemListingTestItem(itemListingToEdit);
             testSupp.SupplierID = modSupp.SupplierID;
-            testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
+            testLog = sLA.RetrieveSupplierLogin("Password#1", "Test");
             SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
             TestCleanupAccessor.DeleteTestSupplier(testSupp);
 
@@ -184,7 +184,7 @@ namespace com.WanderingTurtle.Tests
 
             ItemListingAccessor.DeleteItemListingTestItem(itemListingToTest);
             testSupp.SupplierID = modSupp.SupplierID;
-            testLog = sLA.retrieveSupplierLogin("Password#1", "Test");
+            testLog = sLA.RetrieveSupplierLogin("Password#1", "Test");
             SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
             TestCleanupAccessor.DeleteTestSupplier(testSupp);
 

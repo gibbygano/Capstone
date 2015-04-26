@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spEmployeeGet] 
+﻿CREATE PROCEDURE [dbo].[spSelectEmployee] 
 	@employeeID int = null
 AS
 BEGIN

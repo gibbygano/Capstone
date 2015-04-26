@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spSupplierLoginGet](
+﻿CREATE PROCEDURE [dbo].[spSelectSupplierLogin](
 	@userPassword varchar(50),
 	@userName varchar(50)
 	)

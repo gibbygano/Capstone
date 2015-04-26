@@ -11,3 +11,6 @@
 CREATE UNIQUE NONCLUSTERED INDEX [UniqueUserName]
 	ON [SupplierLogin]([SupplierID]);
 GO
+ALTER TABLE [dbo].[SupplierLogin]
+ADD CONSTRAINT [fk_SupplierLogin_Supplier] FOREIGN KEY ([SupplierID]) REFERENCES [dbo].[Supplier] ([SupplierID]);
+GO

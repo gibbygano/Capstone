@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="supplierID">Requires a SupplierID to SELECT the correct Supplier record.</param>
         /// <returns>Supplier object</returns>
-        /// <update>Edited by William Firtz</update>
+        /// <update>Edited by William Fritz</update>
         public static Supplier GetSupplier(string supplierID)
         {
             Supplier supplierToRetrieve = new Supplier();
@@ -66,72 +66,6 @@ namespace com.WanderingTurtle.DataAccess
 
             return supplierToRetrieve;
         }
-
-        //public static Supplier GetSupplier(string searchParameter, bool isSupplierID)
-        //{
-        //    /*
-        //     * Retrieves Supplier information from database based on SupplierID or CompanyName and returns a Supplier Object.
-        //     *
-        //     * Created by Tyler Collins 02/03/15
-        //     */
-
-        //    Supplier supplierToRetrieve = new Supplier();
-        //    string query;
-        //    SqlConnection conn = DatabaseConnection.GetConnection();
-
-        //    if (isSupplierID)
-        //    {
-        //        query = "Select SupplierID, CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierType, ApplicationID, UserID "
-        //        + "From Supplier Where SupplierID = '" + searchParameter + "' and Active=1";
-        //    }
-        //    else
-        //    {
-        //        query = "Select SupplierID, CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, SupplierType, ApplicationID, UserID "
-        //        + "From Supplier Where CompanyName = '" + searchParameter + "' and Active=1";
-        //    }
-        //    SqlCommand cmd = new SqlCommand(query, conn);
-
-        //    try
-        //    {
-        //        conn.Open();
-
-        //        SqlDataReader reader = cmd.ExecuteReader();
-
-        //        if (reader.HasRows)
-        //        {
-        //            reader.Read();
-
-        //            supplierToRetrieve.SupplierID = reader.GetInt32(0);
-        //            supplierToRetrieve.CompanyName = reader.GetString(1);
-        //            supplierToRetrieve.FirstName = reader.GetString(2);
-        //            supplierToRetrieve.LastName = reader.GetString(3);
-        //            supplierToRetrieve.Address1 = reader.GetString(4);
-        //            supplierToRetrieve.Address2 = !reader.IsDBNull(5) ? supplierToRetrieve.Address2 = reader.GetString(5) : null;
-        //            supplierToRetrieve.Zip = reader.GetString(6);
-        //            supplierToRetrieve.PhoneNumber = reader.GetString(7);
-        //            supplierToRetrieve.EmailAddress = reader.GetString(8);
-        //            supplierToRetrieve.SupplierType = reader.GetInt32(9);
-        //            supplierToRetrieve.ApplicationID = reader.GetInt32(10);
-        //            supplierToRetrieve.UserID = reader.GetInt32(11);
-
-        //        }
-        //        else
-        //        {
-        //            var pokeball = new ApplicationException("Requested ID did not match any records.");
-        //            throw pokeball;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-
-        //    return supplierToRetrieve;
-        //}
 
         /// <summary>
         /// Retrieves all Supplier data from the Database using a Stored Procedure.
@@ -298,16 +232,21 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created  02/05/2015
         /// DELETEs (Sets Boolean Active field to false) a Supplier record in Database using a Stored Procedure.
-        ///
-        /// Created by Tyler Collins 02/05/2015
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated 2015/04/25
+        /// Added supplier login archive to stored procedure & renamed SP
+        /// </remarks>
         /// <param name="supplierToDelete">Requires the Supplier object which matches the record to be DELETED in the Database.</param>
         /// <returns>Returns the number of rows affected</returns>
         public static int DeleteSupplier(Supplier supplierToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string storedProcedure = "spDeleteSupplier";
+            string storedProcedure = "spArchiveSupplierSupplierLogin";
             var cmd = new SqlCommand(storedProcedure, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 

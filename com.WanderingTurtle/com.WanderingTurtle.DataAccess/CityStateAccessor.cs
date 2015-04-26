@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            String cmdText = (zip == null) ? "spCityStateReadAll" : "spCityStateRead";
+            String cmdText = (zip == null) ? "spSelectCityStateList" : "spSelectCityState";
             SqlCommand cmd = new SqlCommand(cmdText, conn);
 
             cmd.CommandType = CommandType.StoredProcedure;

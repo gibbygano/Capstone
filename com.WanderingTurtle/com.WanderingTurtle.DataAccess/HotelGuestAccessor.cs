@@ -31,7 +31,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spHotelGuestAdd";
+            var cmdText = "spInsertHotelGuestInsertInvoice";
             var cmd = new SqlCommand(cmdText, conn);
             var numRows = 0;
 
@@ -83,7 +83,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spHotelGuestGet";
+            var cmdText = "spSelectHotelGuest";
             SqlCommand cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@hotelGuestID", hotelGuestID);
@@ -155,7 +155,7 @@ namespace com.WanderingTurtle.DataAccess
         public static int HotelGuestUpdate(HotelGuest oldHotelGuest, HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spHotelGuestUpdate";
+            var cmdText = "spUpdateHotelGuest";
             var cmd = new SqlCommand(cmdText, conn);
             var numRows = 0;
 

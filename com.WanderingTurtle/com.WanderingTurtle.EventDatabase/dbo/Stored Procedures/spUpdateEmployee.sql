@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spEmployeeUpdate]
+﻿CREATE PROCEDURE [dbo].[spUpdateEmployee]
 	(@firstName 					varchar(50),
 	 @lastName	 					varchar(50),
 	 @password						varchar(8) = null,

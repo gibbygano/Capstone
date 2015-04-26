@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spEmployeeCheckPassword]
+﻿CREATE PROCEDURE [dbo].[spSelectEmployeeByIDPassword]
 (
 	@employeeID INT,
 	@empPassword VARCHAR(8)

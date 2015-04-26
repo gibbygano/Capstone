@@ -11,3 +11,7 @@
 GO
 CREATE NONCLUSTERED INDEX [EventItemIndex]
     ON [dbo].[EventItem]([EventItemID] ASC, [EventItemName] ASC, [EventTypeID] ASC);
+GO
+ALTER TABLE [dbo].[EventItem]
+ADD CONSTRAINT [fk_EventItem_EventType] FOREIGN KEY ([EventTypeID]) REFERENCES [dbo].[EventType] ([EventTypeID]);
+GO

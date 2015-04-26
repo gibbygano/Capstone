@@ -24,3 +24,10 @@ ALTER TABLE [dbo].[ItemListing]
 GO
 ALTER TABLE [dbo].[ItemListing]
     ADD DEFAULT (0) FOR [MinNumberOfGuests];
+GO
+ALTER TABLE [dbo].[ItemListing]
+ADD CONSTRAINT [fk_ItemListing_EventItemID] FOREIGN KEY ([EventItemID]) REFERENCES [dbo].[EventItem] ([EventItemID]);
+GO
+ALTER TABLE [dbo].[ItemListing]
+ADD CONSTRAINT [fk_ItemListing_Supplier] FOREIGN KEY ([SupplierID]) REFERENCES [dbo].[Supplier] ([SupplierID]);
+GO

@@ -118,40 +118,26 @@ GO
 
 INSERT INTO [dbo].[HotelGuest] (FirstName, LastName, Zip, Address1, Address2, PhoneNumber, EmailAddress, Room, GuestPIN)
 VALUES
-('Leontius', 'Womack', '52404', '234 33rd Ave SW', 'Suite 3', '(319) 258-4566', 'comewithme@yahoo.com', '101', '7754a'),
-('Shiva', 'Maddox', '52641', '2234 Benton Ave', '', '(432) 987-2255', 'ShivaMaddox32@hotmail.com', '102', '8643b'),
-('Wanda', 'Elric', '10001', '123 Wall St', 'Apt 114', '(547) 325-8545', 'fullmetal@gmail.com', '103', '0864c'),
-('Ichigo', 'Farkas', '10007', '45657 Broadway Ave', '', '(223) 145-9908','IchigoFarkas01@aol.com', '104', '222d2'),
-('Hugo', 'Tyler', '73078', '6453 3rd Ave', '','(223) 456-1234', 'HugoT@Tyler.com', '105', '77e86'),
-('Martha', 'Sessa', '73078', '6453 Rawson Ave', '', '(319) 489-8521', 'MarthaSessa@Sessa.net', '201', '64f34'),
-('Aslanbek', 'Foreman', '73102', '3345 Otapolik St', 'Apt. 4432', '(524) 578-9354', 'AslanbekF@ymail.com', '202', '753g3'),
-('Barbara', 'Bach', '73102', '5634 Pearson St','', '(456) 223-1234', 'BarbieB@composers.com', '203', '54d32'),
-('Jannike', 'Capaldi', '52641', '2232 Knapp Ave', '', '(319) 217-4455', 'JannikeC@Oakwood.edu', '204', '5s165'),
-('Clara', 'Brownlow', '52641', '1455 Storms Ave', '', '(319) 931-9983', 'Clara@doctorfan.net', '205', '12qe4'),
-('Agapetus', 'Espenson', '52404', '2345 33rd Ave SW', '', '(319) 258-4566', 'comewithme@yahoo.com', '1010', '775qa'),
-('Reyhan', 'Wolfe', '52641', '2234 Lowe Ave', '', '(215) 584-2544', 'Wolfe@Imthewolfman.org', '1020', '864qb'),
-('Jalal', 'Michel', '10001', '123 Friley St', 'Apt 1145', '(847) 544-5426', 'fullmetal@gmail.com', '1030', 'q864c'),
-('Emil', 'Abbate', '10007', '45567 Maple Ave', '', '(223) 145-9908','EmilAbbate@aol.com', '1040', '22ed2'),
-('Evan', 'Ezra', '73078', '6453 Larch Ave', '','(223) 456-1234', '', '1005', '77ew6'),
-('Swati', 'Samson', '73078', '6453 Oak Ave', '', '(545) 878-6542', 'Swati@samsonIndustries.com', '2001', '64r34'),
-('Joaquin', 'Delaney', '73102', '3345 Outside Dr', 'Apt. 4432', '(245) 547-9654', 'JoaquinDelaney@DelaneyEnterprises.com', '2020', '753t3'),
-('Fatima', 'Dali', '73102', '5634 Lovelace St','', '(456) 223-1234', '', '2030', '54dt2'),
-('Timo', 'Pharlain', '52641', '332 Wilson Ave', '', '(515) 217-4355', 'JannikeC@Oakwood.edu', '2004', '5s1t5'),
-('Jenni', 'Stablum', '52641', '1455 Wallace Ave', '', '(319) 931-9983', '', '2005', '12h34')
-GO
-
-INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)
-VALUES
-('GMcKenzie', 100),
-('FJones', 101),
-('HSmith', 102),
-('GAllen', 103),
-('CJackson', 104),
-('SueFox', 105),
-('JoseM', 106),
-('GosseK', 107),
-('GBasurto', 108),
-('HMacCoinnich', 109)
+('Leontius', 'Womack', '52404', '234 33rd Ave SW', 'Suite 3', '(319) 258-4566', 'comewithme@yahoo.com', '101', 'A7B5V4'),
+('Shiva', 'Maddox', '52641', '2234 Benton Ave', '', '(432) 987-2255', 'ShivaMaddox32@hotmail.com', '102', 'B8C4C7'),
+('Wanda', 'Elric', '10001', '123 Wall St', 'Apt 114', '(547) 325-8545', 'fullmetal@gmail.com', '103', 'B0E2G9'),
+('Ichigo', 'Farkas', '10007', '45657 Broadway Ave', '', '(223) 145-9908','IchigoFarkas01@aol.com', '104', 'R2D2F2'),
+('Hugo', 'Tyler', '73078', '6453 3rd Ave', '','(223) 456-1234', 'HugoT@Tyler.com', '105', 'R8B9C9'),
+('Martha', 'Sessa', '73078', '6453 Rawson Ave', '', '(319) 489-8521', 'MarthaSessa@Sessa.net', '201', 'X6S5F3'),
+('Aslanbek', 'Foreman', '73102', '3345 Otapolik St', 'Apt. 4432', '(524) 578-9354', 'AslanbekF@ymail.com', '202', 'V9K6D9'),
+('Barbara', 'Bach', '73102', '5634 Pearson St','', '(456) 223-1234', 'BarbieB@composers.com', '203', 'F4D7Q2'),
+('Jannike', 'Capaldi', '52641', '2232 Knapp Ave', '', '(319) 217-4455', 'JannikeC@Oakwood.edu', '204', 'P0V7C5'),
+('Clara', 'Brownlow', '52641', '1455 Storms Ave', '', '(319) 931-9983', 'Clara@doctorfan.net', '205', 'W6G8D6'),
+('Agapetus', 'Espenson', '52404', '2345 33rd Ave SW', '', '(319) 258-4566', 'comewithme@yahoo.com', '1010', 'M0G7F9'),
+('Reyhan', 'Wolfe', '52641', '2234 Lowe Ave', '', '(215) 584-2544', 'Wolfe@Imthewolfman.org', '1020', 'N9D6B8'),
+('Jalal', 'Michel', '10001', '123 Friley St', 'Apt 1145', '(847) 544-5426', 'fullmetal@gmail.com', '1030', 'B9D7S5'),
+('Emil', 'Abbate', '10007', '45567 Maple Ave', '', '(223) 145-9908','EmilAbbate@aol.com', '1040', 'V6D5S3'),
+('Evan', 'Ezra', '73078', '6453 Larch Ave', '','(223) 456-1234', '', '1005', 'M9G8H7'),
+('Swati', 'Samson', '73078', '6453 Oak Ave', '', '(545) 878-6542', 'Swati@samsonIndustries.com', '2001', 'D6F9H7'),
+('Joaquin', 'Delaney', '73102', '3345 Outside Dr', 'Apt. 4432', '(245) 547-9654', 'JoaquinDelaney@DelaneyEnterprises.com', '2020', 'D9R7G6'),
+('Fatima', 'Dali', '73102', '5634 Lovelace St','', '(456) 223-1234', '', '2030', 'B9R8E7'),
+('Timo', 'Pharlain', '52641', '332 Wilson Ave', '', '(515) 217-4355', 'JannikeC@Oakwood.edu', '2004', 'N9G0F8'),
+('Jenni', 'Stablum', '52641', '1455 Wallace Ave', '', '(319) 931-9983', '', '2005', 'V0E7T7')
 GO
 
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, Active)
@@ -169,6 +155,20 @@ VALUES
 
 GO
 
+INSERT INTO [dbo].[SupplierLogin] (UserName, SupplierID)
+VALUES
+('GMcKenzie', 100),
+('FJones', 101),
+('HSmith', 102),
+('GAllen', 103),
+('CJackson', 104),
+('SueFox', 105),
+('JoseM', 106),
+('GosseK', 107),
+('GBasurto', 108),
+('HMacCoinnich', 109)
+GO
+
 INSERT INTO [dbo].[SupplierApplication]  (CompanyName, CompanyDescription, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationDate, ApplicationStatus, LastStatusDate, Remarks)
 VALUES
 ('Local Farm Tours', '', 'Aviv', 'Kroger', '1 Walker Ranch', '', '73102', '(499) 222-1124', 'Aviv@FarmTours.net', '2015-04-29', 'Pending', CURRENT_TIMESTAMP, ''),
@@ -178,6 +178,15 @@ VALUES
 ('Mokosh''s FunHouse', '', 'Mokosh', 'Labelle', '79 Clone Dr', '', '58214', '(755) 244-8087', 'Mokosh@Funhouse.com', '2015-04-16', 'Pending', CURRENT_TIMESTAMP, ''),
 ('McWilliam Tours', '', 'Katherina', 'McWilliam', '14 Diamond Alley', '', '51537', '(555) 344-1987', 'Katherina@McWilliamTours.com', '2015-04-23', 'Pending', CURRENT_TIMESTAMP, ''),
 ('Steven''s Magic Show', '', 'Silvius', 'Stevens', '33 Mario Way', '', '58214', '(222) 844-1978', 'Silvius@MagicShow.com', '2015-04-20', 'Pending', CURRENT_TIMESTAMP, '')
+GO
+
+INSERT INTO [dbo].[EventType] (EventName)
+VALUES
+('Boat Ride'),
+('Tour'),
+('Dinner'),
+('Entertainment'),
+('Experience')
 GO
 
 INSERT INTO [dbo].[EventItem] (EventItemName, EventTypeID, EventOnsite, Transportation, EventDescription, Active)
@@ -194,14 +203,6 @@ VALUES
 ('Jungle Tour for Kids', 101, 0, 0, 'Perfect for the whole family.', 1 )
 GO
 
-INSERT INTO [dbo].[EventType] (EventName)
-VALUES
-('Boat Ride'),
-('Tour'),
-('Dinner'),
-('Entertainment'),
-('Experience')
-GO
 --Dummy record
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2020-01-01 10:00:00', '2020-01-31 10:00:00', 102, CAST(1234.0000 AS Money), 100, 0, 10, 40, 0)
 --Data for financial records
@@ -214,62 +215,62 @@ INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price],
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-19 10:00:00', '2015-04-19 12:00:00', 101, CAST(30.0000 AS Money), 101, 1, 12, 15, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-07 13:00:00', '2015-04-07 16:00:00', 101, CAST(30.0000 AS Money), 101, 1, 13, 15, 0)
 --Begin real records
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-29 11:30:00', '2015-04-19 17:30:00', 100, CAST(15.0000 AS Money), 102, 1, 0, 50, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(45.0000 AS Money), 109, 1, 15, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-30 10:00:00', '2015-04-30 12:00:00', 102, CAST(20.0000 AS Money), 103, 1, 21, 25, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-16 13:00:00', '2015-05-16 16:00:00', 103, CAST(60.0000 AS Money), 106, 1, 0, 10, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-15 20:00:00', '2015-05-15 22:00:00', 104, CAST(25.0000 AS Money), 101, 1, 0, 100, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-09 19:00:00', '2015-05-09 22:00:00', 105, CAST(75.0000 AS Money), 100, 1, 4, 100, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-10 08:30:00', '2015-05-10 09:30:00', 106, CAST(30.0000 AS Money), 108, 1, 0, 50, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-28 13:00:00', '2015-05-28 15:00:00', 101, CAST(50.0000 AS Money), 109, 1, 3, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-19 12:00:00', '2015-05-19 17:30:00', 101, CAST(40.0000 AS Money), 107, 1, 9, 35, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-11 15:00:00', '2015-05-11 18:00:00', 108, CAST(50.0000 AS Money), 101, 1, 15, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-12 09:00:00', '2015-05-12 12:00:00', 106, CAST(75.0000 AS Money), 108, 1, 10, 30, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-26 19:00:00', '2015-05-26 21:00:00', 105, CAST(75.0000 AS Money), 100, 1, 32, 50, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-25 08:30:00', '2015-05-25 10:30:00', 101, CAST(50.0000 AS Money), 101, 1, 17, 25, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-29 09:00:00', '2015-05-29 11:00:00', 109, CAST(40.0000 AS Money), 101, 1, 10, 20, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-24 08:30:00', '2015-05-24 10:30:00', 107, CAST(65.0000 AS Money), 105, 1, 22, 30, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-28 09:00:00', '2015-05-28 12:30:00', 102, CAST(30.0000 AS Money), 103, 1, 10, 35, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-29 11:30:00', '2015-04-19 17:30:00', 100, CAST(15.0000 AS Money), 102, 1, 26, 50, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(45.0000 AS Money), 109, 1, 4, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-30 10:00:00', '2015-04-30 12:00:00', 102, CAST(20.0000 AS Money), 103, 1, 14, 25, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-16 13:00:00', '2015-05-16 16:00:00', 103, CAST(60.0000 AS Money), 106, 1, 10, 10, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-15 20:00:00', '2015-05-15 22:00:00', 104, CAST(25.0000 AS Money), 101, 1, 28, 100, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-09 19:00:00', '2015-05-09 22:00:00', 105, CAST(75.0000 AS Money), 100, 1, 25, 100, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-10 08:30:00', '2015-05-10 09:30:00', 106, CAST(30.0000 AS Money), 108, 1, 8, 50, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-28 13:00:00', '2015-05-28 15:00:00', 101, CAST(50.0000 AS Money), 109, 1, 10, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-19 12:00:00', '2015-05-19 17:30:00', 101, CAST(40.0000 AS Money), 107, 1, 4, 35, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-11 15:00:00', '2015-05-11 18:00:00', 108, CAST(50.0000 AS Money), 101, 1, 8, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-12 09:00:00', '2015-05-12 12:00:00', 106, CAST(75.0000 AS Money), 108, 1, 4, 30, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-26 19:00:00', '2015-05-26 21:00:00', 105, CAST(75.0000 AS Money), 100, 1, 10, 50, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-25 08:30:00', '2015-05-25 10:30:00', 101, CAST(50.0000 AS Money), 101, 1, 4, 25, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-29 09:00:00', '2015-05-29 11:00:00', 109, CAST(40.0000 AS Money), 101, 1, 5, 20, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-24 08:30:00', '2015-05-24 10:30:00', 107, CAST(65.0000 AS Money), 105, 1, 6, 30, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-05-28 09:00:00', '2015-05-28 12:30:00', 102, CAST(30.0000 AS Money), 103, 1, 2, 35, 0)
 GO
 
 SET IDENTITY_INSERT [dbo].[Booking] ON
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (107, 100, 100, 102, 4, N'2015-04-21 18:22:25', CAST(0.10 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(180.00 AS Decimal(12, 2)), CAST(162.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (108, 101, 100, 115, 4, N'2015-04-21 18:23:11', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (109, 101, 100, 102, 4, N'2015-04-21 18:27:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(180.00 AS Decimal(12, 2)), CAST(180.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (110, 102, 100, 103, 5, N'2015-04-21 18:27:54', CAST(0.10 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(100.00 AS Decimal(12, 2)), CAST(90.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (111, 103, 100, 115, 6, N'2015-04-21 18:29:16', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(390.00 AS Decimal(12, 2)), CAST(390.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (107, 100, 100, 109, 4, N'2015-04-21 18:22:25', CAST(0.10 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(180.00 AS Decimal(12, 2)), CAST(162.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (108, 101, 100, 110, 4, N'2015-04-21 18:23:11', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (109, 101, 100, 112, 4, N'2015-04-21 18:27:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(180.00 AS Decimal(12, 2)), CAST(180.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (110, 102, 100, 113, 5, N'2015-04-21 18:27:54', CAST(0.10 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(100.00 AS Decimal(12, 2)), CAST(90.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (111, 103, 100, 111, 6, N'2015-04-21 18:29:16', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(390.00 AS Decimal(12, 2)), CAST(390.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (112, 103, 100, 113, 5, N'2015-04-21 18:29:39', CAST(0.05 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(250.00 AS Decimal(12, 2)), CAST(237.50 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (113, 106, 100, 103, 2, N'2015-04-21 18:30:01', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(40.00 AS Decimal(12, 2)), CAST(40.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (114, 106, 100, 114, 2, N'2015-04-21 18:30:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(80.00 AS Decimal(12, 2)), CAST(80.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (115, 107, 100, 102, 5, N'2015-04-21 18:30:41', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(225.00 AS Decimal(12, 2)), CAST(225.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (116, 107, 100, 113, 4, N'2015-04-21 18:31:00', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (113, 106, 100, 123, 2, N'2015-04-21 18:30:01', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(40.00 AS Decimal(12, 2)), CAST(40.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (114, 106, 100, 124, 2, N'2015-04-21 18:30:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(80.00 AS Decimal(12, 2)), CAST(80.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (115, 107, 100, 109, 5, N'2015-04-21 18:30:41', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(225.00 AS Decimal(12, 2)), CAST(225.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (116, 107, 100, 123, 4, N'2015-04-21 18:31:00', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (117, 107, 100, 115, 4, N'2015-04-21 18:31:12', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (118, 108, 100, 110, 6, N'2015-04-21 18:31:36', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(300.00 AS Decimal(12, 2)), CAST(300.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (119, 119, 100, 103, 6, N'2015-04-21 18:33:46', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(120.00 AS Decimal(12, 2)), CAST(120.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (120, 119, 100, 106, 4, N'2015-04-21 18:33:56', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(300.00 AS Decimal(12, 2)), CAST(300.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (121, 119, 100, 114, 3, N'2015-04-21 18:34:14', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(120.00 AS Decimal(12, 2)), CAST(120.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (122, 118, 100, 115, 4, N'2015-04-21 18:34:29', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (123, 118, 100, 113, 4, N'2015-04-21 18:34:39', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (124, 118, 100, 112, 6, N'2015-04-21 18:35:08', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(450.00 AS Decimal(12, 2)), CAST(450.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (125, 117, 100, 102, 2, N'2015-04-21 18:35:30', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(90.00 AS Decimal(12, 2)), CAST(90.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (126, 116, 100, 109, 5, N'2015-04-21 18:35:52', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (127, 116, 100, 103, 2, N'2015-04-21 18:36:00', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(40.00 AS Decimal(12, 2)), CAST(40.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (128, 115, 100, 103, 2, N'2015-04-21 18:36:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(40.00 AS Decimal(12, 2)), CAST(40.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (129, 115, 100, 108, 3, N'2015-04-21 18:36:27', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(150.00 AS Decimal(12, 2)), CAST(150.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (118, 108, 100, 120, 6, N'2015-04-21 18:31:36', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(300.00 AS Decimal(12, 2)), CAST(300.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (119, 119, 100, 111, 6, N'2015-04-21 18:33:46', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(120.00 AS Decimal(12, 2)), CAST(120.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (120, 119, 100, 121, 4, N'2015-04-21 18:33:56', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(300.00 AS Decimal(12, 2)), CAST(300.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (121, 119, 100, 109, 3, N'2015-04-21 18:34:14', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(120.00 AS Decimal(12, 2)), CAST(120.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (122, 118, 100, 114, 4, N'2015-04-21 18:34:29', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (123, 118, 100, 109, 4, N'2015-04-21 18:34:39', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (124, 118, 100, 114, 6, N'2015-04-21 18:35:08', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(450.00 AS Decimal(12, 2)), CAST(450.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (125, 117, 100, 111, 2, N'2015-04-21 18:35:30', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(90.00 AS Decimal(12, 2)), CAST(90.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (126, 116, 100, 113, 5, N'2015-04-21 18:35:52', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (127, 116, 100, 117, 2, N'2015-04-21 18:36:00', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(40.00 AS Decimal(12, 2)), CAST(40.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (128, 115, 100, 117, 2, N'2015-04-21 18:36:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(40.00 AS Decimal(12, 2)), CAST(40.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (129, 115, 100, 118, 3, N'2015-04-21 18:36:27', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(150.00 AS Decimal(12, 2)), CAST(150.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (130, 114, 100, 115, 4, N'2015-04-21 18:36:46', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (131, 114, 100, 113, 4, N'2015-04-21 18:36:58', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (132, 113, 100, 110, 5, N'2015-04-21 18:37:20', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(250.00 AS Decimal(12, 2)), CAST(250.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (133, 113, 100, 112, 4, N'2015-04-21 18:37:41', CAST(0.10 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(300.00 AS Decimal(12, 2)), CAST(270.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (134, 112, 100, 103, 4, N'2015-04-21 18:37:53', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(80.00 AS Decimal(12, 2)), CAST(80.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (135, 112, 100, 112, 6, N'2015-04-21 18:38:07', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(450.00 AS Decimal(12, 2)), CAST(450.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (136, 112, 100, 109, 4, N'2015-04-21 18:38:15', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(160.00 AS Decimal(12, 2)), CAST(160.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (137, 111, 100, 111, 10, N'2015-04-21 18:38:45', CAST(0.20 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(750.00 AS Decimal(12, 2)), CAST(600.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (138, 111, 100, 110, 4, N'2015-04-21 18:39:01', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (139, 110, 100, 112, 5, N'2015-04-21 18:39:20', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(375.00 AS Decimal(12, 2)), CAST(375.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (132, 113, 100, 118, 5, N'2015-04-21 18:37:20', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(250.00 AS Decimal(12, 2)), CAST(250.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (133, 113, 100, 109, 4, N'2015-04-21 18:37:41', CAST(0.10 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(300.00 AS Decimal(12, 2)), CAST(270.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (134, 112, 100, 113, 4, N'2015-04-21 18:37:53', CAST(0.00 AS Decimal(3, 2)), 1, CAST(20.00 AS Decimal(8, 2)), CAST(80.00 AS Decimal(12, 2)), CAST(80.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (135, 112, 100, 109, 6, N'2015-04-21 18:38:07', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(450.00 AS Decimal(12, 2)), CAST(450.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (136, 112, 100, 119, 4, N'2015-04-21 18:38:15', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(160.00 AS Decimal(12, 2)), CAST(160.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (137, 111, 100, 114, 10, N'2015-04-21 18:38:45', CAST(0.20 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(750.00 AS Decimal(12, 2)), CAST(600.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (138, 111, 100, 120, 4, N'2015-04-21 18:39:01', CAST(0.00 AS Decimal(3, 2)), 1, CAST(50.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (139, 110, 100, 122, 5, N'2015-04-21 18:39:20', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(375.00 AS Decimal(12, 2)), CAST(375.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (140, 110, 100, 116, 5, N'2015-04-21 18:39:31', CAST(0.00 AS Decimal(3, 2)), 1, CAST(30.00 AS Decimal(8, 2)), CAST(150.00 AS Decimal(12, 2)), CAST(150.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (141, 109, 100, 112, 6, N'2015-04-21 18:39:51', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(450.00 AS Decimal(12, 2)), CAST(450.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (142, 109, 100, 116, 5, N'2015-04-21 18:40:05', CAST(0.00 AS Decimal(3, 2)), 1, CAST(30.00 AS Decimal(8, 2)), CAST(150.00 AS Decimal(12, 2)), CAST(150.00 AS Decimal(12, 2)))
-INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (143, 104, 100, 112, 5, N'2015-04-21 18:40:51', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(375.00 AS Decimal(12, 2)), CAST(375.00 AS Decimal(12, 2)))
+INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (143, 104, 100, 113, 5, N'2015-04-21 18:40:51', CAST(0.00 AS Decimal(3, 2)), 1, CAST(75.00 AS Decimal(8, 2)), CAST(375.00 AS Decimal(12, 2)), CAST(375.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (144, 104, 100, 114, 5, N'2015-04-21 18:41:06', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
 SET IDENTITY_INSERT [dbo].[Booking] OFF
 GO

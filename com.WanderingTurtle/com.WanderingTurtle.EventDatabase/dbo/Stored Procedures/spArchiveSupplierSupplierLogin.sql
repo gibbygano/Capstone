@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE spDeleteSupplier
+﻿CREATE PROCEDURE spArchiveSupplierSupplierLogin
 	(
 	@CompanyName 			varchar(255),
 	@FirstName 				varchar(50), 
@@ -12,6 +12,8 @@
 	@SupplierID 			int
 	)
 AS
+	DECLARE @ArchiveRowCount int
+
 	UPDATE Supplier SET
 		Active = 0
 	WHERE 
@@ -26,4 +28,12 @@ AS
 		AND EmailAddress = @EmailAddress
 		AND ApplicationID = @ApplicationID
 		AND Active = 1
+	SET @ArchiveRowCount = @@ROWCOUNT
+
+	IF @ArchiveRowCount = 1
+	UPDATE SupplierLogin
+	SET Active = 0
+	WHERE SupplierLogin.SupplierID = @SupplierID
+	
 	RETURN @@ROWCOUNT
+

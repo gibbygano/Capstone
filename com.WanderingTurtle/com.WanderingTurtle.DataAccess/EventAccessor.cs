@@ -133,6 +133,7 @@ namespace com.WanderingTurtle.DataAccess
 
         //Justin Pennington 2/14/15
         //retrieves all Events and returns a List of Event objects
+
         public static List<Event> GetEventList()
         {
             var EventList = new List<Event>();

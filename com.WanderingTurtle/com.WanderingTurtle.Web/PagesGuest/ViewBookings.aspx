@@ -14,7 +14,7 @@
         <div id="loginDiv" runat="server">
             <asp:Label ID="lblError" Text="" runat="server" Visible="false" ForeColor="Red" />
             <asp:Label ID="lblLogin" Text="Enter your pin:" runat="server" />
-            <asp:TextBox ID="txtLogin" runat="server" MaxLength="5" TextMode="Password" /><br />
+            <asp:TextBox ID="txtLogin" runat="server" MaxLength="6" TextMode="Password" /><br />
             <asp:Button ID="btnLogin" runat="server" Text="View bookings" OnClick="btnLogin_Click" UseSubmitBehavior="True" />
         </div>
         <div id="guestDetailsDiv" runat="server" visible="false">

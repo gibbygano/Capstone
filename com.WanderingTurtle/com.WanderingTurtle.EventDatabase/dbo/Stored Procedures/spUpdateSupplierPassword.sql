@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spSupplierLoginUpdate]
+﻿CREATE PROCEDURE [dbo].[spUpdateSupplierPassword]
 	(
 	@Password	varchar(50),
 	

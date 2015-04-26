@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spHotelGuestGet]
+﻿CREATE PROCEDURE [dbo].[spSelectHotelGuest]
 	@hotelGuestID int = null
 AS
 BEGIN

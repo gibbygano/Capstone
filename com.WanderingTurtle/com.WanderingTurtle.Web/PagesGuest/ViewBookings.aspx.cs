@@ -37,7 +37,7 @@ namespace com.WanderingTurtle.Web.PagesGuest
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             BookingManager hgm = new BookingManager();
-            if (Validator.ValidateAlphaNumeric(txtLogin.Text, 5, 5))
+            if (Validator.ValidateAlphaNumeric(txtLogin.Text, 6, 6))
             {
                 try
                 {

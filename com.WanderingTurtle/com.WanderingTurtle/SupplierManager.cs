@@ -214,11 +214,19 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// 
+        /// archives supplier and login info
+        /// </summary>
+        /// <param name="supplierToDelete"></param>
+        /// <returns></returns>
         public SupplierResult ArchiveSupplier(Supplier supplierToDelete)
         {
             try
             {
-                if (SupplierAccessor.DeleteSupplier(supplierToDelete) == 1)
+                if (SupplierAccessor.DeleteSupplier(supplierToDelete) == 2)
                 {
                     //update cache
                     DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();

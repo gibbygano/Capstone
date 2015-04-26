@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spHotelGuestUpdate]
+﻿CREATE PROCEDURE [dbo].[spUpdateHotelGuest]
 	@firstName varchar(50),
 	@lastName varchar(50),
 	@zip char(5),

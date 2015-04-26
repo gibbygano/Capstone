@@ -8,7 +8,7 @@ namespace com.WanderingTurtle.DataAccess
 {
     public static class EmployeeAccessor
     {
-        // Failure: an application exception will be thrown
+
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
@@ -21,11 +21,11 @@ namespace com.WanderingTurtle.DataAccess
         /// Miguel Santana
         /// Updated: 2015/02/26
         ///
-        /// Renamed stored procedure to spEmployeeAdd
+        /// Renamed stored procedure to spInsertEmployee
         /// </remarks>
         /// <param name="newEmployee">Employee object to add to databse</param>
         /// <exception cref="ApplicationException">Exception is thrown if no rows affected were returned</exception>
-        /// <returns>Number of rows affected</returns>
+        /// /// <returns>Number of rows affected</returns>
         public static int AddEmployee(Employee newEmployee)
         {
             int rowsAffected = 0;
@@ -83,7 +83,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spEmployeeGet";
+            var cmdText = "spSelectEmployee";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -122,68 +122,6 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        /// <summary>
-        /// Ryan Blake
-        /// Created: 2015/02/12
-        ///
-        /// Method takes in an employee first name and last name,
-        ///     submits those variables to the stored procedure spEmployeeSelectName,
-        ///     which will return the specific employee that matches the firstName and lastName
-        /// </summary>
-        /// <remarks>
-        /// Miguel Santana
-        /// Updated: 2015/02/26
-        ///
-        /// Renamed stored procedure to spEmployeeSelectName
-        /// Reconfigured employee object creation from data retrieved from database
-        /// </remarks>
-        /// <param name="firstName">First name of employee</param>
-        /// <param name="lastName">Last name of employee</param>
-        /// <exception cref="ApplicationException">Exception is thrown if no employee was found in database</exception>
-        /// <returns>Employee found in database</returns>
-        public static Employee GetEmployee(string firstName, string lastName)
-        {
-            var conn = DatabaseConnection.GetDatabaseConnection();
-
-            var cmdText = "spEmployeeSelectName";
-            var cmd = new SqlCommand(cmdText, conn);
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            cmd.Parameters.AddWithValue("@firstName", firstName);
-            cmd.Parameters.AddWithValue("@lastName", lastName);
-
-            try
-            {
-                conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    reader.Read();
-
-                    return new Employee(
-                        reader.GetInt32(0), //EmployeeID
-                        reader.GetString(1), //FirstName
-                        reader.GetString(2), //LastName
-                        reader.GetInt32(3), //Level
-                        reader.GetBoolean(4) //Active
-                    );
-                }
-                else
-                {
-                    var ax = new ApplicationException("Specific employee not found, check your search parameters and try again.");
-                    throw ax;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
 
         /// <summary>
         /// Ryan Blake
@@ -208,7 +146,7 @@ namespace com.WanderingTurtle.DataAccess
 
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spEmployeeGet";
+            var cmdText = "spSelectEmployee";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -274,7 +212,7 @@ namespace com.WanderingTurtle.DataAccess
 
             var conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spEmployeeUpdate";
+            var cmdText = "spUpdateEmployee";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -321,7 +259,7 @@ namespace com.WanderingTurtle.DataAccess
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
 
-            var cmdText = "spEmployeeCheckPassword";
+            var cmdText = "spSelectEmployeeByIDPassword";
             var cmd = new SqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@employeeId", employeeId);

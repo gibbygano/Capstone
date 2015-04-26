@@ -54,6 +54,7 @@
             <Label    Grid.Row="0" Content="Events available:" FontWeight="Bold" />
             <DataGrid Grid.Row="1" x:Name="lvEventListItems" SelectionChanged="lvEventListItems_SelectionChanged" d:DataContext="{d:DesignInstance common:ItemListingDetails}">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Width ="50" Header="ID" Binding="{Binding ItemListID}" />
                     <DataGridTextColumn Width ="100" Header="Start Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
                     <DataGridTextColumn Width ="100" Header="Start Time" Binding="{Binding StartDate, StringFormat='{}{0:t}'}" />
                     <DataGridTextColumn Width ="100" Header="End Date" Binding="{Binding EndDate, StringFormat='{}{0:ddd, MMM d}'}" />

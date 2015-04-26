@@ -1,7 +1,7 @@
 ﻿/* -------------------------Add Hotel Guest Stored Procedures ---------------------------created by: Miguel Santana*/
 /* Added insert into Invoice table for when a hotel guest checks in - Pat Banks  02/27/15 */
 
-CREATE PROCEDURE [dbo].[spHotelGuestAdd]
+CREATE PROCEDURE [dbo].[spInsertHotelGuestInsertInvoice]
 	@firstName varchar(50),
 	@lastName varchar(50),
 	@zip char(5),

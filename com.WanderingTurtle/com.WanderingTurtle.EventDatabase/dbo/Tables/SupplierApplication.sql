@@ -22,3 +22,6 @@ GO
 CREATE NONCLUSTERED INDEX [SupplierApplicationNameIndex]
     ON [dbo].[SupplierApplication]([CompanyName] ASC);
 GO
+ALTER TABLE [dbo].[SupplierApplication]
+ADD CONSTRAINT [fk_SupplierApplication_CityState] FOREIGN KEY ([Zip]) REFERENCES [dbo].[CityState] ([Zip]);
+GO

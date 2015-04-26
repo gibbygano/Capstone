@@ -16,7 +16,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                return access.retrieveSupplierLogin(userPassword, userName);
+                return access.RetrieveSupplierLogin(userPassword, userName);
             }
             catch (SqlException)
             {
@@ -32,23 +32,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                return access.retrieveSupplierUserNameByID(supplierID);
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public int addSupplierLogin(string userName, int supplierID)
-        {
-            try
-            {
-                return access.addSupplierLogin(userName, supplierID);
+                return access.RetrieveSupplierUserNameByID(supplierID);
             }
             catch (SqlException)
             {
@@ -68,7 +52,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 if (result1)
                 {
-                    int result = access.UpdateSupplierLogin(newPassword, oldLogin);
+                    int result = access.UpdateSupplierPassword(newPassword, oldLogin);
 
                     if (result == 1)
                     {
@@ -98,23 +82,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                return access.checkUserName(userName);
-            }
-            catch (SqlException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public int archiveSupplierLogin(SupplierLogin oldSupplier, bool archive)
-        {
-            try
-            {
-                return access.archiveSupplierLogin(oldSupplier, archive);
+                return access.CheckUserName(userName);
             }
             catch (SqlException)
             {

@@ -29,12 +29,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NoLongerNeeded", "NoLongerN
 		com.WanderingTurtle.FormPresentation\ListsPopUp.xaml.cs = com.WanderingTurtle.FormPresentation\ListsPopUp.xaml.cs
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spArchiveInvoice.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spArchiveInvoice.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateCreate.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateCreate.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateReadCity.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateReadCity.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateReadCityState.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateReadCityState.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateReadState.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateReadState.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateUpdate.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spCityStateUpdate.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spDeleteBooking.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spDeleteBooking.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spEmployeeSelectName.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spEmployeeSelectName.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spHotelGuestArchive.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spHotelGuestArchive.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spSelectAllBookings.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spSelectAllBookings.sql
+		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spSupplierLoginArchive.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spSupplierLoginArchive.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginAdd.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGet.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginGetList.sql
 		com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginUpdate.sql = com.WanderingTurtle.EventDatabase\dbo\Stored Procedures\spUserLoginUpdate.sql
 		com.WanderingTurtle.EventDatabase\dbo\Tables\UserLogin.sql = com.WanderingTurtle.EventDatabase\dbo\Tables\UserLogin.sql
+		com.WanderingTurtle.DataAccess\UserLoginAccessor.cs = com.WanderingTurtle.DataAccess\UserLoginAccessor.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem Code", "Problem Code", "{78738C71-D7C3-4536-B6FB-D371B918B2DE}"

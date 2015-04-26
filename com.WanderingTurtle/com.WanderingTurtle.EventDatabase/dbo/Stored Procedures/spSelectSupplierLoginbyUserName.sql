@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spSupplierLoginGetUserName]
+﻿CREATE PROCEDURE [dbo].[spSelectSupplierLoginbyUserName]
 	(
 		@userName varchar(50)
 	)

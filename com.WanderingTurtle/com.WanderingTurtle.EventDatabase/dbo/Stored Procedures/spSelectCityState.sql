@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spCityStateRead] 
+﻿CREATE PROCEDURE [dbo].[spSelectCityState] 
 	(@Zip	char(5))
 AS
 	SELECT Zip, City, State 

@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spSupplierLoginAdd](
+﻿CREATE PROCEDURE [dbo].[spInsertSupplierLogin](
 	@userName varchar(50),
 	@supplierID int
 	)

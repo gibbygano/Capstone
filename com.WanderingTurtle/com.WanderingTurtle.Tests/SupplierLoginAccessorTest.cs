@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.Tests
         [TestInitialize]
         public void initialize()
         {
-            access.addSupplierLogin("F@k3logg3r", 101);
+            access.AddSupplierLogin("F@k3logg3r", 101);
         }
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginAdd()
         {
-            int numberAdded = access.addSupplierLogin("TryM3!", 102);
-            Assert.AreEqual("TryM3!", access.retrieveSupplierLogin("Password#1", "TryM3!").UserName);
+            int numberAdded = access.AddSupplierLogin("TryM3!", 102);
+            Assert.AreEqual("TryM3!", access.RetrieveSupplierLogin("Password#1", "TryM3!").UserName);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginGet()
         {
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "F@k3logg3r");
             Assert.AreEqual("F@k3logg3r", retrieveSupplier.UserName, "There is no such supplier.");
         }
 
@@ -50,7 +50,7 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(ApplicationException))]
         public void TestSupplierLoginGetFail()
         {
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "f@k3Loger");
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "f@k3Loger");
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void TestSupplierLoginAddFail()
         {
-            int numberAdded = access.addSupplierLogin("F@k3logg3r", 101);
+            int numberAdded = access.AddSupplierLogin("F@k3logg3r", 101);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginArchive()
         {
-            SupplierLogin change = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
+            SupplierLogin change = access.RetrieveSupplierLogin("Password#1", "F@k3logg3r");
             int num = access.archiveSupplierLogin(change, false);
             Assert.AreEqual(1, num);
         }
