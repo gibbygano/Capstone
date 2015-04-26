@@ -243,25 +243,12 @@ namespace com.WanderingTurtle.FormPresentation
         /// edited by will fritz 2/15/15
         /// added conformation message box
         /// edited by Rose Steffensmeier 2015/24/04
-        /// commented out checking supplierUserName updated
+        /// deleted checking supplierUserName
         /// </remarks>
         private async void EditSupplier()
         {
             try
             {
-                /*//check if user name has changed
-                if (!_supplierUserName.Equals(txtUserName.Text))
-                {
-                    //update user name
-                    ResultsEdit result = _loginManager.UpdateSupplierLogin(txtUserName.Text, _supplierUserName, _UpdatableSupplier.SupplierID);
-
-                    if (result.Equals(ResultsEdit.Success))
-                    {
-                        await this.ShowMessageDialog("Supplier was updated.");
-                        DialogResult = true;
-                        Close();
-                    }
-                }*/
                 Supplier tempSupplier = new Supplier
                 {
                     CompanyName = txtCompanyName.Text.Trim(),

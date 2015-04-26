@@ -29,8 +29,8 @@
             <div class="float-right">
                 <nav>
                     <ul id="menu">
-                        <li><a runat="server" href="~/PagesGuest/Default">Home</a></li>
-                        <li><a runat="server" href="~/PagesGuest/About">About</a></li>
+                        <li><a runat="server" href="~/PagesGuest/Default">View Upcoming Events</a></li>
+                        <li><a runat="server" href="~/PagesGuest/ViewBookings">View My Events</a></li>
                         <li><a runat="server" href="~/PagesGuest/Contacts">Contact</a></li>
                     </ul>
                 </nav>

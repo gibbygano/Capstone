@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <returns>a list of ItemListingDetails objects (is created from two tables, ItemListing and Event Item)</returns>
         public static List<ItemListingDetails> GetItemListingDetailsList()
         {
-            var BookingOpsList = new List<ItemListingDetails>();
+            var activeListingDetailsList = new List<ItemListingDetails>();
             //Set up database call
             var conn = DatabaseConnection.GetDatabaseConnection();
             string query = "spSelectItemListingDetailsList";
@@ -34,21 +34,21 @@ namespace com.WanderingTurtle.DataAccess
                 {
                     while (reader.Read())
                     {
-                        var currentBook = new ItemListingDetails();
+                        var currentItemListingDetails = new ItemListingDetails();
                         //Below are found on the ItemListing table (ItemListID is a foreign key on booking)
-                        currentBook.ItemListID = reader.GetInt32(0);
-                        currentBook.MaxNumGuests = reader.GetInt32(1);
-                        currentBook.CurrentNumGuests = reader.GetInt32(2);
-                        currentBook.StartDate = reader.GetDateTime(3);
-                        currentBook.EndDate = reader.GetDateTime(4);
+                        currentItemListingDetails.ItemListID = reader.GetInt32(0);
+                        currentItemListingDetails.MaxNumGuests = reader.GetInt32(1);
+                        currentItemListingDetails.CurrentNumGuests = reader.GetInt32(2);
+                        currentItemListingDetails.StartDate = reader.GetDateTime(3);
+                        currentItemListingDetails.EndDate = reader.GetDateTime(4);
                         //Below are found on the EventItem table
-                        currentBook.EventID = reader.GetInt32(5);
-                        currentBook.EventName = reader.GetString(6);
-                        currentBook.EventDescription = reader.GetString(7);
+                        currentItemListingDetails.EventID = reader.GetInt32(5);
+                        currentItemListingDetails.EventName = reader.GetString(6);
+                        currentItemListingDetails.EventDescription = reader.GetString(7);
                         //this is from itemlisting table
-                        currentBook.Price = reader.GetDecimal(8);
+                        currentItemListingDetails.Price = reader.GetDecimal(8);
 
-                        BookingOpsList.Add(currentBook);
+                        activeListingDetailsList.Add(currentItemListingDetails);
                     }
                 }
                 else
@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return BookingOpsList;
+            return activeListingDetailsList;
         }
 
         /// <summary>

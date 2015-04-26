@@ -6,4 +6,5 @@ BEGIN
 	FROM ItemListing, EventItem
 	WHERE ItemListing.EventItemID = EventItem.EventItemID
 	AND ItemListing.StartDate > CURRENT_TIMESTAMP
+	AND ItemListing.Active = 1
 END

@@ -13,10 +13,10 @@
         <Grid  Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height=".5*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height=".5*" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -24,14 +24,16 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" Content="Add Event Type:" />
+            <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Content="Add Event Type:" />
             <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Content="Change Event Type:" />
             <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" Content="To:" />
-            <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" Content="Archive Event Type:" />
-            <TextBox  Grid.Row="0" Grid.Column="1" x:Name="txtAddEventType" />
-            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboEditEvent" ItemsSource = "{Binding}" SelectionChanged="cboEditEvent_SelectionChanged"/>
-            <TextBox  Grid.Row="2" Grid.Column="4" x:Name="txtEventTypeEdit" />
-            <ComboBox Grid.Row="4" Grid.Column="1" x:Name="cboArchiveEvent" ItemsSource = "{Binding}" SelectionChanged="cboArchiveEvent_SelectionChanged" />
+            <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" Content="Archive Event Type:" />
+            <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" Content="Choose Function:" />
+            <TextBox  Grid.Row="1" Grid.Column="1" x:Name="txtAddEventType" IsEnabled="False" />
+            <ComboBox Grid.Row="2" Grid.Column="1" x:Name="cboEditEvent" ItemsSource = "{Binding}" IsEnabled="False"/>
+            <TextBox  Grid.Row="2" Grid.Column="4" x:Name="txtEventTypeEdit" IsEnabled="False" />
+            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="cboArchiveEvent" ItemsSource = "{Binding}" IsEnabled="False" />
+            <RadioButton Content="RadioButton" Grid.Column="1" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top"/>
 
         </Grid>
         <Grid Grid.Row="2" MaxWidth="500">
