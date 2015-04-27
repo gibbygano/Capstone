@@ -60,6 +60,7 @@
     <Compile Include="EventAccessorTest.cs" />
     <Compile Include="InvoiceManagerTest.cs" />
     <Compile Include="ItemListingAccessorTest.cs" />
+    <Compile Include="ProductManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupplierLoginAccessorTest.cs" />
     <Compile Include="SupplierManagerTest.cs" />
