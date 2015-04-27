@@ -140,8 +140,8 @@ namespace com.WanderingTurtle.FormPresentation
             decimal discount = (decimal)(udDiscount.Value);
 
             //calculate values for the tickets
-            decimal extendedPrice = _bookingManager.calcExtendedPrice(selectedItemListing.Price, qty);
-            decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+            decimal extendedPrice = _bookingManager.CalcExtendedPrice(selectedItemListing.Price, qty);
+            decimal totalPrice = _bookingManager.CalcTotalCharge(discount, extendedPrice);
 
             Booking bookingToAdd = new Booking(_CurrentInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
             return bookingToAdd;
@@ -177,8 +177,8 @@ namespace com.WanderingTurtle.FormPresentation
             //total cost calculations
             if (myItemObject == null) return;
 
-            decimal extendedPrice = _bookingManager.calcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
-            lblTotalWithDiscount.Content = _bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
+            decimal extendedPrice = _bookingManager.CalcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
+            lblTotalWithDiscount.Content = _bookingManager.CalcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
         }
 
         /// <summary>

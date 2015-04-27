@@ -12,15 +12,16 @@ namespace com.WanderingTurtle.DataAccess
     {
         //Justin Pennington 2/14/15
         //input parameter of EventType, will add the event type to the database, will return a 0 if it fails and a 1 if it was successful (false/true)
-        public static int AddEventType(EventType newEventType)
+        public static int AddEventType(string newEventType)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertEventType";
             var cmd = new SqlCommand(cmdText, conn);
+
             var rowsAffected = 0;
             //set up parameters for EventType
-            cmd.Parameters.AddWithValue("@EventTypeID", newEventType.EventTypeID);
-            cmd.Parameters.AddWithValue("@EventName", newEventType.EventName);
+            cmd.Parameters.AddWithValue("@EventName", newEventType);
+            cmd.CommandType = CommandType.StoredProcedure;
 
             try
             {
@@ -50,17 +51,19 @@ namespace com.WanderingTurtle.DataAccess
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spUpdateEventType";
             var cmd = new SqlCommand(cmdText, conn);
+  
+            cmd.CommandType = CommandType.StoredProcedure;
             var rowsAffected = 0;
 
             // set command type to stored procedure and add parameters
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@EventName", newEventType.EventName);
 
-            cmd.Parameters.AddWithValue("@originalEventTypeID", oldEventType.EventName);
-            cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventTypeID);
+            cmd.Parameters.AddWithValue("@originalEventTypeID",oldEventType.EventTypeID);
+            cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventName);
 
             try
-            {
+            { 
                 conn.Open();
                 rowsAffected = cmd.ExecuteNonQuery();
                 if (rowsAffected == 0)
@@ -81,17 +84,16 @@ namespace com.WanderingTurtle.DataAccess
 
         //requires: Event object, Boolean value for active/inactive
         //returns number of rows affected
-        public static int DeleteEventType(EventType oldEventType)
+        public static int DeleteEventType(EventType eventTypeToArchive)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            var cmdText = "spDeleteEventType";
+            var cmdText = "spArchiveEventType";
             var cmd = new SqlCommand(cmdText, conn);
             var rowsAffected = 0;
-
             cmd.CommandType = CommandType.StoredProcedure;
+            
             //Set up parameters for EventType
-            cmd.Parameters.AddWithValue("@originalEventTypeID", oldEventType.EventName);
-            cmd.Parameters.AddWithValue("@originalEventName", oldEventType.EventTypeID);
+            cmd.Parameters.AddWithValue("@EventTypeID", eventTypeToArchive.EventTypeID);
 
             try
             {

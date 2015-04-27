@@ -25,28 +25,6 @@ namespace com.WanderingTurtle.Tests
             Assert.AreEqual("F@k3logg3r", retrieveSupplier.UserName);
         }
 
-        [TestMethod]
-        public void testSupplierLoginManageAdd()
-        {
-            int numberAdded = access.addSupplierLogin("TryM3!", 101);
-            Assert.AreEqual("TryM3!", access.retrieveSupplierLogin("Password#1", "TryM3!").UserName);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(SqlException))]
-        public void TestSupplierLoginManageAddFail()
-        {
-            int numberAdded = access.addSupplierLogin("F@k3logg3r", 101);
-        }
-
-        [TestMethod]
-        public void TestSupplierLoginManageArchive()
-        {
-            SupplierLogin change = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
-            int num = access.archiveSupplierLogin(change, false);
-            Assert.AreEqual(1, num);
-        }
-
         [TestCleanup]
         public void cleanup()
         {

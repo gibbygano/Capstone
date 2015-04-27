@@ -55,7 +55,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             //get latest data on the eventItemListing
             _eventListingToView = _bookingManager.RetrieveItemListingDetailsList(CurrentBookingDetails.ItemListID);
-            _eventListingToView.QuantityOffered = _bookingManager.availableQuantity(_eventListingToView.MaxNumGuests, _eventListingToView.CurrentNumGuests);
+            _eventListingToView.QuantityOffered = _bookingManager.AvailableQuantity(_eventListingToView.MaxNumGuests, _eventListingToView.CurrentNumGuests);
 
             //populate form fields with object data
             lblEditBookingGuestName.Content = _CurrentInvoice.GetFullName;
@@ -143,8 +143,8 @@ namespace com.WanderingTurtle.FormPresentation
             decimal discount = (decimal)(udDiscount.Value);
 
             //calculate values for the tickets
-            decimal extendedPrice = _bookingManager.calcExtendedPrice(CurrentBookingDetails.TicketPrice, qty);
-            decimal totalPrice = _bookingManager.calcTotalCharge(discount, extendedPrice);
+            decimal extendedPrice = _bookingManager.CalcExtendedPrice(CurrentBookingDetails.TicketPrice, qty);
+            decimal totalPrice = _bookingManager.CalcTotalCharge(discount, extendedPrice);
 
             Booking editedBooking = new Booking(CurrentBookingDetails.BookingID, CurrentBookingDetails.GuestID, eID, CurrentBookingDetails.ItemListID, qty, DateTime.Now, discount, CurrentBookingDetails.Active, CurrentBookingDetails.TicketPrice, extendedPrice, totalPrice);
             return editedBooking;
@@ -173,11 +173,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCalculateTicketPrice_Click(object sender, RoutedEventArgs e)
         {
-            decimal extendedPrice = _bookingManager.calcExtendedPrice(CurrentBookingDetails.TicketPrice, (int)(udAddBookingQuantity.Value));
-            lblTotalDue.Content = (_bookingManager.calcTotalCharge((decimal)(udDiscount.Value), extendedPrice)).ToString("c");
+            decimal extendedPrice = _bookingManager.CalcExtendedPrice(CurrentBookingDetails.TicketPrice, (int)(udAddBookingQuantity.Value));
+            lblTotalDue.Content = (_bookingManager.CalcTotalCharge((decimal)(udDiscount.Value), extendedPrice)).ToString("c");
 
             //***********************TBD NEED to look at this - not updating correctly
-            lblAvailSeats.Content = _eventListingToView.QuantityOffered - _bookingManager.spotsReservedDifference((int)(udAddBookingQuantity.Value), _eventListingToView.QuantityOffered);
+            lblAvailSeats.Content = _eventListingToView.QuantityOffered - _bookingManager.SpotsReservedDifference((int)(udAddBookingQuantity.Value), _eventListingToView.QuantityOffered);
         }
     }
 }

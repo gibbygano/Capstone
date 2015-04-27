@@ -16,6 +16,7 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheListings : IDataGridContextMenu
     {
         private List<ItemListing> _myListingList;
+        private BookingManager _bookingManager = new BookingManager();
         private ProductManager _productManager = new ProductManager();
 
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
@@ -81,26 +82,39 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+        /// <summary>
+        /// Pat Banks
+        /// Updated 2015/04/26
+        /// added logic so that a listing with guests booked cannot be archived.
+        /// </summary>
         private async void ArchiveListing()
         {
             ItemListing ListingToDelete = lvListing.SelectedItem as ItemListing;
-            if (ListingToDelete == null)
-            {
-                throw new WanderingTurtleException(this, "Please select a row to delete.");
-            }
+            
             try
             {
-                MessageDialogResult result = await this.ShowMessageDialog("Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
-                switch (result)
+                //need to check if there are any Bookings associated with this listing.
+                ResultsArchive results = _bookingManager.CheckListingArchive(ListingToDelete.ItemListID);
+
+                if (results.Equals(ResultsArchive.CannotArchive))
                 {
-                    case MessageDialogResult.Affirmative:
-                        var numRows = _productManager.ArchiveItemListing(ListingToDelete);
-                        if (numRows == listResult.Success)
-                        {
-                            await this.ShowMessageDialog("Listing successfully deleted.");
-                        }
-                        refreshData();
-                        break;
+                    throw new WanderingTurtleException(this, "There are bookings associated with this listing and cannot be archived.");
+                }
+                else
+                {
+                    MessageDialogResult result = await this.ShowMessageDialog("Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
+                    switch (result)
+                    {
+                        case MessageDialogResult.Affirmative:
+                            var numRows = _productManager.ArchiveItemListing(ListingToDelete);
+                            if (numRows == listResult.Success)
+                            {
+                                await this.ShowMessageDialog("Listing successfully deleted.");
+                            }
+                            refreshData();
+                            break;
+                    }
                 }
             }
             catch (Exception ex)

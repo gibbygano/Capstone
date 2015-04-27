@@ -12,13 +12,11 @@ namespace com.WanderingTurtle.Tests
         private HotelManagerAccessorTest tester = new HotelManagerAccessorTest();
         private InvoiceAccessor access = new InvoiceAccessor();
         private HotelGuestAccessor access2 = new HotelGuestAccessor();
-        private List<InvoiceDetails> invoiceList;
 
         [TestInitialize]
         public void initialize()
         {
             tester.initialize();
-            invoiceList = null;
         }
 
         [TestMethod]

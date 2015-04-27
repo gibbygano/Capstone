@@ -11,7 +11,6 @@ namespace com.WanderingTurtle.Tests
     {
         private HotelManagerAccessorTest tester = new HotelManagerAccessorTest();
         private InvoiceManager access = new InvoiceManager();
-        private List<InvoiceDetails> invoiceList;
 
         [TestInitialize]
         public void initialize()

@@ -64,18 +64,6 @@ namespace com.WanderingTurtle.Tests
             int numberAdded = access.AddSupplierLogin("F@k3logg3r", 101);
         }
 
-        /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/09
-        /// Takes a piece of data and archives it.
-        /// </summary>
-        [TestMethod]
-        public void TestSupplierLoginArchive()
-        {
-            SupplierLogin change = access.RetrieveSupplierLogin("Password#1", "F@k3logg3r");
-            int num = access.archiveSupplierLogin(change, false);
-            Assert.AreEqual(1, num);
-        }
-
         [TestCleanup]
         public void cleanUp()
         {
@@ -92,7 +80,7 @@ namespace com.WanderingTurtle.Tests
                 cmd = new SqlCommand(commandText2, conn);
                 cmd.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 Console.WriteLine("Fail!");
             }

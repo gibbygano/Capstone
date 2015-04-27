@@ -136,7 +136,7 @@ namespace com.WanderingTurtle.Web.Pages
                 string inPin = txtGuestPin.Text;
 
                 //see if pin was found = if not there will be an exception
-                foundGuest = myManager.checkValidPIN(inPin);
+                foundGuest = myManager.CheckValidPIN(inPin);
             }
             catch (Exception)
             {
@@ -157,8 +157,8 @@ namespace com.WanderingTurtle.Web.Pages
                 ticketQty = Int32.Parse(txtGuestTickets.Text);
 
                 //calculate values for the tickets
-                extendedPrice = myManager.calcExtendedPrice(selectedItemListing.Price, ticketQty);
-                totalPrice = myManager.calcTotalCharge(discount, extendedPrice);
+                extendedPrice = myManager.CalcExtendedPrice(selectedItemListing.Price, ticketQty);
+                totalPrice = myManager.CalcTotalCharge(discount, extendedPrice);
 
                 guestName = foundGuest.GetFullName;
                 eventName = selectedItemListing.EventName;

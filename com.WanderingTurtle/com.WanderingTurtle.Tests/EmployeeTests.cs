@@ -68,25 +68,13 @@ namespace EmployeeLogicTests
             Assert.IsTrue(worked);
         }
 
-        [TestMethod]
-        public void TestMethodFetchEmployee()
-        {
-            bool worked = false;
-            Employee testEmp2 = myManager.FetchEmployee(FirstName, LastName);
-            if (testEmp2.FirstName == "Test")
-            {
-                worked = true;
-            }
-            Assert.IsTrue(worked);
-        }
-
-        [TestMethod]
-        public void TestMethodFetchEmployeeByID()
-        {
-            Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
-            Employee testEmp2 = myManager.FetchEmployee((int)testEmp1.EmployeeID);
-            Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
-        }
+        //[TestMethod]
+//        public void TestMethodFetchEmployeeByID()
+//        {
+////            Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
+//            Employee testEmp2 = myManager.FetchEmployee((int)testEmp1.EmployeeID);
+//            Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
+//        }
 
         [TestMethod]
         public void TestMethodFetchEmpList()
@@ -97,32 +85,32 @@ namespace EmployeeLogicTests
             Assert.IsNotNull(myList);
         }
 
-        [TestMethod]
-        public void TestMethodGetEmpLogin()
-        {
-            Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
-            Employee testEmp2 = myManager.GetEmployeeLogin((int)testEmp1.EmployeeID, Password);
-            bool worked = false;
-            if (testEmp1.FirstName == testEmp2.FirstName)
-            {
-                worked = true;
-            }
-            Assert.IsTrue(worked);
-        }
+        //[TestMethod]
+ //       public void TestMethodGetEmpLogin()
+ //       {
+ ////           Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
+ //           Employee testEmp2 = myManager.GetEmployeeLogin((int)testEmp1.EmployeeID, Password);
+ //           bool worked = false;
+ //           if (testEmp1.FirstName == testEmp2.FirstName)
+ //           {
+ //               worked = true;
+ //           }
+ //           Assert.IsTrue(worked);
+ //       }
 
-        [TestMethod]
-        public void TestMethodEditEmployee()
-        {
-            Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
-            Employee testEmp2 = new Employee(testEmp1.FirstName, LastName, "pass123", (int)testEmp1.Level, testEmp1.Active);
-            bool worked = false;
-            ResultsEdit result = myManager.EditCurrentEmployee(testEmp1, testEmp2);
-            if (result == ResultsEdit.Success)
-            {
-                worked = true;
-            }
-            Assert.IsTrue(worked);
-        }
+        //[TestMethod]
+        //public void TestMethodEditEmployee()
+        //{
+        //    Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
+        //    Employee testEmp2 = new Employee(testEmp1.FirstName, LastName, "pass123", (int)testEmp1.Level, testEmp1.Active);
+        //    bool worked = false;
+        //    ResultsEdit result = myManager.EditCurrentEmployee(testEmp1, testEmp2);
+        //    if (result == ResultsEdit.Success)
+        //    {
+        //        worked = true;
+        //    }
+        //    Assert.IsTrue(worked);
+        //}
 
         [TestCleanup]
         public void TestMethodDeleteRecord()

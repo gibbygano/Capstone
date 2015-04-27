@@ -41,7 +41,7 @@ namespace com.WanderingTurtle.Web.PagesGuest
             {
                 try
                 {
-                    foundGuest = hgm.checkValidPIN(txtLogin.Text);
+                    foundGuest = hgm.CheckValidPIN(txtLogin.Text);
                     Session["ViewBookingsGuest"] = foundGuest;
                     InvoiceManager im = new InvoiceManager();
                     bookings = im.RetrieveGuestBookingDetailsList((int)foundGuest.HotelGuestID);

@@ -179,6 +179,30 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+
+        public ResultsArchive CheckToArchiveEvent(int eventID)
+        {
+            List<ItemListing> list = RetrieveItemListingList();
+            int count = 0;
+
+            foreach (var item in list)
+            {
+                if (item.EventID == eventID && item.StartDate > DateTime.Now)
+                {
+                    count++;
+                }
+            }
+
+            if (count == 0)
+            {
+                return ResultsArchive.OkToArchive;
+            }
+            else
+            {
+                return ResultsArchive.CannotArchive;
+            }
+        }
+
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
@@ -197,7 +221,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
                 return listResult.NotChanged;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return listResult.DatabaseError;
             }

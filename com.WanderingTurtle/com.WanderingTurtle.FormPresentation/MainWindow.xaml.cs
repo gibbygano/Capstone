@@ -10,6 +10,16 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class MainWindow
     {
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/01/30
+        /// Initial Creation of project
+        /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated 2015/03/04
+        /// Added user tabs
+        /// </remarks>
         public MainWindow()
         {
             try
@@ -23,11 +33,22 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/03/08
+        /// </summary>
         internal void StartUp()
         {
             MainContent.Content = new StartupScreen();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/03/13
+        /// 
+        /// Shows a message box stating the there isn't a connection to the database
+        /// </summary>
+        /// <param name="ex"></param>
         private void _DBConnectError(Exception ex)
         {
             switch (MessageBox.Show(string.Format("Error connecting to database.\rWould you like to exit the program?\r\rError Message:\r{0}", ex.Message),
@@ -40,6 +61,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/03/13
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)
         {
             StartUp();

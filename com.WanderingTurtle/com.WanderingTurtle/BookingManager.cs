@@ -73,7 +73,7 @@ namespace com.WanderingTurtle.BusinessLogic
             //calculating the quantity of available tickets for each listing
             foreach (ItemListingDetails lIO in activeEventListings)
             {
-                lIO.QuantityOffered = availableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
+                lIO.QuantityOffered = AvailableQuantity(lIO.MaxNumGuests, lIO.CurrentNumGuests);
             }
 
             DataCache._currentItemListingDetailsList = activeEventListings;
@@ -285,7 +285,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="price">price of one ticket</param>
         /// <param name="quantity">number of tickets</param>
         /// <returns>the extended price</returns>
-        public decimal calcExtendedPrice(decimal price, int quantity)
+        public decimal CalcExtendedPrice(decimal price, int quantity)
         {
             return quantity * price;
         }
@@ -299,7 +299,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="discount">percentage from form</param>
         /// <param name="extendedPrice">ticket price * quantity</param>
         /// <returns></returns>
-        public decimal calcTotalCharge(decimal discount, decimal extendedPrice)
+        public decimal CalcTotalCharge(decimal discount, decimal extendedPrice)
         {
             decimal amtToPayPercent = (decimal)(1 - discount);
 
@@ -313,7 +313,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="maxQuantity"></param>
         /// <param name="currentQuantity"></param>
         /// <returns></returns>
-        public int availableQuantity(int maxQuantity, int currentQuantity)
+        public int AvailableQuantity(int maxQuantity, int currentQuantity)
         {
             int availableQuantity;
             availableQuantity = maxQuantity - currentQuantity;
@@ -331,7 +331,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="newQuantity">updated number of people attending</param>
         /// <param name="currentQuantity">current quantity of people attending</param>
         /// <returns>number of spots different</returns>
-        public int spotsReservedDifference(int newQuantity, int currentQuantity)
+        public int SpotsReservedDifference(int newQuantity, int currentQuantity)
         {
             int quantity = newQuantity - currentQuantity;
 
@@ -420,13 +420,13 @@ namespace com.WanderingTurtle.BusinessLogic
             try
             {
                 //A variable to hold the difference between the number of guests on the original reservation, and the old reservation
-                int numGuestsDifference = spotsReservedDifference(editedBooking.Quantity, originalQty);
+                int numGuestsDifference = SpotsReservedDifference(editedBooking.Quantity, originalQty);
 
                 // creates an ItemListing object by retrieving the record of the specific object based on it's ItemListID
                 ItemListingDetails originalItem = RetrieveItemListingDetailsList(editedBooking.ItemListID);
 
                 //assigned the difference of the MaxNumGuests - currentNum of guests
-                int quantityOffered = availableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
+                int quantityOffered = AvailableQuantity(originalItem.MaxNumGuests, originalItem.CurrentNumGuests);
 
                 //If the quantity offered is 0, and the new quantity is going up from the original amount booked, alerts the staff and returns.
                 if (quantityOffered == 0 && (numGuestsDifference > editedBooking.Quantity))
@@ -473,7 +473,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="inPIN"></param>
         /// <returns></returns>
-        public HotelGuest checkValidPIN(string inPIN)
+        public HotelGuest CheckValidPIN(string inPIN)
         {
             try
             {
@@ -503,6 +503,32 @@ namespace com.WanderingTurtle.BusinessLogic
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/26
+        /// </summary>
+        /// <param name="itemListID"></param>
+        /// <returns></returns>
+        public ResultsArchive CheckListingArchive(int itemListID)
+        {
+            var bookings = RetrieveBookingNumbers(itemListID);
+            var numbers = 0;
+
+            foreach (var booking in bookings)
+            {
+                numbers += booking.Quantity;
+            }
+
+            if (numbers > 0)
+            {
+                return ResultsArchive.CannotArchive;
+            }
+            else
+            {
+                return ResultsArchive.OkToArchive;
             }
         }
     }

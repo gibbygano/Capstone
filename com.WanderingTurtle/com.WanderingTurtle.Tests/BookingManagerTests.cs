@@ -113,7 +113,7 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestCalcTotalCharge()
         {   //Checks to see what the total price returned will be.
-            decimal result = myBook.calcTotalCharge(discount, extended);
+            decimal result = myBook.CalcTotalCharge(discount, extended);
             decimal expected = 36m;
             Assert.AreEqual(expected, result);
         }
@@ -124,7 +124,7 @@ namespace com.WanderingTurtle.Tests
             //Tests to see what the available quantity will be.
             int max = 10;
             int current = 5;
-            int quantity = myBook.availableQuantity(max, current);
+            int quantity = myBook.AvailableQuantity(max, current);
             int expected = 5;
             Assert.AreEqual(expected, quantity);
         }
@@ -135,7 +135,7 @@ namespace com.WanderingTurtle.Tests
             //Tests to see what the spots reserved will be.
             int newQuantity = 6;
             int oldQuantity = 4;
-            int quantity = myBook.spotsReservedDifference(newQuantity, oldQuantity);
+            int quantity = myBook.SpotsReservedDifference(newQuantity, oldQuantity);
             int expected = 2;
             Assert.AreEqual(expected, quantity);
         }
@@ -183,7 +183,7 @@ namespace com.WanderingTurtle.Tests
             decimal numA = 2.0m;
             int numB = 2;
             decimal expected = 4.0m;
-            decimal result = myBook.calcExtendedPrice(numA, numB);
+            decimal result = myBook.CalcExtendedPrice(numA, numB);
             //Asserts that the expected and the result will be .5M
             Assert.AreEqual(expected, result);
         }
@@ -295,7 +295,7 @@ namespace com.WanderingTurtle.Tests
             List<HotelGuest> guest1 = HotelGuestAccessor.HotelGuestGet(100);
             //Checks using a pin in the database, stores guest info from database into a guest object
             //Asserts that a record is found, that guest is not null by passing the guest1 guest pin
-            HotelGuest guest = myBook.checkValidPIN(guest1[guest1.Count - 1].GuestPIN);
+            HotelGuest guest = myBook.CheckValidPIN(guest1[guest1.Count - 1].GuestPIN);
             Assert.IsNotNull(guest);
         }
         [TestMethod]

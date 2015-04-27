@@ -198,8 +198,8 @@ namespace com.WanderingTurtle.DataAccess
         /// Created: 2015/03/03
         ///
         /// Creates a connection with database and
-        /// calls the stored procedure spArchiveInvoice
-        /// that updates database with information to archive an invoice
+        /// calls the stored procedure spArchiveInvoiceGuestBooking
+        /// that updates database with information to archive an invoice, hotel guest and any bookings for that guest
         /// </summary>
         /// <param name="originalInvoice">invoice that was fetched from database - used to check for concurrency errors</param>
         /// <param name="updatedInvoice">information that needs to be updated in the database</param>

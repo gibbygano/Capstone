@@ -3,7 +3,6 @@ using com.WanderingTurtle.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.Tests
 {

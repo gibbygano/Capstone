@@ -306,11 +306,11 @@ namespace com.WanderingTurtle.BusinessLogic
 
         ///Add a single EventType object
         ///Created by Matt Lapka 2/8/15
-        public EventResult AddNewEventType(EventType newEventType)
+        public EventResult AddNewEventType(string eventName)
         {
             try
             {
-                if (EventTypeAccessor.AddEventType(newEventType) == 1)
+                if (EventTypeAccessor.AddEventType(eventName) == 1)
                 {
                     //refresh cache
                     DataCache._currentEventTypeList = EventTypeAccessor.GetEventTypeList();

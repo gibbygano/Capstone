@@ -99,7 +99,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (cboxType.SelectedItem != null)
                 {
-                    NewEvent.EventTypeID = (cboxType.SelectedItem as EventType).EventTypeID;
+                    NewEvent.EventTypeID = (int)(cboxType.SelectedItem as EventType).EventTypeID;
                 }
                 else
                 {
@@ -187,7 +187,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 if (cboxType.SelectedItem != null)
                 {
-                    eventToSubmit.EventTypeID = (cboxType.SelectedItem as EventType).EventTypeID;
+                    eventToSubmit.EventTypeID = (int)(cboxType.SelectedItem as EventType).EventTypeID;
                 }
                 else
                 {

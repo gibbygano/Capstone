@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
+using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -15,11 +16,14 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListEvents : IDataGridContextMenu
     {
-        private List<Event> myEventList;
-        private EventManager myMan = new EventManager();
+        private List<Event> _myEventList;
+        private com.WanderingTurtle.BusinessLogic.EventManager _myEventManager = new com.WanderingTurtle.BusinessLogic.EventManager();
+        private ProductManager _myProductManager = new ProductManager();
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
+        /// Hunter Lind
+        /// Created 2015/2/23
+        /// 
         /// Fills our Listview with events and initializes the window.
         /// </summary>
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
@@ -85,34 +89,52 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+
         private async void ArchiveEvent(Event selectedEvent)
         {
-            // Configure the message box to be displayed
-            string messageBoxText = "Are you sure you want to delete this event?";
-            string caption = "Delete Event?";
+            ResultsArchive results = _myProductManager.CheckToArchiveEvent(selectedEvent.EventItemID);
 
-            // Display message box
-            MessageDialogResult result = await this.ShowMessageDialog(messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
-
-            // Process message box results
-            switch (result)
+            if (results == ResultsArchive.OkToArchive)
             {
-                case MessageDialogResult.Affirmative:
-                    try
-                    {
-                        myMan.ArchiveAnEvent(selectedEvent);
-                        Refresh();
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new WanderingTurtleException(this, ex);
-                    }
-                    break;
+                try
+                {
+                    // Configure the message box to be displayed
+                    string messageBoxText = "Are you sure you want to delete this event?";
+                    string caption = "Delete Event?";
 
-                case MessageDialogResult.Negative:
-                    // User pressed No button
-                    // ...
-                    break;
+                    // Display message box
+                    MessageDialogResult result = await this.ShowMessageDialog(messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
+                    // Process message box results
+                    switch (result)
+                    {
+                        case MessageDialogResult.Affirmative:
+                            try
+                            {
+                                _myEventManager.ArchiveAnEvent(selectedEvent);
+                                Refresh();
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new WanderingTurtleException(this, ex);
+                            }
+                            break;
+
+                        case MessageDialogResult.Negative:
+                            // User pressed No button
+                            // ...
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+            }
+            else
+            {
+                throw new WanderingTurtleException(this, "Event cannot be archive because it has active listings associated.");
             }
         }
 
@@ -153,7 +175,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> myTempList = myMan.EventSearch(txtSearchInput.Text);
+            List<Event> myTempList = _myEventManager.EventSearch(txtSearchInput.Text);
             lvEvents.ItemsSource = myTempList;
             txtSearchInput.Text = "";
         }
@@ -171,12 +193,12 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                myEventList = myMan.RetrieveEventList();
-                foreach (Event x in myEventList)
+                _myEventList = _myEventManager.RetrieveEventList();
+                foreach (Event x in _myEventList)
                 {
                     x.setFields();
                 }
-                lvEvents.ItemsSource = myEventList;
+                lvEvents.ItemsSource = _myEventList;
             }
             catch (Exception ex)
             {

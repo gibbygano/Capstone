@@ -5,13 +5,21 @@
     /// </summary>
     public partial class PrintableInvoice
     {
-        private int GuestId { get; set; }
 
+        private int _guestId { get; set; }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/17
+        /// 
+        /// Sends the guest ID to the invoice report
+        /// </summary>
+        /// <param name="guestId"></param>
         public PrintableInvoice(int guestId)
         {
             InitializeComponent();
-            GuestId = guestId;
-            ReportViewer.BuildInvoice(GuestId);
+            _guestId = guestId;
+            ReportViewer.BuildInvoice(_guestId);
         }
     }
 }

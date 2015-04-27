@@ -73,7 +73,7 @@ namespace com.WanderingTurtle.DataAccess
         ///
         /// Created by Tyler Collins 02/10/2015
         /// </summary>
-        /// <returns>List of ItemListing objects</returns>
+        /// <returns>List of Active ItemListing objects</returns>
         ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static List<ItemListing> GetItemListingList()
         {

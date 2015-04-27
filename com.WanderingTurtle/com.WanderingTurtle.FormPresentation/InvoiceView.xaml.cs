@@ -74,6 +74,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="readOnly"></param>
         private void OpenBookingDetail(BookingDetails selectedItem = null, bool readOnly = false)
         {
             try
@@ -111,6 +117,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void CancelBooking()
         {
             //check if something was selected
@@ -266,6 +275,14 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/22
+        /// Opens read only view of the booking
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvGuestBookings_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenBookingDetail(sender.RowClick<BookingDetails>(), true);
@@ -291,7 +308,29 @@ namespace com.WanderingTurtle.FormPresentation
 
                 lvGuestBookings.ItemsSource = _bookingDetailsList;
                 lvGuestBookings.Items.Refresh();
-                lblBookingsMessage.Content = "Guest has " + _bookingDetailsList.Count + " booking(s).";
+
+                //check if bookings have been cancelled
+                int bookingCount = 0;
+                foreach (var booking in _bookingDetailsList)
+                {
+                    if (booking.Quantity > 0)
+                    {
+                        bookingCount++;
+                    }
+                }
+
+                if (_bookingDetailsList.Count == 0)
+                {
+                    lblBookingsMessage.Content = "No bookings scheduled.";
+                }
+                else if (_bookingDetailsList.Count > 0 &&  bookingCount == 0)
+                {
+                    lblBookingsMessage.Content = "All bookings have been cancelled.";
+                } 
+                else
+                {
+                    lblBookingsMessage.Content = "Guest has " + bookingCount + " booking(s).";
+                }                
             }
             catch (Exception ex)
             {

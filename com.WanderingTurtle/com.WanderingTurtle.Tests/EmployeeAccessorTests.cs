@@ -44,27 +44,27 @@ namespace com.WanderingTurtle.Tests
             Assert.IsTrue(worked);
         }
 
-        [TestMethod]
-        public void TestMethodFetchEmployeeAccess()
-        {
-            //Fetches the fake employee record
-            bool worked = false;
-            Employee testEmp2 = EmployeeAccessor.GetEmployee(FirstName, LastName);
-            if (testEmp2.FirstName == "Test")
-            {
-                worked = true;
-            }
-            Assert.IsTrue(worked);
-        }
+        //[TestMethod]
+        //public void TestMethodFetchEmployeeAccess()
+        //{
+        //    //Fetches the fake employee record
+        //    bool worked = false;
+        //    Employee testEmp2 = EmployeeAccessor.GetEmployee(FirstName, LastName);
+        //    if (testEmp2.FirstName == "Test")
+        //    {
+        //        worked = true;
+        //    }
+        //    Assert.IsTrue(worked);
+        //}
 
-        [TestMethod]
-        public void TestMethodFetchEmployeeByIDAccess()
-        {
-            //Fetches Fake Record
-            Employee testEmp1 = EmployeeAccessor.GetEmployee(FirstName, LastName);
-            Employee testEmp2 = EmployeeAccessor.GetEmployee((int)testEmp1.EmployeeID);
-            Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
-        }
+        //[TestMethod]
+        //public void TestMethodFetchEmployeeByIDAccess()
+        //{
+        //    //Fetches Fake Record
+        //    Employee testEmp1 = EmployeeAccessor.GetEmployee(FirstName, LastName);
+        //    Employee testEmp2 = EmployeeAccessor.GetEmployee((int)testEmp1.EmployeeID);
+        //    Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
+        //}
 
         [TestMethod]
         public void TestMethodFetchEmpListAccess()
@@ -74,33 +74,6 @@ namespace com.WanderingTurtle.Tests
             myList = EmployeeAccessor.GetEmployeeList();
 
             Assert.IsNotNull(myList);
-        }
-
-        [TestMethod]
-        public void TestMethodGetEmpLoginAccess()
-        {
-            Employee testEmp1 = EmployeeAccessor.GetEmployee(FirstName, LastName);
-            Employee testEmp2 = EmployeeAccessor.GetEmployeeLogin((int)testEmp1.EmployeeID, Password);
-            bool worked = false;
-            if (testEmp1.FirstName == testEmp2.FirstName)
-            {
-                worked = true;
-            }
-            Assert.IsTrue(worked);
-        }
-
-        [TestMethod]
-        public void TestMethodEditEmployeeAccess()
-        {
-            Employee testEmp1 = EmployeeAccessor.GetEmployee(FirstName, LastName);
-            Employee testEmp2 = new Employee(testEmp1.FirstName, LastName, "pass123", (int)testEmp1.Level, testEmp1.Active);
-            bool worked = false;
-            int rows = EmployeeAccessor.UpdateEmployee(testEmp1, testEmp2);
-            if (rows == 1)
-            {
-                worked = true;
-            }
-            Assert.IsTrue(worked);
         }
 
         [TestCleanup]
