@@ -64,7 +64,5 @@
                 <input type="hidden" name="itemID" value="<%# Item.ItemListID %>" /></td>
             </tr>
         </EditItemTemplate>
-
-
     </asp:ListView>
 </asp:Content>

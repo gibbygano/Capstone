@@ -97,12 +97,11 @@ $(document).ready(function () {
         startDateTextBox,
         endDateTextBox,
         {
-            minInterval: (1000 * 30 * 60), // 1hr
-            dateFormat: 'dd M yy',
-            timeFormat: 'hh:mm tt',
+            minInterval: (1000 * 30 * 60), // 30min
+            dateFormat: 'mm/dd/yy',
+            timeFormat: 'h:mm:ss TT',
             controlType: 'select',
             oneLine: true,
-            timeFormat: 'hh:mm tt',
             showButtonPanel: false,
             stepMinute: 10,
             start: {}, // start picker options
