@@ -9,7 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <section>
+    <section class="app">
     <h1>Supplier Application</h1>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:Label ID="lblFinish" runat="server" ForeColor="Black"></asp:Label>
@@ -18,55 +18,55 @@
         <tr>
             <td>Company Name</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtCompanyName" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtCompanyName" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Description</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtDescription" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtDescription" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>First Name</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtFirstName" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtFirstName" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Last Name</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtLastName" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtLastName" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Email</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtEmail" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtEmail" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Phone Number</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtPhoneNumber" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtPhoneNumber" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Address</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtAddress" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtAddress" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
                 <tr>
             <td>Address 2</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtAddress2" runat="server" Width="168px"></asp:TextBox>
+                <asp:TextBox ID="txtAddress2" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td>Zip</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtZip" runat="server" Width="168px"></asp:TextBox> <table id="zips">
+                <asp:TextBox ID="txtZip" runat="server" Width="150px"></asp:TextBox> <table id="zips">
         <thead id="hideme">
             <tr>
                 <th style="display: none;">Zip</th>
@@ -90,4 +90,11 @@
     <br />
     <asp:Button ID="btnSubmitApplication" runat="server" OnClick="btnSubmitApplication_Click" Text="Submit Application" Width="182px" />
     </section>
+    <aside>
+        <ul class="bxslider">
+  <li><img src="../Images/turtle.png" /></li>
+  <li><img src="../Images/food.png" /></li>
+  <li><img src="../Images/juice.png" /></li>
+</ul>
+    </aside>
 </asp:Content>

@@ -2,6 +2,17 @@
 $(document).ready(function () {
     console.log("JQuery loaded");
 
+    $('.bxslider').bxSlider({
+        mode: 'vertical',
+        slideMargin: 5,
+        auto: true,
+        slideWidth: 350,
+        adaptiveHeight: true,
+        ticker: true,
+        speed: 30000
+
+    });
+
     $("#MainContent_txtPhoneNumber").mask("(999) 999-9999");
     $("#MainContent_txtZip").mask("99999");
     var allZips = $('#zips').DataTable({

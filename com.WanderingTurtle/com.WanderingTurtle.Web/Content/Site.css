@@ -320,8 +320,7 @@ aside {
     }
 
         aside ul li {
-            background: url("../Images/bullet.png") no-repeat 0 50%;
-            padding: 2px 0 2px 20px;
+           
         }
 
 .label {
@@ -1055,4 +1054,19 @@ table.dataTable.no-footer {
 
 table.dataTable tbody tr {
   background-color: #EFEEEF;
+}
+
+aside{
+    float: right;
+}
+
+.bx-wrapper{
+    margin-top: 35px;
+    height: 500px;
+    width: 350px;
+}
+
+section.app{
+    width: 75%;
+    float: left;
 }

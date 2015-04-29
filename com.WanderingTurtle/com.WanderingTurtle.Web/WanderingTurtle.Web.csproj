@@ -146,11 +146,15 @@
   <ItemGroup>
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\themes\jquery-datetimepicker.css" />
+    <Content Include="Content\jquery.bxslider.css" />
+    <Content Include="Images\food.png" />
+    <Content Include="Images\juice.png" />
     <Content Include="Images\sort_asc.png" />
     <Content Include="Images\sort_asc_disabled.png" />
     <Content Include="Images\sort_both.png" />
     <Content Include="Images\sort_desc.png" />
     <Content Include="Images\sort_desc_disabled.png" />
+    <Content Include="Images\turtle.png" />
     <Content Include="PagesGuest\About.aspx" />
     <Content Include="PagesGuest\Contacts.aspx" />
     <Content Include="PagesGuest\ViewBookings.aspx" />
@@ -227,6 +231,7 @@
     <Content Include="Scripts\jquery-slider.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.js" />
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.maskedinput.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
