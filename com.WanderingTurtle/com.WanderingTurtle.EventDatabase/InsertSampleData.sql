@@ -199,7 +199,7 @@ VALUES
 ('Authentic Cuisine', 102, 0, 0, 'A seven course meal of local food.', 1 ),
 ('Zip-Lining', 104, 0, 1, 'Zip through the jungle with the monkeys.', 1 ),
 ('Snorkeling', 104, 0, 0, 'See the local fish and sealife.', 1 ),
-('Dophin Watching', 101, 0, 0, 'Lots of dolphins to see.', 1 ),
+('Dolphin Watching', 101, 0, 0, 'Lots of dolphins to see.', 1 ),
 ('Jungle Tour for Kids', 101, 0, 0, 'Perfect for the whole family.', 1 )
 GO
 
