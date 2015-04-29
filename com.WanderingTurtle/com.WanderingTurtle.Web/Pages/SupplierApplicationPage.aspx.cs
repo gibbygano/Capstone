@@ -53,7 +53,22 @@ namespace com.WanderingTurtle.Web.Pages
             if (validateText(txtFirstName, "Please enter your first name")) errorCount++;
             if (validateText(txtLastName, "Please enter your second name")) errorCount++;
             if (validateText(txtAddress, "Please enter your address")) errorCount++;
-            if (validateText(txtZip, "Please enter your zip code")) errorCount++;
+            //check zips
+            bool goodZip = false;
+            foreach (var zip in zips)
+            {
+                if (txtZip.Text == zip.Zip)
+                {
+                    goodZip = true;
+                }
+            }
+            if (!goodZip)
+            {
+                txtZip.ToolTip = "Please enter a valid Zip Code";
+                txtZip.BorderColor = Color.Red;
+                errorCount++;
+            }
+
             if (validateText(txtDescription, "Please enter your description")) errorCount++;
             if (!Validator.ValidateEmail(txtEmail.Text))
             {
