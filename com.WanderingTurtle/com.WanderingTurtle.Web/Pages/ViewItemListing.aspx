@@ -7,6 +7,7 @@
 <%@ Import Namespace="com.WanderingTurtle" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
+    <script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>
     <!--Created 2015/04/09
         Kelsey 
         View List of Item Listings and Options to Edit or Delete

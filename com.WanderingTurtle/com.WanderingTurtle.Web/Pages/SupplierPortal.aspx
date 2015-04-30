@@ -9,6 +9,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+    <script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>
     <div id="mainpage">
         <div id="leftcontainer" runat="server">
             <div id="supplierdetails">
