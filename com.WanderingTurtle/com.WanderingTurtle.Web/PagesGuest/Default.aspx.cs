@@ -32,35 +32,55 @@ namespace com.WanderingTurtle.Web.Pages
         {
             if (Session.IsNewSession)
             {
-                foundGuest = null;
-                ticketQty= 0;
-                guestName="";
-                eventName = "";
-                date = DateTime.Now;
-                discount = 0;
-                totalPrice = 0;
-                extendedPrice = 0m;
-                selectedItemListing = null;
-
-                //create new session variables
-                Session["foundGuest"] = foundGuest;
-                Session["ticketQty"] = ticketQty;
-                Session["selectedItemListing"] = selectedItemListing;
-                Session["extendedPrice"] = extendedPrice;
-                Session["totalPrice"] = totalPrice;
-                Session["discount"] =discount;
+                ResetVariables();
 
             }
             else
             {
                 //update variables with Session variables
-                foundGuest = (HotelGuest)Session["foundGuest"];
-                ticketQty = (int)Session["ticketQty"];
-                selectedItemListing = (ItemListingDetails)Session["selectedItemListing"];
-                extendedPrice = (decimal)Session["extendedPrice"];
-                totalPrice = (decimal)Session["totalPrice"];
-                discount = (decimal)Session["discount"];
+                try
+                {
+                    foundGuest = (HotelGuest)Session["foundGuest"];
+                    ticketQty = (int)Session["ticketQty"];
+                    selectedItemListing = (ItemListingDetails)Session["selectedItemListing"];
+                    extendedPrice = (decimal)Session["extendedPrice"];
+                    totalPrice = (decimal)Session["totalPrice"];
+                    discount = (decimal)Session["discount"];
+                }
+                catch
+                {
+                    //Running on the assumption that if there's an exception it's due to the (int) case on ticketQty failing due to a null session object.
+                    ResetVariables();
+                }
+                
             }
+        }
+
+        /// <summary>
+        /// Arik Chadima
+        /// Created: 2015/4/30
+        /// 
+        /// Refactored->Extracted method for reuse.
+        /// </summary>
+        private void ResetVariables()
+        {
+            foundGuest = null;
+            ticketQty = 0;
+            guestName = "";
+            eventName = "";
+            date = DateTime.Now;
+            discount = 0;
+            totalPrice = 0;
+            extendedPrice = 0m;
+            selectedItemListing = null;
+
+            //create new session variables
+            Session["foundGuest"] = foundGuest;
+            Session["ticketQty"] = ticketQty;
+            Session["selectedItemListing"] = selectedItemListing;
+            Session["extendedPrice"] = extendedPrice;
+            Session["totalPrice"] = totalPrice;
+            Session["discount"] = discount;
         }
 
         /// <summary>

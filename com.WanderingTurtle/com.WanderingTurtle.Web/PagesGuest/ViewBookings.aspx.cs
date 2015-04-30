@@ -11,54 +11,58 @@ namespace com.WanderingTurtle.Web.PagesGuest
 {
     public partial class ViewBookings : System.Web.UI.Page
     {
-        public HotelGuest foundGuest;
-        public List<BookingDetails> bookings;
-        public decimal totalPrice;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Session.IsNewSession)
-            {
-                foundGuest = (HotelGuest)Session["ViewBookingsGuest"];
-                try 
-	            {
-                    InvoiceManager im = new InvoiceManager();
-                    bookings = im.RetrieveGuestBookingDetailsList((int)foundGuest.HotelGuestID);
-                    gvBookings.DataSource = bookings;
-                    gvBookings.DataBind();
-                    totalPrice = bookings.Sum(x => x.ExtendedPrice);
-	            }
-	            catch (Exception)
-	            {
-		            
-	            }
-            }
+
         }
 
+        /// <summary>
+        /// Arik Chadima 
+        /// Created: 2015/4/24
+        /// 
+        /// Checks the user's pin and if it is valid, shows what bookings they've selected.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnLogin_Click(object sender, EventArgs e)
         {
+            lblError.Visible = false;
             BookingManager hgm = new BookingManager();
             if (Validator.ValidateAlphaNumeric(txtLogin.Text, 6, 6))
             {
                 try
                 {
-                    foundGuest = hgm.CheckValidPIN(txtLogin.Text);
-                    Session["ViewBookingsGuest"] = foundGuest;
+                    var foundGuest = hgm.CheckValidPIN(txtLogin.Text);
+                    
                     InvoiceManager im = new InvoiceManager();
-                    bookings = im.RetrieveGuestBookingDetailsList((int)foundGuest.HotelGuestID);
-                    gvBookings.DataSource = bookings;
-                    gvBookings.DataBind();
-                    totalPrice = bookings.Sum(x => x.TotalCharge);
+                    var bookings = im.RetrieveGuestBookingDetailsList((int)foundGuest.HotelGuestID);
+                    repBookings.DataSource = bookings;
+                    repBookings.DataBind();
+                    var totalPrice = bookings.Sum(x => x.TotalCharge);
+                    GuestFullName.Text = foundGuest.GetFullName;
+                    Address1.Text = foundGuest.Address1;
+                    Address2.Text = foundGuest.Address2;
+                    var cityState = foundGuest.CityState;
+                    CityStateZip.Text = cityState.City + ", " + cityState.State + "  " + cityState.Zip;
+                    EmailAddress.Text = foundGuest.EmailAddress;
+                    PhoneNumber.Text = foundGuest.PhoneNumber;
+                    TotalPrice.Text = String.Format("{0:c}", totalPrice);
                     loginDiv.Visible = false;
                     guestDetailsDiv.Visible = true;
 
                 }
-                catch (ApplicationException ax)
+                catch (ApplicationException)
                 {
-                    lblError.Text = "The pin you entered is invalid.";
+                    lblError.Text = "The pin entered is not active or does not exist.";
+                    lblError.Visible = true;
+                    txtLogin.Text = "";
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     lblError.Text = "There was an error fetching data.";
+                    lblError.Visible = true;
+                    txtLogin.Text = "";
                 }
             }
         }
