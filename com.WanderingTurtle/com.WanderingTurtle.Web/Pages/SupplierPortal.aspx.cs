@@ -19,10 +19,13 @@ namespace com.WanderingTurtle.Web.Pages
         public int currentListingCount = 0;
         public int currentGuestsCount = 0;
         public int current = 0;
+        private bool getDetails;
+        Label errorLabel;
 
 
         protected void Page_PreLoad(object sender, EventArgs e)
         {
+             errorLabel = (Label)Master.FindControl("lblErrorMessage");
             try
             {
                 //attempt to get session value if they are logged in
@@ -75,22 +78,25 @@ namespace com.WanderingTurtle.Web.Pages
         {
             if (Page.IsPostBack)
             {
-                try
+                if (getDetails)
                 {
-                    var list = _myBookingManager.RetrieveBookingNumbers(itemListID);
-                    lvDetails.DataSource = list;
-                    lvDetails.DataBind();
+                    try
+                    {
+                        var list = _myBookingManager.RetrieveBookingNumbers(itemListID);
+                        lvDetails.DataSource = list;
+                        lvDetails.DataBind();
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        errorLabel.Text = "Error: " + ex.Message;
+                        Control c = Master.FindControl("ErrorMess");
+                        c.Visible = true;
+                        return;
+                    }
+                    Control cc = Master.FindControl("ErrorMess");
+                    cc.Visible = false;
                 }
-                catch (Exception ex)
-                {
-                    Label errorLabel = (Label)Master.FindControl("lblErrorMessage");
-                    errorLabel.Text = "Error: " + ex.Message;
-                    Control c = Master.FindControl("ErrorMess");
-                    c.Visible = true;
-                    return;
-                }
-                Control cc = Master.FindControl("ErrorMess");
-                cc.Visible = false;
             }
         }
 
@@ -139,6 +145,7 @@ namespace com.WanderingTurtle.Web.Pages
 
         public void btnDetails_Click(object sender, EventArgs e)
         {
+            getDetails = true;
             var b = (Button)sender;
             int i = int.Parse(b.CommandArgument);
             GetNumbers(i);
@@ -151,6 +158,8 @@ namespace com.WanderingTurtle.Web.Pages
 
         public void btnGoBack_Click(object sender, EventArgs e)
         {
+            Control cc = Master.FindControl("ErrorMess");
+            cc.Visible = false;
             actions.Style.Add("display", "block");
             leftcontainer.Style.Add("display", "block");
             eventsDetails.Style.Add("display", "none");
@@ -159,6 +168,7 @@ namespace com.WanderingTurtle.Web.Pages
 
         public void btnViewMoneyDets_Click(object sender, EventArgs e)
         {
+            getDetails = true;
             actions.Style.Add("display", "none");
             leftcontainer.Style.Add("display", "none");
             eventsDetails.Style.Add("display", "none");
