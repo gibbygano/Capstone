@@ -34,7 +34,7 @@ namespace com.WanderingTurtle.Web.PagesGuest
                 try
                 {
                     var foundGuest = hgm.CheckValidPIN(txtLogin.Text);
-                    
+
                     InvoiceManager im = new InvoiceManager();
                     var bookings = im.RetrieveGuestBookingDetailsList((int)foundGuest.HotelGuestID);
                     repBookings.DataSource = bookings;
@@ -64,6 +64,11 @@ namespace com.WanderingTurtle.Web.PagesGuest
                     lblError.Visible = true;
                     txtLogin.Text = "";
                 }
+            }
+            else
+            {
+                lblError.Text = "The pin you enterred was not formatted correctly.  It must be 5 alphanumeric characters.";
+                lblError.Visible = true;
             }
         }
 
