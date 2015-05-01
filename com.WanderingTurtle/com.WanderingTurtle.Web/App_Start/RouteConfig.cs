@@ -21,6 +21,7 @@ namespace com.WanderingTurtle.Web
             routes.MapPageRoute(null, "supplierlistings", "~/Pages/ViewItemListing.aspx");
             routes.MapPageRoute(null, "portal", "~/Pages/SupplierPortal.aspx");
             routes.MapPageRoute(null, "listings", "~/PagesGuest/Default.aspx");
+            routes.MapPageRoute(null, "password", "~/Pages/Password.aspx");
         }
     }
 }

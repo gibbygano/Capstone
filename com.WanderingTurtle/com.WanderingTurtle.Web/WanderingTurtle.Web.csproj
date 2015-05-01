@@ -221,6 +221,7 @@
     <Content Include="PagesGuest\Default.aspx" />
     <Content Include="Pages\LoginBar.ascx" />
     <Content Include="Pages\Logout.aspx" />
+    <Content Include="Pages\Password.aspx" />
     <Content Include="Pages\SupplierApplicationPage.aspx" />
     <Content Include="Pages\SupplierPortal.aspx" />
     <Content Include="Pages\ViewItemListing.aspx" />
@@ -364,6 +365,13 @@
     </Compile>
     <Compile Include="Pages\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Password.aspx.cs">
+      <DependentUpon>Password.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Password.aspx.designer.cs">
+      <DependentUpon>Password.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\SupplierApplicationPage.aspx.cs">
       <DependentUpon>SupplierApplicationPage.aspx</DependentUpon>

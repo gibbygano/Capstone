@@ -33,6 +33,7 @@ namespace com.WanderingTurtle.Web
                 var supplier = _mySuppMan.RetrieveSupplier(user.SupplierID);
                 Session["user"] = supplier;
                 Session["loggedIn"] = true;
+                Session["login"] = user;
                 lblError.Text = "";
             }
             catch

@@ -48,9 +48,10 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
+                //checks if user name already exits.. returns false if it does
                 bool result1 = CheckSupplierUserName(oldLogin.UserName);
 
-                if (result1)
+                if (!result1)
                 {
                     int result = access.UpdateSupplierPassword(newPassword, oldLogin);
 
