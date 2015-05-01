@@ -4,6 +4,9 @@
         .auto-style1 {
             width: 441px;
         }
+        .auto-style2 {
+            width: 626px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
@@ -14,75 +17,64 @@
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
     <asp:Label ID="lblFinish" runat="server" ForeColor="Black"></asp:Label>
     <br />
-    <table>
+    <table id="supplierCreation">
         <tr>
-            <td>Company Name</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtCompanyName" runat="server" Width="299px"></asp:TextBox>
+                Company Name<br />
+&nbsp;<asp:TextBox ID="txtCompanyName" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Description</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtDescription" runat="server" Width="299px"></asp:TextBox>
+                Description<br />
+&nbsp;<asp:TextBox ID="txtDescription" runat="server" Width="299px" Height="79px" TextMode="MultiLine"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>First Name</td>
-            <td class="auto-style1">
-                <asp:TextBox ID="txtFirstName" runat="server" Width="299px"></asp:TextBox>
+            <td>
+                <table> 
+                    <tr>
+                        <td class="auto-style2">
+                First Name<br />
+                            <asp:TextBox ID="txtFirstName" runat="server" Width="180px"></asp:TextBox>
+            </td>
+               <td class="auto-style1">
+                Last Name
+                <asp:TextBox ID="txtLastName" runat="server" Width="191px"></asp:TextBox>
+            </td>
+                    </tr>
+
+                </table>
             </td>
         </tr>
         <tr>
-            <td>Last Name</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtLastName" runat="server" Width="299px"></asp:TextBox>
+                Email<br />
+&nbsp;<asp:TextBox ID="txtEmail" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Email</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtEmail" runat="server" Width="299px"></asp:TextBox>
+                Phone Number<br />
+                <asp:TextBox ID="txtPhoneNumber" runat="server" Width="173px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Phone Number</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtPhoneNumber" runat="server" Width="299px"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td>Address</td>
-            <td class="auto-style1">
-                <asp:TextBox ID="txtAddress" runat="server" Width="299px"></asp:TextBox>
+                Address<br />
+&nbsp;<asp:TextBox ID="txtAddress" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
                 <tr>
-            <td>Address 2</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtAddress2" runat="server" Width="299px"></asp:TextBox>
+                Address 2<br />
+&nbsp;<asp:TextBox ID="txtAddress2" runat="server" Width="299px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>Zip</td>
             <td class="auto-style1">
-                <asp:TextBox ID="txtZip" runat="server" Width="150px"></asp:TextBox> <table id="zips">
-        <thead id="hideme">
-            <tr>
-                <th style="display: none;">Zip</th>
-                <th style="display: none;">City</th>
-                <th style="display: none;">State</th>
-            </tr>
-        </thead>
-            <tbody>
-        <%
-            foreach (var zip in zips)
-            {
-                Response.Write("<tr><td>" + zip.Zip + "</td><td>" + zip.City + "</td><td>" + zip.State + "</tr>");
-            } 
-             %>
-</tbody>
-        </table>
+                Zip<br />
+&nbsp;<asp:TextBox ID="txtZip" runat="server" Width="150px"></asp:TextBox> 
             </td>
         </tr>
     </table>

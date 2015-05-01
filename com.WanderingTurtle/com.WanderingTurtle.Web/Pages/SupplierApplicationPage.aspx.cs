@@ -44,8 +44,21 @@ namespace com.WanderingTurtle.Web.Pages
             return false;
         }
 
+        private void clearBorderColors() 
+        {
+            txtCompanyName.BorderColor = Color.Empty;
+            txtFirstName.BorderColor = Color.Empty;
+            txtLastName.BorderColor = Color.Empty;
+            txtAddress.BorderColor = Color.Empty;
+            txtZip.BorderColor = Color.Empty;
+            txtDescription.BorderColor = Color.Empty;
+            txtEmail.BorderColor = Color.Empty;
+            txtPhoneNumber.BorderColor = Color.Empty;
+        }
         protected void btnSubmitApplication_Click(object sender, EventArgs e)
         {
+
+            clearBorderColors();
             int errorCount = 0;
             lblFinish.Text = "";
             //Validate
@@ -100,14 +113,7 @@ namespace com.WanderingTurtle.Web.Pages
             else
             {
                 //reset border colors
-                txtCompanyName.BorderColor = Color.Empty;
-                txtFirstName.BorderColor = Color.Empty;
-                txtLastName.BorderColor = Color.Empty;
-                txtAddress.BorderColor = Color.Empty;
-                txtZip.BorderColor = Color.Empty;
-                txtDescription.BorderColor = Color.Empty;
-                txtEmail.BorderColor = Color.Empty;
-                txtPhoneNumber.BorderColor = Color.Empty;
+                clearBorderColors();
 
                 try
                 {

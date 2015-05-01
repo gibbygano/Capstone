@@ -67,6 +67,7 @@ h4, h5, h6 {
 
 h1 {
     font-size: 2em;
+    width: 347px;
 }
 
 h2 {
@@ -512,10 +513,14 @@ input[type="checkbox"].input-validation-error {
 /* tables
 ----------------------------------------------------------*/
 table {
+    border-style: none;
+    border-color: inherit;
+    border-width: 0;
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 0.75em;
-    border: 0 none;
+    width: 441px;
+    margin-right: 0px;
 }
 
 th {
@@ -948,8 +953,10 @@ button.ui-button-text-only {
     background: #fff url("images/ui-bg_inset-soft_10_33A133_1x1005.png") 50%;
     color: #000;
     border-color: #000;
-    border-radius: 5px;
-}
+    border-ra
+
+input{
+ 
 
 input{
     border-radius: 5px;
@@ -1111,3 +1118,6 @@ aside.pass{
     width: 48%;
 }
 
+#supplierCreation {
+    text-align:center
+}

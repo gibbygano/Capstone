@@ -8,8 +8,8 @@
                 <h2>Welcome to the Wandering Turtle Supplier Portal</h2>
             </hgroup>
             <p>
-                Please log in to continue.<br />
-                Not a supplier? Submit an application today to get started!
+                Please <a href="/Login">Log in</a> to continue.<br />
+                Not a supplier? <a href="/application">Submit</a> an application today to get started!
             </p>
         </div>
     </section>
