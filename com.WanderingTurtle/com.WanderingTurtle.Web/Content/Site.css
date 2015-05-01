@@ -1098,7 +1098,6 @@ aside{
 }
 
 section.app{
-    width: 75%;
     float: left;
 }
 
@@ -1118,6 +1117,3 @@ aside.pass{
     width: 48%;
 }
 
-#supplierCreation {
-    text-align:center
-}
