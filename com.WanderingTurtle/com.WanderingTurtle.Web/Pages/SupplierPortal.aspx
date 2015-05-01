@@ -14,9 +14,6 @@
         <div id="leftcontainer" runat="server">
             <div id="supplierdetails">
                 <h2><%= _currentSupplier.CompanyName %></h2>
-
-
-
             </div>
             <div id="quickdetails">
                 <h3>Quick Event Details</h3>
