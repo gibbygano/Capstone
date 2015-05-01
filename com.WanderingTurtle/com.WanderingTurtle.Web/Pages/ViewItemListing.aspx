@@ -26,7 +26,7 @@
                 <td><%# Item.MaxNumGuests %></td>
                 <td>
                     <asp:Button CommandName="Edit" CommandArgument="<%# Item.EventID %>" Text="Edit" runat="server" />
-                    <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return confirm('Are you sure you want to delete this?')" />
+                    <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return showConfirm();" />
                 </td>
             </tr>
         </ItemTemplate>
@@ -66,4 +66,40 @@
             </tr>
         </EditItemTemplate>
     </asp:ListView>
+
+    <div id="deletemessage" runat="server" title="Are you sure??" visible="false">
+            <div class="errorMsg">
+                <asp:Label ID="lblDeleteMessage" runat="server" Text="Are you sure you want to delete this event?" ForeColor="#FFFFFF"></asp:Label>
+                <br />
+            </div>
+        </div>
+
+    <script>
+        function showConfirm() {
+            $('#deletemessage').dialog({
+                modal: true,
+                zIndex: 10000,
+                autoOpen: true,
+                width: 'auto',
+                resizable: false,
+                buttons: {
+                    Yes: function () {
+                        return true;
+                    },
+                    No: function () {
+                        $(this).dialog("close");
+                        return false;
+                    }
+                },
+                close: function (event, ui) {
+                    $(this).remove();
+                }
+            });
+            $("#deletemessage").dialog("open");
+
+
+        }
+
+
+    </script>
 </asp:Content>
