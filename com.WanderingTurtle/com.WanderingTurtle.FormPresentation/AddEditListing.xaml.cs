@@ -69,9 +69,9 @@ namespace com.WanderingTurtle.FormPresentation
                 _NewListing.Price = (decimal)(udPrice.Value);
                 _NewListing.MaxNumGuests = (int)(udSeats.Value);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new WanderingTurtleException(this, ex);
+                throw new WanderingTurtleException(this, "Please enter valid start and end dates.");
             }
 
             try
@@ -81,9 +81,9 @@ namespace com.WanderingTurtle.FormPresentation
                 DialogResult = true;
                 Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new WanderingTurtleException(this, ex, "Error adding the Item Listing.");
+                throw new WanderingTurtleException(this, "Error adding the Item Listing.");
             }
         }
 

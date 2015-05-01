@@ -340,5 +340,77 @@ namespace com.WanderingTurtle.Tests
 
             return rowsAffected;
         }
+
+        public static int DeleteTestSupplierLogin(SupplierLogin supplierLoginToDelete)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string storedProcedure = "spDeleteTestSupplierLogin";
+            var cmd = new SqlCommand(storedProcedure, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@UserName", supplierLoginToDelete.UserName);
+
+            int rowsAffected;
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return rowsAffected;
+        }
+
+        static public SupplierLogin RetrieveArchivedSupplierLoginTest(string userPassword, string userName)
+        {
+            SupplierLogin getSupplierInfo = new SupplierLogin();
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string query = "spSelectArchivedSupplierLoginTest";
+
+            var cmd = new SqlCommand(query, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@userPassword", userPassword);
+            cmd.Parameters.AddWithValue("@userName", userName);
+
+            try
+            {
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.HasRows == true)
+                {
+                    reader.Read();
+
+                    getSupplierInfo.UserID = (int)reader.GetValue(0);
+                    getSupplierInfo.UserPassword = reader.GetValue(1).ToString();
+                    getSupplierInfo.UserName = reader.GetValue(2).ToString();
+                    getSupplierInfo.SupplierID = reader.GetValue(3).ToString();
+                    getSupplierInfo.Active = reader.GetBoolean(4);
+                }
+                else
+                    throw new ApplicationException("Incorrect login information. Try again.");
+
+                return getSupplierInfo;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
 }

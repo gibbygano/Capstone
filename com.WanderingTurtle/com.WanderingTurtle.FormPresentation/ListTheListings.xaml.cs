@@ -101,20 +101,17 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     throw new WanderingTurtleException(this, "There are bookings associated with this listing and cannot be archived.");
                 }
-                else
+                MessageDialogResult result = await this.ShowMessageDialog("Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
+                switch (result)
                 {
-                    MessageDialogResult result = await this.ShowMessageDialog("Are you sure you want to delete this?", "Confirm Delete", MessageDialogStyle.AffirmativeAndNegative);
-                    switch (result)
-                    {
-                        case MessageDialogResult.Affirmative:
-                            var numRows = _productManager.ArchiveItemListing(ListingToDelete);
-                            if (numRows == listResult.Success)
-                            {
-                                await this.ShowMessageDialog("Listing successfully deleted.");
-                            }
-                            refreshData();
-                            break;
-                    }
+                    case MessageDialogResult.Affirmative:
+                        var numRows = _productManager.ArchiveItemListing(ListingToDelete);
+                        if (numRows == listResult.Success)
+                        {
+                            await this.ShowMessageDialog("Listing successfully deleted.");
+                        }
+                        refreshData();
+                        break;
                 }
             }
             catch (Exception ex)

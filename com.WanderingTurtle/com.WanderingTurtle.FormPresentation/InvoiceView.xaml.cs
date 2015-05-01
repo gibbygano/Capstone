@@ -4,6 +4,7 @@ using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
@@ -310,14 +311,7 @@ namespace com.WanderingTurtle.FormPresentation
                 lvGuestBookings.Items.Refresh();
 
                 //check if bookings have been cancelled
-                int bookingCount = 0;
-                foreach (var booking in _bookingDetailsList)
-                {
-                    if (booking.Quantity > 0)
-                    {
-                        bookingCount++;
-                    }
-                }
+                int bookingCount = _bookingDetailsList.Count(booking => booking.Quantity > 0);
 
                 if (_bookingDetailsList.Count == 0)
                 {

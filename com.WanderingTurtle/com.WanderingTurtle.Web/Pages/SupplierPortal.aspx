@@ -14,9 +14,6 @@
         <div id="leftcontainer" runat="server">
             <div id="supplierdetails">
                 <h2><%= _currentSupplier.CompanyName %></h2>
-
-
-
             </div>
             <div id="quickdetails">
                 <h3>Quick Event Details</h3>
@@ -109,6 +106,32 @@
                         <label>&nbsp;</label>
                         <asp:Button ID="btnRefreshDate" runat="server" Text="Refresh List" OnClick="btnRefreshDate_Click" />  
                     </div>
+                </div>
+                <div style="float: left">
+                    <% 
+                        if(Session["dateFrom"] != null)
+                       { 
+                    %>
+                    <h3 style="float: left; margin:0; padding:0">Dates Selected: </h3>
+                    <div class="LeftFloatMargin">
+                        <p class="LeftFloatBold">From: </p>
+                        <p class="LeftFloatMargin"><%= Session["dateFrom"] %></p>
+                    </div>
+                    <%
+                      }
+                      if(Session["dateTo"] != null)
+                      { 
+                    %>
+                    <div class="LeftFloatMargin">
+                        <p class="LeftFloatBold">To: </p>
+                        <p class="LeftFloatMargin"><%= Session["dateTo"] %></p>
+                    </div>
+                    <%} else { %>
+                    <div class="LeftFloatMargin">
+                        <p class="LeftFloatBold">To: </p>
+                        <p class="LeftFloatMargin">--/--/----</p>
+                    </div>
+                    <%}%>
                 </div>
                 <div class="clear"></div>
                 <asp:ListView ID="ListView1" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemListsByDate" DataKeyNames="ItemListID" EnableViewState="False" runat="server">

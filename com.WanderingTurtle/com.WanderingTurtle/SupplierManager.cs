@@ -58,29 +58,23 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     return SupplierAccessor.GetSupplier(supplierID);
                 }
+                //check time. If less than 5 min, return event from cache
+                if (now > DataCache._SupplierListTime.AddMinutes(cacheExpirationTime))
+                {
+                    //get event from DB
+                    var currentSupplier = SupplierAccessor.GetSupplier(supplierID);
+                    return currentSupplier;
+                }
                 else
                 {
-                    //check time. If less than 5 min, return event from cache
-                    if (now > DataCache._SupplierListTime.AddMinutes(cacheExpirationTime))
+                    //get event from cached list
+                    var list = DataCache._currentSupplierList;
+                    Supplier currentSupplier = list.Where(e => e.SupplierID.ToString() == supplierID).FirstOrDefault();
+                    if (currentSupplier != null)
                     {
-                        //get event from DB
-                        var currentSupplier = SupplierAccessor.GetSupplier(supplierID);
                         return currentSupplier;
                     }
-                    else
-                    {
-                        //get event from cached list
-                        var list = DataCache._currentSupplierList;
-                        Supplier currentSupplier = list.Where(e => e.SupplierID.ToString() == supplierID).FirstOrDefault();
-                        if (currentSupplier != null)
-                        {
-                            return currentSupplier;
-                        }
-                        else
-                        {
-                            throw new ApplicationException("Supplier not found.");
-                        }
-                    }
+                    throw new ApplicationException("Supplier not found.");
                 }
             }
             catch (Exception)
@@ -110,25 +104,19 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._SupplierListTime = now;
                     return list;
                 }
-                else
+                //check time. If less than 5 min, return cache
+
+                if (now > DataCache._SupplierListTime.AddMinutes(cacheExpirationTime))
                 {
-                    //check time. If less than 5 min, return cache
+                    //get new list from DB
+                    var list = SupplierAccessor.GetSupplierList();
+                    //set cache to new list and update time
+                    DataCache._currentSupplierList = list;
+                    DataCache._SupplierListTime = now;
 
-                    if (now > DataCache._SupplierListTime.AddMinutes(cacheExpirationTime))
-                    {
-                        //get new list from DB
-                        var list = SupplierAccessor.GetSupplierList();
-                        //set cache to new list and update time
-                        DataCache._currentSupplierList = list;
-                        DataCache._SupplierListTime = now;
-
-                        return list;
-                    }
-                    else
-                    {
-                        return DataCache._currentSupplierList;
-                    }
+                    return list;
                 }
+                return DataCache._currentSupplierList;
             }
             catch (Exception)
             {
@@ -155,18 +143,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._SupplierListTime = DateTime.Now;
                     return SupplierResult.Success;
                 }
-                else
-                {
-                    return SupplierResult.NotAdded;
-                }
+                return SupplierResult.NotAdded;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return SupplierResult.ChangedByOtherUser;
-                }
-                return SupplierResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? SupplierResult.ChangedByOtherUser : SupplierResult.DatabaseError;
             }
             catch (Exception ex)
             {
@@ -195,18 +176,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._SupplierListTime = DateTime.Now;
                     return SupplierResult.Success;
                 }
-                else
-                {
-                    return SupplierResult.NotChanged;
-                }
+                return SupplierResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return SupplierResult.ChangedByOtherUser;
-                }
-                return SupplierResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? SupplierResult.ChangedByOtherUser : SupplierResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -233,18 +207,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._SupplierListTime = DateTime.Now;
                     return SupplierResult.Success;
                 }
-                else
-                {
-                    return SupplierResult.NotChanged;
-                }
+                return SupplierResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return SupplierResult.ChangedByOtherUser;
-                }
-                return SupplierResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? SupplierResult.ChangedByOtherUser : SupplierResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -308,22 +275,11 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if (SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp) == 1)
-                {
-                    return SupplierResult.Success;
-                }
-                else
-                {
-                    return SupplierResult.NotAdded;
-                }
+                return SupplierApplicationAccessor.AddSupplierApplication(newSupplierApp) == 1 ? SupplierResult.Success : SupplierResult.NotAdded;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return SupplierResult.ChangedByOtherUser;
-                }
-                return SupplierResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? SupplierResult.ChangedByOtherUser : SupplierResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -360,38 +316,21 @@ namespace com.WanderingTurtle.BusinessLogic
                         RetrieveSupplierApplicationList();
                         return SupplierResult.Success;
                     }
-                    else
-                    {
-                        return SupplierResult.ChangedByOtherUser;
-                    }
+                    return SupplierResult.ChangedByOtherUser;
                 }
                 //Rejecting the application
-                else if (updatedSupplierApp.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()))
+                if (updatedSupplierApp.ApplicationStatus.Equals(ApplicationStatus.Rejected.ToString()))
                 {
                     //update db with rejection
                     int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp);
 
-                    if (numRows == 1)
-                    {
-                        return SupplierResult.Success;
-                    }
-                    else
-                    {
-                        return SupplierResult.ChangedByOtherUser;
-                    }
+                    return numRows == 1 ? SupplierResult.Success : SupplierResult.ChangedByOtherUser;
                 }
-                else
-                {
-                    return SupplierResult.NotChanged;
-                }
+                return SupplierResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation.")
-                {
-                    return SupplierResult.ChangedByOtherUser;
-                }
-                return SupplierResult.DatabaseError;
+                return ex.Message == "Concurrency Violation." ? SupplierResult.ChangedByOtherUser : SupplierResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -425,10 +364,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._SupplierListTime = DateTime.Now;
                     return SupplierResult.Success;
                 }
-                else
-                {
-                    return SupplierResult.ChangedByOtherUser;
-                }
+                return SupplierResult.ChangedByOtherUser;
             }
             catch (SqlException)
             {
@@ -461,10 +397,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
-            else
-            {
-                return RetrieveSupplierList();
-            }
+            return RetrieveSupplierList();
         }
     }
 }

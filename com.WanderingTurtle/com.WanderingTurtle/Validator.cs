@@ -34,10 +34,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9,.?@&!#'~*\s_;+'-]+$");
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -62,14 +59,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>boolean value if string only contains allowed characters</returns>
         public static bool ValidateString(string inputToValidate, int minNumOfChars)
         {
-            if (inputToValidate.Length >= minNumOfChars)
-            {
-                return Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
-            }
-            else
-            {
-                return false;
-            }
+            return inputToValidate.Length >= minNumOfChars && Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
         }
 
         /// <summary>
@@ -87,10 +77,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -121,14 +108,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>boolean value if string only contains allowed characters</returns>
         public static bool ValidateNumeric(string inputToValidate, int minNumOfChars)
         {
-            if (inputToValidate.Length >= minNumOfChars)
-            {
-                return Regex.IsMatch(inputToValidate, @"^[0-9]+$");
-            }
-            else
-            {
-                return false;
-            }
+            return inputToValidate.Length >= minNumOfChars && Regex.IsMatch(inputToValidate, @"^[0-9]+$");
         }
 
         /// <summary>
@@ -149,10 +129,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return Regex.IsMatch(inputToValidate, @"^[0-9]+$");
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -177,14 +154,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <returns>boolean value if string only contains allowed characters</returns>
         public static bool ValidateAlphaNumeric(string inputToValidate, int minNumOfChars)
         {
-            if (inputToValidate.Length >= minNumOfChars)
-            {
-                return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s-]+$");
-            }
-            else
-            {
-                return false;
-            }
+            return inputToValidate.Length >= minNumOfChars && Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s-]+$");
         }
 
         /// <summary>
@@ -202,10 +172,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return Regex.IsMatch(inputToValidate, @"^['a-zA-Z0-9\s-]+$");
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -234,19 +201,9 @@ namespace com.WanderingTurtle.BusinessLogic
             int num;
             if (int.TryParse(inputToValidate, out num))
             {
-                if (num >= min)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return num >= min;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -263,19 +220,9 @@ namespace com.WanderingTurtle.BusinessLogic
             int num;
             if (int.TryParse(inputToValidate, out num))
             {
-                if (num >= min && num <= max)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return num >= min && num <= max;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -304,19 +251,9 @@ namespace com.WanderingTurtle.BusinessLogic
             double num;
             if (double.TryParse(inputToValidate, out num))
             {
-                if (num >= min)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return num >= min;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -333,19 +270,9 @@ namespace com.WanderingTurtle.BusinessLogic
             double num;
             if (double.TryParse(inputToValidate, out num))
             {
-                if (num >= min && num <= max)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return num >= min && num <= max;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -374,19 +301,9 @@ namespace com.WanderingTurtle.BusinessLogic
             decimal num;
             if (decimal.TryParse(inputToValidate, out num))
             {
-                if (num >= min)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return num >= min;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -403,19 +320,9 @@ namespace com.WanderingTurtle.BusinessLogic
             decimal num;
             if (decimal.TryParse(inputToValidate, out num))
             {
-                if (num >= min && num <= max)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return num >= min && num <= max;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -444,19 +351,9 @@ namespace com.WanderingTurtle.BusinessLogic
             DateTime date;
             if (DateTime.TryParse(inputToValidate, out date))
             {
-                if (date >= min)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return date >= min;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -473,19 +370,9 @@ namespace com.WanderingTurtle.BusinessLogic
             DateTime date;
             if (DateTime.TryParse(inputToValidate, out date))
             {
-                if (date >= min && date <= max)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return date >= min && date <= max;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         //Validates the given password meets password complexity requirements
@@ -535,19 +422,9 @@ namespace com.WanderingTurtle.BusinessLogic
                     requirements++;
                 }
 
-                if (requirements >= 3)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return requirements >= 3;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         /// <summary>
@@ -576,13 +453,6 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             bool result = Regex.IsMatch(inputToValidate, @"(\([2-9]\d\d\)|[2-9]\d\d) ?[-.,]? ?[2-9]\d\d ?[-.,]? ?\d{4}");
             return result;
-        }
-
-        //Not sure what needs to be here for an address
-        //are we checking with the postal service or something
-        public static bool ValidateAddress(string inputToValidate)
-        {
-            return true;
         }
 
         /// <summary>

@@ -14,26 +14,30 @@ $(document).ready(function () {
     });
 
     $("#MainContent_txtPhoneNumber").mask("(999) 999-9999");
-    $("#MainContent_txtZip").mask("99999");
-    var allZips = $('#zips').DataTable({
-    });
+    $("#MainContent_txtZip").mask("99999", 
+        {
+            placeholder: ""
+        });
 
-    $('#MainContent_txtZip').keyup(function () {
-        var search = $(this).val();
+    //var allZips = $('#zips').DataTable({
+    //});
 
-        if (search != null) {
-            console.log(search);
-            if (search != "") {
-                $('#zips').css('display', 'block');
-            }
-            else {
-                $('#zips').css('display', 'none');
-            }
-        }
+    //$('#MainContent_txtZip').keyup(function () {
+    //    var search = $(this).val();
 
-        allZips.search(search).draw();
+    //    if (search != null) {
+    //        console.log(search);
+    //        if (search != "") {
+    //            $('#zips').css('display', 'block');
+    //        }
+    //        else {
+    //            $('#zips').css('display', 'none');
+    //        }
+    //    }
 
-    });
+    //    allZips.search(search).draw();
+
+    //});
 
 
     $('#tblmain').DataTable({

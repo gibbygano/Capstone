@@ -255,8 +255,28 @@ namespace com.WanderingTurtle.Web.Pages
             myListing.EventID = myEvent.EventItemID;
             myListing.Price = (decimal)double.Parse(Request.Form["price"]);
             myListing.MaxNumGuests = int.Parse(Request.Form["tickets"]);
-            myListing.StartDate = DateTime.Parse(Request.Form["startdate"]);
-            myListing.EndDate = DateTime.Parse(Request.Form["enddate"]);
+            DateTime start;
+            DateTime end;
+            if(DateTime.TryParse(Request.Form["startdate"], out start))
+            {
+                myListing.StartDate = start;
+            }
+            else
+            {
+                lblAddError.Text = "Invalid Date. Please use the Calendar.";
+                return;
+            }
+            if (DateTime.TryParse(Request.Form["enddate"], out end))
+            {
+                myListing.EndDate = end;
+            }
+            else
+            {
+                lblAddError.Text = "Invalid Date. Please use the Calendar.";
+                return;
+            }
+            
+
             myListing.SupplierID = mySupplier.SupplierID;
 
             if(_myprodMan.AddItemListing(myListing)==listResult.Success)

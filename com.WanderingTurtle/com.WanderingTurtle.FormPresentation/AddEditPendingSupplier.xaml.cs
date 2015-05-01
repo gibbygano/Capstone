@@ -182,7 +182,7 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new InputValidationException(txtCompanyName, "Enter a company name.");
             }
-            if (!Validator.ValidateAddress(txtAddress.Text))
+            if (!Validator.ValidateAlphaNumeric(txtAddress.Text) || String.IsNullOrEmpty(txtAddress.Text))
             {
                 throw new InputValidationException(txtAddress, "Enter an address.");
             }

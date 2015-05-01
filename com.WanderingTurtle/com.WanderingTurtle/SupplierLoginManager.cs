@@ -55,19 +55,9 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     int result = access.UpdateSupplierPassword(newPassword, oldLogin);
 
-                    if (result == 1)
-                    {
-                        return ResultsEdit.Success;
-                    }
-                    else
-                    {
-                        return ResultsEdit.ChangedByOtherUser;
-                    }
+                    return result == 1 ? ResultsEdit.Success : ResultsEdit.ChangedByOtherUser;
                 }
-                else
-                {
-                    return ResultsEdit.DatabaseError;
-                }
+                return ResultsEdit.DatabaseError;
             }
             catch (SqlException)
             {

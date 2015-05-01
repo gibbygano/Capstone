@@ -519,7 +519,6 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
     margin-top: 0.75em;
-    width: 441px;
     margin-right: 0px;
 }
 
@@ -881,6 +880,7 @@ button.ui-button-text-only {
     border-width: 2px;
     border-style: solid;
     padding: 7px;
+    padding-bottom: 42px;
     overflow:hidden;
 }
 
@@ -1125,19 +1125,4 @@ aside.pass{
     width: 48%;
 }
 
-.ui-dialog-titlebar{
-    font-size: .8em;
-    height: 20px;
-}
-.ui-dialog-content{
-    width: 95%;
-    overflow: hidden !important;
-}
 
-div#errorMess{
-    width: 95% !important;
-}
-
-div.ui-widget-content{
-    background: #006AA1;
-}
