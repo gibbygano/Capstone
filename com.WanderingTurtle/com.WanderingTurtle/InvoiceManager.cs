@@ -118,7 +118,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             foreach (BookingDetails b in bookingsToArchive)
             {
-                if (b.StartDate > DateTime.Now && b.Quantity > 0)
+                if (b.StartDate > DateTime.Now.AddHours(6) && b.Quantity > 0)
                 {
                     return ResultsArchive.CannotArchive;
                 }
@@ -149,8 +149,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 else
                 {
                     return ResultsArchive.Success;
-                }
-                
+                }  
             }
             catch (ApplicationException ex)
             {
