@@ -165,10 +165,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
-            else
-            {
-                return FetchListEmployees();
-            }
+            return FetchListEmployees();
         }
     }
 }

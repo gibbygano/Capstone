@@ -108,8 +108,25 @@ namespace com.WanderingTurtle.Web.Pages
 
                 ItemListing newList = new ItemListing(myList.ItemListID, myList.EventID, myList.SupplierID, myList.StartDate, myList.EndDate, myList.Price, myList.MaxNumGuests, myList.MinNumGuests, myList.CurrentNumGuests);
 
-                newList.StartDate = DateTime.Parse(Request.Form["start"]);
-                newList.EndDate = DateTime.Parse(Request.Form["end"]);
+                DateTime start;
+                DateTime end;
+                if (DateTime.TryParse(Request.Form["start"], out start))
+                {
+                    newList.StartDate = start;
+                }
+                else
+                {
+                    errorText = addError(errorText, "Invalid Start Date. Please use the Calendar.");
+                }
+                if (DateTime.TryParse(Request.Form["end"], out end))
+                {
+                    newList.EndDate = end;
+                }
+                else
+                {
+                    errorText = addError(errorText, "Invalid End Date. Please use the Calendar.");
+
+                }
                 newList.Price = decimal.Parse(Request.Form["price"]);
                 newList.MaxNumGuests = int.Parse(Request.Form["max"]);
                 newList.MinNumGuests = 0;
