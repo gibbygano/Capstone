@@ -89,4 +89,34 @@
   <li><img src="../Images/juice.png" /></li>
 </ul>
     </aside>
+
+
+    <script>
+        var allZips = [
+        <%		
+         foreach (var zip in zips)		
+           {		
+              Response.Write("\"" + zip.Zip + "\",");		
+          } 		
+            %>
+        ];
+        $("#<%= txtZip.ClientID %>").autocomplete({
+            source: function (request, response) {
+                var filteredArray = $.map(allZips, function (item
+                                         ) {
+                    if (item.indexOf(request.term) == 0) {
+                        return item;
+                    }
+                    else {
+                        return null;
+                    }
+                });
+                var results = $.ui.autocomplete.filter(filteredArray, request.term);
+                response(results.slice(0, 8));
+
+            }
+        });
+
+
+    </script>
 </asp:Content>

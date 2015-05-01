@@ -84,7 +84,7 @@
                         <ItemStyle Width="150px" />
                     </asp:BoundField>
                     <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription"></asp:BoundField>
-                    <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tix" SortExpression="QuantityOffered" />
+                    <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tickets" SortExpression="QuantityOffered" />
                     <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" />
                 </Columns>
                 <SortedAscendingCellStyle BackColor="#E9E7E2" />

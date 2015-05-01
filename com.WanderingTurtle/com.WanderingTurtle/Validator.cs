@@ -455,13 +455,6 @@ namespace com.WanderingTurtle.BusinessLogic
             return result;
         }
 
-        //Not sure what needs to be here for an address
-        //are we checking with the postal service or something
-        public static bool ValidateAddress(string inputToValidate)
-        {
-            return true;
-        }
-
         /// <summary>
         /// Matt Lapka
         /// Created 2015/02/01
