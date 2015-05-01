@@ -18,7 +18,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/02
-        ///
         /// Constructs the add employee form and fills the combo box.
         /// </summary>
         public AddEmployee()
@@ -34,8 +33,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// Created: 2015/02/20
         /// Constructs a form with data from employee to update
         /// </summary>
-        /// <remarks>
-        /// </remarks>
         /// <param name="employee">Employee to update</param>
         /// <param name="ReadOnly">Make the form ReadOnly.</param>
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
@@ -47,7 +44,6 @@ namespace com.WanderingTurtle.FormPresentation
             ReloadComboBox();
 
             SetFields();
-
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
@@ -61,13 +57,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/19
-        ///
         /// Defines employee roles for the combo box
         /// </summary>
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/22
-        ///
         /// Changed to enum
         /// </remarks>
         private static IEnumerable<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
@@ -75,7 +69,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/05
-        ///
         /// Closes the window
         /// </summary>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -86,7 +79,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/05
-        ///
         /// Resets the fields
         /// </summary>
         private void btnReset_Click(object sender, RoutedEventArgs e)
@@ -97,13 +89,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/15
-        ///
         /// Calls method to open AddEditEmployee UI
         /// </summary>
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/22
-        ///
         /// Added method to update employee
         /// </remarks>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
@@ -125,11 +115,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/22
-        ///
         /// Cast Level to RoleData
-        ///
-        /// Updated 2015/04/13 by Tony Noel
-        ///Updated to comply with the ResultsEdit class of error codes.
+        /// 
+        /// Tony Noel
+        /// Updated:  2015/04/13
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         private async void EmployeeAdd()
         {
@@ -165,11 +155,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/20
-        ///
         /// Validates and Updates Employee user
         /// </summary>
         /// <remarks>
-        /// 2015/04/13 Tony Noel
+        /// Tony Noel
+        /// Updated:  2015/04/13 
         /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         private async void EmployeeUpdate()
@@ -206,7 +196,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/22
-        ///
         /// Reloads the combobox with values from database
         /// </summary>
         private void ReloadComboBox()
@@ -218,7 +207,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/05
-        ///
         /// Resets the values of the fields
         /// </summary>
         private void SetFields()
@@ -246,7 +234,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/13
-        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="message"></param>
@@ -261,7 +248,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show input error Message Dialog
         /// </summary>
         /// <param name="component"></param>
@@ -275,7 +261,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show error message
         /// </summary>
         /// <param name="message"></param>
@@ -288,7 +273,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show error message for exception
         /// </summary>
         /// <param name="exception"></param>
@@ -301,15 +285,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/20
-        ///
         /// Validates the text fields in the form
         /// </summary>
         /// <remarks>
         /// Miguel Santana
         /// Updated: 2015/02/20
-        ///
         /// Extracted method
         /// </remarks>
+        /// <returns>
+        /// True if fields pass validation
+        /// </returns>
         private bool Validate()
         {
             if (!Validator.ValidateString(TxtFirstName.Text))

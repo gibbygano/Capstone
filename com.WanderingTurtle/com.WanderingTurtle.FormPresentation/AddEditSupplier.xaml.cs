@@ -23,9 +23,15 @@ namespace com.WanderingTurtle.FormPresentation
         private List<CityState> _zips;
 
         /// <summary>
-        /// Constructs the object and will fill the list of suppliers
-        /// created by Will Fritz 2/6/15
+        /// Will Fritz
+        /// Created 2015/02/06
+        /// Set up of ui screen, combo box fill
         /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated 2015/04/21
+        /// Normalized screen titles
+        /// </remarks>
         public AddEditSupplier()
         {
             InitializeComponent();
@@ -34,7 +40,18 @@ namespace com.WanderingTurtle.FormPresentation
             FillUpdateList();
         }
 
-        /// <exception cref="WanderingTurtleException"/>
+        /// <summary>
+        /// Will Fritz
+        /// Created:  2015/02/06
+        /// initializes screen
+        /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated:  2015/04/09
+        /// combined add/edit screens
+        /// </remarks>
+        /// <param name="supplierToEdit"></param>
+        /// <param name="ReadOnly"></param>
         public AddEditSupplier(Supplier supplierToEdit, bool ReadOnly = false)
         {
             InitializeComponent();
@@ -53,12 +70,14 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// This will fill the add/edit tab fields with the data from a selected Supplier from the list view
-        /// Created by Will Fritz 2/6/15
+        /// Will Fritz
+        /// Created:  2015/02/06
+        /// fills the add/edit tab fields with the data from a selected Supplier from the list view
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// changed zip to a drop down
+        /// Will Fritz 
+        /// Updated:  2015/02/15
+        /// Changed zip to a drop down
         /// </remarks>
         public void FillUpdateList()
         {
@@ -98,14 +117,11 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created: 2015/02/04
         /// checks to see if all the fields are fill out and formated with the correct data
-        /// It returns a false if there is an invalid fields and will output an error message to the lblError label
-        /// Created By Will Fritz 2/4/15
         /// </summary>
-        /// <remarks>
-        /// edited by will fritz 2/19/15
-        /// </remarks>
-        /// <returns></returns>
+        /// <returns>false if there is an invalid fields and will output an error message to the lblError label</returns>
         /// <exception cref="InputValidationException">Validation Error Handling.</exception>
         public bool Validate()
         {
@@ -149,12 +165,14 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created: 2015/02/06
         /// This will send a supplier object to the business logic layer
-        /// Created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// Added a conformation message box
+        /// Will Fritz 
+        /// Updated:  2015/02/15
+        /// Added a confirmation message box
         /// </remarks>
         private async void AddTheSupplier()
         {
@@ -202,22 +220,39 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/21
+        /// Added button to allow cancel of the form function.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/21
+        /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             FillUpdateList();
         }
 
         /// <summary>
-        /// Will validate the fields and call add/edit supplier method
-        /// created by Will Fritz 2/6/15
+        /// Will Fritz
+        /// Created:  2015/02/06
+        /// Validates the fields and call add/edit supplier method
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/19/15
+        /// Pat Banks
+        /// Updated 2015/04/14
+        /// Added UserName field
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -236,13 +271,16 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created:  2015/02/06
         /// This will send a supplier object to the business logic layer
-        /// Created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// added conformation message box
-        /// edited by Rose Steffensmeier 2015/24/04
+        /// Will Fritz
+        /// Updated: 2015/02/15
+        /// Added confirmation message box
+        /// Rose Steffensmeier
+        /// Updated:  2015/04/24
         /// deleted checking supplierUserName
         /// </remarks>
         private async void EditSupplier()
@@ -274,12 +312,6 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "Supplier wasn't added to the database.");
                 }
             }
-            catch (SqlException)
-            {
-                // ShowErrorMessage("UserName already used.  Please choose another one.");
-
-                throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
-            }
             catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex);
@@ -287,8 +319,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Will Fritz 
+        /// Created 2/19/2015
         /// fills the zip code combo box
-        /// created by will fritz 2/19/2015
         /// </summary>
         private void fillComboBox()
         {

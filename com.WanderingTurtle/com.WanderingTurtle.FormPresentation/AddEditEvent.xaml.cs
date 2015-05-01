@@ -13,9 +13,12 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class AddEditEvent
     {
         private EventManager _eventManager = new EventManager();
+        public Event OriginalEvent { get; private set; }
+        private Event eventToSubmit = new Event();
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
+        /// Hunter Lind
+        /// Created: 2015/2/23
         /// Initializes the form and populates a combobox with event types.
         /// </summary>
         public AddEditEvent()
@@ -25,7 +28,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
+        /// Hunter Lind
+        /// Created:  2015/2/23
         /// Fills out our form with information from NewEvent.
         /// Also saves an Unrevised version of NewEvent.
         /// </summary>
@@ -51,13 +55,10 @@ namespace com.WanderingTurtle.FormPresentation
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
-        public Event OriginalEvent { get; private set; }
-
-        private Event eventToSubmit = new Event();
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
-        ///
+        /// Hunter Lind
+        /// Created: 2015/2/23
         /// Creates an event to replace the old version of itself.
         /// </summary>
         private async void AddNewEvent()
@@ -124,16 +125,37 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Added button to allow cancel of the form function.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             SetFields();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Logic rearranged when combining the add and edit forms.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (OriginalEvent == null) { AddNewEvent(); }
@@ -141,8 +163,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
-        ///
+        /// Hunter Lind 
+        /// Created:  2015/2/23
         /// Fills out our form with information from EventToEdit.
         /// Also saves an Unrevised version of EventToEdit.
         /// </summary>
@@ -202,6 +224,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 // Submit the events
                 var EventManagerResult = _eventManager.EditEvent(OriginalEvent, eventToSubmit);
+
                 if (EventManagerResult.Equals(EventManager.EventResult.Success))
                 {
                     await this.ShowMessageDialog("Event Changed Successfully!");
@@ -216,6 +239,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Method is used to populate fields when editing the event, otherwise, brings up a blank form.
+        /// </summary>
         private void SetFields()
         {
             if (OriginalEvent == null)
@@ -251,6 +280,11 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Sets up the ui 
+        /// </summary>
         private void Setup()
         {
             InitializeComponent();

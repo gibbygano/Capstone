@@ -77,15 +77,13 @@
                 <SelectedRowStyle BackColor="#E2DED6" ForeColor="#333333" Font-Bold="False" />
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
-                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}">
-                        <ControlStyle Width="150px" />
+                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}" ItemStyle-Width ="150px">
                     </asp:BoundField>
-                    <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName">
-                        <ItemStyle Width="150px" />
+                    <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName" ItemStyle-Width ="150px">
                     </asp:BoundField>
-                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription"></asp:BoundField>
-                    <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tickets" SortExpression="QuantityOffered" />
-                    <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" />
+                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription" ItemStyle-Width ="250px" ></asp:BoundField>                      
+                    <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tickets" SortExpression="QuantityOffered" ItemStyle-Width ="50px"/>
+                    <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" ItemStyle-Width ="50px"/>
                 </Columns>
                 <SortedAscendingCellStyle BackColor="#E9E7E2" />
                 <SortedAscendingHeaderStyle BackColor="#506C8C" />
