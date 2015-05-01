@@ -82,7 +82,7 @@
     <br />
     <asp:Button ID="btnSubmitApplication" runat="server" OnClick="btnSubmitApplication_Click" Text="Submit Application" Width="182px" />
     </section>
-    <aside>
+    <aside style="padding-top:85px;">
         <ul class="bxslider">
   <li><img src="../Images/turtle.png" /></li>
   <li><img src="../Images/food.png" /></li>
