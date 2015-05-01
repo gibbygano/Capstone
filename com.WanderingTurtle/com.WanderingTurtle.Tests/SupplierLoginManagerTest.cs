@@ -12,12 +12,6 @@ namespace com.WanderingTurtle.Tests
         private SupplierLoginAccessorTest testing = new SupplierLoginAccessorTest();
         private SupplierLogin retrieveSupplier = new SupplierLogin();
 
-        [TestInitialize]
-        public void initialize()
-        {
-            testing.initialize();
-        }
-
         [TestMethod]
         public void TestSupplierLoginManageGet()
         {

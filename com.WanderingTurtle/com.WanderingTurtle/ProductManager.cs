@@ -183,24 +183,9 @@ namespace com.WanderingTurtle.BusinessLogic
         public ResultsArchive CheckToArchiveEvent(int eventID)
         {
             List<ItemListing> list = RetrieveItemListingList();
-            int count = 0;
+            int count = list.Count(item => item.EventID == eventID && item.StartDate > DateTime.Now);
 
-            foreach (var item in list)
-            {
-                if (item.EventID == eventID && item.StartDate > DateTime.Now)
-                {
-                    count++;
-                }
-            }
-
-            if (count == 0)
-            {
-                return ResultsArchive.OkToArchive;
-            }
-            else
-            {
-                return ResultsArchive.CannotArchive;
-            }
+            return count == 0 ? ResultsArchive.OkToArchive : ResultsArchive.CannotArchive;
         }
 
         /// <summary>
@@ -243,10 +228,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
-            else
-            {
-                return DataCache._currentItemListingList;
-            }
+            return DataCache._currentItemListingList;
         }
 
         /// <summary>
