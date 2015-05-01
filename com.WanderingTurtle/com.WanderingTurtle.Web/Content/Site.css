@@ -311,7 +311,7 @@ article {
 
 aside {
     float: right;
-    width: 25%;
+    width: 45%;
 }
 
     aside ul {
@@ -793,11 +793,26 @@ input[type="radio"] {
         text-decoration: none;
     }
 
-#logout {
+#account {
     float: right;
     padding-left: 10px;
+    cursor: pointer;
 }
 
+#accountOptions{
+    position: absolute;
+    background-color: #8FAB5F;
+    border: 2px;
+    
+    border-color: #fff;
+    float: right;
+    padding-top: 5px;
+
+}
+
+#accountOptions p{
+    margin: 3px;
+}
 #loginlink {
     float: right;
 }
@@ -927,8 +942,17 @@ button.ui-button-text-only {
     cursor: pointer;
 }
 
-.myspinner {
-    width: 30px;
+.myspinner, .ui-spinner {
+    width: 75px;
+    border: 0px solid #72b42d;
+    background: #fff url("images/ui-bg_inset-soft_10_33A133_1x1005.png") 50%;
+    color: #000;
+    border-color: #000;
+    border-radius: 5px;
+}
+
+input{
+    border-radius: 5px;
 }
 
 .mytime {
@@ -1070,3 +1094,20 @@ section.app{
     width: 75%;
     float: left;
 }
+
+.passwordRules{
+    font-size: 1.6em;
+    color: darkred;
+    margin: auto;
+    margin-top: 45px;
+}
+
+section#passwordForm{
+    float: left;
+    width: 50%;
+}
+
+aside.pass{
+    width: 48%;
+}
+

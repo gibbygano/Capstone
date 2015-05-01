@@ -144,6 +144,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\ui-bg_diagonals-small_0_aaaaaa_40x40.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_15_444444_40x40.png" />
+    <Content Include="Content\images\ui-bg_diagonals-thick_95_ffdc2e_40x40.png" />
+    <Content Include="Content\images\ui-bg_glass_55_fbf5d0_1x400.png" />
+    <Content Include="Content\images\ui-bg_highlight-hard_30_006AA1_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_33_33A133_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_50_006AA1_1x100.png" />
+    <Content Include="Content\images\ui-bg_highlight-soft_60_33A133_1x100.png" />
+    <Content Include="Content\images\ui-bg_inset-soft_10_33A133_1x100.png" />
+    <Content Include="Content\images\ui-icons_4eb305_256x240.png" />
+    <Content Include="Content\images\ui-icons_72b42d_256x240.png" />
+    <Content Include="Content\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.dataTables.css" />
     <Content Include="Content\themes\jquery-datetimepicker.css" />
     <Content Include="Content\jquery.bxslider.css" />

@@ -90,6 +90,13 @@ $(document).ready(function () {
         start: 0
     });
 
+    $('#account').hover(function () {
+        $('#accountOptions').slideToggle({
+
+        });
+
+
+    })
 
 
 });

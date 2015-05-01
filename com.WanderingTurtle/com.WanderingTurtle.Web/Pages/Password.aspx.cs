@@ -47,21 +47,22 @@ namespace com.WanderingTurtle.Web.Pages
         protected void btnChange_Click(object sender, EventArgs e)
         {
             //doublecheck client side validation
-            if (txtNewPassword.Text != txtNewPassword2.Text)
+            if (txtNewPassword.Text.Trim() != txtNewPassword2.Text.Trim())
             {
                 return;
             }
-            if (!Validator.ValidatePassword(txtNewPassword.Text))
+            if (!Validator.ValidatePassword(txtNewPassword.Text.Trim()))
             {
-
                 passRules.Visible = true;
                 return;
             }
             passRules.Visible = false;
-            if (txtCurrent.Text != _currentLogin.UserPassword)
+            if (txtCurrent.Text.Trim() != _currentLogin.UserPassword)
             {
+                lblError.Text = "Invalid Password";
                 return;
             }
+            lblError.Text = "";
             try
             {
                 var result = _myMan.UpdateSupplierLogin(txtNewPassword.Text, _currentLogin);
