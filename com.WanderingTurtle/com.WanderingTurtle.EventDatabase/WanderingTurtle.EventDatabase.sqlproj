@@ -132,6 +132,7 @@
     <Build Include="dbo\Stored Procedures\spArchiveInvoiceGuestBooking.sql" />
     <Build Include="dbo\Stored Procedures\spInsertEventType.sql" />
     <Build Include="dbo\Stored Procedures\spArchiveEventType.sql" />
+    <Build Include="dbo\Stored Procedures\spSelectArchivedSupplierLoginTest.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\HotelGuest.sql" />
