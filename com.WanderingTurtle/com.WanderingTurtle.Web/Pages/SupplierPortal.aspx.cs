@@ -101,18 +101,25 @@ namespace com.WanderingTurtle.Web.Pages
                 DateTime From = DateTime.Parse(Request.Form["dateFrom"]);
                 DateTime To = DateTime.Parse(Request.Form["dateTo"]);
 
+                Session["dateFrom"] = From.ToShortDateString();
+                Session["dateTo"] = To.ToShortDateString();
+
                 if (Request.Form["dateFrom"] != null && Request.Form["dateTo"] != null)
                 {
                     return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > From && l.EndDate < To);
                 }
                 else
                 {
-                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+                    Session["dateFrom"] = DateTime.Now.ToShortDateString();
+                    Session["dateTo"] = null;
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now); 
                 }
             }
             catch (Exception)
             {
-                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+                Session["dateFrom"] = DateTime.Now.ToShortDateString();
+                Session["dateTo"] = null;
+                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);             
             }
         } 
 
