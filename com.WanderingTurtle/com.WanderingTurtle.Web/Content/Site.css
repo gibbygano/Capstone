@@ -953,13 +953,13 @@ button.ui-button-text-only {
     background: #fff url("images/ui-bg_inset-soft_10_33A133_1x1005.png") 50%;
     color: #000;
     border-color: #000;
-    border-ra
+    border-radius: 5px;
+}
 
-input{
- 
 
 input{
     border-radius: 5px;
+
 }
 
 .mytime {
