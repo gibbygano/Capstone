@@ -159,6 +159,7 @@
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jquery.dataTables.css" />
+    <Content Include="Content\SiteGuest.css" />
     <Content Include="Content\themes\jquery-datetimepicker.css" />
     <Content Include="Content\jquery.bxslider.css" />
     <Content Include="Images\food.png" />
