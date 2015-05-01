@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data.SqlClient;
 
+
 namespace com.WanderingTurtle.Tests
 {
     [TestClass]
@@ -12,23 +13,44 @@ namespace com.WanderingTurtle.Tests
         private SupplierLoginAccessor access = new SupplierLoginAccessor();
         private SupplierAccessor access2 = new SupplierAccessor();
         private SupplierLogin retrieveSupplier;
-        private Supplier fakeSupplier;
+        private int suppID;
 
-        [TestInitialize]
-        public void initialize()
+        public void setup()
         {
-            access.AddSupplierLogin("F@k3logg3r", 101);
-        }
+            Supplier testSupplier = new Supplier();
+            testSupplier = new Supplier();
+            testSupplier.CompanyName = "fakeCompany";
+            testSupplier.FirstName = "FakeLogin";
+            testSupplier.LastName = "FakeLogin";
+            testSupplier.Address1 = "255 East West St";
+            testSupplier.Address2 = "APT 1";
+            testSupplier.Zip = "50229";
+            testSupplier.PhoneNumber = "575-542-8796";
+            testSupplier.EmailAddress = "FakeLogin@gmail.com";
+            testSupplier.ApplicationID = 999;
+            testSupplier.SupplyCost = (decimal)((60) / 100);
+            testSupplier.Active = true;
 
-        /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
-        /// Tests to input a new SupplierLogin into the database.
-        /// </summary>
-        [TestMethod]
-        public void TestSupplierLoginAdd()
-        {
-            int numberAdded = access.AddSupplierLogin("TryM3!", 102);
-            Assert.AreEqual("TryM3!", access.RetrieveSupplierLogin("Password#1", "TryM3!").UserName);
+            SupplierAccessor.AddSupplier(testSupplier, "Test");
+            try
+            {
+
+                var supList = SupplierAccessor.GetSupplierList();
+                foreach (Supplier x in supList)
+                {
+                    if (x.FirstName.Equals("FirstBlab"))
+                    {
+                        suppID = x.SupplierID;
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("what");
+            }
+
+
+
         }
 
         /// <summary>
@@ -38,8 +60,9 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestSupplierLoginGet()
         {
-            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "F@k3logg3r");
-            Assert.AreEqual("F@k3logg3r", retrieveSupplier.UserName, "There is no such supplier.");
+            setup();
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "Test");
+            Assert.AreEqual("Test", retrieveSupplier.UserName);
         }
 
         /// <summary>
@@ -50,7 +73,8 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(ApplicationException))]
         public void TestSupplierLoginGetFail()
         {
-            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "f@k3Loger");
+            setup();
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#2", "Test");
         }
 
         /// <summary>
@@ -61,23 +85,20 @@ namespace com.WanderingTurtle.Tests
         [ExpectedException(typeof(SqlException))]
         public void TestSupplierLoginAddFail()
         {
-            int numberAdded = access.AddSupplierLogin("F@k3logg3r", 101);
+            int numberAdded = access.AddSupplierLogin("Test", 101);
         }
 
         [TestCleanup]
         public void cleanUp()
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
-            string commandText = @"DELETE FROM SupplierLogin WHERE UserName = 'F@k3logg3r'";
-            string commandText2 = @"DELETE FROM SupplierLogin WHERE UserName='TryM3!'";
+            string commandText = @"DELETE FROM SupplierLogin WHERE UserName='Test!'";
 
             var cmd = new SqlCommand(commandText, conn);
 
             try
             {
                 conn.Open();
-                cmd.ExecuteNonQuery();
-                cmd = new SqlCommand(commandText2, conn);
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException)

@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.Common
         {
         }
 
-        public string GetFullName { get { return string.Format("{0}, {1}", GuestLastName, GuestFirstName); } }
+        public string GetFullName { get { return string.Format("{0} {1}", GuestFirstName, GuestLastName); } }
 
         public string GuestFirstName { get; set; }
 

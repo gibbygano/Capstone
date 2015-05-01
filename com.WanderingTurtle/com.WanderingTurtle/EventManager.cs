@@ -48,29 +48,23 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     return EventAccessor.GetEvent(eventItemID);
                 }
+                //check time. If less than 5 min, return event from cache
+                if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                {
+                    //get event from DB
+                    var currentEvent = EventAccessor.GetEvent(eventItemID);
+                    return currentEvent;
+                }
                 else
                 {
-                    //check time. If less than 5 min, return event from cache
-                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                    //get event from cached list
+                    var list = DataCache._currentEventList;
+                    Event currentEvent = list.Where(e => e.EventItemID.ToString() == eventItemID).FirstOrDefault();
+                    if (currentEvent != null)
                     {
-                        //get event from DB
-                        var currentEvent = EventAccessor.GetEvent(eventItemID);
                         return currentEvent;
                     }
-                    else
-                    {
-                        //get event from cached list
-                        var list = DataCache._currentEventList;
-                        Event currentEvent = list.Where(e => e.EventItemID.ToString() == eventItemID).FirstOrDefault();
-                        if (currentEvent != null)
-                        {
-                            return currentEvent;
-                        }
-                        else
-                        {
-                            throw new ApplicationException("Event not found.");
-                        }
-                    }
+                    throw new ApplicationException("Event not found.");
                 }
             }
             catch (Exception ex)
@@ -95,24 +89,18 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventListTime = now;
                     return list;
                 }
-                else
-                {
-                    //check time. If less than 5 min, return cache
+                //check time. If less than 5 min, return cache
 
-                    if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
-                    {
-                        //get new list from DB
-                        var list = EventAccessor.GetEventList();
-                        //set cache to new list and update time
-                        DataCache._currentEventList = list;
-                        DataCache._EventListTime = now;
-                        return list;
-                    }
-                    else
-                    {
-                        return DataCache._currentEventList;
-                    }
+                if (now > DataCache._EventListTime.AddMinutes(cacheExpirationTime))
+                {
+                    //get new list from DB
+                    var list = EventAccessor.GetEventList();
+                    //set cache to new list and update time
+                    DataCache._currentEventList = list;
+                    DataCache._EventListTime = now;
+                    return list;
                 }
+                return DataCache._currentEventList;
             }
             catch (Exception ex)
             {
@@ -133,18 +121,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventListTime = DateTime.Now;
                     return EventResult.Success;
                 }
-                else
-                {
-                    return EventResult.NotAdded;
-                }
+                return EventResult.NotAdded;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return EventResult.ChangedByOtherUser;
-                }
-                return EventResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? EventResult.ChangedByOtherUser : EventResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -165,18 +146,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventListTime = DateTime.Now;
                     return EventResult.Success;
                 }
-                else
-                {
-                    return EventResult.NotChanged;
-                }
+                return EventResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return EventResult.ChangedByOtherUser;
-                }
-                return EventResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? EventResult.ChangedByOtherUser : EventResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -197,18 +171,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventListTime = DateTime.Now;
                     return EventResult.Success;
                 }
-                else
-                {
-                    return EventResult.NotChanged;
-                }
+                return EventResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return EventResult.ChangedByOtherUser;
-                }
-                return EventResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? EventResult.ChangedByOtherUser : EventResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -231,29 +198,23 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     return EventTypeAccessor.GetEventType(eventTypeID);
                 }
+                //check time. If less than 10 min, return event from cache
+                if (now > DataCache._EventTypeListTime.AddMinutes(cacheExpirationTime))
+                {
+                    //get event from DB
+                    var currentEventType = EventTypeAccessor.GetEventType(eventTypeID);
+                    return currentEventType;
+                }
                 else
                 {
-                    //check time. If less than 10 min, return event from cache
-                    if (now > DataCache._EventTypeListTime.AddMinutes(cacheExpirationTime))
+                    //get event from cached list
+                    var list = DataCache._currentEventTypeList;
+                    EventType currentEventType = list.Where(e => e.EventTypeID.ToString() == eventTypeID).FirstOrDefault();
+                    if (currentEventType != null)
                     {
-                        //get event from DB
-                        var currentEventType = EventTypeAccessor.GetEventType(eventTypeID);
                         return currentEventType;
                     }
-                    else
-                    {
-                        //get event from cached list
-                        var list = DataCache._currentEventTypeList;
-                        EventType currentEventType = list.Where(e => e.EventTypeID.ToString() == eventTypeID).FirstOrDefault();
-                        if (currentEventType != null)
-                        {
-                            return currentEventType;
-                        }
-                        else
-                        {
-                            throw new ApplicationException("Event not found.");
-                        }
-                    }
+                    throw new ApplicationException("Event not found.");
                 }
             }
             catch (Exception ex)
@@ -278,25 +239,19 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventTypeListTime = now;
                     return list;
                 }
-                else
+                //check time. If less than 5 min, return cache
+
+                if (now > DataCache._EventTypeListTime.AddMinutes(cacheExpirationTime))
                 {
-                    //check time. If less than 5 min, return cache
+                    //get new list from DB
+                    var list = EventTypeAccessor.GetEventTypeList();
+                    //set cache to new list and update time
+                    DataCache._currentEventTypeList = list;
+                    DataCache._EventTypeListTime = now;
 
-                    if (now > DataCache._EventTypeListTime.AddMinutes(cacheExpirationTime))
-                    {
-                        //get new list from DB
-                        var list = EventTypeAccessor.GetEventTypeList();
-                        //set cache to new list and update time
-                        DataCache._currentEventTypeList = list;
-                        DataCache._EventTypeListTime = now;
-
-                        return list;
-                    }
-                    else
-                    {
-                        return DataCache._currentEventTypeList;
-                    }
+                    return list;
                 }
+                return DataCache._currentEventTypeList;
             }
             catch (Exception ex)
             {
@@ -317,18 +272,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventTypeListTime = DateTime.Now;
                     return EventResult.Success;
                 }
-                else
-                {
-                    return EventResult.NotAdded;
-                }
+                return EventResult.NotAdded;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return EventResult.ChangedByOtherUser;
-                }
-                return EventResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? EventResult.ChangedByOtherUser : EventResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -349,18 +297,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventTypeListTime = DateTime.Now;
                     return EventResult.Success;
                 }
-                else
-                {
-                    return EventResult.NotChanged;
-                }
+                return EventResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return EventResult.ChangedByOtherUser;
-                }
-                return EventResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? EventResult.ChangedByOtherUser : EventResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -381,18 +322,11 @@ namespace com.WanderingTurtle.BusinessLogic
                     DataCache._EventTypeListTime = DateTime.Now;
                     return EventResult.Success;
                 }
-                else
-                {
-                    return EventResult.NotChanged;
-                }
+                return EventResult.NotChanged;
             }
             catch (ApplicationException ex)
             {
-                if (ex.Message == "Concurrency Violation")
-                {
-                    return EventResult.ChangedByOtherUser;
-                }
-                return EventResult.DatabaseError;
+                return ex.Message == "Concurrency Violation" ? EventResult.ChangedByOtherUser : EventResult.DatabaseError;
             }
             catch (Exception)
             {
@@ -417,10 +351,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
-            else
-            {
-                return DataCache._currentEventList;
-            }
+            return DataCache._currentEventList;
         }
 
         public int deleteTestEvent(Event testEvent)

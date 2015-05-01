@@ -46,17 +46,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                List<InvoiceDetails> activeInvoices = new List<InvoiceDetails>();
-                List<InvoiceDetails> allInvoices = InvoiceAccessor.GetAllInvoicesList();
-
-                foreach (InvoiceDetails i in allInvoices)
-                {
-                    if (i.Active == true)
-                    {
-                        activeInvoices.Add(i);
-                    }
-                }
-                return activeInvoices;
+                return InvoiceAccessor.GetAllInvoicesList().Where(i => i.Active).ToList();
             }
             catch (Exception)
             {
@@ -116,14 +106,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </remarks>
         public ResultsArchive CheckToArchiveInvoice(InvoiceDetails invoiceToArchive, List<BookingDetails> bookingsToArchive)
         {
-            foreach (BookingDetails b in bookingsToArchive)
-            {
-                if (b.StartDate > DateTime.Now.AddHours(6) && b.Quantity > 0)
-                {
-                    return ResultsArchive.CannotArchive;
-                }
-            }
-            return ResultsArchive.OkToArchive;
+            return bookingsToArchive.Any(b => b.StartDate > DateTime.Now.AddHours(6) && b.Quantity > 0) ? ResultsArchive.CannotArchive : ResultsArchive.OkToArchive;
         }
 
         /// <summary>
@@ -142,14 +125,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 int numRows = _invoiceAccessor.ArchiveGuestInvoice(GuestID);
 
-                if (numRows == 2)
-                {
-                    return ResultsArchive.ChangedByOtherUser;
-                }
-                else
-                {
-                    return ResultsArchive.Success;
-                }  
+                return numRows == 2 ? ResultsArchive.ChangedByOtherUser : ResultsArchive.Success;
             }
             catch (ApplicationException ex)
             {
@@ -191,10 +167,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 //Will empty the search list if nothing is found so they will get feedback for typing something incorrectly
             }
-            else
-            {
-                return RetrieveActiveInvoiceDetails();
-            }
+            return RetrieveActiveInvoiceDetails();
         }
     }
 }
