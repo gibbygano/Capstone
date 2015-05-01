@@ -49,7 +49,7 @@ namespace com.WanderingTurtle.Tests
         {
             //Added to database and checked to see if an int row is returned, then compared to expected result
             int result = BookingAccessor.AddBooking(booking);
-            int expected = 1;
+            int expected = 2;
             Assert.AreEqual(expected, result);
         }
 
@@ -120,7 +120,7 @@ namespace com.WanderingTurtle.Tests
         public void CleanupTest()
         {
             TestCleanupAccessor.resetItemListing100();
-            TestCleanupAccessor.testBook(booking);
+            //TestCleanupAccessor.testBook(booking);
         }
     }
 }
