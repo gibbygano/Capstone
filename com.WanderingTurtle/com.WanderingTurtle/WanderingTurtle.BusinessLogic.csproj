@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountingManager.cs" />
     <Compile Include="CityStateManager.cs" />
     <Compile Include="ConnectionManager.cs" />
     <Compile Include="DataCache.cs" />
