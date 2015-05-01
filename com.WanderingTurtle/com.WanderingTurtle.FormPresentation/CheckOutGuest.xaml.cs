@@ -1,9 +1,11 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation
@@ -78,31 +80,40 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private async void btnFinalizeInvoice_Click(object sender, RoutedEventArgs e)
         {
+            Exception exception = null;
+            var controller = await this.ShowProgressAsync("Checkout Guest", "Please wait...");
+            await TaskEx.Delay(1000);
             try
             {
-                ResultsArchive result = _invoiceManager.ArchiveGuestInvoice(_CurrentInvoice.HotelGuestID);
-
+                var result = _invoiceManager.ArchiveGuestInvoice(_CurrentInvoice.HotelGuestID);
+                controller.SetMessage("Guest has been checked out!");
+                await TaskEx.Delay(2000);
                 switch (result)
                 {
                     case (ResultsArchive.ChangedByOtherUser):
                         throw new ApplicationException("Record already changed by another user.");
 
                     case (ResultsArchive.Success):
-
-                        PrintableInvoice newReportWindow = new PrintableInvoice((int)guestToView.HotelGuestID);
-                        newReportWindow.ShowDialog();
-
-                        await this.ShowMessageDialog("Guest checkout complete.");
-
-                        DialogResult = true;
-                        Close();
+                        controller.SetMessage("Opening Printable Invoice.");
+                        await TaskEx.Delay(10);
+                        var invoice = new PrintableInvoice((int)guestToView.HotelGuestID);
+                        await controller.CloseAsync();
+                        invoice.ShowDialog();
                         break;
+
+                    default:
+                        throw new ApplicationException("Unknown exception checkout out guest.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) { exception = ex; }
+            if (exception != null)
             {
-                throw new WanderingTurtleException(this, ex);
+                await controller.CloseAsync();
+                throw new WanderingTurtleException(this, exception);
             }
+            await this.ShowMessageDialog("Guest checkout complete.");
+            DialogResult = true;
+            Close();
         }
 
         /// <summary>
@@ -114,16 +125,6 @@ namespace com.WanderingTurtle.FormPresentation
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void btnPrint_Click(object sender, RoutedEventArgs e)
-        {
-            PrintableInvoice newReportWindow = new PrintableInvoice((int)guestToView.HotelGuestID);
-
-            if (newReportWindow.ShowDialog() == false)
-            {
-                //RefreshEmployeeList();
-            }
         }
     }
 }
