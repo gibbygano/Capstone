@@ -30,13 +30,23 @@ namespace com.WanderingTurtle.BusinessLogic
             DatabaseError,
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/01/31
+        /// Default constructorf
+        /// </summary>
         public EventManager()
         {
             //default constructor
         }
 
-        //Retrieve a single Event object from the Data Access layer with an eventItemID
-        //Created by Matt Lapka 1/31/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/01/31
+        /// Retrieve a single Event object from the Data Access layer with an eventItemID
+        /// </summary>
+        /// <param name="eventItemID"></param>
+        /// <returns>the event with the id</returns>
         public Event RetrieveEvent(string eventItemID)
         {
             var now = DateTime.Now;
@@ -72,9 +82,12 @@ namespace com.WanderingTurtle.BusinessLogic
                 throw ex;
             }
         }
-
-        //Retrieve a list of active Event objects from the Data Access layer with
-        //Created by Matt Lapka 1/31/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/01/31
+        //  Retrieve a list of active Event objects from the Data Access layer
+        /// </summary>
+        /// <returns></returns>
         public List<Event> RetrieveEventList()
         {
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
@@ -108,8 +121,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        //Add a single Event object
-        //Created by Matt Lapka 1/31/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/01/31
+        /// Add a single Event object
+        ///</summary>
+        ///<returns>result of adding event</returns>
         public EventResult AddNewEvent(Event newEvent)
         {
             try
@@ -133,8 +150,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        //Edit an Event object
-        //Created by Matt Lapka 1/31/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/01/31
+        /// Edit an Event object
+        ///</summary>
+        ///<returns>result of adding event</returns>
         public EventResult EditEvent(Event oldEvent, Event newEvent)
         {
             try
@@ -158,8 +179,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        //"Delete" a single Event object (make inactive)
-        //Created by Matt Lapka 1/31/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/01/31
+        /// "Delete" a single Event object (make inactive)
+        ///</summary>
+        ///<returns>result of adding event</returns>
         public EventResult ArchiveAnEvent(Event eventToDelete)
         {
             try
@@ -184,9 +209,11 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/02/08
         /// Retrieve a single EventType object from the Data Access layer with an eventTypeID
-        /// Created by Matt Lapka 2/8/15
-        /// </summary>
+        ///</summary>
+        ///<returns>eventType Object</returns>
         public EventType RetrieveEventType(string eventTypeID)
         {
             var now = DateTime.Now;
@@ -223,8 +250,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        ///Retrieve a list of active EventType objects from the Data Access layer
-        ///Created by Matt Lapka 2/8/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/02/08
+        /// Retrieve a list of active EventType objects from the Data Access layer
+        ///</summary>
+        ///<returns>list of eventType Object</returns>
         public List<EventType> RetrieveEventTypeList()
         {
             double cacheExpirationTime = 10; //how long the cache should live (minutes)
@@ -259,8 +290,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        ///Add a single EventType object
-        ///Created by Matt Lapka 2/8/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/02/08
+        /// Add a single EventType object
+        ///</summary>
+        ///<returns>result of adding the eventtype</returns>
         public EventResult AddNewEventType(string eventName)
         {
             try
@@ -284,8 +319,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        //Edit an EventType object
-        //Created by Matt Lapka 2/8/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/02/08
+        /// Edit an EventType object
+        ///</summary>
+        ///<returns>result of adding the eventtype</returns>
         public EventResult EditEventType(EventType oldEventType, EventType newEventType)
         {
             try
@@ -309,8 +348,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        //"Delete" a single EventType object (make inactive)
-        //Created by Matt Lapka 2/8/15
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/02/08
+        /// "Delete" a single EventType object (make inactive)
+        ///</summary>
+        ///<returns>result of adding the eventtype</returns>
         public EventResult ArchiveAnEventType(EventType eventTypeToDelete)
         {
             try
@@ -333,7 +376,14 @@ namespace com.WanderingTurtle.BusinessLogic
                 return EventResult.DatabaseError;
             }
         }
-
+        
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/03/27
+        /// Searches for a string the user asks for
+        /// </summary>
+        /// <param name="inSearch"></param>
+        /// <returns></returns>
         public List<Event> EventSearch(String inSearch)
         {
             //List<Event> myTempList = new List<Event>();
@@ -354,7 +404,14 @@ namespace com.WanderingTurtle.BusinessLogic
             return DataCache._currentEventList;
         }
 
-        public int deleteTestEvent(Event testEvent)
+        /// <summary>
+        /// Bryan Hurst
+        /// Created: 2015/04/03
+        /// Deletes information concerning the test event
+        /// </summary>
+        /// <param name="testEvent"></param>
+        /// <returns></returns>
+        public int DeleteTestEvent(Event testEvent)
         {
             try
             {

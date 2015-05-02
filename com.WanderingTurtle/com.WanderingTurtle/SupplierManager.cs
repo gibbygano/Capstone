@@ -40,13 +40,18 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
+        /// Reece Maas 
+        /// Created: 2015/02/18
         /// Gets a single Supplier  from the Data Access layer
         /// Throws any exceptions caught by the DAL
-        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
+        /// <remarks>
+        /// Matt Lapka
+        /// Updated:  2015/03/27
+        /// Added supplier cache updates
+        /// </remarks>
         /// <param name="supplierID">string ID of the application to be retrieved</param>
         /// <returns>Supplier object</returns>
-        /// Created by Reece Maas 2/18/15
         public Supplier RetrieveSupplier(string supplierID)
         {
             var now = DateTime.Now;
@@ -84,12 +89,17 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
+        /// Reece Maas 
+        /// Created: 2015/02/18
         /// Gets a list of Suppliers  from the Data Access layer
         /// Throws any exceptions caught by the DAL
-        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
+        /// <remarks>
+        /// Matt Lapka 
+        /// Updated:  2015/03/27
+        /// Added supplier cache
+        /// </remarks>
         /// <returns>Supplier List</returns>
-        /// Created by Reece Maas 2/18/15
         public List<Supplier> RetrieveSupplierList()
         {
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
@@ -125,13 +135,18 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
+        /// Reece Maas 
+        /// Created: 2015/02/18
         /// Adds a single Supplier to the database
         /// Throws any exceptions caught by the DAL
-        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
+        /// <remarks>
+        /// Matt Lapka 
+        /// Updated:  2015/03/27
+        /// Added supplier cache
+        /// </remarks>
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
         /// <returns>Supplier object</returns>
-        /// Created by Reece Maas 2/18/15
         public SupplierResult AddANewSupplier(Supplier supplierToAdd, string userName)
         {
             try
@@ -157,14 +172,19 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
+        /// Reece Maas 
+        /// Created: 2015/02/18
         /// Updates a Supplier
         /// Throws any exceptions caught by the DAL
-        /// Edited by Matt Lapka 2015/03/27
         /// </summary>
+        /// <remarks>
+        /// Matt Lapka 
+        /// Updated:  2015/03/27
+        /// Added supplier cache
+        /// </remarks>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
-        /// <returns>updated Supplier</returns>
-        /// Created by Reece Maas 2/18/15
+        /// <returns>results of editing the supplier</returns>
         public SupplierResult EditSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
             try
@@ -190,12 +210,19 @@ namespace com.WanderingTurtle.BusinessLogic
 
 
         /// <summary>
-        /// 
-        /// 
-        /// archives supplier and login info
+        /// Matt Lapka
+        /// Created:  2015/02/08
+        /// archives supplier
         /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/04/26
+        /// Added archiving of login at the same time as archiving other supplier information
+        /// </remarks>
         /// <param name="supplierToDelete"></param>
-        /// <returns></returns>
+        /// <returns>
+        /// Result of archiving the supplier
+        /// </returns>
         public SupplierResult ArchiveSupplier(Supplier supplierToDelete)
         {
             try
@@ -221,7 +248,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// 2015/02/08
+        /// Created:  2015/02/08
         /// Gets a single Supplier Application Record from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
@@ -341,7 +368,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Pat Banks
         /// Created:  2015/04/11
-        ///
         /// Returns the result of approving a supplier application and adds records to the Supplier Table and SupplierLogin tables
         /// </summary>
         /// <param name="oldSupplierApp">the original application</param>
@@ -380,6 +406,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Justin Pennington
         /// Created on 2015/04/14
+        /// Searches for a string the user inputs
         /// </summary>
         /// <param name="inSearch"></param>
         /// <returns></returns>

@@ -13,7 +13,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
-        ///
         /// Creates a new Hotel Guest in the database
         /// </summary>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>
@@ -21,12 +20,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/10
+        /// 
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
-        ///
-        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
-        ///
         /// Updated try/catch blocks
+        /// 
+        /// Tony Noel 
+        /// Updated 2015/04/13 by 
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         public ResultsEdit AddHotelGuest(HotelGuest newHotelGuest)
         {
@@ -58,7 +59,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
-        ///
         /// Updated try/catch blocks
         /// </remarks>
         /// <param name="hotelGuestId">the id of a hotel guest to retrieve</param>
@@ -84,6 +84,12 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/25
+        /// Generates a random 6 digit pin for the hotel guest to access website
+        /// </summary>
+        /// <returns></returns>
         public string GenerateRandomPIN()
         {
             Random rg = new Random();
@@ -101,7 +107,6 @@ namespace com.WanderingTurtle.BusinessLogic
             return builder.ToString();
         }
 
-
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
@@ -111,10 +116,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
-        ///
-        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
-        ///
         /// Updated try/catch blocks
+        /// 
+        /// Tony Noel
+        /// Updated 2015/04/13
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>

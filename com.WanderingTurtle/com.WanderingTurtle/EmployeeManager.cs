@@ -8,19 +8,17 @@ namespace com.WanderingTurtle.BusinessLogic
 {
     public class EmployeeManager
     {
-        // Success: A ResultsEdit.Success value is returned
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
-        ///
+        /// Method takes in newEmployee and passes it as a parameter into the AddEmployee method of the EmployeeAccessor class
+        /// </summary>
         /// <remarks>
         /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
-        /// Method takes in newEmployee and passes it as a parameter into the AddEmployee method of the EmployeeAccessor class
-        /// </summary>
         /// <param name="newEmployee"></param>
         /// <exception cref="Exception">Exception is thrown if database is not available or new employee cannot be created in the database for any reason</exception>
-        /// <returns>An int value is returned to the method to show rows affected</returns>
+        /// <returns>Success: A ResultsEdit.Success value is returned</returns>
         public ResultsEdit AddNewEmployee(Employee newEmployee)
         {
             try
@@ -41,18 +39,15 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Ryan Blake
         /// Created: 2015/02/12
-        ///
-        ///
         /// Method takes in new and old employee parameters and then submits them to the Data Access Layer method to update the employee record for oldEmploy
-        /// </summary>
-        /// <remarks>
         /// This will also take the place of a 'Delete' method
         ///     The user will simply mark the employee inactive which will change the
         ///     bit value in the table to a 0 to represent false
-        /// </remarks>
-        ///
+        /// </summary>
         /// <remarks>
-        ///  Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// Tony Noel
+        /// Updated: 2015/04/13
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         /// <param name="oldEmployee"></param>
         /// <param name="newEmployee"></param>
@@ -79,31 +74,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Ryan Blake
         /// Created: 2015/02/12
         ///
-        /// Method takes in two parameters that will hold the employee's
-        ///     first and last name. This information is passed to the access layer
-        ///     where it is used to find the employee in question and return that
-        ///     employee's information to the method and then to the presentation
-        ///     layer calling method
-        /// </summary>
-        /// <param name="empID"></param>
-        /// <exception cref="Exception">An exception is thrown from the Access Layer asking the user to try their search again</exception>
-        /// <returns>The employee object is returned to the method successfully</returns>
-        public Employee FetchEmployee(int empID)
-        {
-            try
-            {
-                return EmployeeAccessor.GetEmployee(empID);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        /// <summary>
-        /// Ryan Blake
-        /// Created: 2015/02/12
-        ///
         /// Method makes a call to getEmployeeList method from the EmployeeAccessor to retrieve a list of all active employees
         /// </summary>
         /// <exception cref="Exception">Exception is thrown from Accessor that states that employee could not be found in the database</exception>
@@ -123,7 +93,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Arik Chadima
         /// Created: 2015/03/03
-        ///
         /// Attempts to fetch an employee with the given credentials from the access layer.
         /// Failure: ApplicationException if the login was bad, and SqlException of some kind if it's a connection issue.
         /// </summary>
@@ -145,7 +114,6 @@ namespace com.WanderingTurtle.BusinessLogic
         ///<summary>
         ///Justin Pennington
         ///Created: 2015/04/14
-        ///
         ///Attempts to retrieve an employee based on First, Last, or job title
         ///Failure: If nothing is found, it will return an empty list
         ///</summary>

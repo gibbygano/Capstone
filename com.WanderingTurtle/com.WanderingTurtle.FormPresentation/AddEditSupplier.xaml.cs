@@ -59,7 +59,7 @@ namespace com.WanderingTurtle.FormPresentation
             Title = "Editing Supplier: " + _UpdatableSupplier.GetFullName;
 
             //retrieve the username
-            _supplierUserName = _loginManager.retrieveSupplierUserName(supplierToEdit.SupplierID);
+            _supplierUserName = _loginManager.RetrieveSupplierUserName(supplierToEdit.SupplierID);
 
             fillComboBox();
             FillUpdateList();
