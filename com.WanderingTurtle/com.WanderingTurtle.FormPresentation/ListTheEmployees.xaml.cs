@@ -30,6 +30,13 @@ namespace com.WanderingTurtle.FormPresentation
             lvEmployeesList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// Logic for context menus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {

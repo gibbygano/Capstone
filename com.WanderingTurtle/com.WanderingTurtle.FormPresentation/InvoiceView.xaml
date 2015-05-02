@@ -45,14 +45,13 @@
         </Grid>
         <DataGrid Grid.Row="2" x:Name="lvGuestBookings" d:DataContext="{d:DesignInstance common:BookingDetails }">
             <DataGrid.Columns>
-                <DataGridTextColumn Width ="50" Header="ID" Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width ="100" Header="Event Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
                 <DataGridTextColumn Width ="100" Header="Start Time" Binding="{Binding StartDate, StringFormat='{}{0:t}'}" />
-                <DataGridTextColumn Width ="176" Header="Event Name" Binding="{Binding EventItemName}" />
+                <DataGridTextColumn Width ="200" Header="Event Name" Binding="{Binding EventItemName}" />
                 <DataGridTextColumn Width ="50" Header="Qty" Binding="{Binding Quantity}" />
                 <DataGridTextColumn Width ="100" Header="Ticket Price" Binding="{Binding TicketPrice, StringFormat='{}{0:C}'}" />
-                <DataGridTextColumn Width ="100" Header="Extended" Binding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
-                <DataGridTextColumn Width ="75" Header="Disc" Binding="{Binding Discount, StringFormat='{}{0:P}'}" />
+                <DataGridTextColumn Width ="85" Header="Extended" Binding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
+                <DataGridTextColumn Width ="60" Header="Disc" Binding="{Binding Discount, StringFormat='{}{0:P}'}" />
                 <DataGridTextColumn Width ="100" Header="Total Due" Binding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>

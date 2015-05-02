@@ -14,7 +14,7 @@
     </Metro:TransitioningContentControl>
     <Metro:MetroWindow.RightWindowCommands>
         <Metro:WindowCommands>
-            <Button Content="Sign Out" Click="BtnSignOut_Click" />
+            <Button x:Name="btnSignOut"  Content="Sign Out" Click="BtnSignOut_Click" IsEnabled="False"/>
         </Metro:WindowCommands>
     </Metro:MetroWindow.RightWindowCommands>
 </Metro:MetroWindow>

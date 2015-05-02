@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvEvents" d:DataContext="{d:DesignInstance common:Event}">
+        <DataGrid Grid.Row="0" x:Name="lvEvents" d:DataContext="{d:DesignInstance common:Event}" Loaded="lvEvents_Loaded" >
             <DataGrid.Columns>
                 <!-- Here we bind the names that are held within the Event objects to the fields. This will allow us to present an
                     object to the listview and have it auto-populate with the objects data. Notice that the binding names are IDENTICAL

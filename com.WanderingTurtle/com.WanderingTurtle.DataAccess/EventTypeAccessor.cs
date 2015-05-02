@@ -88,7 +88,7 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return rowsAffected;  // needs to be rows affected
+            return rowsAffected;  
         }
 
         /// <summary>
@@ -126,11 +126,12 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-            return rowsAffected;  // needs to be rows affected
+            return rowsAffected;  
         }
 
         /// <summary>
-
+        /// Justin Pennington
+        /// Created 2015/02/14
         /// retrieves all EventTypes, Makes a List of EventTypes,
         /// </summary>
         /// <returns> Returns the List of EventTypes</returns>

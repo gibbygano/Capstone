@@ -27,6 +27,14 @@ namespace com.WanderingTurtle.FormPresentation
         public ListTheListings()
         {
             InitializeComponent();
+
+            if (Globals.UserToken.Level.Equals(RoleData.Valet) || Globals.UserToken.Level.Equals(RoleData.Concierge))
+            {
+                btnAddListing.IsEnabled = false;
+                btnArchiveListing.IsEnabled = false;
+                btnEditListing.IsEnabled = false;
+            }
+
             refreshData();
 
             lvListing.SetContextMenu(this);
@@ -37,26 +45,44 @@ namespace com.WanderingTurtle.FormPresentation
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<ItemListing>(out command);
-            switch (command)
+
+            if (Globals.UserToken.Level.Equals(RoleData.Valet) || Globals.UserToken.Level.Equals(RoleData.Concierge))
             {
-                case DataGridContextMenuResult.Add:
-                    OpenListing();
-                    break;
+                switch (command)
+                {
+                    case DataGridContextMenuResult.View:
+                        OpenListing(selectedItem, true);
+                        break;
+                    default:
+                        throw new WanderingTurtleException(this, "You do not have access to this function.");
+                }
+            }
+            else
+            {
+                switch (command)
+                {
+                    case DataGridContextMenuResult.Add:
+                        if (Globals.UserToken.Equals(RoleData.Admin))
+                        {
+                            OpenListing();
+                        }
+                        break;
 
-                case DataGridContextMenuResult.View:
-                    OpenListing(selectedItem, true);
-                    break;
+                    case DataGridContextMenuResult.View:
+                        OpenListing(selectedItem, true);
+                        break;
 
-                case DataGridContextMenuResult.Edit:
-                    OpenListing(selectedItem);
-                    break;
+                    case DataGridContextMenuResult.Edit:
+                        OpenListing(selectedItem);
+                        break;
 
-                case DataGridContextMenuResult.Delete:
-                    ArchiveListing();
-                    break;
+                    case DataGridContextMenuResult.Delete:
+                        ArchiveListing();
+                        break;
 
-                default:
-                    throw new WanderingTurtleException(this, "Error processing context menu");
+                    default:
+                        throw new WanderingTurtleException(this, "Error processing context menu");
+                }
             }
         }
 
@@ -82,7 +108,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
         /// <summary>
         /// Pat Banks
         /// Updated 2015/04/26
@@ -91,7 +116,7 @@ namespace com.WanderingTurtle.FormPresentation
         private async void ArchiveListing()
         {
             ItemListing ListingToDelete = lvListing.SelectedItem as ItemListing;
-            
+
             try
             {
                 //need to check if there are any Bookings associated with this listing.
