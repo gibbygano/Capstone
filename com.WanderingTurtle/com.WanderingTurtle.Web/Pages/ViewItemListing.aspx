@@ -7,11 +7,12 @@
 <%@ Import Namespace="com.WanderingTurtle" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
-    <script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>
+    <%--<script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>--%>
     <!--Created 2015/04/09
         Kelsey 
         View List of Item Listings and Options to Edit or Delete
         -->
+    <div id="main">
     <h1>Your Listed Events
     </h1>
     <asp:Label ID="lblError" runat="server" Text="" ForeColor="Red"></asp:Label>
@@ -26,7 +27,11 @@
                 <td><%# Item.MaxNumGuests %></td>
                 <td>
                     <asp:Button CommandName="Edit" CommandArgument="<%# Item.EventID %>" Text="Edit" runat="server" />
-                    <asp:Button CommandName="Delete" Text="Delete" runat="server" OnClientClick="return showConfirm();" />
+                    
+                    <input type="hidden" name="myListID" value="<%# Item.ItemListID %>" />
+                    <input type="button" class="myID" name="<%# Item.ItemListID %>"  value="Delete" />
+                    <%--<asp:Button Text="Delete" ID="<%# Item.ItemListID %>" runat="server" OnClientClick="return showConfirm(this)"  UseSubmitBehavior="false" />--%>
+
                 </td>
             </tr>
         </ItemTemplate>
@@ -60,46 +65,20 @@
                     <input size="3" name="max" id="listmax" class="myspinner myDate" value="<%# Item.MaxNumGuests %>" maxlength="3" /></td>
                 <td>
                     <asp:Button CommandName="Update" Text="Update" CausesValidation="true" runat="server" ID="btnUpdate" />
+
                     <asp:Button CommandName="Cancel" Text="Cancel" runat="server" />
                 <input type="hidden" id="listCurrent" value="<%# Item.CurrentNumGuests %>" />
                 <input type="hidden" name="itemID" value="<%# Item.ItemListID %>" /></td>
             </tr>
         </EditItemTemplate>
     </asp:ListView>
-
-    <div id="deletemessage" runat="server" title="Are you sure??" visible="false">
+</div>
+    hello
+        <div id="deletemessage" title="Are you sure??">
             <div class="errorMsg">
                 <asp:Label ID="lblDeleteMessage" runat="server" Text="Are you sure you want to delete this event?" ForeColor="#FFFFFF"></asp:Label>
                 <br />
             </div>
         </div>
 
-    <script>
-        function showConfirm() {
-            $('#deletemessage').dialog({
-                modal: true,
-                zIndex: 10000,
-                autoOpen: true,
-                width: 'auto',
-                resizable: false,
-                buttons: {
-                    Yes: function () {
-                        return true;
-                    },
-                    No: function () {
-                        $(this).dialog("close");
-                        return false;
-                    }
-                },
-                close: function (event, ui) {
-                    $(this).remove();
-                }
-            });
-            $("#deletemessage").dialog("open");
-
-
-        }
-
-
-    </script>
 </asp:Content>

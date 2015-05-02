@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.Web.Pages
         ProductManager _myManager = new ProductManager();
         EventManager _eventManager = new EventManager();
         SupplierManager _supplierManager = new SupplierManager();
-        IEnumerable<ItemListing> _listedLists;
+        static IEnumerable<ItemListing> _listedLists;
         public bool loggedIn = false;
         public List<Supplier> _suppliers;
         public List<Event> _events;
@@ -35,6 +35,18 @@ namespace com.WanderingTurtle.Web.Pages
                 catch (Exception ex)
                 {
                     //nothing
+                }
+            }
+            if (Page.IsPostBack)
+            {
+                var requestTarget = this.Request["__EVENTTARGET"];
+                var requestArgs = this.Request["__EVENTARGUMENT"];
+
+                if (requestTarget == "delete")
+                {
+                    // do you own validation etc
+                    DeleteList(int.Parse(requestArgs));
+                    return;
                 }
             }
         }
@@ -101,7 +113,7 @@ namespace com.WanderingTurtle.Web.Pages
             string errorText = "";
             lblError.Text = "";
             int ItemListID = int.Parse(Request.Form["itemID"]);
-            
+
             try
             {
                 ItemListing myList = _listedLists.Where(ev => ev.ItemListID == ItemListID).FirstOrDefault();
@@ -157,7 +169,7 @@ namespace com.WanderingTurtle.Web.Pages
                 if (myList != null && errorText.Length == 0)
                 {
                     result = _myManager.EditItemListing(newList, myList);
-                    if(result == listResult.NoDateChange)
+                    if (result == listResult.NoDateChange)
                     {
                         errorText = addError(errorText, "You cannot change the date after guests have signed up!");
                         lblError.Text = errorText;
@@ -182,7 +194,7 @@ namespace com.WanderingTurtle.Web.Pages
                         errorText = addError(errorText, "Date cannot be in the past!");
                         lblError.Text = errorText;
                     }
-                    
+
                     return;
                 }
                 else
@@ -216,6 +228,8 @@ namespace com.WanderingTurtle.Web.Pages
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Deleting Event\")</SCRIPT>");
             }
         }
+
+
         public void InsertList()
         {
 

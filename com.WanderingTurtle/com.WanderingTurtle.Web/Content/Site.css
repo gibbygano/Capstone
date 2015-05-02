@@ -1141,3 +1141,7 @@ div#errorMess{
 div.ui-widget-content{
     background: #006AA1;
 }
+
+div#deletemessage{
+    width: 95% !important;
+}
