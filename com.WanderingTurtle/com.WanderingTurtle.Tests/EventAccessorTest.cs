@@ -86,7 +86,7 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Method for retrieveing the test record created by theses methods
+        /// Method for retrieving the test record created by these methods
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
@@ -130,7 +130,6 @@ namespace com.WanderingTurtle.Tests
             int actual = EventAccessor.DeleteEventItem(eventToTest);
             EventAccessor.DeleteEventTestItem(eventToTest);
             Assert.AreEqual(expected, actual);
-
         }
 
         /// <summary>
