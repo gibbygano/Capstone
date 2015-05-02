@@ -239,12 +239,12 @@ namespace com.WanderingTurtle.Web.Pages
                 lblAddError.Text = "You must enter a valid ending date!";
                 return;
             }
-            if (String.IsNullOrEmpty(Request.Form["price"]) || !Validator.ValidateDouble(Request.Form["price"]))
+            if (String.IsNullOrEmpty(Request.Form["price"]) || !Validator.ValidateDouble(Request.Form["price"], 0.01))
             {
                 lblAddError.Text = "You must enter a valid price!";
                 return;
             }
-            if (String.IsNullOrEmpty(Request.Form["tickets"]) || !Validator.ValidateDouble(Request.Form["tickets"]))
+            if (String.IsNullOrEmpty(Request.Form["tickets"]) || !Validator.ValidateDouble(Request.Form["tickets"], 1))
             {
                 lblAddError.Text = "You must enter a valid number of tickets available";
                 return;
