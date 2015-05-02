@@ -46,29 +46,34 @@ namespace com.WanderingTurtle.FormPresentation.Views
             do
             {
                 if (Globals.UserToken != null) { break; }
-                LoginDialogSettings settings = new LoginDialogSettings
-                {
-                    UsernameWatermark = "User ID",
-                    PasswordWatermark = "Password",
-                    NegativeButtonVisibility = Visibility.Visible,
-                    AffirmativeButtonText = "Log In",
-                    InitialUsername = _user
-                };
-                LoginDialogData result = await this.ShowLoginDialog("Enter your credentials.", "Authentication", settings);
-                if (result == null) { break; }
+                               
                 try
                 {
                     int userId;
-                    if (!int.TryParse(result.Username, out userId)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
+                    string password;
+                    if (!int.TryParse(txtUserName.Text, out userId)) 
+                    { 
+                        throw new ApplicationException(string.Format("Please enter your user id."));
+                    }
+                    
                     _user = userId.ToString();
-                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
-                    Globals.UserToken = new EmployeeManager().GetEmployeeLogin(userId, result.Password);
+
+                    password = txtPassword.Password;
+                    if (string.IsNullOrWhiteSpace(password)) { throw new ApplicationException(string.Format("Please enter your password.")); }
+
+                    Globals.UserToken = new EmployeeManager().GetEmployeeLogin(userId, password);
+
                     if (Globals.UserToken == null) { throw new ApplicationException("Error setting User Token"); }
                     _exception = null;
                 }
-                catch (ApplicationException ex) { _exception = ex; }
-                if (_exception != null) { await this.ShowMessageDialog(_exception.Message, "Login Error"); }
+                catch (ApplicationException ex) { _exception = ex;}
+                if (_exception != null) { await this.ShowMessageDialog(_exception.Message, "Login Error"); return; }
             } while (_exception != null);
+
+            if (Globals.UserToken != null)
+            {
+                this.GetMainWindow().btnSignOut.IsEnabled = true;
+            }
             if (Globals.UserToken != null) { this.GetMainWindow().MainContent.Content = new TabContainer(); }
         }
     }

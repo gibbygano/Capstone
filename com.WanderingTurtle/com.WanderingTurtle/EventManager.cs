@@ -334,6 +334,8 @@ namespace com.WanderingTurtle.BusinessLogic
                     //update cache
                     DataCache._currentEventTypeList = EventTypeAccessor.GetEventTypeList();
                     DataCache._EventTypeListTime = DateTime.Now;
+                    DataCache._currentEventList = EventAccessor.GetEventList();
+                    DataCache._EventListTime = DateTime.Now;
                     return EventResult.Success;
                 }
                 return EventResult.NotChanged;
@@ -363,6 +365,8 @@ namespace com.WanderingTurtle.BusinessLogic
                     //update cache
                     DataCache._currentEventTypeList = EventTypeAccessor.GetEventTypeList();
                     DataCache._EventTypeListTime = DateTime.Now;
+                    DataCache._currentEventList = EventAccessor.GetEventList();
+                    DataCache._EventListTime = DateTime.Now;
                     return EventResult.Success;
                 }
                 return EventResult.NotChanged;

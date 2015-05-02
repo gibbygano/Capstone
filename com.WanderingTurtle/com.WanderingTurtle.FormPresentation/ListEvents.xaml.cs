@@ -36,7 +36,7 @@ namespace com.WanderingTurtle.FormPresentation
         
         /// <summary>
         /// Miguel Santana
-        /// Created:  2015/04/15'
+        /// Created:  2015/04/15
         /// Logic for context menus
         /// </summary>
         /// <param name="sender"></param>
@@ -97,7 +97,6 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, ex);
             }
         }
-
 
         /// <summary>
         /// Hunter Lind 
@@ -220,6 +219,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void Refresh()
         {
+
+            lvEvents.ItemsPanel.LoadContent();
+
             try
             {
                 _myEventList = _myEventManager.RetrieveEventList();
@@ -228,6 +230,7 @@ namespace com.WanderingTurtle.FormPresentation
                     x.setFields();
                 }
                 lvEvents.ItemsSource = _myEventList;
+                lvEvents.Items.Refresh();
             }
             catch (Exception ex)
             {
@@ -246,6 +249,17 @@ namespace com.WanderingTurtle.FormPresentation
         private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             btnSearch.Content = txtSearchInput.Text.Length == 0 ? "Refresh List" : "Search";
+        }
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/05/02
+        /// Reloads the events listing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lvEvents_Loaded(object sender, RoutedEventArgs e)
+        {
+            Refresh();
         }
     }
 }

@@ -172,7 +172,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                 foreach (Event item in eventCbox.Items)
                 {
-                    if (CurrentItemListing.EventName.Equals(item.EventItemName))
+                    if (CurrentItemListing.EventID.Equals(item.EventItemID))
                     { eventCbox.SelectedItem = item; }
                 }
                 foreach (Supplier item in supplierCbox.Items)

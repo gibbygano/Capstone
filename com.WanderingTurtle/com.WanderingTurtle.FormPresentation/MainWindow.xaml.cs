@@ -69,6 +69,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)
         {
+            btnSignOut.IsEnabled = false;
             StartUp();
         }
     }
