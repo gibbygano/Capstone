@@ -9,14 +9,18 @@ namespace com.WanderingTurtle.DataAccess
     public class ItemListingAccessor
     {
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/10
         /// Retrieves ItemListing data from the Database using a Stored Procedure.
         /// Creates an ItemListing object.
-        ///
-        /// Created by Tyler Collins 02/10/2015
         /// </summary>
+        /// <remarks>
+        /// Tyler Collins
+        /// Updated:  2015/02/26
+        /// now up to date with most recent ItemListing object class
+        /// </remarks>
         /// <param name="itemListID">Requires the ItemListID to SELECT the correct ItemListing record.</param>
         /// <returns>ItemListing object</returns>
-        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static ItemListing GetItemListing(string itemListID)
         {
             ItemListing itemListingToRetrieve = new ItemListing();
@@ -67,14 +71,18 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/10
         /// Retrieves all ItemListing data from the Database using a Stored Procedure.
         /// Creates an ItemListing object from retrieved data.
         /// Adds ItemListing object to List of ItemListing objects.
-        ///
-        /// Created by Tyler Collins 02/10/2015
         /// </summary>
+        /// <remarks>
+        /// Tyler Collins
+        /// Updated:  2015/02/26
+        /// now up to date with most recent ItemListing object class
+        /// </remarks>
         /// <returns>List of Active ItemListing objects</returns>
-        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static List<ItemListing> GetItemListingList()
         {
             List<ItemListing> itemListingList = new List<ItemListing>();
@@ -100,9 +108,6 @@ namespace com.WanderingTurtle.DataAccess
                         currentItemListing.ItemListID = reader.GetInt32(2);
                         currentItemListing.EventID = reader.GetInt32(3);
                         currentItemListing.Price = reader.GetDecimal(4);
-
-                        //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
-                        //Updated by Justin Pennington
                         currentItemListing.SupplierID = reader.GetInt32(5);
                         currentItemListing.CurrentNumGuests = reader.GetInt32(6);
                         currentItemListing.MaxNumGuests = reader.GetInt32(7);
@@ -133,15 +138,21 @@ namespace com.WanderingTurtle.DataAccess
 
             return itemListingList;
         }
+
+
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/10
         /// Retrieves all ItemListing data from the Database using a Stored Procedure.
         /// Creates an ItemListing object from retrieved data.
         /// Adds ItemListing object to List of ItemListing objects.
-        ///
-        /// Created by Tyler Collins 02/10/2015
         /// </summary>
+        /// <remarks>
+        /// Tyler Collins
+        /// Updated:  2015/02/26
+        /// now up to date with most recent ItemListing object class
+        /// </remarks>
         /// <returns>List of ItemListing objects</returns>
-        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static List<ItemListing> GetAllItemListingList()
         {
             List<ItemListing> itemListingList = new List<ItemListing>();
@@ -167,9 +178,6 @@ namespace com.WanderingTurtle.DataAccess
                         currentItemListing.ItemListID = reader.GetInt32(2);
                         currentItemListing.EventID = reader.GetInt32(3);
                         currentItemListing.Price = reader.GetDecimal(4);
-
-                        //Are we using QuanityOffered and ProductSize since these are Event Items? O.o
-                        //Updated by Justin Pennington
                         currentItemListing.SupplierID = reader.GetInt32(5);
                         currentItemListing.CurrentNumGuests = reader.GetInt32(6);
                         currentItemListing.MaxNumGuests = reader.GetInt32(7);
@@ -195,18 +203,21 @@ namespace com.WanderingTurtle.DataAccess
             {
                 conn.Close();
             }
-
             return itemListingList;
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/11
         /// INSERTs an ItemListing into the Database using a Stored Procedure.
-        ///
-        /// Created by Tyler Collins 02/11/2015
         /// </summary>
+        /// <remarks>
+        /// Tyler Collins
+        /// Updated:  2015/02/26
+        /// now up to date with most recent ItemListing object class
+        /// </remarks>
         /// <param name="itemListingToAdd">Requires an ItemListing object to INSERT</param>
         /// <returns>Returns the number of rows affected.</returns>
-        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static int AddItemListing(ItemListing itemListingToAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -241,14 +252,18 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/11
         /// UPDATEs an ItemListing record in the Database with new data using a Stored Procedure.
-        ///
-        /// Created by Tyler Collins 02/11/2015
         /// </summary>
+        /// <remarks>
+        /// Tyler Collins
+        /// Updated:  2015/02/26
+        /// now up to date with most recent ItemListing object class
+        /// </remarks>
         /// <param name="newItemListing">Requires the ItemListing object containing the new information</param>
         /// <param name="oldItemListing">Requires the ItemListing object to replace that matches the record in the Database</param>
         /// <returns>Returns the number of rows affected.</returns>
-        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static int UpdateItemListing(ItemListing newItemListing, ItemListing oldItemListing)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -295,13 +310,17 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/11
         /// DELETEs (Sets Boolean Active field to false) an ItemListing record in the Database using a Stored Procedure.
-        ///
-        /// Created by Tyler Collins 02/11/2015
         /// </summary>
+        /// <remarks>
+        /// Tyler Collins
+        /// Updated:  2015/02/26
+        /// now up to date with most recent ItemListing object class
+        /// </remarks>
         /// <param name="itemListingToDelete">Requires the ItemListing object which matches the record to be DELETED in the Database.</param>
         /// <returns>Returns the number of rows affected.</returns>
-        ///<updated>Tyler Collins - 02/26/2015 - now up to date with most recent ItemListing object class</updated>
         public static int DeleteItemListing(ItemListing itemListingToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -337,8 +356,13 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        //Bryan Hurst 4/23/2015
-        //Method for deletion of test records created with the unit tests
+        /// <summary>
+        /// Bryan Hurst 
+        /// Created:  4/23/2015
+        /// Method for deletion of test records created with the unit tests
+        /// </summary>
+        /// <param name="TestListing"></param>
+        /// <returns>number of rows affected</returns>
         public static int DeleteItemListingTestItem(ItemListing TestListing)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

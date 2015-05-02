@@ -9,7 +9,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Tony Noel
     /// Created: 2015/03/04
-    ///
     /// Interaction logic for CancelBooking.xaml
     /// </summary>
     public partial class CancelBooking
@@ -24,7 +23,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        ///
         /// A form used to cancel a booking. Displays the information about the booking.
         /// </summary>
         /// <param name="booking">Requires an input of a BookingDetails object
@@ -43,13 +41,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        ///
         /// Attempts to populate the UI and the Guest labels with text pertaining to the guest booking
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/08
-        ///
         /// Updated with new fields and formatting;  Moved fee calculation to BLL
         /// </remarks>
         private void PopulateText()
@@ -71,18 +67,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        ///
         /// A method to cancel a booking.
         /// The object is then sent to the OrderManager-EditBooking method to be processed.
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/08
-        ///
         /// Updated fields to reflect cancellation of booking
+        /// 
         /// Pat Banks
         /// Updated: 2015/03/19
-        ///
         /// Moved logic to BookingManager - CancelBookingResults
         /// </remarks>
         /// <param name="sender"></param>
@@ -115,6 +109,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/23
+        /// Closes UI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

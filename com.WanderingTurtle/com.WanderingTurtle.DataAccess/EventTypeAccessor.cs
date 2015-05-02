@@ -1,6 +1,4 @@
-﻿//Justin Pennington 2/14/15
-
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,8 +8,13 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class EventTypeAccessor
     {
-        //Justin Pennington 2/14/15
-        //input parameter of EventType, will add the event type to the database, will return a 0 if it fails and a 1 if it was successful (false/true)
+        /// <summary>
+        /// Justin Pennington 
+        /// created:  2015/02/14
+        /// add the event type to the database
+        /// </summary>
+        /// <param name="newEventType">input parameter of EventType</param>
+        /// <returns>number of rows affected:  0 fails and a 1 for success</returns>
         public static int AddEventType(string newEventType)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -43,9 +46,15 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        //Justin Pennington 2/14/15
-        //needs the event object that is having its name being changed and the new name
-        //Returns the number of rows affected (should be 1)
+        /// <summary>
+        /// Justin Pennington 
+        /// created:  2015/02/14
+        /// needs the event object that is having its name being changed and the new name
+        /// </summary>
+        /// </summary>
+        /// <param name="oldEventType"></param>
+        /// <param name="newEventType"></param>
+        /// <returns>Returns the number of rows affected (should be 1)</returns>
         public static int UpdateEventType(EventType oldEventType, EventType newEventType)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -82,8 +91,13 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
-        //requires: Event object, Boolean value for active/inactive
-        //returns number of rows affected
+        /// <summary>
+        /// Justin Pennington 
+        /// created:  2015/02/14
+        /// ARchives an event type
+        /// </summary>
+        /// <param name="eventTypeToArchive"></param>
+        /// <returns>returns number of rows affected</returns>
         public static int DeleteEventType(EventType eventTypeToArchive)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -115,8 +129,11 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
-        //Justin Pennington 2/14/15
-        //retrieves all EventTypes, Makes a List of EventTypes, Returns the List of EventTypes
+        /// <summary>
+
+        /// retrieves all EventTypes, Makes a List of EventTypes,
+        /// </summary>
+        /// <returns> Returns the List of EventTypes</returns>
         public static List<EventType> GetEventTypeList()
         {
             var EventTypeList = new List<EventType>();
@@ -158,8 +175,13 @@ namespace com.WanderingTurtle.DataAccess
             return EventTypeList;
         }
 
-        //Justin Pennington 2/14/15
-        //gets an eventTypeID, retrieves data from databases, Returns an Event object
+        /// <summary>
+        /// Justin Pennington 
+        /// created:  2015/02/14
+        /// gets an eventTypeID, retrieves data from databases
+        /// </summary>
+        /// <param name="eventTypeID"></param>
+        /// <returns>Returns an Event object</returns>
         public static EventType GetEventType(String eventTypeID)
         {
             EventType theEventType = new EventType();

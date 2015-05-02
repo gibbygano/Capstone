@@ -30,7 +30,7 @@ namespace com.WanderingTurtle.Tests
         private Booking booking = new Booking();
         private BookingDetails bookingDetails;
         private BookingManager myBook = new BookingManager();
-
+        private List<Booking> getThem = new List<Booking>();
         public void TestBookingConstructor()
         {
             //booking object created
@@ -42,11 +42,16 @@ namespace com.WanderingTurtle.Tests
         {//Sets up the booking record and calls for the record to be added
             TestBookingConstructor();
             AddBookingResult();
+            createBookingList();
             
         }
         public void AddBookingResult()
         {
             ResultsEdit result = myBook.AddBookingResult(booking);
+        }
+        public void createBookingList()
+        {
+            getThem = TestCleanupAccessor.GetAllBookings();
         }
         [TestMethod]
         public void TestAddBookingResult()
@@ -92,11 +97,11 @@ namespace com.WanderingTurtle.Tests
 
         [TestMethod]
         public void TestRetrieveEventListing()
-        {
+        {   //Assigns int item to the ItemListID from the first booking record in the getThem list of all bookings
+            int item = getThem[getThem.Count - 1].ItemListID;
             //A test to retrieve a single listing by ID from the ItemListing table.
-            ItemListingDetails detail = myBook.RetrieveItemListingDetailsList(itemID);
-            int expected = 1234;
-            Assert.AreEqual(expected, detail.Price);
+            ItemListingDetails detail = myBook.RetrieveItemListingDetailsList(item);
+            Assert.IsNotNull(detail);
         }
 
         [TestMethod]
@@ -241,14 +246,12 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void TestEditBookingResultsSuccess()
         {
-            //Tests the Edit Booking Results method in the Booking Manager- which takes an int and a Booking object.
-            //Grabs the ID for the dummy booking
-            int id = TestCleanupAccessor.GetBooking();
-            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity
-            //to a new amount
+            //Grabs the List of all active bookings in DB and assigns the first record from the listing to a int id 
+            int id = getThem[getThem.Count - 1].BookingID;
+            //retrieves the full booking information, assigns the initial quantity to an int
+            //Does not change the record, just checks to make sure all steps going through.
             Booking booking1 = myBook.RetrieveBooking(id);
             int original = booking1.Quantity;
-            booking1.Quantity = 4;
             //Passes the object to the EditBookingResults method and asserts that that result will be successful
             ResultsEdit result = myBook.EditBookingResult(original, booking1);
             ResultsEdit expected = ResultsEdit.Success;
@@ -260,9 +263,8 @@ namespace com.WanderingTurtle.Tests
         {
             //Tests the Edit Booking Results method in the Booking Manager- which takes an int and a Booking object.
             //Grabs the ID for the dummy booking
-            int id = TestCleanupAccessor.GetBooking();
-            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity
-            //to a new amount
+            int id = getThem[getThem.Count - 1].BookingID;
+            //retrieves the full booking information, assigns the initial quantity to an int
             Booking booking1 = myBook.RetrieveBooking(id);
             int original = booking1.Quantity;
             booking1.Quantity = 0;
@@ -274,16 +276,12 @@ namespace com.WanderingTurtle.Tests
 
         [TestMethod]
         public void TestEditBookingResultsListingFull()
-        {
-            //Tests the Edit Booking Results method in the Booking Manager- which takes an int and a Booking object.
-            //Grabs the ID for the dummy booking
-            int id = TestCleanupAccessor.GetBooking();
-            //retrieves the full booking information, assigns the initial quantity to an int, then reassigns the object quantity
-            //to a new amount
-            Booking booking1 = myBook.RetrieveBooking(id);
+        {   //grabs the BookingID from the first booking from the active bookings list
+            int id = getThem[getThem.Count - 1].BookingID;
+            Booking booking1 = myBook.RetrieveBooking(id);//Retrieves
             int original = booking1.Quantity;
-            booking1.Quantity = 30;
-            //Passes the object to the EditBookingResults method and asserts that that result will be full
+            booking1.Quantity = 10000;//sets to new quantity
+            ////Passes the object to the EditBookingResults method and asserts that that result will be full
             ResultsEdit result = myBook.EditBookingResult(original, booking1);
             ResultsEdit expected = ResultsEdit.ListingFull;
             Assert.AreEqual(expected, result);

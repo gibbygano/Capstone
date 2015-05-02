@@ -6,10 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
-// Worked on by:
-// Hunter
-// Fritz
-// Matthew 10:15
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
@@ -22,13 +18,24 @@ namespace com.WanderingTurtle.FormPresentation
         private ProductManager _productManager = new ProductManager();
         private SupplierManager _supplierManager = new SupplierManager();
 
-        //populates our Combo box for the user to pick from
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/05
+        /// Initializes the AddEditListing screen
+        /// Combined the Edit/Add screens
+        /// </summary>
         public AddEditListing()
         {
             Setup();
             Title = "Add a new Listing";
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/05
+        /// Initializes the AddEditListing screen if it is edit or readonly
+        /// Combined the Edit/Add screens
+        /// </summary>
         /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
         public AddEditListing(ItemListing currentItemListing, bool ReadOnly = false)
         {
@@ -42,7 +49,17 @@ namespace com.WanderingTurtle.FormPresentation
             if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
         }
 
-        private async void addItemListing()
+        /// <summary>
+        /// Hunter Lind
+        /// Created:  2015/02/18
+        /// validates the user input and passes data to Business logic
+        /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated:  2015/04/05
+        /// Combined Edit and Add screens
+        /// </remarks>
+        private async void AddItemListing()
         {
             if (!Validator()) return;
             ItemListing _NewListing = new ItemListing();
@@ -69,9 +86,9 @@ namespace com.WanderingTurtle.FormPresentation
                 _NewListing.Price = (decimal)(udPrice.Value);
                 _NewListing.MaxNumGuests = (int)(udSeats.Value);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new WanderingTurtleException(this, ex);
+                throw new WanderingTurtleException(this, "Please enter valid start and end dates.");
             }
 
             try
@@ -81,30 +98,54 @@ namespace com.WanderingTurtle.FormPresentation
                 DialogResult = true;
                 Close();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new WanderingTurtleException(this, ex, "Error adding the Item Listing.");
+                throw new WanderingTurtleException(this, "Error adding the Item Listing.");
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Added button to allow cancel of the form function.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             populateFields();
         }
 
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Logic rearranged when combining the add and edit forms.
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             if (CurrentItemListing == null)
-            { addItemListing(); }
+            { AddItemListing(); }
             else
-            { updateItemListing(); }
+            { UpdateItemListing(); }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Method is used to populate fields when editing the listing, otherwise, brings up a blank form.
+        /// </summary>
         private void populateFields()
         {
             if (CurrentItemListing == null)
@@ -139,14 +180,18 @@ namespace com.WanderingTurtle.FormPresentation
                     if (CurrentItemListing.SupplierName.Equals(item.CompanyName))
                     { supplierCbox.SelectedItem = item; }
                 }
-                //eventCbox.SelectedItem = CurrentItemListing.EventName.ToString();
-                //lblSupplierName.Content = CurrentItemListing.SupplierName.ToString();
 
                 udSeats.Value = CurrentItemListing.MaxNumGuests;
                 udPrice.Value = (double?)CurrentItemListing.Price;
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/06
+        /// Method is used to initialize the screen to the default presentation.
+        /// Merged add and edit ui screens
+        /// </summary>
         private void Setup()
         {
             InitializeComponent();
@@ -171,7 +216,18 @@ namespace com.WanderingTurtle.FormPresentation
             populateFields();
         }
 
-        private async void updateItemListing()
+        /// <summary>
+        /// Hunter Lind
+        /// Created:  2015/02/10
+        /// Takes input from form to update the item listing
+        /// </summary>
+        /// <remarks>
+        /// Pat Banks
+        /// Updated:  2015/02/19
+        /// fields updated to reflect all required data
+        /// Added spinners and calendar for user input restrictions
+        /// </remarks>
+        private async void UpdateItemListing()
         {
             try
             {
@@ -206,6 +262,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Hunter Lind
+        /// Created 2015/02/16
+        /// Validates user input
+        /// </summary>
+        /// <returns>true if valid</returns>
         private bool Validator()
         {
             if (eventCbox.SelectedIndex.Equals(-1))

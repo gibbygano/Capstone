@@ -1,7 +1,10 @@
-﻿using com.WanderingTurtle.BusinessLogic;
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Data.SqlClient;
+using com.WanderingTurtle.BusinessLogic;
+
 
 namespace com.WanderingTurtle.Tests
 {
@@ -11,24 +14,96 @@ namespace com.WanderingTurtle.Tests
         private SupplierLoginManager access = new SupplierLoginManager();
         private SupplierLoginAccessorTest testing = new SupplierLoginAccessorTest();
         private SupplierLogin retrieveSupplier = new SupplierLogin();
+        private int suppID;
+        Supplier testSupplier = new Supplier();
 
-        [TestInitialize]
-        public void initialize()
+        public void setup()
         {
-            testing.initialize();
+            testSupplier.CompanyName = "fakeCompany";
+            testSupplier.FirstName = "FakeLogin";
+            testSupplier.LastName = "FakeLogin";
+            testSupplier.Address1 = "255 East West St";
+            testSupplier.Address2 = "APT 1";
+            testSupplier.Zip = "50229";
+            testSupplier.PhoneNumber = "575-542-8796";
+            testSupplier.EmailAddress = "FakeLogin@gmail.com";
+            testSupplier.ApplicationID = 999;
+            testSupplier.SupplyCost = (decimal)((60) / 100);
+            testSupplier.Active = true;
+
+            
+            try
+            {
+                SupplierAccessor.AddSupplier(testSupplier, "Test");
+                var supList = SupplierAccessor.GetSupplierList();
+                foreach (Supplier x in supList)
+                {
+                    if (x.FirstName.Equals("FakeLogin"))
+                    {
+                        suppID = x.SupplierID;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("what");
+            }
         }
 
         [TestMethod]
         public void TestSupplierLoginManageGet()
         {
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "F@k3logg3r");
-            Assert.AreEqual("F@k3logg3r", retrieveSupplier.UserName);
+            setup();
+            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "Test");
+            Assert.AreEqual("Test", retrieveSupplier.UserName);
+        }
+
+        [TestMethod]
+        public void TestSupplierUserNameGet()
+        {
+            setup();
+            Assert.AreEqual("Test", access.retrieveSupplierUserName(suppID));
+        }
+
+        [TestMethod]
+        public void TestSupplierLoginUpdate()
+        {
+            setup();
+            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "Test");
+            Assert.AreEqual(ResultsEdit.Success, access.UpdateSupplierLogin("Password#2", retrieveSupplier));
+        }
+
+        [TestMethod]
+        public void TestLoginUpdateFail()
+        {
+            setup();
+            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "Test");
+            retrieveSupplier.UserName = "Tested";
+
+            Assert.AreEqual(ResultsEdit.DatabaseError, access.UpdateSupplierLogin("Password#2", retrieveSupplier));
         }
 
         [TestCleanup]
-        public void cleanup()
+        public void cleanUp()
         {
-            testing.cleanUp();
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            string commandText = @"DELETE FROM SupplierLogin WHERE UserName='Test'";
+
+            var cmd = new SqlCommand(commandText, conn);
+
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException)
+            {
+                Console.WriteLine("Fail!");
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

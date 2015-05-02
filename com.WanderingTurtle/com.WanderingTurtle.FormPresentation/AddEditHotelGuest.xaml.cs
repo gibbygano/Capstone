@@ -16,7 +16,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Miguel Santana
     /// Created: 2015/02/16
-    ///
     /// Interaction logic for AddEditHotelGuest.xaml
     /// </summary>
     public partial class AddEditHotelGuest
@@ -26,7 +25,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Create a New Hotel Guest
         /// </summary>
         public AddEditHotelGuest()
@@ -65,12 +63,13 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created: 2015/02/16
-        ///
-        /// Updated 2015/04/13 by Tony Noel - Updated to comply with the ResultsEdit class of error codes.
-        ///
         /// Parameter marks whether a database command was successful
         /// </summary>
+        /// <remarks>
+        /// Tony Noel
+        /// Updated 2015/04/13
+        /// Updated to comply with the ResultsEdit class of error codes.
+        /// </remarks>
         public ResultsEdit Result { get; private set; }
 
         /// <summary>
@@ -109,20 +108,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
-        /// Opens the combobox on keyboard focus
-        /// </summary>
-        /// <param name="sender">System.Windows.Controls.ComboBox</param>
-        /// <param name="e"></param>
-        private void cboZip_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            // ((ComboBox)sender).IsDropDownOpen = true;
-        }
-
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/02/16
-        ///
         /// Populates form with required information
         /// </summary>
         private void InitializeEverything()
@@ -134,7 +119,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Resets the values of the input fields
         /// </summary>
         private void ResetFields()
@@ -172,7 +156,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/13
-        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="message"></param>
@@ -187,7 +170,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="component"></param>
@@ -200,7 +182,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///         /// Miguel Santana
+        /// Miguel Santana
         /// Created: 2015/04/13
         ///
         /// Show Message Dialog - overloaded
@@ -214,9 +196,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///  Miguel Santana
+        /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show error Message Dialog - overloaded
         /// </summary>
         /// <param name="exception"></param>
@@ -229,12 +210,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Validate fields and submit data to HotelGuestManager
         /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/05
+        /// Added Room number field
+        /// Pat Banks
+        /// Updated:  2015/04/03
+        /// added guest pin field
         /// </remarks>
         private async void Submit()
         {
@@ -322,7 +306,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created 2015-04-24
-        /// 
         /// Used to generate a random PIN for a customer to access the website
         /// </summary>
         /// <param name="sender"></param>
@@ -335,7 +318,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/18
-        ///
         /// Selects all on keyboard focus to allow for easier tabbing between fields
         /// </summary>
         /// <param name="sender">System.Windows.Controls.TextBox</param>
@@ -348,7 +330,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Allows submitting the form by hitting enter on any field
         /// </summary>
         /// <param name="sender"></param>
@@ -364,7 +345,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/10
-        ///
         /// Runs validation on the input fields
         /// </summary>
         /// <returns>True if valid</returns>
@@ -422,7 +402,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/10
-        ///
         /// Checks to see if the fields have been changed
         /// </summary>
         /// <returns>True if valid</returns>

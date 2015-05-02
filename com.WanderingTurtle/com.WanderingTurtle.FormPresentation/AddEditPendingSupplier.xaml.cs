@@ -25,7 +25,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Created:  2015/04/04
         /// Miguel Santana
-        ///
         /// Interaction logic for AddEditPendingSupplier.xaml
         /// </summary>
         public AddEditPendingSupplier()
@@ -84,14 +83,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/04/04
-        /// 
-        /// Handles the results from the logic layer
+        /// Takes user input to send to business logic layer
         /// </summary>
         /// <remarks>
         /// Pat Banks
-        /// Updated 2015/04/14
-        /// 
-        /// Added rejected/approved/pending combo
+        /// Added rejected/approved/pending combo box
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -172,17 +168,16 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created:  2014/04/13
-        /// 
         /// Validates user input
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if valid</returns>
         private bool Validate()
         {
             if (!Validator.ValidateCompanyName(txtCompanyName.Text))
             {
                 throw new InputValidationException(txtCompanyName, "Enter a company name.");
             }
-            if (!Validator.ValidateAddress(txtAddress.Text))
+            if (!Validator.ValidateAlphaNumeric(txtAddress.Text) || String.IsNullOrEmpty(txtAddress.Text))
             {
                 throw new InputValidationException(txtAddress, "Enter an address.");
             }
@@ -217,11 +212,9 @@ namespace com.WanderingTurtle.FormPresentation
             return true;
         }
 
-
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/15
-        /// 
         /// Gathers form data to send to the manager for addition to the database
         /// </summary>
         private void GetFormData()
@@ -248,7 +241,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/04/04
-        ///
         /// Initial commit  - reads in data and sets the field for the user.
         /// </summary>
         private void SetFields()
@@ -271,7 +263,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// will fritz 
+        /// Will Fritz 
         /// Created 2/19/2015
         /// fills the zip code combo box
         /// </summary>
@@ -293,7 +285,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/04/10
-        ///
         /// Defines application status for the combo box
         /// </summary>
         /// <remarks>
@@ -306,7 +297,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created: 2015/04/11
-        ///
         /// Reloads the combobox with values
         /// </summary>
         private void ReloadComboBox()
@@ -318,7 +308,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Ryan Blake
         /// Created:  2015/04/11
-        /// 
         /// Turns fields on and off depending on the status of the application
         /// </summary>
         /// <param name="sender"></param>

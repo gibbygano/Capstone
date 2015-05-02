@@ -14,14 +14,12 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Tony Noel
         /// Created: 15/2/13
-        ///
         /// RetrieveListItemList- a method used to retrieve a list of ItemListingDetails (a subclass of Booking) through the data access layer, from the database
         /// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/30
-        ///
         /// Added DataCache
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>
@@ -38,19 +36,13 @@ namespace com.WanderingTurtle.BusinessLogic
                     RefreshItemListingDetailsListCacheData();
                     return DataCache._currentItemListingDetailsList;
                 }
-                else
+                //check time. If less than 5 min, return cache
+                if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
                 {
-                    //check time. If less than 5 min, return cache
-                    if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
-                    {
-                        RefreshItemListingDetailsListCacheData();
-                        return DataCache._currentItemListingDetailsList;
-                    }
-                    else
-                    {
-                        return DataCache._currentItemListingDetailsList;
-                    }
+                    RefreshItemListingDetailsListCacheData();
+                    return DataCache._currentItemListingDetailsList;
                 }
+                return DataCache._currentItemListingDetailsList;
             }
             catch (Exception)
             {
@@ -100,31 +92,25 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     return BookingAccessor.GetItemListingDetails(itemListID);
                 }
+                //check time. If less than 5 min, return event from cache
+                if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
+                {
+                    //get event from DB
+                    var requestedEvent = BookingAccessor.GetItemListingDetails(itemListID);
+                    return requestedEvent;
+                }
                 else
                 {
-                    //check time. If less than 5 min, return event from cache
-                    if (now > DataCache._ItemListingDetailsListTime.AddMinutes(cacheExpirationTime))
+                    //get event from cached list
+                    var list = DataCache._currentItemListingDetailsList;
+                    ItemListingDetails requestedEvent = new ItemListingDetails();
+                    requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
+
+                    if (requestedEvent != null)
                     {
-                        //get event from DB
-                        var requestedEvent = BookingAccessor.GetItemListingDetails(itemListID);
                         return requestedEvent;
                     }
-                    else
-                    {
-                        //get event from cached list
-                        var list = DataCache._currentItemListingDetailsList;
-                        ItemListingDetails requestedEvent = new ItemListingDetails();
-                        requestedEvent = list.Where(e => e.ItemListID == itemListID).FirstOrDefault();
-
-                        if (requestedEvent != null)
-                        {
-                            return requestedEvent;
-                        }
-                        else
-                        {
-                            throw new ApplicationException("Event not found.");
-                        }
-                    }
+                    throw new ApplicationException("Event not found.");
                 }
             }
             catch (Exception ex)
@@ -147,30 +133,23 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return ResultsEdit.QuantityZero;
             }
-            else
-            //try to add booking
+            try
             {
-                try
-                {
-                    //calls method to add a booking and update itemListing Table with current number of guests
-                    int result = BookingAccessor.AddBooking(bookingToAdd);
+                //calls method to add a booking and update itemListing Table with current number of guests
+                int result = BookingAccessor.AddBooking(bookingToAdd);
 
-                    if (result == 2)
-                    {
-                        //update cache
-                        RefreshItemListingDetailsListCacheData();
-
-                        return ResultsEdit.Success;
-                    }
-                    else
-                    {
-                        return ResultsEdit.DatabaseError;
-                    }
-                }
-                catch (Exception ex)
+                if (result == 2)
                 {
-                    throw ex;
+                    //update cache
+                    RefreshItemListingDetailsListCacheData();
+
+                    return ResultsEdit.Success;
                 }
+                return ResultsEdit.DatabaseError;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -352,14 +331,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 return ResultsEdit.CannotEditTooOld;
             }
-            else if (bookingToCheck.Quantity == 0)
-            {
-                return ResultsEdit.Cancelled;
-            }
-            else
-            {
-                return ResultsEdit.OkToEdit;
-            }
+            return bookingToCheck.Quantity == 0 ? ResultsEdit.Cancelled : ResultsEdit.OkToEdit;
         }
 
         /// <summary>
@@ -389,10 +361,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     RefreshItemListingDetailsListCacheData();
                     return ResultsEdit.Success;
                 }
-                else
-                {
-                    return ResultsEdit.ChangedByOtherUser;
-                }
+                return ResultsEdit.ChangedByOtherUser;
             }
             catch (Exception ex)
             {
@@ -454,10 +423,7 @@ namespace com.WanderingTurtle.BusinessLogic
                     RefreshItemListingDetailsListCacheData();
                     return ResultsEdit.Success;
                 }
-                else
-                {
-                    return ResultsEdit.ChangedByOtherUser;
-                }
+                return ResultsEdit.ChangedByOtherUser;
             }
             catch (Exception ex)
             {
@@ -468,7 +434,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/30
-        /// 
+        ///
         /// Passes data to the Accessor to verify that the pin is not being used.
         /// </summary>
         /// <param name="inPIN"></param>
@@ -482,7 +448,7 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (Exception ax)
             {
-               throw ax;
+                throw ax;
             }
         }
 
@@ -515,21 +481,9 @@ namespace com.WanderingTurtle.BusinessLogic
         public ResultsArchive CheckListingArchive(int itemListID)
         {
             var bookings = RetrieveBookingNumbers(itemListID);
-            var numbers = 0;
+            var numbers = bookings.Sum(booking => booking.Quantity);
 
-            foreach (var booking in bookings)
-            {
-                numbers += booking.Quantity;
-            }
-
-            if (numbers > 0)
-            {
-                return ResultsArchive.CannotArchive;
-            }
-            else
-            {
-                return ResultsArchive.OkToArchive;
-            }
+            return numbers > 0 ? ResultsArchive.CannotArchive : ResultsArchive.OkToArchive;
         }
     }
 }

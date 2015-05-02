@@ -55,7 +55,7 @@
                 <Label Grid.Row="4" Grid.Column="3" x:Name="lblTicketPrice" />
                 <Label Grid.Row="5" Grid.Column="3" x:Name="lblTotalDue" />
 
-                <Button Grid.Row="3" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Re-calculate" Click="btnCalculateTicketPrice_Click" Margin="{DynamicResource Spacing.Container}" />
+                <Button Grid.Row="3" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Re-calculate Cost" Click="btnCalculateTicketPrice_Click" Margin="{DynamicResource Spacing.Container}" />
             </Grid>
         </ScrollViewer>
         <Grid Grid.Row="2" Style="{StaticResource ButtonContainer}">

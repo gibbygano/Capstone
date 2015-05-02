@@ -53,7 +53,9 @@ namespace com.WanderingTurtle.Web.Pages
                 try
                 {
                     var eventTypes = _myEventManager.RetrieveEventTypeList();
-                    eventTypes.Insert(0, new EventType { EventName = "Choose One..." });
+                    if (eventTypes[0].EventName != "Choose One...")
+                    { eventTypes.Insert(0, new EventType { EventName = "Choose One..." }); }
+
                     comboEventTypeList.DataSource = eventTypes;
                     comboEventTypeList.DataTextField = "EventName";
                     comboEventTypeList.DataValueField = "EventTypeID";
@@ -148,7 +150,7 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 showError("You have " + errorCount + " errors that need to be fixed.");
                 return;
-            }            
+            }
             else
             {
 
