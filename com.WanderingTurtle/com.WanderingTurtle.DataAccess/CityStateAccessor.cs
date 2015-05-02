@@ -9,11 +9,12 @@ namespace com.WanderingTurtle.DataAccess
     public class CityStateAccessor
     {
         /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/02/18 
         /// Get a list of all CityState records
         /// </summary>
         /// <param name="zip"></param>
         /// <returns>List of CityState Objects</returns>
-        /// Miguel Santana 2/18/2015
         public static List<CityState> CityStateGet(String zip = null)
         {
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();

@@ -14,14 +14,12 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Tony Noel
         /// Created: 15/2/13
-        ///
         /// RetrieveListItemList- a method used to retrieve a list of ItemListingDetails (a subclass of Booking) through the data access layer, from the database
         /// The information returned is specifically that human-readable elements needed to make a booking like event name, description, etc
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/30
-        ///
         /// Added DataCache
         /// </remarks>
         /// <returns>Returns a list of ItemListingDetails objects from database(From the ItemListing and EventItem tables).</returns>

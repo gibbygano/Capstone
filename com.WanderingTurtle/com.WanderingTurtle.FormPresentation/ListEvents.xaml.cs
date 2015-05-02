@@ -23,14 +23,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Hunter Lind
         /// Created 2015/2/23
-        /// 
         /// Fills our Listview with events and initializes the window.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
-        /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
-        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
-        /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
-        /// <exception cref="WanderingTurtleException" />
         public ListEvents()
         {
             InitializeComponent();
@@ -39,6 +33,14 @@ namespace com.WanderingTurtle.FormPresentation
             lvEvents.SetContextMenu(this);
         }
 
+        
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15'
+        /// Logic for context menus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
@@ -67,6 +69,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/09
+        /// Opens the addevent ui with a record to edit or a blank screen
+        /// </summary>
+        /// <param name="selectedEvent"></param>
+        /// <param name="readOnly"></param>
         private void OpenEvent(Event selectedEvent = null, bool readOnly = false)
         {
             try
@@ -90,7 +99,13 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
 
-
+        /// <summary>
+        /// Hunter Lind 
+        /// Created:  2015/2/23
+        /// Opens a dialog to confirm archival of an event record
+        /// List is refreshed after archival
+        /// </summary>
+        /// <param name="selectedEvent"></param>
         private async void ArchiveEvent(Event selectedEvent)
         {
             ResultsArchive results = _myProductManager.CheckToArchiveEvent(selectedEvent.EventItemID);
@@ -139,7 +154,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
+        /// Hunter Lind 
+        /// Created:  2015/2/23
         /// Opens a new AddNewEvent window for the user to interact with.
         /// When the window closes, we refresh our listview.
         /// </summary>
@@ -149,7 +165,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
+        /// Hunter Lind
+        /// Created:  2015/2/23
         /// Archives a no longer offered event.
         /// </summary>
         private void btnArchiveEvent_Click(object sender, RoutedEventArgs e)
@@ -157,6 +174,13 @@ namespace com.WanderingTurtle.FormPresentation
             ArchiveEvent(lvEvents.SelectedItem as Event);
         }
 
+        /// <summary>
+        /// Hunter Lind
+        /// Created:  2015/02/24
+        /// Opens the Edit Event ui with the selected event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEditEvent_Click(object sender, RoutedEventArgs e)
         {
             OpenEvent(lvEvents.SelectedItem as Event);
@@ -165,12 +189,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Justin Pennington
         /// Created: 2015/3/4
-        ///
         /// Searches through the retrieved Event List (myEventList) and populates the listview with results
         /// that Contain the text in the txtSearchInput (NOT case sensitive)
         /// </summary>
-        /// <remarks>
-        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, RoutedEventArgs e)
@@ -180,13 +201,21 @@ namespace com.WanderingTurtle.FormPresentation
             txtSearchInput.Text = "";
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/04
+        /// Handles double click for record view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenEvent(sender.RowClick<Event>(), true);
         }
 
         /// <summary>
-        /// Hunter Lind || 2015/2/23
+        /// Hunter Lind
+        /// Created:  2015/2/23
         /// Refreshes our Listview, a handy method instead of having to re-type code.
         /// </summary>
         private void Refresh()
@@ -207,6 +236,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/03/27
+        /// Changes the text for the search button depending on what user did.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             btnSearch.Content = txtSearchInput.Text.Length == 0 ? "Refresh List" : "Search";
