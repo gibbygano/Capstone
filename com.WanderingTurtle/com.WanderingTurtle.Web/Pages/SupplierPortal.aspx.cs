@@ -140,13 +140,35 @@ namespace com.WanderingTurtle.Web.Pages
         /// <returns>IEnumerable of item listings for the current supplier within a specified date range</returns>
         public IEnumerable<ItemListing> GetItemListsByDate()
         {
+            lblDateError.Text = "";
             try
             {
-                DateTime From = DateTime.Parse(Request.Form["dateFrom"]);
-                DateTime To = DateTime.Parse(Request.Form["dateTo"]);
-
-                Session["dateFrom"] = From.ToShortDateString();
-                Session["dateTo"] = To.ToShortDateString();
+                DateTime From;
+                DateTime To;
+                if (DateTime.TryParse(Request.Form["dateFrom"], out From))
+                {
+                    Session["dateFrom"] = From.ToShortDateString();
+                }
+                else
+                {
+                    if (Request.Form["dateFrom"] != "")
+                    {
+                        lblDateError.Text = "Invalid Date";
+                    }
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+                }
+                if (DateTime.TryParse(Request.Form["dateTo"], out To))
+                {
+                    Session["dateTo"] = To.ToShortDateString();
+                }
+                else
+                {
+                    if (Request.Form["dateFrom"] != "")
+                    {
+                        lblDateError.Text = "Invalid Date";
+                    }
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now); 
+                }
 
                 if (Request.Form["dateFrom"] != null && Request.Form["dateTo"] != null)
                 {
