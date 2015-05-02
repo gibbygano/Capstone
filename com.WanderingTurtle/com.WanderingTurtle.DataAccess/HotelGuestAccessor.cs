@@ -11,23 +11,21 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
-        ///
         /// Creates a new Hotel Guest in the database
         /// </summary>
-        /// <param name="newHotelGuest">Object containing new hotel guest information</param>
-        /// <returns>Number of rows effected</returns>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/02/27
-        ///
         /// Stored Procedure updated to create an invoice record automatically when adding a hotel guest
+        /// 
         /// Updated Rose Steffensmeier 2015/03/12
+        /// Added try-catch blocks
+        /// 
         /// Updated by Pat Banks 2015/04/03
         /// Added GuestPIN field
-        /// Rose Steffensmeier
-        /// Updated: 2015/03/12
-
         /// </remarks>
+        /// <param name="newHotelGuest">Object containing new hotel guest information</param>
+        /// <returns>Number of rows effected</returns>
         public static int HotelGuestAdd(HotelGuest newHotelGuest)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -70,12 +68,12 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
-        ///
         /// Get a list of all HotelGuest Objects
         /// </summary>
         ///<remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/12
+        /// Added try-catch blocks
         /// </remarks>
         /// <param name="hotelGuestID">Optional Parameter to specify a hotel guest to look up</param>
         /// <returns></returns>
@@ -142,12 +140,12 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/12
-        ///
         /// Updates a hotel guest with new information
         /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 02/23/2015
+        /// added room number field
         /// </remarks>
         /// <param name="oldHotelGuest">Object containing original information about a hotel guest</param>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>

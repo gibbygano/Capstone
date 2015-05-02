@@ -1,6 +1,4 @@
-﻿//Justin Pennington
-
-using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,8 +8,13 @@ namespace com.WanderingTurtle.DataAccess
 {
     public class EventAccessor
     {
-        //Justin Pennington 2/14/15
-        //creates a new event item in the database, using an event object that is passed in
+        /// <summary>
+        ///Justin Pennington
+        ///created:  2015/02/14
+        // adds a new event item in the database, using an event object that is passed in
+        /// </summary>
+        /// <param name="newEvent"></param>
+        /// <returns>number of rows updated in db</returns>
         public static int AddEvent(Event newEvent)
         {
             //Connect To Database
@@ -48,9 +51,14 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
-        //Justin Pennington 2/14/15
-        //needs the event object that is having its name being changed and the new name
-        //Returns the number of rows affected (should be 1)
+        /// <summary>
+        /// Justin Pennington 
+        /// Created:  20015/02/04
+        /// needs the event object that is having its name being changed and the new name
+        /// </summary>
+        /// <param name="oldEvent"></param>
+        /// <param name="newEvent"></param>
+        /// <returns>Returns the number of rows affected (should be 1)</returns>
         public static int UpdateEvent(Event oldEvent, Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -93,9 +101,13 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
-        //Justin Pennington 2/14/15
-        //requires: Event object, Boolean value for active/inactive
-        //returns number of rows affected
+        /// <summary>
+        ///Justin Pennington
+        ///created:  2015/02/14
+        ///changes the event from active to inactive
+        /// </summary>
+        /// <param name="newEvent"></param>
+        /// <returns>returns number of rows affected</returns>
         public static int DeleteEventItem(Event newEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -131,9 +143,13 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;  // needs to be rows affected
         }
 
-        //Justin Pennington 2/14/15
-        //retrieves all Events and returns a List of Event objects
 
+        /// <summary>
+        /// Justin Pennington 
+        /// Created:  2015/02/14 
+        //  retrieves all Active Events and returns a List of Event objects
+        /// </summary>
+        /// <returns></returns>
         public static List<Event> GetEventList()
         {
             var EventList = new List<Event>();
@@ -181,9 +197,17 @@ namespace com.WanderingTurtle.DataAccess
             return EventList;
         }
 
-        //Justin Pennington 2/14/15
-        //Updated Bryan Hurst 4/24/2015 While missing from If & "cmd.CommandType = CommandType.StoredProcedure;" added
-        //retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
+        /// <summary>
+        /// Justin Pennington 
+        /// Created:  2015/02/14
+        /// retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
+        /// </summary>
+        /// <remarks>
+        /// Updated Bryan Hurst 4/24/2015 
+        /// While missing from If & "cmd.CommandType = CommandType.StoredProcedure;" added
+        /// </remarks>
+        /// <param name="eventID"></param>
+        /// <returns></returns>
         public static Event GetEvent(String eventID)
         {
             var theEvent = new Event();
@@ -230,8 +254,13 @@ namespace com.WanderingTurtle.DataAccess
             return theEvent;
         }
 
-        //Hunter Lind
-        //Method for deletion of test records created with the unit tests
+        /// <summary>
+        ///  Hunter Lind
+        ///  Created:  2015/04/03
+        ///  Method for deletion of test records created with the unit tests
+        /// </summary>
+        /// <param name="TestEvent"></param>
+        /// <returns>number of rows affected</returns>
         public static int DeleteEventTestItem(Event TestEvent)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

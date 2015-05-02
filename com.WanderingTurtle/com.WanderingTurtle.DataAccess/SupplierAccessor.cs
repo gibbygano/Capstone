@@ -9,14 +9,18 @@ namespace com.WanderingTurtle.DataAccess
     public class SupplierAccessor
     {
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/03
         /// Retrieves Supplier information from the Database using a Stored Procedure.
         /// Creates a Supplier object.
-        ///
-        /// Created by Tyler Collins 02/03/15
         /// </summary>
+        /// <remarks>
+        /// Ryan Blake
+        /// Updated:  2015/04/03
+        /// Added Supplier Cost
+        /// </remarks>
         /// <param name="supplierID">Requires a SupplierID to SELECT the correct Supplier record.</param>
         /// <returns>Supplier object</returns>
-        /// <update>Edited by William Fritz</update>
         public static Supplier GetSupplier(string supplierID)
         {
             Supplier supplierToRetrieve = new Supplier();
@@ -68,11 +72,11 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/03
         /// Retrieves all Supplier data from the Database using a Stored Procedure.
         /// Creates a Supplier object from retrieved data.
         /// Adds Supplier object to List of Supplier objects.
-        ///
-        /// Created by Tyler Collins 02/03/2015
         /// </summary>
         /// <returns>List of Supplier objects</returns>
         public static List<Supplier> GetSupplierList()
@@ -129,9 +133,9 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/04
         /// INSERTs a Supplier into the Database using a Stored Procedure.
-        ///
-        /// Created by Tyler Collins 02/04/2015
         /// </summary>
         /// <param name="supplierToAdd">Requires a Supplier object to INSERT</param>
         /// <returns>Returns the number of rows affected.</returns>
@@ -172,10 +176,9 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
+        /// Tyler Collins
+        /// Created: 2015/02/04
         /// UPDATEs a Supplier record in the Database with new using a Stored Procedure.
-        ///
-        /// Created by Tyler Collins 02/04/2015
-        /// Updated by Tyler Collins 02/11/2015
         /// </summary>
         /// <param name="newSupplierInfo">Requires the Supplier object containing the new information</param>
         /// <param name="oldSupplierInfo">Requires the Supplier object to replace that matches the record in the Database</param>
@@ -233,7 +236,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Tyler Collins
-        /// Created  02/05/2015
+        /// Created:  2015/02/05
         /// DELETEs (Sets Boolean Active field to false) a Supplier record in Database using a Stored Procedure.
         /// </summary>
         /// <remarks>

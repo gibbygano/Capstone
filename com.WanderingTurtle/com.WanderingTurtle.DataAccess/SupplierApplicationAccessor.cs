@@ -240,6 +240,17 @@ namespace com.WanderingTurtle.DataAccess
             return currentSupplierApplication;
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/11
+        /// Adds a new supplier from an application with supply cost in the supplier table
+        /// Adds User name to the supplier login table.
+        /// </summary>
+        /// <param name="oldApplication"></param>
+        /// <param name="newApplication"></param>
+        /// <param name="userName"></param>
+        /// <param name="supplyCost"></param>
+        /// <returns>number of rows affected</returns>
         public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication, string userName, decimal supplyCost)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
