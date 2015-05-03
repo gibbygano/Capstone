@@ -38,10 +38,11 @@
 
             <VerticalAlignment x:Key="TextBoxVerticalContentAlign">Center</VerticalAlignment>
             <system:Boolean x:Key="TextBoxClearTextButton">True</system:Boolean>
-            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
+            <Style x:Key="LabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource MetroLabel}">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
                 <Setter Property="VerticalContentAlignment" Value="{StaticResource TextBoxVerticalContentAlign}" />
             </Style>
+            <Style TargetType="{x:Type Label}" BasedOn="{StaticResource LabelStyle}" />
             <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MetroTextBox}" x:Key="TextBoxStyle">
                 <Setter Property="Height" Value="{StaticResource Component.Height}" />
                 <Setter Property="Margin" Value="{StaticResource Spacing.TopBottom}" />

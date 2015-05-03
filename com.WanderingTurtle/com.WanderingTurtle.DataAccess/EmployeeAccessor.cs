@@ -278,7 +278,7 @@ namespace com.WanderingTurtle.DataAccess
                 }
                 else
                 {
-                    throw new ApplicationException("No such login is available.");
+                    throw new ApplicationException("Invalid User ID or Password.");
                 }
             }
             catch (Exception)
