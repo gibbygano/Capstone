@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.Web.PagesGuest
         {
             lblError.Visible = false;
             BookingManager hgm = new BookingManager();
-            if (Validator.ValidateAlphaNumeric(txtLogin.Text, 6, 6))
+            if (txtLogin.Text.ValidateAlphaNumeric(6, 6))
             {
                 try
                 {

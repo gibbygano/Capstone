@@ -51,7 +51,7 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 return;
             }
-            if (!Validator.ValidatePassword(txtNewPassword.Text.Trim()))
+            if (!txtNewPassword.Text.Trim().ValidatePassword())
             {
                 passRules.Visible = true;
                 return;

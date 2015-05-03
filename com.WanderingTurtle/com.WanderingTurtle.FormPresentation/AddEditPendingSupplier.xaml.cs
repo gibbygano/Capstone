@@ -173,27 +173,27 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>true if valid</returns>
         private bool Validate()
         {
-            if (!Validator.ValidateCompanyName(txtCompanyName.Text))
+            if (!txtCompanyName.Text.ValidateCompanyName())
             {
                 throw new InputValidationException(txtCompanyName, "Enter a company name.");
             }
-            if (!Validator.ValidateAlphaNumeric(txtAddress.Text) || String.IsNullOrEmpty(txtAddress.Text))
+            if (!txtAddress.Text.ValidateAlphaNumeric() || String.IsNullOrEmpty(txtAddress.Text))
             {
                 throw new InputValidationException(txtAddress, "Enter an address.");
             }
-            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            if (!txtPhoneNumber.Text.ValidatePhone())
             {
                 throw new InputValidationException(txtPhoneNumber, "Enter a phone number.");
             }
-            if (!Validator.ValidateEmail(txtEmailAddress.Text))
+            if (!txtEmailAddress.Text.ValidateEmail())
             {
                 throw new InputValidationException(txtEmailAddress, "Enter an email address.");
             }
-            if (!Validator.ValidateString(txtFirstName.Text))
+            if (!txtFirstName.Text.ValidateString())
             {
                 throw new InputValidationException(txtFirstName, "Enter a first name.");
             }
-            if (!Validator.ValidateString(txtLastName.Text))
+            if (!txtLastName.Text.ValidateString())
             {
                 throw new InputValidationException(txtLastName, "Enter a last name.");
             }
@@ -201,11 +201,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new InputValidationException(cboZip, "You must select an zip from the drop down");
             }
-            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && (!Validator.ValidateString(txtUserName.Text)))
+            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && (!txtUserName.Text.ValidateString()))
             {
                 throw new InputValidationException(txtUserName, "Enter a user name.");
             }
-            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && !Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
+            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && !numSupplyCost.Value.ToString().ValidateDecimal())
             {
                 throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
             }

@@ -111,7 +111,7 @@ namespace com.WanderingTurtle.Web.Pages
 
                 Event newEvent = new Event(myEvent.EventItemID, myEvent.EventItemName, myEvent.Transportation, myEvent.EventTypeID, myEvent.OnSite, myEvent.ProductID, myEvent.Description, myEvent.Active);
 
-                if (Validator.ValidateAlphaNumeric(String.Format("{0}", Request.Form["name"]).Trim(), 1, 255))
+                if (String.Format("{0}", Request.Form["name"]).Trim().ValidateAlphaNumeric(1, 255))
                 {
                     newEvent.EventItemName = String.Format("{0}", Request.Form["name"]).Trim();
 
@@ -129,7 +129,7 @@ namespace com.WanderingTurtle.Web.Pages
                 newEvent.EventTypeID = int.Parse(Request.Form["type"]);
                 newEvent.Transportation = bool.Parse(Request.Form["transport"]);
                 newEvent.OnSite = bool.Parse(Request.Form["onsite"]);
-                if (Validator.ValidateCompanyName(String.Format("{0}", Request.Form["description"]).Trim(), 1, 255))
+                if (String.Format("{0}", Request.Form["description"]).Trim().ValidateCompanyName(1, 255))
                 {
                     newEvent.Description = String.Format("{0}", Request.Form["description"]).Trim();
                 }
@@ -194,7 +194,7 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void lvEvents_ItemUpdating(object sender, ListViewUpdateEventArgs e)
         {
-            if (!Validator.ValidateAlphaNumeric(e.NewValues["EventItemName"].ToString(), 1, 255))
+            if (!e.NewValues["EventItemName"].ToString().ValidateAlphaNumeric(1, 255))
             {
                 Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"You must ender a valid name!\")</SCRIPT>");
                 e.Cancel = true;
@@ -239,12 +239,12 @@ namespace com.WanderingTurtle.Web.Pages
                 lblAddError.Text = "You must enter a valid ending date!";
                 return;
             }
-            if (String.IsNullOrEmpty(Request.Form["price"]) || !Validator.ValidateDouble(Request.Form["price"], 0.01))
+            if (String.IsNullOrEmpty(Request.Form["price"]) || !Request.Form["price"].ValidateDouble(0.01))
             {
                 lblAddError.Text = "You must enter a valid price!";
                 return;
             }
-            if (String.IsNullOrEmpty(Request.Form["tickets"]) || !Validator.ValidateDouble(Request.Form["tickets"], 1))
+            if (String.IsNullOrEmpty(Request.Form["tickets"]) || !Request.Form["tickets"].ValidateDouble(1))
             {
                 lblAddError.Text = "You must enter a valid number of tickets available";
                 return;

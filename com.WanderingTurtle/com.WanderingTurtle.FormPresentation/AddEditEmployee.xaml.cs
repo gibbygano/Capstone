@@ -297,18 +297,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// </returns>
         private bool Validate()
         {
-            if (!Validator.ValidateString(TxtFirstName.Text))
+            if (!TxtFirstName.Text.ValidateString())
             {
                 ShowInputErrorMessage(TxtFirstName, "Please fill out the first name field with a valid name.");
                 return false;
             }
-            if (!Validator.ValidateString(TxtLastName.Text))
+            if (!TxtLastName.Text.ValidateString())
             {
                 ShowInputErrorMessage(TxtLastName, "Please fill out the last name field with a valid name.");
                 return false;
             }
             bool validatePass = !(CurrentEmployee != null && TxtPassword.Password == "");
-            if (validatePass && !Validator.ValidatePassword(TxtPassword.Password))
+            if (validatePass && !TxtPassword.Password.ValidatePassword())
             {
                 ShowInputErrorMessage(TxtPassword, "Password must have a minimum of 8 characters.  \n At Least 1 each of 3 of the following 4:  " +
                                 " \n lowercase letter\n UPPERCASE LETTER \n Number \nSpecial Character (not space)");

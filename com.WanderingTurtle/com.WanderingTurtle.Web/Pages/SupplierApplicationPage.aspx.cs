@@ -83,7 +83,7 @@ namespace com.WanderingTurtle.Web.Pages
             }
 
             if (validateText(txtDescription, "Please enter your description")) errorCount++;
-            if (!Validator.ValidateEmail(txtEmail.Text))
+            if (!txtEmail.Text.ValidateEmail())
             {
                 txtEmail.ToolTip = "Please enter a valid e-mail";
                 txtEmail.BorderColor = Color.Red;
@@ -94,7 +94,7 @@ namespace com.WanderingTurtle.Web.Pages
                 txtEmail.ToolTip = "";
                 txtEmail.BorderColor = Color.Empty;
             }
-            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            if (!txtPhoneNumber.Text.ValidatePhone())
             {
                 txtPhoneNumber.ToolTip = "Please enter a valid phone number";
                 txtPhoneNumber.BorderColor = Color.Red;

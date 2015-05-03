@@ -3,7 +3,6 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -125,15 +124,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <exception cref="InputValidationException">Validation Error Handling.</exception>
         public bool Validate()
         {
-            if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
+            if (!txtCompanyName.Text.Trim().ValidateCompanyName())
             {
                 throw new InputValidationException(txtCompanyName, "Company Name field must be filled out and not contain special characters");
             }
-            if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
+            if (!txtEmail.Text.Trim().ValidateEmail())
             {
                 throw new InputValidationException(txtEmail, "Not a valid e-mail address");
             }
-            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            if (!txtPhoneNumber.Text.ValidatePhone())
             {
                 throw new InputValidationException(txtPhoneNumber, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
             }
@@ -141,23 +140,23 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new InputValidationException(cboZip, "You must select an zip from the drop down");
             }
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
+            if (!txtAddress1.Text.Trim().ValidateAlphaNumeric())
             {
                 throw new InputValidationException(txtAddress1, "The address must be filled out and not contain special characters (spaces allowed)");
             }
-            if (!Validator.ValidateString(txtFirstName.Text.Trim()))
+            if (!txtFirstName.Text.Trim().ValidateString())
             {
                 throw new InputValidationException(txtFirstName, "The first name field filled out and must not contain special characters (No Spaces)");
             }
-            if (!Validator.ValidateString(txtLastName.Text.Trim()))
+            if (!txtLastName.Text.Trim().ValidateString())
             {
                 throw new InputValidationException(txtLastName, "The last name field must be filled out and not contain special characters (No Spaces)");
             }
-            if (!Validator.ValidateAlphaNumeric(txtUserName.Text.Trim()))
+            if (!txtUserName.Text.Trim().ValidateAlphaNumeric())
             {
                 throw new InputValidationException(txtUserName, "Enter a valid user name.");
             }
-            if (!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
+            if (!numSupplyCost.Value.ToString().ValidateDecimal())
             {
                 throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
             }

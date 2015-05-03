@@ -186,7 +186,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnAddType_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validator.ValidateString(txtAddEventType.Text))
+            if (!txtAddEventType.Text.ValidateString())
             {
                 ShowInputErrorMessage(txtAddEventType, "Please enter a valid event type.  No spaces allowed.");
             }

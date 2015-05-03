@@ -145,23 +145,23 @@ namespace com.WanderingTurtle.Web.Pages
 
                 listResult result;
 
-                if (!Validator.ValidateDecimal(newList.Price.ToString("G"), minPrice))
+                if (!newList.Price.ToString("G").ValidateDecimal(minPrice))
                 {
                     errorText = addError(errorText, "Please add a valid, positive price");
                 }
-                if (!Validator.ValidateDateTime(newList.StartDate.ToString()))
+                if (!newList.StartDate.ToString().ValidateDateTime())
                 {
                     errorText = addError(errorText, "Please add a valid start date");
                 }
-                if (!Validator.ValidateDateTime(newList.EndDate.ToString(), newList.StartDate))
+                if (!newList.EndDate.ToString().ValidateDateTime(newList.StartDate))
                 {
                     errorText = addError(errorText, "Please add a valid end date after your start date");
                 }
-                if (!Validator.ValidateInt(newList.MaxNumGuests.ToString(), newList.MinNumGuests))
+                if (!newList.MaxNumGuests.ToString().ValidateInt(newList.MinNumGuests))
                 {
                     errorText = addError(errorText, "Please add a valid max number of guests higher than your minimum");
                 }
-                if (!Validator.ValidateInt(newList.MinNumGuests.ToString(), 0, newList.MaxNumGuests))
+                if (!newList.MinNumGuests.ToString().ValidateInt(0, newList.MaxNumGuests))
                 {
                     errorText = addError(errorText, "Please add a valid min number of guests lower than your maximum, higher than zero");
                 }

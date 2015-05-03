@@ -221,11 +221,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>True or false if valid</returns>
         private bool Validate()
         {
-            if (!Validator.ValidateInt(udAddBookingQuantity.Value.ToString()))
+            if (!udAddBookingQuantity.Value.ToString().ValidateInt())
             {
                 throw new InputValidationException(udAddBookingQuantity, "Value is not an integer.  Please re-enter.");
             }
-            if (!Validator.ValidateDecimal(udDiscount.Value.ToString()))
+            if (!udDiscount.Value.ToString().ValidateDecimal())
             {
                 throw new InputValidationException(udDiscount, "Value is not a percentage.  Please re-enter.");
             }

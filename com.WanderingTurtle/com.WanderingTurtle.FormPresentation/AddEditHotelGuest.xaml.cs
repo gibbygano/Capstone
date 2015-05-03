@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -350,22 +349,22 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>True if valid</returns>
         private bool Validate()
         {
-            if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
+            if (!TxtFirstName.Text.Trim().ValidateString(1, 50))
             {
                 ShowInputErrorMessage(TxtFirstName, "Please enter a First Name");
                 return false;
             }
-            if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
+            if (!TxtLastName.Text.Trim().ValidateString(1, 50))
             {
                 ShowInputErrorMessage(TxtLastName, "Please enter a Last Name");
                 return false;
             }
-            if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
+            if (!TxtAddress1.Text.Trim().ValidateAlphaNumeric(1, 255))
             {
                 ShowInputErrorMessage(TxtAddress1, "Please enter an Address");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
+            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !TxtAddress2.Text.Trim().ValidateAlphaNumeric(0, 255))
             {
                 ShowInputErrorMessage(TxtAddress2, "Error adding Address2");
                 return false;
@@ -375,22 +374,22 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(CboZip, "Please select a Zip Code");
                 return false;
             }
-            if (!Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
+            if (!TxtPhoneNumber.Text.Trim().ValidatePhone())
             {
                 ShowInputErrorMessage(TxtPhoneNumber, "Please enter a valid Phone Number");
                 return false;
             }
-            if (!Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
+            if (!TxtEmailAddress.Text.Trim().ValidateEmail())
             {
                 ShowInputErrorMessage(TxtEmailAddress, "Please enter a valid Email Address");
                 return false;
             }
-            if (!Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
+            if (!TxtRoomNumber.Text.Trim().ValidateNumeric())
             {
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!Validator.ValidateAlphaNumeric(TxtGuestPIN.Text.Trim()) || TxtGuestPIN.Text.Length !=6)
+            if (!TxtGuestPIN.Text.Trim().ValidateAlphaNumeric() || TxtGuestPIN.Text.Length != 6)
             {
                 ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid 6 digit alphanumeric PIN.");
                 return false;

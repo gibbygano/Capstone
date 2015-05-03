@@ -107,7 +107,7 @@ namespace com.WanderingTurtle.Web.Pages
             bool stop = false;
             int errorCount = 0;
             //validate!
-            if (!Validator.ValidateAlphaNumeric(txtEventName.Text, 1))
+            if (!txtEventName.Text.ValidateAlphaNumeric(1))
             {
                 txtEventName.ToolTip = "You must enter a valid event name!";
                 txtEventName.BorderColor = Color.Red;
