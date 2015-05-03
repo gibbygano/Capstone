@@ -20,6 +20,7 @@ namespace com.WanderingTurtle.Web.Pages
         public int currentGuestsCount = 0;
         public int current = 0;
         private bool getDetails;
+        private static bool showDateError = false;
         Label errorLabel;
 
         /// <summary>
@@ -64,6 +65,10 @@ namespace com.WanderingTurtle.Web.Pages
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                showDateError = false;
+            }
                 //get # of listings for supplier
                 try
                 {
@@ -118,14 +123,10 @@ namespace com.WanderingTurtle.Web.Pages
                     }
                     catch (Exception ex)
                     {
-                        
-                        errorLabel.Text = "Error: " + ex.Message;
-                        Control c = Master.FindControl("ErrorMess");
-                        c.Visible = true;
+                            lblMessage.Text = "Error: " + ex.Message;
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                         return;
                     }
-                    Control cc = Master.FindControl("ErrorMess");
-                    cc.Visible = false;
                 }
             }
         }
@@ -153,7 +154,12 @@ namespace com.WanderingTurtle.Web.Pages
                 {
                     if (Request.Form["dateFrom"] != "")
                     {
-                        lblDateError.Text = "Invalid Date";
+                        //only show this if the correct page is being shown
+                        if (showDateError)
+                        {
+                            lblMessage.Text = "Invalid Date";
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                        }
                     }
                     return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                 }
@@ -165,7 +171,11 @@ namespace com.WanderingTurtle.Web.Pages
                 {
                     if (Request.Form["dateFrom"] != "")
                     {
-                        lblDateError.Text = "Invalid Date";
+                        if (showDateError)
+                        {
+                            lblMessage.Text = "Invalid Date";
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                        }
                     }
                     return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now); 
                 }
@@ -241,6 +251,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// <param name="e"></param>
         public void btnGoBack_Click(object sender, EventArgs e)
         {
+            showDateError = false;
             Control cc = Master.FindControl("ErrorMess");
             cc.Visible = false;
             actions.Style.Add("display", "block");
@@ -259,6 +270,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// <param name="e"></param>
         public void btnViewMoneyDets_Click(object sender, EventArgs e)
         {
+            showDateError = true;
             getDetails = true;
             actions.Style.Add("display", "none");
             leftcontainer.Style.Add("display", "none");

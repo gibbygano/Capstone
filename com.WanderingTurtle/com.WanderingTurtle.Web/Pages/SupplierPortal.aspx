@@ -184,4 +184,10 @@
 
 
     </div>
+    <div id="otherMessage" title="Message" style="display: none;">
+            <div class="errorMsg">
+                <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="#FFFFFF"></asp:Label>
+                <br />
+            </div>
+        </div>
 </asp:Content>

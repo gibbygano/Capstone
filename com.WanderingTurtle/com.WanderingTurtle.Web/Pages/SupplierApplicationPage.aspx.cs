@@ -128,7 +128,7 @@ namespace com.WanderingTurtle.Web.Pages
 
                     if (result==SupplierResult.Success)
                     {
-                        showError("Record added");
+                        showError("Thank you for your Application!<br /> We will be in contact once we have reviewed the information. ");
                         clearForm();
                     }
 
