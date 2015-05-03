@@ -94,13 +94,18 @@ $(document).ready(function () {
         start: 0
     });
 
-    $('#account').hover(function () {
-        $('#accountOptions').slideToggle({
+    $('#account').on('mouseenter', function () {
+        $('#accountOptions').stop( true, true ).slideToggle({
 
         });
+       
+    });
+    $('#account').on('mouseleave', function () {
+        $('#accountOptions').stop( true, true ).slideToggle({
 
-
-    })
+        });
+    });
+    
 
 var id;
 $('.myID').click(function () {
