@@ -9,6 +9,10 @@ namespace com.WanderingTurtle.Web.Pages
     /// <summary>
     /// Web facing form for Suppliers to add a new Event.
     /// Created by: Kelsey Blount 2015/04/07
+    /// Updated: 2015/05/01
+    /// Added jQuery Autocomplete to Zip Code field
+    /// Updated: 2015/05/03 by Matt Lapka
+    /// Added jQuery dialog messages
     /// </summary>
     public partial class SupplierApplicationPage : System.Web.UI.Page
     {
@@ -28,7 +32,8 @@ namespace com.WanderingTurtle.Web.Pages
                 }
                 catch (Exception ex)
                 {
-                    lblError.Text = "There was an error loading Zip Code Information: " + ex.Message;
+                    lblMessage.Text = "There was an error loading Zip Code Information: " + ex.Message;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 }
             }
         }
@@ -150,7 +155,8 @@ namespace com.WanderingTurtle.Web.Pages
         private void showError(String message) 
         {
             _errorMessage = message;
-            lblError.Text = _errorMessage;
+            lblMessage.Text = _errorMessage;
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
         }
     }
 }
