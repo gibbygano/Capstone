@@ -191,5 +191,33 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
                 ShowErrorMessage(ex.Message, "Error Adding Event Type");
             }
         }
+
+        private async void BtnRunXML_Click(object sender, RoutedEventArgs e)
+        {
+            AccountingManager myMan = new AccountingManager();
+
+            DateTime formStartDate = (DateTime)(DateStart.SelectedDate);
+            DateTime formEndDate = (DateTime)(DateEnd.SelectedDate);
+
+            var report = myMan.GetAccountingDetails(formStartDate, formEndDate);
+
+            string filename = "report - " +
+                DateTime.Now.ToShortDateString().Replace("/", "-")
+                + " at " +
+                DateTime.Now.ToShortTimeString().Replace(":", "-") + ".xml";
+
+            if (report.XMLFile(filename))
+            {
+                await ShowMessage("Your Report has been saved successfully.", "Success");
+                DateStart.Text = null;
+                DateEnd.Text = null;
+            }
+            else
+            {
+                await ShowMessage("There was a problem.  File not written.", "Error");
+                DateStart.Text = null;
+                DateEnd.Text = null;
+            }
+        }
     }
 }

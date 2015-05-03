@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using MahApps.Metro;
 
 namespace com.WanderingTurtle.FormPresentation.Views
 {
@@ -70,6 +71,32 @@ namespace com.WanderingTurtle.FormPresentation.Views
             }
 
             this.GetWindow<MainWindow>().BtnSignOut.Visibility = Visibility.Visible;
+
+            if (Globals.UserToken.Level.Equals(RoleData.Admin))
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                                      ThemeManager.GetAccent("Emerald"),
+                                      ThemeManager.GetAppTheme("BaseLight"));
+            }
+            else if (Globals.UserToken.Level.Equals(RoleData.Concierge))
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                      ThemeManager.GetAccent("Cyan"),
+                      ThemeManager.GetAppTheme("BaseLight"));
+
+            }
+            else if (Globals.UserToken.Level.Equals(RoleData.DeskClerk))
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                      ThemeManager.GetAccent("Amber"),
+                      ThemeManager.GetAppTheme("BaseLight"));
+            }
+            else
+            {
+                ThemeManager.ChangeAppStyle(Application.Current,
+                      ThemeManager.GetAccent("Magenta"),
+                      ThemeManager.GetAppTheme("BaseLight"));
+            }
             this.GetWindow<MainWindow>().MainContent.Content = new TabContainer();
         }
 

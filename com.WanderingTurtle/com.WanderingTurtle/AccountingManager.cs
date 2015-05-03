@@ -7,12 +7,12 @@ using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
-    class AccountingManager
+    public class AccountingManager
     {
         /// <summary>
         /// Arik Chadima
         /// Created: 2015/5/1
-        /// Unimplemented method for assembling required data for an AccountingDetails object.
+        /// method for assembling required data for an AccountingDetails object.
         /// </summary>
         /// <param name="Start">start date of invoices</param>
         /// <param name="End">end date of invoices</param>

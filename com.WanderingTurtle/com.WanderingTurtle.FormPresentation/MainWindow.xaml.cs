@@ -2,6 +2,7 @@
 using com.WanderingTurtle.FormPresentation.Views;
 using System;
 using System.Windows;
+using MahApps.Metro;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -39,6 +40,10 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         internal void StartUp()
         {
+            ThemeManager.ChangeAppStyle(Application.Current,
+                      ThemeManager.GetAccent("Emerald"),
+                      ThemeManager.GetAppTheme("BaseLight"));
+
             MainContent.Content = new StartupScreen();
         }
 
