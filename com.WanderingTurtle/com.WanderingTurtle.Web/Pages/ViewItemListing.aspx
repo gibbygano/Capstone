@@ -7,7 +7,7 @@
 <%@ Import Namespace="com.WanderingTurtle" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
-    <%--<script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>--%>
+    <script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>
     <!--Created 2015/04/09
         Kelsey 
         View List of Item Listings and Options to Edit or Delete
@@ -73,10 +73,16 @@
         </EditItemTemplate>
     </asp:ListView>
 </div>
-    hello
-        <div id="deletemessage" title="Are you sure??">
+
+        <div id="deletemessage" title="Are you sure??" style="display: none;">
             <div class="errorMsg">
                 <asp:Label ID="lblDeleteMessage" runat="server" Text="Are you sure you want to delete this event?" ForeColor="#FFFFFF"></asp:Label>
+                <br />
+            </div>
+        </div>
+        <div id="otherMessage" title="Message" style="display: none;">
+            <div class="errorMsg">
+                <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="#FFFFFF"></asp:Label>
                 <br />
             </div>
         </div>

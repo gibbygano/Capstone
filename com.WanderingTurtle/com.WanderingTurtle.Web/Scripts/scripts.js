@@ -157,3 +157,22 @@ function confirmDelete() {
     return true;
 }
 
+function showMessage() {
+    $('#otherMessage').dialog({
+        autoOpen: false,
+        width: 'auto',
+        resizable: false,
+        modal: true,
+        buttons: {
+            "OK": function () {
+                $(this).dialog("close");
+            }
+        },
+        close: function (event, ui) {
+            $(this).close;
+        }
+    });
+    $("#otherMessage").dialog("open");
+
+}
+
