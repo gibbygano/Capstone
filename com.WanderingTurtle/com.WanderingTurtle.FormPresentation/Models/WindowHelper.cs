@@ -22,44 +22,18 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </param>
         /// <returns>Base Parent <see cref="MainWindow" /></returns>
         /// <exception cref="WanderingTurtleException" />
-        internal static MainWindow GetMainWindow(this FrameworkElement control)
+        internal static T GetWindow<T>(this FrameworkElement control) where T : class
         {
             try
             {
                 var parent = VisualTreeHelper.GetParent(control) ?? control;
-                while (!(parent is MainWindow))
+                while (!(parent is T))
                 {
                     parent = VisualTreeHelper.GetParent(parent);
                 }
-                return parent as MainWindow;
+                return parent as T;
             }
             catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Main Window"); }
-        }
-
-        /// <summary>
-        /// Returns the parent MetroWindow of any child control
-        /// </summary>
-        /// <remarks>Miguel Santana 2015/03/10</remarks>
-        /// <param name="control">
-        /// The control that you wish to find the parent of. In most cases you will use 'this'
-        /// </param>
-        /// <returns>Parent MetroWindow</returns>
-        /// <exception cref="WanderingTurtleException" />
-        internal static MetroWindow GetWindow(this FrameworkElement control)
-        {
-            try
-            {
-                var parent = VisualTreeHelper.GetParent(control);
-                if (parent == null)
-                { parent = control; }
-                else
-                {
-                    while (!(parent is MetroWindow))
-                    { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
-                }
-                return parent as MetroWindow;
-            }
-            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Parent Window"); }
         }
 
         /// <summary>

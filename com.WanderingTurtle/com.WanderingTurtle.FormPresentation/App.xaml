@@ -20,6 +20,7 @@
             <Style x:Key="WindowStyle" TargetType="{x:Type Metro:MetroWindow}">
                 <Setter Property="BorderBrush" Value="{StaticResource AccentColorBrush}" />
                 <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="GlowBrush" Value="{StaticResource AccentColorBrush}" />
             </Style>
             <Style x:Key="MainWindowStyle" TargetType="{x:Type Metro:MetroWindow}" BasedOn="{StaticResource WindowStyle}">
                 <Setter Property="ResizeMode" Value="CanResizeWithGrip" />

@@ -25,7 +25,7 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />

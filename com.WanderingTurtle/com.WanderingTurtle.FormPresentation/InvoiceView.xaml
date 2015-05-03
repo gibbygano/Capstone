@@ -60,7 +60,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <WrapPanel Grid.Row="3">
+        <WrapPanel Grid.Row="3" Margin="{DynamicResource Spacing.Top}">
             <Button Content="Add Booking"    Margin="{DynamicResource Spacing.Inline}" Click="btnAddBooking_Click" />
             <Button Content="Edit Booking"   Margin="{DynamicResource Spacing.Inline}" Click="btnEditBooking_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
             <Button Content="Cancel Booking" Margin="{DynamicResource Spacing.Inline}" Click="btnCancelBooking_Click"  IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />

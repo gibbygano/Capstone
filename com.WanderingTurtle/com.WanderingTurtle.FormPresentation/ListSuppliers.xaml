@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvSuppliersList" d:DataContext="{d:DesignInstance common:Supplier }" >
+        <DataGrid Grid.Row="0" x:Name="lvSuppliersList" d:DataContext="{d:DesignInstance common:Supplier }">
             <DataGrid.Columns>
                 <DataGridTextColumn Width ="*"    Header="Company Name"  Binding="{Binding CompanyName}" />
                 <DataGridTextColumn Width ="*"    Header="First Name"    Binding="{Binding FirstName}" />
@@ -25,7 +25,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{DynamicResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />

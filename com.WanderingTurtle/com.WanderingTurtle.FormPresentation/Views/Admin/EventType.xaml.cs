@@ -1,22 +1,17 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
-using System.Windows.Controls;
 using com.WanderingTurtle.FormPresentation.Models;
-using com.WanderingTurtle.Common;
-using System.Collections.Generic;
 using MahApps.Metro.Controls.Dialogs;
 using System;
-using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
-using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
+using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation.Views.Admin
 {
     /// <summary>
     /// Interaction logic for EventType.xaml
     /// </summary>
-    internal partial class EventType : UserControl
+    internal partial class EventType
     {
         private EventManager _eventManager = new EventManager();
         private EventManager.EventResult _result;
@@ -24,13 +19,13 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Initializes the eventType admin ui
         /// </summary>
         public EventType()
         {
             InitializeComponent();
-            FillComboBox();         
+            FillComboBox();
         }
 
         /// <summary>
@@ -103,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Sends the eventType that user wants to archive to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
         /// </summary>
@@ -113,31 +108,24 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         {
             Common.EventType archiveEventType = (Common.EventType)cboArchiveEvent.SelectedItem;
 
-            try
-            {
-                _result = _eventManager.ArchiveAnEventType(archiveEventType);
+            _result = _eventManager.ArchiveAnEventType(archiveEventType);
 
-                if (_result.Equals(EventManager.EventResult.Success))
-                {
-                     await ShowMessage("Your Request was Processed Successfully", "Success");
-                     cboArchiveEvent.SelectedIndex = -1;                   
-                     FillComboBox();
-                }                
-                else
-                {
-                    await ShowMessage("Event type could not be updated.", "Error");
-                }
-            }
-            catch (Exception)
+            if (_result.Equals(EventManager.EventResult.Success))
             {
-                throw;
+                await ShowMessage("Your Request was Processed Successfully", "Success");
+                cboArchiveEvent.SelectedIndex = -1;
+                FillComboBox();
+            }
+            else
+            {
+                await ShowMessage("Event type could not be updated.", "Error");
             }
         }
 
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Sends the eventType that user wants to edit to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
         /// </summary>
@@ -150,35 +138,28 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
                 ShowInputErrorMessage(txtEditEventType, "Please enter a valid Event Type");
             }
 
-            try
+            Common.EventType oldEventType = (Common.EventType)cboEditEvent.SelectedItem;
+            Common.EventType newEventType = new Common.EventType(oldEventType.EventTypeID, txtEditEventType.Text);
+
+            _result = _eventManager.EditEventType(oldEventType, newEventType);
+
+            if (_result.Equals(EventManager.EventResult.Success))
             {
-                Common.EventType oldEventType = (Common.EventType)cboEditEvent.SelectedItem;
-                Common.EventType newEventType = new Common.EventType(oldEventType.EventTypeID, txtEditEventType.Text);
-
-                _result = _eventManager.EditEventType(oldEventType, newEventType);
-
-                if (_result.Equals(EventManager.EventResult.Success))
-                {
-                     await ShowMessage("Your Request was Processed Successfully", "Success");
-                     cboEditEvent.SelectedIndex = -1;
-                     txtEditEventType.Text = "";
-                     FillComboBox();
-                }                
-                else
-                {
-                    await ShowMessage("Event type could not be updated.", "Error");
-                }
+                await ShowMessage("Your Request was Processed Successfully", "Success");
+                cboEditEvent.SelectedIndex = -1;
+                txtEditEventType.Text = "";
+                FillComboBox();
             }
-            catch (Exception)
-            {   
-                throw;
+            else
+            {
+                await ShowMessage("Event type could not be updated.", "Error");
             }
         }
 
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Sends the eventType that user wants to edit to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
         /// </summary>
@@ -207,8 +188,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
             }
             catch (Exception ex)
             {
-                ShowErrorMessage(ex.ToString(), null);
-                throw;
+                ShowErrorMessage(ex.Message, "Error Adding Event Type");
             }
         }
     }

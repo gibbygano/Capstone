@@ -68,8 +68,8 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 throw new WanderingTurtleException(this, "Error setting User Token");
             }
 
-            this.GetMainWindow().btnSignOut.IsEnabled = true;
-            this.GetMainWindow().MainContent.Content = new TabContainer();
+            this.GetWindow<MainWindow>().BtnSignOut.Visibility = Visibility.Visible;
+            this.GetWindow<MainWindow>().MainContent.Content = new TabContainer();
         }
 
         private void TxtInput_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -11,7 +11,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Metro:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" Margin="{DynamicResource Spacing.Container}" Metro:TabControlHelper.IsUnderlined="True" />
+        <metro:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="MainTabControl" Margin="{DynamicResource Spacing.Container}" metro:TabControlHelper.IsUnderlined="True" metro:TabControlHelper.Transition="Default" />
         <StatusBar Grid.Row="2">
             <StatusBarItem Content="Current User:" />
             <StatusBarItem x:Name="CurrentUserLabel" />

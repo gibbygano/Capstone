@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -21,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <returns>awaitable Task of type LoginDialogData</returns>
         /// <exception cref="WanderingTurtleException"></exception>
         public static Task<LoginDialogData> ShowLoginDialog(this FrameworkElement control, string message, string title = null, LoginDialogSettings settings = null)
-        { return control.GetWindow().ShowLoginAsync(title, message, settings); }
+        { return control.GetWindow<MetroWindow>().ShowLoginAsync(title, message, settings); }
 
         /// <summary>
         /// Show Message Dialog
@@ -38,6 +39,6 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <returns>awaitable Task of type MessageDialogResult</returns>
         /// <exception cref="WanderingTurtleException" />
         public static Task<MessageDialogResult> ShowMessageDialog(this FrameworkElement control, string message, string title = null, MessageDialogStyle? style = null, MetroDialogSettings settings = null)
-        { return control.GetWindow().ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
+        { return control.GetWindow<MetroWindow>().ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
     }
 }
