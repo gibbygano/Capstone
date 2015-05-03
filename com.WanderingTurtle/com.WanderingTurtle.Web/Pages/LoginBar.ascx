@@ -8,7 +8,7 @@
        supplierName = _currentSupplier.FirstName + " " + _currentSupplier.LastName;
    } %>
 <div id="loginBar">
-<div id="userLoggedIn" runat="server" style="display: none;"><div id="supplierName" style="float: left">Welcome <%= supplierName %>! </div><div id="account">Account<div id="accountOptions"style="display: none;">
+<div id="userLoggedIn" runat="server" style="display: none;"><div id="supplierName" style="float: left">Welcome <%= supplierName %>! </div><div id="account">Account<div id="accountOptions" style="display: none;">
         <p><a href="../password">Change Password</a><br /></p>
         <p><a href="../logout">Logout</a></p>
 </div></div><div class="clear"></div></div>

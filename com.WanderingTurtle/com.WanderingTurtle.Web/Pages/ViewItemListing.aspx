@@ -7,7 +7,7 @@
 <%@ Import Namespace="com.WanderingTurtle" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
-    <script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>
+    
     <!--Created 2015/04/09
         Kelsey 
         View List of Item Listings and Options to Edit or Delete
@@ -52,6 +52,8 @@
             </table>
         </LayoutTemplate>
         <EditItemTemplate>
+            <%
+                Response.Write("<script src=\"/Scripts/datescript.js\"></script>"); %>
             <tr>
                 <input type="hidden" name="ListID" value="<%# Item.ItemListID %>" />
                 <td><%# Item.EventName.Truncate(25) %></td>
@@ -86,5 +88,5 @@
                 <br />
             </div>
         </div>
-
+    <%--<script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>--%>
 </asp:Content>
