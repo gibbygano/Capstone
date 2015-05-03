@@ -19,7 +19,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditHotelGuest
     {
-        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private readonly HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
         /// Miguel Santana
@@ -31,7 +31,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Title = "Add a new Guest";
             TxtRoomNumber.MaxLength = 4;
-            TxtGuestPIN.MaxLength = 6;
+            TxtGuestPin.MaxLength = 6;
             InitializeEverything();
         }
 
@@ -41,9 +41,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Edit an Existing Hotel Guest
         /// </summary>
         /// <param name="hotelGuest"></param>
-        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <param name="readOnly">Make the form ReadOnly.</param>
         /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
-        public AddEditHotelGuest(HotelGuest hotelGuest, bool ReadOnly = false)
+        public AddEditHotelGuest(HotelGuest hotelGuest, bool readOnly = false)
         {
             InitializeComponent();
 
@@ -51,7 +51,7 @@ namespace com.WanderingTurtle.FormPresentation
             Title = String.Format("Editing Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
+            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = null;
                 TxtEmailAddress.Text = null;
                 TxtRoomNumber.Text = null;
-                TxtGuestPIN.Text = _hotelGuestManager.GenerateRandomPIN();
+                TxtGuestPin.Text = _hotelGuestManager.GenerateRandomPIN();
             }
             else
             {
@@ -147,7 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = phoneNumberMasked;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
                 TxtRoomNumber.Text = CurrentHotelGuest.Room;
-                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN;
+                TxtGuestPin.Text = CurrentHotelGuest.GuestPIN;
             }
             TxtFirstName.Focus();
         }
@@ -250,7 +250,7 @@ namespace com.WanderingTurtle.FormPresentation
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
                             TxtRoomNumber.Text.Trim(),
-                            TxtGuestPIN.Text.Trim()
+                            TxtGuestPin.Text.Trim()
                         )
                     );
                 }
@@ -267,7 +267,7 @@ namespace com.WanderingTurtle.FormPresentation
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
                                 TxtRoomNumber.Text.Trim(),
-                                TxtGuestPIN.Text.Trim()
+                                TxtGuestPin.Text.Trim()
                             )
                         );
                 }
@@ -311,7 +311,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnGeneratePIN_Click(object sender, RoutedEventArgs e)
         {
-            TxtGuestPIN.Text = _hotelGuestManager.GenerateRandomPIN();
+            TxtGuestPin.Text = _hotelGuestManager.GenerateRandomPIN();
         }
 
         /// <summary>
@@ -389,9 +389,9 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!TxtGuestPIN.Text.Trim().ValidateAlphaNumeric() || TxtGuestPIN.Text.Length != 6)
+            if (!TxtGuestPin.Text.Trim().ValidateAlphaNumeric() || TxtGuestPin.Text.Length != 6)
             {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid 6 digit alphanumeric PIN.");
+                ShowInputErrorMessage(TxtGuestPin, "Please enter a valid 6 digit alphanumeric PIN.");
                 return false;
             }
 
@@ -414,7 +414,7 @@ namespace com.WanderingTurtle.FormPresentation
                     && CurrentHotelGuest.PhoneNumber.Equals(TxtPhoneNumber.Text.Trim())
                     && CurrentHotelGuest.EmailAddress.Equals(TxtEmailAddress.Text.Trim())
                     && CurrentHotelGuest.Room.Equals(TxtRoomNumber.Text.Trim())
-                    && CurrentHotelGuest.GuestPIN.Equals(TxtGuestPIN.Text.Trim());
+                    && CurrentHotelGuest.GuestPIN.Equals(TxtGuestPin.Text.Trim());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Configuration;
@@ -39,7 +40,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         private void Submit()
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
-            { Globals.UserToken = new Common.Employee(100, "Debugger", null, 1); }
+            { Globals.UserToken = new Employee(100, "Debugger", null, 1); }
 
             int userId;
             if (!int.TryParse(TxtUserName.Text.Trim(), out userId))

@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private InvoiceDetails CurrentInvoice { get; set; }
 
-        private decimal _cancelFee = 0m;
+        private decimal _cancelFee;
         private readonly BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
@@ -51,17 +51,17 @@ namespace com.WanderingTurtle.FormPresentation
         private void PopulateText()
         {
             //populating with data from objects that opened the form
-            lblBookingID.Content = CurrentBooking.BookingID;
-            lblGuestName.Content = CurrentInvoice.GetFullName;
-            lblQuantity.Content = CurrentBooking.Quantity;
-            lblEventName.Content = CurrentBooking.EventItemName;
-            lblDiscount.Content = CurrentBooking.Discount.ToString("p");
-            lblEventTime.Content = CurrentBooking.StartDate;
-            lblTicketPrice.Content = CurrentBooking.TicketPrice.ToString("c");
-            lblTotalDue.Content = CurrentBooking.TotalCharge.ToString("c");
+            LblBookingId.Content = CurrentBooking.BookingID;
+            LblGuestName.Content = CurrentInvoice.GetFullName;
+            LblQuantity.Content = CurrentBooking.Quantity;
+            LblEventName.Content = CurrentBooking.EventItemName;
+            LblDiscount.Content = CurrentBooking.Discount.ToString("p");
+            LblEventTime.Content = CurrentBooking.StartDate;
+            LblTicketPrice.Content = CurrentBooking.TicketPrice.ToString("c");
+            LblTotalDue.Content = CurrentBooking.TotalCharge.ToString("c");
 
             _cancelFee = _bookingManager.CalculateCancellationFee(CurrentBooking);
-            lblCancelMessage.Content = "A fee of " + _cancelFee.ToString("c") + " will be charged to cancel this booking.";
+            LblCancelMessage.Content = "A fee of " + _cancelFee.ToString("c") + " will be charged to cancel this booking.";
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Pat Banks
         /// Updated: 2015/03/08
         /// Updated fields to reflect cancellation of booking
-        /// 
+        ///
         /// Pat Banks
         /// Updated: 2015/03/19
         /// Moved logic to BookingManager - CancelBookingResults

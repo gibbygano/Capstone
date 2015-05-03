@@ -7,7 +7,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" x:Name="lblTitle" FontSize="16" FontWeight="Bold" Content="Event Type Administration" />
+        <Label Grid.Row="0" x:Name="LblTitle" FontSize="16" FontWeight="Bold" Content="Event Type Administration" />
         <Grid  Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -22,20 +22,20 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="0" HorizontalContentAlignment="Right" Content="Add Event Type:" VerticalAlignment="Center" />
-            <Button Grid.Row="0" Grid.Column="3"  Content="Add Event Type" x:Name ="btnAddType" Height="30" Click="btnAddType_Click" />
-            <TextBox Height="30"  Grid.Row="0" Grid.Column="1" x:Name="txtAddEventType" />
+            <Button Grid.Row="0" Grid.Column="3"  Content="Add Event Type" x:Name ="BtnAddType" Height="30" Click="btnAddType_Click" />
+            <TextBox Height="30"  Grid.Row="0" Grid.Column="1" x:Name="TxtAddEventType" />
             <Separator Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Bottom" />
 
-            <ComboBox Height="30"  Grid.Row="1" Grid.Column="1" x:Name="cboEditEvent" ItemsSource = "{Binding}" />
-            <TextBox  Height="30"  Grid.Row="2" Grid.Column="1" x:Name="txtEditEventType" />
+            <ComboBox Height="30"  Grid.Row="1" Grid.Column="1" x:Name="CboEditEvent" ItemsSource = "{Binding}" />
+            <TextBox  Height="30"  Grid.Row="2" Grid.Column="1" x:Name="TxtEditEventType" />
             <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Right" Content="Change Event Type:" VerticalAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right" Content="To:" VerticalAlignment="Center" />
-            <Button Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Content="Update Event Type" x:Name ="btnEditType" Height="30" Click="btnEditType_Click" />
+            <Button Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Content="Update Event Type" x:Name ="BtnEditType" Height="30" Click="btnEditType_Click" />
             <Separator Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" />
 
             <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right" Content="Archive Event Type:" VerticalAlignment="Center" />
-            <ComboBox Grid.Row="3" Grid.Column="1" Height="30"  x:Name="cboArchiveEvent" ItemsSource = "{Binding}" />
-            <Button Grid.Row="3" Grid.Column="3"  Content="Archive Event Type" x:Name ="btnArchiveType" Height="30" Click="btnArchiveType_Click" />
+            <ComboBox Grid.Row="3" Grid.Column="1" Height="30"  x:Name="CboArchiveEvent" ItemsSource = "{Binding}" />
+            <Button Grid.Row="3" Grid.Column="3"  Content="Archive Event Type" x:Name ="BtnArchiveType" Height="30" Click="btnArchiveType_Click" />
         </Grid>
     </Grid>
 </UserControl>

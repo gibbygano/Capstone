@@ -11,7 +11,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvPendingSuppliers" d:DataContext="{d:DesignInstance common:SupplierApplication }">
+        <DataGrid Grid.Row="0" x:Name="LvPendingSuppliers" d:DataContext="{d:DesignInstance common:SupplierApplication }">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*"    Header="Company Name"      Binding="{Binding CompanyName}" />
                 <DataGridTextColumn Width="*"    Header="First Name"        Binding="{Binding FirstName}" />
@@ -29,7 +29,7 @@
 
         <WrapPanel Grid.Row="1" Margin="{StaticResource Spacing.Top}">
             <Button Content="View Approved Suppliers" Margin="{StaticResource Spacing.Right}" Click="btnViewApprovedSuppliers_Click" />
-            <Button Content="Update Pending Supplier" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvPendingSuppliers}" />
+            <Button Content="Update Pending Supplier" Click="btnUpdatePendingSupplier_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=LvPendingSuppliers}" />
         </WrapPanel>
     </Grid>
 </UserControl>

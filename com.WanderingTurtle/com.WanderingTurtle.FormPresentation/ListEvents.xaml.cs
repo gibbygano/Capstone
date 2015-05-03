@@ -1,4 +1,5 @@
-﻿using com.WanderingTurtle.Common;
+﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
@@ -7,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
-using com.WanderingTurtle.BusinessLogic;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -17,23 +17,32 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListEvents : IDataGridContextMenu
     {
         private List<Event> _myEventList;
-        private com.WanderingTurtle.BusinessLogic.EventManager _myEventManager = new com.WanderingTurtle.BusinessLogic.EventManager();
-        private ProductManager _myProductManager = new ProductManager();
+        private readonly EventManager _myEventManager = new EventManager();
+        private readonly ProductManager _myProductManager = new ProductManager();
 
         /// <summary>
         /// Hunter Lind
         /// Created 2015/2/23
         /// Fills our Listview with events and initializes the window.
         /// </summary>
+        /// <exception cref="ArgumentNullException">
+        /// <see cref="DataGridContextMenuResult" /> is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <see cref="DataGridContextMenuResult" /> is not an <see cref="T:System.Enum" />.
+        /// </exception>
+        /// <exception cref="InvalidOperationException">
+        /// The item to add already has a different logical parent.
+        /// </exception>
+        /// <exception cref="WanderingTurtleException">Error assigning the context menu to the component</exception>
         public ListEvents()
         {
             InitializeComponent();
             Refresh();
 
-            lvEvents.SetContextMenu(this);
+            LvEvents.SetContextMenu(this);
         }
 
-        
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/04/15
@@ -99,7 +108,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Hunter Lind 
+        /// Hunter Lind
         /// Created:  2015/2/23
         /// Opens a dialog to confirm archival of an event record
         /// List is refreshed after archival
@@ -111,39 +120,31 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (results == ResultsArchive.OkToArchive)
             {
-                try
-                {
-                    // Configure the message box to be displayed
-                    string messageBoxText = "Are you sure you want to delete this event?";
-                    string caption = "Delete Event?";
+                // Configure the message box to be displayed
+                string messageBoxText = "Are you sure you want to delete this event?";
+                string caption = "Delete Event?";
 
-                    // Display message box
-                    MessageDialogResult result = await this.ShowMessageDialog(messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
-                    // Process message box results
-                    switch (result)
-                    {
-                        case MessageDialogResult.Affirmative:
-                            try
-                            {
-                                _myEventManager.ArchiveAnEvent(selectedEvent);
-                                Refresh();
-                            }
-                            catch (Exception ex)
-                            {
-                                throw new WanderingTurtleException(this, ex);
-                            }
-                            break;
-
-                        case MessageDialogResult.Negative:
-                            // User pressed No button
-                            // ...
-                            break;
-                    }
-                }
-                catch (Exception)
+                // Display message box
+                MessageDialogResult result = await this.ShowMessageDialog(messageBoxText, caption, MessageDialogStyle.AffirmativeAndNegative);
+                // Process message box results
+                switch (result)
                 {
-                    
-                    throw;
+                    case MessageDialogResult.Affirmative:
+                        try
+                        {
+                            _myEventManager.ArchiveAnEvent(selectedEvent);
+                            Refresh();
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new WanderingTurtleException(this, ex);
+                        }
+                        break;
+
+                    case MessageDialogResult.Negative:
+                        // User pressed No button
+                        // ...
+                        break;
                 }
             }
             else
@@ -153,7 +154,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Hunter Lind 
+        /// Hunter Lind
         /// Created:  2015/2/23
         /// Opens a new AddNewEvent window for the user to interact with.
         /// When the window closes, we refresh our listview.
@@ -170,7 +171,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void btnArchiveEvent_Click(object sender, RoutedEventArgs e)
         {
-            ArchiveEvent(lvEvents.SelectedItem as Event);
+            ArchiveEvent(LvEvents.SelectedItem as Event);
         }
 
         /// <summary>
@@ -182,7 +183,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnEditEvent_Click(object sender, RoutedEventArgs e)
         {
-            OpenEvent(lvEvents.SelectedItem as Event);
+            OpenEvent(LvEvents.SelectedItem as Event);
         }
 
         /// <summary>
@@ -195,9 +196,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            List<Event> myTempList = _myEventManager.EventSearch(txtSearchInput.Text);
-            lvEvents.ItemsSource = myTempList;
-            txtSearchInput.Text = "";
+            List<Event> myTempList = _myEventManager.EventSearch(TxtSearchInput.Text);
+            LvEvents.ItemsSource = myTempList;
+            TxtSearchInput.Text = "";
         }
 
         /// <summary>
@@ -219,8 +220,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void Refresh()
         {
-
-            lvEvents.ItemsPanel.LoadContent();
+            LvEvents.ItemsPanel.LoadContent();
 
             try
             {
@@ -229,12 +229,12 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     x.setFields();
                 }
-                lvEvents.ItemsSource = _myEventList;
-                lvEvents.Items.Refresh();
+                LvEvents.ItemsSource = _myEventList;
+                LvEvents.Items.Refresh();
             }
             catch (Exception ex)
             {
-                lvEvents.ItemsSource = "";
+                LvEvents.ItemsSource = "";
                 throw new WanderingTurtleException(this, "Create an event or contact your Systems Administrator", "No data to display from the database.", ex);
             }
         }
@@ -248,8 +248,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void txtSearchInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnSearch.Content = txtSearchInput.Text.Length == 0 ? "Refresh List" : "Search";
+            BtnSearch.Content = TxtSearchInput.Text.Length == 0 ? "Refresh List" : "Search";
         }
+
         /// <summary>
         /// Pat Banks
         /// Created:  2015/05/02

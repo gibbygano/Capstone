@@ -4,6 +4,7 @@ using com.WanderingTurtle.FormPresentation.Models;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,8 +17,8 @@ namespace com.WanderingTurtle.FormPresentation
     public partial class ListTheListings : IDataGridContextMenu
     {
         private List<ItemListing> _myListingList;
-        private BookingManager _bookingManager = new BookingManager();
-        private ProductManager _productManager = new ProductManager();
+        private readonly BookingManager _bookingManager = new BookingManager();
+        private readonly ProductManager _productManager = new ProductManager();
 
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
         /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
@@ -30,14 +31,14 @@ namespace com.WanderingTurtle.FormPresentation
 
             if (Globals.UserToken.Level.Equals(RoleData.Valet) || Globals.UserToken.Level.Equals(RoleData.Concierge))
             {
-                btnAddListing.IsEnabled = false;
-                btnArchiveListing.IsEnabled = false;
-                btnEditListing.IsEnabled = false;
+                BtnAddListing.IsEnabled = false;
+                BtnArchiveListing.IsEnabled = false;
+                BtnEditListing.IsEnabled = false;
             }
 
-            refreshData();
+            RefreshData();
 
-            lvListing.SetContextMenu(this);
+            LvListing.SetContextMenu(this);
         }
 
         /// <exception cref="WanderingTurtleException"/>
@@ -53,6 +54,7 @@ namespace com.WanderingTurtle.FormPresentation
                     case DataGridContextMenuResult.View:
                         OpenListing(selectedItem, true);
                         break;
+
                     default:
                         throw new WanderingTurtleException(this, "You do not have access to this function.");
                 }
@@ -62,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (command)
                 {
                     case DataGridContextMenuResult.Add:
-                        if (Globals.UserToken.Equals(RoleData.Admin))
+                        if (Globals.UserToken.Level.Equals(RoleData.Admin))
                         {
                             OpenListing();
                         }
@@ -93,13 +95,13 @@ namespace com.WanderingTurtle.FormPresentation
                 if (selectedItem == null)
                 {
                     if (new AddEditListing().ShowDialog() == false) return;
-                    refreshData();
+                    RefreshData();
                 }
                 else
                 {
                     if (new AddEditListing(selectedItem, readOnly).ShowDialog() == false) return;
                     if (readOnly) return;
-                    refreshData();
+                    RefreshData();
                 }
             }
             catch (Exception ex)
@@ -115,12 +117,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private async void ArchiveListing()
         {
-            ItemListing ListingToDelete = lvListing.SelectedItem as ItemListing;
+            ItemListing listingToDelete = LvListing.SelectedItem as ItemListing;
 
             try
             {
                 //need to check if there are any Bookings associated with this listing.
-                ResultsArchive results = _bookingManager.CheckListingArchive(ListingToDelete.ItemListID);
+                Debug.Assert(listingToDelete != null, "listingToDelete != null");
+                ResultsArchive results = _bookingManager.CheckListingArchive(listingToDelete.ItemListID);
 
                 if (results.Equals(ResultsArchive.CannotArchive))
                 {
@@ -130,12 +133,12 @@ namespace com.WanderingTurtle.FormPresentation
                 switch (result)
                 {
                     case MessageDialogResult.Affirmative:
-                        var numRows = _productManager.ArchiveItemListing(ListingToDelete);
+                        var numRows = _productManager.ArchiveItemListing(listingToDelete);
                         if (numRows == listResult.Success)
                         {
                             await this.ShowMessageDialog("Listing successfully deleted.");
                         }
-                        refreshData();
+                        RefreshData();
                         break;
                 }
             }
@@ -157,7 +160,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnEditListing_click(object sender, RoutedEventArgs e)
         {
-            OpenListing(lvListing.SelectedItem as ItemListing);
+            OpenListing(LvListing.SelectedItem as ItemListing);
         }
 
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -165,7 +168,7 @@ namespace com.WanderingTurtle.FormPresentation
             OpenListing(sender.RowClick<ItemListing>(), true);
         }
 
-        private void refreshData()
+        private void RefreshData()
         {
             try
             {
@@ -174,7 +177,7 @@ namespace com.WanderingTurtle.FormPresentation
                 {
                     item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
                 }
-                lvListing.ItemsSource = _myListingList;
+                LvListing.ItemsSource = _myListingList;
             }
             catch (Exception ex)
             {
@@ -184,18 +187,18 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchListing_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnSearchListing.Content = txtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
+            BtnSearchListing.Content = TxtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)
         {
-            var myList = _productManager.SearchItemLists(txtSearchListing.Text);
+            var myList = _productManager.SearchItemLists(TxtSearchListing.Text);
             foreach (ItemListing item in myList)
             {
                 item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
             }
-            lvListing.ItemsSource = myList;
-            lvListing.Items.Refresh();
+            LvListing.ItemsSource = myList;
+            LvListing.Items.Refresh();
         }
     }
 }

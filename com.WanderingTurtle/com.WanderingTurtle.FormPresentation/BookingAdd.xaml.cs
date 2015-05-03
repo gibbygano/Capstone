@@ -13,12 +13,12 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddBooking
     {
-        private InvoiceDetails _CurrentInvoice { get; set; }
+        private InvoiceDetails CurrentInvoice { get; set; }
 
-        private List<ItemListingDetails> myEventList = new List<ItemListingDetails>();
-        private int eID;
-        private BookingManager _bookingManager = new BookingManager();
-        public ItemListing originalItem;
+        private List<ItemListingDetails> _myEventList = new List<ItemListingDetails>();
+        private readonly int _eId;
+        private readonly BookingManager _bookingManager = new BookingManager();
+        public ItemListing OriginalItem;
 
         /// <summary>
         /// Tony Noel
@@ -29,14 +29,14 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="inInvoice">brings the invoice data from the prior list view</param>
         public AddBooking(InvoiceDetails inInvoice)
         {
-            _CurrentInvoice = inInvoice;
+            CurrentInvoice = inInvoice;
 
             InitializeComponent();
             RefreshListItems();
             Title = "Add a new Booking";
-            udDiscount.Maximum = .20;
+            UdDiscount.Maximum = .20;
 
-            eID = (int)Globals.UserToken.EmployeeID;
+            _eId = (int)Globals.UserToken.EmployeeID;
         }
 
         /// <summary>
@@ -46,13 +46,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void RefreshListItems()
         {
-            lvEventListItems.ItemsPanel.LoadContent();
+            LvEventListItems.ItemsPanel.LoadContent();
 
             try
             {
-                myEventList = _bookingManager.RetrieveActiveItemListingDetailsList();
-                lvEventListItems.ItemsSource = myEventList;
-                lvEventListItems.Items.Refresh();
+                _myEventList = _bookingManager.RetrieveActiveItemListingDetailsList();
+                LvEventListItems.ItemsSource = _myEventList;
+                LvEventListItems.Items.Refresh();
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace com.WanderingTurtle.FormPresentation
                         throw new WanderingTurtleException(this, "Booking could not be added due to database malfunction.");
 
                     case (ResultsEdit.Success):
-                        btnAddBookingAdd.IsEnabled = false;
+                        BtnAddBookingAdd.IsEnabled = false;
                         await this.ShowMessageDialog("The booking has been successfully added.");
                         DialogResult = true;
                         Close();
@@ -105,7 +105,6 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, ex);
             }
         }
-
 
         /// <summary>
         /// Miguel Santana
@@ -136,16 +135,16 @@ namespace com.WanderingTurtle.FormPresentation
             ItemListingDetails selectedItemListing = GetSelectedItem();
 
             //gets quantity from the up/down quantity field
-            int qty = (int)(udAddBookingQuantity.Value);
+            int qty = (int)(UdAddBookingQuantity.Value);
 
             //get discount from form
-            decimal discount = (decimal)(udDiscount.Value);
+            decimal discount = (decimal)(UdDiscount.Value);
 
             //calculate values for the tickets
             decimal extendedPrice = _bookingManager.CalcExtendedPrice(selectedItemListing.Price, qty);
             decimal totalPrice = _bookingManager.CalcTotalCharge(discount, extendedPrice);
 
-            Booking bookingToAdd = new Booking(_CurrentInvoice.HotelGuestID, eID, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
+            Booking bookingToAdd = new Booking(CurrentInvoice.HotelGuestID, _eId, selectedItemListing.ItemListID, qty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
             return bookingToAdd;
         }
 
@@ -157,7 +156,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>Returns the selected item.</returns>
         private ItemListingDetails GetSelectedItem()
         {
-            ItemListingDetails selected = (ItemListingDetails)lvEventListItems.SelectedItem;
+            ItemListingDetails selected = (ItemListingDetails)LvEventListItems.SelectedItem;
 
             if (selected == null)
             {
@@ -177,8 +176,8 @@ namespace com.WanderingTurtle.FormPresentation
             //total cost calculations
             if (myItemObject == null) return;
 
-            decimal extendedPrice = _bookingManager.CalcExtendedPrice(myItemObject.Price, (int)(udAddBookingQuantity.Value));
-            lblTotalWithDiscount.Content = _bookingManager.CalcTotalCharge((decimal)(udDiscount.Value), extendedPrice);
+            decimal extendedPrice = _bookingManager.CalcExtendedPrice(myItemObject.Price, (int)(UdAddBookingQuantity.Value));
+            LblTotalWithDiscount.Content = _bookingManager.CalcTotalCharge((decimal)(UdDiscount.Value), extendedPrice);
         }
 
         /// <summary>
@@ -206,10 +205,10 @@ namespace com.WanderingTurtle.FormPresentation
         {
             ItemListingDetails myItemObject = GetSelectedItem();
 
-            txtEventDescription.Text = myItemObject.EventDescription;
-            udAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
+            TxtEventDescription.Text = myItemObject.EventDescription;
+            UdAddBookingQuantity.Maximum = myItemObject.QuantityOffered;
 
-            udAddBookingQuantity.Value = myItemObject.QuantityOffered == 0 ? 0 : 1;
+            UdAddBookingQuantity.Value = myItemObject.QuantityOffered == 0 ? 0 : 1;
             RefreshCostsToDisplay(myItemObject);
         }
 
@@ -221,13 +220,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>True or false if valid</returns>
         private bool Validate()
         {
-            if (!udAddBookingQuantity.Value.ToString().ValidateInt())
+            if (!UdAddBookingQuantity.Value.ToString().ValidateInt())
             {
-                throw new InputValidationException(udAddBookingQuantity, "Value is not an integer.  Please re-enter.");
+                throw new InputValidationException(UdAddBookingQuantity, "Value is not an integer.  Please re-enter.");
             }
-            if (!udDiscount.Value.ToString().ValidateDecimal())
+            if (!UdDiscount.Value.ToString().ValidateDecimal())
             {
-                throw new InputValidationException(udDiscount, "Value is not a percentage.  Please re-enter.");
+                throw new InputValidationException(UdDiscount, "Value is not a percentage.  Please re-enter.");
             }
             return true;
         }

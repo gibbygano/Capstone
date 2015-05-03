@@ -19,8 +19,8 @@ namespace com.WanderingTurtle.FormPresentation
         public BookingDetails CurrentBookingDetails { get; set; }
 
         private ItemListingDetails _eventListingToView = new ItemListingDetails();
-        private int _eID;
-        private BookingManager _bookingManager = new BookingManager();
+        private readonly int _eId;
+        private readonly BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
         /// Ryan Blake
@@ -29,9 +29,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <param name="invoiceToEdit">Invoice info from the view invoice UI</param>
         /// <param name="inBookingDetails">Booking info from the view invoice UI</param>
-        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <param name="readOnly">Make the form ReadOnly.</param>
         /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
-        public EditBooking(InvoiceDetails invoiceToEdit, BookingDetails inBookingDetails, bool ReadOnly = false)
+        public EditBooking(InvoiceDetails invoiceToEdit, BookingDetails inBookingDetails, bool readOnly = false)
         {
             CurrentInvoice = invoiceToEdit;
             CurrentBookingDetails = inBookingDetails;
@@ -39,9 +39,9 @@ namespace com.WanderingTurtle.FormPresentation
             Title = "Editing Booking: " + CurrentBookingDetails.EventItemName;
 
             PopulateTextFields();
-            _eID = (int)Globals.UserToken.EmployeeID;
+            _eId = (int)Globals.UserToken.EmployeeID;
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
+            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
         }
 
         /// <summary>
@@ -56,19 +56,19 @@ namespace com.WanderingTurtle.FormPresentation
             _eventListingToView.QuantityOffered = _bookingManager.AvailableQuantity(_eventListingToView.MaxNumGuests, _eventListingToView.CurrentNumGuests);
 
             //populate form fields with object data
-            lblEditBookingGuestName.Content = CurrentInvoice.GetFullName;
-            lblEventName.Content = CurrentBookingDetails.EventItemName;
-            lblStartDate.Content = CurrentBookingDetails.StartDate;
-            lblTicketPrice.Content = CurrentBookingDetails.TicketPrice.ToString("c");
-            lblTotalDue.Content = CurrentBookingDetails.TotalCharge.ToString("c");
+            LblEditBookingGuestName.Content = CurrentInvoice.GetFullName;
+            LblEventName.Content = CurrentBookingDetails.EventItemName;
+            LblStartDate.Content = CurrentBookingDetails.StartDate;
+            LblTicketPrice.Content = CurrentBookingDetails.TicketPrice.ToString("c");
+            LblTotalDue.Content = CurrentBookingDetails.TotalCharge.ToString("c");
 
-            udAddBookingQuantity.Value = CurrentBookingDetails.Quantity;
-            udDiscount.Value = (double?)CurrentBookingDetails.Discount;
+            UdAddBookingQuantity.Value = CurrentBookingDetails.Quantity;
+            UdDiscount.Value = (double?)CurrentBookingDetails.Discount;
 
-            lblAvailSeats.Content = _eventListingToView.QuantityOffered;
+            LblAvailSeats.Content = _eventListingToView.QuantityOffered;
 
             //calculates the maximum quantity for the u/d
-            udAddBookingQuantity.Maximum = CurrentBookingDetails.Quantity + _eventListingToView.QuantityOffered;
+            UdAddBookingQuantity.Maximum = CurrentBookingDetails.Quantity + _eventListingToView.QuantityOffered;
         }
 
         /// <summary>
@@ -80,11 +80,11 @@ namespace com.WanderingTurtle.FormPresentation
         /// Tony Noel
         /// Updated: 2015/03/10
         /// if the booking has occured already, it cannot be changed.
-        /// 
+        ///
         /// Pat Banks
         /// Updated: 2015/03/11
         /// up/down controls added for quantity and discount
-        /// 
+        ///
         /// Pat Banks
         /// Updated: 2015/03/19
         /// Moved decision logic to booking manager
@@ -132,16 +132,16 @@ namespace com.WanderingTurtle.FormPresentation
         private Booking GatherFormInformation()
         {
             //gets quantity from the up/down quantity field
-            int qty = (int)(udAddBookingQuantity.Value);
+            int qty = (int)(UdAddBookingQuantity.Value);
 
             //get discount from form
-            decimal discount = (decimal)(udDiscount.Value);
+            decimal discount = (decimal)(UdDiscount.Value);
 
             //calculate values for the tickets
             decimal extendedPrice = _bookingManager.CalcExtendedPrice(CurrentBookingDetails.TicketPrice, qty);
             decimal totalPrice = _bookingManager.CalcTotalCharge(discount, extendedPrice);
 
-            Booking editedBooking = new Booking(CurrentBookingDetails.BookingID, CurrentBookingDetails.GuestID, _eID, CurrentBookingDetails.ItemListID, qty, DateTime.Now, discount, CurrentBookingDetails.Active, CurrentBookingDetails.TicketPrice, extendedPrice, totalPrice);
+            Booking editedBooking = new Booking(CurrentBookingDetails.BookingID, CurrentBookingDetails.GuestID, _eId, CurrentBookingDetails.ItemListID, qty, DateTime.Now, discount, CurrentBookingDetails.Active, CurrentBookingDetails.TicketPrice, extendedPrice, totalPrice);
             return editedBooking;
         }
 
@@ -166,8 +166,8 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnCalculateTicketPrice_Click(object sender, RoutedEventArgs e)
         {
-            decimal extendedPrice = _bookingManager.CalcExtendedPrice(CurrentBookingDetails.TicketPrice, (int)(udAddBookingQuantity.Value));
-            lblTotalDue.Content = (_bookingManager.CalcTotalCharge((decimal)(udDiscount.Value), extendedPrice)).ToString("c");
+            decimal extendedPrice = _bookingManager.CalcExtendedPrice(CurrentBookingDetails.TicketPrice, (int)(UdAddBookingQuantity.Value));
+            LblTotalDue.Content = (_bookingManager.CalcTotalCharge((decimal)(UdDiscount.Value), extendedPrice)).ToString("c");
         }
     }
 }

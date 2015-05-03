@@ -18,9 +18,9 @@ namespace com.WanderingTurtle.FormPresentation
         public SupplierApplication CurrentSupplierApplication;
         public SupplierApplication UpdatedSupplierApplication = new SupplierApplication();
         public SupplierManager MySupplierManager = new SupplierManager();
-        public SupplierLoginManager myLoginManager = new SupplierLoginManager();
+        public SupplierLoginManager MyLoginManager = new SupplierLoginManager();
         private List<CityState> _zips;
-        private CityStateManager _cityStateManager = new CityStateManager();
+        private readonly CityStateManager _cityStateManager = new CityStateManager();
 
         /// <summary>
         /// Created:  2015/04/04
@@ -41,9 +41,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Handles loading of the screen with data from the list.
         /// </summary>
         /// <param name="currentSupplierApplication"></param>
-        /// <param name="ReadOnly"></param>
+        /// <param name="readOnly"></param>
         /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
-        public AddEditPendingSupplier(SupplierApplication currentSupplierApplication, bool ReadOnly = false)
+        public AddEditPendingSupplier(SupplierApplication currentSupplierApplication, bool readOnly = false)
         {
             InitializeComponent();
 
@@ -52,10 +52,10 @@ namespace com.WanderingTurtle.FormPresentation
             Title = "Editing Pending Supplier: " + CurrentSupplierApplication.GetFullName;
 
             ReloadComboBox();
-            fillComboBox();
+            FillComboBox();
             SetFields();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
+            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
         }
 
         /// <summary>
@@ -98,20 +98,18 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
-                if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()))
+                if (CboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()))
                 {
-                    bool validUserName = false;
-
-                    validUserName = myLoginManager.CheckSupplierUserName(txtUserName.Text);
+                    bool validUserName = MyLoginManager.CheckSupplierUserName(TxtUserName.Text);
 
                     if (validUserName)
                     {
                         //get data from form
                         GetFormData();
 
-                        decimal supplyCost = (decimal)(numSupplyCost.Value);
+                        decimal supplyCost = (decimal)(NumSupplyCost.Value);
 
-                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, txtUserName.Text, supplyCost);
+                        SupplierResult result = MySupplierManager.ApproveSupplierApplication(CurrentSupplierApplication, UpdatedSupplierApplication, TxtUserName.Text, supplyCost);
 
                         if (result == SupplierResult.Success)
                         {
@@ -126,11 +124,11 @@ namespace com.WanderingTurtle.FormPresentation
                     }
                     else
                     {
-                        txtUserName.Text = "";
+                        TxtUserName.Text = "";
                         throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
                     }
                 }
-                else if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Rejected.ToString()) || cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Pending.ToString()))
+                else if (CboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Rejected.ToString()) || CboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Pending.ToString()))
                 {
                     //get data from form
                     GetFormData();
@@ -173,41 +171,41 @@ namespace com.WanderingTurtle.FormPresentation
         /// <returns>true if valid</returns>
         private bool Validate()
         {
-            if (!txtCompanyName.Text.ValidateCompanyName())
+            if (!TxtCompanyName.Text.ValidateCompanyName())
             {
-                throw new InputValidationException(txtCompanyName, "Enter a company name.");
+                throw new InputValidationException(TxtCompanyName, "Enter a company name.");
             }
-            if (!txtAddress.Text.ValidateAlphaNumeric() || String.IsNullOrEmpty(txtAddress.Text))
+            if (!TxtAddress.Text.ValidateAlphaNumeric() || String.IsNullOrEmpty(TxtAddress.Text))
             {
-                throw new InputValidationException(txtAddress, "Enter an address.");
+                throw new InputValidationException(TxtAddress, "Enter an address.");
             }
-            if (!txtPhoneNumber.Text.ValidatePhone())
+            if (!TxtPhoneNumber.Text.ValidatePhone())
             {
-                throw new InputValidationException(txtPhoneNumber, "Enter a phone number.");
+                throw new InputValidationException(TxtPhoneNumber, "Enter a phone number.");
             }
-            if (!txtEmailAddress.Text.ValidateEmail())
+            if (!TxtEmailAddress.Text.ValidateEmail())
             {
-                throw new InputValidationException(txtEmailAddress, "Enter an email address.");
+                throw new InputValidationException(TxtEmailAddress, "Enter an email address.");
             }
-            if (!txtFirstName.Text.ValidateString())
+            if (!TxtFirstName.Text.ValidateString())
             {
-                throw new InputValidationException(txtFirstName, "Enter a first name.");
+                throw new InputValidationException(TxtFirstName, "Enter a first name.");
             }
-            if (!txtLastName.Text.ValidateString())
+            if (!TxtLastName.Text.ValidateString())
             {
-                throw new InputValidationException(txtLastName, "Enter a last name.");
+                throw new InputValidationException(TxtLastName, "Enter a last name.");
             }
-            if (cboZip.SelectedItem == null)
+            if (CboZip.SelectedItem == null)
             {
-                throw new InputValidationException(cboZip, "You must select an zip from the drop down");
+                throw new InputValidationException(CboZip, "You must select an zip from the drop down");
             }
-            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && (!txtUserName.Text.ValidateString()))
+            if (CboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && (!TxtUserName.Text.ValidateString()))
             {
-                throw new InputValidationException(txtUserName, "Enter a user name.");
+                throw new InputValidationException(TxtUserName, "Enter a user name.");
             }
-            if (cboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && !numSupplyCost.Value.ToString().ValidateDecimal())
+            if (CboAppStatus.SelectedValue.ToString().Equals(ApplicationStatus.Approved.ToString()) && !NumSupplyCost.Value.ToString().ValidateDecimal())
             {
-                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
+                throw new InputValidationException(NumSupplyCost, "Enter a valid supply cost.");
             }
             return true;
         }
@@ -219,19 +217,19 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void GetFormData()
         {
-            UpdatedSupplierApplication.CompanyName = txtCompanyName.Text;
-            UpdatedSupplierApplication.CompanyDescription = txtCompanyDescription.Text;
-            UpdatedSupplierApplication.FirstName = txtFirstName.Text;
-            UpdatedSupplierApplication.LastName = txtLastName.Text;
-            UpdatedSupplierApplication.Address1 = txtAddress.Text;
-            UpdatedSupplierApplication.Address2 = txtAddress2.Text;
-            UpdatedSupplierApplication.Zip = cboZip.SelectedValue.ToString();
+            UpdatedSupplierApplication.CompanyName = TxtCompanyName.Text;
+            UpdatedSupplierApplication.CompanyDescription = TxtCompanyDescription.Text;
+            UpdatedSupplierApplication.FirstName = TxtFirstName.Text;
+            UpdatedSupplierApplication.LastName = TxtLastName.Text;
+            UpdatedSupplierApplication.Address1 = TxtAddress.Text;
+            UpdatedSupplierApplication.Address2 = TxtAddress2.Text;
+            UpdatedSupplierApplication.Zip = CboZip.SelectedValue.ToString();
 
-            UpdatedSupplierApplication.PhoneNumber = txtPhoneNumber.Text;
-            UpdatedSupplierApplication.EmailAddress = txtEmailAddress.Text;
+            UpdatedSupplierApplication.PhoneNumber = TxtPhoneNumber.Text;
+            UpdatedSupplierApplication.EmailAddress = TxtEmailAddress.Text;
             UpdatedSupplierApplication.ApplicationDate = CurrentSupplierApplication.ApplicationDate;
-            UpdatedSupplierApplication.ApplicationStatus = cboAppStatus.SelectedValue.ToString();
-            UpdatedSupplierApplication.Remarks = txtRemarks.Text;
+            UpdatedSupplierApplication.ApplicationStatus = CboAppStatus.SelectedValue.ToString();
+            UpdatedSupplierApplication.Remarks = TxtRemarks.Text;
 
             //application id from record in variable
             UpdatedSupplierApplication.ApplicationID = CurrentSupplierApplication.ApplicationID;
@@ -245,36 +243,36 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void SetFields()
         {
-            txtCompanyName.Text = CurrentSupplierApplication.CompanyName;
-            txtCompanyDescription.Text = CurrentSupplierApplication.CompanyDescription;
-            txtFirstName.Text = CurrentSupplierApplication.FirstName;
-            txtLastName.Text = CurrentSupplierApplication.LastName;
-            txtAddress.Text = CurrentSupplierApplication.Address1;
-            txtAddress2.Text = CurrentSupplierApplication.Address2;
+            TxtCompanyName.Text = CurrentSupplierApplication.CompanyName;
+            TxtCompanyDescription.Text = CurrentSupplierApplication.CompanyDescription;
+            TxtFirstName.Text = CurrentSupplierApplication.FirstName;
+            TxtLastName.Text = CurrentSupplierApplication.LastName;
+            TxtAddress.Text = CurrentSupplierApplication.Address1;
+            TxtAddress2.Text = CurrentSupplierApplication.Address2;
             string phoneNumberMasked = CurrentSupplierApplication.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
-            txtPhoneNumber.Text = phoneNumberMasked;
-            txtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
-            dateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
-            cboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
-            txtRemarks.Text = CurrentSupplierApplication.Remarks;
+            TxtPhoneNumber.Text = phoneNumberMasked;
+            TxtEmailAddress.Text = CurrentSupplierApplication.EmailAddress;
+            DateApplicationDate.Content = CurrentSupplierApplication.ApplicationDate.ToString("D");
+            CboAppStatus.Text = CurrentSupplierApplication.ApplicationStatus;
+            TxtRemarks.Text = CurrentSupplierApplication.Remarks;
 
             foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == CurrentSupplierApplication.Zip))
-            { cboZip.SelectedValue = cityState.Zip; }
+            { CboZip.SelectedValue = cityState.Zip; }
         }
 
         /// <summary>
-        /// Will Fritz 
+        /// Will Fritz
         /// Created 2/19/2015
         /// fills the zip code combo box
         /// </summary>
-        private void fillComboBox()
+        private void FillComboBox()
         {
             try
             {
                 _zips = DataCache._currentCityStateList;
-                cboZip.ItemsSource = _zips;
-                cboZip.DisplayMemberPath = "GetZipStateCity";
-                cboZip.SelectedValuePath = "Zip";
+                CboZip.ItemsSource = _zips;
+                CboZip.DisplayMemberPath = "GetZipStateCity";
+                CboZip.SelectedValuePath = "Zip";
             }
             catch (Exception ex)
             {
@@ -292,7 +290,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated:  2015/04/16
         /// updated format of code to IEnum
         /// </remarks>
-        private IEnumerable<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>(Enum.GetValues(typeof(ApplicationStatus)) as IEnumerable<ApplicationStatus>); } }
+        private IEnumerable<ApplicationStatus> GetStatusList { get { return new List<ApplicationStatus>((IEnumerable<ApplicationStatus>)Enum.GetValues(typeof(ApplicationStatus))); } }
 
         /// <summary>
         /// Pat Banks
@@ -302,7 +300,7 @@ namespace com.WanderingTurtle.FormPresentation
         private void ReloadComboBox()
         {
             //creating a list for the dropdown userLevel
-            cboAppStatus.ItemsSource = GetStatusList;
+            CboAppStatus.ItemsSource = GetStatusList;
         }
 
         /// <summary>
@@ -314,18 +312,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void cboAppStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cboAppStatus.SelectedIndex.Equals(1))
+            if (CboAppStatus.SelectedIndex.Equals(1))
             {
-                numSupplyCost.IsEnabled = true;
-                txtUserName.IsEnabled = true;
+                NumSupplyCost.IsEnabled = true;
+                TxtUserName.IsEnabled = true;
             }
             else
             {
-                numSupplyCost.Value = .70;
-                txtUserName.Text = "";
+                NumSupplyCost.Value = .70;
+                TxtUserName.Text = "";
 
-                numSupplyCost.IsEnabled = false;
-                txtUserName.IsEnabled = false;
+                NumSupplyCost.IsEnabled = false;
+                TxtUserName.IsEnabled = false;
             }
         }
     }

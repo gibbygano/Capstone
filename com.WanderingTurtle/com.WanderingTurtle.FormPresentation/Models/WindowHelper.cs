@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <remarks>Miguel Santana 2015/06/04</remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
-        /// <exception cref="WanderingTurtleException" />
+        /// <exception cref="WanderingTurtleException">Error setting the fields as read only.</exception>
         internal static void MakeReadOnly(Panel content, params FrameworkElement[] controlsToKeepEnabled)
         {
             try

@@ -15,13 +15,12 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ArchiveInvoice
     {
-        private Invoice _currentInvoice { get; set; }
+        private Invoice CurrentInvoice { get; set; }
 
-        private List<BookingDetails> _myBookingList;
-        private HotelGuest _guestToView;
-        private InvoiceManager _invoiceManager = new InvoiceManager();
-        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        private BookingManager _bookingManager = new BookingManager();
+        private readonly List<BookingDetails> _myBookingList;
+        private readonly HotelGuest _guestToView;
+        private readonly InvoiceManager _invoiceManager = new InvoiceManager();
+        private readonly HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
         /// Pat Banks
@@ -29,18 +28,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// Constructs a populated form that shows the final charges for a guest and
         /// allows employee to submit to close the invoice
         /// </summary>
-        /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
+        /// <param name="selectedHotelGuestId">Guest selected from the ViewInvoiceUI</param>
         /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
-        public ArchiveInvoice(int selectedHotelGuestID)
+        public ArchiveInvoice(int selectedHotelGuestId)
         {
             try
             {
                 InitializeComponent();
-                _currentInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+                CurrentInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestId);
                 Title = "Archiving Invoice";
 
-                _guestToView = _hotelGuestManager.GetHotelGuest(_currentInvoice.HotelGuestID);
-                _myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(_currentInvoice.HotelGuestID);
+                _guestToView = _hotelGuestManager.GetHotelGuest(CurrentInvoice.HotelGuestID);
+                _myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(CurrentInvoice.HotelGuestID);
                 FillFormFields();
             }
             catch (Exception ex)
@@ -56,17 +55,17 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         private void FillFormFields()
         {
-            _currentInvoice.TotalPaid = _invoiceManager.CalculateTotalDue(_myBookingList);
-            lblGuestNameLookup.Content = _guestToView.GetFullName;
-            lblCheckInDate.Content = _currentInvoice.DateOpened.ToString(CultureInfo.InvariantCulture);
-            lblInvoice.Content = _currentInvoice.InvoiceID.ToString();
-            lblAddress.Content = _guestToView.Address1;
-            lblCityState.Content = _guestToView.CityState.GetZipStateCity;
-            lblPhoneNum.Content = _guestToView.PhoneNumber;
-            lblRoomNum.Content = _guestToView.Room;
-            lblInvoice.Content = _currentInvoice.InvoiceID;
-            lblTotalPrice.Content = _currentInvoice.GetTotalFormat;
-            lblPhoneNum.Content = _guestToView.PhoneNumber;
+            CurrentInvoice.TotalPaid = _invoiceManager.CalculateTotalDue(_myBookingList);
+            LblGuestNameLookup.Content = _guestToView.GetFullName;
+            LblCheckInDate.Content = CurrentInvoice.DateOpened.ToString(CultureInfo.InvariantCulture);
+            LblInvoice.Content = CurrentInvoice.InvoiceID.ToString();
+            LblAddress.Content = _guestToView.Address1;
+            LblCityState.Content = _guestToView.CityState.GetZipStateCity;
+            LblPhoneNum.Content = _guestToView.PhoneNumber;
+            LblRoomNum.Content = _guestToView.Room;
+            LblInvoice.Content = CurrentInvoice.InvoiceID;
+            LblTotalPrice.Content = CurrentInvoice.GetTotalFormat;
+            LblPhoneNum.Content = _guestToView.PhoneNumber;
         }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Pat Banks
         /// Updated:  2015/03/19
         /// Moved decision logic to Invoice Manager
-        /// 
+        ///
         /// Miguel Santana
         /// Updated:  2015/04/28
         /// Added message box to notify user that report is being generated
@@ -92,7 +91,7 @@ namespace com.WanderingTurtle.FormPresentation
             await TaskEx.Delay(1000);
             try
             {
-                var result = _invoiceManager.ArchiveGuestInvoice(_currentInvoice.HotelGuestID);
+                var result = _invoiceManager.ArchiveGuestInvoice(CurrentInvoice.HotelGuestID);
                 controller.SetMessage("Guest has been checked out!");
                 await TaskEx.Delay(2000);
                 switch (result)

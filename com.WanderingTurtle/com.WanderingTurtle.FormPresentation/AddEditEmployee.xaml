@@ -1,8 +1,8 @@
-﻿<Metro:MetroWindow
+﻿<metro:MetroWindow
         x:Class="com.WanderingTurtle.FormPresentation.AddEmployee"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
@@ -55,11 +55,11 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" />
-            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click" />
-            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" />
+            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>
     </Grid>
-</Metro:MetroWindow>
+</metro:MetroWindow>

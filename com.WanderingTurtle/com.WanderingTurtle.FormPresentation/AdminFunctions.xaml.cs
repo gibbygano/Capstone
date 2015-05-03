@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace com.WanderingTurtle.FormPresentation
+﻿namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Interaction logic for AdminFunctions.xaml
     /// </summary>
-    internal partial class AdminFunctions : UserControl
+    internal partial class AdminFunctions
     {
         /// <summary>
         /// Pat Banks

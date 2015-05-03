@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class AddEmployee
     {
-        private EmployeeManager _employeeManager = new EmployeeManager();
+        private readonly EmployeeManager _employeeManager = new EmployeeManager();
 
         /// <summary>
         /// Pat Banks
@@ -34,9 +34,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Constructs a form with data from employee to update
         /// </summary>
         /// <param name="employee">Employee to update</param>
-        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <param name="readOnly">Make the form ReadOnly.</param>
         /// <exception cref="WanderingTurtleException">Occurrs making components readonly</exception>
-        public AddEmployee(Employee employee, bool ReadOnly = false)
+        public AddEmployee(Employee employee, bool readOnly = false)
         {
             InitializeComponent();
             CurrentEmployee = employee;
@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
             ReloadComboBox();
 
             SetFields();
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
+            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated: 2015/02/22
         /// Changed to enum
         /// </remarks>
-        private static IEnumerable<RoleData> GetUserLevelList { get { return new List<RoleData>(Enum.GetValues(typeof(RoleData)) as IEnumerable<RoleData>); } }
+        private static IEnumerable<RoleData> GetUserLevelList { get { return new List<RoleData>((IEnumerable<RoleData>)Enum.GetValues(typeof(RoleData))); } }
 
         /// <summary>
         /// Miguel Santana
@@ -116,7 +116,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// Miguel Santana
         /// Updated: 2015/02/22
         /// Cast Level to RoleData
-        /// 
+        ///
         /// Tony Noel
         /// Updated:  2015/04/13
         /// Updated to comply with the ResultsEdit class of error codes.
@@ -159,7 +159,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// </summary>
         /// <remarks>
         /// Tony Noel
-        /// Updated:  2015/04/13 
+        /// Updated:  2015/04/13
         /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
         private async void EmployeeUpdate()
@@ -168,6 +168,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             try
             {
+                Debug.Assert(ChkActiveEmployee.IsChecked != null, "ChkActiveEmployee.IsChecked != null");
                 ResultsEdit result = _employeeManager.EditCurrentEmployee(
                     CurrentEmployee,
                     new Employee(
@@ -256,18 +257,6 @@ namespace com.WanderingTurtle.FormPresentation
         private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
         {
             throw new InputValidationException(component, message, title);
-        }
-
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/04/13
-        /// Show error message
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="title"></param>
-        private void ShowErrorMessage(string message, string title = null)
-        {
-            throw new WanderingTurtleException(this, message, title);
         }
 
         /// <summary>

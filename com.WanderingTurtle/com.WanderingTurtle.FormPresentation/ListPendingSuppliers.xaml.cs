@@ -14,8 +14,8 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListPendingSuppliers : IDataGridContextMenu
     {
-        private List<SupplierApplication> GetPendingSuppliers = new List<SupplierApplication>();
-        private SupplierManager supplierManager = new SupplierManager();
+        private List<SupplierApplication> _getPendingSuppliers = new List<SupplierApplication>();
+        private readonly SupplierManager _supplierManager = new SupplierManager();
 
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
         /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
@@ -25,9 +25,9 @@ namespace com.WanderingTurtle.FormPresentation
         public ListPendingSuppliers()
         {
             InitializeComponent();
-            loadPendingSuppliers();
+            LoadPendingSuppliers();
 
-            lvPendingSuppliers.SetContextMenu(this, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
+            LvPendingSuppliers.SetContextMenu(this, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
         }
 
         /// <exception cref="WanderingTurtleException"/>
@@ -57,13 +57,13 @@ namespace com.WanderingTurtle.FormPresentation
                 if (selectedItem == null)
                 {
                     if (new AddEditPendingSupplier().ShowDialog() == false) return;
-                    loadPendingSuppliers();
+                    LoadPendingSuppliers();
                 }
                 else
                 {
                     if (new AddEditPendingSupplier(selectedItem, readOnly).ShowDialog() == false) return;
                     if (readOnly) return;
-                    loadPendingSuppliers();
+                    LoadPendingSuppliers();
                 }
             }
             catch (Exception ex)
@@ -74,8 +74,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnUpdatePendingSupplier_Click(object sender, RoutedEventArgs e)
         {
-            if (lvPendingSuppliers.SelectedItem != null)
-                OpenPendingSupplier(lvPendingSuppliers.SelectedItem as SupplierApplication);
+            if (LvPendingSuppliers.SelectedItem != null)
+                OpenPendingSupplier(LvPendingSuppliers.SelectedItem as SupplierApplication);
         }
 
         private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
@@ -83,15 +83,15 @@ namespace com.WanderingTurtle.FormPresentation
             ((TabItem)Parent).Content = new ListSuppliers();
         }
 
-        private void loadPendingSuppliers()
+        private void LoadPendingSuppliers()
         {
-            lvPendingSuppliers.ItemsPanel.LoadContent();
+            LvPendingSuppliers.ItemsPanel.LoadContent();
 
             try
             {
-                GetPendingSuppliers = supplierManager.RetrieveSupplierApplicationList();
-                lvPendingSuppliers.ItemsSource = GetPendingSuppliers;
-                lvPendingSuppliers.Items.Refresh();
+                _getPendingSuppliers = _supplierManager.RetrieveSupplierApplicationList();
+                LvPendingSuppliers.ItemsSource = _getPendingSuppliers;
+                LvPendingSuppliers.Items.Refresh();
             }
             catch (Exception ex)
             {

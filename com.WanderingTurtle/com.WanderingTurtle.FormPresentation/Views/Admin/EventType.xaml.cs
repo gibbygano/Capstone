@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
     /// </summary>
     internal partial class EventType
     {
-        private EventManager _eventManager = new EventManager();
+        private readonly EventManager _eventManager = new EventManager();
         private EventManager.EventResult _result;
 
         /// <summary>
@@ -37,13 +37,13 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         {
             try
             {
-                cboArchiveEvent.ItemsSource = _eventManager.RetrieveEventTypeList();
-                cboArchiveEvent.DisplayMemberPath = "EventName";
-                cboArchiveEvent.SelectedValuePath = "EventTypeID";
+                CboArchiveEvent.ItemsSource = _eventManager.RetrieveEventTypeList();
+                CboArchiveEvent.DisplayMemberPath = "EventName";
+                CboArchiveEvent.SelectedValuePath = "EventTypeID";
 
-                cboEditEvent.ItemsSource = DataCache._currentEventTypeList;
-                cboEditEvent.DisplayMemberPath = "EventName";
-                cboEditEvent.SelectedValuePath = "EventTypeID";
+                CboEditEvent.ItemsSource = DataCache._currentEventTypeList;
+                CboEditEvent.DisplayMemberPath = "EventName";
+                CboEditEvent.SelectedValuePath = "EventTypeID";
             }
             catch (Exception ex)
             {
@@ -106,14 +106,14 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnArchiveType_Click(object sender, RoutedEventArgs e)
         {
-            Common.EventType archiveEventType = (Common.EventType)cboArchiveEvent.SelectedItem;
+            Common.EventType archiveEventType = (Common.EventType)CboArchiveEvent.SelectedItem;
 
             _result = _eventManager.ArchiveAnEventType(archiveEventType);
 
             if (_result.Equals(EventManager.EventResult.Success))
             {
                 await ShowMessage("Your Request was Processed Successfully", "Success");
-                cboArchiveEvent.SelectedIndex = -1;
+                CboArchiveEvent.SelectedIndex = -1;
                 FillComboBox();
             }
             else
@@ -133,21 +133,21 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnEditType_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validator.ValidateString(txtEditEventType.Text))
+            if (!TxtEditEventType.Text.ValidateString())
             {
-                ShowInputErrorMessage(txtEditEventType, "Please enter a valid Event Type");
+                ShowInputErrorMessage(TxtEditEventType, "Please enter a valid Event Type");
             }
 
-            Common.EventType oldEventType = (Common.EventType)cboEditEvent.SelectedItem;
-            Common.EventType newEventType = new Common.EventType(oldEventType.EventTypeID, txtEditEventType.Text);
+            Common.EventType oldEventType = (Common.EventType)CboEditEvent.SelectedItem;
+            Common.EventType newEventType = new Common.EventType(oldEventType.EventTypeID, TxtEditEventType.Text);
 
             _result = _eventManager.EditEventType(oldEventType, newEventType);
 
             if (_result.Equals(EventManager.EventResult.Success))
             {
                 await ShowMessage("Your Request was Processed Successfully", "Success");
-                cboEditEvent.SelectedIndex = -1;
-                txtEditEventType.Text = "";
+                CboEditEvent.SelectedIndex = -1;
+                TxtEditEventType.Text = "";
                 FillComboBox();
             }
             else
@@ -167,18 +167,18 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnAddType_Click(object sender, RoutedEventArgs e)
         {
-            if (!txtAddEventType.Text.ValidateString())
+            if (!TxtAddEventType.Text.ValidateString())
             {
-                ShowInputErrorMessage(txtAddEventType, "Please enter a valid event type.  No spaces allowed.");
+                ShowInputErrorMessage(TxtAddEventType, "Please enter a valid event type.  No spaces allowed.");
             }
             try
             {
-                _result = _eventManager.AddNewEventType(txtAddEventType.Text);
+                _result = _eventManager.AddNewEventType(TxtAddEventType.Text);
 
                 if (_result.Equals(EventManager.EventResult.Success))
                 {
                     await ShowMessage("Your Request was Processed Successfully", "Success");
-                    txtAddEventType.Text = "";
+                    TxtAddEventType.Text = "";
                     FillComboBox();
                 }
                 else

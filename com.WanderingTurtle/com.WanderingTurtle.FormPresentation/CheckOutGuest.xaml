@@ -1,9 +1,8 @@
-﻿<Metro:MetroWindow
+﻿<metro:MetroWindow
         x:Class="com.WanderingTurtle.FormPresentation.ArchiveInvoice"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"          
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
 		Title="Guest Final Invoice" Height="400" Width="500"
 		WindowStartupLocation="CenterScreen">
@@ -17,7 +16,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" x:Name="lblGuestFinalInvoice" Content="Guest Final Invoice Summary" FontSize="16" FontWeight="Bold" />
+            <Label Grid.Row="0" x:Name="LblGuestFinalInvoice" Content="Guest Final Invoice Summary" FontSize="16" FontWeight="Bold" />
             <ScrollViewer Grid.Row="1">
                 <Grid Margin="{DynamicResource Spacing.Container}">
                     <Grid.RowDefinitions>
@@ -53,18 +52,18 @@
                         <Label Grid.Row="8"  Grid.Column="0" HorizontalContentAlignment="Right" Content="Phone #:" />
                         <Label Grid.Row="10" Grid.Column="0" HorizontalContentAlignment="Right" Content="Email:" />
                         <Label Grid.Row="12" Grid.Column="0" HorizontalContentAlignment="Right" Content="Total Due:" />
-                        <Label Grid.Row="0"  Grid.Column="1" x:Name="lblGuestNameLookup" />
-                        <Label Grid.Row="2"  Grid.Column="1" x:Name="lblCheckInDate" />
-                        <Label Grid.Row="4"  Grid.Column="1" x:Name="lblAddress" />
-                        <Label Grid.Row="6"  Grid.Column="1" x:Name="lblCityState" />
-                        <Label Grid.Row="8"  Grid.Column="1" x:Name="lblPhoneNum" />
-                        <Label Grid.Row="10" Grid.Column="1" x:Name="lblEmail" />
-                        <Label Grid.Row="12" Grid.Column="1" x:Name="lblTotalPrice" />
+                        <Label Grid.Row="0"  Grid.Column="1" x:Name="LblGuestNameLookup" />
+                        <Label Grid.Row="2"  Grid.Column="1" x:Name="LblCheckInDate" />
+                        <Label Grid.Row="4"  Grid.Column="1" x:Name="LblAddress" />
+                        <Label Grid.Row="6"  Grid.Column="1" x:Name="LblCityState" />
+                        <Label Grid.Row="8"  Grid.Column="1" x:Name="LblPhoneNum" />
+                        <Label Grid.Row="10" Grid.Column="1" x:Name="LblEmail" />
+                        <Label Grid.Row="12" Grid.Column="1" x:Name="LblTotalPrice" />
 
                         <Label Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Content="Invoice #:" />
                         <Label Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" Content="Room #:" />
-                        <Label Grid.Row="0" Grid.Column="3" x:Name="lblInvoice" />
-                        <Label Grid.Row="2" Grid.Column="3" x:Name="lblRoomNum" />
+                        <Label Grid.Row="0" Grid.Column="3" x:Name="LblInvoice" />
+                        <Label Grid.Row="2" Grid.Column="3" x:Name="LblRoomNum" />
                     </Grid>
                 </Grid>
             </ScrollViewer>
@@ -78,10 +77,9 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="BtnSubmit" Click="btnFinalizeInvoice_Click" />
-            <Button Grid.Column="4" TabIndex="101" Content="Cancel" x:Name="btnCancel" Click="BtnCancel_Click" />
+            <Button Grid.Column="4" TabIndex="101" Content="Cancel" x:Name="BtnCancel" Click="BtnCancel_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
-            <Separator Grid.Column="5" Style="{DynamicResource ButtonSeparator}" />
+            <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>
-
     </Grid>
-</Metro:MetroWindow>
+</metro:MetroWindow>

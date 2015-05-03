@@ -10,8 +10,7 @@ namespace com.WanderingTurtle.FormPresentation
 {
     public partial class ListHotelGuests : IDataGridContextMenu
     {
-        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        private InvoiceManager _invoiceManager = new InvoiceManager();
+        private readonly InvoiceManager _invoiceManager = new InvoiceManager();
 
         /// <summary>
         /// Pat Banks
@@ -28,7 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             RefreshGuestList();
 
-            lvHotelGuestList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View);
+            LvHotelGuestList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View);
         }
 
         /// <exception cref="WanderingTurtleException"/>
@@ -95,7 +94,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e">default event arguments</param>
         private void btnViewGuest_Click(object sender, RoutedEventArgs e)
         {
-            OpenHotelGuest(lvHotelGuestList.SelectedItem as InvoiceDetails);
+            OpenHotelGuest(LvHotelGuestList.SelectedItem as InvoiceDetails);
         }
 
         private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -117,14 +116,14 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         private void RefreshGuestList()
         {
-            lvHotelGuestList.ItemsPanel.LoadContent();
+            LvHotelGuestList.ItemsPanel.LoadContent();
 
             try
             {
                 var hotelGuestList = _invoiceManager.RetrieveActiveInvoiceDetails();
 
-                lvHotelGuestList.ItemsSource = hotelGuestList;
-                lvHotelGuestList.Items.Refresh();
+                LvHotelGuestList.ItemsSource = hotelGuestList;
+                LvHotelGuestList.Items.Refresh();
             }
             catch (Exception ex)
             {
@@ -134,14 +133,14 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnGuestSearch.Content = txtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
+            BtnGuestSearch.Content = TxtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)
         {
-            var myTempList = _invoiceManager.InvoiceDetailsSearch(txtSearchBox.Text);
-            lvHotelGuestList.ItemsSource = myTempList;
-            txtSearchBox.Text = "";
+            var myTempList = _invoiceManager.InvoiceDetailsSearch(TxtSearchBox.Text);
+            LvHotelGuestList.ItemsSource = myTempList;
+            TxtSearchBox.Text = "";
         }
     }
 }
