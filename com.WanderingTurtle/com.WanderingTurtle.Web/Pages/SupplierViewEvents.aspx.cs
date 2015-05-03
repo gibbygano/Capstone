@@ -52,9 +52,10 @@ namespace com.WanderingTurtle.Web.Pages
                 {
                     _eventTypes = _myManager.RetrieveEventTypeList();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving Event Types\")</SCRIPT>");
+                    lblMessage.Text = "Event fetching data: " + ex.Message;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 }
             }
 
@@ -89,10 +90,11 @@ namespace com.WanderingTurtle.Web.Pages
                 }
                 return _listedEvents;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving List\")</SCRIPT>");
+                lblMessage.Text = "Event fetching data: " + ex.Message;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 return null;
             }
         }
@@ -102,7 +104,6 @@ namespace com.WanderingTurtle.Web.Pages
         }
         public void UpdateEvent(int eventItemID)
         {
-            bool stop = false;
             int errorCount = 0;
             try
             {
@@ -119,7 +120,6 @@ namespace com.WanderingTurtle.Web.Pages
                 else
                 {
                     errorCount++;
-                    stop = true;
                     showError("You must enter a valid Event Name!");
                     return;
 
@@ -136,7 +136,6 @@ namespace com.WanderingTurtle.Web.Pages
                 else
                 {
                     errorCount++;
-                    stop = true;
                     showError("You must enter a valid Description!" + String.Format("{0}", Request.Form["description"]).Trim());
                     return;
                 }
@@ -155,7 +154,8 @@ namespace com.WanderingTurtle.Web.Pages
             }
             catch (Exception ex)
             {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Updating Event" + ex.Message + "\" )</SCRIPT>");
+                lblMessage.Text = "Event Updating Event: " + ex.Message;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
             }
 
         }
@@ -164,14 +164,20 @@ namespace com.WanderingTurtle.Web.Pages
         /// Created 2015/03/07
         /// 
         /// Sets the error message displayed on the page.
+        /// Updated 2015/05/03
+        /// Now uses jQuery Dialog boxes
         /// </summary>
         /// <param name="errorMessage"></param>
         private void showError(string errorMessage)
         {
-            lblError.Text = errorMessage;
+            //set the message
+            lblMessage.Text = errorMessage;
+            //call the script to open the dialog box and show the message
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
         }
         public void DeleteEvent(int eventItemID)
         {
+            //no longer used
             try
             {
                 Event myEvent = _listedEvents
@@ -204,11 +210,16 @@ namespace com.WanderingTurtle.Web.Pages
 
         protected void btn_Click(object sender, EventArgs e)
         {
+            //gets the info about the event from the button clicks
             var b = (Button)sender;
             int itemID = int.Parse(b.CommandArgument);
+            //get exact event info
             var myEvent = _listedEvents.Where(l => l.EventItemID == itemID).FirstOrDefault();
+            //set session variable
             Session["Event"] = myEvent;
+            //hide list of events
             theLists.Style.Add("display", "none");
+            //show add listing form
             addListing.Style.Add("display", "block");
             lblEventName.Text = myEvent.EventItemName;
         }
@@ -227,44 +238,36 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 return;
             }
-
+            string errors = "";
+            DateTime start;
+            DateTime end;
             //validate form
             if (String.IsNullOrEmpty(Request.Form["startdate"]))
             {
-                lblAddError.Text = "You must enter a valid starting date!";
-                return;
+                errors += "<li>You must enter a valid starting date!</li>";
             }
             if (String.IsNullOrEmpty(Request.Form["enddate"]))
             {
-                lblAddError.Text = "You must enter a valid ending date!";
-                return;
+                errors += "<li>You must enter a valid ending date!</li>";
             }
             if (String.IsNullOrEmpty(Request.Form["price"]) || !Request.Form["price"].ValidateDouble(0.01))
             {
-                lblAddError.Text = "You must enter a valid price!";
-                return;
+                errors += "<li>You must enter a valid price!</li>";
             }
             if (String.IsNullOrEmpty(Request.Form["tickets"]) || !Request.Form["tickets"].ValidateDouble(1))
             {
-                lblAddError.Text = "You must enter a valid number of tickets available";
-                return;
+                errors += "<li>You must enter a valid number of tickets available</li>";
             }
-
-            //make new Item Listing
+            //make new item listing
             ItemListing myListing = new ItemListing();
-            myListing.EventID = myEvent.EventItemID;
-            myListing.Price = (decimal)double.Parse(Request.Form["price"]);
-            myListing.MaxNumGuests = int.Parse(Request.Form["tickets"]);
-            DateTime start;
-            DateTime end;
-            if(DateTime.TryParse(Request.Form["startdate"], out start))
+
+            if (DateTime.TryParse(Request.Form["startdate"], out start))
             {
                 myListing.StartDate = start;
             }
             else
             {
-                lblAddError.Text = "Invalid Date. Please use the Calendar.";
-                return;
+                errors += "<li>Invalid Date. Please use the Calendar.</li>";
             }
             if (DateTime.TryParse(Request.Form["enddate"], out end))
             {
@@ -272,19 +275,38 @@ namespace com.WanderingTurtle.Web.Pages
             }
             else
             {
-                lblAddError.Text = "Invalid Date. Please use the Calendar.";
+                errors += "<li>Invalid Date. Please use the Calendar.</li>";
+            }
+            //check date values
+            if (start < DateTime.Now)
+            {
+                errors += "<li>You cannot list an event in the past.</li>";
+            }
+
+            //if errors, stop and display them
+            if (errors.Length > 0)
+            {
+                showError("Please see the following errors: <ul> " + errors + "</ul>");
                 return;
             }
-            
+
+
+
+            //add values to listing            
+            myListing.EventID = myEvent.EventItemID;
+            myListing.Price = (decimal)double.Parse(Request.Form["price"]);
+            myListing.MaxNumGuests = int.Parse(Request.Form["tickets"]);
+
+
+
 
             myListing.SupplierID = mySupplier.SupplierID;
 
-            if(_myprodMan.AddItemListing(myListing)==listResult.Success)
+            if (_myprodMan.AddItemListing(myListing) == listResult.Success)
             {
                 addListing.Style.Add("display", "none");
                 theLists.Style.Add("display", "block");
-                lblError.Text = "Listing Added.";
-                lblError.ForeColor = System.Drawing.Color.Black;
+                showError("Event Listing Added!");
             }
 
 
