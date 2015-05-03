@@ -45,7 +45,7 @@ namespace com.WanderingTurtle.Web.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //notes -- need the if statement to ensure this only gets run the firs time
+            //notes -- need the if statement to ensure this only gets run the first time
             //enableeventvalidation needs to be false
             //autopostback needs to be true
             if (!Page.IsPostBack)
@@ -99,7 +99,8 @@ namespace com.WanderingTurtle.Web.Pages
         private void showError(string message)
         {
             _errorMessage = message;
-            lblError.Text = _errorMessage;
+            lblMessage.Text = _errorMessage;
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
         }
 
         protected void btnSubmitEvent_Click(object sender, EventArgs e)
@@ -180,21 +181,11 @@ namespace com.WanderingTurtle.Web.Pages
                     currentEvent.OnSite = onsite;
                     currentEvent.Transportation = transportation;
 
-                    /*****************TEST DATA****************************************/
-                    //these are added for testing purposes until Event can be reworked.
-                    //need to be removed once that is fixed
-                    /*
-                    currentEvent.EventStartDate = DateTime.Now;
-                    currentEvent.EventEndDate = DateTime.Now;
-                    currentEvent.PricePerPerson = (decimal)15.00;
-                    currentEvent.MinNumGuests = 0;
-                    currentEvent.MaxNumGuests = 15;
-                     * */
-                    /******************************************************************/
                     EventManager.EventResult result = _myEventManager.AddNewEvent(currentEvent);
                     if (result == EventManager.EventResult.Success)
                     {
-                        Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Event Added Successfully!\")</SCRIPT>");
+                        lblMessage.Text = "Event Successfully Added!";
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                     }
                     clearForm();
                 }
@@ -214,7 +205,7 @@ namespace com.WanderingTurtle.Web.Pages
             radTransportation.SelectedIndex = -1;
             radTransportation.Visible = false;
             lblTransportation.Visible = false;
-            showError("");
+            _errorMessage = "";
         }
 
 
