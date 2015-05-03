@@ -1,13 +1,13 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro;
 using System;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using MahApps.Metro;
 
 namespace com.WanderingTurtle.FormPresentation.Views
 {
@@ -23,6 +23,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         public StartupScreen()
         {
             Globals.UserToken = null;
+            Application.Current.ChangeAppStyle(ThemeManager.GetAccent("Emerald"));
             InitializeComponent();
             TxtUserName.Focus();
         }
@@ -50,7 +51,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
             }
 
             var password = TxtPassword.Password.Trim();
-            if (password.ValidatePassword())
+            if (string.IsNullOrEmpty(password) || password.ValidatePassword())
             {
                 throw new InputValidationException(TxtPassword, "Please enter your Password.", "Login Error");
             }
@@ -71,32 +72,6 @@ namespace com.WanderingTurtle.FormPresentation.Views
             }
 
             this.GetWindow<MainWindow>().BtnSignOut.Visibility = Visibility.Visible;
-
-            if (Globals.UserToken.Level.Equals(RoleData.Admin))
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                                      ThemeManager.GetAccent("Emerald"),
-                                      ThemeManager.GetAppTheme("BaseLight"));
-            }
-            else if (Globals.UserToken.Level.Equals(RoleData.Concierge))
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                      ThemeManager.GetAccent("Cyan"),
-                      ThemeManager.GetAppTheme("BaseLight"));
-
-            }
-            else if (Globals.UserToken.Level.Equals(RoleData.DeskClerk))
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                      ThemeManager.GetAccent("Amber"),
-                      ThemeManager.GetAppTheme("BaseLight"));
-            }
-            else
-            {
-                ThemeManager.ChangeAppStyle(Application.Current,
-                      ThemeManager.GetAccent("Magenta"),
-                      ThemeManager.GetAppTheme("BaseLight"));
-            }
             this.GetWindow<MainWindow>().MainContent.Content = new TabContainer();
         }
 

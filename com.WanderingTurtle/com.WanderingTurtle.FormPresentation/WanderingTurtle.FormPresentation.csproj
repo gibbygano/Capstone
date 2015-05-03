@@ -170,6 +170,9 @@
     <Compile Include="Views\Admin\EventType.xaml.cs">
       <DependentUpon>EventType.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\GenerateReport.xaml.cs">
+      <DependentUpon>GenerateReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReportHost.xaml.cs">
       <DependentUpon>ReportHost.xaml</DependentUpon>
     </Compile>
@@ -256,6 +259,10 @@
     <Page Include="Views\Admin\EventType.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\GenerateReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ReportHost.xaml">
       <Generator>MSBuild:Compile</Generator>

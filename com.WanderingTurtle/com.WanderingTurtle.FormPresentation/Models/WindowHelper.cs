@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
 using System;
 using System.Linq;
 using System.Windows;
@@ -13,6 +14,43 @@ namespace com.WanderingTurtle.FormPresentation.Models
     /// </summary>
     internal static class WindowHelper
     {
+        private static readonly AppTheme DefaultTheme = ThemeManager.GetAppTheme("BaseLight");
+
+        /// <summary>
+        /// Sets the style of the specified <see cref="Window" /><paramref name="window" />
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="window"></param>
+        /// <param name="accentColor"></param>
+        /// <param name="themeColor"></param>
+        public static void ChangeAppStyle(this Window window, Accent accentColor, AppTheme themeColor = null)
+        {
+            ThemeManager.ChangeAppStyle(window, accentColor, themeColor ?? DefaultTheme);
+        }
+
+        /// <summary>
+        /// Sets the style of the specified <see cref="Application" /><paramref name="application" />
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="application"></param>
+        /// <param name="accentColor"></param>
+        /// <param name="themeColor"></param>
+        public static void ChangeAppStyle(this Application application, Accent accentColor, AppTheme themeColor = null)
+        {
+            ThemeManager.ChangeAppStyle(application, accentColor, themeColor ?? DefaultTheme);
+        }
+
+        /// <summary>
+        /// Sets the style of the specified <see cref="Application" /><paramref name="application" />
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="application"></param>
+        /// <param name="theme"></param>
+        public static void ChangeAppStyle(this Application application, Tuple<AppTheme, Accent> theme)
+        {
+            ChangeAppStyle(application, theme.Item2, theme.Item1);
+        }
+
         /// <summary>
         /// Returns the base parent <see cref="MainWindow" />
         /// </summary>
@@ -31,6 +69,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 {
                     parent = VisualTreeHelper.GetParent(parent);
                 }
+
                 return parent as T;
             }
             catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Main Window"); }

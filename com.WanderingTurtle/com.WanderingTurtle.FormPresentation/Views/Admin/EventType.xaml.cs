@@ -61,7 +61,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <returns>error message</returns>
-        private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
+        private static void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
         {
             throw new InputValidationException(component, message, title);
         }
@@ -106,7 +106,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnArchiveType_Click(object sender, RoutedEventArgs e)
         {
-            Common.EventType archiveEventType = (Common.EventType)CboArchiveEvent.SelectedItem;
+            var archiveEventType = (Common.EventType)CboArchiveEvent.SelectedItem;
 
             _result = _eventManager.ArchiveAnEventType(archiveEventType);
 
@@ -138,8 +138,8 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
                 ShowInputErrorMessage(TxtEditEventType, "Please enter a valid Event Type");
             }
 
-            Common.EventType oldEventType = (Common.EventType)CboEditEvent.SelectedItem;
-            Common.EventType newEventType = new Common.EventType(oldEventType.EventTypeID, TxtEditEventType.Text);
+            var oldEventType = (Common.EventType)CboEditEvent.SelectedItem;
+            var newEventType = new Common.EventType(oldEventType.EventTypeID, TxtEditEventType.Text);
 
             _result = _eventManager.EditEventType(oldEventType, newEventType);
 
@@ -189,34 +189,6 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
             catch (Exception ex)
             {
                 ShowErrorMessage(ex.Message, "Error Adding Event Type");
-            }
-        }
-
-        private async void BtnRunXML_Click(object sender, RoutedEventArgs e)
-        {
-            AccountingManager myMan = new AccountingManager();
-
-            DateTime formStartDate = (DateTime)(DateStart.SelectedDate);
-            DateTime formEndDate = (DateTime)(DateEnd.SelectedDate);
-
-            var report = myMan.GetAccountingDetails(formStartDate, formEndDate);
-
-            string filename = "report - " +
-                DateTime.Now.ToShortDateString().Replace("/", "-")
-                + " at " +
-                DateTime.Now.ToShortTimeString().Replace(":", "-") + ".xml";
-
-            if (report.XMLFile(filename))
-            {
-                await ShowMessage("Your Report has been saved successfully.", "Success");
-                DateStart.Text = null;
-                DateEnd.Text = null;
-            }
-            else
-            {
-                await ShowMessage("There was a problem.  File not written.", "Error");
-                DateStart.Text = null;
-                DateEnd.Text = null;
             }
         }
     }
