@@ -30,6 +30,17 @@ namespace com.WanderingTurtle.FormPresentation.Models
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InputValidationException" /> class. Show
+        /// <see cref="InputValidationException" /> Error Message with a
+        /// <see cref="Exception" /><paramref name="exception" /> and <see cref="string" /><paramref name="title" />.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <param name="exception"></param>
+        /// <param name="title"></param>
+        public InputValidationException(FrameworkElement component, Exception exception, string title)
+            : base(component, exception, title, true) { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InputValidationException" /> class. Show
         /// <see cref="InputValidationException" /> Error Message with an already constructed <see cref="WanderingTurtleException" /><paramref name="exception" />.
         /// </summary>
         /// <param name="exception"></param>

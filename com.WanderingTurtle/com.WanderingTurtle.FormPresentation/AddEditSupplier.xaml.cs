@@ -3,7 +3,6 @@ using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,171 +14,187 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class AddEditSupplier
     {
-        private CityStateManager _cityStateManager = new CityStateManager();
-        private SupplierLoginManager _loginManager = new SupplierLoginManager();
-        private SupplierManager _manager = new SupplierManager();
-        private string _supplierUserName;
-        private Supplier _UpdatableSupplier;
+        private readonly SupplierLoginManager _loginManager = new SupplierLoginManager();
+        private readonly SupplierManager _manager = new SupplierManager();
+        private readonly string _supplierUserName;
+        private readonly Supplier _updatableSupplier;
         private List<CityState> _zips;
 
         /// <summary>
-        /// Constructs the object and will fill the list of suppliers
-        /// created by Will Fritz 2/6/15
+        /// Will Fritz
+        /// Created 2015/02/06
+        /// Set up of ui screen, combo box fill
         /// </summary>
+        /// <remarks>
+        /// Miguel Santana
+        /// Updated 2015/04/21
+        /// Normalized screen titles
+        /// </remarks>
         public AddEditSupplier()
         {
             InitializeComponent();
             Title = "Add a new Supplier";
-            fillComboBox();
+            FillComboBox();
             FillUpdateList();
-        }
-
-        /// <exception cref="WanderingTurtleException"/>
-        public AddEditSupplier(Supplier supplierToEdit, bool ReadOnly = false)
-        {
-            InitializeComponent();
-            _UpdatableSupplier = supplierToEdit;
-            Title = "Editing Supplier: " + _UpdatableSupplier.GetFullName;
-
-            //retrieve the username
-            _supplierUserName = _loginManager.retrieveSupplierUserName(supplierToEdit.SupplierID);
-
-            fillComboBox();
-            FillUpdateList();
-
-            txtUserName.IsEnabled = false;
-
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel); }
         }
 
         /// <summary>
-        /// This will fill the add/edit tab fields with the data from a selected Supplier from the list view
-        /// Created by Will Fritz 2/6/15
+        /// Will Fritz
+        /// Created:  2015/02/06
+        /// initializes screen
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// changed zip to a drop down
+        /// Miguel Santana
+        /// Updated:  2015/04/09
+        /// combined add/edit screens
+        /// </remarks>
+        /// <param name="supplierToEdit"></param>
+        /// <param name="readOnly"></param>
+        /// <exception cref="WanderingTurtleException">Error setting the fields as read only.</exception>
+        public AddEditSupplier(Supplier supplierToEdit, bool readOnly = false)
+        {
+            InitializeComponent();
+            _updatableSupplier = supplierToEdit;
+            Title = "Editing Supplier: " + _updatableSupplier.GetFullName;
+
+            //retrieve the username
+            _supplierUserName = _loginManager.RetrieveSupplierUserName(supplierToEdit.SupplierID);
+
+            FillComboBox();
+            FillUpdateList();
+
+            TxtUserName.IsEnabled = false;
+
+            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel); }
+        }
+
+        /// <summary>
+        /// Will Fritz
+        /// Created:  2015/02/06
+        /// fills the add/edit tab fields with the data from a selected Supplier from the list view
+        /// </summary>
+        /// <remarks>
+        /// Will Fritz
+        /// Updated:  2015/02/15
+        /// Changed zip to a drop down
         /// </remarks>
         public void FillUpdateList()
         {
-            if (_UpdatableSupplier == null)
+            if (_updatableSupplier == null)
             {
-                txtCompanyName.Text = null;
-                txtFirstName.Text = null;
-                txtLastName.Text = null;
-                txtAddress1.Text = null;
-                txtAddress2.Text = null;
-                txtEmail.Text = null;
-                txtPhoneNumber.Text = null;
-                txtUserName.Text = null;
+                TxtCompanyName.Text = null;
+                TxtFirstName.Text = null;
+                TxtLastName.Text = null;
+                TxtAddress1.Text = null;
+                TxtAddress2.Text = null;
+                TxtEmail.Text = null;
+                TxtPhoneNumber.Text = null;
+                TxtUserName.Text = null;
                 //making user name items visible so that they can be changed
-                txtUserName.Visibility = System.Windows.Visibility.Visible;
-                lblUserName.Visibility = System.Windows.Visibility.Visible;
-                cboZip.SelectedItem = null;
-                numSupplyCost.Value = .70;
+                TxtUserName.Visibility = Visibility.Visible;
+                LblUserName.Visibility = Visibility.Visible;
+                CboZip.SelectedItem = null;
+                NumSupplyCost.Value = .70;
             }
             else
             {
-                txtCompanyName.Text = _UpdatableSupplier.CompanyName.Trim();
-                txtFirstName.Text = _UpdatableSupplier.FirstName.Trim();
-                txtLastName.Text = _UpdatableSupplier.LastName.Trim();
-                txtAddress1.Text = _UpdatableSupplier.Address1.Trim();
-                txtAddress2.Text = _UpdatableSupplier.Address2.Trim();
-                txtEmail.Text = _UpdatableSupplier.EmailAddress.Trim();
-                txtPhoneNumber.Text = _UpdatableSupplier.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
-                txtUserName.Text = _supplierUserName;
+                TxtCompanyName.Text = _updatableSupplier.CompanyName.Trim();
+                TxtFirstName.Text = _updatableSupplier.FirstName.Trim();
+                TxtLastName.Text = _updatableSupplier.LastName.Trim();
+                TxtAddress1.Text = _updatableSupplier.Address1.Trim();
+                TxtAddress2.Text = _updatableSupplier.Address2.Trim();
+                TxtEmail.Text = _updatableSupplier.EmailAddress.Trim();
+                TxtPhoneNumber.Text = _updatableSupplier.PhoneNumber.Trim().Replace("-", "").Replace("(", "").Replace(")", "").Replace(" ", "");
+                TxtUserName.Text = _supplierUserName;
                 //making user name items invisible so that they can't be changed
-                txtUserName.Visibility = System.Windows.Visibility.Hidden;
-                lblUserName.Visibility = System.Windows.Visibility.Hidden;
-                foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == _UpdatableSupplier.Zip)) { cboZip.SelectedValue = cityState.Zip; }
-                numSupplyCost.Value = (double)(_UpdatableSupplier.SupplyCost);
+                TxtUserName.Visibility = Visibility.Hidden;
+                LblUserName.Visibility = Visibility.Hidden;
+                foreach (CityState cityState in _zips.Where(cityState => cityState.Zip == _updatableSupplier.Zip)) { CboZip.SelectedValue = cityState.Zip; }
+                NumSupplyCost.Value = (double)(_updatableSupplier.SupplyCost);
                 //cboZip.SelectedValue = supplierUpdate.Zip;
             }
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created: 2015/02/04
         /// checks to see if all the fields are fill out and formated with the correct data
-        /// It returns a false if there is an invalid fields and will output an error message to the lblError label
-        /// Created By Will Fritz 2/4/15
         /// </summary>
-        /// <remarks>
-        /// edited by will fritz 2/19/15
-        /// </remarks>
-        /// <returns></returns>
+        /// <returns>false if there is an invalid fields and will output an error message to the lblError label</returns>
         /// <exception cref="InputValidationException">Validation Error Handling.</exception>
         public bool Validate()
         {
-            if (!Validator.ValidateCompanyName(txtCompanyName.Text.Trim()))
+            if (!TxtCompanyName.Text.Trim().ValidateCompanyName())
             {
-                throw new InputValidationException(txtCompanyName, "Company Name field must be filled out and not contain special characters");
+                throw new InputValidationException(TxtCompanyName, "Company Name field must be filled out and not contain special characters");
             }
-            if (!Validator.ValidateEmail(txtEmail.Text.Trim()))
+            if (!TxtEmail.Text.Trim().ValidateEmail())
             {
-                throw new InputValidationException(txtEmail, "Not a valid e-mail address");
+                throw new InputValidationException(TxtEmail, "Not a valid e-mail address");
             }
-            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            if (!TxtPhoneNumber.Text.ValidatePhone())
             {
-                throw new InputValidationException(txtPhoneNumber, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
+                throw new InputValidationException(TxtPhoneNumber, "The phone number cannot start with a 1 and must filled out and be formated correctly (10 numeric digits)");
             }
-            if (cboZip.SelectedItem == null)
+            if (CboZip.SelectedItem == null)
             {
-                throw new InputValidationException(cboZip, "You must select an zip from the drop down");
+                throw new InputValidationException(CboZip, "You must select an zip from the drop down");
             }
-            if (!Validator.ValidateAlphaNumeric(txtAddress1.Text.Trim()))
+            if (!TxtAddress1.Text.Trim().ValidateAlphaNumeric())
             {
-                throw new InputValidationException(txtAddress1, "The address must be filled out and not contain special characters (spaces allowed)");
+                throw new InputValidationException(TxtAddress1, "The address must be filled out and not contain special characters (spaces allowed)");
             }
-            if (!Validator.ValidateString(txtFirstName.Text.Trim()))
+            if (!TxtFirstName.Text.Trim().ValidateString())
             {
-                throw new InputValidationException(txtFirstName, "The first name field filled out and must not contain special characters (No Spaces)");
+                throw new InputValidationException(TxtFirstName, "The first name field filled out and must not contain special characters (No Spaces)");
             }
-            if (!Validator.ValidateString(txtLastName.Text.Trim()))
+            if (!TxtLastName.Text.Trim().ValidateString())
             {
-                throw new InputValidationException(txtLastName, "The last name field must be filled out and not contain special characters (No Spaces)");
+                throw new InputValidationException(TxtLastName, "The last name field must be filled out and not contain special characters (No Spaces)");
             }
-            if (!Validator.ValidateAlphaNumeric(txtUserName.Text.Trim()))
+            if (!TxtUserName.Text.Trim().ValidateAlphaNumeric())
             {
-                throw new InputValidationException(txtUserName, "Enter a valid user name.");
+                throw new InputValidationException(TxtUserName, "Enter a valid user name.");
             }
-            if (!Validator.ValidateDecimal(numSupplyCost.Value.ToString()))
+            if (!NumSupplyCost.Value.ToString().ValidateDecimal())
             {
-                throw new InputValidationException(numSupplyCost, "Enter a valid supply cost.");
+                throw new InputValidationException(NumSupplyCost, "Enter a valid supply cost.");
             }
             return true;
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created: 2015/02/06
         /// This will send a supplier object to the business logic layer
-        /// Created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// Added a conformation message box
+        /// Will Fritz
+        /// Updated:  2015/02/15
+        /// Added a confirmation message box
         /// </remarks>
         private async void AddTheSupplier()
         {
             try
             {
-                bool validUserName = false;
-
-                validUserName = _loginManager.CheckSupplierUserName(txtUserName.Text);
+                bool validUserName = _loginManager.CheckSupplierUserName(TxtUserName.Text);
 
                 if (validUserName)
                 {
                     Supplier tempSupplier = new Supplier
                     {
-                        CompanyName = txtCompanyName.Text.Trim(),
-                        FirstName = txtFirstName.Text.Trim(),
-                        LastName = txtLastName.Text.Trim(),
-                        Address1 = txtAddress1.Text.Trim(),
-                        Address2 = txtAddress2.Text.Trim(),
-                        PhoneNumber = txtPhoneNumber.Text,
-                        Zip = cboZip.SelectedValue.ToString(),
-                        EmailAddress = txtEmail.Text.Trim(),
-                        SupplyCost = (decimal)numSupplyCost.Value
+                        CompanyName = TxtCompanyName.Text.Trim(),
+                        FirstName = TxtFirstName.Text.Trim(),
+                        LastName = TxtLastName.Text.Trim(),
+                        Address1 = TxtAddress1.Text.Trim(),
+                        Address2 = TxtAddress2.Text.Trim(),
+                        PhoneNumber = TxtPhoneNumber.Text,
+                        Zip = CboZip.SelectedValue.ToString(),
+                        EmailAddress = TxtEmail.Text.Trim(),
+                        SupplyCost = (decimal)NumSupplyCost.Value
                     };
 
-                    if (_manager.AddANewSupplier(tempSupplier, txtUserName.Text) == SupplierResult.Success)
+                    if (_manager.AddANewSupplier(tempSupplier, TxtUserName.Text) == SupplierResult.Success)
                     {
                         await this.ShowMessageDialog("Supplier was added to the database.");
                         DialogResult = true;
@@ -192,7 +207,7 @@ namespace com.WanderingTurtle.FormPresentation
                 }
                 else
                 {
-                    txtUserName.Text = "";
+                    TxtUserName.Text = "";
                     throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
                 }
             }
@@ -202,22 +217,39 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/21
+        /// Added button to allow cancel of the form function.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/21
+        /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReset_Click(object sender, RoutedEventArgs e)
         {
             FillUpdateList();
         }
 
         /// <summary>
-        /// Will validate the fields and call add/edit supplier method
-        /// created by Will Fritz 2/6/15
+        /// Will Fritz
+        /// Created:  2015/02/06
+        /// Validates the fields and call add/edit supplier method
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/19/15
+        /// Pat Banks
+        /// Updated 2015/04/14
+        /// Added UserName field
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -225,7 +257,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             if (!Validate()) { return; }
 
-            if (_UpdatableSupplier == null)
+            if (_updatableSupplier == null)
             {
                 AddTheSupplier();
             }
@@ -236,13 +268,16 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created:  2015/02/06
         /// This will send a supplier object to the business logic layer
-        /// Created by Will Fritz 2/6/15
         /// </summary>
         /// <remarks>
-        /// edited by will fritz 2/15/15
-        /// added conformation message box
-        /// edited by Rose Steffensmeier 2015/24/04
+        /// Will Fritz
+        /// Updated: 2015/02/15
+        /// Added confirmation message box
+        /// Rose Steffensmeier
+        /// Updated:  2015/04/24
         /// deleted checking supplierUserName
         /// </remarks>
         private async void EditSupplier()
@@ -251,19 +286,19 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Supplier tempSupplier = new Supplier
                 {
-                    CompanyName = txtCompanyName.Text.Trim(),
-                    FirstName = txtFirstName.Text.Trim(),
-                    LastName = txtLastName.Text.Trim(),
-                    Address1 = txtAddress1.Text.Trim(),
-                    Address2 = txtAddress2.Text.Trim(),
-                    PhoneNumber = txtPhoneNumber.Text,
-                    Zip = cboZip.SelectedValue.ToString(),
-                    EmailAddress = txtEmail.Text.Trim(),
-                    SupplyCost = (decimal)numSupplyCost.Value,
-                    SupplierID = _UpdatableSupplier.SupplierID
+                    CompanyName = TxtCompanyName.Text.Trim(),
+                    FirstName = TxtFirstName.Text.Trim(),
+                    LastName = TxtLastName.Text.Trim(),
+                    Address1 = TxtAddress1.Text.Trim(),
+                    Address2 = TxtAddress2.Text.Trim(),
+                    PhoneNumber = TxtPhoneNumber.Text,
+                    Zip = CboZip.SelectedValue.ToString(),
+                    EmailAddress = TxtEmail.Text.Trim(),
+                    SupplyCost = (decimal)NumSupplyCost.Value,
+                    SupplierID = _updatableSupplier.SupplierID
                 };
 
-                if (_manager.EditSupplier(_UpdatableSupplier, tempSupplier) == SupplierResult.Success)
+                if (_manager.EditSupplier(_updatableSupplier, tempSupplier) == SupplierResult.Success)
                 {
                     await this.ShowMessageDialog("The Supplier was successfully edited.");
                     DialogResult = true;
@@ -274,12 +309,6 @@ namespace com.WanderingTurtle.FormPresentation
                     throw new WanderingTurtleException(this, "Supplier wasn't added to the database.");
                 }
             }
-            catch (SqlException)
-            {
-                // ShowErrorMessage("UserName already used.  Please choose another one.");
-
-                throw new WanderingTurtleException(this, "UserName already used.  Please choose another one.");
-            }
             catch (Exception ex)
             {
                 throw new WanderingTurtleException(this, ex);
@@ -287,17 +316,18 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
+        /// Will Fritz
+        /// Created 2/19/2015
         /// fills the zip code combo box
-        /// created by will fritz 2/19/2015
         /// </summary>
-        private void fillComboBox()
+        private void FillComboBox()
         {
             try
             {
                 _zips = DataCache._currentCityStateList;
-                cboZip.ItemsSource = _zips;
-                cboZip.DisplayMemberPath = "GetZipStateCity";
-                cboZip.SelectedValuePath = "Zip";
+                CboZip.ItemsSource = _zips;
+                CboZip.DisplayMemberPath = "GetZipStateCity";
+                CboZip.SelectedValuePath = "Zip";
             }
             catch (Exception ex)
             {

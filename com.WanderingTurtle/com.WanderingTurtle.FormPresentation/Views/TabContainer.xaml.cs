@@ -1,7 +1,9 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro;
 using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace com.WanderingTurtle.FormPresentation.Views
@@ -31,10 +33,12 @@ namespace com.WanderingTurtle.FormPresentation.Views
             if (Globals.UserToken != null)
             {
                 CurrentUserLabel.Content = Globals.UserToken.GetFullName;
+                Tuple<AppTheme, Accent> theme = null;
 
                 switch (Globals.UserToken.Level)
                 {
                     case RoleData.Admin:
+                        theme = new Tuple<AppTheme, Accent>(null, ThemeManager.GetAccent("Emerald"));
                         AddTab(TabName.HotelGuests, new ListHotelGuests());
                         AddTab(TabName.Suppliers, new ListSuppliers());
                         AddTab(TabName.Employees, new ListTheEmployees());
@@ -44,19 +48,22 @@ namespace com.WanderingTurtle.FormPresentation.Views
                         break;
 
                     case RoleData.Concierge:
+                        theme = new Tuple<AppTheme, Accent>(null, ThemeManager.GetAccent("Cyan"));
                         AddTab(TabName.HotelGuests, new ListHotelGuests());
                         AddTab(TabName.Listings, new ListTheListings());
                         break;
 
                     case RoleData.DeskClerk:
+                        theme = new Tuple<AppTheme, Accent>(null, ThemeManager.GetAccent("Amber"));
                         AddTab(TabName.HotelGuests, new ListHotelGuests());
                         break;
 
                     case RoleData.Valet:
+                        theme = new Tuple<AppTheme, Accent>(null, ThemeManager.GetAccent("Magenta"));
                         AddTab(TabName.Listings, new ListTheListings());
                         break;
                 }
-
+                Application.Current.ChangeAppStyle(theme);
                 // Filling ZipCode Cache
                 new CityStateManager().PopulateCityStateCache();
             }

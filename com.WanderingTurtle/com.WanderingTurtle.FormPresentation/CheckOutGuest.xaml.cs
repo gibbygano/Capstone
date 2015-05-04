@@ -15,31 +15,31 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ArchiveInvoice
     {
-        private Invoice _CurrentInvoice { get; set; }
+        private Invoice CurrentInvoice { get; set; }
 
-        private List<BookingDetails> myBookingList;
-        private HotelGuest guestToView;
-        private InvoiceManager _invoiceManager = new InvoiceManager();
-        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
-        private BookingManager _bookingManager = new BookingManager();
+        private readonly List<BookingDetails> _myBookingList;
+        private readonly HotelGuest _guestToView;
+        private readonly InvoiceManager _invoiceManager = new InvoiceManager();
+        private readonly HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Pat Banks
+        /// Created:  2015/03/03
         /// Constructs a populated form that shows the final charges for a guest and
         /// allows employee to submit to close the invoice
         /// </summary>
-        /// <param name="selectedHotelGuestID">Guest selected from the ViewInvoiceUI</param>
+        /// <param name="selectedHotelGuestId">Guest selected from the ViewInvoiceUI</param>
         /// <exception cref="WanderingTurtleException">Child window errored during initialization.</exception>
-        public ArchiveInvoice(int selectedHotelGuestID)
+        public ArchiveInvoice(int selectedHotelGuestId)
         {
             try
             {
                 InitializeComponent();
-                _CurrentInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestID);
+                CurrentInvoice = _invoiceManager.RetrieveInvoiceByGuest(selectedHotelGuestId);
                 Title = "Archiving Invoice";
 
-                guestToView = _hotelGuestManager.GetHotelGuest(_CurrentInvoice.HotelGuestID);
-                myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(_CurrentInvoice.HotelGuestID);
+                _guestToView = _hotelGuestManager.GetHotelGuest(CurrentInvoice.HotelGuestID);
+                _myBookingList = _invoiceManager.RetrieveGuestBookingDetailsList(CurrentInvoice.HotelGuestID);
                 FillFormFields();
             }
             catch (Exception ex)
@@ -49,32 +49,38 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
+        /// Pat Banks
+        /// Created:  2015/03/03
         /// Populates form fields
         /// </summary>
         private void FillFormFields()
         {
-            _CurrentInvoice.TotalPaid = _invoiceManager.CalculateTotalDue(myBookingList);
-            lblGuestNameLookup.Content = guestToView.GetFullName;
-            lblCheckInDate.Content = _CurrentInvoice.DateOpened.ToString(CultureInfo.InvariantCulture);
-            lblInvoice.Content = _CurrentInvoice.InvoiceID.ToString();
-            lblAddress.Content = guestToView.Address1;
-            lblCityState.Content = guestToView.CityState.GetZipStateCity;
-            lblPhoneNum.Content = guestToView.PhoneNumber;
-            lblRoomNum.Content = guestToView.Room;
-            lblInvoice.Content = _CurrentInvoice.InvoiceID;
-            lblTotalPrice.Content = _CurrentInvoice.GetTotalFormat;
-            lblPhoneNum.Content = guestToView.PhoneNumber;
+            CurrentInvoice.TotalPaid = _invoiceManager.CalculateTotalDue(_myBookingList);
+            LblGuestNameLookup.Content = _guestToView.GetFullName;
+            LblCheckInDate.Content = CurrentInvoice.DateOpened.ToString(CultureInfo.InvariantCulture);
+            LblInvoice.Content = CurrentInvoice.InvoiceID.ToString();
+            LblAddress.Content = _guestToView.Address1;
+            LblCityState.Content = _guestToView.CityState.GetZipStateCity;
+            LblPhoneNum.Content = _guestToView.PhoneNumber;
+            LblRoomNum.Content = _guestToView.Room;
+            LblInvoice.Content = CurrentInvoice.InvoiceID;
+            LblTotalPrice.Content = CurrentInvoice.GetTotalFormat;
+            LblPhoneNum.Content = _guestToView.PhoneNumber;
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/03
-        ///
+        /// Pat Banks
+        /// Created:  2015/03/03
         /// Calls methods to archive the associated database records for the selected hotel guest
         /// </summary>
         /// <remarks>
-        /// Updated by Pat Banks 2015/03/19
+        /// Pat Banks
+        /// Updated:  2015/03/19
         /// Moved decision logic to Invoice Manager
+        ///
+        /// Miguel Santana
+        /// Updated:  2015/04/28
+        /// Added message box to notify user that report is being generated
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -85,7 +91,7 @@ namespace com.WanderingTurtle.FormPresentation
             await TaskEx.Delay(1000);
             try
             {
-                var result = _invoiceManager.ArchiveGuestInvoice(_CurrentInvoice.HotelGuestID);
+                var result = _invoiceManager.ArchiveGuestInvoice(CurrentInvoice.HotelGuestID);
                 controller.SetMessage("Guest has been checked out!");
                 await TaskEx.Delay(2000);
                 switch (result)
@@ -96,7 +102,7 @@ namespace com.WanderingTurtle.FormPresentation
                     case (ResultsArchive.Success):
                         controller.SetMessage("Opening Printable Invoice.");
                         await TaskEx.Delay(10);
-                        var invoice = new PrintableInvoice((int)guestToView.HotelGuestID);
+                        var invoice = new PrintableInvoice((int)_guestToView.HotelGuestID);
                         await controller.CloseAsync();
                         invoice.ShowDialog();
                         break;
@@ -117,8 +123,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/07
-        /// Handles click event
+        /// Pat Banks
+        /// Created:  2015/03/07
+        /// Handles click event that closes the ui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

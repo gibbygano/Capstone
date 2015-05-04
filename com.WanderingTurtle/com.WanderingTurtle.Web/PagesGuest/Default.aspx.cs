@@ -133,7 +133,7 @@ namespace com.WanderingTurtle.Web.Pages
                 return;
             } 
             //gets quantity from the quantity field
-            else if (!Validator.ValidateInt(txtGuestTickets.Text, 1))
+            else if (!txtGuestTickets.Text.ValidateInt(1))
             {
                 lblMessage.Text = "You must enter a valid number of tickets.";
                 txtGuestTickets.Text = "";
@@ -145,7 +145,7 @@ namespace com.WanderingTurtle.Web.Pages
                 txtGuestTickets.Text = "";
                 return;
             }
-            else if (!Validator.ValidateAlphaNumeric(txtGuestPin.Text))
+            else if (!txtGuestPin.Text.ValidateAlphaNumeric())
             {
                     lblMessage.Text = "You must enter a valid pin.";
                     txtGuestTickets.Text = "";

@@ -1,38 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagesGuest/SiteGuest.Master" AutoEventWireup="true" CodeBehind="ViewBookings.aspx.cs" Inherits="com.WanderingTurtle.Web.PagesGuest.ViewBookings" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
-        .boldBigger {
-            font-size: 14px;
-        }
 
-        #bookingTable {
-            border-collapse: collapse;
-            border: 0px;
-            color: #333;
-        }
-
-            #bookingTable thead tr {
-                background-color: #186D99;
-            }
-
-                #bookingTable thead tr td {
-                    font-weight: bold;
-                    color: white;
-                    text-align: center;
-                    vertical-align: middle;
-                }
-
-            #bookingTable tbody tr {
-                background-color: #F7F6F3;
-                color: #333;
-            }
-
-            #bookingTable tbody:nth-child(2n+1) {
-                background-color: white;
-                color: #284775;
-            }
-    </style>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <%-- Created by Arik Chadima 2015/4/24
@@ -75,11 +44,13 @@
                 <tbody>
                     <asp:Repeater ID="repBookings" runat="server">
                         <ItemTemplate>
-                            <td><%# String.Format("{0:ddd, MMM d}, {0:t}", DataBinder.Eval(Container.DataItem,"StartDate").ToString()) %></td>
+                            <tr>
+                            <td><%# String.Format("{0:ddd, MMM d}, {0:t}", DataBinder.Eval(Container.DataItem,"StartDate")) %></td>
                             <td><%# DataBinder.Eval(Container.DataItem,"EventItemName") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Quantity") %></td>
-                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TicketPrice").ToString()) %></td>
-                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TotalCharge").ToString()) %></td>
+                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TicketPrice")) %></td>
+                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TotalCharge")) %></td>
+                                </tr>
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr>

@@ -11,14 +11,12 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/25
-        ///
         /// Creates a connection with database and
         /// calls the stored procedure spSelectInvoiceBookings
-        /// that querys the database
-        /// for all bookings of a specified hotel guest
+        /// that querys the database for all bookings of a specified hotel guest
         /// </summary>
         /// <param name="GuestID">A Hotel Guest's ID</param>
-        /// <returns>List of Booking details</returns>
+        /// <returns>List of Booking details for a guest</returns>
         public static List<BookingDetails> GetInvoiceBookingsByGuest(int guestID)
         {
             //create list of bookingdetails
@@ -71,7 +69,6 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/03
-        ///
         /// Creates a connection with database and
         /// calls the stored procedure spSelectAllInvoices
         /// that querys the database for a list of all active invoices
@@ -79,7 +76,6 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/19
-        ///
         /// Made a generic accessor by moving if active test to InvoiceManager
         /// </remarks>
         /// <returns>List of InvoiceDetails</returns>
@@ -137,7 +133,6 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Pat Banks
         /// Created: 2015/02/25
-        ///
         /// Creates a connection with database and
         /// calls the stored procedure spSelectInvoiceByGuest
         /// that querys the database for a guest's invoice information
@@ -196,7 +191,6 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Pat Banks
         /// Created: 2015/03/03
-        ///
         /// Creates a connection with database and
         /// calls the stored procedure spArchiveInvoiceGuestBooking
         /// that updates database with information to archive an invoice, hotel guest and any bookings for that guest

@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.Web.Pages
         ProductManager _myManager = new ProductManager();
         EventManager _eventManager = new EventManager();
         SupplierManager _supplierManager = new SupplierManager();
-        IEnumerable<ItemListing> _listedLists;
+        static IEnumerable<ItemListing> _listedLists;
         public bool loggedIn = false;
         public List<Supplier> _suppliers;
         public List<Event> _events;
@@ -34,7 +34,19 @@ namespace com.WanderingTurtle.Web.Pages
                 }
                 catch (Exception ex)
                 {
-                    //nothing
+                    lblMessage.Text = "Event fetching data: " + ex.Message;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                }
+            }
+            if (Page.IsPostBack)
+            {
+                var requestTarget = this.Request["__EVENTTARGET"];
+                var requestArgs = this.Request["__EVENTARGUMENT"];
+
+                if (requestTarget == "delete")
+                {
+                    DeleteList(int.Parse(requestArgs));
+                    return;
                 }
             }
         }
@@ -73,9 +85,10 @@ namespace com.WanderingTurtle.Web.Pages
                 _listedLists = list.Where(l => l.StartDate > DateTime.Now);
                 return _listedLists;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving List" + e.Message + "\")</SCRIPT>");
+                lblMessage.Text = "Event fetching event listings: " + ex.Message;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 return null;
             }
 
@@ -101,7 +114,7 @@ namespace com.WanderingTurtle.Web.Pages
             string errorText = "";
             lblError.Text = "";
             int ItemListID = int.Parse(Request.Form["itemID"]);
-            
+
             try
             {
                 ItemListing myList = _listedLists.Where(ev => ev.ItemListID == ItemListID).FirstOrDefault();
@@ -116,7 +129,7 @@ namespace com.WanderingTurtle.Web.Pages
                 }
                 else
                 {
-                    errorText = addError(errorText, "Invalid Start Date. Please use the Calendar.");
+                    errorText = addError(errorText, "<li>Invalid Start Date. Please use the Calendar.</li>");
                 }
                 if (DateTime.TryParse(Request.Form["end"], out end))
                 {
@@ -124,7 +137,7 @@ namespace com.WanderingTurtle.Web.Pages
                 }
                 else
                 {
-                    errorText = addError(errorText, "Invalid End Date. Please use the Calendar.");
+                    errorText = addError(errorText, "<li>Invalid End Date. Please use the Calendar.</li>");
 
                 }
                 newList.Price = decimal.Parse(Request.Form["price"]);
@@ -133,66 +146,71 @@ namespace com.WanderingTurtle.Web.Pages
 
                 listResult result;
 
-                if (!Validator.ValidateDecimal(newList.Price.ToString("G"), minPrice))
+                if (!newList.Price.ToString("G").ValidateDecimal(minPrice))
                 {
-                    errorText = addError(errorText, "Please add a valid, positive price");
+                    errorText = addError(errorText, "<li>Please add a valid, positive price</li>");
                 }
-                if (!Validator.ValidateDateTime(newList.StartDate.ToString()))
+                if (!newList.StartDate.ToString().ValidateDateTime())
                 {
-                    errorText = addError(errorText, "Please add a valid start date");
+                    errorText = addError(errorText, "<li>Please add a valid start date</li>");
                 }
-                if (!Validator.ValidateDateTime(newList.EndDate.ToString(), newList.StartDate))
+                if (!newList.EndDate.ToString().ValidateDateTime(newList.StartDate))
                 {
-                    errorText = addError(errorText, "Please add a valid end date after your start date");
+                    errorText = addError(errorText, "<li>Please add a valid end date after your start date</li>");
                 }
-                if (!Validator.ValidateInt(newList.MaxNumGuests.ToString(), newList.MinNumGuests))
+                if (!newList.MaxNumGuests.ToString().ValidateInt(newList.MinNumGuests))
                 {
-                    errorText = addError(errorText, "Please add a valid max number of guests higher than your minimum");
-                }
-                if (!Validator.ValidateInt(newList.MinNumGuests.ToString(), 0, newList.MaxNumGuests))
-                {
-                    errorText = addError(errorText, "Please add a valid min number of guests lower than your maximum, higher than zero");
+                    errorText = addError(errorText, "<li>Please add a valid max number of guests greater than zero.</li>");
                 }
 
                 if (myList != null && errorText.Length == 0)
                 {
                     result = _myManager.EditItemListing(newList, myList);
-                    if(result == listResult.NoDateChange)
+                    if (result == listResult.NoDateChange)
                     {
-                        errorText = addError(errorText, "You cannot change the date after guests have signed up!");
-                        lblError.Text = errorText;
+                        errorText = addError(errorText, "<li>You cannot change the date after guests have signed up!</li>");
+                        
                     }
                     if (result == listResult.NoPriceChange)
                     {
-                        errorText = addError(errorText, "You cannot change the price after guests have signed up!");
-                        lblError.Text = errorText;
+                        errorText = addError(errorText, "<li>You cannot change the price after guests have signed up!</li>");
+
                     }
                     if (result == listResult.MaxSmallerThanCurrent)
                     {
-                        errorText = addError(errorText, "You cannot change the Max Number of Guests to be lower than the number signed up!");
-                        lblError.Text = errorText;
+                        errorText = addError(errorText, "<li>You cannot change the Max Number of Guests to be lower than the number signed up!</li>");
                     }
                     if (result == listResult.StartEndDateError)
                     {
-                        errorText = addError(errorText, "Start Date cannot be after End Date!");
-                        lblError.Text = errorText;
+                        errorText = addError(errorText, "<li>Start Date cannot be after End Date!</li>");
                     }
                     if (result == listResult.DateInPast)
                     {
-                        errorText = addError(errorText, "Date cannot be in the past!");
-                        lblError.Text = errorText;
+                        errorText = addError(errorText, "<li>Date cannot be in the past!</li>");
                     }
-                    
+                    if (errorText.Length > 0)
+                    {
+                        lblMessage.Text = "Please see the following errors: <ul>" + errorText + "</ul>";
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                    }
+                    if (result==listResult.Success)
+                    {
+                        lblMessage.Text = "Event Updated!";
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                    }
+
                     return;
                 }
                 else
                 {
-                    lblError.Text = errorText;
+                    lblMessage.Text = "Please see the following errors: <ul>" + errorText + "</ul>";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 }
             }
             catch (Exception ex)
             {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Updating Event" + ex.Message + "\" )</SCRIPT>");
+                lblMessage.Text = "Event updating listing: " + ex.Message;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
             }
         }
 
@@ -209,13 +227,21 @@ namespace com.WanderingTurtle.Web.Pages
                 .Where(e => e.ItemListID == ItemListID).FirstOrDefault();
 
                 listResult result = _myManager.ArchiveItemListing(myList);
+                if (result==listResult.Success)
+                {
+                    lblMessage.Text = "Event listing successfully deleted.";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Deleting Event\")</SCRIPT>");
+                lblMessage.Text = "Event deleting listing: " + ex.Message;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
             }
         }
+
+
         public void InsertList()
         {
 

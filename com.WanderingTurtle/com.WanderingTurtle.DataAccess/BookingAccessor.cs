@@ -11,9 +11,9 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/13
-        ///
-        /// Creates a list of options, has an ItemListID, Quantity, and some event info
-        /// to help populate drop downs/ lists for Add Bookings
+        /// Creates a list of Event listings with an ItemListID, Quantity, and readable event info
+        /// to populate the lists of Event Listings
+        /// List consists of active listings that have start time after DateTime.Now
         /// </summary>
         /// <returns>a list of ItemListingDetails objects (is created from two tables, ItemListing and Event Item)</returns>
         public static List<ItemListingDetails> GetItemListingDetailsList()
@@ -69,10 +69,10 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Created by Pat Banks 2015/03/11
-        ///
-        /// Retrieves the event listing information to to enable
-        /// user to see current number of spots available for a listing
+        /// Pat Banks 
+        /// Created:  2015/03/11
+        /// Retrieves the event listing information to enable
+        /// user to see current number of spots available for a selected listing
         /// </summary>
         /// <param name="itemListID">Id for the itemListing</param>
         /// <returns></returns>
@@ -131,18 +131,20 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        ///
-        /// AddBooking- a method used to insert a booking into the database
+        /// a method used to insert a booking into the database
         /// </summary>
         /// <remarks>
-        /// Updated By:  Pat Banks -2015/02/19
-        /// exception  handling if add wasn't successful
+        /// Pat Banks
+        /// Updated:  2015/02/19
+        /// exception handling if add wasn't successful
         /// Pat Banks
         /// Updated:  2015/04/25
         /// SP also updates the Current Number of guests based on the total number of bookings for that Item ID
         /// </remarks>
         /// <param name="toAdd">input- a Booking object to be inserted</param>
-        /// <returns>Output is the number of rows affected by the insert</returns>
+        /// <returns>Output is the number of rows affected by the insert;  2 is considered a success
+        /// One row updated for the booking and one for the ItemListing CurrentNumGuests
+        /// </returns>
         public static int AddBooking(Booking toAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -187,8 +189,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        ///
-        /// getBooking- a method used to select a specified booking record from the database
+        /// used to select a specified booking record from the database
         /// </summary>
         /// <remarks>
         /// Tony Noel
@@ -251,13 +252,12 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        ///
-        /// UpdateBooking- a method used to update a booking in the database, allows only four booking fields to be updated:
-        /// Quantity, Refund, Cancel
+        /// updates a booking in the database
         /// </summary>
         /// <remarks>
         /// Tony Noel
         /// Updated: 2015/03/02
+        /// Added discount, extended price, ticket price and total charge fields.
         /// 
         /// Pat Banks
         /// Updated:  2015/04/25
@@ -314,7 +314,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Matt Lapka
         /// Created 2015/04/14
-        /// Gets Booking numbers from database for specific event listing
+        /// Gets Booking numbers from database for specific event listing 
         /// </summary>
         /// <param name="itemListID"></param>
         /// <returns></returns>
@@ -365,7 +365,6 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Pat Banks
         /// Created:  2015/04/14
-        /// 
         /// Verifies the hotel guest pin to sign up for an item listing and create a booking
         /// </summary>
         /// <param name="inPIN"></param>

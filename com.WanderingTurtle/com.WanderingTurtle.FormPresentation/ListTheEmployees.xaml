@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvEmployeesList" d:DataContext="{d:DesignInstance common:Employee }">
+        <DataGrid Grid.Row="0" x:Name="LvEmployeesList" d:DataContext="{d:DesignInstance common:Employee }">
             <DataGrid.Columns>
                 <DataGridTextColumn Width ="*" Header="Employee ID" Binding="{Binding EmployeeID}" />
                 <DataGridTextColumn Width ="*" Header="First Name"  Binding="{Binding FirstName}" />
@@ -25,17 +25,17 @@
             </DataGrid.RowStyle>
         </DataGrid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="btnAddEmployee"    Content="Add Employee"    Click="btnAddEmployee_Click" />
-            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="btnUpdateEmployee" Content="Update Employee" Click="btnUpdateEmployee_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvEmployeesList}" />
-            <TextBox Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="txtEmployeeSearch" TextWrapping="Wrap" TextChanged="txtEmployeeSearch_TextChanged" Style="{DynamicResource SearchTextBox.Inline}" />
-            <Button  Grid.Column="3" x:Name ="btnSearchEmployee" Content="Refresh List" Click="btnSearchEmployee_Click" />
+            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="BtnAddEmployee"    Content="Add Employee"    Click="btnAddEmployee_Click" />
+            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="BtnUpdateEmployee" Content="Update Employee" Click="btnUpdateEmployee_Click" IsEnabled="{Binding SelectedItems.Count, ElementName=LvEmployeesList}" />
+            <TextBox Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="TxtEmployeeSearch" TextWrapping="Wrap" TextChanged="txtEmployeeSearch_TextChanged" Style="{DynamicResource SearchTextBox.Inline}" />
+            <Button  Grid.Column="3" x:Name ="BtnSearchEmployee" Content="Refresh List" Click="btnSearchEmployee_Click" />
         </Grid>
     </Grid>
 </UserControl>

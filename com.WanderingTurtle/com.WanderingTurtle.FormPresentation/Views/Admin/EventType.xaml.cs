@@ -1,36 +1,31 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
-using System.Windows.Controls;
 using com.WanderingTurtle.FormPresentation.Models;
-using com.WanderingTurtle.Common;
-using System.Collections.Generic;
 using MahApps.Metro.Controls.Dialogs;
 using System;
-using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
-using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
+using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation.Views.Admin
 {
     /// <summary>
     /// Interaction logic for EventType.xaml
     /// </summary>
-    internal partial class EventType : UserControl
+    internal partial class EventType
     {
-        private EventManager _eventManager = new EventManager();
+        private readonly EventManager _eventManager = new EventManager();
         private EventManager.EventResult _result;
 
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Initializes the eventType admin ui
         /// </summary>
         public EventType()
         {
             InitializeComponent();
-            FillComboBox();         
+            FillComboBox();
         }
 
         /// <summary>
@@ -42,13 +37,13 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         {
             try
             {
-                cboArchiveEvent.ItemsSource = _eventManager.RetrieveEventTypeList();
-                cboArchiveEvent.DisplayMemberPath = "EventName";
-                cboArchiveEvent.SelectedValuePath = "EventTypeID";
+                CboArchiveEvent.ItemsSource = _eventManager.RetrieveEventTypeList();
+                CboArchiveEvent.DisplayMemberPath = "EventName";
+                CboArchiveEvent.SelectedValuePath = "EventTypeID";
 
-                cboEditEvent.ItemsSource = DataCache._currentEventTypeList;
-                cboEditEvent.DisplayMemberPath = "EventName";
-                cboEditEvent.SelectedValuePath = "EventTypeID";
+                CboEditEvent.ItemsSource = DataCache._currentEventTypeList;
+                CboEditEvent.DisplayMemberPath = "EventName";
+                CboEditEvent.SelectedValuePath = "EventTypeID";
             }
             catch (Exception ex)
             {
@@ -66,7 +61,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="message"></param>
         /// <param name="title"></param>
         /// <returns>error message</returns>
-        private void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
+        private static void ShowInputErrorMessage(FrameworkElement component, string message, string title = null)
         {
             throw new InputValidationException(component, message, title);
         }
@@ -103,7 +98,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Sends the eventType that user wants to archive to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
         /// </summary>
@@ -111,34 +106,26 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnArchiveType_Click(object sender, RoutedEventArgs e)
         {
-            Common.EventType archiveEventType = (Common.EventType)cboArchiveEvent.SelectedItem;
+            var archiveEventType = (Common.EventType)CboArchiveEvent.SelectedItem;
 
-            try
-            {
-                _result = _eventManager.ArchiveAnEventType(archiveEventType);
+            _result = _eventManager.ArchiveAnEventType(archiveEventType);
 
-                if (_result.Equals(EventManager.EventResult.Success))
-                {
-                     await ShowMessage("Your Request was Processed Successfully", "Success");
-                     cboArchiveEvent.SelectedIndex = -1;                   
-                     FillComboBox();
-                }                
-                else
-                {
-                    await ShowMessage("Event type could not be updated.", "Error");
-                }
-            }
-            catch (Exception)
+            if (_result.Equals(EventManager.EventResult.Success))
             {
-                throw;
+                await ShowMessage("Your Request was Processed Successfully", "Success");
+                CboArchiveEvent.SelectedIndex = -1;
+                FillComboBox();
             }
-           
+            else
+            {
+                await ShowMessage("Event type could not be updated.", "Error");
+            }
         }
 
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Sends the eventType that user wants to edit to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
         /// </summary>
@@ -146,40 +133,33 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnEditType_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validator.ValidateString(txtEditEventType.Text))
+            if (!TxtEditEventType.Text.ValidateString())
             {
-                ShowInputErrorMessage(txtEditEventType, "Please enter a valid Event Type");
+                ShowInputErrorMessage(TxtEditEventType, "Please enter a valid Event Type");
             }
 
-            try
+            var oldEventType = (Common.EventType)CboEditEvent.SelectedItem;
+            var newEventType = new Common.EventType(oldEventType.EventTypeID, TxtEditEventType.Text);
+
+            _result = _eventManager.EditEventType(oldEventType, newEventType);
+
+            if (_result.Equals(EventManager.EventResult.Success))
             {
-                Common.EventType oldEventType = (Common.EventType)cboEditEvent.SelectedItem;
-                Common.EventType newEventType = new Common.EventType(oldEventType.EventTypeID, txtEditEventType.Text);
-
-                _result = _eventManager.EditEventType(oldEventType, newEventType);
-
-                if (_result.Equals(EventManager.EventResult.Success))
-                {
-                     await ShowMessage("Your Request was Processed Successfully", "Success");
-                     cboEditEvent.SelectedIndex = -1;
-                     txtEditEventType.Text = "";
-                     FillComboBox();
-                }                
-                else
-                {
-                    await ShowMessage("Event type could not be updated.", "Error");
-                }
+                await ShowMessage("Your Request was Processed Successfully", "Success");
+                CboEditEvent.SelectedIndex = -1;
+                TxtEditEventType.Text = "";
+                FillComboBox();
             }
-            catch (Exception)
-            {   
-                throw;
+            else
+            {
+                await ShowMessage("Event type could not be updated.", "Error");
             }
         }
 
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
-        /// 
+        ///
         /// Sends the eventType that user wants to edit to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
         /// </summary>
@@ -187,18 +167,18 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         /// <param name="e"></param>
         private async void btnAddType_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validator.ValidateString(txtAddEventType.Text))
+            if (!TxtAddEventType.Text.ValidateString())
             {
-                ShowInputErrorMessage(txtAddEventType, "Please enter a valid event type.  No spaces allowed.");
+                ShowInputErrorMessage(TxtAddEventType, "Please enter a valid event type.  No spaces allowed.");
             }
             try
             {
-                _result = _eventManager.AddNewEventType(txtAddEventType.Text);
+                _result = _eventManager.AddNewEventType(TxtAddEventType.Text);
 
                 if (_result.Equals(EventManager.EventResult.Success))
                 {
                     await ShowMessage("Your Request was Processed Successfully", "Success");
-                    txtAddEventType.Text = "";
+                    TxtAddEventType.Text = "";
                     FillComboBox();
                 }
                 else
@@ -208,8 +188,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
             }
             catch (Exception ex)
             {
-                ShowErrorMessage(ex.ToString(), null);
-                throw;
+                ShowErrorMessage(ex.Message, "Error Adding Event Type");
             }
         }
     }

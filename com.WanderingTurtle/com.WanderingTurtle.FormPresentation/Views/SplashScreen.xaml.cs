@@ -1,9 +1,13 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
+using MahApps.Metro;
 using System;
 using System.Configuration;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace com.WanderingTurtle.FormPresentation.Views
 {
@@ -14,22 +18,14 @@ namespace com.WanderingTurtle.FormPresentation.Views
     public partial class StartupScreen
     {
         /// <summary>
-        /// Temporary exception to handle user validation
-        /// </summary>
-        private Exception _exception;
-
-        /// <summary>
-        /// Temporary user for user validation
-        /// </summary>
-        private string _user;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="StartupScreen" /> class.
         /// </summary>
         public StartupScreen()
         {
             Globals.UserToken = null;
+            Application.Current.ChangeAppStyle(ThemeManager.GetAccent("Emerald"));
             InitializeComponent();
+            TxtUserName.Focus();
         }
 
         /// <summary>
@@ -38,38 +34,66 @@ namespace com.WanderingTurtle.FormPresentation.Views
         /// <param name="sender">The sender.</param>
         /// <param name="e">The e.</param>
         /// <exception cref="ApplicationException"></exception>
-        private async void BtnSignInClick(object sender, RoutedEventArgs e)
+        private void BtnSignInClick(object sender, RoutedEventArgs e)
+        {
+            Submit();
+        }
+
+        private void Submit()
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
-            { Globals.UserToken = new Common.Employee(100, "Debugger", null, 1); }
+            { Globals.UserToken = new Employee(100, "Debugger", null, 1); }
 
-            do
+            int userId;
+            if (!int.TryParse(TxtUserName.Text.Trim(), out userId))
             {
-                if (Globals.UserToken != null) { break; }
-                LoginDialogSettings settings = new LoginDialogSettings
-                {
-                    UsernameWatermark = "User ID",
-                    PasswordWatermark = "Password",
-                    NegativeButtonVisibility = Visibility.Visible,
-                    AffirmativeButtonText = "Log In",
-                    InitialUsername = _user
-                };
-                LoginDialogData result = await this.ShowLoginDialog("Enter your credentials.", "Authentication", settings);
-                if (result == null) { break; }
-                try
-                {
-                    int userId;
-                    if (!int.TryParse(result.Username, out userId)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.UsernameWatermark)); }
-                    _user = userId.ToString();
-                    if (string.IsNullOrWhiteSpace(result.Password)) { throw new ApplicationException(string.Format("Please enter your {0}.", settings.PasswordWatermark)); }
-                    Globals.UserToken = new EmployeeManager().GetEmployeeLogin(userId, result.Password);
-                    if (Globals.UserToken == null) { throw new ApplicationException("Error setting User Token"); }
-                    _exception = null;
-                }
-                catch (ApplicationException ex) { _exception = ex; }
-                if (_exception != null) { await this.ShowMessageDialog(_exception.Message, "Login Error"); }
-            } while (_exception != null);
-            if (Globals.UserToken != null) { this.GetMainWindow().MainContent.Content = new TabContainer(); }
+                throw new InputValidationException(TxtUserName, "Please enter your User ID.", "Login Error");
+            }
+
+            var password = TxtPassword.Password.Trim();
+            if (string.IsNullOrEmpty(password) || password.ValidatePassword())
+            {
+                throw new InputValidationException(TxtPassword, "Please enter your Password.", "Login Error");
+            }
+
+            try
+            {
+                TxtPassword.Clear();
+                Globals.UserToken = new EmployeeManager().GetEmployeeLogin(userId, password);
+            }
+            catch (ApplicationException ex)
+            {
+                throw new InputValidationException(TxtPassword, ex, "Login Error");
+            }
+
+            if (Globals.UserToken == null)
+            {
+                throw new WanderingTurtleException(this, "Error setting User Token");
+            }
+
+            this.GetWindow<MainWindow>().BtnSignOut.Visibility = Visibility.Visible;
+            this.GetWindow<MainWindow>().MainContent.Content = new TabContainer();
+        }
+
+        private void TxtInput_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            var @textBox = sender as TextBoxBase;
+            if (@textBox != null) { @textBox.SelectAll(); }
+            else
+            {
+                var @passwordBox = sender as PasswordBox;
+                if (@passwordBox != null) { @passwordBox.SelectAll(); }
+            }
+        }
+
+        private void TxtInput_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Return:
+                    Submit();
+                    break;
+            }
         }
     }
 }

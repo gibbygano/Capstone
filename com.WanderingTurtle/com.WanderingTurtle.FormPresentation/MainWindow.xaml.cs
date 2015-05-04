@@ -45,7 +45,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created 2015/03/13
-        /// 
+        ///
         /// Shows a message box stating the there isn't a connection to the database
         /// </summary>
         /// <param name="ex"></param>
@@ -69,6 +69,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void BtnSignOut_Click(object sender, RoutedEventArgs e)
         {
+            BtnSignOut.Visibility = Visibility.Collapsed;
             StartUp();
         }
     }

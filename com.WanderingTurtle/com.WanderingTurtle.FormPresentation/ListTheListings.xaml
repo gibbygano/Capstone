@@ -10,7 +10,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="lvListing" d:DataContext="{d:DesignInstance common:ItemListing }">
+        <DataGrid Grid.Row="0" x:Name="LvListing" d:DataContext="{d:DesignInstance common:ItemListing }">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto"  Header="ID"              Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width="*" Header="Supplier"            Binding="{Binding SupplierName}" />
@@ -29,7 +29,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="{DynamicResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -37,11 +37,12 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="btnAddListing"     Content="Add Listing"     Click="btnAddListing_Click" />
-            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="btnEditListing"    Content="Edit Listing"    Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
-            <Button  Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="btnArchiveListing" Content="Archive Listing" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=lvListing}" />
-            <TextBox Grid.Column="3" Margin="{StaticResource Spacing.Right}" x:Name="txtSearchListing"  TextWrapping="Wrap" TextChanged="txtSearchListing_TextChanged" Style="{DynamicResource SearchTextBox}" />
-            <Button  Grid.Column="4" x:Name="btnSearchListing" Content="Refresh List" Click="btnSearchListing_Click" />
+            <Button  Grid.Column="0" Margin="{StaticResource Spacing.Right}" x:Name="BtnAddListing"     Content="Add Listing"     Click="btnAddListing_Click" />
+            <Button  Grid.Column="1" Margin="{StaticResource Spacing.Right}" x:Name="BtnEditListing"    Content="Edit Listing"    Click="btnEditListing_click"    IsEnabled="{Binding SelectedItems.Count, ElementName=LvListing}" />
+
+            <Button  Grid.Column="2" Margin="{StaticResource Spacing.Right}" x:Name="BtnArchiveListing" Content="Archive Listing" Click="btnArchiveListing_click" IsEnabled="{Binding SelectedItems.Count, ElementName=LvListing}" />
+            <TextBox Grid.Column="3" Margin="{StaticResource Spacing.Right}" x:Name="TxtSearchListing"  TextWrapping="Wrap" TextChanged="txtSearchListing_TextChanged" Style="{DynamicResource SearchTextBox}" />
+            <Button  Grid.Column="4" x:Name="BtnSearchListing" Content="Refresh List" Click="btnSearchListing_Click" />
         </Grid>
     </Grid>
 </UserControl>

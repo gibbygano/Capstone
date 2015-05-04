@@ -10,11 +10,13 @@ namespace com.WanderingTurtle.DataAccess
         public SupplierLoginAccessor()
         { }
 
-        /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
+        /// <summary>]
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
         /// </summary>
         /// <remarks>
-        /// Updated by Rose Steffensmeier 2015/04/13
+        /// Rose Steffensmeier
+        /// Updated: 2015/04/13
         /// Added new parameter for input, uncommented Exception catch.
         /// </remarks>
         /// <param name="userPassword">The password for the supplier.</param>
@@ -68,10 +70,12 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
         /// </summary>
         /// <remarks>
-        /// Updated by Rose Steffensmeier 2015/04/13
+        /// Rose Steffensmeier
+        /// Updated 2015/04/13
         /// Added new paramenter
         /// </remarks>
         /// <param name="userName">The username the supplier wants.</param>
@@ -110,6 +114,14 @@ namespace com.WanderingTurtle.DataAccess
         }
 
 
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
+        /// Updates a supplier's password
+        /// </summary>
+        /// <param name="newPassword"></param>
+        /// <param name="oldLogin"></param>
+        /// <returns>number of rows affected</returns>
         public int UpdateSupplierPassword(string newPassword, SupplierLogin oldLogin)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -144,6 +156,13 @@ namespace com.WanderingTurtle.DataAccess
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/15
+        /// Checks if user name is in use or has ever been in use
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>Returns true if the suggested userName is valid; False if the userName is/was in use</returns>
         public bool CheckUserName(string userName)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -181,6 +200,13 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created: 2015/04/25
+        /// Retrieves the supplierLogin information
+        /// </summary>
+        /// <param name="supplierID"></param>
+        /// <returns>Username found SupplierLogin table</returns>
         public string RetrieveSupplierUserNameByID(int supplierID)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -218,8 +244,13 @@ namespace com.WanderingTurtle.DataAccess
             }
         }
 
-        //Bryan Hurst 4/23/2015
-        //Method for the deletion of test login records in the database
+        /// <summary>
+        /// Bryan Hurst 
+        /// Created:  2015/04/23
+        /// Method for the deletion of test login records in the database
+        /// </summary>
+        /// <param name="supplierLoginToDelete"></param>
+        /// <returns>number of rows affected</returns>
         public static int DeleteTestSupplierLogin(SupplierLogin supplierLoginToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

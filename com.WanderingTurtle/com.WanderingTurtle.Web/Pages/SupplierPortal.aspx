@@ -102,10 +102,12 @@
                         <label>To:</label>
                         <input type="text" name="dateTo" id="eventEnd" />
                     </div>
+                   
                     <div style="float: left">
                         <label>&nbsp;</label>
                         <asp:Button ID="btnRefreshDate" runat="server" Text="Refresh List" OnClick="btnRefreshDate_Click" />  
                     </div>
+                     <asp:Label ID="lblDateError" CssClass="dontPrint" runat="server" Text="" BorderStyle="NotSet" ForeColor="#CC0000"></asp:Label>
                 </div>
                 <div style="float: left">
                     <% 
@@ -182,4 +184,10 @@
 
 
     </div>
+    <div id="otherMessage" title="Message" style="display: none;">
+            <div class="errorMsg">
+                <asp:Label ID="lblMessage" runat="server" Text="" ForeColor="#FFFFFF"></asp:Label>
+                <br />
+            </div>
+        </div>
 </asp:Content>

@@ -179,7 +179,13 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/26
+        /// Added logic to determine if an event can be archived
+        /// </summary>
+        /// <param name="eventID"></param>
+        /// <returns></returns>
         public ResultsArchive CheckToArchiveEvent(int eventID)
         {
             List<ItemListing> list = RetrieveItemListingList();
@@ -212,6 +218,13 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/15
+        /// Searches for a string the user inputs
+        /// </summary>
+        /// <param name="inSearch"></param>
+        /// <returns></returns>
         public List<ItemListing> SearchItemLists(string inSearch)
         {
             if (!inSearch.Equals("") && !inSearch.Equals(null))

@@ -54,7 +54,7 @@ namespace com.WanderingTurtle.Tests
         public void TestSupplierLoginManageGet()
         {
             setup();
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "Test");
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "Test");
             Assert.AreEqual("Test", retrieveSupplier.UserName);
         }
 
@@ -62,14 +62,14 @@ namespace com.WanderingTurtle.Tests
         public void TestSupplierUserNameGet()
         {
             setup();
-            Assert.AreEqual("Test", access.retrieveSupplierUserName(suppID));
+            Assert.AreEqual("Test", access.RetrieveSupplierUserName(suppID));
         }
 
         [TestMethod]
         public void TestSupplierLoginUpdate()
         {
             setup();
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "Test");
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "Test");
             Assert.AreEqual(ResultsEdit.Success, access.UpdateSupplierLogin("Password#2", retrieveSupplier));
         }
 
@@ -77,7 +77,7 @@ namespace com.WanderingTurtle.Tests
         public void TestLoginUpdateFail()
         {
             setup();
-            retrieveSupplier = access.retrieveSupplierLogin("Password#1", "Test");
+            retrieveSupplier = access.RetrieveSupplierLogin("Password#1", "Test");
             retrieveSupplier.UserName = "Tested";
 
             Assert.AreEqual(ResultsEdit.DatabaseError, access.UpdateSupplierLogin("Password#2", retrieveSupplier));

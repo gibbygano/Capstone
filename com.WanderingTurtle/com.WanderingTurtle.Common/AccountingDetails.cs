@@ -87,25 +87,26 @@ namespace com.WanderingTurtle.Common
     }
 
 
-    public class AccountingInvoiceDetails : InvoiceDetails
+    public class AccountingInvoiceDetails
     {
+        public InvoiceDetails InvoiceInformation { get; set; }
         public List<BookingDetails> Bookings { get; set; }
         public AccountingInvoiceDetails()
-            : base()
         {
             Bookings = new List<BookingDetails>();
         }
     }
 
-    public class AccountingSupplierListingDetails: Supplier
+    public class AccountingSupplierListingDetails
     {
         public List<ItemListingDetails> Items { get; set; }
+        public List<BookingDetails> Bookings { get; set; }
         public Supplier Vendor { get; set; }
 
         public AccountingSupplierListingDetails()
-            :base()
         {
             Items = new List<ItemListingDetails>();
+            Bookings = new List<BookingDetails>();
         }
     }
 }

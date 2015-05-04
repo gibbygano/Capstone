@@ -9,6 +9,10 @@ namespace com.WanderingTurtle.Web.Pages
     /// <summary>
     /// Web facing form for Suppliers to add a new Event.
     /// Created by: Kelsey Blount 2015/04/07
+    /// Updated: 2015/05/01
+    /// Added jQuery Autocomplete to Zip Code field
+    /// Updated: 2015/05/03 by Matt Lapka
+    /// Added jQuery dialog messages
     /// </summary>
     public partial class SupplierApplicationPage : System.Web.UI.Page
     {
@@ -28,7 +32,8 @@ namespace com.WanderingTurtle.Web.Pages
                 }
                 catch (Exception ex)
                 {
-                    lblError.Text = "There was an error loading Zip Code Information: " + ex.Message;
+                    lblMessage.Text = "There was an error loading Zip Code Information: " + ex.Message;
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 }
             }
         }
@@ -83,7 +88,7 @@ namespace com.WanderingTurtle.Web.Pages
             }
 
             if (validateText(txtDescription, "Please enter your description")) errorCount++;
-            if (!Validator.ValidateEmail(txtEmail.Text))
+            if (!txtEmail.Text.ValidateEmail())
             {
                 txtEmail.ToolTip = "Please enter a valid e-mail";
                 txtEmail.BorderColor = Color.Red;
@@ -94,7 +99,7 @@ namespace com.WanderingTurtle.Web.Pages
                 txtEmail.ToolTip = "";
                 txtEmail.BorderColor = Color.Empty;
             }
-            if (!Validator.ValidatePhone(txtPhoneNumber.Text))
+            if (!txtPhoneNumber.Text.ValidatePhone())
             {
                 txtPhoneNumber.ToolTip = "Please enter a valid phone number";
                 txtPhoneNumber.BorderColor = Color.Red;
@@ -123,7 +128,7 @@ namespace com.WanderingTurtle.Web.Pages
 
                     if (result==SupplierResult.Success)
                     {
-                        showError("Record added");
+                        showError("Thank you for your Application!<br /> We will be in contact once we have reviewed the information. ");
                         clearForm();
                     }
 
@@ -150,7 +155,8 @@ namespace com.WanderingTurtle.Web.Pages
         private void showError(String message) 
         {
             _errorMessage = message;
-            lblError.Text = _errorMessage;
+            lblMessage.Text = _errorMessage;
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
         }
     }
 }

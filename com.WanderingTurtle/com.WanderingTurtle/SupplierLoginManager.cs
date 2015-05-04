@@ -7,16 +7,30 @@ namespace com.WanderingTurtle.BusinessLogic
 {
     public class SupplierLoginManager
     {
-        private SupplierLoginAccessor access = new SupplierLoginAccessor();
+        private SupplierLoginAccessor _access = new SupplierLoginAccessor();
 
+
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
+        /// Added ability for a supplier to login
+        /// </summary>
         public SupplierLoginManager()
         { }
 
-        public SupplierLogin retrieveSupplierLogin(string userPassword, string userName)
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
+        /// Retrieves supplier login by username and password
+        /// </summary>
+        /// <param name="userPassword"></param>
+        /// <param name="userName"></param>
+        /// <returns>SupplierLogin object</returns>
+        public SupplierLogin RetrieveSupplierLogin(string userPassword, string userName)
         {
             try
             {
-                return access.RetrieveSupplierLogin(userPassword, userName);
+                return _access.RetrieveSupplierLogin(userPassword, userName);
             }
             catch (SqlException)
             {
@@ -28,11 +42,16 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
-        public string retrieveSupplierUserName(int supplierID)
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
+        /// Retrieves a suppler userName based on the supplier ID
+        /// </summary>
+        public string RetrieveSupplierUserName(int supplierID)
         {
             try
             {
-                return access.RetrieveSupplierUserNameByID(supplierID);
+                return _access.RetrieveSupplierUserNameByID(supplierID);
             }
             catch (SqlException)
             {
@@ -44,6 +63,14 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Rose Steffensmeier
+        /// Created:  2015/04/03
+        /// Updates a supplierLogin information with a new password
+        /// </summary>
+        /// <param name="newPassword"></param>
+        /// <param name="oldLogin"></param>
+        /// <returns></returns>
         public ResultsEdit UpdateSupplierLogin(string newPassword, SupplierLogin oldLogin)
         {
             try
@@ -53,7 +80,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 if (!result1)
                 {
-                    int result = access.UpdateSupplierPassword(newPassword, oldLogin);
+                    int result = _access.UpdateSupplierPassword(newPassword, oldLogin);
 
                     return result == 1 ? ResultsEdit.Success : ResultsEdit.ChangedByOtherUser;
                 }
@@ -69,11 +96,18 @@ namespace com.WanderingTurtle.BusinessLogic
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/13
+        /// Checks if a supplier username is in use
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
         public bool CheckSupplierUserName(string userName)
         {
             try
             {
-                return access.CheckUserName(userName);
+                return _access.CheckUserName(userName);
             }
             catch (SqlException)
             {

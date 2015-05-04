@@ -14,8 +14,10 @@
 
         public string EventName { get; set; }
 
-        //Bryan Hurst Feb.19
-        //Object for the creation of EventType objects with set data fields
+        /// <summary>
+        /// Bryan Hurst Feb.19
+        /// Object for the creation of EventType objects with set data fields
+        /// </summary>
         public int EventTypeID { get; set; }
     }
 }

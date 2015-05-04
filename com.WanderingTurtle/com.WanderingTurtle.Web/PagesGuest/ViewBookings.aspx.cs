@@ -29,7 +29,7 @@ namespace com.WanderingTurtle.Web.PagesGuest
         {
             lblError.Visible = false;
             BookingManager hgm = new BookingManager();
-            if (Validator.ValidateAlphaNumeric(txtLogin.Text, 6, 6))
+            if (txtLogin.Text.ValidateAlphaNumeric(6, 6))
             {
                 try
                 {
@@ -67,7 +67,7 @@ namespace com.WanderingTurtle.Web.PagesGuest
             }
             else
             {
-                lblError.Text = "The pin you enterred was not formatted correctly.  It must be 5 alphanumeric characters.";
+                lblError.Text = "The pin you enterred was not formatted correctly.  It must be 6 alphanumeric characters.";
                 lblError.Visible = true;
             }
         }

@@ -15,7 +15,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListSuppliers : IDataGridContextMenu
     {
-        private SupplierManager _supplierManager = new SupplierManager();
+        private readonly SupplierManager _supplierManager = new SupplierManager();
         private List<Supplier> _suppliers;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             FillList();
 
-            lvSuppliersList.SetContextMenu(this);
+            LvSuppliersList.SetContextMenu(this);
         }
 
         /// <exception cref="WanderingTurtleException"/>
@@ -88,7 +88,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                Supplier supplierToDelete = (Supplier)lvSuppliersList.SelectedItems[0];
+                Supplier supplierToDelete = (Supplier)LvSuppliersList.SelectedItems[0];
                 MessageDialogResult result =
                     await
                         this.ShowMessageDialog("Are you sure you want to delete?", "Confirm Delete",
@@ -117,10 +117,10 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                lvSuppliersList.ItemsSource = null;
+                LvSuppliersList.ItemsSource = null;
                 _suppliers = _supplierManager.RetrieveSupplierList();
-                lvSuppliersList.Items.Clear();
-                lvSuppliersList.ItemsSource = _suppliers;
+                LvSuppliersList.Items.Clear();
+                LvSuppliersList.ItemsSource = _suppliers;
             }
             catch (Exception ex)
             {
@@ -173,7 +173,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                OpenSupplier(lvSuppliersList.SelectedItems[0] as Supplier);
+                OpenSupplier(LvSuppliersList.SelectedItems[0] as Supplier);
             }
             catch (Exception ex)
             {
@@ -188,14 +188,14 @@ namespace com.WanderingTurtle.FormPresentation
 
         private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)
         {
-            var myList = _supplierManager.searchSupplier(txtSearchSupplier.Text);
-            lvSuppliersList.ItemsSource = myList;
-            lvSuppliersList.Items.Refresh();
+            var myList = _supplierManager.searchSupplier(TxtSearchSupplier.Text);
+            LvSuppliersList.ItemsSource = myList;
+            LvSuppliersList.Items.Refresh();
         }
 
         private void txtSearchSupplier_TextChanged(object sender, TextChangedEventArgs e)
         {
-            btnSearchSupplier.Content = txtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";
+            BtnSearchSupplier.Content = TxtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";
         }
     }
 }

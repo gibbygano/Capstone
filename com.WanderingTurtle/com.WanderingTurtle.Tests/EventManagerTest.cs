@@ -60,7 +60,7 @@ namespace com.WanderingTurtle.Tests
         {
             setup();
             Assert.AreEqual(myMan.AddNewEvent(toTest), EventManager.EventResult.Success);
-            myMan.deleteTestEvent(toTest);
+            myMan.DeleteTestEvent(toTest);
         }
 
         [TestMethod]
@@ -107,7 +107,7 @@ namespace com.WanderingTurtle.Tests
             var result = myMan.RetrieveEvent(toTest.EventItemID.ToString());
 
             Assert.AreEqual(expected, result, "objects do not match");
-            myMan.deleteTestEvent(toTest);
+            myMan.DeleteTestEvent(toTest);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace com.WanderingTurtle.Tests
             myMan.AddNewEvent(toTest);
             toTestUpdate();
             Assert.AreEqual(EventManager.EventResult.Success, myMan.EditEvent(toTest, toTest2), "method failed");
-            myMan.deleteTestEvent(toTest);
+            myMan.DeleteTestEvent(toTest);
         }
 
         /*

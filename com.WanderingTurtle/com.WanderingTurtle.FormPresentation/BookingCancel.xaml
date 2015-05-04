@@ -1,8 +1,8 @@
-﻿<Metro:MetroWindow
+﻿<metro:MetroWindow
         x:Class="com.WanderingTurtle.FormPresentation.CancelBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
         Title="Cancel Booking" Height="300" Width="500"
         WindowStartupLocation="CenterScreen">
@@ -32,20 +32,20 @@
                 <Label  Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Right" Content="Event Name:" />
                 <Label  Grid.Column="0" Grid.Row="2" HorizontalContentAlignment="Right" Content="Quantity:" />
                 <Label  Grid.Column="0" Grid.Row="3" HorizontalContentAlignment="Right" Content="Ticket Price:" />
-                <Label  Grid.Row="0" Grid.Column="1" x:Name="lblGuestName" />
-                <Label  Grid.Row="1" Grid.Column="1" x:Name="lblEventName" />
-                <Label  Grid.Row="2" Grid.Column="1" x:Name="lblQuantity" />
-                <Label  Grid.Row="3" Grid.Column="1" x:Name="lblTicketPrice" />
+                <Label  Grid.Row="0" Grid.Column="1" x:Name="LblGuestName" />
+                <Label  Grid.Row="1" Grid.Column="1" x:Name="LblEventName" />
+                <Label  Grid.Row="2" Grid.Column="1" x:Name="LblQuantity" />
+                <Label  Grid.Row="3" Grid.Column="1" x:Name="LblTicketPrice" />
 
                 <Label  Grid.Row="0" Grid.Column="2" HorizontalContentAlignment="Right" Content="Booking ID:" />
                 <Label  Grid.Row="1" Grid.Column="2" HorizontalContentAlignment="Right" Content="Event Time:" />
                 <Label  Grid.Row="2" Grid.Column="2" HorizontalContentAlignment="Right" Content="Discount:" />
                 <Label  Grid.Row="3" Grid.Column="2" HorizontalContentAlignment="Right" Content="Total Due:" />
-                <Label  Grid.Row="0" Grid.Column="3" x:Name="lblBookingID" />
-                <Label  Grid.Row="1" Grid.Column="3" x:Name="lblEventTime" />
-                <Label  Grid.Row="2" Grid.Column="3" x:Name="lblDiscount" />
-                <Label  Grid.Row="3" Grid.Column="3" x:Name="lblTotalDue" />
-                <Label  Grid.Row="4" Grid.Column="0" x:Name="lblCancelMessage" Grid.ColumnSpan="4" FontStyle="Italic" HorizontalContentAlignment="Center" />
+                <Label  Grid.Row="0" Grid.Column="3" x:Name="LblBookingId" />
+                <Label  Grid.Row="1" Grid.Column="3" x:Name="LblEventTime" />
+                <Label  Grid.Row="2" Grid.Column="3" x:Name="LblDiscount" />
+                <Label  Grid.Row="3" Grid.Column="3" x:Name="LblTotalDue" />
+                <Label  Grid.Row="4" Grid.Column="0" x:Name="LblCancelMessage" Grid.ColumnSpan="4" FontStyle="Italic" HorizontalContentAlignment="Center" />
             </Grid>
         </ScrollViewer>
         <Grid Grid.Row="2" Style="{StaticResource ButtonContainer}">
@@ -59,4 +59,4 @@
             <Separator Grid.Column="1" Style="{StaticResource ButtonSeparator}" />
         </Grid>
     </Grid>
-</Metro:MetroWindow>
+</metro:MetroWindow>

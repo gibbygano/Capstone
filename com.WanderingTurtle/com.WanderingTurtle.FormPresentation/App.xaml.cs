@@ -1,4 +1,5 @@
 ﻿using com.WanderingTurtle.FormPresentation.Models;
+using MahApps.Metro;
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -11,8 +12,14 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Current.ChangeAppStyle(ThemeManager.GetAccent("Emerald"));
+            base.OnStartup(e);
+        }
+
         private async void DispatcherUnhandledExceptionEventHandler(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // Prevent default unhandled exception processing

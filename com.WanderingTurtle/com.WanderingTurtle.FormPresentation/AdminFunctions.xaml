@@ -8,9 +8,11 @@
             <Setter Property="Margin" Value="0,10" />
         </Style>
     </UserControl.Resources>
-    <ScrollViewer>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <admin:EventType />
+            <Separator />
+            <admin:GenerateReport />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

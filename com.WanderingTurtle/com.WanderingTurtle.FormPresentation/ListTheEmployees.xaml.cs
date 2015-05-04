@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheEmployees : IDataGridContextMenu
     {
-        private EmployeeManager _employeeManager = new EmployeeManager();
+        private readonly EmployeeManager _employeeManager = new EmployeeManager();
         private List<Employee> _employeeList;
 
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
@@ -27,9 +27,16 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             RefreshEmployeeList();
 
-            lvEmployeesList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
+            LvEmployeesList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// Logic for context menus
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
@@ -54,11 +61,10 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/04/18
-        /// 
+        ///
         /// Opens employee UI as read only or with edit capability
         /// </summary>
         /// <param name="selectedItem"></param>
@@ -108,7 +114,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <param name="e"></param>
         private void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
         {
-            OpenEmployee(lvEmployeesList.SelectedItem as Employee);
+            OpenEmployee(LvEmployeesList.SelectedItem as Employee);
         }
 
         /// <summary>
@@ -133,13 +139,13 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         private void RefreshEmployeeList()
         {
-            lvEmployeesList.ItemsPanel.LoadContent();
+            LvEmployeesList.ItemsPanel.LoadContent();
 
             try
             {
                 _employeeList = _employeeManager.FetchListEmployees();
-                lvEmployeesList.ItemsSource = _employeeList;
-                lvEmployeesList.Items.Refresh();
+                LvEmployeesList.ItemsSource = _employeeList;
+                LvEmployeesList.Items.Refresh();
             }
             catch (Exception ex)
             {
@@ -150,7 +156,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Justin Pennington
         /// Created:  2015/04/14
-        /// 
+        ///
         /// Searches for an employee
         /// </summary>
         /// <param name="sender"></param>
@@ -158,27 +164,27 @@ namespace com.WanderingTurtle.FormPresentation
         private void txtEmployeeSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             //Yes for some reason this is required
-            if (btnSearchEmployee == null)
+            if (BtnSearchEmployee == null)
             {
-                btnSearchEmployee = new Button();
+                BtnSearchEmployee = new Button();
             }
 
-            btnSearchEmployee.Content = txtEmployeeSearch.Text.Length == 0 ? "Refresh List" : "Search";
+            BtnSearchEmployee.Content = TxtEmployeeSearch.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
         /// <summary>
         /// Justin Pennington
         /// Created:  2015/04/14
-        /// 
+        ///
         /// Searches for an employee
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnSearchEmployee_Click(object sender, RoutedEventArgs e)
         {
-            var myList = _employeeManager.SearchEmployee(txtEmployeeSearch.Text);
-            lvEmployeesList.ItemsSource = myList;
-            lvEmployeesList.Items.Refresh();
+            var myList = _employeeManager.SearchEmployee(TxtEmployeeSearch.Text);
+            LvEmployeesList.ItemsSource = myList;
+            LvEmployeesList.Items.Refresh();
         }
     }
 }

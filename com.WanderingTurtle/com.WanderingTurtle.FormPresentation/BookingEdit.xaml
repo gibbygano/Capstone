@@ -1,9 +1,8 @@
-﻿<Metro:MetroWindow
+﻿<metro:MetroWindow
         x:Class="com.WanderingTurtle.FormPresentation.EditBooking"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         Style="{DynamicResource WindowStyle}"
         Title="Edit Booking" Height="350" Width="500"
         WindowStartupLocation="CenterScreen">
@@ -36,26 +35,26 @@
                 <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Event Start Date:" />
                 <Label Grid.Row="3" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Quantity:" />
                 <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right"  Content="Discount:" />
-                <Label Grid.Row="0" Grid.Column="1" x:Name="lblEditBookingGuestName" Grid.ColumnSpan="2" />
-                <Label Grid.Row="1" Grid.Column="1" x:Name="lblEventName" Grid.ColumnSpan="2" />
-                <Label Grid.Row="2" Grid.Column="1" x:Name="lblStartDate" />
-                <Metro:NumericUpDown Grid.Row="3" Grid.Column="1" Value="0" Minimum="0" Name="udAddBookingQuantity" />
-                <Metro:NumericUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" StringFormat="P0" Name="udDiscount" Interval=".01" />
+                <Label Grid.Row="0" Grid.Column="1" x:Name="LblEditBookingGuestName" Grid.ColumnSpan="2" />
+                <Label Grid.Row="1" Grid.Column="1" x:Name="LblEventName" Grid.ColumnSpan="2" />
+                <Label Grid.Row="2" Grid.Column="1" x:Name="LblStartDate" />
+                <metro:NumericUpDown Grid.Row="3" Grid.Column="1" Value="0" Minimum="0" Name="UdAddBookingQuantity" />
+                <metro:NumericUpDown Grid.Row="4" Grid.Column="1" Value="3" Minimum="0" Maximum =".20" StringFormat="P0" Name="UdDiscount" Interval=".01" />
                 <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Quantity Seats Available:" />
-                    <Label Grid.Column="1" x:Name="lblAvailSeats" />
+                    <Label Grid.Column="1" x:Name="LblAvailSeats" />
                 </Grid>
 
                 <Label Grid.Row="4" Grid.Column="2" HorizontalContentAlignment="Right" Content="Ticket Price:" />
                 <Label Grid.Row="5" Grid.Column="2" HorizontalContentAlignment="Right" Content="Total Due:" />
-                <Label Grid.Row="4" Grid.Column="3" x:Name="lblTicketPrice" />
-                <Label Grid.Row="5" Grid.Column="3" x:Name="lblTotalDue" />
+                <Label Grid.Row="4" Grid.Column="3" x:Name="LblTicketPrice" />
+                <Label Grid.Row="5" Grid.Column="3" x:Name="LblTotalDue" />
 
-                <Button Grid.Row="3" Grid.Column="3" x:Name="btnCalculateTicketPrice" Content="Re-calculate" Click="btnCalculateTicketPrice_Click" Margin="{DynamicResource Spacing.Container}" />
+                <Button Grid.Row="3" Grid.Column="3" x:Name="BtnCalculateTicketPrice" Content="Re-calculate Cost" Click="btnCalculateTicketPrice_Click" Margin="{DynamicResource Spacing.Container}" />
             </Grid>
         </ScrollViewer>
         <Grid Grid.Row="2" Style="{StaticResource ButtonContainer}">
@@ -64,9 +63,9 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="btnSubmit" Content="Submit" Click="btnSubmitBooking_Click" VerticalAlignment="Center" />
-            <Button Grid.Column="2" x:Name="btnCancel" Content="Cancel" Click="btnCancel_Click"  VerticalAlignment="Center" />
+            <Button Grid.Column="0" x:Name="BtnSubmit" Content="Submit" Click="btnSubmitBooking_Click" VerticalAlignment="Center" />
+            <Button Grid.Column="2" x:Name="BtnCancel" Content="Cancel" Click="btnCancel_Click"  VerticalAlignment="Center" />
             <Separator Grid.Column="1" Style="{StaticResource ButtonSeparator}" />
         </Grid>
     </Grid>
-</Metro:MetroWindow>   
+</metro:MetroWindow>   

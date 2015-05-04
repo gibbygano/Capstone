@@ -9,7 +9,6 @@ namespace com.WanderingTurtle.FormPresentation
     /// <summary>
     /// Tony Noel
     /// Created: 2015/03/04
-    ///
     /// Interaction logic for CancelBooking.xaml
     /// </summary>
     public partial class CancelBooking
@@ -18,13 +17,12 @@ namespace com.WanderingTurtle.FormPresentation
 
         private InvoiceDetails CurrentInvoice { get; set; }
 
-        private decimal _cancelFee = 0m;
+        private decimal _cancelFee;
         private readonly BookingManager _bookingManager = new BookingManager();
 
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        ///
         /// A form used to cancel a booking. Displays the information about the booking.
         /// </summary>
         /// <param name="booking">Requires an input of a BookingDetails object
@@ -43,46 +41,42 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        ///
         /// Attempts to populate the UI and the Guest labels with text pertaining to the guest booking
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/08
-        ///
         /// Updated with new fields and formatting;  Moved fee calculation to BLL
         /// </remarks>
         private void PopulateText()
         {
             //populating with data from objects that opened the form
-            lblBookingID.Content = CurrentBooking.BookingID;
-            lblGuestName.Content = CurrentInvoice.GetFullName;
-            lblQuantity.Content = CurrentBooking.Quantity;
-            lblEventName.Content = CurrentBooking.EventItemName;
-            lblDiscount.Content = CurrentBooking.Discount.ToString("p");
-            lblEventTime.Content = CurrentBooking.StartDate;
-            lblTicketPrice.Content = CurrentBooking.TicketPrice.ToString("c");
-            lblTotalDue.Content = CurrentBooking.TotalCharge.ToString("c");
+            LblBookingId.Content = CurrentBooking.BookingID;
+            LblGuestName.Content = CurrentInvoice.GetFullName;
+            LblQuantity.Content = CurrentBooking.Quantity;
+            LblEventName.Content = CurrentBooking.EventItemName;
+            LblDiscount.Content = CurrentBooking.Discount.ToString("p");
+            LblEventTime.Content = CurrentBooking.StartDate;
+            LblTicketPrice.Content = CurrentBooking.TicketPrice.ToString("c");
+            LblTotalDue.Content = CurrentBooking.TotalCharge.ToString("c");
 
             _cancelFee = _bookingManager.CalculateCancellationFee(CurrentBooking);
-            lblCancelMessage.Content = "A fee of " + _cancelFee.ToString("c") + " will be charged to cancel this booking.";
+            LblCancelMessage.Content = "A fee of " + _cancelFee.ToString("c") + " will be charged to cancel this booking.";
         }
 
         /// <summary>
         /// Tony Noel
         /// Created: 2015/03/04
-        ///
         /// A method to cancel a booking.
         /// The object is then sent to the OrderManager-EditBooking method to be processed.
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated: 2015/03/08
-        ///
         /// Updated fields to reflect cancellation of booking
+        ///
         /// Pat Banks
         /// Updated: 2015/03/19
-        ///
         /// Moved logic to BookingManager - CancelBookingResults
         /// </remarks>
         /// <param name="sender"></param>
@@ -115,6 +109,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/23
+        /// Closes UI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCancelButton_Click(object sender, RoutedEventArgs e)
         {
             Close();

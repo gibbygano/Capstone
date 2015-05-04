@@ -1,8 +1,8 @@
-﻿<Metro:MetroWindow
+﻿<metro:MetroWindow
         x:Class="com.WanderingTurtle.FormPresentation.AddEditListing"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Style="{DynamicResource WindowStyle}"
         Title="ItemListings" Height="350" Width="500"
@@ -17,7 +17,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" x:Name="lblTitle" FontSize="16" FontWeight="Bold" Content="Event Listing" />
+            <Label Grid.Row="0" x:Name="LblTitle" FontSize="16" FontWeight="Bold" Content="Event Listing" />
             <ScrollViewer Grid.Row="1">
                 <Grid Margin="{DynamicResource Spacing.Container}">
                     <Grid.RowDefinitions>
@@ -42,18 +42,18 @@
                     <Label Grid.Row="4" Grid.Column="0" HorizontalContentAlignment="Right" Content="Start Date:" />
                     <Label Grid.Row="6" Grid.Column="0" HorizontalContentAlignment="Right" Content="End Date:" />
                     <Label Grid.Row="8" Grid.Column="0" HorizontalContentAlignment="Right" Content="Price (USD):" />
-                    <ComboBox            Grid.Row="0" Grid.Column="1" TabIndex="0" x:Name="eventCbox"    Grid.ColumnSpan="2" DisplayMemberPath="EventItemName" />
-                    <ComboBox            Grid.Row="2" Grid.Column="1" TabIndex="1" x:Name="supplierCbox" Grid.ColumnSpan="2" DisplayMemberPath="CompanyName" />
-                    <DatePicker          Grid.Row="4" Grid.Column="1" TabIndex="2" x:Name="dateStart" />
-                    <DatePicker          Grid.Row="6" Grid.Column="1" TabIndex="4" x:Name="dateEnd" />
-                    <Metro:NumericUpDown Grid.Row="8" Grid.Column="1" TabIndex="6" x:Name="udPrice" StringFormat="C2" Interval="5" />
+                    <ComboBox            Grid.Row="0" Grid.Column="1" TabIndex="0" x:Name="EventCbox"    Grid.ColumnSpan="2" DisplayMemberPath="EventItemName" />
+                    <ComboBox            Grid.Row="2" Grid.Column="1" TabIndex="1" x:Name="SupplierCbox" Grid.ColumnSpan="2" DisplayMemberPath="CompanyName" />
+                    <DatePicker          Grid.Row="4" Grid.Column="1" TabIndex="2" x:Name="DateStart" />
+                    <DatePicker          Grid.Row="6" Grid.Column="1" TabIndex="4" x:Name="DateEnd" />
+                    <metro:NumericUpDown Grid.Row="8" Grid.Column="1" TabIndex="6" x:Name="UdPrice" StringFormat="C2" Interval="5" />
 
                     <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Start Time:" />
                     <Label Grid.Row="6" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="End Time:" />
                     <Label Grid.Row="8" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Seats Available:" />
-                    <xctk:TimePicker     Grid.Row="4" Grid.Column="3" TabIndex="3" x:Name="tpStartTime" />
-                    <xctk:TimePicker     Grid.Row="6" Grid.Column="3" TabIndex="5" x:Name="tpEndTime" />
-                    <Metro:NumericUpDown Grid.Row="8" Grid.Column="3" TabIndex="6" x:Name="udSeats" Interval="5" Minimum="1" />
+                    <xctk:TimePicker     Grid.Row="4" Grid.Column="3" TabIndex="3" x:Name="TpStartTime" />
+                    <xctk:TimePicker     Grid.Row="6" Grid.Column="3" TabIndex="5" x:Name="TpEndTime" />
+                    <metro:NumericUpDown Grid.Row="8" Grid.Column="3" TabIndex="6" x:Name="UdSeats" Interval="5" Minimum="1" />
                 </Grid>
             </ScrollViewer>
         </Grid>
@@ -65,11 +65,11 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="btnSubmit" Click="btnSubmit_Click" />
-            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="btnReset"  Click="btnReset_Click" />
-            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="btnCancel" Click="btnCancel_Click" />
+            <Button Grid.Column="0" TabIndex="100" Content="Submit" x:Name="BtnSubmit" Click="btnSubmit_Click" />
+            <Button Grid.Column="2" TabIndex="101" Content="Reset"  x:Name="BtnReset"  Click="btnReset_Click" />
+            <Button Grid.Column="4" TabIndex="102" Content="Cancel" x:Name="BtnCancel" Click="btnCancel_Click" />
             <Separator Grid.Column="1" Style="{DynamicResource ButtonSeparator}" />
             <Separator Grid.Column="3" Style="{DynamicResource ButtonSeparator}" />
         </Grid>
     </Grid>
-</Metro:MetroWindow>
+</metro:MetroWindow>

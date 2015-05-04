@@ -86,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// The item to add already has a different logical parent.
         /// </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
-        /// <exception cref="WanderingTurtleException" />
+        /// <exception cref="WanderingTurtleException">Error assigning the context menu to the <paramref name="component"/></exception>
         public static FrameworkElement SetContextMenu(this FrameworkElement component, IDataGridContextMenu context, params DataGridContextMenuResult[] contextMenus)
         {
             try

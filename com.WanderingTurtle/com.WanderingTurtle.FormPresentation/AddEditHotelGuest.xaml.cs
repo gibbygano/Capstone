@@ -9,24 +9,21 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace com.WanderingTurtle.FormPresentation
 {
     /// <summary>
     /// Miguel Santana
     /// Created: 2015/02/16
-    ///
     /// Interaction logic for AddEditHotelGuest.xaml
     /// </summary>
     public partial class AddEditHotelGuest
     {
-        private HotelGuestManager _hotelGuestManager = new HotelGuestManager();
+        private readonly HotelGuestManager _hotelGuestManager = new HotelGuestManager();
 
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Create a New Hotel Guest
         /// </summary>
         public AddEditHotelGuest()
@@ -34,7 +31,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Title = "Add a new Guest";
             TxtRoomNumber.MaxLength = 4;
-            TxtGuestPIN.MaxLength = 6;
+            TxtGuestPin.MaxLength = 6;
             InitializeEverything();
         }
 
@@ -44,9 +41,9 @@ namespace com.WanderingTurtle.FormPresentation
         /// Edit an Existing Hotel Guest
         /// </summary>
         /// <param name="hotelGuest"></param>
-        /// <param name="ReadOnly">Make the form ReadOnly.</param>
+        /// <param name="readOnly">Make the form ReadOnly.</param>
         /// <exception cref="WanderingTurtleException">Occurs making components readonly.</exception>
-        public AddEditHotelGuest(HotelGuest hotelGuest, bool ReadOnly = false)
+        public AddEditHotelGuest(HotelGuest hotelGuest, bool readOnly = false)
         {
             InitializeComponent();
 
@@ -54,7 +51,7 @@ namespace com.WanderingTurtle.FormPresentation
             Title = String.Format("Editing Guest: {0}", CurrentHotelGuest.GetFullName);
             InitializeEverything();
 
-            if (ReadOnly) { WindowHelper.MakeReadOnly(Content as Panel, btnCancel); }
+            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
         }
 
         /// <summary>
@@ -65,12 +62,13 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created: 2015/02/16
-        ///
-        /// Updated 2015/04/13 by Tony Noel - Updated to comply with the ResultsEdit class of error codes.
-        ///
         /// Parameter marks whether a database command was successful
         /// </summary>
+        /// <remarks>
+        /// Tony Noel
+        /// Updated 2015/04/13
+        /// Updated to comply with the ResultsEdit class of error codes.
+        /// </remarks>
         public ResultsEdit Result { get; private set; }
 
         /// <summary>
@@ -109,20 +107,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
-        /// Opens the combobox on keyboard focus
-        /// </summary>
-        /// <param name="sender">System.Windows.Controls.ComboBox</param>
-        /// <param name="e"></param>
-        private void cboZip_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-        {
-            // ((ComboBox)sender).IsDropDownOpen = true;
-        }
-
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/02/16
-        ///
         /// Populates form with required information
         /// </summary>
         private void InitializeEverything()
@@ -134,7 +118,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Resets the values of the input fields
         /// </summary>
         private void ResetFields()
@@ -149,7 +132,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = null;
                 TxtEmailAddress.Text = null;
                 TxtRoomNumber.Text = null;
-                TxtGuestPIN.Text = _hotelGuestManager.GenerateRandomPIN();
+                TxtGuestPin.Text = _hotelGuestManager.GenerateRandomPIN();
             }
             else
             {
@@ -164,7 +147,7 @@ namespace com.WanderingTurtle.FormPresentation
                 TxtPhoneNumber.Text = phoneNumberMasked;
                 TxtEmailAddress.Text = CurrentHotelGuest.EmailAddress;
                 TxtRoomNumber.Text = CurrentHotelGuest.Room;
-                TxtGuestPIN.Text = CurrentHotelGuest.GuestPIN;
+                TxtGuestPin.Text = CurrentHotelGuest.GuestPIN;
             }
             TxtFirstName.Focus();
         }
@@ -172,7 +155,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/13
-        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="message"></param>
@@ -187,7 +169,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show Message Dialog
         /// </summary>
         /// <param name="component"></param>
@@ -200,7 +181,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///         /// Miguel Santana
+        /// Miguel Santana
         /// Created: 2015/04/13
         ///
         /// Show Message Dialog - overloaded
@@ -214,9 +195,8 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        ///  Miguel Santana
+        /// Miguel Santana
         /// Created: 2015/04/13
-        ///
         /// Show error Message Dialog - overloaded
         /// </summary>
         /// <param name="exception"></param>
@@ -229,12 +209,15 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Validate fields and submit data to HotelGuestManager
         /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/05
+        /// Added Room number field
+        /// Pat Banks
+        /// Updated:  2015/04/03
+        /// added guest pin field
         /// </remarks>
         private async void Submit()
         {
@@ -267,7 +250,7 @@ namespace com.WanderingTurtle.FormPresentation
                             TxtPhoneNumber.Text.Trim(),
                             TxtEmailAddress.Text.Trim(),
                             TxtRoomNumber.Text.Trim(),
-                            TxtGuestPIN.Text.Trim()
+                            TxtGuestPin.Text.Trim()
                         )
                     );
                 }
@@ -284,7 +267,7 @@ namespace com.WanderingTurtle.FormPresentation
                                 TxtPhoneNumber.Text.Trim(),
                                 TxtEmailAddress.Text.Trim(),
                                 TxtRoomNumber.Text.Trim(),
-                                TxtGuestPIN.Text.Trim()
+                                TxtGuestPin.Text.Trim()
                             )
                         );
                 }
@@ -322,20 +305,18 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Pat Banks
         /// Created 2015-04-24
-        /// 
         /// Used to generate a random PIN for a customer to access the website
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnGeneratePIN_Click(object sender, RoutedEventArgs e)
         {
-            TxtGuestPIN.Text = _hotelGuestManager.GenerateRandomPIN();
+            TxtGuestPin.Text = _hotelGuestManager.GenerateRandomPIN();
         }
 
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/18
-        ///
         /// Selects all on keyboard focus to allow for easier tabbing between fields
         /// </summary>
         /// <param name="sender">System.Windows.Controls.TextBox</param>
@@ -348,7 +329,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/02/16
-        ///
         /// Allows submitting the form by hitting enter on any field
         /// </summary>
         /// <param name="sender"></param>
@@ -364,28 +344,27 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/10
-        ///
         /// Runs validation on the input fields
         /// </summary>
         /// <returns>True if valid</returns>
         private bool Validate()
         {
-            if (!Validator.ValidateString(TxtFirstName.Text.Trim(), 1, 50))
+            if (!TxtFirstName.Text.Trim().ValidateString(1, 50))
             {
                 ShowInputErrorMessage(TxtFirstName, "Please enter a First Name");
                 return false;
             }
-            if (!Validator.ValidateString(TxtLastName.Text.Trim(), 1, 50))
+            if (!TxtLastName.Text.Trim().ValidateString(1, 50))
             {
                 ShowInputErrorMessage(TxtLastName, "Please enter a Last Name");
                 return false;
             }
-            if (!Validator.ValidateAlphaNumeric(TxtAddress1.Text.Trim(), 1, 255))
+            if (!TxtAddress1.Text.Trim().ValidateAlphaNumeric(1, 255))
             {
                 ShowInputErrorMessage(TxtAddress1, "Please enter an Address");
                 return false;
             }
-            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !Validator.ValidateAlphaNumeric(TxtAddress2.Text.Trim(), 0, 255))
+            if (!string.IsNullOrEmpty(TxtAddress2.Text.Trim()) && !TxtAddress2.Text.Trim().ValidateAlphaNumeric(0, 255))
             {
                 ShowInputErrorMessage(TxtAddress2, "Error adding Address2");
                 return false;
@@ -395,24 +374,24 @@ namespace com.WanderingTurtle.FormPresentation
                 ShowInputErrorMessage(CboZip, "Please select a Zip Code");
                 return false;
             }
-            if (!Validator.ValidatePhone(TxtPhoneNumber.Text.Trim()))
+            if (!TxtPhoneNumber.Text.Trim().ValidatePhone())
             {
                 ShowInputErrorMessage(TxtPhoneNumber, "Please enter a valid Phone Number");
                 return false;
             }
-            if (!Validator.ValidateEmail(TxtEmailAddress.Text.Trim()))
+            if (!TxtEmailAddress.Text.Trim().ValidateEmail())
             {
                 ShowInputErrorMessage(TxtEmailAddress, "Please enter a valid Email Address");
                 return false;
             }
-            if (!Validator.ValidateNumeric(TxtRoomNumber.Text.Trim()))
+            if (!TxtRoomNumber.Text.Trim().ValidateNumeric())
             {
                 ShowInputErrorMessage(TxtRoomNumber, "Please enter a valid Room Number");
                 return false;
             }
-            if (!Validator.ValidateAlphaNumeric(TxtGuestPIN.Text.Trim()) || TxtGuestPIN.Text.Length !=6)
+            if (!TxtGuestPin.Text.Trim().ValidateAlphaNumeric() || TxtGuestPin.Text.Length != 6)
             {
-                ShowInputErrorMessage(TxtGuestPIN, "Please enter a valid 6 digit alphanumeric PIN.");
+                ShowInputErrorMessage(TxtGuestPin, "Please enter a valid 6 digit alphanumeric PIN.");
                 return false;
             }
 
@@ -422,7 +401,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created: 2015/03/10
-        ///
         /// Checks to see if the fields have been changed
         /// </summary>
         /// <returns>True if valid</returns>
@@ -436,7 +414,7 @@ namespace com.WanderingTurtle.FormPresentation
                     && CurrentHotelGuest.PhoneNumber.Equals(TxtPhoneNumber.Text.Trim())
                     && CurrentHotelGuest.EmailAddress.Equals(TxtEmailAddress.Text.Trim())
                     && CurrentHotelGuest.Room.Equals(TxtRoomNumber.Text.Trim())
-                    && CurrentHotelGuest.GuestPIN.Equals(TxtGuestPIN.Text.Trim());
+                    && CurrentHotelGuest.GuestPIN.Equals(TxtGuestPin.Text.Trim());
         }
     }
 }

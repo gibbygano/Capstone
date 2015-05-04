@@ -435,5 +435,36 @@ namespace com.WanderingTurtle.Tests
                 conn.Close();
             }
         }
+
+        public static int DeleteEventTypeTest(EventType TestEventType)
+        {
+            var conn = DatabaseConnection.GetDatabaseConnection();
+            var cmdText = "spDeleteTestEventType";
+            var cmd = new SqlCommand(cmdText, conn);
+            var rowsAffected = 0;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@EventName", TestEventType.EventName);
+
+            try
+            {
+                conn.Open();
+                rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    throw new ApplicationException("Concurrency Violation");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return rowsAffected;  // needs to be rows affected
+        }
     }
 }

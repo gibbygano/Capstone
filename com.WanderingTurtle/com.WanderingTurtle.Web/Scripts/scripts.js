@@ -94,22 +94,85 @@ $(document).ready(function () {
         start: 0
     });
 
-    $('#account').hover(function () {
-        $('#accountOptions').slideToggle({
+    $('#account').on('mouseenter', function () {
+        $('#accountOptions').stop( true, true ).slideToggle({
 
         });
+       
+    });
+    $('#account').on('mouseleave', function () {
+        $('#accountOptions').stop( true, true ).slideToggle({
 
+        });
+    });
+    
 
-    })
+var id;
+$('.myID').click(function () {
+
+    id = $(this).attr('name');
+    console.log(id);
+    showConfirm(id);
+})
+
+    
 
 
 });
 
 
+function showConfirm(id) {
+    $('#deletemessage').dialog({
+        autoOpen: false,
+        width: 'auto',
+        resizable: false,
+        modal: true,
+        buttons: {
+            "Delete":function(){
+                __doPostBack("delete", id);
+                $(this).dialog("close");
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        },
+        close: function (event, ui) {
+            $(this).close;
+        }
+    });
+    $("#deletemessage").dialog("open");
+    //var confirm_value = document.createElement("INPUT");
+    //confirm_value.type = "hidden";
+    //confirm_value.name = "confirm_value";
+    //document.forms[0].appendChild(confirm_value);
+ }
 
-function showDetails() {
+function closeWindow() {
+    $("#deletemessage").dialog("close");
+    return false;
+}
 
-   
+function confirmDelete() {
+    $("#deletemessage").dialog("close");
+    return true;
+}
 
+function showMessage() {
+    $('#otherMessage').dialog({
+        autoOpen: false,
+        width: 'auto',
+        resizable: false,
+        modal: true,
+        buttons: {
+            "OK": function () {
+                $(this).dialog("close");
+            }
+        },
+        close: function (event, ui) {
+            $(this).close;
+        }
+    });
+    $("#otherMessage").dialog("open");
 
 }
+

@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using MahApps.Metro;
+using MahApps.Metro.Controls;
 using System;
 using System.Linq;
 using System.Windows;
@@ -13,6 +14,43 @@ namespace com.WanderingTurtle.FormPresentation.Models
     /// </summary>
     internal static class WindowHelper
     {
+        private static readonly AppTheme DefaultTheme = ThemeManager.GetAppTheme("BaseLight");
+
+        /// <summary>
+        /// Sets the style of the specified <see cref="Window" /><paramref name="window" />
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="window"></param>
+        /// <param name="accentColor"></param>
+        /// <param name="themeColor"></param>
+        public static void ChangeAppStyle(this Window window, Accent accentColor, AppTheme themeColor = null)
+        {
+            ThemeManager.ChangeAppStyle(window, accentColor, themeColor ?? DefaultTheme);
+        }
+
+        /// <summary>
+        /// Sets the style of the specified <see cref="Application" /><paramref name="application" />
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="application"></param>
+        /// <param name="accentColor"></param>
+        /// <param name="themeColor"></param>
+        public static void ChangeAppStyle(this Application application, Accent accentColor, AppTheme themeColor = null)
+        {
+            ThemeManager.ChangeAppStyle(application, accentColor, themeColor ?? DefaultTheme);
+        }
+
+        /// <summary>
+        /// Sets the style of the specified <see cref="Application" /><paramref name="application" />
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="application"></param>
+        /// <param name="theme"></param>
+        public static void ChangeAppStyle(this Application application, Tuple<AppTheme, Accent> theme)
+        {
+            ChangeAppStyle(application, theme.Item2, theme.Item1);
+        }
+
         /// <summary>
         /// Returns the base parent <see cref="MainWindow" />
         /// </summary>
@@ -22,44 +60,19 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </param>
         /// <returns>Base Parent <see cref="MainWindow" /></returns>
         /// <exception cref="WanderingTurtleException" />
-        internal static MainWindow GetMainWindow(this FrameworkElement control)
+        internal static T GetWindow<T>(this FrameworkElement control) where T : class
         {
             try
             {
                 var parent = VisualTreeHelper.GetParent(control) ?? control;
-                while (!(parent is MainWindow))
+                while (!(parent is T))
                 {
                     parent = VisualTreeHelper.GetParent(parent);
                 }
-                return parent as MainWindow;
+
+                return parent as T;
             }
             catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Main Window"); }
-        }
-
-        /// <summary>
-        /// Returns the parent MetroWindow of any child control
-        /// </summary>
-        /// <remarks>Miguel Santana 2015/03/10</remarks>
-        /// <param name="control">
-        /// The control that you wish to find the parent of. In most cases you will use 'this'
-        /// </param>
-        /// <returns>Parent MetroWindow</returns>
-        /// <exception cref="WanderingTurtleException" />
-        internal static MetroWindow GetWindow(this FrameworkElement control)
-        {
-            try
-            {
-                var parent = VisualTreeHelper.GetParent(control);
-                if (parent == null)
-                { parent = control; }
-                else
-                {
-                    while (!(parent is MetroWindow))
-                    { if (parent != null) { parent = VisualTreeHelper.GetParent(parent); } }
-                }
-                return parent as MetroWindow;
-            }
-            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Parent Window"); }
         }
 
         /// <summary>
@@ -68,7 +81,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <remarks>Miguel Santana 2015/06/04</remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
-        /// <exception cref="WanderingTurtleException" />
+        /// <exception cref="WanderingTurtleException">Error setting the fields as read only.</exception>
         internal static void MakeReadOnly(Panel content, params FrameworkElement[] controlsToKeepEnabled)
         {
             try

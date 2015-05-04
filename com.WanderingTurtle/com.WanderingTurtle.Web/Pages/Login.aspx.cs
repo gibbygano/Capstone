@@ -21,7 +21,7 @@ namespace com.WanderingTurtle.Web
         {
             try
             {
-                var user = _myMan.retrieveSupplierLogin(txtPassword.Text, txtUserName.Text);
+                var user = _myMan.RetrieveSupplierLogin(txtPassword.Text, txtUserName.Text);
                 if (user.UserPassword != txtPassword.Text)
                 {
                     //sql doesn't care about case, so it may return a positive user

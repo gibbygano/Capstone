@@ -1,8 +1,8 @@
-﻿<Metro:MetroWindow
+﻿<metro:MetroWindow
         x:Class="com.WanderingTurtle.FormPresentation.ViewInvoice"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:common="clr-namespace:com.WanderingTurtle.Common;assembly=WanderingTurtle.Common"
@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" x:Name="lblGeneralViewInvoice" Content="Guest Information" FontSize="16" FontWeight="Bold" />
+        <Label Grid.Row="0" x:Name="LblGeneralViewInvoice" Content="Guest Information" FontSize="16" FontWeight="Bold" />
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -35,24 +35,23 @@
             <Label Grid.Row="0" Grid.Column="0" Content="Guest Name:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <Label Grid.Row="1" Grid.Column="0" Content="Checked In:" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <Label Grid.Row="2" Grid.Column="0" Content="Room #:"     HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
-            <Label Grid.Row="0" Grid.Column="1" x:Name="lblGuestNameLookup" VerticalContentAlignment="Center" />
-            <Label Grid.Row="1" Grid.Column="1" x:Name="lblCheckInDate"     VerticalContentAlignment="Center" />
-            <Label Grid.Row="2" Grid.Column="1" x:Name="lblRoomNum"         VerticalContentAlignment="Center" />
+            <Label Grid.Row="0" Grid.Column="1" x:Name="LblGuestNameLookup" VerticalContentAlignment="Center" />
+            <Label Grid.Row="1" Grid.Column="1" x:Name="LblCheckInDate"     VerticalContentAlignment="Center" />
+            <Label Grid.Row="2" Grid.Column="1" x:Name="LblRoomNum"         VerticalContentAlignment="Center" />
 
-            <Button Grid.Row="2" Grid.Column="2" x:Name="btnEditGuest" Content="Edit Guest" Click="btnEditGuest_Click" HorizontalAlignment="Left" />
+            <Button Grid.Row="2" Grid.Column="2" x:Name="BtnEditGuest" Content="Edit Guest" Click="btnEditGuest_Click" HorizontalAlignment="Left" />
             <Label  Grid.Row="3" Grid.Column="0" Content="Bookings:" FontSize="14" FontWeight="Bold" VerticalContentAlignment="Bottom" />
-            <Label  Grid.Row="3" Grid.Column="1" x:Name="lblBookingsMessage" VerticalContentAlignment="Bottom" Grid.ColumnSpan="2" />
+            <Label  Grid.Row="3" Grid.Column="1" x:Name="LblBookingsMessage" VerticalContentAlignment="Bottom" Grid.ColumnSpan="2" />
         </Grid>
-        <DataGrid Grid.Row="2" x:Name="lvGuestBookings" d:DataContext="{d:DesignInstance common:BookingDetails }">
+        <DataGrid Grid.Row="2" x:Name="LvGuestBookings" d:DataContext="{d:DesignInstance common:BookingDetails }">
             <DataGrid.Columns>
-                <DataGridTextColumn Width ="50" Header="ID" Binding="{Binding ItemListID}" />
                 <DataGridTextColumn Width ="100" Header="Event Date" Binding="{Binding StartDate, StringFormat='{}{0:ddd, MMM d}'}" />
                 <DataGridTextColumn Width ="100" Header="Start Time" Binding="{Binding StartDate, StringFormat='{}{0:t}'}" />
-                <DataGridTextColumn Width ="176" Header="Event Name" Binding="{Binding EventItemName}" />
+                <DataGridTextColumn Width ="200" Header="Event Name" Binding="{Binding EventItemName}" />
                 <DataGridTextColumn Width ="50" Header="Qty" Binding="{Binding Quantity}" />
                 <DataGridTextColumn Width ="100" Header="Ticket Price" Binding="{Binding TicketPrice, StringFormat='{}{0:C}'}" />
-                <DataGridTextColumn Width ="100" Header="Extended" Binding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
-                <DataGridTextColumn Width ="75" Header="Disc" Binding="{Binding Discount, StringFormat='{}{0:P}'}" />
+                <DataGridTextColumn Width ="85" Header="Extended" Binding="{Binding ExtendedPrice, StringFormat='{}{0:C}'}" />
+                <DataGridTextColumn Width ="60" Header="Disc" Binding="{Binding Discount, StringFormat='{}{0:P}'}" />
                 <DataGridTextColumn Width ="100" Header="Total Due" Binding="{Binding TotalCharge, StringFormat='{}{0:C}'}" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>
@@ -61,11 +60,11 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <WrapPanel Grid.Row="3">
+        <WrapPanel Grid.Row="3" Margin="{DynamicResource Spacing.Top}">
             <Button Content="Add Booking"    Margin="{DynamicResource Spacing.Inline}" Click="btnAddBooking_Click" />
-            <Button Content="Edit Booking"   Margin="{DynamicResource Spacing.Inline}" Click="btnEditBooking_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
-            <Button Content="Cancel Booking" Margin="{DynamicResource Spacing.Inline}" Click="btnCancelBooking_Click"  IsEnabled="{Binding SelectedItems.Count, ElementName=lvGuestBookings}" />
+            <Button Content="Edit Booking"   Margin="{DynamicResource Spacing.Inline}" Click="btnEditBooking_Click"    IsEnabled="{Binding SelectedItems.Count, ElementName=LvGuestBookings}" />
+            <Button Content="Cancel Booking" Margin="{DynamicResource Spacing.Inline}" Click="btnCancelBooking_Click"  IsEnabled="{Binding SelectedItems.Count, ElementName=LvGuestBookings}" />
             <Button Content="Guest Checkout" Margin="{DynamicResource Spacing.Inline}" Click="btnArchiveInvoice_Click" />
         </WrapPanel>
     </Grid>
-</Metro:MetroWindow>
+</metro:MetroWindow>
