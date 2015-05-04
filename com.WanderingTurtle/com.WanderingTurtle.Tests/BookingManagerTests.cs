@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
-{///Created- Tony Noel, 2015/3/27, Updated: 2015/4/7, Updated: 2015/4/10
+{///Created- Tony Noel, 2015/3/27, Updated: 2015/4/7, Updated: 2015/4/10, Updated 2015/05/01
     /// <summary>
     /// Booking Manager Tests- Creates a fake booking record by using a dummy ItemListing from the database
     /// (ItemListing record 100). Performs actions on this booking based upon manager methods.
@@ -43,7 +43,7 @@ namespace com.WanderingTurtle.Tests
             TestBookingConstructor();
             AddBookingResult();
             createBookingList();
-            
+
         }
         public void AddBookingResult()
         {
@@ -205,7 +205,7 @@ namespace com.WanderingTurtle.Tests
             //Asserts that the expected and the result will be .5M
             Assert.AreEqual(expected, result);
         }
- 
+
         [TestMethod]
         public void CheckToEditBooking()
         {

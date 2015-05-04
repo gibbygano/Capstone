@@ -9,6 +9,11 @@ namespace com.WanderingTurtle.Tests
 {
     public class TestCleanupAccessor
     {
+        ///Created By: Tony Noel 2015/03/27, Updated: 2015/4/10, Updated 2015/05/01
+        /// <summary>
+        /// Helper class to cleanup or select records from the database for test use only.
+        /// </summary>
+        /// <param name="testEmp"></param>
 
         public static void testEmp(Employee testEmp)
         {
@@ -52,7 +57,7 @@ namespace com.WanderingTurtle.Tests
             //establish connection
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
             //write some query text
-            string query = "DELETE FROM Booking WHERE GuestID = 100 AND EmployeeID = 100 AND ItemListID = 100 AND TicketPrice= 1234";
+            string query = "DELETE FROM Booking WHERE GuestID = 100 AND EmployeeID = 100 AND ItemListID = 100 AND TotalCharge= 36";
             //create a Sql Command
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -135,6 +140,11 @@ namespace com.WanderingTurtle.Tests
                 conn.Close();
             }
         }
+        /// Created by : Tony Noel, 2015/04/7
+        /// <summary>
+        /// Grabs the specific dummy record from the database
+        /// </summary>
+        /// <returns></returns>
         public static int GetBooking()
         {
             int result;
@@ -170,6 +180,11 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
+        /// Created By: Tony Noel, 2015/05/01
+        /// <summary>
+        /// Used to grab a list of all bookings where the ItemListID links to a active ItemListing only.
+        /// </summary>
+        /// <returns></returns>
         public static List<Booking> GetAllBookings()
         {
             var result = new List<Booking>();
@@ -218,7 +233,11 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
-
+        ///Created By Tony Noel, 2015/04/27
+        /// <summary>
+        /// Grabs the specific fake hotel guest record added in the test method.
+        /// </summary>
+        /// <returns></returns>
         public static int GetHotelGuest()
         {
             int result;
@@ -254,7 +273,11 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
-
+        ///Created By: Tony Noel, 2015/04/07
+        /// <summary>
+        ///  Resets the dummy record back to 30. Aides in Booking Test methods.
+        /// </summary>
+        /// <returns></returns>
         public static int resetItemListing100()
         {
             int rowsAffected;
