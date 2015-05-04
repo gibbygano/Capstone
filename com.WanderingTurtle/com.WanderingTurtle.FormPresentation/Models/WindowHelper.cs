@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 
 namespace com.WanderingTurtle.FormPresentation.Models
 {
@@ -52,37 +51,13 @@ namespace com.WanderingTurtle.FormPresentation.Models
         }
 
         /// <summary>
-        /// Returns the base parent <see cref="MainWindow" />
-        /// </summary>
-        /// <remarks>Miguel Santana 2015/03/10</remarks>
-        /// <param name="control">
-        /// The control that you wish to find main window of. In most cases you will use 'this'
-        /// </param>
-        /// <returns>Base Parent <see cref="MainWindow" /></returns>
-        /// <exception cref="WanderingTurtleException" />
-        internal static T GetWindow<T>(this FrameworkElement control) where T : class
-        {
-            try
-            {
-                var parent = VisualTreeHelper.GetParent(control) ?? control;
-                while (!(parent is T))
-                {
-                    parent = VisualTreeHelper.GetParent(parent);
-                }
-
-                return parent as T;
-            }
-            catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error Getting Main Window"); }
-        }
-
-        /// <summary>
         /// Takes the child components of <paramref name="content" /> and disables them.
         /// </summary>
         /// <remarks>Miguel Santana 2015/06/04</remarks>
         /// <param name="content">The parent container</param>
         /// <param name="controlsToKeepEnabled">Controls that you want to keep enabled</param>
         /// <exception cref="WanderingTurtleException">Error setting the fields as read only.</exception>
-        internal static void MakeReadOnly(Panel content, params FrameworkElement[] controlsToKeepEnabled)
+        internal static void MakeReadOnly(this Panel content, params FrameworkElement[] controlsToKeepEnabled)
         {
             try
             {

@@ -41,7 +41,7 @@ namespace com.WanderingTurtle.FormPresentation
             PopulateTextFields();
             _eId = (int)Globals.UserToken.EmployeeID;
 
-            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
+            if (readOnly) { (Content as Panel).MakeReadOnly(BtnCancel); }
         }
 
         /// <summary>

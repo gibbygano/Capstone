@@ -66,7 +66,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
             Debug.Assert(menuItem.CommandParameter != null, "menuItem.CommandParameter != null");
             Debug.Assert(menuItem.Parent != null, "menuItem.Parent != null");
             command = (DataGridContextMenuResult)menuItem.CommandParameter;
-            return (T)((DataGrid)menuItem.GetParent<ContextMenu>().PlacementTarget).SelectedItem;
+            return (T)((DataGrid)menuItem.GetVisualParent<ContextMenu>().PlacementTarget).SelectedItem;
         }
 
         /// <summary>
