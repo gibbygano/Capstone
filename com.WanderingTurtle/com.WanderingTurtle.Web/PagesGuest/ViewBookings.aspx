@@ -44,11 +44,13 @@
                 <tbody>
                     <asp:Repeater ID="repBookings" runat="server">
                         <ItemTemplate>
-                            <td><%# String.Format("{0:ddd, MMM d}, {0:t}", DataBinder.Eval(Container.DataItem,"StartDate").ToString()) %></td>
+                            <tr>
+                            <td><%# String.Format("{0:ddd, MMM d}, {0:t}", DataBinder.Eval(Container.DataItem,"StartDate")) %></td>
                             <td><%# DataBinder.Eval(Container.DataItem,"EventItemName") %></td>
                             <td><%# DataBinder.Eval(Container.DataItem, "Quantity") %></td>
-                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TicketPrice").ToString()) %></td>
-                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TotalCharge").ToString()) %></td>
+                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TicketPrice")) %></td>
+                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TotalCharge")) %></td>
+                                </tr>
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr>

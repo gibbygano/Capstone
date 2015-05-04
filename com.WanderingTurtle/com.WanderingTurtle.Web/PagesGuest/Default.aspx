@@ -31,13 +31,10 @@
                 else {
                     $(this).css("background-color", "red");
                 }
-
             });
 
             $("#txtGuestPin").change(function () {
-                
-
-                if (pinValue.length != 6) {
+                 if (pinValue.length != 6) {
                     $(this).css("background-color", "red");
                 }
                 else {
