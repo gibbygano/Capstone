@@ -35,6 +35,11 @@ namespace com.WanderingTurtle.FormPresentation
             LvSuppliersList.SetContextMenu();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// Logic for context menus
+        /// </summary>
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {

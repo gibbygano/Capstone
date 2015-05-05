@@ -30,6 +30,11 @@ namespace com.WanderingTurtle.FormPresentation
             LvHotelGuestList.SetContextMenu(DataGridContextMenuResult.Add, DataGridContextMenuResult.View);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// Logic for context menus
+        /// </summary>
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
@@ -50,6 +55,12 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/02/01
+        /// Opens UI for hotel guest operations
+        /// </summary>
+        /// <param name="selectedItem"></param>
         private void OpenHotelGuest(InvoiceDetails selectedItem = null)
         {
             try
@@ -97,6 +108,14 @@ namespace com.WanderingTurtle.FormPresentation
             OpenHotelGuest(LvHotelGuestList.SelectedItem as InvoiceDetails);
         }
 
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/02/01
+        /// Opens UI for hotel guest operations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvHotelGuestList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenHotelGuest(sender.RowClick<InvoiceDetails>());
@@ -131,11 +150,26 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/10
+        /// Changes button text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             BtnGuestSearch.Content = TxtSearchBox.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/10
+        /// Searches for hotel guest
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGuestSearch_Click(object sender, RoutedEventArgs e)
         {
             var myTempList = _invoiceManager.InvoiceDetailsSearch(TxtSearchBox.Text);
@@ -143,6 +177,13 @@ namespace com.WanderingTurtle.FormPresentation
             TxtSearchBox.Text = "";
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/05/05
+        /// Loads the guest list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LvHotelGuestList_Loaded(object sender, RoutedEventArgs e)
         {
             RefreshGuestList();
