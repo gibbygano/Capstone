@@ -19,26 +19,6 @@ $(document).ready(function () {
             placeholder: ""
         });
 
-    //var allZips = $('#zips').DataTable({
-    //});
-
-    //$('#MainContent_txtZip').keyup(function () {
-    //    var search = $(this).val();
-
-    //    if (search != null) {
-    //        console.log(search);
-    //        if (search != "") {
-    //            $('#zips').css('display', 'block');
-    //        }
-    //        else {
-    //            $('#zips').css('display', 'none');
-    //        }
-    //    }
-
-    //    allZips.search(search).draw();
-
-    //});
-
 
     $('#tblmain').DataTable({
         stateSave: true

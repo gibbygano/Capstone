@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
@@ -113,9 +114,15 @@ namespace com.WanderingTurtle.Web.Pages
             }
             catch (Exception)
             {
-                Response.Write("<SCRIPT LANGUAGE=\"JavaScript\">alert(\"Error Retrieving List\")</SCRIPT>");
+                showError("Error Retrieving List");
                 return null;
             }
+        }
+
+        private void showError(string message)
+        {
+            lblOtherMessage.Text = message;
+            ScriptManager.RegisterStartupScript(this.Page, GetType(), "showthis", "showMyMessage();", true);
         }
 
         private void showMessage(string message)
@@ -129,25 +136,25 @@ namespace com.WanderingTurtle.Web.Pages
             //if something isn't selected - throw error
             if (gvListings.SelectedValue == null)
             {
-                lblMessage.Text = "Please select an event";
+                showError("Please select an event");
                 return;
             } 
             //gets quantity from the quantity field
             else if (!txtGuestTickets.Text.ValidateInt(1))
             {
-                lblMessage.Text = "You must enter a valid number of tickets.";
+                showError("You must enter a valid number of tickets.");
                 txtGuestTickets.Text = "";
                 return;
             }
             else if (Int32.Parse(txtGuestTickets.Text) > getSelectedItem().QuantityOffered)
             {
-                lblMessage.Text = "You cannot request more tickets than available";
+                showError("You cannot request more tickets than available");
                 txtGuestTickets.Text = "";
                 return;
             }
             else if (!txtGuestPin.Text.ValidateAlphaNumeric())
             {
-                    lblMessage.Text = "You must enter a valid pin.";
+                    showError("You must enter a valid pin.");
                     txtGuestTickets.Text = "";
                     return;
             }
@@ -160,7 +167,7 @@ namespace com.WanderingTurtle.Web.Pages
             }
             catch (Exception)
             {
-                lblMessage.Text = "You must enter a valid pin.";
+                showError("You must enter a valid pin.");
                 return;
             }
 
@@ -198,7 +205,7 @@ namespace com.WanderingTurtle.Web.Pages
             }
             catch (Exception ax)
             {
-                lblMessage.Text = ax.ToString();
+                showError("Error: " + ax.Message);
                 return;
             }
         }
@@ -238,7 +245,7 @@ namespace com.WanderingTurtle.Web.Pages
             switch (addResult)
             {
                 case ResultsEdit.Success:
-                    lblMessage.Text = ("Thank You, " + foundGuest.GetFullName + ". You have successfully signed up for " + selectedItemListing.EventName + ".");
+                    showError("Thank You, " + foundGuest.GetFullName + ". \nYou have successfully signed up for:\n" + selectedItemListing.EventName + ".");
                     clearFields();
                     gvListings.DataBind();
                     confirmDetails.Style.Add("display", "none");
@@ -246,10 +253,10 @@ namespace com.WanderingTurtle.Web.Pages
                     break;
 
                 case ResultsEdit.ListingFull:
-                    lblMessage.Text = "full";
+                    showError("Sorry, that event is full!");
                     break;
                 case ResultsEdit.DatabaseError:
-                    lblMessage.Text = "db error";
+                    showError("Sorry, there was a problem registering for this event.\nPlease contact the front desk.");
                     break;
             }
         }
