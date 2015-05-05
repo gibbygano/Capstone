@@ -9,11 +9,11 @@ namespace com.WanderingTurtle.DataAccess
     public class EventAccessor
     {
         /// <summary>
-        ///Justin Pennington
-        ///created:  2015/02/14
-        // adds a new event item in the database, using an event object that is passed in
+        /// Justin Pennington
+        /// Created:  2015/02/14
+        /// Adds a new event item in the database, using an event object that is passed in
         /// </summary>
-        /// <param name="newEvent"></param>
+        /// <param name="newEvent">The Event object to be added</param>
         /// <returns>number of rows updated in db</returns>
         public static int AddEvent(Event newEvent)
         {
@@ -53,11 +53,12 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Justin Pennington 
-        /// Created:  20015/02/04
-        /// needs the event object that is having its name being changed and the new name
+        /// Created:  2015/02/04
+        /// 
+        /// Updates an Event object/record
         /// </summary>
-        /// <param name="oldEvent"></param>
-        /// <param name="newEvent"></param>
+        /// <param name="oldEvent">The Event object to be updated</param>
+        /// <param name="newEvent">The Event object with the updated information</param>
         /// <returns>Returns the number of rows affected (should be 1)</returns>
         public static int UpdateEvent(Event oldEvent, Event newEvent)
         {
@@ -102,13 +103,13 @@ namespace com.WanderingTurtle.DataAccess
         }
 
         /// <summary>
-        ///Justin Pennington
-        ///created:  2015/02/14
-        ///changes the event from active to inactive
+        /// Justin Pennington
+        /// Created:  2015/02/14
+        /// Changes the event from active to inactive
         /// </summary>
-        /// <param name="newEvent"></param>
+        /// <param name="eventToBeDeleted">The Event to be set inactive</param>
         /// <returns>returns number of rows affected</returns>
-        public static int DeleteEventItem(Event newEvent)
+        public static int DeleteEventItem(Event eventToBeDeleted)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spDeleteEventItem";
@@ -117,12 +118,12 @@ namespace com.WanderingTurtle.DataAccess
 
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@EventItemName", newEvent.EventItemName);
-            cmd.Parameters.AddWithValue("@EventItemID", newEvent.EventItemID);
-            cmd.Parameters.AddWithValue("@EventTypeID", newEvent.EventTypeID);
-            cmd.Parameters.AddWithValue("@Transportation", newEvent.Transportation);
-            cmd.Parameters.AddWithValue("@EventDescription", newEvent.Description);
-            cmd.Parameters.AddWithValue("@EventOnsite", newEvent.OnSite);
+            cmd.Parameters.AddWithValue("@EventItemName", eventToBeDeleted.EventItemName);
+            cmd.Parameters.AddWithValue("@EventItemID", eventToBeDeleted.EventItemID);
+            cmd.Parameters.AddWithValue("@EventTypeID", eventToBeDeleted.EventTypeID);
+            cmd.Parameters.AddWithValue("@Transportation", eventToBeDeleted.Transportation);
+            cmd.Parameters.AddWithValue("@EventDescription", eventToBeDeleted.Description);
+            cmd.Parameters.AddWithValue("@EventOnsite", eventToBeDeleted.OnSite);
             try
             {
                 conn.Open();
@@ -147,9 +148,9 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Justin Pennington 
         /// Created:  2015/02/14 
-        //  retrieves all Active Events and returns a List of Event objects
+        /// Retrieves all Active Events and returns a List of Event objects
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List object containing Event objects returned by the database</returns>
         public static List<Event> GetEventList()
         {
             var EventList = new List<Event>();
@@ -200,15 +201,17 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Justin Pennington 
         /// Created:  2015/02/14
-        /// retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
+        /// Retrieve data for an Event, create an object using data with retrieved data, and return the object that is created
         /// </summary>
         /// <remarks>
-        /// Updated Bryan Hurst 4/24/2015 
-        /// While missing from If & "cmd.CommandType = CommandType.StoredProcedure;" added
+        /// Bryan Hurst
+        /// Updated: 2015/04/24
+        /// 
+        /// Added while loop and CommandType.StoredProcedure setting
         /// </remarks>
-        /// <param name="eventID"></param>
-        /// <returns></returns>
-        public static Event GetEvent(String eventID)
+        /// <param name="eventID">The EventID matching the Event to be retrieved</param>
+        /// <returns>The Event requested via the EventID</returns>
+        public static Event GetEvent(string eventID)
         {
             var theEvent = new Event();
             // set up the database call
@@ -259,7 +262,7 @@ namespace com.WanderingTurtle.DataAccess
         ///  Created:  2015/04/03
         ///  Method for deletion of test records created with the unit tests
         /// </summary>
-        /// <param name="TestEvent"></param>
+        /// <param name="TestEvent">The Event object used for testing -- to be deleted</param>
         /// <returns>number of rows affected</returns>
         public static int DeleteEventTestItem(Event TestEvent)
         {

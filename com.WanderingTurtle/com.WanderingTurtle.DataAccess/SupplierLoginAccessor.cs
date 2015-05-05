@@ -75,7 +75,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <remarks>
         /// Rose Steffensmeier
-        /// Updated 2015/04/13
+        /// Updated: 2015/04/13
         /// Added new paramenter
         /// </remarks>
         /// <param name="userName">The username the supplier wants.</param>
@@ -119,8 +119,8 @@ namespace com.WanderingTurtle.DataAccess
         /// Created:  2015/04/03
         /// Updates a supplier's password
         /// </summary>
-        /// <param name="newPassword"></param>
-        /// <param name="oldLogin"></param>
+        /// <param name="newPassword">The string containing the new password for a supplier</param>
+        /// <param name="oldLogin">The SupplierLogin object matching the Supplier whose login information is being updated</param>
         /// <returns>number of rows affected</returns>
         public int UpdateSupplierPassword(string newPassword, SupplierLogin oldLogin)
         {
@@ -161,7 +161,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created:  2015/04/15
         /// Checks if user name is in use or has ever been in use
         /// </summary>
-        /// <param name="userName"></param>
+        /// <param name="userName">The username to check against</param>
         /// <returns>Returns true if the suggested userName is valid; False if the userName is/was in use</returns>
         public bool CheckUserName(string userName)
         {
@@ -205,7 +205,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created: 2015/04/25
         /// Retrieves the supplierLogin information
         /// </summary>
-        /// <param name="supplierID"></param>
+        /// <param name="supplierID">The supplierID matching a record to retrieve</param>
         /// <returns>Username found SupplierLogin table</returns>
         public string RetrieveSupplierUserNameByID(int supplierID)
         {
@@ -249,7 +249,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created:  2015/04/23
         /// Method for the deletion of test login records in the database
         /// </summary>
-        /// <param name="supplierLoginToDelete"></param>
+        /// <param name="supplierLoginToDelete">The SupplierLogin object used for testing -- to be deleted</param>
         /// <returns>number of rows affected</returns>
         public static int DeleteTestSupplierLogin(SupplierLogin supplierLoginToDelete)
         {

@@ -137,7 +137,6 @@ namespace com.WanderingTurtle.DataAccess
         /// calls the stored procedure spSelectInvoiceByGuest
         /// that querys the database for a guest's invoice information
         /// </summary>
-        /// <remarks></remarks>
         /// <param name="guestID">Hotel Guest ID</param>
         /// <returns>Invoice information for the guest</returns>
         public static InvoiceDetails GetInvoiceByGuest(int guestID)

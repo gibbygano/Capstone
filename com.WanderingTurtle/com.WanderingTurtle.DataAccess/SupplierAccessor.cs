@@ -241,7 +241,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <remarks>
         /// Pat Banks
-        /// Updated 2015/04/25
+        /// Updated: 2015/04/25
         /// Added supplier login archive to stored procedure & renamed SP
         /// </remarks>
         /// <param name="supplierToDelete">Requires the Supplier object which matches the record to be DELETED in the Database.</param>

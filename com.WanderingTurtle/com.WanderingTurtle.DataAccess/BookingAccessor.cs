@@ -75,7 +75,7 @@ namespace com.WanderingTurtle.DataAccess
         /// user to see current number of spots available for a selected listing
         /// </summary>
         /// <param name="itemListID">Id for the itemListing</param>
-        /// <returns></returns>
+        /// <returns>An ItemListingDetails object whose ID matches the passed ID</returns>
         public static ItemListingDetails GetItemListingDetails(int itemListID)
         {
             var eventItemListing = new ItemListingDetails();
@@ -189,7 +189,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        /// used to select a specified booking record from the database
+        /// Selects a specific booking from the database
         /// </summary>
         /// <remarks>
         /// Tony Noel
@@ -252,7 +252,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Tony Noel
         /// Created: 2015/02/03
-        /// updates a booking in the database
+        /// Updates a booking in the database
         /// </summary>
         /// <remarks>
         /// Tony Noel
@@ -261,7 +261,7 @@ namespace com.WanderingTurtle.DataAccess
         /// 
         /// Pat Banks
         /// Updated:  2015/04/25
-        /// SP also updates the Current Number of guests based on the total number of bookings for that Item ID
+        /// StoredProcedure also updates the Current Number of guests based on the total number of bookings for that Item ID
         /// </remarks>
         /// <param name="oldOne">The original Booking object/values</param>
         /// <param name="toUpdate">The new booking object values to replace the old</param>
@@ -316,8 +316,8 @@ namespace com.WanderingTurtle.DataAccess
         /// Created 2015/04/14
         /// Gets Booking numbers from database for specific event listing 
         /// </summary>
-        /// <param name="itemListID"></param>
-        /// <returns></returns>
+        /// <param name="itemListID">The ItemListID to reference when getting booking numbers</param>
+        /// <returns>List object containing BookingNumbers objects related to the itemListID passed</returns>
         public static List<BookingNumbers> GetBookingNumbers(int itemListID)
         {
             var bookingNumber = new List<BookingNumbers>();
@@ -367,7 +367,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Created:  2015/04/14
         /// Verifies the hotel guest pin to sign up for an item listing and create a booking
         /// </summary>
-        /// <param name="inPIN"></param>
+        /// <param name="inPIN">The pin to cross reference against HotelGuests</param>
         /// <returns>Hotel guest that has that pin</returns>
         public static HotelGuest VerifyHotelGuestPin(string inPIN)
         {
