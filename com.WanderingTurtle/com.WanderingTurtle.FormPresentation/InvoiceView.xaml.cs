@@ -164,6 +164,7 @@ namespace com.WanderingTurtle.FormPresentation
 
                         if (cancel.ShowDialog() == false) return;
                         RefreshBookingList();
+                        Result = true;
                     }
                     catch (Exception ex)
                     {
@@ -278,7 +279,6 @@ namespace com.WanderingTurtle.FormPresentation
                 if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false) return;
                 RefreshGuestInformation(CurrentInvoice.HotelGuestID);
                 Result = true;
-
             }
             catch (Exception ex)
             {
