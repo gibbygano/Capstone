@@ -9,7 +9,7 @@ namespace com.WanderingTurtle.Tests
 {
     public class TestCleanupAccessor
     {
-        ///Created By: Tony Noel 2015/03/27, Updated: 2015/4/10, Updated 2015/05/01
+        ///Created By: Tony Noel 2015/03/27, Updated: 2015/4/10, Updated 2015/05/01, Updated 2015/05/05- added new method to get fake empID
         /// <summary>
         /// Helper class to cleanup or select records from the database for test use only.
         /// </summary>
@@ -52,6 +52,52 @@ namespace com.WanderingTurtle.Tests
             }
         }
 
+        ///Created By: Tony Noel, 2015/05/05
+        /// <summary>
+        /// A method that will only grab the specified fake employee record from the database. Returns the Employee ID.
+        /// </summary>
+        /// <returns></returns>
+        public static int getTestEmp()
+        {
+            int result;
+            //establish connection
+            SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
+            //write some query text
+            string query = "Select employeeID FROM Employee WHERE firstName = 'Test' AND lastName = 'Passman'";
+            //create a Sql Command
+            SqlCommand cmd = new SqlCommand(query, conn);
+            try
+            {
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+
+                    result = reader.GetInt32(0);
+                }
+                else
+                {
+                    var ex = new ApplicationException("Requested object did not match any records.");
+                    throw ex;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+        ///Created By: Tony Noel 2015/03/27
+        /// <summary>
+        /// Deletes only the dummy booking record from the database for testing.
+        /// </summary>
+        /// <param name="testBook"></param>
         public static void testBook(Booking testBook)
         {
             //establish connection
