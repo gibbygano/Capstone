@@ -139,8 +139,6 @@ namespace com.WanderingTurtle.FormPresentation
         /// </remarks>
         private void RefreshEmployeeList()
         {
-            LvEmployeesList.ItemsPanel.LoadContent();
-
             try
             {
                 _employeeList = _employeeManager.FetchListEmployees();

@@ -57,6 +57,17 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
+                if (oldEmployee.Active && !newEmployee.Active)
+                {
+                    newEmployee.Password = "";
+                }
+                if (!oldEmployee.Active && newEmployee.Active)
+                {
+                    if (newEmployee.Password == null || string.IsNullOrWhiteSpace(newEmployee.Password))
+                    {
+                        throw new ApplicationException("You must set a password");
+                    }
+                }
                 int result = EmployeeAccessor.UpdateEmployee(oldEmployee, newEmployee);
                 if (result == 1)
                 {
@@ -82,7 +93,7 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                return EmployeeAccessor.GetEmployeeList();
+                return EmployeeAccessor.GetEmployeeList().OrderBy(x => x.Active != true).ToList();
             }
             catch (Exception ex)
             {
