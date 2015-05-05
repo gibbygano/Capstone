@@ -105,7 +105,7 @@ namespace com.WanderingTurtle.Tests
             int expected = 1;
             setup();
 
-            SupplierAccessor.AddSupplier(testSupp, "Test");
+            SupplierAccessor.AddSupplier(testSupp, "Test", "Password#1");
             modSupp = getSupplierListCompName(suppList);
             itemListingToTest.SupplierID = modSupp.SupplierID;
 
@@ -128,7 +128,7 @@ namespace com.WanderingTurtle.Tests
             int expected = 1;
             setup();
 
-            SupplierAccessor.AddSupplier(testSupp, "Test");
+            SupplierAccessor.AddSupplier(testSupp, "Test", "Password#1");
             modSupp = getSupplierListCompName(suppList);
             itemListingToEdit.SupplierID = modSupp.SupplierID;
             ItemListingAccessor.AddItemListing(itemListingToTest);
@@ -173,7 +173,7 @@ namespace com.WanderingTurtle.Tests
             int expected = 1;
             setup();
 
-            SupplierAccessor.AddSupplier(testSupp, "Test");
+            SupplierAccessor.AddSupplier(testSupp, "Test", "Password#1");
             modSupp = getSupplierListCompName(suppList);
             itemListingToTest.SupplierID = modSupp.SupplierID;
             ItemListingAccessor.AddItemListing(itemListingToTest);

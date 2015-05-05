@@ -31,7 +31,7 @@ namespace com.WanderingTurtle.Tests
             testSupplier.SupplyCost = (decimal)((60) / 100);
             testSupplier.Active = true;
 
-            SupplierAccessor.AddSupplier(testSupplier, "Test");
+            SupplierAccessor.AddSupplier(testSupplier, "Test", "Password#1");
             try
             {
 

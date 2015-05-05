@@ -34,7 +34,7 @@ namespace com.WanderingTurtle.Tests
             
             try
             {
-                SupplierAccessor.AddSupplier(testSupplier, "Test");
+                SupplierAccessor.AddSupplier(testSupplier, "Test", "Password#1");
                 var supList = SupplierAccessor.GetSupplierList();
                 foreach (Supplier x in supList)
                 {
