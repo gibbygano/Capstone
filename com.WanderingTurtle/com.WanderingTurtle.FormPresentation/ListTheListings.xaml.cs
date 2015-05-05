@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using EventManager = com.WanderingTurtle.BusinessLogic.EventManager;
 
 namespace com.WanderingTurtle.FormPresentation
 {
@@ -16,9 +17,11 @@ namespace com.WanderingTurtle.FormPresentation
     /// </summary>
     public partial class ListTheListings : IDataGridContextMenu
     {
-        private List<ItemListing> _myListingList;
+        private List<ItemListing> ListingList { get; set; }
+
         private readonly BookingManager _bookingManager = new BookingManager();
         private readonly ProductManager _productManager = new ProductManager();
+        private readonly EventManager _eventmanager = new EventManager();
 
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
         /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
@@ -158,12 +161,13 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                _myListingList = _productManager.RetrieveItemListingList();
-                foreach (ItemListing item in _myListingList)
+                _eventmanager.RetrieveEventList();
+                ListingList = _productManager.RetrieveItemListingList();
+                foreach (ItemListing item in ListingList)
                 {
                     item.Seats = (item.MaxNumGuests - item.CurrentNumGuests);
                 }
-                LvListing.ItemsSource = _myListingList;
+                LvListing.ItemsSource = ListingList;
             }
             catch (Exception ex)
             {

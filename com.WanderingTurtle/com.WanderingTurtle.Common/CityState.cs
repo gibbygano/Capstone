@@ -3,9 +3,10 @@
 namespace com.WanderingTurtle.Common
 {
     /// <summary>
+    /// Matthew Lapka
+    /// Created: 2015/02/08
+    /// 
     /// City State object populated with data from the CityState lookup table
-    ///
-    /// Created by Matt Lapka - 2/8/15
     /// </summary>
     public class CityState
     {

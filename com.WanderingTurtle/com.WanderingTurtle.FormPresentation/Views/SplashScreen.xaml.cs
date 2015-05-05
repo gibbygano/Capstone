@@ -25,7 +25,6 @@ namespace com.WanderingTurtle.FormPresentation.Views
             Globals.UserToken = null;
             Application.Current.ChangeAppStyle(ThemeManager.GetAccent("Emerald"));
             InitializeComponent();
-            TxtUserName.Focus();
         }
 
         /// <summary>
@@ -95,6 +94,11 @@ namespace com.WanderingTurtle.FormPresentation.Views
                     Submit();
                     break;
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            TxtUserName.Focus();
         }
     }
 }
