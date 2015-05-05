@@ -130,33 +130,55 @@ namespace com.WanderingTurtle.Web.Pages
             userMessage = message;
             lblMessage.Text = userMessage;
         }
+        public static void MakeAccessible(GridView grid)
+        {
+            if (grid.Rows.Count <= 0) return;
+            grid.UseAccessibleHeader = true;
+            grid.HeaderRow.TableSection = TableRowSection.TableHeader;
+            if (grid.ShowFooter)
+                grid.FooterRow.TableSection = TableRowSection.TableFooter;
+        }
 
+        protected override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
+
+            MakeAccessible(gvListings);
+        }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            lblOtherMessage.Text = "";
+            string errors = "";
             //if something isn't selected - throw error
             if (gvListings.SelectedValue == null)
             {
-                showError("Please select an event");
-                return;
+                errors += "<li>Please select an event</li>";
+
             } 
             //gets quantity from the quantity field
-            else if (!txtGuestTickets.Text.ValidateInt(1))
+            if (!txtGuestTickets.Text.ValidateInt(1))
             {
-                showError("You must enter a valid number of tickets.");
+                errors += "<li>You must enter a valid number of tickets.</li>";
                 txtGuestTickets.Text = "";
-                return;
+
             }
-            else if (Int32.Parse(txtGuestTickets.Text) > getSelectedItem().QuantityOffered)
+            else
             {
-                showError("You cannot request more tickets than available");
-                txtGuestTickets.Text = "";
-                return;
-            }
-            else if (!txtGuestPin.Text.ValidateAlphaNumeric())
-            {
-                    showError("You must enter a valid pin.");
+                if (Int32.Parse(txtGuestTickets.Text) > getSelectedItem().QuantityOffered)
+                {
+                    errors += "<li>You cannot request more tickets than available</li>";
                     txtGuestTickets.Text = "";
-                    return;
+                }
+            }
+            if (!txtGuestPin.Text.ValidateAlphaNumeric())
+            {
+                    errors += "<li>You must enter a valid pin.</li>";
+                    txtGuestTickets.Text = "";
+            }
+            if (errors.Length > 0)
+            {
+                showError("Please fix the following errors: <ul>" + errors + "</ul>");
+                return;
             }
             try
             {
@@ -168,7 +190,6 @@ namespace com.WanderingTurtle.Web.Pages
             catch (Exception)
             {
                 showError("You must enter a valid pin.");
-                return;
             }
 
             gatherFormInformation();
@@ -245,7 +266,7 @@ namespace com.WanderingTurtle.Web.Pages
             switch (addResult)
             {
                 case ResultsEdit.Success:
-                    showError("Thank You, " + foundGuest.GetFullName + ". \nYou have successfully signed up for:\n" + selectedItemListing.EventName + ".");
+                    showError("Thank You, " + foundGuest.GetFullName + ". <br>You have successfully signed up for:\n" + selectedItemListing.EventName + ".");
                     clearFields();
                     gvListings.DataBind();
                     confirmDetails.Style.Add("display", "none");

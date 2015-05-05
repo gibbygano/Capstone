@@ -1,5 +1,11 @@
 ﻿namespace com.WanderingTurtle.Common
 {
+    /// <summary>
+    /// Bryan Hurst
+    /// Created: 2015/02/19
+    /// 
+    /// Class for the creation of Event Objects with set data fields
+    /// </summary>
     public class Event
     {
         public Event(int eventItemID, string eventItemName,
@@ -23,8 +29,6 @@
 
         public string Description { get; set; }
 
-        //Bryan Hurst Feb.19
-        //Object for the creation of Event objects with set data fields
         public int EventItemID { get; set; }
 
         public string EventItemName { get; set; }

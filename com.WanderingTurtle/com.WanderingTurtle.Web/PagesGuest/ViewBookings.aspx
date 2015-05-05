@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/PagesGuest/SiteGuest.Master" AutoEventWireup="true" CodeBehind="ViewBookings.aspx.cs" Inherits="com.WanderingTurtle.Web.PagesGuest.ViewBookings" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <%-- Created by Arik Chadima 2015/4/24
@@ -45,12 +44,12 @@
                     <asp:Repeater ID="repBookings" runat="server">
                         <ItemTemplate>
                             <tr>
-                            <td><%# String.Format("{0:ddd, MMM d}, {0:t}", DataBinder.Eval(Container.DataItem,"StartDate")) %></td>
-                            <td><%# DataBinder.Eval(Container.DataItem,"EventItemName") %></td>
-                            <td><%# DataBinder.Eval(Container.DataItem, "Quantity") %></td>
-                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TicketPrice")) %></td>
-                            <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TotalCharge")) %></td>
-                                </tr>
+                                <td><%# String.Format("{0:ddd, MMM d}, {0:t}", DataBinder.Eval(Container.DataItem,"StartDate")) %></td>
+                                <td><%# DataBinder.Eval(Container.DataItem,"EventItemName") %></td>
+                                <td><%# DataBinder.Eval(Container.DataItem, "Quantity") %></td>
+                                <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TicketPrice")) %></td>
+                                <td><%# String.Format("{0:c}",DataBinder.Eval(Container.DataItem,"TotalCharge")) %></td>
+                            </tr>
                         </ItemTemplate>
                     </asp:Repeater>
                     <tr>
@@ -64,6 +63,12 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div id="otherMessage" title="Message" style="display: none;">
+        <div class="errorMsg">
+            <asp:Label ID="lblOtherMessage" runat="server" Text="Error" ForeColor="#000000"></asp:Label>
+            <br />
         </div>
     </div>
 </asp:Content>
