@@ -32,7 +32,8 @@
 	
 	@originalApplicationStatus	varchar(25),
 	@originalLastStatusDate	datetime,
-	@originalRemarks		varchar(255)	
+	@originalRemarks		varchar(255),
+	@password				varchar(256)	
 	)
 AS
 	UPDATE SupplierApplication SET
@@ -76,8 +77,8 @@ AS
 	SET @rowCount2 = @@ROWCOUNT
 	
 	IF @rowCount2 = 1
-			INSERT INTO [SupplierLogin] (UserName, SupplierID)
-			VALUES (@UserName, @SupplierID)
+			INSERT INTO [SupplierLogin] (UserName, SupplierID, UserPassword)
+			VALUES (@UserName, @SupplierID, @password)
 	RETURN @@ROWCOUNT
 
 END

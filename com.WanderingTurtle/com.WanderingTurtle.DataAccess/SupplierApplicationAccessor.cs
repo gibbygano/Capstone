@@ -251,7 +251,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <param name="userName"></param>
         /// <param name="supplyCost"></param>
         /// <returns>number of rows affected</returns>
-        public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication, string userName, decimal supplyCost)
+        public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication, string userName, decimal supplyCost, string password)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             var cmdText = "spInsertSupplierFromApplication";
@@ -292,6 +292,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@originalApplicationStatus", oldApplication.ApplicationStatus);
             cmd.Parameters.AddWithValue("@originalLastStatusDate", oldApplication.LastStatusDate);
             cmd.Parameters.AddWithValue("@originalRemarks", oldApplication.Remarks);
+            cmd.Parameters.AddWithValue("@password", password);
 
             try
             {

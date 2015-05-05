@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spSelectSupplierLogin](
-	@userPassword varchar(50),
+	@userPassword varchar(256),
 	@userName varchar(50)
 	)
 AS
