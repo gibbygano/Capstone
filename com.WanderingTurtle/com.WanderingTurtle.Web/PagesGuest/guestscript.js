@@ -2,8 +2,17 @@
 console.log("I hate JS");
 $(document).ready(function () {
     
+    pageLoad();
+    $('#MainContent_gvListings').DataTable({
+        stateSave: true
+    });
 
-    console.log("jquery is ready.");
+
+});
+
+function pageLoad() {
+
+    console.log("jquery is ready.2");
     $("#txtGuestTickets").spinner({
         min: 0,
         max: $("#hfGuestMaxTickets").val()
@@ -34,8 +43,8 @@ $(document).ready(function () {
 
     });
 
-
-});
+    
+}
 
 function showMyMessage() {
 
@@ -56,5 +65,6 @@ function showMyMessage() {
     });
 
     $("#otherMessage").dialog("open");
+
 
 }
