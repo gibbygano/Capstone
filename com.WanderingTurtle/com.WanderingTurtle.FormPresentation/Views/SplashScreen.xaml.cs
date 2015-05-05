@@ -64,7 +64,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
             {
                 throw new InputValidationException(TxtPassword, ex, "Login Error");
             }
-
+              
             if (Globals.UserToken == null)
             {
                 throw new WanderingTurtleException(this, "Error setting User Token");
