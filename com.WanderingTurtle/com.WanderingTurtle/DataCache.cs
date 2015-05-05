@@ -30,6 +30,10 @@ namespace com.WanderingTurtle.BusinessLogic
 
         public static DateTime _ItemListingListTime { get; set; }
 
+        public static List<ItemListing> _currentAllItemListingList { get; set; }
+
+        public static DateTime _AllItemListingListTime { get; set; }
+
         /******* SUPPLIER ********/
 
         public static List<Supplier> _currentSupplierList { get; set; }
