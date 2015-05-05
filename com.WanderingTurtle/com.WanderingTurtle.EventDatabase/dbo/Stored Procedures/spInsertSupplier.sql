@@ -13,7 +13,8 @@ CREATE PROCEDURE spInsertSupplier
 	@PhoneNumber 	varchar(15), 
 	@EmailAddress 	varchar(100), 
 	@ApplicationID 	int, 
-	@SupplyCost		decimal(3,2)
+	@SupplyCost		decimal(3,2),
+	@password		varchar(256)
 	)
 AS
 DECLARE @rowCount int, @supplierID int
@@ -25,6 +26,6 @@ DECLARE @rowCount int, @supplierID int
 
 	SET @rowCount = @@ROWCOUNT
 	IF @rowCount = 1
-			INSERT INTO [SupplierLogin] (UserName, SupplierID)
-			VALUES (@UserName, @SupplierID)
+			INSERT INTO [SupplierLogin] (UserName, SupplierID, UserPassword)
+			VALUES (@UserName, @SupplierID, @password)
 	RETURN @@ROWCOUNT

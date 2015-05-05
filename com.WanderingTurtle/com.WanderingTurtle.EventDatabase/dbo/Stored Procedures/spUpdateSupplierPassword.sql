@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[spUpdateSupplierPassword]
 	(
-	@Password	varchar(50),
+	@Password	varchar(256),
 	
 	@original_UserName	varchar(50),
-	@original_Password	varchar(50),
+	@original_Password	varchar(256),
 	@original_SupplierID int
 )
 AS

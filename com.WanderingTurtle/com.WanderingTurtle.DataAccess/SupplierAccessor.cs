@@ -139,7 +139,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="supplierToAdd">Requires a Supplier object to INSERT</param>
         /// <returns>Returns the number of rows affected.</returns>
-        public static int AddSupplier(Supplier supplierToAdd, string userName)
+        public static int AddSupplier(Supplier supplierToAdd, string userName, string password)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
             string storedProcedure = "spInsertSupplier";
@@ -157,6 +157,7 @@ namespace com.WanderingTurtle.DataAccess
             cmd.Parameters.AddWithValue("@EmailAddress", supplierToAdd.EmailAddress);
             cmd.Parameters.AddWithValue("@ApplicationID", supplierToAdd.ApplicationID);
             cmd.Parameters.AddWithValue("@SupplyCost", (float)supplierToAdd.SupplyCost);
+            cmd.Parameters.AddWithValue("@password", password);
 
             int rowsAffected;
             try

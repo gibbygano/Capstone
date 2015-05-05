@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[SupplierLogin] (
     [UserID]       INT          IDENTITY (101, 1) NOT NULL,
-    [UserPassword] VARCHAR (50) DEFAULT ('Password#1') NOT NULL,
+    [UserPassword] VARCHAR (256) DEFAULT ('Password#1') NOT NULL,
     [UserName]     VARCHAR (50) NOT NULL,
     [SupplierID]   INT          NOT NULL,
     [Active]       BIT          DEFAULT ((1)) NOT NULL,

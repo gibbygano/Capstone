@@ -30,6 +30,8 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
+                PasswordManager myPass = new PasswordManager();
+                userPassword = myPass.supplierHash(userName, userPassword);
                 return _access.RetrieveSupplierLogin(userPassword, userName);
             }
             catch (SqlException)
@@ -80,6 +82,9 @@ namespace com.WanderingTurtle.BusinessLogic
 
                 if (!result1)
                 {
+                    PasswordManager myPass = new PasswordManager();
+                    //oldLogin.UserPassword = myPass.supplierHash(oldLogin.UserName, oldLogin.UserPassword);
+                    newPassword= myPass.supplierHash(oldLogin.UserName, newPassword);
                     int result = _access.UpdateSupplierPassword(newPassword, oldLogin);
 
                     return result == 1 ? ResultsEdit.Success : ResultsEdit.ChangedByOtherUser;

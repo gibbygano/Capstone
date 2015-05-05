@@ -151,7 +151,9 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if (SupplierAccessor.AddSupplier(supplierToAdd, userName) == 2)
+                PasswordManager myPass = new PasswordManager();
+                string password = myPass.supplierHash(userName, "Password#1");
+                if (SupplierAccessor.AddSupplier(supplierToAdd, userName, password) == 2)
                 {
                     //refresh cache
                     DataCache._currentSupplierList = SupplierAccessor.GetSupplierList();
@@ -379,9 +381,11 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
+                PasswordManager myPass = new PasswordManager();
+                string password = myPass.supplierHash(userName, "Password#1");
                 //Approving
                 //update db with approval, add supplier record, add supplier login
-                int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp, userName, supplyCost);
+                int numRows = SupplierApplicationAccessor.UpdateSupplierApplication(oldSupplierApp, updatedSupplierApp, userName, supplyCost, password);
 
                 if (numRows == 3)
                 {
