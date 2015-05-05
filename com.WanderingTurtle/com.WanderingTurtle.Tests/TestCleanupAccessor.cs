@@ -236,7 +236,7 @@ namespace com.WanderingTurtle.Tests
             var result = new List<Booking>();
 
             SqlConnection conn = DatabaseConnection.GetDatabaseConnection();
-            string query = "Select BookingID, GuestID, EmployeeID, Booking.ItemlistID, Quantity, DateBooked, Discount, Booking.Active, TicketPrice, ExtendedPrice, TotalCharge FROM Booking, ItemListing Where Booking.ItemListID = ItemListing.ItemListID AND ItemListing.Active = 1";
+            string query = "Select BookingID, GuestID, EmployeeID, Booking.ItemlistID, Quantity, DateBooked, Discount, Booking.Active, TicketPrice, ExtendedPrice, TotalCharge FROM Booking, ItemListing Where Booking.ItemListID = ItemListing.ItemListID AND ItemListing.Active = 1 AND Booking.Quantity != 0";
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
