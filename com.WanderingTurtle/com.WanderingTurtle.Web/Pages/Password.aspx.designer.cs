@@ -40,15 +40,6 @@ namespace com.WanderingTurtle.Web.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtCurrent;
         
         /// <summary>
-        /// currentValidator control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator currentValidator;
-        
-        /// <summary>
         /// txtNewPassword control.
         /// </summary>
         /// <remarks>
@@ -65,15 +56,6 @@ namespace com.WanderingTurtle.Web.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNewPassword2;
-        
-        /// <summary>
-        /// pass2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator pass2;
         
         /// <summary>
         /// passValidator control.

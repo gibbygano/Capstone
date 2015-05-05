@@ -8,7 +8,7 @@
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server" ID="head">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
-  <%--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <%--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>--%>
     <script>
         
@@ -33,24 +33,19 @@
     <h2>Upcoming Event Listings</h2>
     <h3>Please select an event to book your tickets:</h3>
 
-    <asp:UpdatePanel runat="server" ID="gvListingsUpdate">
-        <ContentTemplate>
-            <asp:GridView ID="gvListings" runat="server" AutoGenerateColumns="False" AllowSorting="True" AutoGenerateSelectButton="True" CellPadding="4" GridLines="None" DataSourceID="ObjectDataSource1" DataKeyNames="ItemListID" OnSelectedIndexChanged="gvListings_SelectedIndexChanged" ForeColor="#333333">
+            <asp:GridView ID="gvListings" runat="server" AutoGenerateColumns="False" AutoGenerateSelectButton="True" CellPadding="4" GridLines="None" DataSourceID="ObjectDataSource1" DataKeyNames="ItemListID" OnSelectedIndexChanged="gvListings_SelectedIndexChanged" ForeColor="#333333">
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" ForeColor="White" Font-Bold="True" />
                 <HeaderStyle BackColor="#186D99" BorderStyle="None" Font-Bold="True" BorderColor="#327EA7" ForeColor="White" HorizontalAlign="Center" VerticalAlign="Middle" BorderWidth="0px" />
                 <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
                 <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
                 <SelectedRowStyle BackColor="#E2DED6" ForeColor="#333333" Font-Bold="False" />
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
-                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}" ItemStyle-Width ="150px">
-                    </asp:BoundField>
-                    <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName" ItemStyle-Width ="150px">
-                    </asp:BoundField>
-                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription" ItemStyle-Width ="250px" ></asp:BoundField>                      
-                    <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tickets" SortExpression="QuantityOffered" ItemStyle-Width ="50px"/>
-                    <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" ItemStyle-Width ="50px"/>
+                    <asp:BoundField DataField="StartDate" HeaderText="Start Date" SortExpression="StartDate" DataFormatString="{0:ddd, MMM d}, {0:t}" ItemStyle-Width="150px"></asp:BoundField>
+                    <asp:BoundField DataField="EventName" HeaderText="Event Name" SortExpression="EventName" ItemStyle-Width="150px"></asp:BoundField>
+                    <asp:BoundField DataField="EventDescription" HeaderText="Description" SortExpression="EventDescription" ItemStyle-Width="250px"></asp:BoundField>
+                    <asp:BoundField DataField="QuantityOffered" HeaderText="Avail Tickets" SortExpression="QuantityOffered" ItemStyle-Width="50px" />
+                    <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" DataFormatString="{0:c}" ItemStyle-Width="50px" />
                 </Columns>
                 <SortedAscendingCellStyle BackColor="#E9E7E2" />
                 <SortedAscendingHeaderStyle BackColor="#506C8C" />
@@ -97,13 +92,12 @@
 
                 <asp:Button ID="btnSubmit" runat="server" OnClick="btnSubmit_Click" Text="Submit" UseSubmitBehavior="False" />
             </div>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-    <div id="otherMessage" title="Message" style="display: none;">
-            <div class="errorMsg">
-                <asp:Label ID="lblOtherMessage" runat="server" Text="" ForeColor="#000000"></asp:Label>
-                <br />
+            <div id="otherMessage" title="Message" style="display: none;">
+                <div class="errorMsg">
+                    <asp:Label ID="lblOtherMessage" runat="server" Text="Error" ForeColor="#000000"></asp:Label>
+                    <br />
+                </div>
             </div>
-        </div>
+
 </asp:Content>
 
