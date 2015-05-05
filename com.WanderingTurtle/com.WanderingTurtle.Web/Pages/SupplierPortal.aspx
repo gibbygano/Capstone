@@ -110,30 +110,33 @@
                      <asp:Label ID="lblDateError" CssClass="dontPrint" runat="server" Text="" BorderStyle="NotSet" ForeColor="#CC0000"></asp:Label>
                 </div>
                 <div style="float: left">
+                    <h3 style="float: left; margin:0; padding:0">Dates Selected: </h3>
+                    <div class="LeftFloatMargin">
+                        <p class="LeftFloatBold">From: </p>
                     <% 
                         if(Session["dateFrom"] != null)
                        { 
                     %>
-                    <h3 style="float: left; margin:0; padding:0">Dates Selected: </h3>
-                    <div class="LeftFloatMargin">
-                        <p class="LeftFloatBold">From: </p>
                         <p class="LeftFloatMargin"><%= Session["dateFrom"] %></p>
-                    </div>
+                        </div>
+                    <%} else { %>
+                        <p class="LeftFloatMargin">--/--/----</p>
+                        </div>
+                    <%} %>
+                    
+                     <div class="LeftFloatMargin">
+                     <p class="LeftFloatBold">To: </p>
                     <%
-                      }
                       if(Session["dateTo"] != null)
                       { 
                     %>
-                    <div class="LeftFloatMargin">
-                        <p class="LeftFloatBold">To: </p>
                         <p class="LeftFloatMargin"><%= Session["dateTo"] %></p>
-                    </div>
-                    <%} else { %>
-                    <div class="LeftFloatMargin">
-                        <p class="LeftFloatBold">To: </p>
-                        <p class="LeftFloatMargin">--/--/----</p>
-                    </div>
-                    <%}%>
+                        </div>
+                    <% }
+                    else { 
+                        Response.Write("<p class='LeftFloatMargin'>--/--/----</p>" +
+                        "</div>");
+                   } %>
                 </div>
                 <div class="clear"></div>
                 <asp:ListView ID="ListView1" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemListsByDate" DataKeyNames="ItemListID" EnableViewState="False" runat="server">

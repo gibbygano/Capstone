@@ -9,6 +9,7 @@
         mc:Ignorable="d"
         Style="{DynamicResource WindowStyle}"
         Title="View Guest" Height="400" Width="830"
+        Closing="MetroWindow_Closing"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="{DynamicResource Spacing.Container}">
         <Grid.RowDefinitions>

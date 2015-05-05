@@ -132,7 +132,7 @@ namespace com.WanderingTurtle.Tests
         }
         [TestMethod]
         public void InvoiceManagerInvoiceDetailsSearch()
-        {   //Uses the fake name to for the fake guest
+        {   //Uses the fake name to find the fake guest
             List<InvoiceDetails> details = access.InvoiceDetailsSearch("Fake");
             string expected = "Fake";
             Assert.AreEqual(expected, details[details.Count - 1].GuestFirstName);

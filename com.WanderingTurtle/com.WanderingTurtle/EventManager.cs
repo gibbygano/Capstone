@@ -69,7 +69,7 @@ namespace com.WanderingTurtle.BusinessLogic
                 {
                     //get event from cached list
                     var list = DataCache._currentEventList;
-                    Event currentEvent = list.Where(e => e.EventItemID.ToString() == eventItemID).FirstOrDefault();
+                    Event currentEvent = list.FirstOrDefault(e => e.EventItemID.ToString() == eventItemID);
                     if (currentEvent != null)
                     {
                         return currentEvent;
