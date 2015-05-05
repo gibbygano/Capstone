@@ -54,23 +54,27 @@ namespace com.WanderingTurtle.Web.PagesGuest
                 }
                 catch (ApplicationException)
                 {
-                    lblError.Text = "The pin entered is not active or does not exist.";
+                    showError("The pin entered is not active or does not exist.");
                     lblError.Visible = true;
                     txtLogin.Text = "";
                 }
                 catch (Exception)
                 {
-                    lblError.Text = "There was an error fetching data.";
+                    showError("There was an error fetching data.");
                     lblError.Visible = true;
                     txtLogin.Text = "";
                 }
             }
             else
             {
-                lblError.Text = "The pin you enterred was not formatted correctly.  It must be 6 alphanumeric characters.";
+                showError("The pin you enterred was not formatted correctly.<br>It must be 6 alphanumeric characters.");
                 lblError.Visible = true;
             }
         }
-
+        private void showError(string message)
+        {
+            lblError.Text = message;
+            lblError.Visible = true;
+        }
     }
 }

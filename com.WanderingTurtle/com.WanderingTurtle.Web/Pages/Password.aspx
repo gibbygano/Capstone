@@ -16,8 +16,8 @@
                         <li>
                             <asp:Label runat="server" AssociatedControlID="txtCurrent">Current Password</asp:Label>
                             <asp:TextBox runat="server" ID="txtCurrent" TextMode="Password" />
-                           <!-- <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCurrent" CssClass="field-validation-error" ErrorMessage="You must enter your current password." /> -->
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCurrent" CssClass="field-validation-error" ErrorMessage="You must enter your current password." />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCurrent" CssClass="field-validation-error" ErrorMessage="You must enter your current password." /> 
+                           
                         </li>
                         <li>
                             <asp:Label runat="server" AssociatedControlID="txtNewPassword">New Password</asp:Label>
@@ -28,7 +28,6 @@
                         <li>
                             <asp:Label runat="server" AssociatedControlID="txtNewPassword2">Confirm New Password</asp:Label>
                             <asp:TextBox runat="server" ID="txtNewPassword2" TextMode="Password" />
-                           <!-- <asp:RequiredFieldValidator ID="pass2" runat="server" ControlToValidate="txtNewPassword2" CssClass="field-validation-error" ErrorMessage="Please confirm your new password." /> -->
                           
                             <asp:CompareValidator CssClass="field-validation-error" ID="passValidator" runat="server" ErrorMessage="Passwords do not match!" ControlToValidate="txtNewPassword2" ControlToCompare="txtNewPassword"></asp:CompareValidator>
                         </li>

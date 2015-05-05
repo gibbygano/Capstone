@@ -1,5 +1,11 @@
 ﻿namespace com.WanderingTurtle.Common
 {
+    /// <summary>
+    /// Matthew Lapka
+    /// Created: 2015/04/14
+    /// 
+    /// Class for the creation of BookingNumbers objects with set data fields.
+    /// </summary>
     public class BookingNumbers
     {
         public BookingNumbers()

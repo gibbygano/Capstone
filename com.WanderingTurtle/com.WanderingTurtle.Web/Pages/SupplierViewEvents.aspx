@@ -146,10 +146,10 @@
         <input type="text" id="eventEnd" name="enddate" class="mydate" />
         <br />
         Ticket Price: $
-        <input id="listPrice" name="price" value="0.00" class="myspinner">
+        <input id="listPrice" name="price" value="0.00" maxlength="6" class="myspinner">
         <br />
         Number of Tickets Available:
-        <input id="listTickets" name="tickets" value="0" class="myspinner"><br />
+        <input id="listTickets" name="tickets" value="0" maxlength="3" class="myspinner"><br />
         <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
         <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" />
     </div>

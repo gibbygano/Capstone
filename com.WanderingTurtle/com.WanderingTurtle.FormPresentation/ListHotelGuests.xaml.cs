@@ -142,5 +142,10 @@ namespace com.WanderingTurtle.FormPresentation
             LvHotelGuestList.ItemsSource = myTempList;
             TxtSearchBox.Text = "";
         }
+
+        private void LvHotelGuestList_Loaded(object sender, RoutedEventArgs e)
+        {
+            RefreshGuestList();
+        }
     }
 }
