@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             RefreshGuestList();
 
-            LvHotelGuestList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View);
+            LvHotelGuestList.SetContextMenu(DataGridContextMenuResult.Add, DataGridContextMenuResult.View);
         }
 
         /// <exception cref="WanderingTurtleException"/>

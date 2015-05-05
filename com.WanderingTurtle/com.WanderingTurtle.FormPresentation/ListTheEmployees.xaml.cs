@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             RefreshEmployeeList();
 
-            LvEmployeesList.SetContextMenu(this, DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
+            LvEmployeesList.SetContextMenu(DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
         }
 
         /// <summary>

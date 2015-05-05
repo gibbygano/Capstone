@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             LoadPendingSuppliers();
 
-            LvPendingSuppliers.SetContextMenu(this, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
+            LvPendingSuppliers.SetContextMenu(DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
         }
 
         /// <exception cref="WanderingTurtleException"/>

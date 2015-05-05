@@ -73,7 +73,6 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// Sets the context menu on the specified component
         /// </summary>
         /// <param name="component">the component on which to ad the context menu</param>
-        /// <param name="context">the class that implements <see cref="IDataGridContextMenu" /></param>
         /// <param name="contextMenus"></param>
         /// <returns><see cref="FrameworkElement" /></returns>
         /// <exception cref="ArgumentNullException">
@@ -87,7 +86,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         /// <exception cref="WanderingTurtleException">Error assigning the context menu to the <paramref name="component"/></exception>
-        public static FrameworkElement SetContextMenu(this FrameworkElement component, IDataGridContextMenu context, params DataGridContextMenuResult[] contextMenus)
+        public static FrameworkElement SetContextMenu(this FrameworkElement component, params DataGridContextMenuResult[] contextMenus)
         {
             try
             {
@@ -103,7 +102,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                                 CommandParameter = menu
                             }))
                 {
-                    menuItem.Click += context.ContextMenuItemClick;
+                    menuItem.Click += component.GetParent<IDataGridContextMenu>().ContextMenuItemClick;
                     var result =
                         (DataGridContextMenuResult)
                             Enum.Parse(typeof(DataGridContextMenuResult), menuItem.Header.ToString());

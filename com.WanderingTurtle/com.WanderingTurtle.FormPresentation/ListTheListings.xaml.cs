@@ -38,7 +38,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             RefreshData();
 
-            LvListing.SetContextMenu(this);
+            LvListing.SetContextMenu();
         }
 
         /// <exception cref="WanderingTurtleException"/>
