@@ -89,12 +89,16 @@ namespace com.WanderingTurtle.Tests
             var conn = DatabaseConnection.GetDatabaseConnection();
             string commandText = @"DELETE FROM SupplierLogin WHERE UserName='Test'";
 
+            string commandText2 = @"DELETE FROM Supplier WHERE CompanyName = 'fakeCompany'";
+
             var cmd = new SqlCommand(commandText, conn);
+            var cmd2 = new SqlCommand(commandText2, conn);
 
             try
             {
                 conn.Open();
                 cmd.ExecuteNonQuery();
+                cmd2.ExecuteNonQuery();
             }
             catch (SqlException)
             {
