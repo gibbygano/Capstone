@@ -232,6 +232,11 @@ namespace com.WanderingTurtle.Web.Pages
                     lblMessage.Text = "Event listing successfully deleted.";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 }
+                else
+                {
+                    lblMessage.Text = "Cannot delete listing with registered guests.";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                }
             }
             catch (Exception ex)
             {

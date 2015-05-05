@@ -205,11 +205,17 @@ namespace com.WanderingTurtle.BusinessLogic
         {
             try
             {
-                if (ItemListingAccessor.DeleteItemListing(itemListToDelete) == 1)
+                if (itemListToDelete.CurrentNumGuests == 0)
                 {
-                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
-                    return listResult.Success;
-                }
+                    if (itemListToDelete.CurrentNumGuests == 0)
+                    {
+                        if (ItemListingAccessor.DeleteItemListing(itemListToDelete) == 1)
+                        {
+                            DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                            return listResult.Success;
+                        }
+                    }
+                }           
                 return listResult.NotChanged;
             }
             catch (Exception)
