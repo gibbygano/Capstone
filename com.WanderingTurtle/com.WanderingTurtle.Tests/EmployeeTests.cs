@@ -33,25 +33,6 @@ namespace EmployeeLogicTests
 
         #region Additional test attributes
 
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
 
         #endregion Additional test attributes
         public void addEmp()
@@ -69,17 +50,6 @@ namespace EmployeeLogicTests
                 worked = true;
             }
             Assert.IsTrue(worked);
-        }
-
-        [TestMethod]
-        public void EmployeeManagerFetchEmployeeByID()
-        {
-            //Grabs the fake emp id 
-            int ID = TestCleanupAccessor.getTestEmp();
-            //Gets the entire Employee Record
-            Employee orig = myManager.FetchEmployee(ID);
-            //Asserts that the record returned matches the one in setup.
-            Assert.AreEqual("Test",orig.FirstName);
         }
         [TestMethod]
         public void EmployeeManagerFetchEmpList()
@@ -109,7 +79,7 @@ namespace EmployeeLogicTests
         {   //Grabs the fake emp id 
             int ID = TestCleanupAccessor.getTestEmp();
             //Gets the entire Employee Record
-            Employee orig = myManager.FetchEmployee(ID);
+            Employee orig = EmployeeAccessor.GetEmployee(ID);
             //Creates a new employee object with the original properties, update the active property to false.
             Employee newEmp = new Employee(orig.FirstName, orig.LastName, orig.Password, (int)orig.Level, false);
             //calls to manager.
