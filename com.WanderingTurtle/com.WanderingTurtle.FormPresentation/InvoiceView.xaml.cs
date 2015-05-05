@@ -164,7 +164,6 @@ namespace com.WanderingTurtle.FormPresentation
 
                         if (cancel.ShowDialog() == false) return;
                         RefreshBookingList();
-                        Result = true;
                     }
                     catch (Exception ex)
                     {
@@ -214,7 +213,7 @@ namespace com.WanderingTurtle.FormPresentation
                         ArchiveInvoice myGuest = new ArchiveInvoice(CurrentInvoice.HotelGuestID);
 
                         if (myGuest.ShowDialog() == false) return;
-                        DialogResult = true;
+                        Result = true;
                         Close();
                     }
                     catch (Exception ex)

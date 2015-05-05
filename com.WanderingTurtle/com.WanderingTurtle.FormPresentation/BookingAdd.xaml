@@ -34,12 +34,12 @@
             <Label Grid.Row="0" Grid.Column="0" x:Name="LblAddBookingGuestId" Content="Guest Name:" HorizontalContentAlignment="Right" />
             <Label Grid.Row="1" Grid.Column="0" x:Name="LblAddBookingQuantity" Content="Quantity:" HorizontalContentAlignment="Right" />
             <Label Grid.Row="2" Grid.Column="0" x:Name="LblAddBookingDiscount" Content="Discount:" HorizontalContentAlignment="Right" />
-            <Label Grid.Row="0" Grid.Column="1" x:Name="LblAddBookingGuestName" Grid.ColumnSpan="2" />
+            <Label Grid.Row="0" Grid.Column="1" x:Name="LblAddBookingGuestName" />
             <metro:NumericUpDown Grid.Column="1" Grid.Row="1" Minimum="0" Value="0" x:Name="UdAddBookingQuantity" />
             <metro:NumericUpDown Grid.Column="1" Grid.Row="2" Minimum="0" Value="0" x:Name="UdDiscount" StringFormat="P0" Interval=".01" />
 
             <Label   Grid.Row="0" Grid.Column="2" Content="Total Discounted Price:" />
-            <Label   Grid.Row="1" Grid.Column="3" x:Name="LblTotalWithDiscount" ContentStringFormat="{}{0:C}" />
+            <Label   Grid.Row="1" Grid.Column="2" x:Name="LblTotalWithDiscount" ContentStringFormat="{}{0:C}" />
             <Label   Grid.Row="0" Grid.Column="3" FontWeight="Bold" Content="EVENT DESCRIPTION:" />
             <TextBox Grid.Row="1" Grid.Column="3" x:Name="TxtEventDescription" Grid.RowSpan="2" Grid.ColumnSpan="2" Style="{StaticResource TextArea}" />
 

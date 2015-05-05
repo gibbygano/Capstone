@@ -26,7 +26,7 @@ namespace com.WanderingTurtle.FormPresentation.Models
                 var parent = control;
                 while (!(parent is T))
                 {
-                    if (parent == null) { throw new ApplicationException("Control " + control.Name + " does not have parent " + typeof(T)); }
+                    if (parent == null) { throw new ApplicationException("Control " + control + " does not have parent " + typeof(T)); }
                     parent = (FrameworkElement)parent.Parent;
                 }
                 return parent as T;
@@ -48,9 +48,10 @@ namespace com.WanderingTurtle.FormPresentation.Models
         {
             try
             {
-                var parent = VisualTreeHelper.GetParent(control) ?? control;
+                var parent = control as DependencyObject;
                 while (!(parent is T))
                 {
+                    if (parent == null) { throw new ApplicationException("Control " + control + " does not have parent " + typeof(T)); }
                     parent = VisualTreeHelper.GetParent(parent);
                 }
 

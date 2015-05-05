@@ -1,6 +1,8 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.FormPresentation.Models;
 using com.WanderingTurtle.FormPresentation.Views;
 using System;
+using System.Data.Common;
 using System.Windows;
 
 namespace com.WanderingTurtle.FormPresentation
@@ -20,17 +22,26 @@ namespace com.WanderingTurtle.FormPresentation
         /// Updated 2015/03/04
         /// Added user tabs
         /// </remarks>
+        /// <exception cref="WanderingTurtleException">Condition.</exception>
         public MainWindow()
         {
             try
             {
                 ConnectionManager.TestConnection();
             }
-            catch (Exception ex)
+            catch (DbException ex)
             {
                 _DBConnectError(ex);
             }
-            InitializeComponent();
+
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                throw new WanderingTurtleException(this, ex);
+            }
         }
 
         /// <summary>

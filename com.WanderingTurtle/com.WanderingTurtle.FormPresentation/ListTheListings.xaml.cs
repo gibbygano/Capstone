@@ -1,10 +1,8 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
 using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
-using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -32,18 +30,17 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
 
-            switch(Globals.UserToken.Level)
+            switch (Globals.UserToken.Level)
             {
                 case RoleData.Valet:
                 case RoleData.Concierge:
                     BtnAddListing.Visibility = Visibility.Collapsed;
-                    BtnArchiveListing.Visibility = Visibility.Collapsed;
                     BtnEditListing.Visibility = Visibility.Collapsed;
                     LvListing.SetContextMenu(DataGridContextMenuResult.View);
                     break;
 
                 default:
-                    LvListing.SetContextMenu();
+                    LvListing.SetContextMenu(DataGridContextMenuResult.Add, DataGridContextMenuResult.View, DataGridContextMenuResult.Edit);
                     break;
             }
             RefreshData();
@@ -73,13 +70,9 @@ namespace com.WanderingTurtle.FormPresentation
                     OpenListing(selectedItem);
                     break;
 
-                case DataGridContextMenuResult.Delete:
-                    ArchiveListing();
-                    break;
-
                 default:
                     throw new WanderingTurtleException(this, "Error processing context menu");
-                }
+            }
         }
 
         private void OpenListing(ItemListing selectedItem = null, bool readOnly = false)
@@ -104,6 +97,9 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        #region ArchiveListing
+
+        /*
         /// <summary>
         /// Pat Banks
         /// Updated 2015/04/26
@@ -141,15 +137,13 @@ namespace com.WanderingTurtle.FormPresentation
                 throw new WanderingTurtleException(this, ex);
             }
         }
+        */
+
+        #endregion ArchiveListing
 
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
             OpenListing();
-        }
-
-        private void btnArchiveListing_click(object sender, RoutedEventArgs e)
-        {
-            ArchiveListing();
         }
 
         private void btnEditListing_click(object sender, RoutedEventArgs e)
@@ -166,7 +160,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
- //             _eventmanager.RetrieveEventList();
+                _eventmanager.RetrieveEventList();
                 ListingList = _productManager.RetrieveItemListingList();
                 foreach (ItemListing item in ListingList)
                 {
@@ -184,7 +178,6 @@ namespace com.WanderingTurtle.FormPresentation
         {
             BtnSearchListing.Content = TxtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
-
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)
         {
