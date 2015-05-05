@@ -8,6 +8,10 @@
     /// </summary>
     public class BookingNumbers
     {
+        /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/04/14
+        /// </summary>
         public BookingNumbers()
         {
         }

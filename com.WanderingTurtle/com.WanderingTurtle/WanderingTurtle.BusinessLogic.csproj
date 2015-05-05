@@ -48,6 +48,7 @@
     <Compile Include="InvoiceManager.cs" />
     <Compile Include="BookingManager.cs" />
     <Compile Include="EventManager.cs" />
+    <Compile Include="PasswordManager.cs" />
     <Compile Include="ProductManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupplierLoginManager.cs" />

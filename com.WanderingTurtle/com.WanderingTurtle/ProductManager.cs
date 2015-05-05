@@ -117,7 +117,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 if (ItemListingAccessor.AddItemListing(newItemListing) == 1)
                 {
-                    DataCache._currentItemListingList = ItemListingAccessor.GetAllItemListingList();
+                    DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
                     return listResult.Success;
                 }
                 return listResult.NotAdded;
@@ -263,20 +263,20 @@ namespace com.WanderingTurtle.BusinessLogic
                 if (DataCache._currentItemListingList == null)
                 {
                     //data hasn't been retrieved yet. get data, set it to the cache and return the result.
-                    DataCache._currentItemListingList = ItemListingAccessor.GetAllItemListingList();
-                    DataCache._ItemListingListTime = now;
+                    DataCache._currentAllItemListingList = ItemListingAccessor.GetAllItemListingList();
+                    DataCache._AllItemListingListTime = now;
                 }
                 else
                 {
                     //check time. If less than 5 min, return cache
-                    if (now > DataCache._ItemListingListTime.AddMinutes(cacheExpirationTime))
+                    if (now > DataCache._AllItemListingListTime.AddMinutes(cacheExpirationTime))
                     {
                         //get new list from DB
-                        DataCache._currentItemListingList = ItemListingAccessor.GetAllItemListingList();
-                        DataCache._ItemListingListTime = now;
+                        DataCache._currentAllItemListingList = ItemListingAccessor.GetAllItemListingList();
+                        DataCache._AllItemListingListTime = now;
                     }
                 }
-                return DataCache._currentItemListingList.Where(l => l.SupplierID == supplierID);
+                return DataCache._currentAllItemListingList.Where(l => l.SupplierID == supplierID);
             }
             catch (Exception)
             {
