@@ -24,11 +24,11 @@ namespace EmployeeLogicTests
         private EmployeeManager myManager;
 
         [TestInitialize]
-        public void EmployeeTestSetup()
+        public void EmployeeManagerTestSetup()
         {
             myManager = new EmployeeManager();
             testEmp = new Employee(FirstName, LastName, Password, (int)Level, Active);
-            TestMethodAddEmployee();
+            addEmp();
         }
 
         #region Additional test attributes
@@ -54,9 +54,12 @@ namespace EmployeeLogicTests
         //
 
         #endregion Additional test attributes
-
+        public void addEmp()
+        {
+            ResultsEdit result = myManager.AddNewEmployee(testEmp);
+        }
         [TestMethod]
-        public void TestMethodAddEmployee()
+        public void EmployeeManagerAddEmployee()
         {
             //Adds fake employee to Data base
             bool worked = false;
@@ -68,52 +71,62 @@ namespace EmployeeLogicTests
             Assert.IsTrue(worked);
         }
 
-        //[TestMethod]
-//        public void TestMethodFetchEmployeeByID()
-//        {
-////            Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
-//            Employee testEmp2 = myManager.FetchEmployee((int)testEmp1.EmployeeID);
-//            Assert.AreEqual(testEmp1.FirstName, testEmp2.FirstName);
-//        }
-
         [TestMethod]
-        public void TestMethodFetchEmpList()
+        public void EmployeeManagerFetchEmployeeByID()
+        {
+            //Grabs the fake emp id 
+            int ID = TestCleanupAccessor.getTestEmp();
+            //Gets the entire Employee Record
+            Employee orig = myManager.FetchEmployee(ID);
+            //Asserts that the record returned matches the one in setup.
+            Assert.AreEqual("Test",orig.FirstName);
+        }
+        [TestMethod]
+        public void EmployeeManagerFetchEmpList()
         {
             List<Employee> myList = new List<Employee>();
             myList = myManager.FetchListEmployees();
-
-            Assert.IsNotNull(myList);
+            bool worked = false;
+            //Tests that a list greater than one is being returned.
+            if (myList.Count > 1)
+            {
+                worked = true;
+            }
+            Assert.IsTrue(worked);
         }
-
-        //[TestMethod]
- //       public void TestMethodGetEmpLogin()
- //       {
- ////           Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
- //           Employee testEmp2 = myManager.GetEmployeeLogin((int)testEmp1.EmployeeID, Password);
- //           bool worked = false;
- //           if (testEmp1.FirstName == testEmp2.FirstName)
- //           {
- //               worked = true;
- //           }
- //           Assert.IsTrue(worked);
- //       }
-
-        //[TestMethod]
-        //public void TestMethodEditEmployee()
-        //{
-        //    Employee testEmp1 = myManager.FetchEmployee(FirstName, LastName);
-        //    Employee testEmp2 = new Employee(testEmp1.FirstName, LastName, "pass123", (int)testEmp1.Level, testEmp1.Active);
-        //    bool worked = false;
-        //    ResultsEdit result = myManager.EditCurrentEmployee(testEmp1, testEmp2);
-        //    if (result == ResultsEdit.Success)
-        //    {
-        //        worked = true;
-        //    }
-        //    Assert.IsTrue(worked);
-        //}
-
+        [TestMethod]
+        public void EmployeeManagerGetEmpLogin()
+        {
+            //Grabs the fake emp id 
+            int ID = TestCleanupAccessor.getTestEmp();
+            //Gets the entire Employee Record by login info
+            Employee orig = myManager.GetEmployeeLogin(ID, Password);
+            //Asserts that the record returned matches the one in setup.
+            Assert.AreEqual("Test", orig.FirstName);
+        }
+        [TestMethod]
+        public void EmployeeManagerEditEmployee()
+        {   //Grabs the fake emp id 
+            int ID = TestCleanupAccessor.getTestEmp();
+            //Gets the entire Employee Record
+            Employee orig = myManager.FetchEmployee(ID);
+            //Creates a new employee object with the original properties, update the active property to false.
+            Employee newEmp = new Employee(orig.FirstName, orig.LastName, orig.Password, (int)orig.Level, false);
+            //calls to manager.
+            ResultsEdit result = myManager.EditCurrentEmployee(orig, newEmp);
+            //Asserts that the update went through
+            Assert.AreEqual(ResultsEdit.Success, result);
+        }
+        [TestMethod]
+        public void EmployeeManagerSearchEmployee()
+        {
+            //Uses the fake first name to find the employee
+            List<Employee> emps = myManager.SearchEmployee("Test");
+            //Asserts that the employee returned in the list will match the test setup employee
+            Assert.AreEqual("Test", emps[emps.Count - 1].FirstName);
+        }
         [TestCleanup]
-        public void TestMethodDeleteRecord()
+        public void EmployeeManagerDeleteRecord()
         {
             TestCleanupAccessor.testEmp(testEmp);
         }
