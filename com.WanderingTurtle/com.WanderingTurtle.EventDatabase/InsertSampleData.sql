@@ -134,12 +134,12 @@ VALUES
 ('Reyhan', 'Wolfe', '52641', '2234 Lowe Ave', '', '(215) 584-2544', 'Wolfe@Imthewolfman.org', '1020', 'N9D6B8'),
 ('Jalal', 'Michel', '10001', '123 Friley St', 'Apt 1145', '(847) 544-5426', 'fullmetal@gmail.com', '1030', 'B9D7S5'),
 ('Emil', 'Abbate', '10007', '45567 Maple Ave', '', '(223) 145-9908','EmilAbbate@aol.com', '1040', 'V6D5S3'),
-('Evan', 'Ezra', '73078', '6453 Larch Ave', '','(223) 456-1234', '', '1005', 'M9G8H7'),
+('Evan', 'Ezra', '73078', '6453 Larch Ave', '','(223) 456-1234', 'EvanEzra@Ezra.com', '1005', 'M9G8H7'),
 ('Swati', 'Samson', '73078', '6453 Oak Ave', '', '(545) 878-6542', 'Swati@samsonIndustries.com', '2001', 'D6F9H7'),
 ('Joaquin', 'Delaney', '73102', '3345 Outside Dr', 'Apt. 4432', '(245) 547-9654', 'JoaquinDelaney@DelaneyEnterprises.com', '2020', 'D9R7G6'),
-('Fatima', 'Dali', '73102', '5634 Lovelace St','', '(456) 223-1234', '', '2030', 'B9R8E7'),
+('Fatima', 'Dali', '73102', '5634 Lovelace St','', '(456) 223-1234', 'Fatima@me.com', '2030', 'B9R8E7'),
 ('Timo', 'Pharlain', '52641', '332 Wilson Ave', '', '(515) 217-4355', 'JannikeC@Oakwood.edu', '2004', 'N9G0F8'),
-('Jenni', 'Stablum', '52641', '1455 Wallace Ave', '', '(319) 931-9983', '', '2005', 'V0E7T7')
+('Jenni', 'Stablum', '52641', '1455 Wallace Ave', '', '(319) 931-9983', 'Jenni333@Stablum.com', '2005', 'V0E7T7')
 GO
 
 INSERT INTO [dbo].[Supplier]  (CompanyName, FirstName, LastName, Address1, Address2, Zip, PhoneNumber, EmailAddress, ApplicationID, Active)
@@ -198,24 +198,26 @@ VALUES
 ('Market Excursion', 101, 0, 1, 'Tour the local marketplace. Haggle your way to some great stuff!', 1 ),
 ('Alligator Wrestling', 104, 0, 0, 'A fun swim with the green guys.', 1 ),
 ('Roaring Fun', 103, 0, 0, 'Singing and Comedy all in one.', 1 ),
-('Authentic Cuisine', 102, 0, 0, 'A seven course meal of local food.', 1 ),
+('Authentic Cuisine', 102, 1, 0, 'A seven course meal of local food.', 1 ),
 ('Zip-Lining', 104, 0, 1, 'Zip through the jungle with the monkeys.', 1 ),
 ('Snorkeling', 104, 0, 0, 'See the local fish and sealife.', 1 ),
 ('Dolphin Watching', 101, 0, 0, 'Lots of dolphins to see.', 1 ),
-('Jungle Tour for Kids', 101, 0, 0, 'Perfect for the whole family.', 1 )
+('Jungle Tour for Kids', 101, 0, 0, 'Perfect for the whole family.', 1 ),
+('Kayaking', 100, 0,0,'For families with children over 10.', 1),
+('Food Sampling', 102, 1,0,'An array of local foods to try.', 1)
 GO
 
 --Dummy record
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2020-01-01 10:00:00', '2020-01-31 10:00:00', 102, CAST(1234.0000 AS Money), 100, 0, 10, 40, 0)
 --Data for financial records
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-01 11:30:00', '2015-04-01 17:30:00', 101, CAST(30.0000 AS Money), 101, 1, 15, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-10 17:00:00', '2015-04-10 19:00:00', 101, CAST(30.0000 AS Money), 101, 1, 10, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-03 10:00:00', '2015-04-03 12:00:00', 108, CAST(40.0000 AS Money), 101, 1, 21, 25, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-04 13:00:00', '2015-04-04 16:00:00', 109, CAST(60.0000 AS Money), 101, 1, 7, 10, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-15 20:00:00', '2015-04-15 22:00:00', 102, CAST(25.0000 AS Money), 101, 1, 10, 10, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(30.0000 AS Money), 101, 1, 15, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-19 10:00:00', '2015-04-19 12:00:00', 101, CAST(30.0000 AS Money), 101, 1, 12, 15, 0)
-INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-07 13:00:00', '2015-04-07 16:00:00', 101, CAST(30.0000 AS Money), 101, 1, 13, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-01 11:30:00', '2015-04-01 17:30:00', 101, CAST(30.0000 AS Money), 101, 0, 15, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-10 17:00:00', '2015-04-10 19:00:00', 101, CAST(30.0000 AS Money), 101, 0, 10, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-03 10:00:00', '2015-04-03 12:00:00', 108, CAST(40.0000 AS Money), 101, 0, 21, 25, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-04 13:00:00', '2015-04-04 16:00:00', 109, CAST(60.0000 AS Money), 101, 0, 7, 10, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-15 20:00:00', '2015-04-15 22:00:00', 102, CAST(25.0000 AS Money), 101, 0, 10, 10, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(30.0000 AS Money), 101, 0, 15, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-19 10:00:00', '2015-04-19 12:00:00', 101, CAST(30.0000 AS Money), 101, 0, 12, 15, 0)
+INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-07 13:00:00', '2015-04-07 16:00:00', 101, CAST(30.0000 AS Money), 101, 0, 13, 15, 0)
 --Begin real records
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-29 11:30:00', '2015-04-19 17:30:00', 100, CAST(15.0000 AS Money), 102, 1, 26, 50, 0)
 INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price], [SupplierID], [Active], [CurrentNumberOfGuests], [MaxNumberOfGuests], [MinNumberOfGuests]) VALUES ('2015-04-22 17:00:00', '2015-04-22 19:00:00', 101, CAST(45.0000 AS Money), 109, 1, 4, 15, 0)
@@ -236,7 +238,6 @@ INSERT INTO [dbo].[ItemListing] ([StartDate], [EndDate], [EventItemID], [Price],
 GO
 
 SET IDENTITY_INSERT [dbo].[Booking] ON
---Begin real records
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (107, 100, 100, 109, 4, N'2015-04-21 18:22:25', CAST(0.10 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(180.00 AS Decimal(12, 2)), CAST(162.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (108, 101, 100, 110, 4, N'2015-04-21 18:23:11', CAST(0.00 AS Decimal(3, 2)), 1, CAST(65.00 AS Decimal(8, 2)), CAST(260.00 AS Decimal(12, 2)), CAST(260.00 AS Decimal(12, 2)))
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (109, 101, 100, 112, 4, N'2015-04-21 18:27:17', CAST(0.00 AS Decimal(3, 2)), 1, CAST(45.00 AS Decimal(8, 2)), CAST(180.00 AS Decimal(12, 2)), CAST(180.00 AS Decimal(12, 2)))
@@ -277,7 +278,6 @@ INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID],
 INSERT INTO [dbo].[Booking] ([BookingID], [GuestID], [EmployeeID], [ItemListID], [Quantity], [DateBooked], [Discount], [Active], [TicketPrice], [ExtendedPrice], [TotalCharge]) VALUES (144, 104, 100, 114, 5, N'2015-04-21 18:41:06', CAST(0.00 AS Decimal(3, 2)), 1, CAST(40.00 AS Decimal(8, 2)), CAST(200.00 AS Decimal(12, 2)), CAST(200.00 AS Decimal(12, 2)))
 SET IDENTITY_INSERT [dbo].[Booking] OFF
 GO
-
 
 INSERT INTO [dbo].[Invoice] (HotelGuestID, Active, DateOpened)
 VALUES

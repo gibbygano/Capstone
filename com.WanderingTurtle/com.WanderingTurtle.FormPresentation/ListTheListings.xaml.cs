@@ -161,7 +161,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                _eventmanager.RetrieveEventList();
+ //             _eventmanager.RetrieveEventList();
                 ListingList = _productManager.RetrieveItemListingList();
                 foreach (ItemListing item in ListingList)
                 {
@@ -179,6 +179,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             BtnSearchListing.Content = TxtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
+
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)
         {
