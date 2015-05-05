@@ -70,17 +70,6 @@ namespace EmployeeLogicTests
             }
             Assert.IsTrue(worked);
         }
-
-        [TestMethod]
-        public void EmployeeManagerFetchEmployeeByID()
-        {
-            //Grabs the fake emp id 
-            int ID = TestCleanupAccessor.getTestEmp();
-            //Gets the entire Employee Record
-            Employee orig = myManager.FetchEmployee(ID);
-            //Asserts that the record returned matches the one in setup.
-            Assert.AreEqual("Test",orig.FirstName);
-        }
         [TestMethod]
         public void EmployeeManagerFetchEmpList()
         {
@@ -109,7 +98,7 @@ namespace EmployeeLogicTests
         {   //Grabs the fake emp id 
             int ID = TestCleanupAccessor.getTestEmp();
             //Gets the entire Employee Record
-            Employee orig = myManager.FetchEmployee(ID);
+            Employee orig = EmployeeAccessor.GetEmployee(ID);
             //Creates a new employee object with the original properties, update the active property to false.
             Employee newEmp = new Employee(orig.FirstName, orig.LastName, orig.Password, (int)orig.Level, false);
             //calls to manager.
