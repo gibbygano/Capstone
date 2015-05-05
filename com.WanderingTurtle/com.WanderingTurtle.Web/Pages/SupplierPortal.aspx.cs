@@ -161,6 +161,8 @@ namespace com.WanderingTurtle.Web.Pages
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                         }
                     }
+                    Session["dateFrom"] = DateTime.Now.ToShortDateString();
+                    Session["dateTo"] = null;
                     return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                 }
                 if (DateTime.TryParse(Request.Form["dateTo"], out To))
@@ -177,6 +179,8 @@ namespace com.WanderingTurtle.Web.Pages
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                         }
                     }
+                    Session["dateFrom"] = DateTime.Now.ToShortDateString();
+                    Session["dateTo"] = null;
                     return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now); 
                 }
 
