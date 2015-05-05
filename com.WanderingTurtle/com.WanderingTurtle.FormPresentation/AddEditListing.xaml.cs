@@ -104,7 +104,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Added button to allow cancel of the form function.  Combined Edit and Add forms
         /// </summary>
         /// <param name="sender"></param>
@@ -116,7 +116,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
         /// </summary>
         /// <param name="sender"></param>
@@ -127,7 +127,7 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Logic rearranged when combining the add and edit forms.
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -141,7 +141,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Method is used to populate fields when editing the listing, otherwise, brings up a blank form.
         /// </summary>
         private void PopulateFields()
@@ -186,7 +186,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Method is used to initialize the screen to the default presentation.
         /// Merged add and edit ui screens
         /// </summary>
@@ -262,7 +262,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Hunter Lind
-        /// Created 2015/02/16
+        /// Created: 2015/02/16
         /// Validates user input
         /// </summary>
         /// <returns>true if valid</returns>

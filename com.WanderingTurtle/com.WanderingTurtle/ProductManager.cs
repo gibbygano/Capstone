@@ -36,10 +36,6 @@ namespace com.WanderingTurtle.BusinessLogic
         StartEndDateError,
         //start date can't be in past
         DateInPast
-
-
-
-
     }
 
     public class ProductManager
@@ -47,15 +43,13 @@ namespace com.WanderingTurtle.BusinessLogic
         public ProductManager()
         {
         }
-
-
         /// <summary>
         /// Matt Lapka
         /// Created: 2015/02/14
         /// Get a single ItemListing object from the database
         /// </summary>
         /// <param name="itemListID">the ItemListing ID in string format</param>
-        /// <returns>a single ItemListing object meeting the criteria</returns>
+        /// <returns>A single ItemListing object meeting the criteria</returns>
         public ItemListing RetrieveItemListing(string itemListID)
         {
             try
@@ -110,7 +104,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Send a new ItemListing object to the Data Access Layer to be added to the database
         /// </summary>
         /// <param name="newItemListing">ItemListing object that contains the information to be added</param>
-        /// <returns>int number of rows affect -- 1 if successful, 0 if not</returns>
+        /// <returns>An int reflecting the number of rows affected -- 1 if successful, 0 if not</returns>
         public listResult AddItemListing(ItemListing newItemListing)
         {
             try
@@ -133,9 +127,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created: 2015/02/14
         /// Updates an ItemListing object by sending the object in its original form and the object with the updated information
         /// </summary>
-        /// <param name="newItemList">the ItemListing object containing the new data</param>
-        /// <param name="oldItemList">the ItemListing object containing the original data</param>
-        /// <returns>int number of rows affected-- should be 1</returns>
+        /// <param name="newItemList">The ItemListing object containing the new data</param>
+        /// <param name="oldItemList">The ItemListing object containing the original data</param>
+        /// <returns>An int reflecting the number of rows affected-- should be 1</returns>
         public listResult EditItemListing(ItemListing newItemLists, ItemListing oldItemLists)
         {
             if (newItemLists.CurrentNumGuests > 0)
@@ -184,8 +178,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/26
         /// Added logic to determine if an event can be archived
         /// </summary>
-        /// <param name="eventID"></param>
-        /// <returns></returns>
+        /// <param name="eventID">The eventID to crossreference against</param>
+        /// <returns>An Enumerated result depicting OkToArchive or CannotArchive</returns>
         public ResultsArchive CheckToArchiveEvent(int eventID)
         {
             List<ItemListing> list = RetrieveItemListingList();
@@ -200,7 +194,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Archive an ItemListing so it does not appear in active searches
         /// </summary>
         /// <param name="itemListToDelete">ItemListing object containing the information to delete</param>
-        /// <returns>int # of rows affected</returns>
+        /// <returns>An int reflecting number of rows affected</returns>
         public listResult ArchiveItemListing(ItemListing itemListToDelete)
         {
             try
@@ -226,8 +220,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/15
         /// Searches for a string the user inputs
         /// </summary>
-        /// <param name="inSearch"></param>
-        /// <returns></returns>
+        /// <param name="inSearch">The string to be searched for</param>
+        /// <returns>
+        /// A List object containing ItemListing objects which contain the string being searched for
+        /// or an empty list if none are found.
+        /// </returns>
         public List<ItemListing> SearchItemLists(string inSearch)
         {
             if (!inSearch.Equals("") && !inSearch.Equals(null))
@@ -249,11 +246,11 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/04/16
+        /// Created: 2015/04/16
         /// returns a list of listing from a specific supplier
         /// </summary>
-        /// <param name="supplierID">supplier id</param>
-        /// <returns></returns>
+        /// <param name="supplierID">SupplierID to cross reference against</param>
+        /// <returns>An IEnumerable object of ItemListing objects</returns>
         public IEnumerable<ItemListing> RetrieveItemListingList(int supplierID)
         {
             try

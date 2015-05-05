@@ -9,10 +9,12 @@ namespace com.WanderingTurtle.BusinessLogic
     public class CityStateManager
     {
         /// <summary>
+        /// Miguel Santana 
+        /// Created: 2015/02/18
+        /// 
         /// Get a list of all CityState records
         /// </summary>
         /// <returns>Return List of CityState Objects for the cache</returns>
-        /// Miguel Santana 2/18/2015
         public void PopulateCityStateCache()
         {
             //need to check if it has already been populated first

@@ -14,9 +14,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Method takes in newEmployee and passes it as a parameter into the AddEmployee method of the EmployeeAccessor class
         /// </summary>
         /// <remarks>
-        /// Updated 2015/04/13 by Tony Noel -Updated to comply with the ResultsEdit class of error codes.
+        /// Tony Noel
+        /// Updated: 2015/04/13
+        /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
-        /// <param name="newEmployee"></param>
+        /// <param name="newEmployee">The Employee object containing the new employee information to be added</param>
         /// <exception cref="Exception">Exception is thrown if database is not available or new employee cannot be created in the database for any reason</exception>
         /// <returns>Success: A ResultsEdit.Success value is returned</returns>
         public ResultsEdit AddNewEmployee(Employee newEmployee)
@@ -49,8 +51,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updated: 2015/04/13
         /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
-        /// <param name="oldEmployee"></param>
-        /// <param name="newEmployee"></param>
+        /// <param name="oldEmployee">The Employee object containing old information</param>
+        /// <param name="newEmployee">The Employee object with the new information</param>
         /// <exception cref="Exception">EmployeeAccessor method will throw exception to Manager saying that the employee could not be found to edit</exception>
         /// <returns>Employee information is updatd in the table and an integer is returned to represent rows affected</returns>
         public ResultsEdit EditCurrentEmployee(Employee oldEmployee, Employee newEmployee)
@@ -96,8 +98,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Attempts to fetch an employee with the given credentials from the access layer.
         /// Failure: ApplicationException if the login was bad, and SqlException of some kind if it's a connection issue.
         /// </summary>
-        /// <param name="empId">The employee's ID</param>
-        /// <param name="empPassword">the employee's Password</param>
+        /// <param name="empId">The employee's ID matching an employee record</param>
+        /// <param name="empPassword">the employee's Password that matches the same record as the employeeID</param>
         /// <returns>The employee object with the given credentials.</returns>
         public Employee GetEmployeeLogin(int empId, string empPassword)
         {

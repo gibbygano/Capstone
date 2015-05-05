@@ -27,7 +27,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// Sets up the page variables and redirects you to the login page if you havent logged in
         /// </summary>
         /// <remarks>
-        /// Created by Matt Lapka
+        /// Created: by Matt Lapka
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -59,7 +59,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// fills the current suppliers item listing lists and gets the number of guests 
         /// </summary>
         /// <remarks>
-        /// Created by Matt Lapka
+        /// Created: by Matt Lapka
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -92,7 +92,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// returns a list of items listings where the date is more recent than today
         /// </summary>
         /// <remarks>
-        /// Created by Matt Lapka
+        /// Created: by Matt Lapka
         /// </remarks>
         /// <returns>IEnumerable of item listings for the current supplier</returns>
         public IEnumerable<ItemListing> GetItemLists()
@@ -106,7 +106,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// This method will get a list of booking numbers based on a supplied ItemListID and will data bind that list to lvDetails or it will put up an error message
         /// </summary>
         /// <remarks>
-        /// Created by Matt Lapka
+        /// Created: by Matt Lapka
         /// </remarks>
         /// <param name="itemListID"></param>
         public void GetNumbers(int itemListID)
@@ -136,7 +136,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// will also set session variables to the selected dates, which will be used in the aspx page
         /// </summary>
         /// <remarks>
-        /// Created by Willam Fritz 
+        /// Created: by Willam Fritz 
         /// </remarks>
         /// <returns>IEnumerable of item listings for the current supplier within a specified date range</returns>
         public IEnumerable<ItemListing> GetItemListsByDate()
@@ -207,7 +207,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// This method will calculate the total amount of money that the supplier will get after the events within the selected date range are compleated and payed for
         /// </summary>
         /// <remarks>
-        /// Created by William Fritz
+        /// Created: by William Fritz
         /// </remarks>
         /// <returns>The amount of money the supplier will earn</returns>
         public decimal getTotal()
@@ -228,7 +228,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// This method will get the ItemListID from the buttons CommandArgument then will call GetNumbers with the ItemListID. It also displays the Events Details div to visible and changes the others to invisible
         /// </summary>
         /// <remarks>
-        /// Created by Matt Lapka
+        /// Created: by Matt Lapka
         /// Edited by William Fritz
         /// </remarks>
         /// <param name="sender"></param>
@@ -249,7 +249,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// Displays the left container div to visible and changes the others to invisible
         /// </summary>
         /// <remarks>
-        /// Created by William Fritz
+        /// Created: by William Fritz
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -268,7 +268,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// displays the view money details div to visible and changes the others to invisible
         /// </summary>
         /// <remarks>
-        /// Created by William Fritz
+        /// Created: by William Fritz
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -286,7 +286,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// will refresh the suppliers Item list by calling the GetItemListsByDate method
         /// </summary>
         /// <remarks>
-        /// Created by William Fritz
+        /// Created: by William Fritz
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>

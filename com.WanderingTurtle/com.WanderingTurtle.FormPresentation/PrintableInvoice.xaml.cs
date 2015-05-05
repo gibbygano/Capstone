@@ -11,7 +11,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/17
+        /// Created: 2015/04/17
         /// Sends the guest ID to the invoice report
         /// </summary>
         /// <param name="guestId"></param>

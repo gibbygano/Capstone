@@ -54,8 +54,10 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
-        /// Tests for if the get method works
+        /// Rose Steffensmeier 
+        /// Created: 2015/04/03
+        /// 
+        /// Tests if the get method works
         /// </summary>
         [TestMethod]
         public void TestSupplierLoginGet()
@@ -66,7 +68,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/03
+        /// Rose Steffensmeier 
+        /// Created: 2015/04/03
         /// Tests if a peice of data fails to retrieve data.
         /// </summary>
         [TestMethod]
@@ -78,7 +81,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Created by Rose Steffensmeier 2015/04/09
+        /// Rose Steffensmeier
+        /// Created: 2015/04/09
         /// Tests if a piece of data will fail to add to database if F@k3logg3r already exists as a username.
         /// </summary>
         [TestMethod]

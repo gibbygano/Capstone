@@ -7,7 +7,7 @@ namespace com.WanderingTurtle.Web.Pages
 {
     /// <summary>
     /// Web facing form for Suppliers to add a new Event.
-    /// Created by: Matt Lapka 2015/02/22
+    /// Created: by: Matt Lapka 2015/02/22
     /// Key points:
     /// Supplier must be signed in and an approved Supplier
     /// Event Name cannot be the same as another one

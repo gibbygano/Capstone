@@ -304,7 +304,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015-04-24
+        /// Created: 2015-04-24
         /// Used to generate a random PIN for a customer to access the website
         /// </summary>
         /// <param name="sender"></param>

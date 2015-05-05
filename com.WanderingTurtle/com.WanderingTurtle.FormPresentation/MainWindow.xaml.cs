@@ -12,7 +12,7 @@ namespace com.WanderingTurtle.FormPresentation
     {
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/01/30
+        /// Created: 2015/01/30
         /// Initial Creation of project
         /// </summary>
         /// <remarks>
@@ -35,7 +35,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/03/08
+        /// Created: 2015/03/08
         /// </summary>
         internal void StartUp()
         {
@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/03/13
+        /// Created: 2015/03/13
         ///
         /// Shows a message box stating the there isn't a connection to the database
         /// </summary>
@@ -63,7 +63,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/03/13
+        /// Created: 2015/03/13
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

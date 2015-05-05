@@ -10,7 +10,7 @@
     /// Miguel Santana
     /// Updated: 2015/26/22
     ///
-    /// Created non-default constructors to be used in assigning values.
+    /// Created: non-default constructors to be used in assigning values.
     /// </remarks>
     public class Employee
     {

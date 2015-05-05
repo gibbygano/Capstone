@@ -8,7 +8,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
     <script src="<%: ResolveUrl("~/Scripts/datescript.js") %>"></script>
-    <!--Created 2015/02/27
+    <!--Created: 2015/02/27
         Matt Lapka
         Hunter Lind
         View List of Events and Options to Edit or Delete

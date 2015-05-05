@@ -18,7 +18,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/26
+        /// Created: 2015/04/26
         ///
         /// Initializes the eventType admin ui
         /// </summary>
@@ -30,7 +30,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/26
+        /// Created: 2015/04/26
         /// fills the EventType combo Boxes
         /// </summary>
         private void FillComboBox()
@@ -97,7 +97,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/26
+        /// Created: 2015/04/26
         ///
         /// Sends the eventType that user wants to archive to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
@@ -124,7 +124,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/26
+        /// Created: 2015/04/26
         ///
         /// Sends the eventType that user wants to edit to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful
@@ -158,7 +158,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/26
+        /// Created: 2015/04/26
         ///
         /// Sends the eventType that user wants to edit to the BusinessLogic Layer
         /// Returns an indication of whether or not the transaction was successful

@@ -9,12 +9,12 @@ namespace com.WanderingTurtle.BusinessLogic
     {
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/28
+        /// Created: 2015/02/28
         ///
         /// Custom Validator for Company names that can contain certain special characters. Follow industry standards.
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
-        /// <returns>boolean value if string only contains allowed characters</returns>
+        /// <param name="inputToValidate">The string to validate</param>
+        /// <returns>A boolean value if string only contains allowed characters</returns>
         public static bool ValidateCompanyName(this string inputToValidate)
         {
             return Regex.IsMatch(inputToValidate, @"^[a-zA-Z0-9,.?@&!#'~*\s_;+'-]+$");
@@ -22,12 +22,12 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/28
+        /// Created: 2015/02/28
         ///
         /// Custom Validator for Company names that can contain certain special characters. Follow industry standards.
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
-        /// <returns>boolean value if string only contains allowed characters</returns>
+        /// <param name="inputToValidate">The string to validate</param>
+        /// <returns>A boolean value if string only contains allowed characters</returns>
         public static bool ValidateCompanyName(this string inputToValidate, int min, int max)
         {
             if (inputToValidate.Length >= min && inputToValidate.Length <= max)
@@ -39,11 +39,11 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that a string only contains letters or an apostrophe
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
-        /// <returns>boolean value if string only contains allowed characters</returns>
+        /// <param name="inputToValidate">The string to validate</param>
+        /// <returns>A boolean value if string only contains allowed characters</returns>
         public static bool ValidateString(this string inputToValidate)
         {
             return Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
@@ -51,12 +51,12 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that a string only contains letters or an apostrophe and meets minimum length requirements
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
-        /// <param name="min">minimum length</param>
-        /// <returns>boolean value if string only contains allowed characters</returns>
+        /// <param name="inputToValidate">The string to validate</param>
+        /// <param name="min">The minimum length allowed</param>
+        /// <returns>A boolean value if string only contains allowed characters</returns>
         public static bool ValidateString(this string inputToValidate, int minNumOfChars)
         {
             return inputToValidate.Length >= minNumOfChars && Regex.IsMatch(inputToValidate, @"^[a-zA-Z'-]+$");
@@ -64,13 +64,13 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that a string only contains letters or an apostrophe and meets min/mex length requirements
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
-        /// <param name="min">minimum length</param>
-        /// <param name="max">maximum length</param>
-        /// <returns>boolean value if string only contains allowed characters</returns>
+        /// <param name="inputToValidate">The string to validate</param>
+        /// <param name="min">The minimum length allowed</param>
+        /// <param name="max">The maximum length allowed</param>
+        /// <returns>A boolean value if string only contains allowed characters</returns>
         public static bool ValidateString(this string inputToValidate, int minNumOfChars, int maxNumOfChars)
         {
             if (inputToValidate.Length >= minNumOfChars && inputToValidate.Length <= maxNumOfChars)
@@ -82,14 +82,14 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is numeric (numbers)
         /// Does NOT check if it is an int, double, etc
         /// Will return false on negatives and decimals - use other provided methods for those cases
         /// also should be used if leading zeros are important
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
-        /// <returns>boolean value if string only contains allowed characters</returns>
+        /// <param name="inputToValidate">The string to validate</param>
+        /// <returns>A boolean value if string only contains allowed characters</returns>
         public static bool ValidateNumeric(this string inputToValidate)
         {
             return Regex.IsMatch(inputToValidate, @"^[0-9]+$");
@@ -97,13 +97,13 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is numeric (numbers) & meets minimum length
         /// Does NOT check if it is an int, double, etc
         /// Will return false on negatives and decimals - use other provided methods for those cases
         /// also should be used if leading zeros are important
         /// </summary>
-        /// <param name="inputToValidate">string to validate</param>
+        /// <param name="inputToValidate">The string to validate</param>
         /// <param name="min">minimum length</param>
         /// <returns>boolean value if string only contains allowed characters</returns>
         public static bool ValidateNumeric(this string inputToValidate, int minNumOfChars)
@@ -113,7 +113,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is numeric (numbers) & meets minimum & max length requirements
         /// Does NOT check if it is an int, double, etc
         /// Will return false on negatives and decimals - use other provided methods for those cases
@@ -134,7 +134,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is alphanumeric (only numbers & letters -- and spaces)
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -146,7 +146,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is alphanumeric (only numbers & letters -- and spaces) & meets minimum length
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -159,7 +159,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is alphanumeric (only numbers & letters -- and spaces) & meets minimum & max length requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -177,7 +177,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is an int
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -190,7 +190,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is an int & meets minimum value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -208,7 +208,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is an int & meets minimum & max value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -227,7 +227,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is a double
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -240,7 +240,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is a double & meets minimum value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -258,7 +258,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is a double & meets minimum & max value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -277,7 +277,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is a decimal
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -290,7 +290,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is a decimal & meets minimum value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -308,7 +308,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string is a decimal & meets minimum & max value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -327,7 +327,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string can be converted to a DateTime object
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -340,7 +340,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string can be converted to a DateTime object & meets minimum value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -358,7 +358,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates that the given string can be converted to a DateTime object & meets minimum & max value requirements
         /// </summary>
         /// <param name="inputToValidate">string to validate</param>
@@ -384,7 +384,7 @@ namespace com.WanderingTurtle.BusinessLogic
         // Special Character (not space)
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates the given password meets password complexity requirements
         /// minimum of 8 characters
         /// at least 1 each of 3 of the following 4:
@@ -429,7 +429,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates whether a string can be converted to a valid boolean object
         /// does not return the converted value!
         /// </summary>
@@ -443,7 +443,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates whether a string is in a valid phone format
         /// accepts: 2222222222. 222.222.2222, 222-222-2222, (222) 222-2222 etc
         /// </summary>
@@ -457,7 +457,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/02/01
+        /// Created: 2015/02/01
         /// Validates whether string is in a valid e-mail format
         /// Does not check whether is actually valid or working
         /// </summary>

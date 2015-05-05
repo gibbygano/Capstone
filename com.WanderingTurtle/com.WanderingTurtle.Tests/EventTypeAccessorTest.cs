@@ -9,7 +9,8 @@ using com.WanderingTurtle.DataAccess;
 namespace com.WanderingTurtle.Tests
 {
     /// <summary>
-    /// Bryan Hurst 5/2/2015
+    /// Bryan Hurst 
+    /// Created: 2015/05/02
     /// Unit test for the class EventTypeAccessor
     /// </summary>
     [TestClass]
@@ -20,7 +21,8 @@ namespace com.WanderingTurtle.Tests
         List<EventType> list = new List<EventType>();
 
         /// <summary>
-        /// Bryan Hurst 5/2/2015
+        /// Bryan Hurst
+        /// Created: 2015/05/02
         /// Setup method for tests
         /// </summary>
         public void setup()
@@ -33,7 +35,7 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Method for retrieving the test record created by these methods
+        /// Method for retrieving the test record Created: by these methods
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>
@@ -51,7 +53,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Bryan Hurst 5/2/2015
+        /// Bryan Hurst 
+        /// Created: 2015/05/02
         /// Test to add an EventType
         /// </summary>
         [TestMethod]
@@ -65,7 +68,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Bryan Hurst 5/2/2015
+        /// Bryan Hurst
+        /// Created: 2015/05/02
         /// Test to update a valid event type
         /// </summary>
         [TestMethod]
@@ -82,7 +86,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Bryan Hurst 5/2/2015
+        /// Bryan Hurst 
+        /// Created: 2015/05/02
         /// Test to update a non-existent EventType
         /// </summary>
         [TestMethod]
@@ -96,7 +101,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Bryan Hurst 5/2/2015
+        /// Bryan Hurst 
+        /// Created: 2015/05/02
         /// Test to archive a valid EventType
         /// </summary>
         [TestMethod]
@@ -113,7 +119,8 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Bryan Hurst 5/2/2015
+        /// Bryan Hurst 
+        /// Created: 2015/05/02
         /// Test to archive a non-existent EventType
         /// </summary>
         [TestMethod]

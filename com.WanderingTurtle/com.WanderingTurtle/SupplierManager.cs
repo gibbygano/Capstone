@@ -43,15 +43,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Reece Maas 
         /// Created: 2015/02/18
         /// Gets a single Supplier  from the Data Access layer
-        /// Throws any exceptions caught by the DAL
         /// </summary>
         /// <remarks>
         /// Matt Lapka
         /// Updated:  2015/03/27
         /// Added supplier cache updates
         /// </remarks>
-        /// <param name="supplierID">string ID of the application to be retrieved</param>
-        /// <returns>Supplier object</returns>
+        /// <param name="supplierID">The string ID of the application to be retrieved</param>
+        /// <returns>Supplier object whose ID matches the passed parameter</returns>
         public Supplier RetrieveSupplier(string supplierID)
         {
             var now = DateTime.Now;
@@ -91,15 +90,14 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Reece Maas 
         /// Created: 2015/02/18
-        /// Gets a list of Suppliers  from the Data Access layer
-        /// Throws any exceptions caught by the DAL
+        /// Gets a list of Suppliers
         /// </summary>
         /// <remarks>
         /// Matt Lapka 
         /// Updated:  2015/03/27
         /// Added supplier cache
         /// </remarks>
-        /// <returns>Supplier List</returns>
+        /// <returns>A List object containing Supplier objects returned by the database</returns>
         public List<Supplier> RetrieveSupplierList()
         {
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
@@ -145,8 +143,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updated:  2015/03/27
         /// Added supplier cache
         /// </remarks>
-        /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
-        /// <returns>Supplier object</returns>
+        /// <param name="supplierToAdd">Supplier object containing the information of the supplier to be added</param>
+        /// <param name="userName">The username to be given to the Supplier</param>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public SupplierResult AddANewSupplier(Supplier supplierToAdd, string userName)
         {
             try
@@ -184,7 +183,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </remarks>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
-        /// <returns>results of editing the supplier</returns>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public SupplierResult EditSupplier(Supplier oldSupplier, Supplier newSupplier)
         {
             try
@@ -212,16 +211,16 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Matt Lapka
         /// Created:  2015/02/08
-        /// archives supplier
+        /// Archives a Supplier
         /// </summary>
         /// <remarks>
         /// Pat Banks
         /// Updated:  2015/04/26
         /// Added archiving of login at the same time as archiving other supplier information
         /// </remarks>
-        /// <param name="supplierToDelete"></param>
+        /// <param name="supplierToDelete">The Supplier object to be deleted/made inactive</param>
         /// <returns>
-        /// Result of archiving the supplier
+        /// An enumerated result depicting pass or fail
         /// </returns>
         public SupplierResult ArchiveSupplier(Supplier supplierToDelete)
         {
@@ -252,8 +251,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Gets a single Supplier Application Record from the Data Access layer
         /// Throws any exceptions caught by the DAL
         /// </summary>
-        /// <param name="applicationID">string ID of the application to be retrieved</param>
-        /// <returns>SupplierApplication object</returns>
+        /// <param name="applicationID">The string ID of the application to be retrieved</param>
+        /// <returns>A SupplierApplication object whose applicationID matches the passed parameter</returns>
         public SupplierApplication RetrieveSupplierApplication(string applicationID)
         {
             try
@@ -297,7 +296,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Added logic for returning the result of the operations to the presentation layer
         /// </remarks>
         /// <param name="newSupplier">Supplier object containing the information of the supplier to be added</param>
-        /// <returns>int # of rows affected</returns>
+        /// <returns>An int reflecting the number of rows affected</returns>
         public SupplierResult AddASupplierApplication(SupplierApplication newSupplierApp)
         {
             try
@@ -327,7 +326,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </remarks>
         /// <param name="newSupplier">Supplier object containing the new information of the supplier</param>
         /// <param name="oldSupplier">Supplier object containing the current information of the supplier to be matched to salve concurrency problems</param>
-        /// <returns>int # of rows affected</returns>
+        /// <returns>An int reflecting the of rows affected</returns>
         public SupplierResult EditSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication updatedSupplierApp)
         {
             try
@@ -370,11 +369,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/11
         /// Returns the result of approving a supplier application and adds records to the Supplier Table and SupplierLogin tables
         /// </summary>
-        /// <param name="oldSupplierApp">the original application</param>
-        /// <param name="updatedSupplierApp">the updated application</param>
-        /// <param name="userName">the requested username</param>
+        /// <param name="oldSupplierApp">The SupplierApplication object to be updated</param>
+        /// <param name="updatedSupplierApp">The SupplierApplication object with the updated information</param>
+        /// <param name="userName">The username of the Supplier</param>
         /// <param name="supplyCost">The supplier's portion of ticket proceeds</param>
-        /// <returns></returns>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public SupplierResult ApproveSupplierApplication(SupplierApplication oldSupplierApp, SupplierApplication updatedSupplierApp, string userName, decimal supplyCost)
         {
             try
@@ -405,11 +404,14 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Justin Pennington
-        /// Created on 2015/04/14
+        /// Created: on 2015/04/14
         /// Searches for a string the user inputs
         /// </summary>
-        /// <param name="inSearch"></param>
-        /// <returns></returns>
+        /// <param name="inSearch">The string to be searched for</param>
+        /// <returns>
+        /// A List object of Supplier objects that contain the search parameter
+        /// or an empty list if none are found.
+        /// </returns>
         public List<Supplier> searchSupplier(string inSearch)
         {
             if (!inSearch.Equals("") && !inSearch.Equals(null))

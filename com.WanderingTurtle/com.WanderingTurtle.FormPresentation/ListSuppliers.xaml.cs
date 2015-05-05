@@ -20,7 +20,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// This will fill the list of suppliers and set this object to the "Instance variable"
-        /// Created by will fritz 2015/02/06
+        /// Created: by will fritz 2015/02/06
         /// </summary>
         /// <exception cref="ArgumentNullException"><see cref="DataGridContextMenuResult"/> is null. </exception>
         /// <exception cref="ArgumentException"><see cref="DataGridContextMenuResult"/> is not an <see cref="T:System.Enum" />. </exception>
@@ -112,7 +112,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Fills the list view with the suppliers with a fresh list of suppliers
-        /// created by Will Fritz 15/2/6
+        /// Created: by Will Fritz 15/2/6
         /// </summary>
         /// <remarks>
         /// edited by will fritz 15/2/19
@@ -135,7 +135,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// opens the AddEditSupplier window
-        /// created by Pat 15/2/6
+        /// Created: by Pat 15/2/6
         /// </summary>
         /// <remarks>
         /// Edited to make it a singleton pattern
@@ -150,7 +150,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Will get selected supplier and delete it (archive)
-        /// Created by Will Fritz 15/2/6
+        /// Created: by Will Fritz 15/2/6
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -166,7 +166,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Will get selected supplier and fill the add/edit tab with info
-        /// Created by Will Fritz 15/2/6
+        /// Created: by Will Fritz 15/2/6
         /// </summary>
         /// <remarks>
         /// Edited to make it a singleton pattern

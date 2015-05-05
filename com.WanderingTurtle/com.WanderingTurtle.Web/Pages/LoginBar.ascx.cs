@@ -11,7 +11,7 @@ namespace com.WanderingTurtle.Web.Pages
 {
     /// <summary>
     /// Matt Lapka
-    /// Created on 2015/04/10
+    /// Created: on 2015/04/10
     /// Defines the area on all supplier portal pages that gives allows a user to log in or out
     /// or welcomes them if they are logged in.
     /// </summary>

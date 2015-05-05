@@ -15,8 +15,6 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created: 2015/02/12
         /// Creates a new Hotel Guest in the database
         /// </summary>
-        /// <param name="newHotelGuest">Object containing new hotel guest information</param>
-        /// <returns>Number of rows effected</returns>
         /// <remarks>
         /// Rose Steffensmeier
         /// Updated: 2015/03/10
@@ -29,6 +27,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Updated 2015/04/13 by 
         /// Updated to comply with the ResultsEdit class of error codes.
         /// </remarks>
+        /// <param name="newHotelGuest">Object containing new hotel guest information</param>
+        /// <returns>Number of rows effected</returns>
         public ResultsEdit AddHotelGuest(HotelGuest newHotelGuest)
         {
             try
@@ -86,10 +86,10 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/25
+        /// Created: 2015/04/25
         /// Generates a random 6 digit pin for the hotel guest to access website
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A string with a randomized value</returns>
         public string GenerateRandomPIN()
         {
             Random rg = new Random();

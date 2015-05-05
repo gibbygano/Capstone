@@ -138,6 +138,7 @@ namespace com.WanderingTurtle.DataAccess
         /// INSERTs a Supplier into the Database using a Stored Procedure.
         /// </summary>
         /// <param name="supplierToAdd">Requires a Supplier object to INSERT</param>
+        /// <param name="userName">The username of the Supplier</param>
         /// <returns>Returns the number of rows affected.</returns>
         public static int AddSupplier(Supplier supplierToAdd, string userName)
         {

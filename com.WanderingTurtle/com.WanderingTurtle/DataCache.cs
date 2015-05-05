@@ -6,7 +6,7 @@ namespace com.WanderingTurtle.BusinessLogic
 {
     /// <summary>
     /// Matt Lapka
-    /// Created on: 2015/03/26
+    /// Created: on: 2015/03/26
     /// Holds a cache of data returned from the database that can be returned instead
     /// of a new database query if certain business logic is met (time)
     /// </summary>

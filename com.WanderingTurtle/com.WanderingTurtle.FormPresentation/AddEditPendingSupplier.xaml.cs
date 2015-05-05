@@ -212,7 +212,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/15
+        /// Created: 2015/04/15
         /// Gathers form data to send to the manager for addition to the database
         /// </summary>
         private void GetFormData()
@@ -262,7 +262,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Will Fritz
-        /// Created 2/19/2015
+        /// Created: 2/19/2015
         /// fills the zip code combo box
         /// </summary>
         private void FillComboBox()

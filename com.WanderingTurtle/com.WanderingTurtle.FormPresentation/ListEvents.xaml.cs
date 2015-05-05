@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Hunter Lind
-        /// Created 2015/2/23
+        /// Created: 2015/2/23
         /// Fills our Listview with events and initializes the window.
         /// </summary>
         /// <exception cref="ArgumentNullException">

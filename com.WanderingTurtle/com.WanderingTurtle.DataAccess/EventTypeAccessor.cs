@@ -133,7 +133,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Justin Pennington
-        /// Created 2015/02/14
+        /// Created: 2015/02/14
         /// 
         /// Retrieves all EventTypes. 
         /// Makes a List of EventTypes,

@@ -288,7 +288,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/22
+        /// Created: 2015/04/22
         /// Opens read only view of the booking
         /// </summary>
         /// <param name="sender"></param>
