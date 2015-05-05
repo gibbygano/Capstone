@@ -21,6 +21,7 @@ namespace com.WanderingTurtle.FormPresentation
         private readonly HotelGuestManager _hotelGuestManager = new HotelGuestManager();
         private readonly InvoiceManager _invoiceManager = new InvoiceManager();
         private List<BookingDetails> _bookingDetailsList;
+        private bool Result = false;
 
         /// <summary>
         /// Pat Banks
@@ -276,6 +277,8 @@ namespace com.WanderingTurtle.FormPresentation
                 //refreshes guest information after AddEditHotelGuest UI
                 if (new AddEditHotelGuest(selectedGuest).ShowDialog() == false) return;
                 RefreshGuestInformation(CurrentInvoice.HotelGuestID);
+                Result = true;
+
             }
             catch (Exception ex)
             {
@@ -359,6 +362,11 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 throw new WanderingTurtleException(this, ex, "Unable to retrieve guest information from the database.");
             }
+        }
+
+        private void MetroWindow_Closing(object sender, EventArgs e)
+        {
+            DialogResult = Result;
         }
     }
 }
