@@ -65,6 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
             LblRoomNum.Content = _guestToView.Room;
             LblInvoice.Content = CurrentInvoice.InvoiceID;
             LblTotalPrice.Content = CurrentInvoice.GetTotalFormat;
+            LblEmail.Content = _guestToView.EmailAddress;
             LblPhoneNum.Content = _guestToView.PhoneNumber;
         }
 
