@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             FillList();
 
-            LvSuppliersList.SetContextMenu(this);
+            LvSuppliersList.SetContextMenu();
         }
 
         /// <exception cref="WanderingTurtleException"/>

@@ -40,7 +40,7 @@ namespace com.WanderingTurtle.FormPresentation
             InitializeComponent();
             Refresh();
 
-            LvEvents.SetContextMenu(this);
+            LvEvents.SetContextMenu();
         }
 
         /// <summary>

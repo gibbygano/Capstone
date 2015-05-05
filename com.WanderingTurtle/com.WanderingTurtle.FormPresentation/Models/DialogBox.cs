@@ -20,9 +20,9 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <param name="settings">LoginDialogSettings sets properties for dialog fields and buttons</param>
         /// <example><see cref="LoginDialogData" /> result = await <see cref="DialogBox.ShowLoginDialog" />(...)</example>
         /// <returns>awaitable Task of type LoginDialogData</returns>
-        /// <exception cref="WanderingTurtleException"></exception>
+        /// <exception cref="WanderingTurtleException" />
         public static Task<LoginDialogData> ShowLoginDialog(this FrameworkElement control, string message, string title = null, LoginDialogSettings settings = null)
-        { return control.GetWindow<MetroWindow>().ShowLoginAsync(title, message, settings); }
+        { return control.GetVisualParent<MetroWindow>().ShowLoginAsync(title, message, settings); }
 
         /// <summary>
         /// Show Message Dialog
@@ -39,6 +39,6 @@ namespace com.WanderingTurtle.FormPresentation.Models
         /// <returns>awaitable Task of type MessageDialogResult</returns>
         /// <exception cref="WanderingTurtleException" />
         public static Task<MessageDialogResult> ShowMessageDialog(this FrameworkElement control, string message, string title = null, MessageDialogStyle? style = null, MetroDialogSettings settings = null)
-        { return control.GetWindow<MetroWindow>().ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
+        { return control.GetVisualParent<MetroWindow>().ShowMessageAsync(title, message, style ?? MessageDialogStyle.Affirmative, settings); }
     }
 }

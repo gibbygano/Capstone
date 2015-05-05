@@ -17,10 +17,11 @@
     <form runat="server">
     <asp:ScriptManager runat="server">
         <Scripts>
-            <asp:ScriptReference Name="jquery" />
-            <asp:ScriptReference Name="jquery.ui.combined" />
         </Scripts>
     </asp:ScriptManager>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-2.1.3.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/Scripts/jquery-ui-1.11.4.min.js") %>"></script>
+        <script src="<%: ResolveUrl("~/PagesGuest/guestscript.js") %>"></script>
     <header>
         <div class="content-wrapper">
             <div class="float-left">

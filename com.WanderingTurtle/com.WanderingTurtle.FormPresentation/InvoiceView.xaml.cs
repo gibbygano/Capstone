@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
             RefreshBookingList();
 
             Title = "Viewing Guest: " + CurrentInvoice.GetFullName;
-            LvGuestBookings.SetContextMenu(this);
+            LvGuestBookings.SetContextMenu();
         }
 
         /// <summary>

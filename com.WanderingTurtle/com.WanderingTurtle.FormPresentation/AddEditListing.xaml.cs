@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
             EventCbox.IsEnabled = false;
             SupplierCbox.IsEnabled = false;
 
-            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
+            if (readOnly) { (Content as Panel).MakeReadOnly(BtnCancel); }
         }
 
         /// <summary>

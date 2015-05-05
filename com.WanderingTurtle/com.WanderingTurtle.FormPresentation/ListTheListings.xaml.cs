@@ -29,16 +29,21 @@ namespace com.WanderingTurtle.FormPresentation
         {
             InitializeComponent();
 
-            if (Globals.UserToken.Level.Equals(RoleData.Valet) || Globals.UserToken.Level.Equals(RoleData.Concierge))
+            switch(Globals.UserToken.Level)
             {
-                BtnAddListing.IsEnabled = false;
-                BtnArchiveListing.IsEnabled = false;
-                BtnEditListing.IsEnabled = false;
+                case RoleData.Valet:
+                case RoleData.Concierge:
+                    BtnAddListing.Visibility = Visibility.Collapsed;
+                    BtnArchiveListing.Visibility = Visibility.Collapsed;
+                    BtnEditListing.Visibility = Visibility.Collapsed;
+                    LvListing.SetContextMenu(DataGridContextMenuResult.View);
+                    break;
+
+                default:
+                    LvListing.SetContextMenu();
+                    break;
             }
-
             RefreshData();
-
-            LvListing.SetContextMenu(this);
         }
 
         /// <exception cref="WanderingTurtleException"/>
@@ -46,46 +51,27 @@ namespace com.WanderingTurtle.FormPresentation
         {
             DataGridContextMenuResult command;
             var selectedItem = sender.ContextMenuClick<ItemListing>(out command);
-
-            if (Globals.UserToken.Level.Equals(RoleData.Valet) || Globals.UserToken.Level.Equals(RoleData.Concierge))
+            switch (command)
             {
-                switch (command)
-                {
-                    case DataGridContextMenuResult.View:
-                        OpenListing(selectedItem, true);
-                        break;
+                case DataGridContextMenuResult.Add:
+                    OpenListing();
+                    break;
 
-                    default:
-                        throw new WanderingTurtleException(this, "You do not have access to this function.");
+                case DataGridContextMenuResult.View:
+                    OpenListing(selectedItem, true);
+                    break;
+
+                case DataGridContextMenuResult.Edit:
+                    OpenListing(selectedItem);
+                    break;
+
+                case DataGridContextMenuResult.Delete:
+                    ArchiveListing();
+                    break;
+
+                default:
+                    throw new WanderingTurtleException(this, "Error processing context menu");
                 }
-            }
-            else
-            {
-                switch (command)
-                {
-                    case DataGridContextMenuResult.Add:
-                        if (Globals.UserToken.Level.Equals(RoleData.Admin))
-                        {
-                            OpenListing();
-                        }
-                        break;
-
-                    case DataGridContextMenuResult.View:
-                        OpenListing(selectedItem, true);
-                        break;
-
-                    case DataGridContextMenuResult.Edit:
-                        OpenListing(selectedItem);
-                        break;
-
-                    case DataGridContextMenuResult.Delete:
-                        ArchiveListing();
-                        break;
-
-                    default:
-                        throw new WanderingTurtleException(this, "Error processing context menu");
-                }
-            }
         }
 
         private void OpenListing(ItemListing selectedItem = null, bool readOnly = false)

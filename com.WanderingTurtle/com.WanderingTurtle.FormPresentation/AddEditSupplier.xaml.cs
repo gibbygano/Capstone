@@ -65,7 +65,7 @@ namespace com.WanderingTurtle.FormPresentation
 
             TxtUserName.IsEnabled = false;
 
-            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel); }
+            if (readOnly) { (Content as Panel).MakeReadOnly(); }
         }
 
         /// <summary>

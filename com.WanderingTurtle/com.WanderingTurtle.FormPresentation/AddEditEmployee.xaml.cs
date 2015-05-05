@@ -44,7 +44,7 @@ namespace com.WanderingTurtle.FormPresentation
             ReloadComboBox();
 
             SetFields();
-            if (readOnly) { WindowHelper.MakeReadOnly(Content as Panel, BtnCancel); }
+            if (readOnly) { (Content as Panel).MakeReadOnly(BtnCancel); }
         }
 
         /// <summary>

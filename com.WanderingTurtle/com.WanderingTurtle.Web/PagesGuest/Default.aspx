@@ -8,40 +8,10 @@
 
 <asp:Content ContentPlaceHolderID="HeadContent" runat="server" ID="head">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  <%--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>--%>
     <script>
-        function pageLoad() {
-            console.log("jquery is ready.");
-            $("#txtGuestTickets").spinner({
-                min: 0,
-                max: $("#hfGuestMaxTickets").val()
-            });
-
-            $("#txtGuestTickets").change(function () {
-                if (($.isNumeric($(this).val()))) {
-                    if ($(this).val() > 0 && $(this).val() < $("#hfGuestMaxTickets").val()) {
-                        $(this).css("background-color", "white");
-                        return;
-                    }
-                    else {
-                        $(this).css("background-color", "red");
-                    }
-                }
-                else {
-                    $(this).css("background-color", "red");
-                }
-            });
-
-            $("#txtGuestPin").change(function () {
-                 if (pinValue.length != 6) {
-                    $(this).css("background-color", "red");
-                }
-                else {
-                    $(this).css("background-color", "white");
-                }
-            });
-        }
+        
     </script>
     <style>
         .hide div {
@@ -129,5 +99,11 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <div id="otherMessage" title="Message" style="display: none;">
+            <div class="errorMsg">
+                <asp:Label ID="lblOtherMessage" runat="server" Text="" ForeColor="#000000"></asp:Label>
+                <br />
+            </div>
+        </div>
 </asp:Content>
 
