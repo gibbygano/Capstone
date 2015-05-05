@@ -108,7 +108,6 @@ namespace com.WanderingTurtle.FormPresentation
             OpenHotelGuest(LvHotelGuestList.SelectedItem as InvoiceDetails);
         }
 
-
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/02/01
@@ -150,7 +149,6 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
-
         /// <summary>
         /// Justin Pennington
         /// Created:  2015/04/10
@@ -175,18 +173,6 @@ namespace com.WanderingTurtle.FormPresentation
             var myTempList = _invoiceManager.InvoiceDetailsSearch(TxtSearchBox.Text);
             LvHotelGuestList.ItemsSource = myTempList;
             TxtSearchBox.Text = "";
-        }
-
-        /// <summary>
-        /// Miguel Santana
-        /// Created:  2015/05/05
-        /// Loads the guest list
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LvHotelGuestList_Loaded(object sender, RoutedEventArgs e)
-        {
-            RefreshGuestList();
         }
     }
 }

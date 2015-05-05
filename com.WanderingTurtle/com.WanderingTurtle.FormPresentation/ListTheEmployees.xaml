@@ -10,13 +10,13 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="LvEmployeesList" d:DataContext="{d:DesignInstance common:Employee }">
+        <DataGrid Grid.Row="0" x:Name="LvEmployeesList" d:DataContext="{d:DesignInstance common:Employee}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width ="*" Header="Employee ID" Binding="{Binding EmployeeID}" />
-                <DataGridTextColumn Width ="*" Header="First Name"  Binding="{Binding FirstName}" />
-                <DataGridTextColumn Width ="*" Header="Last Name"   Binding="{Binding LastName}" />
-                <DataGridTextColumn Width ="*" Header="Level"       Binding="{Binding Level}" />
-                <DataGridTextColumn Width ="*" Header="Active"      Binding="{Binding Active}" />
+                <DataGridTextColumn Width ="Auto" Header="Employee ID" Binding="{Binding EmployeeID}" />
+                <DataGridTextColumn Width ="*"    Header="First Name"  Binding="{Binding FirstName}" />
+                <DataGridTextColumn Width ="*"    Header="Last Name"   Binding="{Binding LastName}" />
+                <DataGridTextColumn Width ="*"    Header="Level"       Binding="{Binding Level}" />
+                <DataGridCheckBoxColumn Width ="Auto" Header="Active"  Binding="{Binding Active, Mode=OneTime}" ElementStyle="{StaticResource MetroDataGridCheckBox}" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource MetroDataGridRow}">

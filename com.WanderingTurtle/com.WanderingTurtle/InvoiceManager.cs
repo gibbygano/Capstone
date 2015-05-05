@@ -118,7 +118,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 int numRows = _invoiceAccessor.ArchiveGuestInvoice(GuestID);
 
-                return numRows == 2 ? ResultsArchive.ChangedByOtherUser : ResultsArchive.Success;
+                return numRows >= 2 ? ResultsArchive.Success : ResultsArchive.ChangedByOtherUser;
             }
             catch (ApplicationException ex)
             {

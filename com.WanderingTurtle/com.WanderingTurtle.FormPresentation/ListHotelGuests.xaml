@@ -6,16 +6,11 @@
              xmlns:common="clr-namespace:com.WanderingTurtle.Common;assembly=WanderingTurtle.Common"
              mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="89*"/>
-            <ColumnDefinition Width="88*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="LvHotelGuestList" d:DataContext="{d:DesignInstance common:InvoiceDetails}" Grid.ColumnSpan="3" Loaded="LvHotelGuestList_Loaded">
+        <DataGrid Grid.Row="0" x:Name="LvHotelGuestList" d:DataContext="{d:DesignInstance common:InvoiceDetails}" Grid.ColumnSpan="3">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="Auto" Header="Room #"       Binding="{Binding GuestRoomNum}" />
                 <DataGridTextColumn Width="*" Header="Date Registered" Binding="{Binding DateOpened, StringFormat='{}{0:D}'}" />
@@ -28,7 +23,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Top}" Grid.ColumnSpan="3">
+        <Grid Grid.Row="1" Margin="{StaticResource Spacing.Top}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />

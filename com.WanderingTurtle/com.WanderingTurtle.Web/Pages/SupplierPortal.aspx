@@ -29,7 +29,6 @@
                 <h2>Upcoming Events</h2>
                 <asp:ListView ID="lvLists" ItemType="com.WanderingTurtle.Common.ItemListing" SelectMethod="GetItemLists" DataKeyNames="ItemListID" EnableViewState="False" runat="server">
                     <ItemTemplate>
-
                         <tr>
                             <td><%# Item.EventName.Truncate(25) %></td>
                             <td><%# Item.StartDate.ToString("MM/dd/yy hh:mmt") %></td>

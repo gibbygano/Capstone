@@ -170,15 +170,15 @@ namespace com.WanderingTurtle.FormPresentation
             {
                 Debug.Assert(ChkActiveEmployee.IsChecked != null, "ChkActiveEmployee.IsChecked != null");
                 ResultsEdit result = _employeeManager.EditCurrentEmployee(
-                    CurrentEmployee,
-                    new Employee(
-                        TxtFirstName.Text,
-                        TxtLastName.Text,
-                        string.IsNullOrEmpty(TxtPassword.Password) ? TxtPassword.Password : null,
-                        (int)CboUserLevel.SelectedItem,
-                        ChkActiveEmployee.IsChecked.Value
-                        )
-                    );
+                   CurrentEmployee,
+                   new Employee(
+                       TxtFirstName.Text,
+                       TxtLastName.Text,
+                       !string.IsNullOrEmpty(TxtPassword.Password) ? TxtPassword.Password : null,
+                       (int)CboUserLevel.SelectedItem,
+                       ChkActiveEmployee.IsChecked.Value
+                       )
+                   );
 
                 if (result == ResultsEdit.Success)
                 {

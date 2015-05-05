@@ -47,23 +47,17 @@
             SetValues(null, FirstName, LastName, Password, Level, Active);
         }
 
-        public bool Active { get; private set; }
+        public bool Active { get; set; }
 
-        public int? EmployeeID { get; private set; }
+        public int? EmployeeID { get; set; }
 
-        public string FirstName { get; private set; }
+        public string FirstName { get; set; }
 
-        /// <summary>
-        /// Miguel Santana
-        /// Created: 2015/02/26
-        /// </summary>
-        public string GetFullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
+        public string LastName { get; set; }
 
-        public string LastName { get; private set; }
+        public RoleData Level { get; set; }
 
-        public RoleData Level { get; private set; }
-
-        public string Password { get; private set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// Miguel Santana
@@ -84,5 +78,11 @@
             this.Level = (RoleData)Level;
             this.Active = Active;
         }
+
+        /// <summary>
+        /// Miguel Santana
+        /// Created: 2015/02/26
+        /// </summary>
+        public string GetFullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }
 }

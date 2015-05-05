@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace com.WanderingTurtle.FormPresentation.Models
@@ -24,11 +23,13 @@ namespace com.WanderingTurtle.FormPresentation.Models
         {
             try
             {
-                while (!(control is T))
+                var parent = control;
+                while (!(parent is T))
                 {
-                    control = (FrameworkElement)control.Parent;
+                    if (parent == null) { throw new ApplicationException("Control " + control + " does not have parent " + typeof(T)); }
+                    parent = (FrameworkElement)parent.Parent;
                 }
-                return control as T;
+                return parent as T;
             }
             catch (Exception ex) { throw new WanderingTurtleException(control, ex, "Error getting parent component " + typeof(T)); }
         }
@@ -47,9 +48,10 @@ namespace com.WanderingTurtle.FormPresentation.Models
         {
             try
             {
-                var parent = VisualTreeHelper.GetParent(control) ?? control;
+                var parent = control as DependencyObject;
                 while (!(parent is T))
                 {
+                    if (parent == null) { throw new ApplicationException("Control " + control + " does not have parent " + typeof(T)); }
                     parent = VisualTreeHelper.GetParent(parent);
                 }
 

@@ -9,7 +9,7 @@
         </Style>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <StackPanel>
+        <StackPanel MaxWidth="500">
             <admin:EventType />
             <Separator />
             <admin:GenerateReport />

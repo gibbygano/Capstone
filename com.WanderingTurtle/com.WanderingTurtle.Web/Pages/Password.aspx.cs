@@ -57,14 +57,18 @@ namespace com.WanderingTurtle.Web.Pages
                 return;
             }
             passRules.Visible = false;
-            if (txtCurrent.Text.Trim() != _currentLogin.UserPassword)
+            PasswordManager myPass = new PasswordManager();
+            string pass = myPass.supplierHash(_currentLogin.UserName, txtCurrent.Text);
+            if (pass != _currentLogin.UserPassword)
             {
+               
                 lblError.Text = "Invalid Password";
                 return;
             }
             lblError.Text = "";
             try
             {
+                
                 var result = _myMan.UpdateSupplierLogin(txtNewPassword.Text, _currentLogin);
                 if (result == ResultsEdit.Success)
                 {
@@ -88,5 +92,12 @@ namespace com.WanderingTurtle.Web.Pages
                 throw;
             }
         }
+
+        //protected void BtnGen_Click(object sender, EventArgs e)
+        //{
+        //    PasswordManager myPass = new PasswordManager();
+        //    txthash.Text = myPass.supplierHash(txtUser.Text, txtPass.Text);
+
+        //}
     }
 }
