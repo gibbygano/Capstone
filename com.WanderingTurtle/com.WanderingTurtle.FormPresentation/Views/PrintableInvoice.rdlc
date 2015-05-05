@@ -1228,7 +1228,7 @@
               <TextRun>
                 <Value>The Wandering Turtle</Value>
                 <Style>
-                  <FontFamily>Brush Script MT</FontFamily>
+                  <FontStyle>Italic</FontStyle>
                   <FontSize>28pt</FontSize>
                 </Style>
               </TextRun>
@@ -1239,7 +1239,7 @@
         <rd:DefaultName>Textbox33</rd:DefaultName>
         <Left>0.01389in</Left>
         <Height>0.5243in</Height>
-        <Width>3.20958in</Width>
+        <Width>3.92706in</Width>
         <ZIndex>10</ZIndex>
         <Style>
           <Border>
@@ -1594,7 +1594,7 @@
         <Value>Logobw</Value>
         <Sizing>FitProportional</Sizing>
         <Top>0.0243in</Top>
-        <Left>3.00345in</Left>
+        <Left>3.94095in</Left>
         <Height>0.5in</Height>
         <Width>0.5in</Width>
         <ZIndex>21</ZIndex>
