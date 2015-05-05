@@ -68,6 +68,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/18
+        /// Opens supplier form depending if it is read only or not
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="readOnly"></param>
         private void OpenSupplier(Supplier selectedItem = null, bool readOnly = false)
         {
             try
@@ -89,6 +96,11 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/18
+        /// archives supplier
+        /// </summary>
         private async void ArchiveSupplier()
         {
             try
@@ -159,6 +171,12 @@ namespace com.WanderingTurtle.FormPresentation
             ArchiveSupplier();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/04
+        /// opens pending supplier ui on double click
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPendingSuppliers_Click(object sender, RoutedEventArgs e)
         {
             ((TabItem)Parent).Content = new ListPendingSuppliers();
@@ -186,11 +204,25 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/04
+        /// opens supplier ui on double click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvSuppliersList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenSupplier(sender.RowClick<Supplier>(), true);
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created 2015/04/14
+        /// searches the text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearchSupplier_Click(object sender, RoutedEventArgs e)
         {
             var myList = _supplierManager.searchSupplier(TxtSearchSupplier.Text);
@@ -198,6 +230,13 @@ namespace com.WanderingTurtle.FormPresentation
             LvSuppliersList.Items.Refresh();
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created 2015/04/14
+        /// searches the text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSearchSupplier_TextChanged(object sender, TextChangedEventArgs e)
         {
             BtnSearchSupplier.Content = TxtSearchSupplier.Text.Length == 0 ? "Refresh List" : "Search";

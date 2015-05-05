@@ -29,6 +29,13 @@ namespace com.WanderingTurtle.Web.Pages
         public string eventName;
         public DateTime date;
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/11
+        /// Loads web pages for hotel guest
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session.IsNewSession)
@@ -119,17 +126,36 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/05/05
+        /// Shows user errors
+        /// </summary>
+        /// <param name="message"></param>
         private void showError(string message)
         {
             lblOtherMessage.Text = message;
             ScriptManager.RegisterStartupScript(this.Page, GetType(), "showthis", "showMyMessage();", true);
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/05/05
+        /// Shows user errors
+        /// </summary>
+        /// <param name="message"></param>
         private void showMessage(string message)
         {
             userMessage = message;
             lblMessage.Text = userMessage;
         }
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/05/05
+        /// Makes grid rows accessible for data tables
+        /// </summary>
+        /// <param name="grid"></param>
         public static void MakeAccessible(GridView grid)
         {
             if (grid.Rows.Count <= 0) return;
@@ -139,12 +165,26 @@ namespace com.WanderingTurtle.Web.Pages
                 grid.FooterRow.TableSection = TableRowSection.TableFooter;
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/05/05
+        /// Makes grid rows accessible for data tables
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
 
             MakeAccessible(gvListings);
         }
+
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/11
+        /// Handles submit functionality of a hotel guest adding an event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             lblOtherMessage.Text = "";
@@ -196,7 +236,9 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
-        /// 
+        /// Pat Banks
+        /// Created 2015/04/11
+        /// Gathers form data to send to business logic
         /// </summary>
         private void gatherFormInformation()
         {
@@ -231,6 +273,11 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/11
+        /// Clears fields after add
+        /// </summary>
         private void clearFields()
         {
             txtGuestTickets.Text = "";
@@ -238,6 +285,12 @@ namespace com.WanderingTurtle.Web.Pages
             gvListings.SelectedIndex = -1;
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/11
+        /// gets selected item from the data grid
+        /// </summary>
+        /// <returns></returns>
         private ItemListingDetails getSelectedItem()
         {
             int itemID = (int)gvListings.SelectedDataKey.Value;
@@ -245,18 +298,38 @@ namespace com.WanderingTurtle.Web.Pages
             return selectedItemListing;
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created 2015/04/11
+        /// event handling
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void lvListings_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             bindData();
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// created 2015/04/16
+        /// event handling
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void gvListings_SelectedIndexChanged(object sender, EventArgs e)
         {
             int maxTickets = getSelectedItem().QuantityOffered;
             hfGuestMaxTickets.Value = maxTickets.ToString();
         }
 
-        //Need confirmation from guest before can officially submit
+        /// <summary>
+        /// Pat Banks
+        /// created:  2015/04/22
+        /// Need confirmation from guest before can officially submit the booking
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnConfirm_Click(object sender, EventArgs e)
         {
             Booking webBookingToAdd = new Booking((int)foundGuest.HotelGuestID, 100, selectedItemListing.ItemListID, ticketQty, DateTime.Now, selectedItemListing.Price, extendedPrice, discount, totalPrice);
@@ -282,6 +355,13 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Pat Banks
+        /// Created:  2015/04/22
+        /// handles click method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             clearFields();

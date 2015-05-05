@@ -55,6 +55,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// opens pending supplier dialog
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="readOnly"></param>
         private void OpenPendingSupplier(SupplierApplication selectedItem = null, bool readOnly = false)
         {
             try
@@ -77,17 +84,32 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/10
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdatePendingSupplier_Click(object sender, RoutedEventArgs e)
         {
             if (LvPendingSuppliers.SelectedItem != null)
                 OpenPendingSupplier(LvPendingSuppliers.SelectedItem as SupplierApplication);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnViewApprovedSuppliers_Click(object sender, RoutedEventArgs e)
         {
             ((TabItem)Parent).Content = new ListSuppliers();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void LoadPendingSuppliers()
         {
             LvPendingSuppliers.ItemsPanel.LoadContent();
@@ -104,6 +126,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// created:  2015/04/10
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvPendingSuppliers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenPendingSupplier(sender.RowClick<SupplierApplication>(), true);
