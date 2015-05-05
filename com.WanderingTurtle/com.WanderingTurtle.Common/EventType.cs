@@ -2,6 +2,13 @@
 {
     public class EventType
     {
+        /// <summary>
+        /// Bryan Hurst
+        /// Created: 2015/02/19
+        /// 
+        /// Class for the creation of EventType Objects with set data fields
+        /// </summary>
+
         public EventType()
         {
         }
@@ -14,10 +21,7 @@
 
         public string EventName { get; set; }
 
-        /// <summary>
-        /// Bryan Hurst Feb.19
-        /// Object for the creation of EventType objects with set data fields
-        /// </summary>
+
         public int EventTypeID { get; set; }
     }
 }
