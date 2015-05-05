@@ -204,16 +204,13 @@ namespace com.WanderingTurtle.BusinessLogic
         public listResult ArchiveItemListing(ItemListing itemListToDelete)
         {
             try
-            {
+            { 
                 if (itemListToDelete.CurrentNumGuests == 0)
                 {
-                    if (itemListToDelete.CurrentNumGuests == 0)
+                    if (ItemListingAccessor.DeleteItemListing(itemListToDelete) == 1)
                     {
-                        if (ItemListingAccessor.DeleteItemListing(itemListToDelete) == 1)
-                        {
-                            DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
-                            return listResult.Success;
-                        }
+                        DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                        return listResult.Success;
                     }
                 }           
                 return listResult.NotChanged;
