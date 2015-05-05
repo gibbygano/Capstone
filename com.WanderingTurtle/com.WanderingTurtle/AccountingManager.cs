@@ -19,11 +19,12 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <param name="End">end date of invoices</param>
         /// <returns>AccountingDetails with object data as requested by the params</returns>
         /// <remarks>
-        /// Updated 2015/5/1
         /// Arik Chadima
+        /// Updated: 2015/05/01
         /// Implemented method from just a stub to complete.
         /// 
-        /// Updated 2015/5/5
+        /// Arik Chadima
+        /// Updated 2015/05/05
         /// Added try-catch blocks for "dangerous" code.
         /// </remarks>
         public AccountingDetails GetAccountingDetails(DateTime Start, DateTime End)
