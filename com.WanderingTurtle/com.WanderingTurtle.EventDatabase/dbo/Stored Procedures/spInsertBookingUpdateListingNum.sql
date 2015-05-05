@@ -1,5 +1,5 @@
 ﻿/* -------------------------Booking Stored Procedures -------
--------------------created by: Tony Noel     
+-------------------Created by: Tony Noel     
 Updates the number of guests in ItemListID */
 
 CREATE PROCEDURE [dbo].[spInsertBookingUpdateListingNum]

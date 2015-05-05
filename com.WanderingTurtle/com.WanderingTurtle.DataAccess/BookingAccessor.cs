@@ -313,7 +313,7 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/04/14
+        /// Created: 2015/04/14
         /// Gets Booking numbers from database for specific event listing 
         /// </summary>
         /// <param name="itemListID">The ItemListID to reference when getting booking numbers</param>

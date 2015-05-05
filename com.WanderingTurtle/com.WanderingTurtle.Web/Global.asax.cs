@@ -24,7 +24,7 @@ namespace com.WanderingTurtle.Web
         }
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/03/07
+        /// Created: 2015/03/07
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

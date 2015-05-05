@@ -125,7 +125,7 @@ namespace com.WanderingTurtle.Web.Pages
 
 
                 }
-                //created programatically so don't need to be validated
+                //Created programatically so don't need to be validated
                 newEvent.EventTypeID = int.Parse(Request.Form["type"]);
                 newEvent.Transportation = bool.Parse(Request.Form["transport"]);
                 newEvent.OnSite = bool.Parse(Request.Form["onsite"]);
@@ -161,7 +161,7 @@ namespace com.WanderingTurtle.Web.Pages
         }
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/03/07
+        /// Created: 2015/03/07
         /// 
         /// Sets the error message displayed on the page.
         /// Updated 2015/05/03

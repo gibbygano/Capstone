@@ -9,11 +9,20 @@ namespace com.WanderingTurtle.Tests
 {
     public class TestCleanupAccessor
     {
-        ///Created By: Tony Noel 2015/03/27, Updated: 2015/4/10, Updated 2015/05/01, Updated 2015/05/05- added new method to get fake empID
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/27
+        /// 
         /// Helper class to cleanup or select records from the database for test use only.
         /// </summary>
-        /// <param name="testEmp"></param>
+        /// <remarks>
+        /// Updated: 2015/04/10
+        /// Updated: 2015/05/01
+        /// Updated: 2015/05/05
+        /// 
+        /// Added new method to get fake EmpID
+        /// </remarks>
+        /// <param name="testEmp">The Employee object to be tested with</param>
 
         public static void testEmp(Employee testEmp)
         {
@@ -52,11 +61,13 @@ namespace com.WanderingTurtle.Tests
             }
         }
 
-        ///Created By: Tony Noel, 2015/05/05
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/05/05
+        /// 
         /// A method that will only grab the specified fake employee record from the database. Returns the Employee ID.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The EmployeeID of the fake Employee</returns>
         public static int getTestEmp()
         {
             int result;
@@ -93,11 +104,13 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
-        ///Created By: Tony Noel 2015/03/27
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/03/27
+        /// 
         /// Deletes only the dummy booking record from the database for testing.
         /// </summary>
-        /// <param name="testBook"></param>
+        /// <param name="testBook">The Booking Object used for testing</param>
         public static void testBook(Booking testBook)
         {
             //establish connection
@@ -135,7 +148,8 @@ namespace com.WanderingTurtle.Tests
             }
         }
         /// <summary>
-        /// Created: Tony Noel 2015/04/24
+        /// Tony Noel 
+        /// Created: 2015/04/24
         /// Uses the stored procedure listed to locate an invoice where the guestID matches the fake
         /// hotel guestID and then removes it from the database.
         /// </summary>
@@ -162,7 +176,10 @@ namespace com.WanderingTurtle.Tests
             }
         }
         /// <summary>
-        /// Created: Tony Noel- 2015/04/24, Deletes the dummy Hotel Guest record from the database.
+        /// Tony Noel 
+        /// Created: 2015/04/24
+        /// 
+        /// Deletes the dummy Hotel Guest record from the database.
         /// </summary>
         public static void DeleteHotelGuest()
         {
@@ -186,11 +203,13 @@ namespace com.WanderingTurtle.Tests
                 conn.Close();
             }
         }
-        /// Created by : Tony Noel, 2015/04/7
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/04/07
+        /// 
         /// Grabs the specific dummy record from the database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ID of the fake Booking added</returns>
         public static int GetBooking()
         {
             int result;
@@ -226,11 +245,13 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
-        /// Created By: Tony Noel, 2015/05/01
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/05/01
+        /// 
         /// Used to grab a list of all bookings where the ItemListID links to a active ItemListing only.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A List object of Booking objects</returns>
         public static List<Booking> GetAllBookings()
         {
             var result = new List<Booking>();
@@ -279,11 +300,13 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
-        ///Created By Tony Noel, 2015/04/27
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/04/27
+        /// 
         /// Grabs the specific fake hotel guest record added in the test method.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The ID of the fake HotelGuest</returns>
         public static int GetHotelGuest()
         {
             int result;
@@ -319,11 +342,13 @@ namespace com.WanderingTurtle.Tests
 
             return result;
         }
-        ///Created By: Tony Noel, 2015/04/07
         /// <summary>
+        /// Tony Noel
+        /// Created: 2015/04/07
+        /// 
         ///  Resets the dummy record back to 30. Aides in Booking Test methods.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The number of rows affected</returns>
         public static int resetItemListing100()
         {
             int rowsAffected;
@@ -346,6 +371,12 @@ namespace com.WanderingTurtle.Tests
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Hunter Lind
+        /// Created: 2015/04/16
+        /// 
+        /// Deletes Testing data for SupplierApplication
+        /// </summary>
         public static void deleteTestApplication()
         {
             //establish connection
@@ -382,7 +413,14 @@ namespace com.WanderingTurtle.Tests
                 conn.Close();
             }
         }
-
+        /// <summary>
+        /// Hunter Lind
+        /// Created: 2015/04/16
+        /// 
+        /// Deletes Test Supplier Data
+        /// </summary>
+        /// <param name="supplierToDelete">The fake Supplier object to be deleted from the database</param>
+        /// <returns>An int reflecting number of rows affected</returns>
         public static int DeleteTestSupplier(Supplier supplierToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -409,7 +447,14 @@ namespace com.WanderingTurtle.Tests
 
             return rowsAffected;
         }
-
+        /// <summary>
+        /// Bryan Hurst
+        /// Created: 2015/05/01
+        /// 
+        /// Deletes the test SupplierLogin from the database
+        /// </summary>
+        /// <param name="supplierLoginToDelete">The test SupplierLogin object to be deleted</param>
+        /// <returns>An int reflecting the number of rows affected</returns>
         public static int DeleteTestSupplierLogin(SupplierLogin supplierLoginToDelete)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -437,6 +482,15 @@ namespace com.WanderingTurtle.Tests
             return rowsAffected;
         }
 
+        /// <summary>
+        /// Bryan Hurst
+        /// Created: 2015/05/01
+        /// 
+        /// Selectes the test archived SupplierLogin
+        /// </summary>
+        /// <param name="userPassword">The password of the test data</param>
+        /// <param name="userName">The username of the test data</param>
+        /// <returns>The test SupplierLogin object</returns>
         static public SupplierLogin RetrieveArchivedSupplierLoginTest(string userPassword, string userName)
         {
             SupplierLogin getSupplierInfo = new SupplierLogin();
@@ -481,7 +535,14 @@ namespace com.WanderingTurtle.Tests
                 conn.Close();
             }
         }
-
+        /// <summary>
+        /// Bryan Hurst
+        /// Created: 2015/05/02
+        /// 
+        /// Deletes the test EventType object from the database
+        /// </summary>
+        /// <param name="TestEventType">The test EventType object added to the database previously</param>
+        /// <returns>An int reflecting the number of rows affected</returns>
         public static int DeleteEventTypeTest(EventType TestEventType)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

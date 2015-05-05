@@ -33,7 +33,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Matt Lapka
         /// Created:  2015/01/31
-        /// Default constructorf
+        /// Default constructor
         /// </summary>
         public EventManager()
         {
@@ -42,11 +42,11 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created:  2015/01/31
+        /// Created: 2015/01/31
         /// Retrieve a single Event object from the Data Access layer with an eventItemID
         /// </summary>
-        /// <param name="eventItemID"></param>
-        /// <returns>the event with the id</returns>
+        /// <param name="eventItemID">The EventItemID to search for</param>
+        /// <returns>The Event object whose ID matches the passed parameter</returns>
         public Event RetrieveEvent(string eventItemID)
         {
             var now = DateTime.Now;
@@ -84,10 +84,10 @@ namespace com.WanderingTurtle.BusinessLogic
         }
         /// <summary>
         /// Matt Lapka
-        /// Created:  2015/01/31
-        //  Retrieve a list of active Event objects from the Data Access layer
+        /// Created: 2015/01/31
+        //  Retrieve a list of active Event objects
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A List object containing Event objects retrieved from the database</returns>
         public List<Event> RetrieveEventList()
         {
             double cacheExpirationTime = 5; //how long the cache should live (minutes)
@@ -123,10 +123,11 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created:  2015/01/31
+        /// Created: 2015/01/31
         /// Add a single Event object
-        ///</summary>
-        ///<returns>result of adding event</returns>
+        /// </summary>
+        /// <param name="newEvent">The Event object to be added to the database</param>
+        /// <returns>An enumerated result depicting success or failure</returns>
         public EventResult AddNewEvent(Event newEvent)
         {
             try
@@ -154,8 +155,10 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Matt Lapka
         /// Created:  2015/01/31
         /// Edit an Event object
-        ///</summary>
-        ///<returns>result of adding event</returns>
+        /// </summary>
+        /// <param name="oldEvent">The Event object to be updated</param>
+        /// <param name="newEvent">The Event object with the updated information</param>
+        /// <returns>An enumerated result depicting success or failure</returns>
         public EventResult EditEvent(Event oldEvent, Event newEvent)
         {
             try
@@ -183,8 +186,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Matt Lapka
         /// Created:  2015/01/31
         /// "Delete" a single Event object (make inactive)
-        ///</summary>
-        ///<returns>result of adding event</returns>
+        /// </summary>
+        /// <param name="eventToDelete">The Event object to be deleted/made inactive</param>
+        /// <returns>An enumerated result depicting success or fail</returns>
         public EventResult ArchiveAnEvent(Event eventToDelete)
         {
             try
@@ -212,8 +216,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Matt Lapka
         /// Created:  2015/02/08
         /// Retrieve a single EventType object from the Data Access layer with an eventTypeID
-        ///</summary>
-        ///<returns>eventType Object</returns>
+        /// </summary>
+        /// <param name="eventTypeID">The string representing the EventTypeID to search for</param>
+        /// <returns>An EventType object whose ID matches the passed parameter</returns>
         public EventType RetrieveEventType(string eventTypeID)
         {
             var now = DateTime.Now;

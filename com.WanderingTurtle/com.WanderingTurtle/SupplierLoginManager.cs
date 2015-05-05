@@ -23,9 +23,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/03
         /// Retrieves supplier login by username and password
         /// </summary>
-        /// <param name="userPassword"></param>
-        /// <param name="userName"></param>
-        /// <returns>SupplierLogin object</returns>
+        /// <param name="userPassword">The supplier's password to check against</param>
+        /// <param name="userName">The supplier's username to check against</param>
+        /// <returns>SupplierLogin object whose username and password match those of the parameters passed</returns>
         public SupplierLogin RetrieveSupplierLogin(string userPassword, string userName)
         {
             try
@@ -49,6 +49,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/03
         /// Retrieves a suppler userName based on the supplier ID
         /// </summary>
+        /// <param name="supplierID">SupplierID matching a Supplier object</param>
+        /// <returns>A string representing the username of the Supplier whose ID matches the passed Parameter</returns>
+
         public string RetrieveSupplierUserName(int supplierID)
         {
             try
@@ -70,9 +73,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/03
         /// Updates a supplierLogin information with a new password
         /// </summary>
-        /// <param name="newPassword"></param>
-        /// <param name="oldLogin"></param>
-        /// <returns></returns>
+        /// <param name="newPassword">The string representation of the new password requested</param>
+        /// <param name="oldLogin">The SupplierLogin object to have the password updated for</param>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public ResultsEdit UpdateSupplierLogin(string newPassword, SupplierLogin oldLogin)
         {
             try
@@ -106,8 +109,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Created:  2015/04/13
         /// Checks if a supplier username is in use
         /// </summary>
-        /// <param name="userName"></param>
-        /// <returns></returns>
+        /// <param name="userName">The string representation of the username to check against</param>
+        /// <returns>Returns true or false; true if the username is valid to use, false if it is not</returns>
         public bool CheckSupplierUserName(string userName)
         {
             try

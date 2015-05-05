@@ -62,7 +62,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Pat Banks
         /// Updated: 2015/02/27
         /// </remarks>
-        /// <param name="hotelGuestId">Hotel Guest ID</param>
+        /// <param name="hotelGuestId">Hotel Guest ID matching a HotelGuest object/record</param>
         /// <returns>Invoice information for a hotel guest</returns>
         public InvoiceDetails RetrieveInvoiceByGuest(int hotelGuestId)
         {
@@ -135,13 +135,16 @@ namespace com.WanderingTurtle.BusinessLogic
         }
 
         /// <summary>
-        /// Created on 2015/04/10
+        /// Created: on 2015/04/10
         /// Justin Pennington
         /// Searches for a string that the user inputs
         /// </summary>
-        /// <param name="inSearch"></param>
-        /// <returns></returns>
-        public List<InvoiceDetails> InvoiceDetailsSearch(String inSearch)
+        /// <param name="inSearch">The string to search for</param>
+        /// <returns>
+        /// A List object containing InvoiceDetails objects which contain the string passed 
+        /// or an empty list if no matches are found.
+        /// </returns>
+        public List<InvoiceDetails> InvoiceDetailsSearch(string inSearch)
         {
             //List<Event> myTempList = new List<Event>();
             if (!inSearch.Equals("") && !inSearch.Equals(null))

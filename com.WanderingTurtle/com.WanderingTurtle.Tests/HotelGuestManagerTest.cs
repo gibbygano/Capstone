@@ -9,11 +9,20 @@ using com.WanderingTurtle.DataAccess;
 namespace com.WanderingTurtle.Tests
 {
     /// <summary>
-    /// Created by Rose Steffensmeier 2015/04/09, 
-    /// Updated by Tony Noel- 2015/04/20, 2015/04/22 - All tests passing as of 04/22
-    /// Updates: Fixed methods that were not working, updated tests to match the manager methods in the HotelGuestManager, and commented each test method
+    /// Rose Steffensmeier
+    /// Created: 2015/04/09 
+    /// 
     /// Tests for different things in the HotelGuestManager
     /// </summary>
+    /// <remarks>
+    /// Tony Noel
+    /// Updated: 2015/04/20
+    /// Updated: 2015/04/22
+    /// 
+    /// Fixed methods that were not working, 
+    /// updated tests to match the manager methods in the HotelGuestManager, 
+    /// and commented each test method
+    /// </remarks>
     [TestClass]
     public class HotelGuestManagerTest
     {

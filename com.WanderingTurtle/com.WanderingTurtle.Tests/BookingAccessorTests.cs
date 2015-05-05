@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 
 namespace com.WanderingTurtle.Tests
-{   ///Created By: Tony Noel- 2015/4/10, Updated 2015/05/01
+{   ///Created: By: Tony Noel- 2015/4/10, Updated 2015/05/01
     /// <summary>
     /// Booking Accessor Tests- Creates a fake booking record by using a dummy ItemListing from the database
     /// (ItemListing record 100). Performs actions on this booking based upon Accessor methods.

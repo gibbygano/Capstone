@@ -8,7 +8,7 @@ namespace com.WanderingTurtle.Tests
 {
     /// <summary>
     /// Bryan Hurst
-    /// Created 4/2/2015
+    /// Created: 2015/04/02
     /// 
     /// Summary description for ItemListingAccessorTest
     /// </summary>

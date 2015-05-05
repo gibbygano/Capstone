@@ -13,7 +13,7 @@ namespace com.WanderingTurtle.Tests
 {
     /// <summary>
     /// Bryan Hurst
-    /// Created 4/2/2015
+    /// Created: 2015/04/02
     /// 
     /// Unit tests for the methods in Event Accessor
     /// </summary>
@@ -86,7 +86,7 @@ namespace com.WanderingTurtle.Tests
         }
 
         /// <summary>
-        /// Method for retrieving the test record created by these methods
+        /// Method for retrieving the test record Created: by these methods
         /// </summary>
         /// <param name="list"></param>
         /// <returns></returns>

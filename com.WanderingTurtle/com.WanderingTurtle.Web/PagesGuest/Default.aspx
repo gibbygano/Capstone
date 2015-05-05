@@ -26,7 +26,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
-    <!--Created 2015/03/27
+    <!--Created: 2015/03/27
         Pat Banks
         View List of current listings for hotel guest to sign up 
         -->

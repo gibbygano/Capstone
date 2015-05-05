@@ -19,7 +19,8 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Hunter Lind
-        /// Created: 2015/2/23
+        /// 
+        /// 2015/2/23
         /// Initializes the form and populates a combobox with event types.
         /// </summary>
         public AddEditEvent()
@@ -127,7 +128,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Added button to allow cancel of the form function.  Combined Edit and Add forms
         /// </summary>
         /// <param name="sender"></param>
@@ -139,7 +140,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
         /// </summary>
         /// <param name="sender"></param>
@@ -151,7 +152,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Logic rearranged when combining the add and edit forms.
         /// </summary>
         /// <param name="sender"></param>
@@ -241,7 +242,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Method is used to populate fields when editing the event, otherwise, brings up a blank form.
         /// </summary>
         private void SetFields()
@@ -281,7 +282,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/06
+        /// Created: 2015/04/06
         /// Sets up the ui
         /// </summary>
         private void Setup()

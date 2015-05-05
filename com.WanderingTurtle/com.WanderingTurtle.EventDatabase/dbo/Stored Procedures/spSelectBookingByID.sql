@@ -1,4 +1,4 @@
-﻿/* ------------------------------Select- General --------------created by: Tony Noel-----------------*/
+﻿/* ------------------------------Select- General --------------Created by: Tony Noel-----------------*/
 CREATE PROCEDURE [dbo].[spSelectBookingByID]
 	(@bookingID int)
 AS

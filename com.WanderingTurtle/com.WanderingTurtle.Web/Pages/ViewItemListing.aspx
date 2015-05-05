@@ -8,7 +8,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server" ID="body">
     
-    <!--Created 2015/04/09
+    <!--Created: 2015/04/09
         Kelsey 
         View List of Item Listings and Options to Edit or Delete
         -->

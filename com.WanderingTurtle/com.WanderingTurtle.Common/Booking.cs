@@ -109,7 +109,7 @@ namespace com.WanderingTurtle.Common
 
     /// <summary>
     /// Pat Banks
-    /// Created on: 2015/02/25
+    /// Created: on: 2015/02/25
     ///
     /// Booking Details inherits from a Booking. Object holds additional information for a booking to show on an invoice.
     /// </summary>

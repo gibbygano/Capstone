@@ -8,7 +8,7 @@ namespace com.WanderingTurtle.Web.Pages
 {  
     /// <summary>
     /// Web facing form for Suppliers to add a new Event.
-    /// Created by: Kelsey Blount 2015/04/07
+    /// Created: by: Kelsey Blount 2015/04/07
     /// Updated: 2015/05/01
     /// Added jQuery Autocomplete to Zip Code field
     /// Updated: 2015/05/03 by Matt Lapka

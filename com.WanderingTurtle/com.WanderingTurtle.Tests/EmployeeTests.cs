@@ -6,11 +6,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
 namespace EmployeeLogicTests
-{   ///Created by: Tony Noel, 2015/3/27, Updated 2015/4/10
+{   
     /// <summary>
+    /// Tony Noel
+    /// Created: 2015/03/27
     /// A complete testing of all employee logic methods in the Employee Manager.
-    ///The test creates a dummy employee record and performs the various methods in the manager using this record.
+    /// The test creates a dummy employee record and performs the various methods in the manager using this record.
     /// </summary>
+    /// <remarks>
+    /// Tony Noel
+    /// Updated: 2015/04/10
+    /// </remarks>
     [TestClass]
     public class EmployeeTests
     {   //Test values

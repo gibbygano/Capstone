@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- Created by Arik Chadima 2015/4/24
+    <%-- Created: by Arik Chadima 2015/4/24
         Allows for guests to view and print the bookings their signed up for.
         Modified by Arik Chadima 2015/4/30
         changed gridview to a repeater to allow for easier styling and item manipulation. --%>

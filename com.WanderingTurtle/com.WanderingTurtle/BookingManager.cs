@@ -455,7 +455,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Matt Lapka
-        /// Created 2015/04/14
+        /// Created: 2015/04/14
         /// Retrieves numbers from a specific event listing
         /// Not cached since it will differ each time
         /// </summary>
@@ -475,7 +475,7 @@ namespace com.WanderingTurtle.BusinessLogic
 
         /// <summary>
         /// Pat Banks
-        /// Created 2015/04/26
+        /// Created: 2015/04/26
         /// 
         /// Checks if anyone is signed up for an event
         /// </summary>

@@ -22,7 +22,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Will Fritz
-        /// Created 2015/02/06
+        /// Created: 2015/02/06
         /// Set up of ui screen, combo box fill
         /// </summary>
         /// <remarks>
@@ -219,7 +219,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/21
+        /// Created: 2015/04/21
         /// Added button to allow cancel of the form function.  Combined Edit and Add forms
         /// </summary>
         /// <param name="sender"></param>
@@ -231,7 +231,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Miguel Santana
-        /// Created 2015/04/21
+        /// Created: 2015/04/21
         /// Added button to allow Reset of the form fields.  Combined Edit and Add forms
         /// </summary>
         /// <param name="sender"></param>
@@ -317,7 +317,7 @@ namespace com.WanderingTurtle.FormPresentation
 
         /// <summary>
         /// Will Fritz
-        /// Created 2/19/2015
+        /// Created: 2/19/2015
         /// fills the zip code combo box
         /// </summary>
         private void FillComboBox()
