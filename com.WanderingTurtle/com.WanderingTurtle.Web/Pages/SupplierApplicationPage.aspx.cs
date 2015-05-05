@@ -48,6 +48,23 @@ namespace com.WanderingTurtle.Web.Pages
             textBox.BorderColor = Color.Empty;
             return false;
         }
+        private bool validateName(System.Web.UI.WebControls.TextBox textBox, String toolTipText)
+        {
+            if (String.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.ToolTip = toolTipText;
+                textBox.BorderColor = Color.Red;
+                return true;
+            }
+            else if (!Validator.ValidateString(textBox.Text))
+            {
+                textBox.ToolTip = toolTipText;
+                textBox.BorderColor = Color.Red;
+                return true;
+            }
+            textBox.BorderColor = Color.Empty;
+            return false;
+        }
 
         private void clearBorderColors() 
         {
@@ -68,8 +85,8 @@ namespace com.WanderingTurtle.Web.Pages
             lblFinish.Text = "";
             //Validate
             if (validateText(txtCompanyName, "Please enter a company name")) errorCount++;
-            if (validateText(txtFirstName, "Please enter your first name")) errorCount++;
-            if (validateText(txtLastName, "Please enter your second name")) errorCount++;
+            if (validateName(txtFirstName, "Please enter your first name")) errorCount++;
+            if (validateName(txtLastName, "Please enter your second name")) errorCount++;
             if (validateText(txtAddress, "Please enter your address")) errorCount++;
             //check zips
             bool goodZip = false;
