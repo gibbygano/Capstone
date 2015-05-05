@@ -1,12 +1,15 @@
 ﻿namespace com.WanderingTurtle.Common
 {
     /// <summary>
-    /// Object to hold employee role data for the employee forms
-    /// Pat Banks 2/18/15
+    /// Pat Banks
+    /// Created: 2015/02/18
+    /// 
+    /// Enum to hold employee role data for the employee forms
     /// </summary>
     /// <remarks>
     /// Miguel Santana
-    /// : 2015/02/22
+    /// Updated: 2015/02/22
+    /// 
     /// Changed from object to enum
     /// </remarks>
     public enum RoleData

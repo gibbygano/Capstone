@@ -3,8 +3,10 @@
 namespace com.WanderingTurtle.Common
 {
     /// <summary>
+    /// Matthew Lapka 
+    /// Created: 2015/02/05
+    /// 
     /// Creates an ItemListing Object. Contains specific information about the event listing
-    /// Created by Matt Lapka 2/5/15
     /// </summary>
     public class ItemListing
     {
@@ -64,8 +66,11 @@ namespace com.WanderingTurtle.Common
         public string SupplierName { get; set; }
     }
 
-    ///Created by Anthony Noel: 2015/02/16
+    
     /// <summary>
+    /// Anthony Noel 
+    /// Created: 2015/02/16
+    /// 
     /// List Item Object, extends booking.
     /// Has a default constructor, and one to accept 2 ints, 2 strings, another int, and two datetimes
     /// Extends booking so that all information on a booking can be linked to the event information.

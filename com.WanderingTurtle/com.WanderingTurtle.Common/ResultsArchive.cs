@@ -1,11 +1,11 @@
 ﻿namespace com.WanderingTurtle.Common
 {
     /// <summary>
-    /// Enum to hold results for Archiving
     /// Pat Banks
+    /// Created: 2015/03/23
+    /// 
+    /// Enum to hold results for Archiving
     /// </summary>
-    /// <remarks>
-    /// </remarks>
     public enum ResultsArchive
     {
         //item could not be found

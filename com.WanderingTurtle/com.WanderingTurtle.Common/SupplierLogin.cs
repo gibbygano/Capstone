@@ -1,5 +1,11 @@
 ﻿namespace com.WanderingTurtle.Common
 {
+    /// <summary>
+    /// Rose Steffensmeier
+    /// Created: 2015/04/03 
+    ///
+    /// Object to hold information pertaining to a Supplier Login
+    /// </summary>
     public class SupplierLogin
     {
         public SupplierLogin()

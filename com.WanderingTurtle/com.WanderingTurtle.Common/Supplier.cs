@@ -1,5 +1,11 @@
 ﻿namespace com.WanderingTurtle.Common
-{
+{        
+    /// <summary>
+    /// Bryan Hurst
+    /// Created: 2015/02/19
+    /// 
+    /// Object for the creation of Supplier objects with set data fields 
+    /// </summary>
     public class Supplier
     {
         public Supplier(int supplierID, string companyName, string firstName, string lastName, string address1,
@@ -56,8 +62,7 @@
 
         public string PhoneNumber { get; set; }
 
-        //Bryan Hurst Feb.19
-        //Object for the creation of Supplier objects with set data fields
+
         public int SupplierID { get; set; }
 
         public decimal? SupplyCost { get; set; }

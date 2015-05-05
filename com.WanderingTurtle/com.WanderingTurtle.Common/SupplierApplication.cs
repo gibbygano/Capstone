@@ -5,6 +5,7 @@ namespace com.WanderingTurtle.Common
     /// <summary>
     /// Matt Lapka
     /// Created: 2015/02/08
+    /// 
     /// Object to hold information pertaining to a Supplier Application
     /// </summary>
     public class SupplierApplication

@@ -1,11 +1,11 @@
 ﻿namespace com.WanderingTurtle.Common
 {
     /// <summary>
-    /// Enum to hold results for editing
     /// Pat Banks
+    /// Created: 2015/03/23
+    /// 
+    /// Enum to hold results for editing
     /// </summary>
-    /// <remarks>
-    /// </remarks>
     public enum ResultsEdit
     {
         //item could not be found
