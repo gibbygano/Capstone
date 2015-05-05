@@ -10,10 +10,11 @@ namespace com.WanderingTurtle.DataAccess
     {
         /// <summary>
         /// Justin Pennington 
-        /// created:  2015/02/14
-        /// add the event type to the database
+        /// Created:  2015/02/14
+        /// 
+        /// Add the event type to the database
         /// </summary>
-        /// <param name="newEventType">input parameter of EventType</param>
+        /// <param name="newEventType">String containing the name of a new EventType</param>
         /// <returns>number of rows affected:  0 fails and a 1 for success</returns>
         public static int AddEventType(string newEventType)
         {
@@ -48,12 +49,13 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Justin Pennington 
-        /// created:  2015/02/14
-        /// needs the event object that is having its name being changed and the new name
+        /// Created:  2015/02/14
+        /// 
+        /// Updates an EventType object and database record
         /// </summary>
         /// </summary>
-        /// <param name="oldEventType"></param>
-        /// <param name="newEventType"></param>
+        /// <param name="oldEventType">The EventType object to be updated</param>
+        /// <param name="newEventType">The EventType object with the updated changes</param>
         /// <returns>Returns the number of rows affected (should be 1)</returns>
         public static int UpdateEventType(EventType oldEventType, EventType newEventType)
         {
@@ -93,10 +95,10 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Justin Pennington 
-        /// created:  2015/02/14
-        /// ARchives an event type
+        /// Created:  2015/02/14
+        /// Archives an event type record
         /// </summary>
-        /// <param name="eventTypeToArchive"></param>
+        /// <param name="eventTypeToArchive">The EventType object to be archived</param>
         /// <returns>returns number of rows affected</returns>
         public static int DeleteEventType(EventType eventTypeToArchive)
         {
@@ -132,7 +134,9 @@ namespace com.WanderingTurtle.DataAccess
         /// <summary>
         /// Justin Pennington
         /// Created 2015/02/14
-        /// retrieves all EventTypes, Makes a List of EventTypes,
+        /// 
+        /// Retrieves all EventTypes. 
+        /// Makes a List of EventTypes,
         /// </summary>
         /// <returns> Returns the List of EventTypes</returns>
         public static List<EventType> GetEventTypeList()
@@ -178,12 +182,12 @@ namespace com.WanderingTurtle.DataAccess
 
         /// <summary>
         /// Justin Pennington 
-        /// created:  2015/02/14
-        /// gets an eventTypeID, retrieves data from databases
+        /// Created:  2015/02/14
+        /// Gets an eventTypeID, retrieves data from databases
         /// </summary>
-        /// <param name="eventTypeID"></param>
-        /// <returns>Returns an Event object</returns>
-        public static EventType GetEventType(String eventTypeID)
+        /// <param name="eventTypeID">String containing the EventTypeID matching a specific EventType record/object</param>
+        /// <returns>Returns an EventType object</returns>
+        public static EventType GetEventType(string eventTypeID)
         {
             EventType theEventType = new EventType();
             // set up the database call

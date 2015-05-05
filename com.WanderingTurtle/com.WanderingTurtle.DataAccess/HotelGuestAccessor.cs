@@ -18,10 +18,12 @@ namespace com.WanderingTurtle.DataAccess
         /// Updated: 2015/02/27
         /// Stored Procedure updated to create an invoice record automatically when adding a hotel guest
         /// 
-        /// Updated Rose Steffensmeier 2015/03/12
+        /// Rose Steffensmeier
+        /// Updated: 2015/03/12
         /// Added try-catch blocks
         /// 
-        /// Updated by Pat Banks 2015/04/03
+        /// Pat Banks
+        /// Updated: 2015/04/03
         /// Added GuestPIN field
         /// </remarks>
         /// <param name="newHotelGuest">Object containing new hotel guest information</param>

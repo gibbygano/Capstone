@@ -49,6 +49,11 @@ namespace com.WanderingTurtle.FormPresentation
             RefreshData();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// Logic for context menus
+        /// </summary>
         /// <exception cref="WanderingTurtleException"/>
         public void ContextMenuItemClick(object sender, RoutedEventArgs e)
         {
@@ -161,7 +166,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             try
             {
-                _eventmanager.RetrieveEventList();
+ //             _eventmanager.RetrieveEventList();
                 ListingList = _productManager.RetrieveItemListingList();
                 foreach (ItemListing item in ListingList)
                 {
@@ -179,6 +184,7 @@ namespace com.WanderingTurtle.FormPresentation
         {
             BtnSearchListing.Content = TxtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
+
 
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)
         {

@@ -2,6 +2,7 @@
 using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Windows;
+using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.FormPresentation.Views.Admin
 {
@@ -16,13 +17,19 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         }
 
         private async void BtnRunXML_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             var accountingManager = new AccountingManager();
 
             if (DateStart.SelectedDate == null) throw new InputValidationException(DateStart, "Please select a Start Date");
             var formStartDate = (DateTime)DateStart.SelectedDate;
+
             if (DateEnd.SelectedDate == null) throw new InputValidationException(DateStart, "Please select an End Date");
             var formEndDate = (DateTime)DateEnd.SelectedDate;
+
+            if (formStartDate > formEndDate)
+            {
+                throw new InputValidationException(DateStart, "Start Date must be before the end date.");
+            }
 
             var report = accountingManager.GetAccountingDetails(formStartDate, formEndDate);
 
@@ -33,6 +40,9 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
             DateStart.Text = null;
             DateEnd.Text = null;
+
+            
+
             if (report.XMLFile(filename))
             {
                 await this.ShowMessageDialog("Your Report has been saved successfully.", "Success");

@@ -8,6 +8,5 @@ BEGIN
 		  ,[empLevel]
 		  ,[active]
 	  FROM [dbo].[Employee]
-	  WHERE (@employeeID IS NOT NULL OR ([active] = '1'))
-		AND (@employeeID IS NULL OR ([employeeID] = @employeeID))
+	  WHERE (@employeeID IS NULL OR ([employeeID] = @employeeID))
 END

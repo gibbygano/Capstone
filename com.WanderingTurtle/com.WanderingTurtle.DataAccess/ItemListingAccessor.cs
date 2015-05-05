@@ -17,7 +17,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tyler Collins
         /// Updated:  2015/02/26
-        /// now up to date with most recent ItemListing object class
+        /// Now up to date with most recent ItemListing object class
         /// </remarks>
         /// <param name="itemListID">Requires the ItemListID to SELECT the correct ItemListing record.</param>
         /// <returns>ItemListing object</returns>
@@ -80,7 +80,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tyler Collins
         /// Updated:  2015/02/26
-        /// now up to date with most recent ItemListing object class
+        /// Now up to date with most recent ItemListing object class
         /// </remarks>
         /// <returns>List of Active ItemListing objects</returns>
         public static List<ItemListing> GetItemListingList()
@@ -150,7 +150,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tyler Collins
         /// Updated:  2015/02/26
-        /// now up to date with most recent ItemListing object class
+        /// Now up to date with most recent ItemListing object class
         /// </remarks>
         /// <returns>List of ItemListing objects</returns>
         public static List<ItemListing> GetAllItemListingList()
@@ -214,7 +214,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tyler Collins
         /// Updated:  2015/02/26
-        /// now up to date with most recent ItemListing object class
+        /// Now up to date with most recent ItemListing object class
         /// </remarks>
         /// <param name="itemListingToAdd">Requires an ItemListing object to INSERT</param>
         /// <returns>Returns the number of rows affected.</returns>
@@ -259,7 +259,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tyler Collins
         /// Updated:  2015/02/26
-        /// now up to date with most recent ItemListing object class
+        /// Now up to date with most recent ItemListing object class
         /// </remarks>
         /// <param name="newItemListing">Requires the ItemListing object containing the new information</param>
         /// <param name="oldItemListing">Requires the ItemListing object to replace that matches the record in the Database</param>
@@ -317,7 +317,7 @@ namespace com.WanderingTurtle.DataAccess
         /// <remarks>
         /// Tyler Collins
         /// Updated:  2015/02/26
-        /// now up to date with most recent ItemListing object class
+        /// Now up to date with most recent ItemListing object class
         /// </remarks>
         /// <param name="itemListingToDelete">Requires the ItemListing object which matches the record to be DELETED in the Database.</param>
         /// <returns>Returns the number of rows affected.</returns>
@@ -361,8 +361,8 @@ namespace com.WanderingTurtle.DataAccess
         /// Created:  4/23/2015
         /// Method for deletion of test records created with the unit tests
         /// </summary>
-        /// <param name="TestListing"></param>
-        /// <returns>number of rows affected</returns>
+        /// <param name="TestListing">The ItemListing added during testing -- to be deleted</param>
+        /// <returns>Number of rows affected</returns>
         public static int DeleteItemListingTestItem(ItemListing TestListing)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();

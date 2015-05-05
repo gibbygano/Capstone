@@ -14,7 +14,7 @@ namespace com.WanderingTurtle.DataAccess
         /// Inserts a new Supplier Application Record into the Database
         /// </summary>
         /// <param name="supplierApplicationToAdd">A Supplier Application Object that contains all the information to be added</param>
-        /// <returns>int # of rows affected</returns>
+        /// <returns>int reflecting number of rows affected</returns>
         public static int AddSupplierApplication(SupplierApplication supplierApplicationToAdd)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -62,7 +62,7 @@ namespace com.WanderingTurtle.DataAccess
         /// </summary>
         /// <param name="oldApplication">A SupplierApplication Object that contains all the information of the record to be changed</param>
         /// <param name="newApplication">A SupplierApplication Object that contains all the information to change in the record</param>
-        /// <returns>int # of rows affected</returns>
+        /// <returns>int reflecting number of rows affected</returns>
         public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication)
         {
             var conn = DatabaseConnection.GetDatabaseConnection();
@@ -129,7 +129,8 @@ namespace com.WanderingTurtle.DataAccess
         /// Retrieves a list of all Supplier Application Records from the Database
         /// </summary>
         /// <remarks>
-        /// Edited by Rose Steffensmeier 2015/04/03
+        /// Rose Steffensmeier
+        /// Updated: 2015/04/03
         /// added param to input so that stored procedure will work, param does not affect the actual
         /// </remarks>
         /// <returns>List of SupplierApplication objects</returns>
@@ -246,10 +247,10 @@ namespace com.WanderingTurtle.DataAccess
         /// Adds a new supplier from an application with supply cost in the supplier table
         /// Adds User name to the supplier login table.
         /// </summary>
-        /// <param name="oldApplication"></param>
-        /// <param name="newApplication"></param>
-        /// <param name="userName"></param>
-        /// <param name="supplyCost"></param>
+        /// <param name="oldApplication">The SupplierApplication object/record to be updated</param>
+        /// <param name="newApplication">The SupplierApplication object with the updated information for the record</param>
+        /// <param name="userName">The username for the supplier whose application is being updated</param>
+        /// <param name="supplyCost">The updated supply cost</param>
         /// <returns>number of rows affected</returns>
         public static int UpdateSupplierApplication(SupplierApplication oldApplication, SupplierApplication newApplication, string userName, decimal supplyCost)
         {

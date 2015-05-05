@@ -79,7 +79,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Retrieves Event Listing information for the one selected item listing
         /// Information is human readable with data from joined tables
         /// </summary>
-        /// <param name="itemListID">ItemList ID</param>
+        /// <param name="itemListID">ItemList ID matching an ItemListingDetails record</param>
         /// <returns>an ItemListingDetails containing the item listing information</returns>
         public ItemListingDetails RetrieveItemListingDetailsList(int itemListID)
         {
@@ -199,7 +199,7 @@ namespace com.WanderingTurtle.BusinessLogic
         ///
         /// Method to calculate the cancellation fee using the CalculateTime method * TotalCharge
         /// </summary>
-        /// <param name="bookingToCancel"></param>
+        /// <param name="bookingToCancel">The BookingDetails object to be cancelled</param>
         /// <returns>the actual fee in $ that will be charged for cancelling a booking</returns>
         public decimal CalculateCancellationFee(BookingDetails bookingToCancel)
         {
@@ -223,7 +223,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Tony Noel
         /// Updated: 2015/03/10
         /// </remarks>
-        /// <returns>decimal containing the total cancellation fee % amount</returns>
+        /// <param name="bookingStartTime">The BookingDetails being refunded for</param>
+        /// <returns>Decimal containing the total cancellation fee % amount</returns>
         public decimal CalculateTime(BookingDetails bookingStartTime)
         {
             decimal feePercent;
@@ -263,7 +264,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="price">price of one ticket</param>
         /// <param name="quantity">number of tickets</param>
-        /// <returns>the extended price</returns>
+        /// <returns>The extended price</returns>
         public decimal CalcExtendedPrice(decimal price, int quantity)
         {
             return quantity * price;
@@ -289,9 +290,9 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Tony Noel
         /// Created: 2015/03/10 - Moved to Booking Manager, as it does a calculation.
         /// </summary>
-        /// <param name="maxQuantity"></param>
-        /// <param name="currentQuantity"></param>
-        /// <returns></returns>
+        /// <param name="maxQuantity">The maximum amount of people who can sign up for a booking</param>
+        /// <param name="currentQuantity">The current amount of people signed up for a booking</param>
+        /// <returns>An int reflecting how many people can still sign up</returns>
         public int AvailableQuantity(int maxQuantity, int currentQuantity)
         {
             int availableQuantity;
@@ -309,7 +310,7 @@ namespace com.WanderingTurtle.BusinessLogic
         /// </summary>
         /// <param name="newQuantity">updated number of people attending</param>
         /// <param name="currentQuantity">current quantity of people attending</param>
-        /// <returns>number of spots different</returns>
+        /// <returns>Number of spots different</returns>
         public int SpotsReservedDifference(int newQuantity, int currentQuantity)
         {
             int quantity = newQuantity - currentQuantity;
@@ -323,8 +324,8 @@ namespace com.WanderingTurtle.BusinessLogic
         ///
         /// Checks if a booking can be edited by performing logical checks if booking is too old or cancelled
         /// </summary>
-        /// <param name="bookingToCheck"></param>
-        /// <returns></returns>
+        /// <param name="bookingToCheck">The BookingDetails object to crossreference against</param>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public ResultsEdit CheckToEditBooking(BookingDetails bookingToCheck)
         {
             if (bookingToCheck.StartDate < DateTime.Now)
@@ -340,8 +341,8 @@ namespace com.WanderingTurtle.BusinessLogic
         ///
         /// Gives the results of cancelling a booking to the preseantation layer
         /// </summary>
-        /// <param name="bookingToCancel"></param>
-        /// <returns></returns>
+        /// <param name="bookingToCancel">The bookingDetails object to cancel</param>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public ResultsEdit CancelBookingResults(BookingDetails bookingToCancel)
         {
             try
@@ -381,9 +382,9 @@ namespace com.WanderingTurtle.BusinessLogic
         ///
         /// Updated to include data cache refresh
         /// </remarks>
-        /// <param name="originalQty"></param>
-        /// <param name="editedBooking"></param>
-        /// <returns></returns>
+        /// <param name="originalQty">The amount of people who could sign up</param>
+        /// <param name="editedBooking">The Booking object with the updated information</param>
+        /// <returns>An enumerated result depicting pass or fail</returns>
         public ResultsEdit EditBookingResult(int originalQty, Booking editedBooking)
         {
             try
@@ -437,8 +438,8 @@ namespace com.WanderingTurtle.BusinessLogic
         ///
         /// Passes data to the Accessor to verify that the pin is not being used.
         /// </summary>
-        /// <param name="inPIN"></param>
-        /// <returns></returns>
+        /// <param name="inPIN">The pin to crossreference against</param>
+        /// <returns>A HotelGuest object whose pin matches the one passed</returns>
         public HotelGuest CheckValidPIN(string inPIN)
         {
             try
@@ -458,8 +459,8 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Retrieves numbers from a specific event listing
         /// Not cached since it will differ each time
         /// </summary>
-        /// <param name="itemListID">id of event listing</param>
-        /// <returns>names of hotel guests, room #s, and quantities of tickets for each booking related to that item listing</returns>
+        /// <param name="itemListID">The ID of event listing</param>
+        /// <returns>Names of hotel guests, room numbers, and quantities of tickets for each booking related to that item listing</returns>
         public List<BookingNumbers> RetrieveBookingNumbers(int itemListID)
         {
             try
@@ -475,9 +476,11 @@ namespace com.WanderingTurtle.BusinessLogic
         /// <summary>
         /// Pat Banks
         /// Created 2015/04/26
+        /// 
+        /// Checks if anyone is signed up for an event
         /// </summary>
-        /// <param name="itemListID"></param>
-        /// <returns></returns>
+        /// <param name="itemListID">The ID of the event listing to check against</param>
+        /// <returns>An enumerated result indicating yes or no</returns>
         public ResultsArchive CheckListingArchive(int itemListID)
         {
             var bookings = RetrieveBookingNumbers(itemListID);
