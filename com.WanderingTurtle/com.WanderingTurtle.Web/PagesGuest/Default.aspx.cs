@@ -32,7 +32,7 @@ namespace com.WanderingTurtle.Web.Pages
         /// <summary>
         /// Pat Banks
         /// Created:  2015/04/11
-        /// Loads web pages for hotel guest
+        /// Loads web pages for hotel guest and udpates session variables
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -67,7 +67,6 @@ namespace com.WanderingTurtle.Web.Pages
         /// <summary>
         /// Arik Chadima
         /// Created: 2015/4/30
-        /// 
         /// Refactored->Extracted method for reuse.
         /// </summary>
         private void ResetVariables()
@@ -94,7 +93,6 @@ namespace com.WanderingTurtle.Web.Pages
         /// <summary>
         /// Pat Banks
         /// Created:  2015/04/08
-        /// 
         /// Binds data for the grid view to the current list of event offerings
         /// </summary>
         private void bindData()
@@ -106,7 +104,6 @@ namespace com.WanderingTurtle.Web.Pages
         /// <summary>
         /// Pat Banks
         /// Created:  2015/04/08
-        /// 
         /// retrieves the list of event offerings for the grid view
         /// </summary>
         /// <returns>

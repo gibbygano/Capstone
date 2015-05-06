@@ -11,6 +11,13 @@ namespace com.WanderingTurtle.Web
     {
          private bool loggedIn = false;
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/14
+        /// Sets login information based on session data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
          protected void Page_PreLoad(object sender, EventArgs e)
          {
              try
@@ -30,6 +37,13 @@ namespace com.WanderingTurtle.Web
                  Response.Redirect("~/portal");
              }
          }
+
+        /// <summary>
+         /// Matt Lapka
+         /// Created 2015/02/22
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
 

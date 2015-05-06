@@ -75,7 +75,7 @@ namespace com.WanderingTurtle.Tests
         { 
             int guestID = TestCleanupAccessor.GetHotelGuest();
             ResultsArchive result = access.ArchiveGuestInvoice(guestID);
-            ResultsArchive expected = ResultsArchive.ChangedByOtherUser;
+            ResultsArchive expected = ResultsArchive.Success;
             Assert.AreEqual(expected, result);
         }
         [TestMethod]

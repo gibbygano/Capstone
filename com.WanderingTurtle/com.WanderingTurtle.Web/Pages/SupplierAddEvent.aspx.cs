@@ -18,6 +18,12 @@ namespace com.WanderingTurtle.Web.Pages
         private string _errorMessage = "";
         private bool loggedIn = false;
 
+        /// Matt Lapka
+        /// Created 2015/04/12
+        /// Sets login information based on session data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             try
@@ -38,13 +44,17 @@ namespace com.WanderingTurtle.Web.Pages
                 //if not logged in, send them to login page
                 Response.Redirect("~/login");
             }
-
         }
 
-
+        /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/03/10
+        /// loads page information for events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
-
             //notes -- need the if statement to ensure this only gets run the first time
             //enableeventvalidation needs to be false
             //autopostback needs to be true
@@ -60,25 +70,23 @@ namespace com.WanderingTurtle.Web.Pages
                     comboEventTypeList.DataTextField = "EventName";
                     comboEventTypeList.DataValueField = "EventTypeID";
                     comboEventTypeList.DataBind();
-
                 }
                 catch (Exception ex)
                 {
                     showError(ex.Message);
-
                 }
             }
-
         }
 
-        protected void radTransportation_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/03/26
+        ///  gets values from radio buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void radOnSite_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (radOnSite.SelectedValue == "True")
             {
                 //set transportation to false and keep it hidden because tranportation is not needed
@@ -96,6 +104,12 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/05/03
+        /// adds message data in dialog
+        /// </summary>
+        /// <param name="message"></param>
         private void showError(string message)
         {
             _errorMessage = message;
@@ -103,6 +117,13 @@ namespace com.WanderingTurtle.Web.Pages
             Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created: 2015/03/26
+        /// Sends event information to BLL and validates data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSubmitEvent_Click(object sender, EventArgs e)
         {
             bool stop = false;
@@ -154,14 +175,12 @@ namespace com.WanderingTurtle.Web.Pages
             }
             else
             {
-
                 //reset border colors
                 txtEventName.BorderColor = Color.Black;
                 txtDescription.BorderColor = Color.Black;
                 comboEventTypeList.BorderColor = Color.Black;
                 radTransportation.BorderColor = Color.Black;
                 radOnSite.BorderColor = Color.Black;
-
 
                 try
                 {
@@ -196,6 +215,11 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/03/10
+        /// clears form after addition of an event
+        /// </summary>
         private void clearForm()
         {
             txtEventName.Text = "";
@@ -207,7 +231,5 @@ namespace com.WanderingTurtle.Web.Pages
             lblTransportation.Visible = false;
             _errorMessage = "";
         }
-
-
     }
 }

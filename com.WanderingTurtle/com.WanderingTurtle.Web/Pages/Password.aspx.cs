@@ -16,6 +16,14 @@ namespace com.WanderingTurtle.Web.Pages
         private Supplier _currentSupplier;
         private SupplierLoginManager _myMan = new SupplierLoginManager();
         private SupplierLogin _currentLogin;
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/12
+        /// Sets login information based on session data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_PreLoad(object sender, EventArgs e)
         {
             try
@@ -39,11 +47,25 @@ namespace com.WanderingTurtle.Web.Pages
                 Response.Redirect("~/login");
             }
         }
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/30
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/30
+        /// validates & sends updated password info to the BLL 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnChange_Click(object sender, EventArgs e)
         {
             //doublecheck client side validation
@@ -92,12 +114,5 @@ namespace com.WanderingTurtle.Web.Pages
                 throw;
             }
         }
-
-        //protected void BtnGen_Click(object sender, EventArgs e)
-        //{
-        //    PasswordManager myPass = new PasswordManager();
-        //    txthash.Text = myPass.supplierHash(txtUser.Text, txtPass.Text);
-
-        //}
     }
 }

@@ -9,7 +9,6 @@ using com.WanderingTurtle.Common;
 
 namespace com.WanderingTurtle.Web
 {
-
     public partial class SiteMaster : MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
@@ -17,7 +16,13 @@ namespace com.WanderingTurtle.Web
         private string _antiXsrfTokenValue;
         private bool loggedIn = false;
         
-
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/02/22
+        /// auto generated code for page loading
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -50,6 +55,13 @@ namespace com.WanderingTurtle.Web
             Page.PreLoad += master_Page_PreLoad;
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/02/22
+        /// auto generated code for page loading
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void master_Page_PreLoad(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -67,10 +79,15 @@ namespace com.WanderingTurtle.Web
                     throw new InvalidOperationException("Validation of Anti-XSRF token failed.");
                 }
             }
-
-        
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// created 2015/02/22
+        /// Sets login of user and adds appropriate menu items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             //create menu based on login -- need to create this logic
@@ -119,6 +136,13 @@ namespace com.WanderingTurtle.Web
                 }
             }
         }
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/13
+        /// added error div to login page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void errorButton_Click(object sender, EventArgs e)
         {
             errorMess.Visible = false;

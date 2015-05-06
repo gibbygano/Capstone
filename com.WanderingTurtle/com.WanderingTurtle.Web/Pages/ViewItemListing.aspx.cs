@@ -21,6 +21,12 @@ namespace com.WanderingTurtle.Web.Pages
         private decimal minPrice = 0;
         private int supplierID;
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/16
+        /// checks login information then fetches data for supplier listings
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             testLogin();
@@ -51,6 +57,11 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/16
+        /// Sets login information based on session data
+        /// </summary>
         private void testLogin()
         {
             try
@@ -75,6 +86,12 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/10
+        /// Gets listing data from BLL based on supplier id
+        /// </summary>
+        /// <returns>List of the Item listings for that supplier</returns>
         public IEnumerable<ItemListing> GetLists()
         {
             testLogin();
@@ -91,24 +108,37 @@ namespace com.WanderingTurtle.Web.Pages
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                 return null;
             }
-
-
         }
+
+        /// <summary>
+        /// Kelsey Blount
+        /// created  2015/04/10
+        /// Binds data for the list view
+        /// </summary>
         private void bindData()
         {
             lvLists.DataSource = _listedLists;
             lvLists.DataBind();
         }
 
-        public void FormValidate(int eventItemID)
-        {
-
-        }
-
+        /// <summary>
+        /// Kelsey Blount
+        /// created  2015/04/16
+        /// Adds error text
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
         private String addError(String list, String text)
         {
             return list.Length > 0 ? list + "\n" + text : text;
         }
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/16
+        /// Handles the updating of a listing.  includes input validation, messaging and necessary session variables
+        /// </summary>
         public void UpdateList()
         {
             string errorText = "";
@@ -214,11 +244,28 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Kelsey Blount
+        /// created  2015/04/10
+        /// Shows error text
+        /// </summary>
+        /// <param name="errorMessage"></param>
         private void showError(string errorMessage)
         {
             lblError.Text = errorMessage;
         }
 
+        /// <summary>
+        /// Kelsey Blount
+        /// created  2015/04/10
+        /// Handles archival of a listing
+        /// </summary>
+        /// <remarks>
+        /// Matt Lapka
+        /// Updated 2015/04/15
+        /// error messages added
+        /// </remarks>
+        /// <param name="ItemListID">item ID for the listing</param>
         public void DeleteList(int ItemListID)
         {
             try
@@ -240,24 +287,21 @@ namespace com.WanderingTurtle.Web.Pages
             }
             catch (Exception ex)
             {
-
                 lblMessage.Text = "Event deleting listing: " + ex.Message;
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
             }
         }
 
-
-        public void InsertList()
-        {
-
-        }
-
+        /// <summary>
+        /// Kelsey Blount
+        /// created  2015/04/10
+        /// Binds data for the listing view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void lvLists_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
         {
             bindData();
         }
-
-
     }
-
 }

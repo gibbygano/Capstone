@@ -170,7 +170,6 @@
     <Content Include="Images\sort_desc.png" />
     <Content Include="Images\sort_desc_disabled.png" />
     <Content Include="Images\turtle.png" />
-    <Content Include="PagesGuest\About.aspx" />
     <Content Include="PagesGuest\Contacts.aspx" />
     <Content Include="PagesGuest\guestscript.js" />
     <Content Include="PagesGuest\ViewBookings.aspx" />
@@ -272,13 +271,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PagesGuest\About.aspx.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="PagesGuest\About.aspx.designer.cs">
-      <DependentUpon>About.aspx</DependentUpon>
-    </Compile>
     <Compile Include="PagesGuest\Contacts.aspx.cs">
       <DependentUpon>Contacts.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

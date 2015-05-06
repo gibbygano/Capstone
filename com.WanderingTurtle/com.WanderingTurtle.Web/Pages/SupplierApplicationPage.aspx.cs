@@ -8,11 +8,6 @@ namespace com.WanderingTurtle.Web.Pages
 {  
     /// <summary>
     /// Web facing form for Suppliers to add a new Event.
-    /// Created: by: Kelsey Blount 2015/04/07
-    /// Updated: 2015/05/01
-    /// Added jQuery Autocomplete to Zip Code field
-    /// Updated: 2015/05/03 by Matt Lapka
-    /// Added jQuery dialog messages
     /// </summary>
     public partial class SupplierApplicationPage : System.Web.UI.Page
     {
@@ -21,6 +16,22 @@ namespace com.WanderingTurtle.Web.Pages
         private string _errorMessage = "";
         private SupplierManager ApplicationManager = new SupplierManager();
 
+        /// <summary>
+        /// Kelsey Blount 
+        /// Created 2015/04/07
+        /// loads page information for supplier application
+        /// </summary>
+        /// <remarks>
+        /// Matt Lapka
+        /// Updated: 2015/05/01
+        /// Added jQuery Autocomplete to Zip Code field
+        ///
+        /// Matt Lapka
+        /// Updated: 2015/05/03
+        /// Added jQuery dialog messages
+        /// </remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
             if(!Page.IsPostBack)
@@ -37,6 +48,15 @@ namespace com.WanderingTurtle.Web.Pages
                 }
             }
         }
+
+        /// <summary>
+        /// Kelsey Blount 
+        /// Created 2015/04/07
+        /// validates suppplier text to give feedback to user
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <param name="toolTipText"></param>
+        /// <returns>true if invalid data is present</returns>
         private bool validateText(System.Web.UI.WebControls.TextBox textBox, String toolTipText)
         {
             if (String.IsNullOrEmpty(textBox.Text)) 
@@ -48,6 +68,20 @@ namespace com.WanderingTurtle.Web.Pages
             textBox.BorderColor = Color.Empty;
             return false;
         }
+
+        /// <summary>
+        /// Kelsey Blount 
+        /// Created 2015/04/07
+        /// validates suppplier text to give feedback to user
+        /// </summary>
+        /// <remarks>
+        /// Ryan Blake
+        /// updated 2015/05/05
+        /// validation fix for address
+        /// </remarks>
+        /// <param name="textBox"></param>
+        /// <param name="toolTipText"></param>
+        /// <returns>true if invalid data is present</returns>
         private bool validateName(System.Web.UI.WebControls.TextBox textBox, String toolTipText)
         {
             if (String.IsNullOrEmpty(textBox.Text))
@@ -66,6 +100,11 @@ namespace com.WanderingTurtle.Web.Pages
             return false;
         }
 
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/05/01
+        /// clears border colors after validation
+        /// </summary>
         private void clearBorderColors() 
         {
             txtCompanyName.BorderColor = Color.Empty;
@@ -77,9 +116,16 @@ namespace com.WanderingTurtle.Web.Pages
             txtEmail.BorderColor = Color.Empty;
             txtPhoneNumber.BorderColor = Color.Empty;
         }
+
+        /// <summary>
+        /// Kelsey Blount 
+        /// Created 2015/04/07
+        /// submits data to bll for supplier application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnSubmitApplication_Click(object sender, EventArgs e)
         {
-
             clearBorderColors();
             int errorCount = 0;
             lblFinish.Text = "";
@@ -148,7 +194,6 @@ namespace com.WanderingTurtle.Web.Pages
                         showError("Thank you for your Application!<br /> We will be in contact once we have reviewed the information. ");
                         clearForm();
                     }
-
                 }
                 catch (Exception ex)
                 {
@@ -157,6 +202,11 @@ namespace com.WanderingTurtle.Web.Pages
             }
         }
 
+        /// <summary>
+        /// Kelsey Blount 
+        /// Created 2015/04/07
+        /// Clears form after submittal
+        /// </summary>
         private void clearForm()
         {
             txtZip.Text = "";
@@ -169,6 +219,18 @@ namespace com.WanderingTurtle.Web.Pages
             txtPhoneNumber.Text = "";
         }
 
+        /// <summary>
+        /// Kelsey Blount 
+        /// Created 2015/04/07
+        /// shows errors to user
+        /// </summary>
+        /// <remarks>
+        /// Matt Lapka
+        /// Updated: 2015/05/03
+        /// Added jQuery dialog messages
+        /// </remarks>
+        /// </remarks>
+        /// <param name="message"></param>
         private void showError(String message) 
         {
             _errorMessage = message;

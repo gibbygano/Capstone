@@ -13,10 +13,25 @@ namespace com.WanderingTurtle.Web
     {
         private SupplierLoginManager _myMan = new SupplierLoginManager();
         private SupplierManager _mySuppMan = new SupplierManager();
+             
+        /// <summary>
+        /// Reece Maas
+        /// Created 2015/04/10
+        /// loads page information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/10
+        /// Sets login information based on session data
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void CheckLogin(object sender, EventArgs e)
         {
             try

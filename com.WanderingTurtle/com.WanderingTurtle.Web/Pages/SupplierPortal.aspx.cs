@@ -24,16 +24,14 @@ namespace com.WanderingTurtle.Web.Pages
         Label errorLabel;
 
         /// <summary>
-        /// Sets up the page variables and redirects you to the login page if you havent logged in
-        /// </summary>
-        /// <remarks>
-        /// Created: by Matt Lapka
-        /// </remarks>
+        /// Matt Lapka
+        /// Created 2015/04/13
+        /// Sets login information based on session data
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Page_PreLoad(object sender, EventArgs e)
         {
-             errorLabel = (Label)Master.FindControl("lblErrorMessage");
+            errorLabel = (Label)Master.FindControl("lblErrorMessage");
             try
             {
                 //attempt to get session value if they are logged in
@@ -56,11 +54,10 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/13
         /// fills the current suppliers item listing lists and gets the number of guests 
         /// </summary>
-        /// <remarks>
-        /// Created: by Matt Lapka
-        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void Page_Load(object sender, EventArgs e)
@@ -69,46 +66,42 @@ namespace com.WanderingTurtle.Web.Pages
             {
                 showDateError = false;
             }
-                //get # of listings for supplier
-                try
-                {
-                    _currentItemListings = _myManager.RetrieveItemListingList(_currentSupplier.SupplierID).ToList();
-                    var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
-                    currentListingCount = myList.Count();
+            //get # of listings for supplier
+            try
+            {
+                _currentItemListings = _myManager.RetrieveItemListingList(_currentSupplier.SupplierID).ToList();
+                var myList = _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
+                currentListingCount = myList.Count();
 
-                    //get # of guests signed up for the listings
-                    foreach (var listing in myList)
-                    {
-                        currentGuestsCount += listing.CurrentNumGuests;
-                    }
-                }
-                catch (Exception)
+                //get # of guests signed up for the listings
+                foreach (var listing in myList)
                 {
-                    throw;
+                    currentGuestsCount += listing.CurrentNumGuests;
                 }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/13
         /// returns a list of items listings where the date is more recent than today
         /// </summary>
-        /// <remarks>
-        /// Created: by Matt Lapka
-        /// </remarks>
         /// <returns>IEnumerable of item listings for the current supplier</returns>
         public IEnumerable<ItemListing> GetItemLists()
         {
-
-                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
-            
+            return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
         }
 
         /// <summary>
+        /// Matt Lapka
+        /// Created 2015/04/14
         /// This method will get a list of booking numbers based on a supplied ItemListID and will data bind that list to lvDetails or it will put up an error message
         /// </summary>
-        /// <remarks>
-        /// Created: by Matt Lapka
-        /// </remarks>
-        /// <param name="itemListID"></param>
+        /// <param name="itemListID"> Item listingID for the desired item</param>
         public void GetNumbers(int itemListID)
         {
             if (Page.IsPostBack)
@@ -123,8 +116,8 @@ namespace com.WanderingTurtle.Web.Pages
                     }
                     catch (Exception ex)
                     {
-                            lblMessage.Text = "Error: " + ex.Message;
-                            Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
+                        lblMessage.Text = "Error: " + ex.Message;
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "showit", "showMessage()", true);
                         return;
                     }
                 }
@@ -132,12 +125,11 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
+        /// Willam Fritz 
+        /// Created 2015/04/24
         /// returns a list of items listings where the date is more recent than today if there is no date selected, otherwise it will return a list within the specifed date range.
         /// will also set session variables to the selected dates, which will be used in the aspx page
         /// </summary>
-        /// <remarks>
-        /// Created: by Willam Fritz 
-        /// </remarks>
         /// <returns>IEnumerable of item listings for the current supplier within a specified date range</returns>
         public IEnumerable<ItemListing> GetItemListsByDate()
         {
@@ -181,7 +173,7 @@ namespace com.WanderingTurtle.Web.Pages
                     }
                     Session["dateFrom"] = DateTime.Now.ToShortDateString();
                     Session["dateTo"] = null;
-                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now); 
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                 }
 
                 if (Request.Form["dateFrom"] != null && Request.Form["dateTo"] != null)
@@ -192,23 +184,23 @@ namespace com.WanderingTurtle.Web.Pages
                 {
                     Session["dateFrom"] = DateTime.Now.ToShortDateString();
                     Session["dateTo"] = null;
-                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now); 
+                    return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
                 }
             }
             catch (Exception)
             {
                 Session["dateFrom"] = DateTime.Now.ToShortDateString();
                 Session["dateTo"] = null;
-                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);             
+                return _currentItemListings.Where(l => l.SupplierID == _currentSupplier.SupplierID && l.StartDate > DateTime.Now);
             }
-        } 
+        }
 
         /// <summary>
-        /// This method will calculate the total amount of money that the supplier will get after the events within the selected date range are compleated and payed for
+        /// Willam Fritz 
+        /// Created 2015/04/24
+        /// This method will calculate the total amount of money that the supplier will 
+        /// receive after the events within the selected date range are completed and paid for
         /// </summary>
-        /// <remarks>
-        /// Created: by William Fritz
-        /// </remarks>
         /// <returns>The amount of money the supplier will earn</returns>
         public decimal getTotal()
         {
@@ -225,11 +217,16 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
-        /// This method will get the ItemListID from the buttons CommandArgument then will call GetNumbers with the ItemListID. It also displays the Events Details div to visible and changes the others to invisible
+        /// Matt Lapka
+        /// Created 2015/04/14
+        /// This method will get the ItemListID from the buttons CommandArgument 
+        /// then will call GetNumbers with the ItemListID. It also displays the 
+        /// Events Details div to visible and changes the others to invisible
         /// </summary>
         /// <remarks>
-        /// Created: by Matt Lapka
-        /// Edited by William Fritz
+        /// William Fritz
+        /// updated 2015/04/17
+        /// adding printing capabilities
         /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -246,11 +243,10 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
+        /// Willam Fritz 
+        /// Created 2015/04/24
         /// Displays the left container div to visible and changes the others to invisible
         /// </summary>
-        /// <remarks>
-        /// Created: by William Fritz
-        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void btnGoBack_Click(object sender, EventArgs e)
@@ -265,11 +261,10 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
+        /// Willam Fritz 
+        /// Created 2015/04/24
         /// displays the view money details div to visible and changes the others to invisible
         /// </summary>
-        /// <remarks>
-        /// Created: by William Fritz
-        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void btnViewMoneyDets_Click(object sender, EventArgs e)
@@ -283,11 +278,10 @@ namespace com.WanderingTurtle.Web.Pages
         }
 
         /// <summary>
-        /// will refresh the suppliers Item list by calling the GetItemListsByDate method
+        /// Willam Fritz 
+        /// Created 2015/04/24
+        /// refreshes the suppliers Item list by calling the GetItemListsByDate method
         /// </summary>
-        /// <remarks>
-        /// Created: by William Fritz
-        /// </remarks>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public void btnRefreshDate_Click(object sender, EventArgs e)
@@ -295,6 +289,5 @@ namespace com.WanderingTurtle.Web.Pages
             GetItemListsByDate();
             ListView1.DataBind();
         }
-
     }
 }

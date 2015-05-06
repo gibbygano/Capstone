@@ -46,8 +46,6 @@ namespace com.WanderingTurtle.Web.Pages
                 userLoggedIn.Style.Add("display", "none");
                 userLoggedOut.Style.Add("display", "block");
             }
-
-
         }
     }
 }

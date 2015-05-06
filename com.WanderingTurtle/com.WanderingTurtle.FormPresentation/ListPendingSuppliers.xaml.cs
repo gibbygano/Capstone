@@ -87,7 +87,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// Created:  2015/04/10
-        /// 
+        /// Opens pending supplier approval window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -98,7 +98,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// 
+        /// Miguel Santana
+        /// Created:  2015/04/10
+        /// Changes the suppliers content from viewing pending suppliers to viewing approved suppliers
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -108,7 +110,9 @@ namespace com.WanderingTurtle.FormPresentation
         }
 
         /// <summary>
-        /// 
+        /// Miguel Santana
+        /// Created:  2015/04/10
+        /// Changes the suppliers content from viewing approved suppliers to viewing pending suppliers
         /// </summary>
         private void LoadPendingSuppliers()
         {
@@ -129,7 +133,7 @@ namespace com.WanderingTurtle.FormPresentation
         /// <summary>
         /// Miguel Santana
         /// created:  2015/04/10
-        /// 
+        /// Opens pending suppliers with a double click
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
