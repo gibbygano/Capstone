@@ -17,7 +17,7 @@
         <Thickness x:Key="GridMargin">20</Thickness>
     </UserControl.Resources>
     <Grid>
-        <metro:FlipView Grid.ZIndex="0" x:Name="FlipView" IsBannerEnabled="False" MouseOverGlowEnabled="False" />
+        <metro:FlipView Grid.ZIndex="0" x:Name="FlipView" IsBannerEnabled="False" MouseOverGlowEnabled="False" IsTabStop="False" />
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid Grid.ZIndex="1" Background="{DynamicResource OverlayColor}" Margin="{DynamicResource GridMargin}" HorizontalAlignment="Left" VerticalAlignment="Top">
