@@ -1,39 +1,28 @@
 ﻿<UserControl
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Loaded="UserControl_Loaded"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Loaded="UserControl_Loaded" Background="Black"
         x:Class="com.WanderingTurtle.FormPresentation.Views.StartupScreen">
     <UserControl.Resources>
-        <GridLength x:Key="Offset">20</GridLength>
+        <SolidColorBrush x:Key="OverlayColor" Color="White" Opacity="0.35" />
         <Style x:Key="LoginLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelStyle}">
             <Setter Property="HorizontalContentAlignment" Value="Right" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Height" Value="Auto" />
         </Style>
+        <Thickness x:Key="GridPadding">10</Thickness>
+        <Thickness x:Key="GridMargin">20</Thickness>
     </UserControl.Resources>
-    <UserControl.Background>
-        <ImageBrush AlignmentX="Left" AlignmentY="Top" ImageSource="/WanderingTurtle;component/Resources/SplashImage.jpg" Stretch="UniformToFill" />
-    </UserControl.Background>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{DynamicResource Offset}" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="{DynamicResource Offset}" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="{DynamicResource Offset}" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="{DynamicResource Offset}" />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="2">
-                <Grid.Background>
-                    <SolidColorBrush Color="White" Opacity="0.35" />
-                </Grid.Background>
-                <Grid Margin="10">
+    <Grid>
+        <metro:FlipView Grid.ZIndex="0" x:Name="FlipView" IsBannerEnabled="False" MouseOverGlowEnabled="False" />
+        <Grid Background="{DynamicResource OverlayColor}" Margin="{DynamicResource GridMargin}" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image Grid.ZIndex="1" Source="/WanderingTurtle;component/Resources/Logo_White.png" Margin="{DynamicResource GridPadding}" Width="200" />
+        </Grid>
+        <ScrollViewer Grid.ZIndex="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="{DynamicResource GridMargin}">
+            <Grid Background="{DynamicResource OverlayColor}">
+                <Grid Margin="{DynamicResource GridPadding}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -50,6 +39,6 @@
                     <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnSignInClick" Content="Submit" HorizontalAlignment="Center" Padding="25,3" Margin="{DynamicResource Spacing.Top}" />
                 </Grid>
             </Grid>
-        </Grid>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
