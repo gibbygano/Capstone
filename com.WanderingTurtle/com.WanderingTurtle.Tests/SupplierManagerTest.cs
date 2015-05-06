@@ -384,11 +384,12 @@ namespace com.WanderingTurtle.Tests
         {
             Setup("EditSupWorking");
             SupplierMang.AddANewSupplier(testSupplier, "Test");
+            SupplierLoginManager newMan = new SupplierLoginManager();
             findTestItemDetails();
             Supplier testSupplier2 = test2();
             Assert.AreEqual(SupplierMang.EditSupplier(testSupplier, testSupplier2), SupplierResult.Success);
 
-            testLog = sLA.RetrieveSupplierLogin("Password#1", "Test");
+            testLog = newMan.RetrieveSupplierLogin("Password#1", "Test");
             TestCleanupAccessor.DeleteTestSupplierLogin(testLog);
             TestCleanupAccessor.DeleteTestSupplier(testSupplier);
         }
@@ -524,21 +525,22 @@ namespace com.WanderingTurtle.Tests
         [TestMethod]
         public void ArchiveSupplierWorkingTest() // ☑
         {
-            Setup("ArchiveSuppWorking");
+            Setup("EditSupWorking");
             SupplierMang.AddANewSupplier(testSupplier, "Test");
-            var listToSearch = SupplierMang.RetrieveSupplierList();
-            foreach (var item in listToSearch)
-            {
-                if (item.ApplicationID == 999)
-                {
-                    testSupplier = item;
-                }
-            }
-            Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplier), SupplierResult.Success);
+            SupplierLoginManager newMan = new SupplierLoginManager();
+            findTestItemDetails();
 
-            testLog = TestCleanupAccessor.RetrieveArchivedSupplierLoginTest("Password#1", "Test");
-            TestCleanupAccessor.DeleteTestSupplierLogin(testLog);
+            Assert.AreEqual(SupplierMang.ArchiveSupplier(testSupplier), SupplierResult.Success);
+            SupplierLogin fake = new SupplierLogin();
+            fake.UserName = "Test";
+            TestCleanupAccessor.DeleteTestSupplierLogin(fake);
             TestCleanupAccessor.DeleteTestSupplier(testSupplier);
+
+        }
+
+        public void deleteTestStuff()
+        {
+
         }
     }
 }

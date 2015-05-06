@@ -70,10 +70,11 @@ namespace com.WanderingTurtle.Tests
 
         public void Cleanup()
         {
+            SupplierLoginManager myMan = new SupplierLoginManager();
             ItemListingAccessor.DeleteItemListingTestItem(itemListingToTest);
             testSupp.SupplierID = modSupp.SupplierID;
-            testLog = sLA.RetrieveSupplierLogin("Password#1", "Test");
-            SupplierLoginAccessor.DeleteTestSupplierLogin(testLog);
+            testLog = myMan.RetrieveSupplierLogin("Password#1", "Test");
+            TestCleanupAccessor.DeleteTestSupplierLogin(testLog);
             TestCleanupAccessor.DeleteTestSupplier(testSupp);
         }
 
@@ -280,18 +281,20 @@ namespace com.WanderingTurtle.Tests
         public void ArchiveItemListing_ValidItemListing()
         {
             Setup();
-
-            SupplierAccessor.AddSupplier(testSupp, "Test", "Password#1");
+            SupplierManager myMan = new SupplierManager();
+            ProductManager otherMan = new ProductManager();
+            myMan.AddANewSupplier(testSupp, "Test");
             modSupp = getSupplierListCompName(suppList);
             itemListingToTest.SupplierID = modSupp.SupplierID;
-            ItemListingAccessor.AddItemListing(itemListingToTest);
+            otherMan.AddItemListing(itemListingToTest);
             itemListingToTest = getItemListingTestObject(itemList);
-
+            itemListingToTest.CurrentNumGuests = 0;
             listResult actual = pMgr.ArchiveItemListing(itemListingToTest);
+
+            Assert.AreEqual(listResult.Success, actual);
 
             Cleanup();
 
-            Assert.AreEqual(listResult.Success, actual);
         }
 
         /// <summary>

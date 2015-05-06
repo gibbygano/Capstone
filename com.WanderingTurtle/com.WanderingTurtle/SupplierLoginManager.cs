@@ -96,11 +96,11 @@ namespace com.WanderingTurtle.BusinessLogic
             }
             catch (SqlException)
             {
-                throw;
+                return ResultsEdit.DatabaseError;
             }
             catch (Exception)
             {
-                throw;
+                return ResultsEdit.DatabaseError;
             }
         }
 
