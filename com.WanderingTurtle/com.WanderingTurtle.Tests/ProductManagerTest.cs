@@ -60,7 +60,8 @@ namespace com.WanderingTurtle.Tests
 
         public void EditSetup()
         {
-            SupplierAccessor.AddSupplier(testSupp, "Test", "Password#1");
+            SupplierManager mySupMan = new SupplierManager();
+            mySupMan.AddANewSupplier(testSupp, "Test");
             modSupp = getSupplierListCompName(suppList);
             itemListingToEdit.SupplierID = modSupp.SupplierID;
             ItemListingAccessor.AddItemListing(itemListingToTest);
@@ -123,8 +124,8 @@ namespace com.WanderingTurtle.Tests
         public void AddItemListing_Success()
         {
             Setup();
-
-            SupplierAccessor.AddSupplier(testSupp, "Test", "Password#1");
+            SupplierManager mySupMan = new SupplierManager();
+            mySupMan.AddANewSupplier(testSupp, "Test");
             modSupp = getSupplierListCompName(suppList);
             itemListingToTest.SupplierID = modSupp.SupplierID;
 
