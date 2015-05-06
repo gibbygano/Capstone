@@ -5,38 +5,41 @@
         Loaded="UserControl_Loaded" Background="Black"
         x:Class="com.WanderingTurtle.FormPresentation.Views.StartupScreen">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="OverlayColor" Color="White" Opacity="0.35" />
+        <SolidColorBrush x:Key="OverlayColor" Color="Black" Opacity="0.5" />
         <Style x:Key="LoginLabelStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource LabelStyle}">
             <Setter Property="HorizontalContentAlignment" Value="Right" />
-            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="FontSize" Value="15" />
             <Setter Property="Height" Value="Auto" />
+            <Setter Property="Foreground" Value="White" />
         </Style>
         <Thickness x:Key="GridPadding">10</Thickness>
         <Thickness x:Key="GridMargin">20</Thickness>
     </UserControl.Resources>
     <Grid>
         <metro:FlipView Grid.ZIndex="0" x:Name="FlipView" IsBannerEnabled="False" MouseOverGlowEnabled="False" />
-        <Grid Background="{DynamicResource OverlayColor}" Margin="{DynamicResource GridMargin}" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Image Grid.ZIndex="1" Source="/WanderingTurtle;component/Resources/Logo_White.png" Margin="{DynamicResource GridPadding}" Width="200" />
-        </Grid>
-        <ScrollViewer Grid.ZIndex="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="{DynamicResource GridMargin}">
-            <Grid Background="{DynamicResource OverlayColor}">
-                <Grid Margin="{DynamicResource GridPadding}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="200" />
-                    </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource LoginLabelStyle}" Content="User ID:" />
-                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource LoginLabelStyle}" Content="Password:" />
-                    <TextBox     Grid.Row="0" Grid.Column="1" x:Name="TxtUserName" GotKeyboardFocus="TxtInput_GotKeyboardFocus" KeyUp="TxtInput_KeyUp" />
-                    <PasswordBox Grid.Row="1" Grid.Column="1" x:Name="TxtPassword" GotKeyboardFocus="TxtInput_GotKeyboardFocus" KeyUp="TxtInput_KeyUp" />
-                    <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnSignInClick" Content="Submit" HorizontalAlignment="Center" Padding="25,3" Margin="{DynamicResource Spacing.Top}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid Grid.ZIndex="1" Background="{DynamicResource OverlayColor}" Margin="{DynamicResource GridMargin}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Source="/WanderingTurtle;component/Resources/Logo_White.png" Margin="{DynamicResource GridPadding}" Width="200" />
+                </Grid>
+                <Grid Grid.ZIndex="2" Background="{DynamicResource OverlayColor}" Margin="{DynamicResource GridMargin}" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Grid Margin="{DynamicResource GridPadding}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="200" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource LoginLabelStyle}" Content="User ID:" />
+                        <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource LoginLabelStyle}" Content="Password:" />
+                        <TextBox     Grid.Row="0" Grid.Column="1" x:Name="TxtUserName" GotKeyboardFocus="TxtInput_GotKeyboardFocus" KeyUp="TxtInput_KeyUp" />
+                        <PasswordBox Grid.Row="1" Grid.Column="1" x:Name="TxtPassword" GotKeyboardFocus="TxtInput_GotKeyboardFocus" KeyUp="TxtInput_KeyUp" />
+                        <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Click="BtnSignInClick" Content="Submit" HorizontalAlignment="Center" Padding="25,3" Margin="{DynamicResource Spacing.Top}" />
+                    </Grid>
                 </Grid>
             </Grid>
         </ScrollViewer>

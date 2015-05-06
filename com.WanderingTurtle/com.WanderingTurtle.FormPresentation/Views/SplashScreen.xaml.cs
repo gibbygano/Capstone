@@ -32,7 +32,9 @@ namespace com.WanderingTurtle.FormPresentation.Views
         /// <summary>
         /// Initializes a new instance of the <see cref="StartupScreen" /> class.
         /// </summary>
-        /// <exception cref="InvalidOperationException">The item to add already has a different logical parent. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// The item to add already has a different logical parent.
+        /// </exception>
         /// <exception cref="InvalidOperationException">The collection is in ItemsSource mode.</exception>
         public StartupScreen()
         {
@@ -49,18 +51,24 @@ namespace com.WanderingTurtle.FormPresentation.Views
             myTimer.Start();
         }
 
-        private void TimerEventProcessor(object sender, EventArgs e)
-        {
-            FlipView.SelectedIndex = Equals(FlipView.SelectedIndex + 1, FlipView.Items.Count)
-                ? 0
-                : FlipView.SelectedIndex + 1;
-        }
-
-        /// <exception cref="MissingManifestResourceException"><paramref name="tryParents" /> is true, no usable set of resources has been found, and there are no default culture resources. </exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="culture" /> parameter is null. </exception>
-        /// <exception cref="ArgumentException">The height or width of the bitmap is greater than <see cref="F:System.Int16.MaxValue" />.</exception>
+        /// <summary>
+        /// Gets the list of SplashScreen Images
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/06</remarks>
+        /// <exception cref="MissingManifestResourceException">
+        /// <paramref name="tryParents" /> is true, no usable set of resources has been found, and
+        /// there are no default culture resources.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// The <paramref name="culture" /> parameter is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// The height or width of the bitmap is greater than <see cref="F:System.Int16.MaxValue" />.
+        /// </exception>
         /// <exception cref="Exception">The operation failed.</exception>
-        /// <exception cref="InvalidCastException" accessor="get">An element in the sequence cannot be cast to type <paramref name="TResult" />.</exception>
+        /// <exception cref="InvalidCastException" accessor="get">
+        /// An element in the sequence cannot be cast to type <paramref name="TResult" />.
+        /// </exception>
         public List<BitmapSource> SplashImageList
         {
             get
@@ -68,7 +76,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
                 return SplashImages.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true)
                     .Cast<DictionaryEntry>()
                     .Where(resource => resource.Value is Bitmap)
-                    .Reverse()
+                    .OrderBy(resource => resource.Key)
                     .Select(resource => ((Bitmap)resource.Value).ToBitmapSource())
                     .ToList();
             }
@@ -77,6 +85,7 @@ namespace com.WanderingTurtle.FormPresentation.Views
         /// <summary>
         /// The sign-in button click event handler.
         /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The e.</param>
         /// <exception cref="ApplicationException"></exception>
@@ -85,6 +94,10 @@ namespace com.WanderingTurtle.FormPresentation.Views
             Submit();
         }
 
+        /// <summary>
+        /// Submits the login form
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
         private void Submit()
         {
             if (Convert.ToBoolean(ConfigurationManager.AppSettings["Debug"]))
@@ -123,6 +136,25 @@ namespace com.WanderingTurtle.FormPresentation.Views
             myTimer.Stop();
         }
 
+        /// <summary>
+        /// Timer that automates the FlipView slideshow
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/06</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TimerEventProcessor(object sender, EventArgs e)
+        {
+            FlipView.SelectedIndex = Equals(FlipView.SelectedIndex + 1, FlipView.Items.Count)
+                ? 0
+                : FlipView.SelectedIndex + 1;
+        }
+
+        /// <summary>
+        /// Selects the textbox content on keyboard focus
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtInput_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             var @textBox = sender as TextBoxBase;
@@ -134,6 +166,12 @@ namespace com.WanderingTurtle.FormPresentation.Views
             }
         }
 
+        /// <summary>
+        /// Key up event, Submits the form
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/03</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtInput_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.Key)
@@ -144,6 +182,12 @@ namespace com.WanderingTurtle.FormPresentation.Views
             }
         }
 
+        /// <summary>
+        /// Focuses the username field on load
+        /// </summary>
+        /// <remarks>Miguel Santana 2015/05/05</remarks>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             TxtUserName.Focus();

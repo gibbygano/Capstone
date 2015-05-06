@@ -111,11 +111,52 @@ namespace com.WanderingTurtle.FormPresentation.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string String {
+        internal static System.Drawing.Bitmap splash_06 {
             get {
-                return ResourceManager.GetString("String", resourceCulture);
+                object obj = ResourceManager.GetObject("splash_06", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap splash_07 {
+            get {
+                object obj = ResourceManager.GetObject("splash_07", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap splash_08 {
+            get {
+                object obj = ResourceManager.GetObject("splash_08", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap splash_09 {
+            get {
+                object obj = ResourceManager.GetObject("splash_09", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap splash_10 {
+            get {
+                object obj = ResourceManager.GetObject("splash_10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

@@ -395,14 +395,16 @@
     <Resource Include="Resources\Icon-Background.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\SplashImage.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\SplashImages\01.jpeg" />
     <Resource Include="Resources\SplashImages\02.jpeg" />
     <Resource Include="Resources\SplashImages\03.jpeg" />
     <Resource Include="Resources\SplashImages\04.jpeg" />
     <Resource Include="Resources\SplashImages\05.jpeg" />
+    <Resource Include="Resources\SplashImages\06.jpeg" />
+    <Resource Include="Resources\SplashImages\07.jpeg" />
+    <Resource Include="Resources\SplashImages\09.jpeg" />
+    <Resource Include="Resources\SplashImages\08.jpeg" />
+    <Resource Include="Resources\SplashImages\10.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
