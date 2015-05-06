@@ -71,6 +71,13 @@ namespace com.WanderingTurtle.Web.PagesGuest
                 lblError.Visible = true;
             }
         }
+
+        /// <summary>
+        /// Matt Lapka
+        /// Created:  2015/05/05
+        /// Shows error on the screen
+        /// </summary>
+        /// <param name="message"></param>
         private void showError(string message)
         {
             lblError.Text = message;

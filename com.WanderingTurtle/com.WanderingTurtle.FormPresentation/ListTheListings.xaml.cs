@@ -75,6 +75,13 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created:  2015/04/15
+        /// opens the window with a selected item
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <param name="readOnly"></param>
         private void OpenListing(ItemListing selectedItem = null, bool readOnly = false)
         {
             try
@@ -141,21 +148,48 @@ namespace com.WanderingTurtle.FormPresentation
 
         #endregion ArchiveListing
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/04
+        /// adds listing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddListing_Click(object sender, RoutedEventArgs e)
         {
             OpenListing();
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/04
+        /// opens listing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEditListing_click(object sender, RoutedEventArgs e)
         {
             OpenListing(LvListing.SelectedItem as ItemListing);
         }
 
+        /// <summary>
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/04
+        /// Opens listing with double click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lvListing_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenListing(sender.RowClick<ItemListing>(), true);
         }
 
+        /// <summary>
+        /// Miguel Santana
+        /// Created 2015/04/04
+        /// Retrieves the latest information from the bll
+        /// </summary>
         private void RefreshData()
         {
             try
@@ -174,11 +208,25 @@ namespace com.WanderingTurtle.FormPresentation
             }
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/14
+        /// searches fields to filter the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtSearchListing_TextChanged(object sender, TextChangedEventArgs e)
         {
             BtnSearchListing.Content = TxtSearchListing.Text.Length == 0 ? "Refresh List" : "Search";
         }
 
+        /// <summary>
+        /// Justin Pennington
+        /// Created:  2015/04/14
+        /// searches fields to filter the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSearchListing_Click(object sender, RoutedEventArgs e)
         {
             var myList = _productManager.SearchItemLists(TxtSearchListing.Text);

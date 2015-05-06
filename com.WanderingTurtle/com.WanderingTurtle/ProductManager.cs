@@ -112,6 +112,9 @@ namespace com.WanderingTurtle.BusinessLogic
                 if (ItemListingAccessor.AddItemListing(newItemListing) == 1)
                 {
                     DataCache._currentItemListingList = ItemListingAccessor.GetItemListingList();
+                    DataCache._ItemListingListTime = DateTime.Now;
+                    DataCache._currentAllItemListingList = ItemListingAccessor.GetAllItemListingList();
+                    DataCache._AllItemListingListTime = DateTime.Now;
                     return listResult.Success;
                 }
                 return listResult.NotAdded;
@@ -257,7 +260,7 @@ namespace com.WanderingTurtle.BusinessLogic
             {
                 double cacheExpirationTime = 5; //how long the cache should live (minutes)
                 var now = DateTime.Now;
-                if (DataCache._currentItemListingList == null)
+                if (DataCache._currentAllItemListingList == null)
                 {
                     //data hasn't been retrieved yet. get data, set it to the cache and return the result.
                     DataCache._currentAllItemListingList = ItemListingAccessor.GetAllItemListingList();
