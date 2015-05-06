@@ -33,7 +33,7 @@ namespace com.WanderingTurtle.Tests
             itemListingToTest.Price = 10.0000M;
             itemListingToTest.MaxNumGuests = 11;
             itemListingToTest.MinNumGuests = 0;
-            itemListingToTest.CurrentNumGuests = 10;
+            itemListingToTest.CurrentNumGuests = 0;
             itemListingToTest.SupplierID = 100;
 
             itemListingToEdit.ItemListID = 204;
