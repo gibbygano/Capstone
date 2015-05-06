@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("com.WanderingTurtle.FormPresentation")]
+[assembly: AssemblyTitle("Wandering Turtle Manager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("com.WanderingTurtle.FormPresentation")]
+[assembly: AssemblyCompany("Tòti a Pèdi Resort")]
+[assembly: AssemblyProduct("The Wandering Turtle Resort Manager")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
