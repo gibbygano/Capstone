@@ -1,8 +1,9 @@
 ﻿using com.WanderingTurtle.BusinessLogic;
+using com.WanderingTurtle.Common;
 using com.WanderingTurtle.FormPresentation.Models;
 using System;
 using System.Windows;
-using com.WanderingTurtle.Common;
+using System.Windows.Forms;
 
 namespace com.WanderingTurtle.FormPresentation.Views.Admin
 {
@@ -17,7 +18,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
         }
 
         private async void BtnRunXML_Click(object sender, RoutedEventArgs e)
-        {           
+        {
             var accountingManager = new AccountingManager();
 
             if (DateStart.SelectedDate == null) throw new InputValidationException(DateStart, "Please select a Start Date");
@@ -33,17 +34,26 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
 
             var report = accountingManager.GetAccountingDetails(formStartDate, formEndDate);
 
-            var filename = "report - " +
-                              DateTime.Now.ToShortDateString().Replace("/", "-")
-                              + " at " +
-                              DateTime.Now.ToShortTimeString().Replace(":", "-") + ".xml";
+            var dlg = new SaveFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                FileName = "Report - " +
+                            DateTime.Now.ToShortDateString().Replace("/", "-")
+                            + " at " +
+                            DateTime.Now.ToShortTimeString().Replace(":", "-"),
+                DefaultExt = ".xml",
+                Filter = @"Text documents (.xml)|*.xml"
+            };
+            // Default file extension
+            // Filter files by extension
+
+            // Show save file dialog box
+            if (!dlg.ShowDialog().Equals(DialogResult.OK)) return;
 
             DateStart.Text = null;
             DateEnd.Text = null;
 
-            
-
-            if (report.XMLFile(filename))
+            if (report.XmlFile<AccountingDetails>(dlg.FileName))
             {
                 await this.ShowMessageDialog("Your Report has been saved successfully.", "Success");
             }

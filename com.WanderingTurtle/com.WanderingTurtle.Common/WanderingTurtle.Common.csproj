@@ -46,7 +46,6 @@
     <Compile Include="AccountingDetails.cs" />
     <Compile Include="ApplicationStatus.cs" />
     <Compile Include="BookingNumbers.cs" />
-    <Compile Include="IXMLAble.cs" />
     <Compile Include="ResultsArchive.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="ResultsEdit.cs" />

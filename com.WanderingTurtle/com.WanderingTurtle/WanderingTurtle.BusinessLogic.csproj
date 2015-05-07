@@ -54,6 +54,7 @@
     <Compile Include="SupplierLoginManager.cs" />
     <Compile Include="SupplierManager.cs" />
     <Compile Include="Validator.cs" />
+    <Compile Include="XmlSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.WanderingTurtle.Common\WanderingTurtle.Common.csproj">
