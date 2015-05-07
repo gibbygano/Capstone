@@ -1,9 +1,8 @@
-﻿using System;
+﻿using com.WanderingTurtle.Common;
+using com.WanderingTurtle.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using com.WanderingTurtle.Common;
-using com.WanderingTurtle.DataAccess;
 
 namespace com.WanderingTurtle.BusinessLogic
 {
@@ -13,62 +12,39 @@ namespace com.WanderingTurtle.BusinessLogic
         /// Arik Chadima
         /// Created: 2015/5/1
         /// Assembles and returns an AccountingDetails Object with booking details for invoices and supplier listings for closed out invoices within the start and end params
-        /// 
         /// </summary>
-        /// <param name="Start">start date of invoices</param>
-        /// <param name="End">end date of invoices</param>
+        /// <param name="start">start date of invoices</param>
+        /// <param name="end">end date of invoices</param>
         /// <returns>AccountingDetails with object data as requested by the params</returns>
         /// <remarks>
         /// Arik Chadima
         /// Updated: 2015/05/01
         /// Implemented method from just a stub to complete.
-        /// 
         /// Arik Chadima
         /// Updated 2015/05/05
         /// Added try-catch blocks for "dangerous" code.
         /// </remarks>
-        public AccountingDetails GetAccountingDetails(DateTime Start, DateTime End)
+        /// <exception cref="ArgumentNullException"><paramref name="match" /> is null.</exception>
+        public AccountingDetails GetAccountingDetails(DateTime start, DateTime end)
         {
-            AccountingDetails details = new AccountingDetails();
-            details.StartDate = Start;
-            details.EndDate = End;
+            AccountingDetails details = new AccountingDetails
+            {
+                StartDate = start,
+                EndDate = end
+            };
             InvoiceManager im = new InvoiceManager();
             BookingManager bm = new BookingManager();
-            List<ItemListing> listings;
-            try
-            {
-                listings = ItemListingAccessor.GetAllItemListingList();
-            }
-            catch
-            {
-                throw;
-            }
-            List<InvoiceDetails> inactiveInvoices = new List<InvoiceDetails>();
-            try
-            {
-                inactiveInvoices = InvoiceAccessor.GetAllInvoicesList().FindAll(i => i.Active == false && i.DateOpened >= Start && i.DateClosed <= End);
-            }
-            catch
-            {
-                throw;
-            }
+            List<ItemListing> listings = ItemListingAccessor.GetAllItemListingList();
+            List<InvoiceDetails> inactiveInvoices = InvoiceAccessor.GetAllInvoicesList().FindAll(i => i.Active == false && i.DateOpened >= start && i.DateClosed <= end);
             List<BookingDetails> bookings = new List<BookingDetails>();
             List<int> listingIDs = new List<int>();
 
-            foreach (var i in inactiveInvoices)
+            foreach (InvoiceDetails i in inactiveInvoices)
             {
-                List<BookingDetails> guestBookings;
-                try
-                {
-                    guestBookings = im.RetrieveGuestBookingDetailsList(i.HotelGuestID);
-                }
-                catch
-                {
-                    throw;
-                }
+                var guestBookings = im.RetrieveGuestBookingDetailsList(i.HotelGuestID);
                 details.Invoices.Add(new AccountingInvoiceDetails { InvoiceInformation = i, Bookings = guestBookings }); //translations into a "lower" subset.
 
-                foreach (var bd in guestBookings)
+                foreach (BookingDetails bd in guestBookings)
                 {
                     bookings.Add(bd);
                     if (!listingIDs.Contains(bd.ItemListID))
@@ -78,35 +54,17 @@ namespace com.WanderingTurtle.BusinessLogic
                 }
             }
 
-            List<Supplier> suppliers;
-            try
-            {
-                suppliers = SupplierAccessor.GetSupplierList();
-            }
-            catch
-            {
-                throw;
-            }
+            var suppliers = SupplierAccessor.GetSupplierList();
 
-            foreach (var s in suppliers)
+            foreach (Supplier s in suppliers)
             {
-                var itemIDs = listings.FindAll(l => listingIDs.Contains(l.ItemListID)).Select(l => l.ItemListID);
-                var items = new List<ItemListingDetails>();
-                foreach (int i in itemIDs)
-                {
-                    try
-                    {
-                        items.Add(bm.RetrieveItemListingDetailsList(i));
-                    }
-                    catch
-                    {
-                        throw;
-                    }
-                }
+                IEnumerable<int> itemIDs = listings.FindAll(l => listingIDs.Contains(l.ItemListID)).Select(l => l.ItemListID);
+                var iDs = itemIDs as IList<int> ?? itemIDs.ToList();
+                List<ItemListingDetails> items = iDs.Select(i => bm.RetrieveItemListingDetailsList(i)).ToList();
+
                 //probably too condensed, but it compiles everyting necessary for stuffs.
-                details.SupplierListings.Add(new AccountingSupplierListingDetails { Vendor = s, Items = items, Bookings = bookings.FindAll(b => itemIDs.Contains(b.ItemListID)) });
+                details.SupplierListings.Add(new AccountingSupplierListingDetails { Vendor = s, Items = items, Bookings = bookings.FindAll(b => iDs.Contains(b.ItemListID)) });
             }
-
 
             return details;
         }
