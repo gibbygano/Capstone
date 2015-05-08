@@ -12,7 +12,9 @@
             <asp:ListItem Text="No"  Value="False" Selected="False" />
         </asp:RadioButtonList>
         <asp:Label ID="lblTransportation" runat="server" Text="Is Transportation to and from the event provided?" Visible="False"></asp:Label><br />
-        <asp:RadioButtonList ID="radTransportation" runat="server"  CssClass="fixed"  Visible="False">
+
+        <asp:RadioButtonList ID="radTransportation" runat="server"  CssClass="fixed" Visible="False">
+
             <asp:ListItem Text="Yes"  Value="True" Selected="False" />
             <asp:ListItem Text="No"  Value="False" Selected="False" />
         </asp:RadioButtonList>
