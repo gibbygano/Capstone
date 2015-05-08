@@ -42,7 +42,7 @@ namespace com.WanderingTurtle.FormPresentation.Views.Admin
                             + " at " +
                             DateTime.Now.ToShortTimeString().Replace(":", "-"),
                 DefaultExt = ".xml",
-                Filter = @"Text documents (.xml)|*.xml"
+                Filter = @"Xml Report (.xml)|*.xml"
             };
             // Default file extension
             // Filter files by extension
